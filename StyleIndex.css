@@ -1,0 +1,39 @@
+#navbarText1{
+    color:wheat ;
+}
+#navbarText2{
+    color: wheat;
+}
+a{
+  text-decoration: none;
+}
+#link1{
+    color: wheat;
+}
+#link2{
+    color: wheat;
+}
+.hero-image{
+    background-image: url("Imagenes/Hero.jpg");
+    height: 500px;
+    margin-top: 0px;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+#Titulo1{
+    color: aliceblue;
+    font-size: 50px;
+}
+
+#TextoTitulo1{
+    color: aliceblue;
+    font-size: 25px;
+}
+#CartasInicio{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
