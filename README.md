@@ -6,7 +6,7 @@
 - Camila Santo, 42.076.819
 - Agustin Zarate, 40.720.288
 
-# Página tipo “Tinder” para jugar Fútbol 5:
+# FutMatch:
 
 Se trataría de una página para conectar jugadores y armar equipos en canchas cercanas al usuario para jugar fútbol casual. El usuario “jugador” puede ver en su mapa las canchas, y al clickear en una puede visualizar los distintos horarios en los que puede participar en un partido. También puede solicitar una reserva de cancha abierta, en la que los jugadores individuales o de grupos pequeños podrían solicitar participar en el equipo del que inicia la reserva o en el equipo rival. El usuario “administrador de cancha” puede gestionar los distintos horarios que ofrece y puede visualizar el historial de usuario de los jugadores que solicitan utilizar su predio. De esta manera, puede gestionar las solicitudes de su servicio de manera segura. 
 
