@@ -1,0 +1,107 @@
+.bg-image {
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+
+}
+
+h1, h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Fuente general */
+:root{
+  --radius: 1.25rem;
+}
+body {
+  font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  background-color: #0b0b0b;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;            /* ocupa alto pantalla */
+  display: grid;
+  align-items: center;
+  padding-top: 5vh;
+  padding-bottom: 8vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; /* sutil efecto parallax en desktop */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* Degradado + oscurecimiento; ajustá opacidad si tu foto es más oscura */
+  background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.65));
+}
+
+/* Título + lema: legibilidad extra */
+.brand-title,
+.brand-tagline {
+  text-shadow: 0 2px 18px rgba(0,0,0,.45);
+}
+.fw-800 { font-weight: 800; }
+.fw-600 { font-weight: 600; }
+
+/* Tarjetas de acción */
+.card-action {
+  border: 0;
+  border-radius: var(--radius);
+  backdrop-filter: blur(2px);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+  cursor: pointer;
+  outline: none;
+}
+.card-action:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(25,135,84,.35), 0 6px 18px rgba(0,0,0,.12);
+}
+.card-action:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.16);
+}
+
+/* Chevron que rota al expandir */
+#loginCard[aria-expanded="true"] .chevron {
+  rotate: 180deg;
+}
+.chevron {
+  transition: rotate .18s ease;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* Enlace discreto para gestores de cancha */
+.link-cancha {
+  display: inline-block;
+  margin-top: .25rem;
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(255,255,255,.3);
+  transition: color .15s ease, border-color .15s ease;
+}
+.link-cancha:hover {
+  color: #ffffff;
+  border-color: rgba(255,255,255,.6);
+}
+
+/* Respetar usuarios con "reducir movimiento" */
+@media (prefers-reduced-motion: reduce) {
+  .card-action,
+  .chevron {
+    transition: none;
+  }
+  .card-action:hover {
+    transform: none;
+  }
+}
+
+/* Ajustes responsivos suaves */
+@media (max-width: 575.98px) {
+  .brand-title { font-size: 2.25rem; }
+  .brand-tagline { font-size: 1rem; }
+}
