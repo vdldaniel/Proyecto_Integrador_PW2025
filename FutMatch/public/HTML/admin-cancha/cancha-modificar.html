@@ -1,42 +1,121 @@
 <!--
 Manejo de la modificación de canchas:
-- Formulario para modificar datos de la cancha (nombre, ubicación, tipo de superficie, capacidad
-- Comienza con los datos actuales de la cancha
-- Validación de datos
-- Botón para guardar cambios
-- Botón para cancelar y volver al panel de administración
-- Botón para cerrar sesión
-- Mostrar mensaje de éxito o error al guardar cambios
-- Redirige al panel de administración tras guardar cambios
+- [x] Formulario para modificar datos de la cancha (nombre, ubicación, tipo de superficie, capacidad
+- [x] Comienza con los datos actuales de la cancha
+- [] Validación de datos
+- [x] Botón para guardar cambios
+- [x] Botón para cancelar y volver al panel de administración
+- [] Botón para cerrar sesión
+- [] Mostrar mensaje de éxito o error al guardar cambios
+- [] Redirige al panel de administración tras guardar cambios
 -->
-
-
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title><!-- Cambiar título --> FutMatch</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <title>Modificar Cancha | FutMatch</title>
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Scripts -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
-</body>
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="" alt="FutMatch" width="30" height="24" />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container py-5">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-4">
+            <h3 class="card-title mb-3 d-flex">Editar Cancha</h3>
+            <form id="formEditarCancha" action="">
+              <div class="row">
+                <!-- Nombre -->
+                <div class="mb-3 col-12 col-lg-6">
+                  <label for="nombreCancha" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreCancha"
+                    value="Cancha A2-F9"
+                  />
+                </div>
+                <!-- Tipo de superficie -->
+                <div class="mb-3 col-12 col-lg-6">
+                  <label for="tipoSuperficie" class="form-label"
+                    >Tipo de superficie</label
+                  >
+                  <select class="form-select" id="tipoSuperficie">
+                    <option value="1" selected>Sintetico</option>
+                    <option value="2">Cemento</option>
+                    <option value="3">Parquet</option>
+                    <option value="4">Cesped natural</option>
+                  </select>
+                </div>
+                <!--Ubicacion-->
+                <div class="mb-3 col-12 col-lg-6">
+                  <label for="ubicacionCancha" class="form-label"
+                    >Ubicacion</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="ubicacionCancha"
+                    value="Ramón Santamarina 1250, B1805 El Jagüel, Provincia de Buenos Aires"
+                    required
+                  />
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorUbicacion"></p>
+                </div>
+                <!--Capacidad-->
+                <div class="mb-3 col-12 col-lg-6">
+                  <label for="capacidadCancha" class="form-label"
+                    >Tipo de cancha</label
+                  >
+                  <select class="form-select" id="capacidadCancha" required>
+                    <option value="1">Futbol 5</option>
+                    <option value="2">Futbol 7</option>
+                    <option value="3" selected>Futbol 9</option>
+                    <option value="4">Futbol 11</option>
+                  </select>
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorCapacidad"></p>
+                </div>
+                <!-- Botones -->
+                <div class="d-flex gap-2 justify-content-end">
+                  <button type="reset" class="btn btn-danger">Cancelar</button>
+                  <button type="submit" class="btn btn-primary" id="">
+                    Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Scripts -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

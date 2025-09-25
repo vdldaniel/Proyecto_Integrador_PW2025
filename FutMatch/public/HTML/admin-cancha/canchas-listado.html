@@ -1,38 +1,111 @@
 <!--
 Listado inicial de canchas al ingresar a "Mis Canchas" en el panel de administración:
-- Tabla con listado de canchas (nombre, ubicación, tipo de superficie, capacidad)
-- Botón para ver perfil detallado de cada cancha
-- Botón para agregar nueva cancha
+- [x] Tabla con listado de canchas (nombre, ubicación, tipo de superficie, capacidad)
+- [x] Botón para ver perfil detallado de cada cancha
+- [x] Botón para agregar nueva cancha
 - Botón para cerrar sesión
 -->
 
-
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title><!-- Cambiar título --> FutMatch</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <title>Listado de Canchas | FutMatch</title>
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Scripts -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
-</body>
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="" alt="FutMatch" width="30" height="24" />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container-fluid mt-5">
+        <div class="card shadow-lg p-4 rounded-3">
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <h2 class="mb-4">Listado de Canchas</h2>
+              <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Tipo de Superficie</th>
+                    <th>Capacidad</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>La Previa Cancha C1-F5</td>
+                    <td>Cemento</td>
+                    <td>Futbol 5</td>
+                    <td>
+                      <button class="btn btn-sm btn-info">Ver</button>
+                      <button class="btn btn-sm btn-warning">Editar</button>
+                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>MegaFutbol Cancha A2-F9</td>
+                    <td>Sintetico</td>
+                    <td>Futbol 9</td>
+                    <td>
+                      <button class="btn btn-sm btn-info">Ver</button>
+                      <button class="btn btn-sm btn-warning">Editar</button>
+                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Cancha Delantera</td>
+                    <td>Parquet</td>
+                    <td>Futbol 5</td>
+                    <td>
+                      <button class="btn btn-sm btn-info">Ver</button>
+                      <button class="btn btn-sm btn-warning">Editar</button>
+                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex gap-2 justify-content-end">
+                <a href="public/HTML/admin-cancha/cancha-nueva.html">
+                  <button type="button" class="btn btn-primary" id="">
+                    Agregar cancha
+                  </button></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Scripts -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
