@@ -1,0 +1,6 @@
+document.addEventListener('DOMcontendloaded',function(){
+
+    
+
+
+})
