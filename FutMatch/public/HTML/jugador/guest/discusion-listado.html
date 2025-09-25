@@ -1,6 +1,17 @@
-<!--Filtro de búsqueda , opción "Reservar cancha"
-Listado de canchas resultantes
-Mapa de canchas resultantes-->
+<!--
+Página para ver un listado de "foros de discusión" creados por jugadores
+- Debe mostrar una lista con tarjetas que incluyan:
+  - Título de la discusión
+  - Nombre del creador
+  - Fecha de creación
+  - Número de respuestas
+    - Botón de "Ver discusión" que redirija a discusion-detalle.html
+    - Botón flotante de "Crear nueva discusión" que redirija a discusion-crear.html
+        + VALIDACIÓN DE SI EL JUGADOR ESTÁ LOGUEADO O NO,   
+            + SI NO ESTÁ LOGUEADO, REDIRIGIR A login-jugador.html
+            + SI ESTÁ LOGUEADO, REDIRIGIR A discusion-crear.html
+-->
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -9,7 +20,7 @@ Mapa de canchas resultantes-->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
   
-  <title>FutMatch</title>
+  <title><!-- Cambiar título --> FutMatch</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
