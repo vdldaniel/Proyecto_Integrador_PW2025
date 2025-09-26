@@ -58,7 +58,7 @@ body {
   outline: none;
 }
 
-.card-body {
+.guest.card-body {
   display: flex;
   flex-direction: column;
   justify-content: center; /* centra vertical */

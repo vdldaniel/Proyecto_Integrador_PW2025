@@ -37,4 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => emailInput && emailInput.focus(), 50);
   });
 
+  // posponemos la validación real hasta tener el back-end
+  const form = document.getElementById('loginForm');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Evita validación real
+
+      const email = (emailInput?.value || '').trim().toLowerCase();
+
+      // Lógica de demo: depende del "usuario" ingresado
+      if (email.includes('jugador')) {
+        window.location.href = 'public/HTML/jugador/inicio-jugador.html';
+      } 
+      else if (email.includes('admin-cancha')) {
+        window.location.href = 'public/HTML/admin-cancha/inicio-admin-cancha.html';
+      } 
+      else {
+        alert("Para la demo, usá un usuario que contenga 'jugador' o 'admin-cancha'");
+      }
+    });
+  }
+
+
 });
