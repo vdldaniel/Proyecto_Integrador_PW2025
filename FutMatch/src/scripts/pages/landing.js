@@ -32,24 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     loginCard.setAttribute('aria-expanded', 'false');
   });
 
-  // Foco en email al abrir
+  // focus mail
   collapseEl.addEventListener('shown.bs.collapse', () => {
     setTimeout(() => emailInput && emailInput.focus(), 50);
   });
 
-  // Validación básica del formulario (HTML5 + Bootstrap)
-  const form = document.getElementById('loginForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      if (!form.checkValidity()) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      form.classList.add('was-validated');
-
-      // Acá iría tu lógica de autenticación (fetch/axios) si es válido
-      // Ejemplo:
-      // if (form.checkValidity()) login(email.value, password.value)
-    }, false);
-  }
 });
