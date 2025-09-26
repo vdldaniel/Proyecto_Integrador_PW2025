@@ -12,7 +12,10 @@ Página para formulario de reserva de canchas
   <title>FutMatch</title>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/public/assets/css/bootstrap.min.css" />
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
 
   <!-- Fuente -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,13 +24,102 @@ Página para formulario de reserva de canchas
 
   <!-- Estilos propios -->
   <link rel="stylesheet" href="style.css" />
+  <!--links para calendario-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <!--links para mapa-->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+
 </head>
 <body>
+<div class="container mt-5">
+<nav class="navbar bg-body-tertiary fixed-top mb-5">
+       <div class="container-fluid">
+          <a class="navbar-brand " href="#">Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end"tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Torneo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Crear equipo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Invitar jugardor</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Uniser a un equipo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Discusiones</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Perfil</a>
+                </li>
+              </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="container mt-5 px-3 ">
+        <div class="row mt-3 align-items-center mt-5">
+          <p class="col-12 mt-5">¿Que estas buscando?</p>
+          <button type="button" class="btn btn-primary col-4">Jugador</button>
+          <button type="button" class="btn btn-primary col-4">Equipo</button>
+          <button type="button" class="btn btn-primary col-4">Estoy completo</button>
+        </div>
+        <div class="row mt-3 align-items-center mt-5">
+          <p class="col-12 mt-5">¿Que estas buscando?</p>
+          <button type="button" class="btn btn-primary col-6 ">5</button>
+          <button type="button" class="btn btn-primary col-6 ">7</button>
+          <button type="button" class="btn btn-primary col-6 ">9</button>
+          <button type="button" class="btn btn-primary col-6 ">11</button>
+        </div>
+        <div class="row mt-3 align-items-center mt-5">
+          <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fecha">
+          </div>
+        </div>    
+      <div class="row mt-3 align-items-center mt-5">
+        <div class="mb-3">
+          <label for="hora" class="form-label">Hora</label>
+          <input type="time" class="form-control" id="hora">
+        </div>
+      </div>
+      <div class="row mt-3 align-items-center mt-5">
+        <div id="map"style="height:400px;"></div>
+      </div>
+
+
+
+
+
+      </div>
+</div>
   <!-- Contenido de la página -->
   <!-- Dejar vacío por ahora -->
 
   <!-- Scripts -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+  <script src="/public/assets/css/bootstrap.min.css"></script>
+  <script src="/src/scripts/pages/reservarCancha.js"></script>
+ 
 </body>
 </html>
