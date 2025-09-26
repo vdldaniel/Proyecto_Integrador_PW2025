@@ -1,40 +1,91 @@
-<!--
-Página con 3 pestañas:
-- Torneos en estado "publicado" (inscripciones abiertas) (lista de torneos creados por el admin de la cancha, con opción para ver detalle)
-- Torneos en estado "activo" (inscripciones cerradas, en curso)
-    (lista de torneos creados por el admin de la cancha, con opción para ver detalle)
-- Torneos en estado "finalizado" (lista de torneos creados por el admin de la cancha, con opción para ver detalle)
-- Botón para crear un nuevo torneo (redirige a mis-torneos-crear.html)
 
--->
 
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title><!-- Cambiar título --> FutMatch</title>
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-
-  <!-- Fuente -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FutMatch - Torneos</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../../src/styles/adminInc.css" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+   <!-- Scripts -->
+  <script src="../../../src/scripts/pages/adminInc.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <!-- Fuente de google -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  </head>
+  <body>
+    <div
+      class="container-fluid bg-image pt-5 pb-5"
+      style="background-image: url('../../img/bg4.jpg')"
+    >
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="text-white fw-bold display-4">Gestión de Torneos</h1>
+          <a href="inicio-admin-cancha.html" class="btn btn-light mt-3">
+            <i class="bi bi-arrow-left"></i> Volver a Panel Administrador
+          </a>
+        </div>
+      </div>
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+      <div class="container mt-5">
+        <div class="mb-3 text-center">
+          <button id="crearTorneoBtn" class="btn btn-success m-2">Crear Torneo</button>
+          <button class="btn btn-secondary m-2">Historial de Torneos</button>
+        </div>
 
-  <!-- Scripts -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
-</body>
+        <div class="table-responsive mt-4">
+          <table class="table table-dark table-striped align-middle">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Fecha Inicio</th>
+                <th>Equipos</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="torneos-list">
+              <tr>
+                <td>1</td>
+                <td>Torneo Apertura</td>
+                <td>10/10/2025</td>
+                <td>8</td>
+                <td>Activo</td>
+                <td>
+                  <button class="btn btn-warning btn-sm me-2">Modificar</button>
+                  <button class="btn btn-danger btn-sm">Cancelar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Copa FutMatch</td>
+                <td>15/11/2025</td>
+                <td>12</td>
+                <td>Activo</td>
+                <td>
+                  <button class="btn btn-warning btn-sm me-2">Modificar</button>
+                  <button class="btn btn-danger btn-sm">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </body>
 </html>

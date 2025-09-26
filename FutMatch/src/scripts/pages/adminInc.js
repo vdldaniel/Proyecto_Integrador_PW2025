@@ -1,46 +1,68 @@
-function showSection(section) {
+// Descripción de secciones 
+
+function showTooltip(section) {
   let content = document.getElementById("section-content");
   switch (section) {
     case "torneos":
+
       content.innerHTML = `
-        <h3>Gestión de Torneos</h3>
-        <button class="btn btn-success m-2">Crear Torneo</button>
-        <button class="btn btn-info m-2">Modificar Torneo</button>
-        <button class="btn btn-danger m-2">Cancelar Torneo</button>
-        <button class="btn btn-secondary m-2">Historial de Torneos</button>
+        <p>Podrás Crear, Modificar , Cancelar y Ver Historial  de Torneos.</p>
+
       `;
       break;
 
     case "canchas":
       content.innerHTML = `
-        <h3>Gestión de Canchas</h3>
-        <button class="btn btn-success m-2">Agregar Cancha</button>
-        <button class="btn btn-info m-2">Modificar Cancha</button>
-        <button class="btn btn-danger m-2">Eliminar Cancha</button>
-        <button class="btn btn-secondary m-2">Listar Canchas</button>
+        <p>Podrás Agregar, Eliminar, Modificar y Listar Canchas</p>
       `;
       break;
 
     case "reservas":
       content.innerHTML = `
-        <h3>Gestión de Reservas</h3>
-        <button class="btn btn-success m-2">Crear Reserva</button>
-        <button class="btn btn-info m-2">Modificar Reserva</button>
-        <button class="btn btn-danger m-2">Eliminar Reserva</button>
-        <button class="btn btn-secondary m-2">Ver Historial</button>
+        <p>Podrás Crear , Modificar, Eliminar  y Ver Historial de Reservas.</p>
       `;
       break;
 
     case "usuarios":
       content.innerHTML = `
-        <h3>Gestión de Usuarios</h3>
-        <button class="btn btn-info m-2">Ver Cuenta</button>
-        <button class="btn btn-warning m-2">Modificar Perfil</button>
-        <button class="btn btn-danger m-2">Eliminar Cuenta</button>
+        <p>Podrás Ver, Modificar y Eliminar una Cuenta de Usuario.</p>
       `;
       break;
 
     default:
-      content.innerHTML = "<p>Selecciona una opción para comenzar.</p>";
+      content.innerHTML = "<p>Selecciona una opción .</p>";
+  }
+}
+
+function hideTooltip() {
+  let content = document.getElementById("section-content");
+
+
+  content.innerHTML = "<p>Selecciona una opción.</p>";
+
+}
+
+// Selección de opción 
+function showSection(section) {
+  let content = document.getElementById("section-content");
+  switch (section) {
+    case "torneos":
+      window.location.href = "mis-torneos.html";
+      break;
+
+    case "canchas":
+      window.location.href = "canchas-listado.html";
+      break;
+
+    case "reservas":
+     window.location.href = "cancha-reservar.html";
+      break;
+
+    case "usuarios":
+      window.location.href = "cuenta-jugador.html";
+      break;
+
+    default:
+      content.innerHTML = "<p>Selecciona una opción.</p>";
   }
 }

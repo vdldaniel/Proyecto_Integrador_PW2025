@@ -1,105 +1,99 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FutMatch - Panel Administrador</title>
-    <link rel="stylesheet" type="text/css" href="../../../src/styles/adminInc.css" />
-    <!-- Bootstrap 5 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-0WuQd47pxQ2ayLHg8m8ADtC7StBvn8zq4hv4nq8oIljV4NdfGdPyiPUs2rY7LwY4"
-      crossorigin="anonymous"
-    ></script>
-     <!-- Scripts -->
-    <script src="../../../src/scripts/pages/adminInc.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
-    <!-- Fuente de google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div
-      class="container-fluid bg-image pt-5 pb-5"
-      style="background-image: url('../../img/bg4.jpg')"
-    >
-      <div class="row">
-        <div class="col-12">
-          <h1 class="h1 text-white fw-bold text-center display-1">FutMatch</h1>
-          <h2 class="h4 text-white text-center mb-5">
-            Panel del Administrador de Canchas
-          </h2>
-        </div>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FutMatch - Panel Administrador</title>
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="../../../src/styles/adminInc.css" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-0WuQd47pxQ2ayLHg8m8ADtC7StBvn8zq4hv4nq8oIljV4NdfGdPyiPUs2rY7LwY4"
+    crossorigin="anonymous"></script>
+  <!-- Scripts -->
+  <script src="../../../src/scripts/pages/adminInc.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <!-- Fuente de google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container-fluid bg-image pt-5 pb-5" style="background-image: url('../../img/bg4.jpg')">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="h1 text-white fw-bold text-center display-1">FutMatch</h1>
+        <h2 class="h4 text-white text-center mb-5">
+          Panel del Administrador de Canchas
+        </h2>
       </div>
+    </div>
 
-      <!-- Sección de botones principales -->
-      <div class="container">
-        <div class="row g-3 justify-content-center">
 
-          <!-- Torneos -->
-          <div class="col-12 col-md-4">
-            <div class="card shadow-lg option-card text-center" onclick="showSection('torneos')">
-              <i class="bi bi-trophy display-4 text-success"></i>
-              <div class="card-body">
-                <h5 class="card-title">Gestionar Torneos</h5>
-              </div>
+    <div class="container">
+      <div class="row g-3 justify-content-center">
+
+        <!-- Torneos -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-lg option-card text-center" onclick="showSection('torneos')"
+            onmouseenter="showTooltip('torneos')" onmouseleave="hideTooltip()">
+            <i class="bi bi-trophy display-4 text-success"></i>
+            <div class="card-body">
+              <h5 class="card-title">Gestionar Torneos</h5>
             </div>
           </div>
-
-          <!-- Canchas -->
-          <div class="col-12 col-md-4">
-            <div class="card shadow-lg option-card text-center" onclick="showSection('canchas')">
-              <i class="bi bi-building display-4 text-primary"></i>
-              <div class="card-body">
-                <h5 class="card-title">Gestionar Canchas</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Reservas -->
-          <div class="col-12 col-md-4">
-            <div class="card shadow-lg option-card text-center" onclick="showSection('reservas')">
-              <i class="bi bi-calendar-check display-4 text-warning"></i>
-              <div class="card-body">
-                <h5 class="card-title">Gestionar Reservas</h5>
-              </div>
-            </div>
-          </div>
-
-          <!-- Usuarios -->
-          <div class="col-12 col-md-4">
-            <div class="card shadow-lg option-card text-center" onclick="showSection('usuarios')">
-              <i class="bi bi-people display-4 text-danger"></i>
-              <div class="card-body">
-                <h5 class="card-title">Usuarios</h5>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-      <!-- Sección dinámica -->
-      <div class="container mt-5">
-        <div id="section-content" class="text-center text-white">
-          <p>Selecciona una opción para comenzar.</p>
+        <!-- Canchas -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-lg option-card text-center" onclick="showSection('canchas')"
+            onmouseenter="showTooltip('canchas')" onmouseleave="hideTooltip()">
+            <i class="bi bi-building display-4 text-primary"></i>
+            <div class="card-body">
+              <h5 class="card-title">Gestionar Canchas</h5>
+            </div>
+          </div>
         </div>
-      </div>
 
+        <!-- Reservas -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-lg option-card text-center" onclick="showSection('reservas')"
+            onmouseenter="showTooltip('reservas')" onmouseleave="hideTooltip()">
+            <i class="bi bi-calendar-check display-4 text-warning"></i>
+            <div class="card-body">
+              <h5 class="card-title">Gestionar Reservas</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usuarios -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-lg option-card text-center" onclick="showSection('usuarios')"
+            onmouseenter="showTooltip('usuarios')" onmouseleave="hideTooltip()">
+            <i class="bi bi-people display-4 text-danger"></i>
+            <div class="card-body">
+              <h5 class="card-title">Usuarios</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sección dinámica -->
+    <div class="container mt-5">
+      <div id="section-content" class="text-center text-white">
+        <p>Selecciona una opción para comenzar.</p>
+      </div>
     </div>
     
-  </body>
+  </div>
+
+</body>
+
 </html>
