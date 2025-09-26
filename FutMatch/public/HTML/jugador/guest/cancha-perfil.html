@@ -1,13 +1,20 @@
-<!--
-Página a la cual se accede desde discusion-detalle.html al presionar el botón "Responder"
-Aquí el jugador podrá responder a la discusión y unirse a la cadena de comentarios. 
-Se reutiliza el mismo diseño de discusion-detalle.html, pero en lugar de mostrar los comentarios
-se muestra un formulario para responder.
-- Campo de texto para escribir la respuesta
-- Botón para enviar la respuesta
-- Botón para cancelar y volver a la página anterior
--->
+<!--perfil de cancha seleccionada
+Viene de explorar-canchas o explorar-partidos
 
+Es posible que se tenga que subdividir en varias paginas (tabs o secciones)
+
+Incluye:
+- info de la cancha (nombre, ubicacion, descripcion, horarios generales, servicios, fotos)
+- Discusiones abiertas por la cancha (si las hay)
+- Valoracion general de la cancha (si la hay) + ver opiniones
+- Discusiones relacionadas con la cancha (las que hicieron los jugadores, mencionando la cancha)
+- Torneos abiertos / resumen de torneos históricos de la cancha.
+- boton para acceder a la agenda de la cancha (solo aparecen eventos con: 
+    "horario disponible",
+    "horario reservado",
+    "partido abierto disponible")
+- boton para reservar cancha
+-->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -38,4 +45,5 @@ se muestra un formulario para responder.
   <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
 </body>
 </html>
+
 

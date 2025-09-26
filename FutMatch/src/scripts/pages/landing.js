@@ -32,24 +32,32 @@ document.addEventListener('DOMContentLoaded', () => {
     loginCard.setAttribute('aria-expanded', 'false');
   });
 
-  // Foco en email al abrir
+  // focus mail
   collapseEl.addEventListener('shown.bs.collapse', () => {
     setTimeout(() => emailInput && emailInput.focus(), 50);
   });
 
-  // Validación básica del formulario (HTML5 + Bootstrap)
+  // posponemos la validación real hasta tener el back-end
   const form = document.getElementById('loginForm');
+
   if (form) {
     form.addEventListener('submit', (e) => {
-      if (!form.checkValidity()) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      form.classList.add('was-validated');
+      e.preventDefault(); // Evita validación real
 
-      // Acá iría tu lógica de autenticación (fetch/axios) si es válido
-      // Ejemplo:
-      // if (form.checkValidity()) login(email.value, password.value)
-    }, false);
+      const email = (emailInput?.value || '').trim().toLowerCase();
+
+      // Lógica de demo: depende del "usuario" ingresado
+      if (email.includes('jugador')) {
+        window.location.href = 'public/HTML/jugador/inicio-jugador.html';
+      } 
+      else if (email.includes('admin-cancha')) {
+        window.location.href = 'public/HTML/admin-cancha/inicio-admin-cancha.html';
+      } 
+      else {
+        alert("Para la demo, usá un usuario que contenga 'jugador' o 'admin-cancha'");
+      }
+    });
   }
+
+
 });

@@ -50,8 +50,8 @@ También enlaza al formulario para inscribirse como admin. de canchas.
         <!-- Card: Invitado -->
         <div class="col-11 col-md-5 col-lg-4">
           <div class="card card-action h-100" role="button" tabindex="0" aria-label="Entrar como invitado"
-               onclick="location.href='/public/HTML/guest.html'"
-               onkeydown="if(event.key==='Enter'){location.href='/public/HTML/guest.html'}">
+               onclick="location.href='public/HTML/jugador/guest/inicio-guest.html'"
+               onkeydown="if(event.key==='Enter'){location.href='public/HTML/jugador/guest/inicio-guest.html'}">
             <div class="card-body py-4">
               <h2 class="h4 fw-600 mb-2">Entrar como invitado</h2>
               <p class="text-muted mb-0">
@@ -63,7 +63,7 @@ También enlaza al formulario para inscribirse como admin. de canchas.
 
         <!-- Card: Iniciar sesión / Registrarse (expandible) -->
         <div class="col-11 col-md-5 col-lg-4">
-          <div class="card card-action h-100" id="loginCard" role="button" tabindex="0"
+          <div class="guest card card-action h-100" id="loginCard" role="button" tabindex="0"
                aria-controls="loginCollapse" aria-expanded="false">
             <div class="card-body py-4">
               <div class="d-flex align-items-center justify-content-between">
@@ -92,11 +92,10 @@ También enlaza al formulario para inscribirse como admin. de canchas.
                   </div>
 
                   <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-success" 
-                            href="public/HTML/jugador/inicioJugador.html">
+                    <button type="submit" class="btn btn-success">
                             Ingresar</button>
                     <a class="btn btn-outline-secondary" 
-                       href="public/HTML/auth/register.html">Registrarme</a>
+                       href="public/HTML/auth/register-jugador.html">Registrarme</a>
                   </div>
 
                   <div class="text-center mt-3">
@@ -111,7 +110,7 @@ También enlaza al formulario para inscribirse como admin. de canchas.
 
         <!-- Enlace discreto para gestores de canchas -->
         <div class="col-12 text-center">
-          <a href="public/HTML/admin-cancha/form-canchas.html" 
+          <a href="public/HTML/auth/register-admin-canchas.html" 
              class="link-cancha">¿Sos dueño de una cancha? Te ayudamos a gestionarla</a>
         </div>
       </div>
@@ -120,6 +119,6 @@ También enlaza al formulario para inscribirse como admin. de canchas.
 
   <!-- Scripts -->
   <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/login.js"></script>
+  <script src="src/scripts/pages/landing.js"></script>
 </body>
 </html>
