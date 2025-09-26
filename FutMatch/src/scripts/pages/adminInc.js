@@ -55,7 +55,7 @@ function showSection(section) {
       break;
 
     case "reservas":
-     window.location.href = "cancha-reservar.html";
+      window.location.href = "cancha-reservar.html";
       break;
 
     case "usuarios":
@@ -66,3 +66,36 @@ function showSection(section) {
       content.innerHTML = "<p>Selecciona una opción.</p>";
   }
 }
+
+// Formulario para crear Torneo
+function enviarFormularioTorneo() {
+
+  const nombre = document.getElementById("nombre").value;
+  const ubicacion = document.getElementById("ubicacion").value;
+  const tamano = document.getElementById("tamano").value;
+  const cierre = document.getElementById("cierre").value;
+  const inicio = document.getElementById("inicio").value;
+  const fin = document.getElementById("fin").value;
+  const equipos = document.getElementById("equipos").value;
+
+  // Validación simple
+  if (!nombre || !ubicacion || !tamano || !cierre || !inicio || !fin || !equipos) {
+    alert("Por favor, completa todos los campos requeridos.");
+    return;
+  } else {
+    // Resetear formulario
+    document.getElementById("torneoForm").reset();
+
+  
+    // Redirigir a pagina principal
+      window.location.href = "mis-torneos.html";
+    
+  }
+}
+
+function cancelarFormularioTorneo() {
+  if (confirm("¿Seguro que quieres cancelar la creación del torneo?")) {
+    window.location.href = "mis-torneos.html"; // vuelve a la principal
+  }
+}
+
