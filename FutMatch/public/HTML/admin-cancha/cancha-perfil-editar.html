@@ -1,9 +1,9 @@
 <!--
 Editar perfil de una cancha:
-- Formulario para editar datos de la cancha (nombre, ubicación, tipo de superficie, capacidad, fotos)
-- Comienza con los datos actuales de la cancha
-- Validación de datos
-- Botón para guardar cambios
+- [x]Formulario para editar datos de la cancha (nombre, ubicación, tipo de superficie, capacidad, fotos)
+- [x] Comienza con los datos actuales de la cancha
+- [ ] Validación de datos
+- [x] Botón para guardar cambios
 - Botón para cancelar y volver al perfil detallado de la cancha
 - Botón para cerrar sesión
 - Mostrar mensaje de éxito o error al guardar cambios
@@ -12,34 +12,138 @@ Editar perfil de una cancha:
 - Mostrar las fotos actuales de la cancha con opción a eliminar cada una
 -->
 
-
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title>FutMatch</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+    <title>Editar cancha - FutMatch</title>
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
-</head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
-</body>
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <!--cambiar por style especifico si corresponde-->
+  </head>
+  <body class="bg-light">
+    <main>
+      <div class="container py-5">
+        <div class="card shadow border-0 rounded-4">
+          <div class="card-body p-4">
+            <h3 class="card-title mb-3 d-flex fw-bold">
+              Editar perfil de cancha
+            </h3>
+            <form class="formCuenta" id="formCuenta" action="">
+              <div class="row">
+                <!--Nombre de la cancha-->
+                <div class="mb-3 col-12 col-md-6">
+                  <label for="inputNombreCancha" class="form-label"
+                    >Nombre de la cancha</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputNombreCancha"
+                    value="Cancha 1"
+                    required
+                  />
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorNombre"></p>
+                </div>
+                <!--Ubicacion-->
+                <div class="mb-3 col-12 col-md-6">
+                  <label for="inputUbicacion" class="form-label"
+                    >Ubicacion</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputUbicacion"
+                    value="Ramón Santamarina 1250, B1805 El Jagüel, Provincia de Buenos Aires"
+                  />
+                </div>
+                <!--Tipo de superficie-->
+                <div class="mb-3 col-12 col-lg-6">
+                  <label for="inputSuperficie" class="form-label"
+                    >Tipo de superficie</label
+                  >
+                  <select class="form-select" id="inputSuperficie" required>
+                    <option value="1" selected>Sintetico</option>
+                    <option value="2">Cemento</option>
+                    <option value="3">Parquet</option>
+                    <option value="4">Cesped natural</option>
+                  </select>
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorSuperficie"></p>
+                </div>
+                <!--Capacidad-->
+                <div class="mb-3 col-12 col-lg-6">
+                  <label for="inputCapacidad" class="form-label"
+                    >Tipo de cancha</label
+                  >
+                  <select class="form-select" id="inputCapacidad" required>
+                    <option value="1">Futbol 5</option>
+                    <option value="2" selected>Futbol 7</option>
+                    <option value="3">Futbol 9</option>
+                    <option value="4">Futbol 11</option>
+                  </select>
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorCapacidad"></p>
+                </div>
+                <!-- Foto actual -->
+                <div class="mb-3">
+                  <label class="form-label">Foto de perfil</label>
+                  <div class="d-flex flex-wrap gap-3">
+                    <div class="position-relative">
+                      <img
+                        src="https://www.megafutbol.com.ar/fotos/foto040.jpg"
+                        class="img-thumbnail"
+                        width="150"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-danger position-absolute top-0 end-0"
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Subir nuevas fotos -->
+                <div class="mb-3">
+                  <label for="fotos" class="form-label"
+                    >Subir nuevas fotos</label
+                  >
+                  <input type="file" class="form-control" id="fotos" multiple />
+                </div>
+                <!--Boton-->
+                <div class="d-flex gap-2 mt-2 justify-content-end">
+                  <button type="submit" class="btn btn-primary">
+                    Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Scripts -->
+    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="src/scripts/pages/script.js"></script>
+    <!--cambiar por el script de la pagina-->
+  </body>
 </html>
-

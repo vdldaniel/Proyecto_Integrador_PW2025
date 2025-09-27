@@ -1,43 +1,177 @@
 <!--
 Ver perfil detallado de una cancha:
-- Pestaña que muestre al perfil VISIBLE de la cancha (para que el admin lo pueda ver)
+- [x] Pestaña que muestre al perfil VISIBLE de la cancha (para que el admin lo pueda ver)
     (nombre, ubicación, tipo de superficie, capacidad, fotos)
-- Otra pestaña con un pequeño grafico de estadísticas de uso de la cancha (reservas por mes, horas pico, etc.)
-- Botón para ver la agenda de reservas de la cancha
-- Botón para editar la cancha (redirige a modificar cancha)
-- Botón para eliminar la cancha (con confirmación)
-- Botón para volver al panel de administración
-- Botón para cerrar sesión
+- [x] Otra pestaña con un pequeño grafico de estadísticas de uso de la cancha (reservas por mes, horas pico, etc.)
+- [x] Botón para ver la agenda de reservas de la cancha
+- [x] Botón para editar la cancha (redirige a modificar cancha)
+- [x] Botón para eliminar la cancha 
+    - [x] Modal de confirmacion
+- [x] Botón para volver al panel de administración (en el nav)(?)
+- [x] Botón para cerrar sesión (en el nav)
 -->
-
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title>FutMatch</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+    <title>FutMatch</title>
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
-</head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
-</body>
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <!--cambiar por style especifico si corresponde-->
+  </head>
+  <body class="bg-light">
+    <main>
+      <div class="container py-5">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-3" id="perfilTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="detalles-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#detalles"
+              type="button"
+              role="tab"
+            >
+              Detalles
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="estadisticas-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#estadisticas"
+              type="button"
+              role="tab"
+            >
+              Estadísticas
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <!-- Detalles -->
+          <div class="tab-pane fade show active" id="detalles" role="tabpanel">
+            <div class="card shadow border-0 rounded-4">
+              <div class="card-body p-4">
+                <h3 class="card-title mb-3 fw-bold">
+                  Cancha Futbol 5 - Centro
+                </h3>
+                <p>
+                  <strong>Ubicación:</strong> Ramón Santamarina 1250, B1805 El
+                  Jagüel, Provincia de Buenos Aires
+                </p>
+                <p><strong>Superficie:</strong> Césped sintético</p>
+                <p><strong>Capacidad:</strong> Fútbol 7</p>
+
+                <h5 class="mt-4">Fotos</h5>
+                <div class="d-flex flex-wrap gap-3">
+                  <img
+                    src="https://www.megafutbol.com.ar/fotos/foto040.jpg"
+                    class="img-thumbnail"
+                    width="200"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estadísticas -->
+          <div class="tab-pane fade" id="estadisticas" role="tabpanel">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">Estadísticas de uso</h5>
+                <p>Reservas por mes, horas pico, etc.</p>
+                <div
+                  class="bg-secondary bg-opacity-25 d-flex align-items-center justify-content-center"
+                >
+                  <span class="text-muted">[ Gráfico de estadísticas ]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Botones-->
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a
+            href="public/HTML/canchas/cancha-agenda.html"
+            class="btn btn-primary"
+            >Ver agenda</a
+          >
+          <a
+            href="public/HTML/canchas/cancha-editar.html"
+            class="btn btn-warning"
+            >Editar cancha</a
+          >
+          <button
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmarEliminar"
+          >
+            Eliminar cancha
+          </button>
+          <a href="public/HTML/admin/panel.html" class="btn btn-secondary"
+            >Volver al panel</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal de confirmación de eliminación -->
+    <div
+      class="modal fade"
+      id="confirmarEliminar"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar eliminación</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas eliminar esta cancha? Esta acción no se
+            puede deshacer.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <a href="public/HTML/admin/panel.html" class="btn btn-danger"
+              >Eliminar</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts Bootstrap -->
+    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
-
