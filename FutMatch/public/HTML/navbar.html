@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+    <!-- Bootstrap JS (bundle con Popper incluido) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--Iconos Bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="src/styles/navbar.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img class="logo" src="public/img/logo-sinfondo.svg" alt="" />
+            <span class="brand-text">FutMatch</span></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mis partidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+              </li>
+            </ul>
+            <button
+              id="btn-configuracion"
+              class="btn btn-outline-light me-2"
+              type="button"
+            >
+              <i class="bi bi-gear"></i>
+            </button>
+            <button type="button" class="btn btn-danger">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </body>
+</html>
