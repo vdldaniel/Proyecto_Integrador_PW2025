@@ -2,48 +2,251 @@
 Página para explorar partidos disponibles para unirse
 - Debe mostrar 2 pestañas:
   - (por defecto) Listado de partidos cercanos (tarjetas) con:
-    - Nombre de la cancha
-    - Ubicación (dirección)
-    - Botón de "Ver detalles" que redirija a partido-detalle.html
-    - Botón de "Solicitar Unirse" que redirija a partido-unirse.html
+    - [x] Nombre de la cancha
+    - [x] Ubicación (dirección)
+    - [x] Botón de "Ver detalles" que redirija a partido-detalle.html
+    - [x] Botón de "Solicitar Unirse" que redirija a partido-unirse.html
       + Si el usuario no está logueado, redirigir a login-jugador.html
   - Mapa con marcadores de los partidos cercanos:
     - Al hacer clic en un marcador, mostrar un tooltip con el nombre de la cancha 
       y un botón de "Ver detalles" que redirija a partido-detalle.html
   - Filtro de búsqueda por:
-    - Ubicación (ciudad/barrio)
-    - Cantidad de jugadores que se unirían (para filtrar partidos según cupos)
+    - [x] Genero
+    - [x] Ubicación (ciudad/barrio)
+    - [x] Cantidad de jugadores que se unirían (para filtrar partidos según cupos)
     - Servicios (iluminación, vestuarios, etc.)
     - Botón de "Aplicar filtros" que actualice el listado y el mapa según los criterios seleccionados
 -->
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title>FutMatch</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+    <title>Listado de Canchas | FutMatch</title>
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+    <!--Iconos Bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
-</head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+    <!-- Fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
-</body>
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="src/styles/canchas-listado.css" />
+    <!--Es el mismo que canchas, deberia crear uno nuevo?-->
+  </head>
+  <body>
+    <header>
+      <nav class="navbar bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="" alt="FutMatch" width="30" height="24" />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="bg-light">
+        <div class="container-fluid py-5">
+          <div class="busqueda-container">
+            <!--Barra de busqueda-->
+            <div class="busqueda-wrapper">
+              <div class="busqueda-header">
+                <div class="barra-de-busqueda">
+                  <input
+                    type="text"
+                    class="input-busqueda form-control"
+                    placeholder="Buscar partidos..."
+                  />
+                  <i class="bi bi-search busqueda-icon"></i>
+                </div>
+              </div>
+              <!--Filtros de búsqueda-->
+              <div class="container-fluid filtro-de-busquedas">
+                <form id="filtrosForm">
+                  <div class="row g-3">
+                    <!--Ubicación-->
+                    <div class="col-md-4">
+                      <label for="ubicacion" class="form-label"
+                        >Ubicación</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="ubicacion"
+                        placeholder="Ingrese una ubicacion..."
+                      />
+                    </div>
+                    <!--Tipo de cancha-->
+                    <div class="col-md-2">
+                      <label for="jugadores" class="form-label"
+                        >Tipo de cancha</label
+                      >
+                      <select class="form-select" id="jugadores">
+                        <option selected>Seleccione tipo de cancha...</option>
+                        <option value="5">Futbol 5</option>
+                        <option value="7">Futbol 7</option>
+                        <option value="11">Futbol 11</option>
+                      </select>
+                    </div>
+                    <!--Genero-->
+                    <div class="col-md-2" class="form-label">
+                      <label for="genero"> 
+                        Genero
+                      </label>
+                      <select
+                        class="form-select"
+                        id="genero"
+                      >
+                        <option selected>Seleccione el genero...</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="MIX">Mixto</option>
+                      </select>
+                    </div>
+                    <!--Fecha-->
+                    <!--AGREGAR MAS FILTROS DE BUSQUEDA-->
+                  </div>
+                  <!--Boton aplicar filtros-->
+                  <div class="mt-4 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                      Aplicar filtros
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!--Listado de canchas GRID VIEW-->
+              <div class="listado-grid border-top">
+                <div
+                  class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1"
+                >
+                  <div class="col">
+                    <div class="card h-100 shadow-sm">
+                      <img
+                        src="https://www.megafutbol.com.ar/fotos/foto040.jpg"
+                        class="card-img"
+                        alt="Imagen de la cancha"
+                      />
+                      <div class="card-body">
+                        <h5 class="card-title">MegaFutbol Llavallol</h5>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-geo-alt"></i>
+                          Antártida Argentina 2340, B1833CDN Llavallol,
+                          Provincia de Buenos Aires
+                        </p>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-calendar-event"></i> Sabado 27/9
+                        </p>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-clock"></i>17:00 a 18:00 hs
+                        </p>
+                      </div>
+                      <div class="card-footer bg-transparent border-top-0">
+                        <!--Botones-->
+                        <div class="d-flex gap-2 align-items-center">
+                          <button type="button" class="btn btn-primary btn-sm">
+                            Ver detalles
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm">
+                            Unirse
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="card h-100 shadow-sm">
+                      <img
+                        src="https://www.megafutbol.com.ar/fotos/foto040.jpg"
+                        class="card-img"
+                        alt="Imagen de la cancha"
+                      />
+                      <div class="card-body">
+                        <h5 class="card-title">MegaFutbol Llavallol</h5>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-geo-alt"></i>
+                          Antártida Argentina 2340, B1833CDN Llavallol,
+                          Provincia de Buenos Aires
+                        </p>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-calendar-event"></i> Sabado 27/9
+                        </p>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-clock"></i>17:00 a 18:00 hs
+                        </p>
+                      </div>
+                      <div class="card-footer bg-transparent border-top-0">
+                        <!--Botones-->
+                        <div class="d-flex gap-2 align-items-center">
+                          <button type="button" class="btn btn-primary btn-sm">
+                            Ver detalles
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm">
+                            Unirse
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="card h-100 shadow-sm">
+                      <img
+                        src="https://www.megafutbol.com.ar/fotos/foto040.jpg"
+                        class="card-img"
+                        alt="Imagen de la cancha"
+                      />
+                      <div class="card-body">
+                        <h5 class="card-title">MegaFutbol Llavallol</h5>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-geo-alt"></i>
+                          Antártida Argentina 2340, B1833CDN Llavallol,
+                          Provincia de Buenos Aires
+                        </p>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-calendar-event"></i> Sabado 27/9
+                        </p>
+                        <p class="d-flex gap-1">
+                          <i class="bi bi-clock"></i>17:00 a 18:00 hs
+                        </p>
+                      </div>
+                      <div class="card-footer bg-transparent border-top-0">
+                        <!--Botones-->
+                        <div class="d-flex gap-2 align-items-center">
+                          <button type="button" class="btn btn-primary btn-sm">
+                            Ver detalles
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm">
+                            Unirse
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Scripts -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
-
