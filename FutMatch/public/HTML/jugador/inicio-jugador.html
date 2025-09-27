@@ -14,7 +14,6 @@ Incluye:
   * configuración)
 - Noticias o actualizaciones recientes relacionadas con el fútbol o la plataforma
 -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,7 +24,10 @@ Incluye:
   <title>FutMatch</title>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/FutMatch/public/assets/css/bootstrap.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
 
   <!-- Fuente -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,15 +35,128 @@ Incluye:
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
+  <link rel="stylesheet" href="/src/styles/styleInicioJugador.css" />
+   <link rel="stylesheet" href="/FutMatch/src/styles/navbar.css" />
+  
+  
 </head>
 <body>
+      <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img class="logo" src="/FutMatch/public/img/logo-sinfondo.svg" alt="" />
+            <span class="brand-text">FutMatch</span></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mis partidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Torneo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Crear equipo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Invitar jugardor</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Uniser a un equipo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Discusiones</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Perfil</a>
+                </li>
+            </ul>
+            <button
+              id="btn-configuracion"
+              class="btn btn-outline-light me-2"
+              type="button"
+            >
+              <i class="bi bi-gear"></i>
+            </button>
+            <button type="button" class="btn btn-danger">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
   <!-- Contenido de la página -->
   <!-- Dejar vacío por ahora -->
+  <div class="container mt-5">      
+           <div class="hero-image ">
+              <div class="container text-center" id="titulo">
+                  <h1 class="col-12" id="titulo1">Futmatch</h1>
+                  <p class="col-12">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit recusandae quasi ea! Corrupti,</p>
+              </div>
+            </div>
+                 <div class="container mt-2 px-3 ">
+                    <div class="row mt-3 align-items-center">
+                      <div class="card col-6">
+                      <img src="/public/img/reserva.jpg" class="card-img-top " alt="..." >
+                      <h5 class="card-title align-text-center">Reservar una cancha</h5>  
+                      <a href="/FutMatch/public/HTML/jugador/cancha-reservar.html" class="stretched-link"></a>
+                      </div>
+                      <div class="card col-6" >
+                      <img src="/public/img/reserva.jpg" class="card-img-top" alt="..." href="#">
+                      <h5 class="card-title align-text-center">Participar de un partido</h5>  
+                      </div>
+                    </div>
+                    <div class="row mt-3 mb-5 align-items-center">
+                      <div class="card col-6" >
+                      <img src="/public/img/reserva.jpg" class="card-img-top" alt="..." href="#">
+                      <h5 class="card-title align-text-center">Historial de partidos</h5>  
+                      </div>
+                      <div class="card col-6" >
+                      <img src="/public/img/reserva.jpg" class="card-img-top" alt="..." href="#">
+                      <h5 class="card-title align-text-center">Canchas disponibles</h5>  
+                      </div>
+                    </div>
+                    <div class="row mt-5 align-items-center">
+                     <button type="button" class="btn btn-primary">Mis proximos partidos</button>
+                    </div>
+                    
+                  
+                  </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
 
   <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
+  <script src="/FutMatch/public/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/src/scripts/pages/inicioJugador.js"></script>
+  
 </body>
 </html>
-
