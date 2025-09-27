@@ -39,7 +39,7 @@ Manejo de la agenda del Admin de Cancha:
 
 </head>
 
-<body class="light-page">
+<body class="light-page monthly-view-active">
   <!-- Barra superior -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
     <div class="container-fluid">
@@ -55,7 +55,7 @@ Manejo de la agenda del Admin de Cancha:
       <div class="d-flex justify-content-sm-end justify-content-md-center align-items-center mx-auto">
         <button id="todayBtn" class="btn btn-outline-primary me-2" type="button">Hoy</button>
         <input type="date" class="form-control" 
-               id="dateSelector" value="2025-09-26">
+               id="dateSelector">
       </div>
 
       <!-- Lado derecho: configuración + selector de vista -->
@@ -99,10 +99,10 @@ Manejo de la agenda del Admin de Cancha:
 
       <!-- Botones de acción -->
       <div class="d-grid gap-2">
-        <button id="btn-crear-reserva" class="btn btn-success" type="button">
+        <button id="crearReservaBtn" class="btn btn-success" type="button">
           <i class="bi bi-plus-circle me-2"></i>Crear reserva
         </button>
-        <button id="btn-gestionar-solicitudes" class="btn btn-warning position-relative" type="button">
+        <button id="gestionarSolicitudesBtn" class="btn btn-warning position-relative" type="button">
           <i class="bi bi-clock-history me-2"></i>Gestionar solicitudes
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             3
@@ -147,7 +147,7 @@ Manejo de la agenda del Admin de Cancha:
         <!-- Contenido del calendario -->
         <div id="calendarContent" class="d-flex flex-column flex-grow-1">
           <!-- Vista mensual -->
-          <div id="monthView" class="calendar-view d-flex flex-column flex-grow-1">
+          <div id="monthView" class="calendar-view d-flex flex-column">
             <div class="table-responsive flex-grow-1">
               <table class="table table-bordered h-100">
                 <thead class="table-light">
@@ -225,6 +225,25 @@ Manejo de la agenda del Admin de Cancha:
       </main>
     </div>
   </div>
+
+  <!--MODALES-->
+  <div class="modal" id="crearReservaModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Crear reserva</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>  
 
   <!-- Scripts de JavaScript -->
   <script src="public/assets/js/bootstrap.bundle.min.js"></script>

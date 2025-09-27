@@ -3,49 +3,81 @@
  * Maneja la visualización del calendario, reservas, y navegación entre vistas
  */
 
+// Reemplazar con back-end
+const CALENDAR_CONFIG = {
+    DAYS: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    MONTHS: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    TIME_SLOTS: {
+        START_HOUR: 8,
+        END_HOUR: 22,
+        INTERVAL: 1 // horas
+    }
+};
+
 class AgendaApp {
     constructor() {
         this.currentDate = new Date();
         this.currentView = 'month';
         this.selectedCancha = null;
-        this.reservas = this.generateSampleData();
+        this.reservas = [];
+        
+        // Caché de elementos DOM frecuentemente accedidos
+        this.elements = {};
         
         this.init();
     }
 
     init() {
+        this.cacheElements();
         this.bindEvents();
         this.initializeDefaultView();
         this.updateDateDisplay();
         this.renderCurrentView();
+        this.generateSampleData(); // reemplazar con back-end
+    }
+
+
+    // Cachear elementos DOM para optimizar rendimiento
+    cacheElements() {
+        this.elements = {
+            // Vistas del calendario
+            monthView: document.getElementById('monthView'),
+            weekView: document.getElementById('weekView'),
+            dayView: document.getElementById('dayView'),
+            
+            // Navegación
+            todayBtn: document.getElementById('todayBtn'),
+            prevBtn: document.getElementById('prevBtn'),
+            nextBtn: document.getElementById('nextBtn'),
+            dateSelector: document.getElementById('dateSelector'),
+            currentDateDisplay: document.getElementById('currentDateDisplay'),
+            
+            // Sidebar
+            canchaSelect: document.getElementById('canchaSelect'),
+            crearReservaBtn: document.getElementById('crearReservaBtn'),
+            gestionarSolicitudesBtn: document.getElementById('gestionarSolicitudesBtn'),
+            
+            // Headers
+            dayViewHeader: document.getElementById('dayViewHeader')
+        };
     }
     
     // Inicializar vista por defecto
+    // Esto fue agregado porque apenas arrancaba la pestaña no mostraba la vista mensual
     initializeDefaultView() {
-        console.log('Initializing default view...'); // Debug
-        
-        // Establecer vista mensual como activa
-        document.body.classList.add('monthly-view-active');
+        // Establecer vista mensual como activa (solo si no está ya presente)
+        if (!document.body.classList.contains('monthly-view-active')) {
+            document.body.classList.add('monthly-view-active');
+        }
         
         // Asegurar que la vista mensual esté visible por defecto
-        const monthView = document.getElementById('monthView');
-        const weekView = document.getElementById('weekView');
-        const dayView = document.getElementById('dayView');
-        
-        console.log('Views found:', { monthView, weekView, dayView }); // Debug
-        
-        if (monthView) {
-            monthView.classList.remove('d-none');
-            console.log('Month view made visible');
-        }
-        if (weekView) weekView.classList.add('d-none');
-        if (dayView) dayView.classList.add('d-none');
+        if (this.elements.monthView) this.elements.monthView.classList.remove('d-none');
+        if (this.elements.weekView) this.elements.weekView.classList.add('d-none');
+        if (this.elements.dayView) this.elements.dayView.classList.add('d-none');
         
         // Actualizar selector de fecha con fecha actual
-        const dateSelector = document.getElementById('dateSelector');
-        if (dateSelector) {
-            dateSelector.value = this.formatDateForInput(this.currentDate);
-            console.log('Date selector updated to:', dateSelector.value);
+        if (this.elements.dateSelector) {
+            this.elements.dateSelector.value = this.formatDateForInput(this.currentDate);
         }
     }
 
@@ -55,61 +87,49 @@ class AgendaApp {
         this.setupDateNavigation();
         this.setupSidebar();
         this.setupDateSelector();
-        this.setupAdditionalViewSelectors();
-    }
-    
-    // Configurar selectores de vista adicionales (para dropdown y botones móviles)
-    setupAdditionalViewSelectors() {
-        // Esto se llamará después de que la aplicación esté completamente inicializada
-        // La configuración real se hace en el evento DOMContentLoaded
     }
 
-    // Configurar cambio de vistas (mensual, semanal, diaria)
+
+    // Configurar cambio de vistas (mensual, semanal, diaria) 
     setupViewSwitching() {
-        const viewButtons = document.querySelectorAll('[data-view]');
-        const calendarViews = document.querySelectorAll('.calendar-view');
+        // Seleccionar todos los elementos con data-view (botones y dropdown items)
+        const viewSelectors = document.querySelectorAll('[data-view]');
         
-        viewButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
+        viewSelectors.forEach(selector => {
+            selector.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetView = button.dataset.view;
+                const targetView = selector.dataset.view;
                 this.switchView(targetView);
                 
-                // Actualizar estado activo de botones
-                viewButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
+                // Actualizar estado activo solo en botones (no en dropdown items)
+                if (selector.tagName === 'BUTTON') {
+                    const buttons = document.querySelectorAll('button[data-view]');
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    selector.classList.add('active');
+                }
             });
         });
     }
 
     // Configurar navegación de fechas
     setupDateNavigation() {
-        const todayBtn = document.getElementById('todayBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        
-        console.log('Setting up navigation:', { todayBtn, prevBtn, nextBtn }); // Debug
-        
-        if (todayBtn) {
-            todayBtn.addEventListener('click', (e) => {
+        if (this.elements.todayBtn) {
+            this.elements.todayBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('Today button clicked'); // Debug
                 this.goToToday();
             });
         }
         
-        if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
+        if (this.elements.prevBtn) {
+            this.elements.prevBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('Previous button clicked'); // Debug
                 this.navigateDate(-1);
             });
         }
         
-        if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
+        if (this.elements.nextBtn) {
+            this.elements.nextBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('Next button clicked'); // Debug
                 this.navigateDate(1);
             });
         }
@@ -117,45 +137,45 @@ class AgendaApp {
 
     // Configurar sidebar y selección de cancha
     setupSidebar() {
-        const canchaSelect = document.getElementById('canchaSelect');
-        const crearReservaBtn = document.getElementById('btn-crear-reserva');
-        const gestionarSolicitudesBtn = document.getElementById('btn-gestionar-solicitudes');
-        
-        console.log('Setting up sidebar:', { canchaSelect, crearReservaBtn, gestionarSolicitudesBtn }); // Debug
-        
-        if (canchaSelect) {
-            canchaSelect.addEventListener('change', (e) => {
+        if (this.elements.canchaSelect) {
+            this.elements.canchaSelect.addEventListener('change', (e) => {
                 this.selectedCancha = e.target.value;
-                console.log('Cancha selected:', this.selectedCancha); // Debug
                 this.renderCurrentView();
                 this.updateBadgeCount();
             });
         }
         
-        if (crearReservaBtn) {
-            crearReservaBtn.addEventListener('click', (e) => {
-                console.log('Crear reserva clicked'); // Debug
-                // Add functionality later
+        if (this.elements.crearReservaBtn) {
+            this.elements.crearReservaBtn.addEventListener('click', (e) => {
+                this.crearReserva();
             });
         }
         
-        if (gestionarSolicitudesBtn) {
-            gestionarSolicitudesBtn.addEventListener('click', (e) => {
-                console.log('Gestionar solicitudes clicked'); // Debug
-                // Add functionality later
+        if (this.elements.gestionarSolicitudesBtn) {
+            this.elements.gestionarSolicitudesBtn.addEventListener('click', (e) => {
+                this.gestionarSolicitudes();
             });
         }
     }
 
+    // Métodos preparados para integración con backend
+    crearReserva() {
+        // TODO: Implementar gestión de solicitudes con backend
+        console.log('Crear reserva para cancha:', this.selectedCancha);
+    }
+
+    gestionarSolicitudes() {
+        // TODO: Implementar gestión de solicitudes con backend
+        console.log('Gestionar solicitudes para cancha:', this.selectedCancha);
+    }
+
     // Configurar selector de fecha
     setupDateSelector() {
-        const dateSelector = document.getElementById('dateSelector');
-        
-        if (dateSelector) {
+        if (this.elements.dateSelector) {
             // Establecer fecha actual por defecto
-            dateSelector.value = this.formatDateForInput(this.currentDate);
+            this.elements.dateSelector.value = this.formatDateForInput(this.currentDate);
             
-            dateSelector.addEventListener('change', (e) => {
+            this.elements.dateSelector.addEventListener('change', (e) => {
                 // Crear fecha usando componentes individuales para evitar problemas de zona horaria
                 const dateString = e.target.value;
                 const [year, month, day] = dateString.split('-').map(num => parseInt(num));
@@ -193,9 +213,8 @@ class AgendaApp {
     // Ir a hoy
     goToToday() {
         this.currentDate = new Date();
-        const dateSelector = document.getElementById('dateSelector');
-        if (dateSelector) {
-            dateSelector.value = this.formatDateForInput(this.currentDate);
+        if (this.elements.dateSelector) {
+            this.elements.dateSelector.value = this.formatDateForInput(this.currentDate);
         }
         this.updateDateDisplay();
         this.renderCurrentView();
@@ -224,30 +243,23 @@ class AgendaApp {
 
     // Actualizar display de fecha actual
     updateDateDisplay() {
-        const display = document.getElementById('currentDateDisplay');
-        if (!display) return;
+        if (!this.elements.currentDateDisplay) return;
         
-        const months = [
-            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-        ];
-        
-        const month = months[this.currentDate.getMonth()];
+        const month = CALENDAR_CONFIG.MONTHS[this.currentDate.getMonth()];
         const year = this.currentDate.getFullYear();
         
         if (this.currentView === 'month') {
-            display.textContent = `${month} ${year}`;
+            this.elements.currentDateDisplay.textContent = `${month} ${year}`;
         } else if (this.currentView === 'week') {
             const weekStart = this.getWeekStart(this.currentDate);
             const weekEnd = new Date(weekStart);
             weekEnd.setDate(weekEnd.getDate() + 6);
             
-            display.textContent = `Semana del ${weekStart.getDate()} al ${weekEnd.getDate()} de ${month} ${year}`;
+            this.elements.currentDateDisplay.textContent = `Semana del ${weekStart.getDate()} al ${weekEnd.getDate()} de ${month} ${year}`;
         } else if (this.currentView === 'day') {
-            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-            const dayName = days[this.currentDate.getDay()];
+            const dayName = CALENDAR_CONFIG.DAYS[this.currentDate.getDay()];
             
-            display.textContent = `${dayName} ${this.currentDate.getDate()} de ${month} ${year}`;
+            this.elements.currentDateDisplay.textContent = `${dayName} ${this.currentDate.getDate()} de ${month} ${year}`;
         }
     }
 
@@ -268,25 +280,16 @@ class AgendaApp {
 
     // Renderizar vista mensual
     renderMonthView() {
-        console.log('Rendering month view for:', this.currentDate); // Debug
-        const monthView = document.getElementById('monthView');
-        if (!monthView) {
-            console.error('Month view element not found');
-            return;
-        }
+        if (!this.elements.monthView) return;
         
-        const table = monthView.querySelector('table tbody');
-        if (!table) {
-            console.error('Month view table body not found');
-            return;
-        }
+        const table = this.elements.monthView.querySelector('table tbody');
+        if (!table) return;
         
         table.innerHTML = '';
         
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
         const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
         const startDate = new Date(firstDay);
         startDate.setDate(startDate.getDate() - firstDay.getDay());
         
@@ -320,10 +323,12 @@ class AgendaApp {
                     cell.appendChild(badge);
                 }
                 
-                cell.addEventListener('click', () => {
-                    this.currentDate = new Date(currentDate);
-                    this.switchView('day');
-                });
+                cell.addEventListener('click', ((clickedDate) => {
+                    return () => {
+                        this.currentDate = new Date(clickedDate);
+                        this.switchView('day');
+                    };
+                })(new Date(currentDate)));
                 
                 row.appendChild(cell);
                 currentDate.setDate(currentDate.getDate() + 1);
@@ -388,23 +393,21 @@ class AgendaApp {
 
     // Renderizar vista diaria
     renderDayView() {
-        const dayView = document.getElementById('dayView');
-        if (!dayView) return;
+        if (!this.elements.dayView) return;
         
-        const table = dayView.querySelector('table');
+        const table = this.elements.dayView.querySelector('table');
         if (!table) return;
         
         const hours = this.generateTimeSlots();
         const tbody = table.querySelector('tbody');
         tbody.innerHTML = '';
         
-        // Actualizar header con fecha del día usando el ID específico
-        const header = document.getElementById('dayViewHeader');
-        if (header) {
-            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        // Actualizar header con fecha del día usando el elemento cacheado
+        if (this.elements.dayViewHeader) {
+            const dayName = CALENDAR_CONFIG.DAYS[this.currentDate.getDay()];
+            const monthName = CALENDAR_CONFIG.MONTHS[this.currentDate.getMonth()];
             
-            header.textContent = `${days[this.currentDate.getDay()]} ${this.currentDate.getDate()} de ${months[this.currentDate.getMonth()]}`;
+            this.elements.dayViewHeader.textContent = `${dayName} ${this.currentDate.getDate()} de ${monthName}`;
         }
         
         hours.forEach(hour => {
@@ -483,7 +486,7 @@ class AgendaApp {
 
     generateTimeSlots() {
         const slots = [];
-        for (let hour = 8; hour <= 22; hour++) {
+        for (let hour = CALENDAR_CONFIG.TIME_SLOTS.START_HOUR; hour <= CALENDAR_CONFIG.TIME_SLOTS.END_HOUR; hour++) {
             slots.push(`${hour.toString().padStart(2, '0')}:00`);
         }
         return slots;
@@ -503,83 +506,75 @@ class AgendaApp {
         });
     }
 
-    // Generar datos de ejemplo
-    generateSampleData() {
-        const today = new Date();
-        return [
-            {
-                id: 1,
-                title: 'Reserva Equipo A',
-                description: 'Cancha A - Confirmada',
-                date: new Date(2025, 8, 26), // 26 de septiembre
-                time: '08:00',
-                status: 'confirmed',
-                cancha: '1'
-            },
-            {
-                id: 2,
-                title: 'Reserva Equipo A',
-                description: 'Cancha A - Confirmada',
-                date: new Date(2025, 8, 26),
-                time: '09:00',
-                status: 'confirmed',
-                cancha: '1'
-            },
-            {
-                id: 3,
-                title: 'Solicitud Equipo B',
-                description: 'Cancha B - Pendiente',
-                date: new Date(2025, 8, 26),
-                time: '11:00',
-                status: 'pending',
-                cancha: '2'
-            },
-            {
-                id: 4,
-                title: 'Torneo Local',
-                description: 'Cancha C - Confirmada',
-                date: new Date(2025, 8, 27),
-                time: '15:00',
-                status: 'confirmed',
-                cancha: '3'
-            },
-            {
-                id: 5,
-                title: 'Entrenamiento',
-                description: 'Cancha A - Pendiente',
-                date: new Date(2025, 8, 28),
-                time: '10:00',
-                status: 'pending',
-                cancha: '1'
-            }
-        ];
-    }
+
 }
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing AgendaApp...'); // Debug
-    
-    // Add small delay to ensure all elements are ready
+    // Pequeño delay para asegurar que todos los elementos estén listos
     setTimeout(() => {
         window.agendaApp = new AgendaApp();
-        console.log('AgendaApp initialized:', window.agendaApp); // Debug
-        
-        // Setup view selectors after app is initialized
-        document.querySelectorAll('.view-selector').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault(); // This prevents the href="#" navigation
-                const view = this.getAttribute('data-view');
-                console.log('View selector clicked:', view); // Debug
-                if (window.agendaApp && window.agendaApp.switchView) {
-                    window.agendaApp.switchView(view);
-                } else {
-                    console.error('AgendaApp not ready');
-                }
-            });
-        });
     }, 100);
 });
+
+// DATOS HARDCODEADOS - Mover a backend cuando esté listo
+AgendaApp.prototype.generateSampleData = function() {
+    // TODO: Reemplazar con llamadas a API del backend
+    // Endpoints necesarios:
+    // - GET /api/reservas?cancha={id}&fecha={date}
+    // - GET /api/canchas
+    // - POST /api/reservas
+    // - PUT /api/reservas/{id}
+    // - DELETE /api/reservas/{id}
+    
+    return [
+        {
+            id: 1,
+            title: 'Reserva Equipo A',
+            description: 'Cancha A - Confirmada',
+            date: new Date(2025, 8, 26), // 26 de septiembre
+            time: '08:00',
+            status: 'confirmed',
+            cancha: '1'
+        },
+        {
+            id: 2,
+            title: 'Reserva Equipo A',
+            description: 'Cancha A - Confirmada',
+            date: new Date(2025, 8, 26),
+            time: '09:00',
+            status: 'confirmed',
+            cancha: '1'
+        },
+        {
+            id: 3,
+            title: 'Solicitud Equipo B',
+            description: 'Cancha B - Pendiente',
+            date: new Date(2025, 8, 26),
+            time: '11:00',
+            status: 'pending',
+            cancha: '2'
+        },
+        {
+            id: 4,
+            title: 'Torneo Local',
+            description: 'Cancha C - Confirmada',
+            date: new Date(2025, 8, 27),
+            time: '15:00',
+            status: 'confirmed',
+            cancha: '3'
+        },
+        {
+            id: 5,
+            title: 'Entrenamiento',
+            description: 'Cancha A - Pendiente',
+            date: new Date(2025, 8, 28),
+            time: '10:00',
+            status: 'pending',
+            cancha: '1'
+        }
+    ];
+};
 
 // Exportar para uso en módulos si es necesario
 if (typeof module !== 'undefined' && module.exports) {
