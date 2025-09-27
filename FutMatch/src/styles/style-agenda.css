@@ -1,0 +1,103 @@
+/* CALENDARIO - AGENDA */
+    /* Layout de altura completa */
+    html, body {
+      height: 100%;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* El contenedor principal toma el espacio restante */
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Ocultar barra de desplazamiento en vista mensual */
+    .monthly-view-active main {
+      overflow: hidden !important;
+    }
+    
+    .monthly-view-active .table-responsive {
+      overflow: hidden !important;
+    }
+    
+    /* Prevenir scroll horizontal cuando se abre el dropdown */
+    body {
+      overflow-x: hidden;
+    }
+    
+    /* Asegurar que el dropdown no cause overflow */
+    .dropdown-menu {
+      right: 0 !important;
+      left: auto !important;
+      transform: none !important;
+    }
+    
+    /* Arreglar posicionamiento del dropdown para prevenir overflow */
+    .navbar .dropdown {
+      position: static;
+    }
+    
+    .navbar .dropdown-menu {
+      position: absolute;
+      right: 0;
+      left: auto;
+      min-width: 120px;
+      max-width: 200px;
+    }
+    
+    /* Encabezado de fecha visible en todas las vistas - no necesita ocultarse */
+    
+    /* Transición de botones de navegación */
+    .calendar-navigation {
+      transition: opacity 0.3s ease;
+    }
+    
+    /* Anchos de columna iguales para vistas mensual y semanal */
+    #monthView table,
+    #weekView table {
+      table-layout: fixed;
+      width: 100%;
+    }
+    
+    #monthView th,
+    #monthView td,
+    #weekView th:not(:first-child),
+    #weekView td:not(:first-child) {
+      width: 14.28%; /* 100% / 7 días */
+    }
+    
+    #weekView th:first-child,
+    #weekView td:first-child {
+      width: 100px; /* Ancho fijo para columna de hora */
+    }
+    
+    /* Estilos específicos del calendario */
+    #monthView .table {
+      height: 100%;
+    }
+    
+    #monthView tbody tr {
+      height: calc(100% / 6);
+    }
+    
+    #monthView td {
+      vertical-align: top;
+      position: relative;
+      min-height: 80px;
+      padding: 8px;
+    }
+    
+    .calendar-view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .table-responsive {
+      flex: 1;
+    }

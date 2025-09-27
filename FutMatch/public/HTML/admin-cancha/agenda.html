@@ -19,238 +19,216 @@ Manejo de la agenda del Admin de Cancha:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
+  <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
   
   <title>FutMatch</title>
-  <title>FutMatch</title>
 
-  <!-- Bootstrap -->
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+  
+  <!-- Iconos de Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
-  <!-- Fuente -->
+  <!-- Tipografía -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
+  <!-- Estilos de la agenda -->
+  <link rel="stylesheet" href="src/styles/style-agenda.css" />
+
 </head>
 
-<body>
-  <!-- HEADER -->
-  <header class="navbar navbar-expand">
-    <div class="container-fluid gap-2">
-      <button class="btn btn-outline-light d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Abrir panel">
-        <i class="bi bi-layout-sidebar-inset"></i>
-      </button>
-
-      <a class="navbar-brand d-flex align-items-center gap-2 m-0 text-white" href="#">
-        <i class="bi bi-calendar3 fs-4 text-primary"></i>
-        <span class="fw-800">AGENDA</span>
-      </a>
-
-      <div class="d-flex align-items-center mx-auto gap-2">
-        <button id="btnPrev" class="btn btn-outline-light" title="Mes anterior" aria-label="Mes anterior">
-          <i class="bi bi-chevron-left"></i>
+<body class="light-page">
+  <!-- Barra superior -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container-fluid">
+      <!-- Lado izquierdo: menú hamburguesa + título -->
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-secondary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+          <i class="bi bi-list"></i>
         </button>
-        <div id="currentPeriod" class="fs-6 fw-600 text-nowrap text-white-50"></div>
-        <button id="btnNext" class="btn btn-outline-light" title="Mes siguiente" aria-label="Mes siguiente">
-          <i class="bi bi-chevron-right"></i>
-        </button>
-        <button id="btnToday" class="btn btn-success ms-2">Hoy</button>
+        <span class="navbar-brand mb-0 h2">AGENDA</span>
       </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <button class="btn btn-outline-light" title="Configuración" aria-label="Configuración">
+      <!-- Centro: botón hoy + selector de fecha -->
+      <div class="d-flex justify-content-sm-end justify-content-md-center align-items-center mx-auto">
+        <button id="todayBtn" class="btn btn-outline-primary me-2" type="button">Hoy</button>
+        <input type="date" class="form-control" 
+               id="dateSelector" value="2025-09-26">
+      </div>
+
+      <!-- Lado derecho: configuración + selector de vista -->
+      <div class="d-none d-md-flex align-items-center"> <!-- Solo visible en pantallas medianas y grandes -->
+        <button id="btn-configuracion" class="btn btn-outline-secondary me-2" type="button">
           <i class="bi bi-gear"></i>
         </button>
-        <div class="btn-group" role="group" aria-label="Selector de vista">
-          <input type="radio" class="btn-check" name="viewMode" id="viewMonth" value="month" checked>
-          <label class="btn btn-outline-light" for="viewMonth">Mes</label>
-
-          <input type="radio" class="btn-check" name="viewMode" id="viewWeek" value="week">
-          <label class="btn btn-outline-light" for="viewWeek">Semana</label>
-
-          <input type="radio" class="btn-check" name="viewMode" id="viewDay" value="day">
-          <label class="btn btn-outline-light" for="viewDay">Día</label>
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-calendar-week me-1"></i>Vista
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item view-selector" type="button" data-view="month">Mensual</a></li>
+            <li><a class="dropdown-item view-selector" type="button" data-view="week">Semanal</a></li>
+            <li><a class="dropdown-item view-selector" type="button" data-view="day">Diaria</a></li>
+          </ul>
         </div>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- SHELL -->
-  <div class="app-shell container-fluid">
-    <div class="row h-100">
-      <!-- Sidebar (>= lg) -->
-      <aside class="col-lg-3 col-xl-2 sidebar p-3">
-        <div class="sidebar-inner">
-          <!-- 1) Selector de cancha -->
-          <div class="mb-3 card-action p-3">
-            <label for="selCancha" class="form-label fw-600">Cancha</label>
-            <select id="selCancha" class="form-select">
-              <option value="all">Todas las canchas</option>
-              <option value="c1">Cancha 1 (Sintética)</option>
-              <option value="c2">Cancha 2 (Césped)</option>
-              <option value="c3">Cancha 3 (Indoor)</option>
-            </select>
-            <a href="#" class="link-cancha" title="Ver gestor de canchas">Ir al gestor de canchas</a>
-          </div>
-
-          <!-- 2) Botón crear reserva -->
-          <div class="d-grid mb-3">
-            <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modalReserva">
-              <i class="bi bi-plus-lg me-1"></i> Crear reserva
-            </button>
-          </div>
-
-          <!-- 3) Mini calendario -->
-          <div class="card-action mb-3">
-            <div class="card-header py-2 d-flex align-items-center justify-content-between">
-              <span class="fw-600">Calendario</span>
-              <div class="btn-group btn-group-sm">
-                <button id="miniPrev" class="btn btn-outline-light" aria-label="Prev mini">
-                  <i class="bi bi-chevron-left"></i>
-                </button>
-                <button id="miniNext" class="btn btn-outline-light" aria-label="Next mini">
-                  <i class="bi bi-chevron-right"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body mini-cal">
-              <div class="text-center fw-600 mb-2 text-white-50" id="miniCaption">Mes Año</div>
-              <table class="table table-sm mb-0 align-middle text-white-50">
-                <thead>
-                  <tr class="text-muted">
-                    <th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sa</th><th>Do</th>
-                  </tr>
-                </thead>
-                <tbody id="miniBody"><!-- JS --></tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- 4) Gestionar solicitudes -->
-          <div class="d-grid">
-            <button class="btn btn-outline-primary d-flex align-items-center justify-content-between">
-              <span><i class="bi bi-inbox me-1"></i> Gestionar solicitudes</span>
-              <span class="badge text-bg-danger" id="badgeSolicitudes">3</span>
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Offcanvas (mobile) -->
-      <div class="offcanvas offcanvas-start text-white" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel" style="background: #121212;">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasSidebarLabel"><i class="bi bi-calendar3 me-2"></i>AGENDA</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-        </div>
-        <div class="offcanvas-body">
-          <div class="mb-3">
-            <label for="selCanchaMobile" class="form-label fw-600">Cancha</label>
-            <select id="selCanchaMobile" class="form-select">
-              <option value="all">Todas las canchas</option>
-              <option value="c1">Cancha 1 (Sintética)</option>
-              <option value="c2">Cancha 2 (Césped)</option>
-              <option value="c3">Cancha 3 (Indoor)</option>
-            </select>
-          </div>
-
-          <div class="d-grid mb-3">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReserva">
-              <i class="bi bi-plus-lg me-1"></i> Crear reserva
-            </button>
-          </div>
-
-          <div class="card-action mb-3">
-            <div class="card-header py-2 d-flex align-items-center justify-content-between">
-              <span class="fw-600">Calendario</span>
-              <div class="btn-group btn-group-sm">
-                <button id="miniPrevMobile" class="btn btn-outline-light" aria-label="Prev mini">
-                  <i class="bi bi-chevron-left"></i>
-                </button>
-                <button id="miniNextMobile" class="btn btn-outline-light" aria-label="Next mini">
-                  <i class="bi bi-chevron-right"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body mini-cal">
-              <div class="text-center fw-600 mb-2 text-white-50" id="miniCaptionMobile">Mes Año</div>
-              <table class="table table-sm mb-0 align-middle text-white-50">
-                <thead>
-                  <tr class="text-muted">
-                    <th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sa</th><th>Do</th>
-                  </tr>
-                </thead>
-                <tbody id="miniBodyMobile"><!-- JS --></tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="d-grid">
-            <button class="btn btn-outline-primary d-flex align-items-center justify-content-between">
-              <span><i class="bi bi-inbox me-1"></i> Gestionar solicitudes</span>
-              <span class="badge text-bg-danger">3</span>
-            </button>
-          </div>
-        </div>
+  <!-- Menú lateral deslizable -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sidebarMenuLabel">Menú</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Selector de cancha -->
+      <div class="mb-3">
+        <label for="canchaSelect" class="form-label fw-semibold">Seleccionar Cancha</label>
+        <select class="form-select" id="canchaSelect">
+          <option selected>Seleccione una cancha...</option> <!-- Datos fijos hasta conectar con backend -->
+          <option value="1">Cancha A - Fútbol 11</option>
+          <option value="2">Cancha B - Fútbol 7</option>
+          <option value="3">Cancha C - Fútbol 5</option>
+        </select>
       </div>
 
-      <!-- Main -->
-      <main class="col-lg-9 col-xl-10 p-3">
-        <div class="calendar-grid" id="calendarGrid" aria-live="polite" aria-busy="false"><!-- JS --></div>
+      <hr>
+
+      <!-- Botones de acción -->
+      <div class="d-grid gap-2">
+        <button id="btn-crear-reserva" class="btn btn-success" type="button">
+          <i class="bi bi-plus-circle me-2"></i>Crear reserva
+        </button>
+        <button id="btn-gestionar-solicitudes" class="btn btn-warning position-relative" type="button">
+          <i class="bi bi-clock-history me-2"></i>Gestionar solicitudes
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            3
+            <span class="visually-hidden">Solicitudes pendientes</span>
+          </span>
+        </button>
+      </div>
+
+      <!-- Opciones de vista para móviles -->
+      <div class="d-md-none"> <!-- Solo visible en pantallas pequeñas -->
+        <h6 class="fw-semibold">Vista</h6>
+        <div class="d-grid gap-2 mb-3">
+          <button class="btn btn-outline-secondary view-selector" data-view="month">Mensual</button>
+          <button class="btn btn-outline-secondary view-selector" data-view="week">Semanal</button>
+          <button class="btn btn-outline-secondary view-selector" data-view="day">Diaria</button>
+        </div>
+        <button id="btn-configuracion" class="btn btn-outline-secondary w-100" type="button">
+          <i class="bi bi-gear me-2"></i>Configuración
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Área principal del calendario -->
+  <div class="main-container">
+    <div class="container-fluid h-100">
+      <div class="row h-100 p-1 p-sm-1 p-md-3 p-lg-4">
+        <main class="col-12 d-flex flex-column">
+          <!-- Encabezado con fecha y navegación -->
+          <div class="d-flex justify-content-between align-items-center mb-3 date-header">
+            <h3 id="currentDateDisplay" class="mb-0">Septiembre 2025</h3> <!-- Se actualiza con updateDateDisplay() en agenda.js -->
+            <div class="btn-group calendar-navigation" role="group" aria-label="Navigate calendar">
+              <button type="button" class="btn btn-outline-secondary" id="prevBtn">
+                <i class="bi bi-chevron-left"></i> <!-- Ir al período anterior -->
+              </button>
+              <button type="button" class="btn btn-outline-secondary" id="nextBtn">
+                <i class="bi bi-chevron-right"></i> <!-- Ir al período siguiente -->
+              </button>
+            </div>
+          </div>
+
+        <!-- Contenido del calendario -->
+        <div id="calendarContent" class="d-flex flex-column flex-grow-1">
+          <!-- Vista mensual -->
+          <div id="monthView" class="calendar-view d-flex flex-column flex-grow-1">
+            <div class="table-responsive flex-grow-1">
+              <table class="table table-bordered h-100">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Dom</th>
+                    <th scope="col">Lun</th>
+                    <th scope="col">Mar</th>
+                    <th scope="col">Mié</th>
+                    <th scope="col">Jue</th>
+                    <th scope="col">Vie</th>
+                    <th scope="col">Sáb</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Se llena con renderMonthView() en agenda.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Vista semanal -->
+          <div id="weekView" class="calendar-view d-none">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" width="100">Hora</th>
+                    <th scope="col">Dom</th>
+                    <th scope="col">Lun</th>
+                    <th scope="col">Mar</th>
+                    <th scope="col">Mié</th>
+                    <th scope="col">Jue</th>
+                    <th scope="col">Vie</th>
+                    <th scope="col">Sáb</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Se llena con renderWeekView() en agenda.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Vista diaria -->
+          <div id="dayView" class="calendar-view d-none">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead class="table-light">
+                      <tr>
+                        <th scope="col" width="100">Hora</th>
+                        <th scope="col" id="dayViewHeader">Día</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Se llena con renderDayView() en agenda.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h6 class="mb-0">Resumen del día</h6>
+                  </div>
+                  <div class="card-body">
+                    <!-- Se llena con updateDaySummary() en agenda.js -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </div>
 
-  <!-- Modal Crear Reserva -->
-  <div class="modal fade" id="modalReserva" tabindex="-1" aria-labelledby="modalReservaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content" style="background:#121212;">
-        <div class="modal-header border-0">
-          <h5 class="modal-title" id="modalReservaLabel"><i class="bi bi-plus-lg me-2"></i>Nueva reserva</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <form id="frmReserva" class="row g-3">
-            <div class="col-12">
-              <label class="form-label">Cancha</label>
-              <select class="form-select" required>
-                <option value="c1">Cancha 1 (Sintética)</option>
-                <option value="c2">Cancha 2 (Césped)</option>
-                <option value="c3">Cancha 3 (Indoor)</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Fecha</label>
-              <input type="date" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Desde</label>
-              <input type="time" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Hasta</label>
-              <input type="time" class="form-control" required>
-            </div>
-            <div class="col-12">
-              <label class="form-label">Notas</label>
-              <textarea class="form-control" rows="2" placeholder="Opcional"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer border-0">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button class="btn btn-primary">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Scripts de JavaScript -->
+  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="src/scripts/pages/agenda.js"></script>
 </body>
 </html>
 
