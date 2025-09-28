@@ -25,8 +25,8 @@ Incluye:
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="/FutMatch/public/assets/css/bootstrap.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> -->
 
 
   <!-- Fuente -->
@@ -35,16 +35,18 @@ Incluye:
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="/src/styles/styleInicioJugador.css" />
-   <link rel="stylesheet" href="/FutMatch/src/styles/navbar.css" />
+  <link rel="stylesheet" href="/FutMatch/src/styles/inicio-jugador.css" />
+  <link rel="stylesheet" href="/FutMatch/src/styles/navbar.css" />
+  <link rel="stylesheet" href="/FutMatch/src/styles/style.css" />
+  
   
   
 </head>
 <body>
-      <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+  <header>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
+          <a class="navbar-brand" href="/FutMatch/public/HTML/jugador/inicio-jugador.html"
             ><img class="logo" src="/FutMatch/public/img/logo-sinfondo.svg" alt="" />
             <span class="brand-text">FutMatch</span></a
           >
@@ -68,26 +70,14 @@ Incluye:
                 <a class="nav-link" href="#">Mis partidos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Perfil</a>
+                <a class="nav-link" href="#">Mi equipo</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Torneo</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Crear equipo</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Invitar jugardor</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Uniser a un equipo</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Discusiones</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Perfil</a>
-                </li>
+                <a class="nav-link" href="#">Foros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+              </li>
             </ul>
             <button
               id="btn-configuracion"
@@ -109,33 +99,37 @@ Incluye:
            <div class="hero-image ">
               <div class="container text-center" id="titulo">
                   <h1 class="col-12" id="titulo1">Futmatch</h1>
-                  <p class="col-12">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit recusandae quasi ea! Corrupti,</p>
+                  <p class="col-12" id="textTitulo">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit recusandae quasi ea! Corrupti,</p>
               </div>
             </div>
                  <div class="container mt-2 px-3 ">
                     <div class="row mt-3 align-items-center">
-                      <div class="card col-6">
-                      <img src="/public/img/reserva.jpg" class="card-img-top " alt="..." >
-                      <h5 class="card-title align-text-center">Reservar una cancha</h5>  
+                      <div class="card text-bg-success mb-3 col-6 align-items-center">
+                      <img src="/FutMatch/public/img/reservaIcono.png" class="card-img-top" alt="..." >
+                      <h5 class="card-title align-text-center" >Reservar una cancha</h5>  
                       <a href="/FutMatch/public/HTML/jugador/cancha-reservar.html" class="stretched-link"></a>
                       </div>
-                      <div class="card col-6" >
-                      <img src="/public/img/reserva.jpg" class="card-img-top" alt="..." href="#">
-                      <h5 class="card-title align-text-center">Participar de un partido</h5>  
+                      <div class="card text-bg-success mb-3 col-6 align-items-center" >
+                      <img src="/FutMatch/public/img/uniserPartido.png" class="card-img-top" alt="..." href="#">
+                      <h5 class="card-title align-text-center">Participar de un partido</h5>
+                      <a href="/FutMatch/public/HTML/jugador/partido-unirse.html" class="stretched-link"></a>  
                       </div>
                     </div>
                     <div class="row mt-3 mb-5 align-items-center">
-                      <div class="card col-6" >
-                      <img src="/public/img/reserva.jpg" class="card-img-top" alt="..." href="#">
-                      <h5 class="card-title align-text-center">Historial de partidos</h5>  
+                      <div class="card text-bg-success mb-3 col-6 align-items-center" >
+                      <img src="/FutMatch/public/img/historial.png" class="card-img-top" alt="..." href="#">
+                      <h5 class="card-title align-text-center">Historial de partidos</h5>
+                      <a href="FutMatch/public/HTML/jugador/partido-unirse.html" class="stretched-link"></a>  
                       </div>
-                      <div class="card col-6" >
-                      <img src="/public/img/reserva.jpg" class="card-img-top" alt="..." href="#">
+                      <div class="card text-bg-success mb-3 col-6 align-items-center" >
+                      <img src="/FutMatch/public/img/canchasCerca.png" class="card-img-top" alt="..." href="#">
                       <h5 class="card-title align-text-center">Canchas disponibles</h5>  
+                      <a href="/FutMatch/public/HTML/jugador/partidos-jugador.html" class="stretched-link"></a>
                       </div>
                     </div>
                     <div class="row mt-5 align-items-center">
                      <button type="button" class="btn btn-primary">Mis proximos partidos</button>
+                
                     </div>
                     
                   
@@ -156,7 +150,7 @@ Incluye:
 
   <!-- Scripts -->
   <script src="/FutMatch/public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="/src/scripts/pages/inicioJugador.js"></script>
+  <!-- <script src="/src/scripts/pages/inicioJugador.js"></script> -->
   
 </body>
 </html>
