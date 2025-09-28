@@ -414,6 +414,36 @@ class AplicacionAgenda {
         alert('Redirigiendo a perfil de cancha...');
     }
     
+    // Configurar event listener para cerrar sesión
+    configurarCerrarSesion() {
+        const btnCerrarSesion = document.getElementById('btnCerrarSesion');
+        if (btnCerrarSesion) {
+            btnCerrarSesion.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.confirmarCerrarSesion();
+            });
+        }
+    }
+    
+    // Confirmar antes de cerrar sesión
+    confirmarCerrarSesion() {
+        const confirmacion = confirm(
+            '¿Está seguro que desea cerrar sesión?\n\n' +
+            'Se perderán todos los cambios no guardados.'
+        );
+        
+        if (confirmacion) {
+            // Limpiar datos de sesión si es necesario
+            console.log('Cerrando sesión...');
+            
+            // TODO: Llamar al backend para cerrar sesión
+            // await this.cerrarSesionEnBackend();
+            
+            // Redirigir a la página de landing
+            window.location.href = 'public/HTML/auth/landing.html';
+        }
+    }
+    
     // Cargar datos de configuración en el formulario
     cargarDatosConfiguracion() {
         // Cargar horarios
@@ -571,6 +601,7 @@ class AplicacionAgenda {
         this.configurarBarraLateral();
         this.configurarSelectorFecha();
         this.configurarResetModalAlCerrar();
+        this.configurarCerrarSesion();
     }
 
     // Configurar reset del modal al cerrarse
@@ -1664,3 +1695,4 @@ function verPerfilCancha() {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AplicacionAgenda;
 }
+

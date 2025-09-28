@@ -86,8 +86,8 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
             <li><a class="dropdown-item selector-vista" type="button" data-vista="semana">Semanal</a></li>
             <li><a class="dropdown-item selector-vista" type="button" data-vista="dia">Diaria</a></li>
           </ul>
-          <button type="button" class="btn btn-danger">
-              <a href="public/HTML/auth/landing.html"><i class="bi bi-box-arrow-right text-white"></i></a>
+          <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
+              <i class="bi bi-box-arrow-right text-white"></i>
           </button>
         </div>
       </div>
@@ -130,8 +130,8 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
         </button>
       </div>
 
-      <!-- Opciones de vista para móviles -->
-      <div class="d-md-none"> <!-- Solo visible en pantallas pequeñas -->
+      <!-- Opciones de vista pantallas pequeñas -->
+      <div class="d-md-none">
         <h6 class="fw-semibold">Vista</h6>
         <div class="d-grid gap-2 mb-3">
           <button class="btn btn-outline-secondary selector-vista" data-vista="mes">Mensual</button>
