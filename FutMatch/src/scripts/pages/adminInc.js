@@ -55,7 +55,7 @@ function showSection(section) {
       break;
 
     case "reservas":
-      window.location.href = "cancha-reservar.html";
+      window.location.href = "agenda.html";
       break;
 
     case "usuarios":
