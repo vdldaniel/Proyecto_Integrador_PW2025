@@ -1,0 +1,125 @@
+/* Estilos para la página de listado de foros */
+
+/* Sidebar fijo - estilo minimalista */
+.sidebar-fijo {
+    border-right: 1px solid var(--bs-border-color);
+    width: 280px;
+    min-height: calc(100vh - 72px);
+    overflow-y: auto;
+    background-color: var(--bs-body-bg);
+}
+
+.sidebar-fijo::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-fijo::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.sidebar-fijo::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.sidebar-fijo::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Mejoras para los items de foros */
+.list-group-item:hover {
+    background-color: rgba(0,123,255,0.1) !important;
+    padding: 0.5rem;
+
+}
+
+.list-group-item .text-truncate {
+    max-width: 180px;
+}
+
+/* Botones del sidebar */
+.sidebar-fijo .btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.sidebar-fijo .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (min-width: 992px) {
+    .content-with-sidebar {
+        margin-left: 280px;
+    }
+}
+
+/* Dark mode improvements */
+[data-bs-theme="dark"] .sidebar-fijo {
+    background-color: var(--bs-dark-bg-subtle);
+    border-right-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .list-group-item {
+    background-color: transparent;
+    border-color: var(--bs-border-color-translucent);
+}
+
+[data-bs-theme="dark"] .list-group-item:hover {
+    background-color: var(--bs-secondary-bg);
+}
+
+/* Mejoras para el área de contenido */
+#contenidoForos {
+    min-height: 600px;
+}
+
+/* Estilo para la barra de búsqueda */
+.navbar .form-control {
+    min-width: 250px;
+}
+
+@media (max-width: 768px) {
+    .navbar .form-control {
+        min-width: 200px;
+    }
+}
+
+/* Mejoras para el offcanvas */
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.offcanvas .list-group-item {
+    transition: background-color 0.2s ease;
+}
+
+.offcanvas .list-group-item:hover {
+    background-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Separador visual en el sidebar */
+.sidebar-fijo hr {
+    border-color: #dee2e6;
+    margin: 1rem 0;
+}
+
+.offcanvas hr {
+    border-color: #495057;
+    margin: 1rem 0;
+}
+
+@media (max-width: 790px) {
+  .d-none-custom {
+    display: none !important;
+  }
+}
+
+/* Borde inferior fino blanco para la navbar */
+.navbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+

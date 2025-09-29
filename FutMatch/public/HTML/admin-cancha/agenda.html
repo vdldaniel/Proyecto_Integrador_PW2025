@@ -10,7 +10,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
 
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,21 +37,32 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
 
 <body class="light-page monthly-view-active">
   <!-- Barra superior -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <!-- Lado izquierdo: menú hamburguesa + título -->
       <div class="d-flex align-items-center">
         <button class="btn btn-dark me-3" 
                 type="button" data-bs-toggle="offcanvas" 
                 data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-          <i class="bi bi-list text-white"></i>
+          <i class="bi bi-list"></i>
         </button>
         <a class="navbar-brand d-flex align-items-center" href="#"
             ><img class="logo" src="public/img/logo-sinfondo.svg" alt="" />
             <span class="brand-text d-none d-md-block">FutMatch</span></a>
         
-        <!-- Campanita de notificaciones -->
-        <button class="btn btn-outline-warning position-relative me-2" 
+        <span class="navbar-brand mb-0 h2 d-none d-md-block">AGENDA</span>
+      </div>
+
+      <!-- Centro: botón hoy + selector de fecha -->
+      <div class="d-flex justify-content-sm-end justify-content-md-center align-items-center mx-auto">
+        <button id="botonHoy" class="btn btn-primary me-2" type="button">Hoy</button>
+        <input type="date" class="form-control" id="selectorFecha">
+      </div>
+
+      <!-- Lado derecho: configuración + selector de vista -->
+      <div class="d-flex align-items-center">
+        <!-- Campanita de notificaciones - visible en todas las pantallas -->
+        <button class="btn btn-outline-warning position-relative me-3" 
                 type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
                 title="Solicitudes de reserva">
           <i class="bi bi-bell"></i>
@@ -60,34 +71,24 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
             <span class="visually-hidden">Solicitudes pendientes</span>
           </span>
         </button>
-        
-        <span class="navbar-brand mb-0 h2 d-none d-md-block">AGENDA</span>
-      </div>
-
-      <!-- Centro: botón hoy + selector de fecha -->
-      <div class="d-flex justify-content-sm-end justify-content-md-center align-items-center mx-auto">
-        <button id="botonHoy" class="btn btn-primary me-2" type="button">Hoy</button>
-        <input type="date" class="form-control bg-dark text-white border-secondary"
-               data-bs-theme="dark" id="selectorFecha">
-      </div>
-
-      <!-- Lado derecho: configuración + selector de vista -->
-      <div class="d-none d-md-flex align-items-center"> <!-- Solo visible en pantallas medianas y grandes -->
-        <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
-                data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-          <i class="bi bi-gear"></i>
-        </button>
-        <div class="dropdown">
-          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-calendar-week me-1"></i>Vista
+        <!-- Resto de botones - solo visible en pantallas medianas y grandes -->
+        <div class="d-none d-md-flex align-items-center">
+          <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
+                  data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
+            <i class="bi bi-gear"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end" data-bs-theme="dark">
-            <li><a class="dropdown-item selector-vista" type="button" data-vista="mes">Mensual</a></li>
-            <li><a class="dropdown-item selector-vista" type="button" data-vista="semana">Semanal</a></li>
-            <li><a class="dropdown-item selector-vista" type="button" data-vista="dia">Diaria</a></li>
-          </ul>
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-calendar-week me-1"></i>Vista
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item selector-vista" type="button" data-vista="mes">Mensual</a></li>
+              <li><a class="dropdown-item selector-vista" type="button" data-vista="semana">Semanal</a></li>
+              <li><a class="dropdown-item selector-vista" type="button" data-vista="dia">Diaria</a></li>
+            </ul>
+          </div>
           <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
-              <i class="bi bi-box-arrow-right text-white"></i>
+              <i class="bi bi-box-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -95,18 +96,17 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
   </nav>
 
   <!-- Menú lateral deslizable -->
-  <div class="offcanvas offcanvas-start bg-dark text-white" 
+  <div class="offcanvas offcanvas-start" 
        tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="sidebarMenuLabel">Menú</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
-              data-bs-theme="dark"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <!-- Selector de cancha -->
       <div class="mb-3">
         <label for="selectorCancha" class="form-label fw-semibold">Cancha:</label>
-        <select class="form-select" id="selectorCancha" data-bs-theme="dark">
+        <select class="form-select" id="selectorCancha">
           <option selected>Seleccione una cancha...</option> <!-- Datos fijos hasta conectar con backend -->
           <option value="1">Cancha A - Fútbol 11</option>
           <option value="2">Cancha B - Fútbol 7</option>
@@ -114,7 +114,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
         </select>
       </div>
 
-      <hr>
+      <hr> <!-- Separador -->
 
       <!-- Botones de acción -->
       <div class="d-grid gap-2">
@@ -131,7 +131,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
       </div>
 
       <!-- Opciones de vista pantallas pequeñas -->
-      <div class="d-md-none">
+      <div class="d-md-none py-3">
         <h6 class="fw-semibold">Vista</h6>
         <div class="d-grid gap-2 mb-3">
           <button class="btn btn-outline-secondary selector-vista" data-vista="mes">Mensual</button>
@@ -141,6 +141,9 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
         <button id="botonConfiguracionMovil" class="btn btn-outline-secondary w-100" type="button"
                 data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
           <i class="bi bi-gear me-2"></i>Configuración
+        </button>
+                <button id="btnCerrarSesionMovil" class="btn btn-outline-danger w-100 mt-2" type="button">
+          <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
         </button>
       </div>
     </div>
@@ -249,7 +252,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
   <!--MODALES-->
   
   <!-- Modal de Notificaciones/Solicitudes -->
-  <div class="modal fade" id="modalNotificaciones" tabindex="-1" data-bs-theme="dark">
+  <div class="modal fade" id="modalNotificaciones" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -276,7 +279,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
   </div>
   
   <!-- Modal de Configuración -->
-  <div class="modal fade" id="modalConfiguracion" tabindex="-1" data-bs-theme="dark">
+  <div class="modal fade" id="modalConfiguracion" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -352,7 +355,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
             <!-- Información de la cancha -->
             <div class="mb-4">
               <h6 class="fw-bold mb-3">Información del Complejo</h6>
-              <div class="card bg-dark border-secondary">
+              <div class="card">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -383,7 +386,7 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
     </div>
   </div>
 
-  <div class="modal" id="modalGestionReserva" tabindex="-1" data-bs-theme="dark">
+  <div class="modal" id="modalGestionReserva" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
