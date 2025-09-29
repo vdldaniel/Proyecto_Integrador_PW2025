@@ -34,147 +34,258 @@ Incluye:
 
   <!-- Estilos propios -->
   <link rel="stylesheet" href="src/styles/navbar.css" />
-  <!--link rel="stylesheet" href="src/styles/partidos-jugador.css"-->
+  <link rel="stylesheet" href="src/styles/partidos-jugador.css" />
 </head>
 <body>
   <!-- Navbar -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top border-bottom">
-      <div class="container-fluid">
-        <!-- Lado izquierdo: menú hamburguesa + título + botones navegación -->
-        <div class="d-flex align-items-center">
-          <button class="btn btn-dark me-3 d-lg-none" 
-                  type="button" data-bs-toggle="offcanvas" 
-                  data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-            <i class="bi bi-list text-white"></i>
-          </button>
-          <a class="navbar-brand d-flex align-items-center" href="public/HTML/jugador/inicio-jugador.html">
-              <img class="logo me-3" src="public/img/logo-sinfondo.svg" alt="" />
-              <span class="brand-text">FutMatch</span>
-          </a>          
-          <!--Botones que llevan a otras secciones del programa-->
-          <div class="d-flex align-items-center d-none d-md-flex ms-3">
-            <a href="public/HTML/jugador/inicio-jugador.html" class="btn btn-dark me-2" id="home" 
-               title="Home">
-              <i class="bi bi-house-door"></i>
-              <span class="d-none d-lg-inline ms-1">Home</span>
-            </a> 
-            <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-dark me-2" id="botonMisPartidos" 
-               title="Mis Partidos">
-              <i class="bi bi-calendar-event"></i>
-              <span class="d-none d-lg-inline ms-1">Mis Partidos</span>
-            </a>
-            <!-- Dropdown Explorar -->
-            <div class="dropdown">
-              <button class="btn btn-dark dropdown-toggle me-2" type="button" id="dropdownExplorar" 
-                      data-bs-toggle="dropdown" aria-expanded="false" title="Explorar">
-                <i class="bi bi-search"></i>
-                <span class="d-none d-lg-inline ms-1">Explorar</span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                <li><a class="dropdown-item" href="public/HTML/jugador/guest/canchas-listado.html">
-                  <i class="bi bi-geo-alt me-2"></i>Explorar canchas
-                </a></li>
-                <li><a class="dropdown-item" href="public/HTML/jugador/guest/partidos-listado.html">
-                  <i class="bi bi-people me-2"></i>Explorar partidos
-                </a></li>
-              </ul>
+    <nav id="navbarFutmatch"></nav>
+  </header>
+  <!-- Contenido Principal -->
+  <main class="container mt-4">
+    <!-- Header con título y botón -->
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <h1 class="fw-bold">Mis Partidos</h1>
+        <p class="text-muted">Gestiona tus partidos programados y pasados</p>
+      </div>
+      <div class="col-md-4 text-end">
+        <button class="btn btn-outline-success">
+          <i class="bi bi-clock-history me-2"></i>Ver Historial
+        </button>
+      </div>
+    </div>
+
+    <!-- Lista de Partidos -->
+    <div class="row">
+      <!-- Partido 1 - Anfitrión -->
+      <div class="col-12 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="mb-0 fw-bold">Fútbol 5 Competitivo</h6>
+              <small class="text-muted">
+                <i class="bi bi-calendar3 me-1"></i>Sábado 15 Feb, 2025 - 19:00
+              </small>
             </div>
-            <a href="public/HTML/jugador/equipos-listado.html" class="btn btn-dark me-2" id="botonMiEquipo" 
-               title="Mi Equipo">
-              <i class="bi bi-people"></i>
-              <span class="d-none d-lg-inline ms-1">Mi Equipo</span>
-            </a>
-            <a href="public/HTML/jugador/guest/foros-listado.html" class="btn btn-dark me-2 active" id="botonForos" 
-               title="Foros">
-              <i class="bi bi-chat-dots"></i>
-              <span class="d-none d-lg-inline ms-1">Foros</span>
-            </a>
+            <span class="badge badge-host">Sos anfitrión</span>
           </div>
-        </div>
-        
-        <!-- Lado derecho: perfil, notificaciones y configuración -->
-        <div class="d-flex align-items-center">
-          <!-- Botón Mi Perfil -->
-          <a href="public/HTML/jugador/perfil-jugador-detalle.html" class="btn btn-dark me-2 d-none d-md-flex" id="botonPerfil" 
-             title="Mi Perfil">
-            <i class="bi bi-person-circle"></i>
-            <span class="d-none d-lg-inline ms-1">Mi Perfil</span>
-          </a>
-          <!-- Campanita de notificaciones -->
-          <button class="btn btn-outline-warning position-relative me-2" 
-                  type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
-                  title="Notificaciones">
-            <i class="bi bi-bell"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              2
-            </span>
-          </button>
-          <!-- Botones solo en pantallas medianas y grandes -->
-          <div class="d-none-custom d-md-flex align-items-center">
-            <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
-                    data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-              <i class="bi bi-gear"></i>
-            </button>
-            <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
-              <i class="bi bi-box-arrow-right text-white"></i>
-            </button>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong class="text-success">
+                    <i class="bi bi-geo-alt-fill me-1"></i>Cancha Premium
+                  </strong>
+                  <p class="mb-1 text-muted small">Av. Libertador 1234, Centro</p>
+                </div>
+                <div class="mb-2">
+                  <strong>Equipos:</strong>
+                  <div class="mt-1">
+                    <button class="btn btn-sm btn-outline-primary me-2">
+                      <i class="bi bi-people-fill me-1"></i>Los Tigres (Tu equipo)
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-people-fill me-1"></i>FC Barcelona
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong>Estado:</strong>
+                  <span class="badge status-waiting ms-1">Esperando confirmación</span>
+                </div>
+                <div class="mb-2">
+                  <strong>Jugadores:</strong>
+                  <span class="text-muted">8/10 confirmados</span>
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-sm btn-primary me-2">
+                    <i class="bi bi-chat-dots me-1"></i>Crear Foro
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-x-circle me-1"></i>Cancelar Partido
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </nav>
-</header>
-  <div class="container mt-5"> 
-       <div class="container mt-2 px-3 ">
-          <div class="row mt-3 align-items-center">
-                       <div class="card">
-                         <div class="card-header">
-                           Nombre equipo anfitrión
-                         </div>
-                        <div class="card-body">
-                          <h5 class="card-title">Cancha</h5>
-                          <p class="card-text">Horario</p>
-                          <!-- <p class="card-text">Cantidad de jugadores/cantidad requerida</p> -->
-                          <!-- <p class="card-text">Posiciones</p> -->
-                          <!-- <img src="public/img/bg1.jpg" class="rounded float-end img-fluid" alt="..."> -->
-                          <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-primary">cancelar</a>
-                        </div>
-                      </div>
-          </div>
-          <div class="row mt-3 align-items-center">
-                       <div class="card">
-                         <div class="card-header">
-                           Nombre equipo anfitrión
-                         </div>
-                        <div class="card-body">
-                          <h5 class="card-title">Cancha</h5>
-                          <p class="card-text">Horario</p>
-                          <!-- <p class="card-text">Cantidad de jugadores/cantidad requerida</p> -->
-                          <!-- <p class="card-text">Posiciones</p> -->
-                          <!-- <img src="public/img/bg1.jpg" class="rounded float-end img-fluid" alt="..."> -->
-                          <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-primary">cancelar</a>
-                        </div>
-                      </div>
-          </div>
-          <div class="row mt-3 align-items-center">
-                       <div class="card">
-                         <div class="card-header">
-                           Nombre equipo anfitrión
-                         </div>
-                        <div class="card-body">
-                          <h5 class="card-title">Cancha</h5>
-                          <p class="card-text">Horario</p>
-                          <!-- <p class="card-text">Cantidad de jugadores/cantidad requerida</p> -->
-                          <!-- <p class="card-text">Posiciones</p> -->
-                          <!-- <img src="public/img/bg1.jpg" class="rounded float-end img-fluid" alt="..."> -->
-                          <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-primary">cancelar</a>
-                        </div>
-                      </div>
-          </div>
 
-       </div>
+      <!-- Partido 2 - Invitado -->
+      <div class="col-12 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="mb-0 fw-bold">Fútbol 7 Recreativo</h6>
+              <small class="text-muted">
+                <i class="bi bi-calendar3 me-1"></i>Domingo 16 Feb, 2025 - 16:30
+              </small>
+            </div>
+            <span class="badge badge-guest">Sos invitado</span>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong class="text-success">
+                    <i class="bi bi-geo-alt-fill me-1"></i>Deportivo Municipal
+                  </strong>
+                  <p class="mb-1 text-muted small">Calle San Martín 567, Oeste</p>
+                </div>
+                <div class="mb-2">
+                  <strong>Equipos:</strong>
+                  <div class="mt-1">
+                    <button class="btn btn-sm btn-outline-secondary me-2">
+                      <i class="bi bi-people-fill me-1"></i>Real Madrid
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-people-fill me-1"></i>Manchester (Tu equipo)
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong>Estado:</strong>
+                  <span class="badge status-confirmed ms-1">Confirmado</span>
+                </div>
+                <div class="mb-2">
+                  <strong>Jugadores:</strong>
+                  <span class="text-muted">14/14 confirmados</span>
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-sm btn-primary me-2">
+                    <i class="bi bi-chat-dots me-1"></i>Ver Foro
+                  </button>
+                  <button class="btn btn-sm btn-outline-warning">
+                    <i class="bi bi-person-dash me-1"></i>Abandonar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  </div>
+      <!-- Partido 3 - Solicitante -->
+      <div class="col-12 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="mb-0 fw-bold">Fútbol 11 Competitivo</h6>
+              <small class="text-muted">
+                <i class="bi bi-calendar3 me-1"></i>Viernes 21 Feb, 2025 - 20:00
+              </small>
+            </div>
+            <span class="badge badge-applicant">Sos solicitante</span>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong class="text-success">
+                    <i class="bi bi-geo-alt-fill me-1"></i>Estadio Central
+                  </strong>
+                  <p class="mb-1 text-muted small">Av. Independencia 890, Norte</p>
+                </div>
+                <div class="mb-2">
+                  <strong>Equipos:</strong>
+                  <div class="mt-1">
+                    <button class="btn btn-sm btn-outline-secondary me-2">
+                      <i class="bi bi-people-fill me-1"></i>Atlético Nacional
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-people-fill me-1"></i>Liverpool (Tu equipo)
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong>Estado:</strong>
+                  <span class="badge status-pending ms-1">Pendiente respuesta</span>
+                </div>
+                <div class="mb-2">
+                  <strong>Jugadores:</strong>
+                  <span class="text-muted">18/22 disponibles</span>
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-sm btn-outline-secondary me-2" disabled>
+                    <i class="bi bi-chat-dots me-1"></i>Foro no disponible
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-x-circle me-1"></i>Cancelar Solicitud
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partido 4 - Ejemplo adicional -->
+      <div class="col-12 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="mb-0 fw-bold">Fútbol 5 Amistoso</h6>
+              <small class="text-muted">
+                <i class="bi bi-calendar3 me-1"></i>Martes 25 Feb, 2025 - 18:00
+              </small>
+            </div>
+            <span class="badge badge-host">Sos anfitrión</span>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong class="text-success">
+                    <i class="bi bi-geo-alt-fill me-1"></i>Complejo Deportivo Sur
+                  </strong>
+                  <p class="mb-1 text-muted small">Ruta Provincial 45, Km 12</p>
+                </div>
+                <div class="mb-2">
+                  <strong>Equipos:</strong>
+                  <div class="mt-1">
+                    <button class="btn btn-sm btn-outline-primary me-2">
+                      <i class="bi bi-people-fill me-1"></i>Los Cracks (Tu equipo)
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-people-fill me-1"></i>Equipo por confirmar
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-2">
+                  <strong>Estado:</strong>
+                  <span class="badge status-searching ms-1">Buscando rival</span>
+                </div>
+                <div class="mb-2">
+                  <strong>Jugadores:</strong>
+                  <span class="text-muted">5/10 necesarios</span>
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-sm btn-outline-secondary me-2" disabled>
+                    <i class="bi bi-chat-dots me-1"></i>Crear Foro
+                  </button>
+                  <button class="btn btn-sm btn-outline-primary me-2">
+                    <i class="bi bi-plus-circle me-1"></i>Invitar Equipo
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-x-circle me-1"></i>Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <!--Scripts-->
   <script src="public/assets/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,259 @@
+
+/* Variables CSS para mejor gestión de colores */
+:root {
+  /* Colores para badges con mejor contraste */
+  --badge-host-bg: #198754;
+  --badge-host-color: #ffffff;
+  
+  --badge-guest-bg: #0d6efd;
+  --badge-guest-color: #ffffff;
+  
+  --badge-applicant-bg: #fd7e14;
+  --badge-applicant-color: #000000;
+  
+  /* Estados de partido con mejor legibilidad */
+  --status-confirmed-bg: #198754;
+  --status-confirmed-color: #ffffff;
+  
+  --status-waiting-bg: #ffc107;
+  --status-waiting-color: #000000;
+  
+  --status-pending-bg: #6c757d;
+  --status-pending-color: #ffffff;
+  
+  --status-searching-bg: #6f42c1;
+  --status-searching-color: #ffffff;
+  
+  /* Colores para tarjetas - modo claro */
+  --light-card-bg: rgba(0, 0, 0, 0.02);
+  --light-card-header-bg: rgba(0, 0, 0, 0.03);
+  --light-card-border: rgba(0, 0, 0, 0.08);
+  
+  /* Colores para tarjetas - modo oscuro */
+  --dark-card-bg: rgba(255, 255, 255, 0.03);
+  --dark-card-header-bg: rgba(255, 255, 255, 0.05);
+  --dark-card-border: rgba(255, 255, 255, 0.08);
+  --dark-text-primary: #ffffff;
+  --dark-text-secondary: #a0aec0;
+}
+
+/* Modo oscuro - variables ajustadas */
+[data-bs-theme="dark"] {
+  --badge-applicant-bg: #ff8c00;
+  --badge-applicant-color: #000000;
+  
+  --status-waiting-bg: #ffb300;
+  --status-waiting-color: #000000;
+  
+  --status-pending-bg: #718096;
+  --status-pending-color: #ffffff;
+  
+  /* Tarjetas más sutiles en modo oscuro */
+  --card-bg: var(--dark-card-bg);
+  --card-header-bg: var(--dark-card-header-bg);
+  --card-border: var(--dark-card-border);
+}
+
+/* Modo claro - variables para tarjetas */
+[data-bs-theme="light"], :root:not([data-bs-theme="dark"]) {
+  --card-bg: var(--light-card-bg);
+  --card-header-bg: var(--light-card-header-bg);
+  --card-border: var(--light-card-border);
+}
+
+/* Badge para anfitrión */
+.badge-host {
+  background-color: var(--badge-host-bg) !important;
+  color: var(--badge-host-color) !important;
+  font-weight: 600;
+}
+
+/* Badge para invitado */
+.badge-guest {
+  background-color: var(--badge-guest-bg) !important;
+  color: var(--badge-guest-color) !important;
+  font-weight: 600;
+}
+
+/* Badge para solicitante */
+.badge-applicant {
+  background-color: var(--badge-applicant-bg) !important;
+  color: var(--badge-applicant-color) !important;
+  font-weight: 600;
+}
+
+/* Estado confirmado */
+.status-confirmed {
+  background-color: var(--status-confirmed-bg) !important;
+  color: var(--status-confirmed-color) !important;
+}
+
+/* Estado esperando confirmación */
+.status-waiting {
+  background-color: var(--status-waiting-bg) !important;
+  color: var(--status-waiting-color) !important;
+}
+
+/* Estado pendiente */
+.status-pending {
+  background-color: var(--status-pending-bg) !important;
+  color: var(--status-pending-color) !important;
+}
+
+/* Estado buscando rival */
+.status-searching {
+  background-color: var(--status-searching-bg) !important;
+  color: var(--status-searching-color) !important;
+}
+
+/* Estilos de tarjetas con colores sutiles */
+.card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+  backdrop-filter: blur(10px);
+}
+
+.card-header {
+  background-color: var(--card-header-bg) !important;
+  border-bottom-color: var(--card-border) !important;
+}
+
+/* Mejorar legibilidad de texto en dark mode */
+[data-bs-theme="dark"] .text-muted {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Botones de equipo con mejor contraste */
+.btn-team-primary {
+  --bs-btn-bg: #0d6efd;
+  --bs-btn-border-color: #0d6efd;
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: #0b5ed7;
+  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-hover-color: #ffffff;
+}
+
+.btn-team-secondary {
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: #6c757d;
+  --bs-btn-color: #6c757d;
+  --bs-btn-hover-bg: #6c757d;
+  --bs-btn-hover-border-color: #6c757d;
+  --bs-btn-hover-color: #ffffff;
+}
+
+[data-bs-theme="dark"] .btn-team-secondary {
+  --bs-btn-color: #adb5bd;
+  --bs-btn-border-color: #adb5bd;
+  --bs-btn-hover-bg: #6c757d;
+  --bs-btn-hover-border-color: #6c757d;
+}
+
+/* ===================================
+   ICONOS Y ELEMENTOS DECORATIVOS
+   =================================== */
+
+/* Mejorar visibilidad de iconos */
+.text-success {
+  color: #20c997 !important;
+}
+
+[data-bs-theme="dark"] .text-success {
+  color: #20c997 !important;
+}
+
+/* Hover effects para cards con colores sutiles */
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  --card-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* Modo claro - hover effect */
+[data-bs-theme="light"] .card:hover, 
+:root:not([data-bs-theme="dark"]) .card:hover {
+  --card-bg: rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .badge-host,
+  .badge-guest,
+  .badge-applicant {
+    font-size: 0.75rem;
+  }
+  
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .card-header h6 {
+    font-size: 0.9rem;
+  }
+}
+
+/* ===================================
+   ESTADO VACÍO
+   =================================== */
+
+/* Estilos para cuando no hay partidos */
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.empty-state .display-1 {
+  font-size: 4rem;
+  opacity: 0.3;
+}
+
+.empty-state h3 {
+  margin-top: 1.5rem;
+  color: var(--bs-secondary);
+}
+
+.empty-state p {
+  color: var(--bs-secondary);
+  margin-bottom: 2rem;
+}
+
+/* ===================================
+   ANIMACIONES SUAVES
+   =================================== */
+
+/* Transiciones suaves para badges */
+.badge {
+  transition: all 0.2s ease-in-out;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* Transiciones para botones */
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Focus states mejorados */
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+[data-bs-theme="dark"] .btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.4);
+}
