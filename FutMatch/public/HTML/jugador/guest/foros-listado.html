@@ -44,78 +44,92 @@ Página para ver un listado de "foros de discusión" creados por jugadores
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top">
-    <div class="container-fluid">
-      <!-- Lado izquierdo: menú hamburguesa + título -->
-      <div class="d-flex align-items-center">
-        <button class="btn btn-dark me-3 d-lg-none" 
-                type="button" data-bs-toggle="offcanvas" 
-                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-          <i class="bi bi-list text-white"></i>
-        </button>
-        <a class="navbar-brand d-flex align-items-center" href="#"
-            ><img class="logo me-3" src="public/img/logo-sinfondo.svg" alt="" />
-            <span class="brand-text d-none d-md-block">FutMatch</span></a>
-      </div>
-      <!--Botones que llevan a otras secciones del programa-->
-      <div class="d-flex align-items-center d-none d-lg-block me-3">
-        <button id="home" class="btn btn-dark me-2" type="button" 
-                title="Home">
-          <i class="bi bi-house-door"></i>
-        </button> 
-        <button id="botonMisPartidos" class="btn btn-dark me-2" type="button" 
-                title="Mis Partidos">
-          <i class="bi bi-calendar-event"></i>
-        </button>
-        <button id="botonMiEquipo" class="btn btn-dark me-2" type="button" 
-                title="Mi Equipo">
-          <i class="bi bi-people"></i>
-        </button>
-        <button id="botonForos" class="btn btn-dark me-2 active" type="button" 
-                title="Foros">
-          <i class="bi bi-chat-dots"></i>
-        </button>
-        <button id="botonPerfil" class="btn btn-dark me-2" type="button" 
-                title="Mi Perfil">
-          <i class="bi bi-person-circle"></i>
-        </button>
-      </div>
-      
-      <!-- Centro: barra de búsqueda -->
-      <div class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 500px;">
-        <form class="d-flex w-100" role="search">
-          <input class="form-control me-2" type="search" placeholder="Buscar en FOROS" 
-                 aria-label="Search" id="inputBuscarForo">
-          <button class="btn btn-outline-success" type="submit">
-            <i class="bi bi-search"></i>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top border-bottom">
+      <div class="container-fluid">
+        <!-- Lado izquierdo: menú hamburguesa + título + botones navegación -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-dark me-3 d-lg-none" 
+                  type="button" data-bs-toggle="offcanvas" 
+                  data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+            <i class="bi bi-list text-white"></i>
           </button>
-        </form>
-      </div>
-
-      <!-- Lado derecho: notificaciones y configuración -->
-      <div class="d-flex align-items-center">
-        <!-- Campanita de notificaciones -->
-        <button class="btn btn-outline-warning position-relative me-2" 
-                type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
-                title="Notificaciones">
-          <i class="bi bi-bell"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            2
-          </span>
-        </button>
-        <!-- Botones solo en pantallas medianas y grandes -->
-        <div class="d-none-custom d-md-flex align-items-center">
-          <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
-                  data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-            <i class="bi bi-gear"></i>
+          <a class="navbar-brand d-flex align-items-center" href="public/HTML/jugador/inicio-jugador.html">
+              <img class="logo me-3" src="public/img/logo-sinfondo.svg" alt="" />
+              <span class="brand-text">FutMatch</span>
+          </a>          
+          <!--Botones que llevan a otras secciones del programa-->
+          <div class="d-flex align-items-center d-none d-md-flex ms-3">
+            <a href="public/HTML/jugador/inicio-jugador.html" class="btn btn-dark me-2" id="home" 
+               title="Home">
+              <i class="bi bi-house-door"></i>
+              <span class="d-none d-lg-inline ms-1">Home</span>
+            </a> 
+            <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-dark me-2" id="botonMisPartidos" 
+               title="Mis Partidos">
+              <i class="bi bi-calendar-event"></i>
+              <span class="d-none d-lg-inline ms-1">Mis Partidos</span>
+            </a>
+            <!-- Dropdown Explorar -->
+            <div class="dropdown">
+              <button class="btn btn-dark dropdown-toggle me-2" type="button" id="dropdownExplorar" 
+                      data-bs-toggle="dropdown" aria-expanded="false" title="Explorar">
+                <i class="bi bi-search"></i>
+                <span class="d-none d-lg-inline ms-1">Explorar</span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
+                <li><a class="dropdown-item" href="public/HTML/jugador/guest/canchas-listado.html">
+                  <i class="bi bi-geo-alt me-2"></i>Explorar canchas
+                </a></li>
+                <li><a class="dropdown-item" href="public/HTML/jugador/guest/partidos-listado.html">
+                  <i class="bi bi-people me-2"></i>Explorar partidos
+                </a></li>
+              </ul>
+            </div>
+            <a href="public/HTML/jugador/equipos-listado.html" class="btn btn-dark me-2" id="botonMiEquipo" 
+               title="Mi Equipo">
+              <i class="bi bi-people"></i>
+              <span class="d-none d-lg-inline ms-1">Mi Equipo</span>
+            </a>
+            <a href="public/HTML/jugador/guest/foros-listado.html" class="btn btn-dark me-2 active" id="botonForos" 
+               title="Foros">
+              <i class="bi bi-chat-dots"></i>
+              <span class="d-none d-lg-inline ms-1">Foros</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Lado derecho: perfil, notificaciones y configuración -->
+        <div class="d-flex align-items-center">
+          <!-- Botón Mi Perfil -->
+          <a href="public/HTML/jugador/perfil-jugador-detalle.html" class="btn btn-dark me-2 d-none d-md-flex" id="botonPerfil" 
+             title="Mi Perfil">
+            <i class="bi bi-person-circle"></i>
+            <span class="d-none d-lg-inline ms-1">Mi Perfil</span>
+          </a>
+          <!-- Campanita de notificaciones -->
+          <button class="btn btn-outline-warning position-relative me-2" 
+                  type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
+                  title="Notificaciones">
+            <i class="bi bi-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              2
+            </span>
           </button>
-          <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
-            <i class="bi bi-box-arrow-right text-white"></i>
-          </button>
+          <!-- Botones solo en pantallas medianas y grandes -->
+          <div class="d-none-custom d-md-flex align-items-center">
+            <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
+                    data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
+              <i class="bi bi-gear"></i>
+            </button>
+            <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
+              <i class="bi bi-box-arrow-right text-white"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+</header>
 
   <!-- Layout principal -->
   <div class="d-flex">
@@ -166,13 +180,13 @@ Página para ver un listado de "foros de discusión" creados por jugadores
         <div class="mb-3">
           <h6 class="text-body-secondary text-uppercase fw-bold small mb-3">Explorar</h6>
           <div class="d-grid gap-1">
-            <button id="botonForosSeguidosDesktop" class="btn btn-outline-secondary btn-sm text-start" type="button">
+            <button id="botonForosSeguidosDesktop" class="btn btn-dark btn-sm text-start" type="button">
               <i class="bi bi-star me-2"></i>Foros Seguidos
             </button>
-            <button id="botonForosMisEquiposDesktop" class="btn btn-outline-secondary btn-sm text-start" type="button">
+            <button id="botonForosMisEquiposDesktop" class="btn btn-dark btn-sm text-start" type="button">
               <i class="bi bi-people me-2"></i>Foros de mis Equipos
             </button>
-            <button id="botonDescubrirForosDesktop" class="btn btn-outline-secondary btn-sm text-start" type="button">
+            <button id="botonDescubrirForosDesktop" class="btn btn-dark btn-sm text-start" type="button">
               <i class="bi bi-chat-left-text me-2"></i>Descubre Foros
             </button>
           </div>
@@ -244,13 +258,13 @@ Página para ver un listado de "foros de discusión" creados por jugadores
       <div class="mb-4">
         <h6 class="text-body-secondary text-uppercase fw-bold small mb-3">Explorar</h6>
         <div class="d-grid gap-2">
-          <button id="botonForosSeguidosMovil" class="btn btn-outline-secondary btn-sm text-start" type="button">
+          <button id="botonForosSeguidosMovil" class="btn btn-dark btn-sm text-start" type="button">
             <i class="bi bi-star me-2"></i>Foros Seguidos
           </button>
-          <button id="botonForosMisEquiposMovil" class="btn btn-outline-secondary btn-sm text-start" type="button">
+          <button id="botonForosMisEquiposMovil" class="btn btn-dark btn-sm text-start" type="button">
             <i class="bi bi-people me-2"></i>Foros de mis Equipos
           </button>
-          <button id="botonDescubrirForosMovil" class="btn btn-outline-secondary btn-sm text-start" type="button">
+          <button id="botonDescubrirForosMovil" class="btn btn-dark btn-sm text-start" type="button">
             <i class="bi bi-chat-left-text me-2"></i>Descubre Foros
           </button>
         </div>
@@ -258,22 +272,22 @@ Página para ver un listado de "foros de discusión" creados por jugadores
       <!-- Otros botones, configuración y cerrar sesión -->
       <div class="mt-auto pt-3 border-top">
         <div class="d-grid gap-2">
-          <button id="botonConfiguracionMovil" class="btn btn-outline-secondary" type="button">
+          <button id="botonConfiguracionMovil" class="btn btn-dark" type="button">
             <i class="bi bi-house-door me-2"></i>Home
           </button>
-          <button id="botonConfiguracionMovil" class="btn btn-outline-secondary" type="button">
+          <button id="botonConfiguracionMovil" class="btn btn-dark" type="button">
             <i class="bi bi-calendar-event me-2"></i>Mis Partidos
           </button>
-          <button id="botonConfiguracionMovil" class="btn btn-outline-secondary" type="button">
+          <button id="botonConfiguracionMovil" class="btn btn-dark" type="button">
             <i class="bi bi-people me-2"></i>Mi Equipo
           </button>
-          <button id="botonConfiguracionMovil" class="btn btn-outline-secondary" type="button">
+          <button id="botonConfiguracionMovil" class="btn btn-dark" type="button">
             <i class="bi bi-chat-dots active me-2"></i>Foros
           </button>
-          <button id="botonConfiguracionMovil" class="btn btn-outline-secondary" type="button">
+          <button id="botonConfiguracionMovil" class="btn btn-dark" type="button">
             <i class="bi bi-person-circle me-2"></i>Mi Perfil
           </button>
-          <button id="botonConfiguracionMovil" class="btn btn-outline-secondary" type="button"
+          <button id="botonConfiguracionMovil" class="btn btn-dark" type="button"
                   data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
             <i class="bi bi-gear me-2"></i>Configuración
           </button>
