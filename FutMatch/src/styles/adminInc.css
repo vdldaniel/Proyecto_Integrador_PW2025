@@ -1,3 +1,16 @@
+.hero-image{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/FutMatch/public/img/bg5.jpg");
+    height: 300px;
+    margin-top:px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display:grid;
+    justify-content:center;
+    align-content:center;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -42,3 +55,4 @@ button i {
   border-radius: 15px;
   padding: 20px;
 }
+

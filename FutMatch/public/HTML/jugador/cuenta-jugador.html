@@ -8,10 +8,10 @@ Página para configurar detalles de la cuenta del jugador:
 - Sistema de notificaciones
 - Link a perfil-jugador-ver.html para ver el perfil público
 - [x] Botón de "Guardar cambios" 
-    - [] Despliega un modal de confirmación
+    - [x] Despliega un modal de confirmación
 - [x] Botón de "Eliminar cuenta" que despliega un modal de confirmación de eliminación
-    - [] Mostrar segundo modal de confirmación al aceptar
-    - [] Redirigir a la página principal con mensaje de que tiene 30 días para reactivar su cuenta
+    - [x] Mostrar segundo modal de confirmación al aceptar
+    - [x] Redirigir a la página principal con mensaje de que tiene 30 días para reactivar su cuenta
     - [] Si no se reactiva en 30 días, eliminar todos sus datos de la base de datos
 -->
 
@@ -49,7 +49,7 @@ Página para configurar detalles de la cuenta del jugador:
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
+          <a class="navbar-brand" href="public/HTML/jugador/cuenta-jugador.html"
             ><img class="logo" src="public/img/logo-sinfondo.svg" alt="" />
             <span class="brand-text">FutMatch</span></a
           >
@@ -67,35 +67,27 @@ Página para configurar detalles de la cuenta del jugador:
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="public/HTML/jugador/inicio-jugador.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Mis partidos</a>
+                <a class="nav-link" href="public/HTML/jugador/partidos-jugador.html">Mis partidos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Mi equipo</a>
+                <a class="nav-link" href="public/HTML/jugador/equipo-detalle.html">Mi equipo</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Foros</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Perfil</a>
+                <a class="nav-link" href="public/HTML/jugador/perfil-jugador-detalle.html">Perfil</a>
               </li>
             </ul>
-            <button
-              id="btn-configuracion"
-              class="btn btn-outline-light me-2"
-              type="button"
-            >
-              <a href="public/HTML/jugador/cuenta-jugador.html"
+              <a href="public/HTML/jugador/cuenta-jugador.html" class="btn btn-outline-light me-2"
                 ><i class="bi bi-gear text-white"></i
               ></a>
-            </button>
-            <button type="button" class="btn btn-danger">
-              <a href="public/HTML/auth/landing.html"
+              <a href="public/HTML/auth/landing.html" class="btn btn-danger"
                 ><i class="bi bi-box-arrow-right text-white"></i
               ></a>
-            </button>
           </div>
         </div>
       </nav>
@@ -104,7 +96,9 @@ Página para configurar detalles de la cuenta del jugador:
       <div class="container py-5">
         <div class="card shadow border-0 rounded-4">
           <div class="card-body p-4">
-            <h3 class="card-title mb-3 d-flex fw-bold">Configuracion de cuenta</h3>
+            <h3 class="card-title mb-3 d-flex fw-bold">
+              Configuracion de cuenta
+            </h3>
             <form class="formCuenta" id="formCuenta" action="">
               <div class="row">
                 <!--Nombre-->
@@ -129,6 +123,8 @@ Página para configurar detalles de la cuenta del jugador:
                     id="inputApellido"
                     value="Santos"
                   />
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorApellido"></p>
                 </div>
                 <!--Correo electronico-->
                 <div class="mb-3 col-12 col-md-6">
@@ -141,20 +137,28 @@ Página para configurar detalles de la cuenta del jugador:
                     id="inputEmail"
                     value="ronaldonazario2002@gmail.com"
                   />
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorEmail"></p>
                 </div>
                 <!--Telefono-->
                 <div class="mb-3 col-12 col-md-6">
                   <label for="inputTel" class="form-label">Telefono</label>
                   <input
-                    type="number"
+                    type="tel"
                     class="form-control"
                     id="inputTel"
                     value="+5491156812474"
                   />
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorTel"></p>
                 </div>
                 <!--Boton-->
                 <div class="d-flex gap-2 mt-2 justify-content-end">
-                  <button type="submit" class="btn btn-primary">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="btnGuardar"
+                  >
                     Guardar cambios
                   </button>
                 </div>
@@ -165,7 +169,7 @@ Página para configurar detalles de la cuenta del jugador:
                 <h4 class="h4 mt-4 mb-3 d-flex fw-bold">Cambiar contraseña</h4>
                 <!--Contraseña anterior-->
                 <div class="mb-3 col-12">
-                  <label for="inputTel" class="form-label"
+                  <label for="inputContraseña class="form-label"
                     >Tu contraseña anterior</label
                   >
                   <input
@@ -174,22 +178,24 @@ Página para configurar detalles de la cuenta del jugador:
                     id="inputContraseña"
                     value="contraseña123"
                   />
+                  <!--Muestra el error-->
+                  <p class="text-danger" id="errorPass"></p>
                 </div>
                 <!--Nueva contraseña-->
-                <label for="inputTel" class="form-label"
+                <label for="inputContraseñaNew" class="form-label"
                   >Nueva contraseña</label
                 >
                 <div class="mb-3 col-12">
                   <input
                     type="password"
                     class="form-control"
-                    id="inputContraseñaConfirm"
+                    id="inputContraseñaNew"
                     placeholder="Nueva contraseña"
                   />
                 </div>
                 <!--Confirmar contraseña-->
                 <div class="mb-3 col-12">
-                  <label for="inputTel" class="form-label"
+                  <label for="inputContraseñaConfirm" class="form-label"
                     >Repite tu nueva contraseña</label
                   >
                   <input
@@ -201,18 +207,19 @@ Página para configurar detalles de la cuenta del jugador:
                 </div>
                 <!--Botones-->
                 <div class="d-flex gap-2 mt-2 justify-content-end">
-                  <button type="submit" class="btn btn-primary">
+                  <button type="button" class="btn btn-primary" id="btnCambiarPass">
                     Cambiar contraseña
                   </button>
                 </div>
-                <div class="row">
-
-
-                </div>
+                <div class="row"></div>
                 <div class="col-12">
-                  <h4 class="h4 mt-4 mb-3 d-flex fw-bold">Eliminar cuenta de usuario</h4>
-                  <p>Si deseas eliminar tu cuenta, haz click en el boton de abajo</p>
-                  <button type="submit" class="btn btn-danger">
+                  <h4 class="h4 mt-4 mb-3 d-flex fw-bold">
+                    Eliminar cuenta de usuario
+                  </h4>
+                  <p>
+                    Si deseas eliminar tu cuenta, haz click en el boton de abajo
+                  </p>
+                  <button type="button" id="btnEliminarCuenta" class="btn btn-danger">
                     Eliminar cuenta
                   </button>
                 </div>
@@ -222,9 +229,95 @@ Página para configurar detalles de la cuenta del jugador:
         </div>
       </div>
     </main>
+
+    <!--Modales-->
+    <!-- Guardar cambios -->
+    <div class="modal fade" id="modalGuardar" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cambios guardados</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Los cambios se han guardado correctamente!
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-bs-dismiss="modal">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmar eliminar cuenta -->
+    <div
+      class="modal fade"
+      id="modalEliminar1"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar cuenta</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            ¿Seguro que deseas eliminar tu cuenta? 
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              class="btn btn-danger"
+              id="btnConfirmarEliminar"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segundo Modal -->
+    <div
+      class="modal fade"
+      id="modalEliminar2"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-dark text-white">
+            <h5 class="modal-title">Cuenta eliminada</h5>
+          </div>
+          <div class="modal-body">
+            Tu cuenta ha sido desactivada. Tienes 30 días para
+            reactivarla, de lo contrario sera eliminada definitivamente.
+          </div>
+          <div class="modal-footer">
+            <a href="public/HTML/auth/landing.html" class="btn btn-danger"
+              >Aceptar</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Scripts -->
     <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="src/scripts/pages/script.js"></script>
+    <script src="src/scripts/pages/cuenta-jugador.js"></script>
     <!--cambiar por el script de la pagina-->
   </body>
 </html>

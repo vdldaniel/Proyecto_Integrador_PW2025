@@ -17,7 +17,7 @@ Página para explorar canchas disponibles para reservar
     - [x] Botón de "Aplicar filtros" que actualice el listado y el mapa según los criterios seleccionados
 -->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,52 +45,94 @@ Página para explorar canchas disponibles para reservar
     <link rel="stylesheet" href="src/styles/navbar.css" />
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"
-            ><img class="logo" src="public/img/logo-sinfondo.svg" alt="" />
-            <span class="brand-text">FutMatch</span></a
-          >
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
+  <header>
+    <nav class="navbar navbar-expand-lg sticky-top border-bottom">
+      <div class="container-fluid">
+        <!-- Lado izquierdo: menú hamburguesa + título + botones navegación -->
+        <div class="d-flex align-items-center">
+          <button class="btn btn-dark me-3 d-lg-none" 
+                  type="button" data-bs-toggle="offcanvas" 
+                  data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+            <i class="bi bi-list"></i>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Mis partidos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Perfil</a>
-              </li>
-            </ul>
-            <button
-              id="btn-configuracion"
-              class="btn btn-outline-light me-2"
-              type="button"
-            >
+          <a class="navbar-brand d-flex align-items-center" href="public/HTML/jugador/inicio-jugador.html">
+              <img class="logo me-3" src="public/img/logo-sinfondo.svg" alt="" />
+              <span class="brand-text">FutMatch</span>
+          </a>          
+          <!--Botones que llevan a otras secciones del programa-->
+          <div class="d-flex align-items-center d-none d-md-flex ms-3">
+            <a href="public/HTML/jugador/inicio-jugador.html" class="btn btn-dark me-2" id="home" 
+               title="Home">
+              <i class="bi bi-house-door"></i>
+              <span class="d-none d-lg-inline ms-1">Home</span>
+            </a> 
+            <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-dark me-2" id="botonMisPartidos" 
+               title="Mis Partidos">
+              <i class="bi bi-calendar-event"></i>
+              <span class="d-none d-lg-inline ms-1">Mis Partidos</span>
+            </a>
+            <!-- Dropdown Explorar -->
+            <div class="dropdown">
+              <button class="btn btn-dark dropdown-toggle me-2 active" type="button" id="dropdownExplorar" 
+                      data-bs-toggle="dropdown" aria-expanded="false" title="Explorar">
+                <i class="bi bi-search"></i>
+                <span class="d-none d-lg-inline ms-1">Explorar</span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
+                <li><a class="dropdown-item" href="public/HTML/jugador/guest/canchas-listado.html">
+                  <i class="bi bi-geo-alt me-2"></i>Explorar canchas
+                </a></li>
+                <li><a class="dropdown-item" href="public/HTML/jugador/guest/partidos-listado.html">
+                  <i class="bi bi-people me-2"></i>Explorar partidos
+                </a></li>
+              </ul>
+            </div>
+            <a href="public/HTML/jugador/equipos-listado.html" class="btn btn-dark me-2" id="botonMiEquipo" 
+               title="Mi Equipo">
+              <i class="bi bi-people"></i>
+              <span class="d-none d-lg-inline ms-1">Mi Equipo</span>
+            </a>
+            <a href="public/HTML/jugador/guest/foros-listado.html" class="btn btn-dark me-2" id="botonForos" 
+               title="Foros">
+              <i class="bi bi-chat-dots"></i>
+              <span class="d-none d-lg-inline ms-1">Foros</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Lado derecho: perfil, notificaciones y configuración -->
+        <div class="d-flex align-items-center">
+          <!-- Botón Mi Perfil -->
+          <a href="public/HTML/jugador/perfil-jugador-detalle.html" class="btn btn-dark me-2 d-none d-md-flex" id="botonPerfil" 
+             title="Mi Perfil">
+            <i class="bi bi-person-circle"></i>
+            <span class="d-none d-lg-inline ms-1">Mi Perfil</span>
+          </a>
+          <!-- Campanita de notificaciones -->
+          <button class="btn btn-outline-warning position-relative me-2" 
+                  type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
+                  title="Notificaciones">
+            <i class="bi bi-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              2
+            </span>
+          </button>
+          <!-- Botones solo en pantallas medianas y grandes -->
+          <div class="d-none-custom d-md-flex align-items-center">
+            <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
+                    data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
               <i class="bi bi-gear"></i>
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
               <i class="bi bi-box-arrow-right"></i>
             </button>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+</header>
     <main>
-      <div class="bg-light">
+      <div class="bg-body-secondary">
         <div class="container-fluid py-5">
           <div class="busqueda-container">
             <!--Barra de busqueda-->
@@ -268,8 +310,58 @@ Página para explorar canchas disponibles para reservar
         </div>
       </div>
     </main>
+
+    <!-- Menú lateral deslizable para pantallas medianas y menores -->
+  <div class="offcanvas offcanvas-start" 
+       tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sidebarMenuLabel">Menú</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Navegación principal -->
+      <div class="mb-4">
+        <div class="d-grid gap-2">
+          <a href="public/HTML/jugador/inicio-jugador.html" class="btn btn-dark text-start" id="homeMovil">
+            <i class="bi bi-house-door me-2"></i>Home
+          </a>
+          <a href="public/HTML/jugador/guest/partidos-listado.html" class="btn btn-dark text-start" id="botonMisPartidosMovil">
+            <i class="bi bi-calendar-event me-2"></i>Mis Partidos
+          </a>
+          <a href="public/HTML/jugador/guest/canchas-listado.html" class="btn btn-dark text-start" id="botonExplorarCanchasMovil">
+            <i class="bi bi-geo-alt me-2"></i>Explorar canchas
+          </a>
+          <a href="public/HTML/jugador/guest/partidos-listado.html" class="btn btn-dark text-start" id="botonExplorarPartidosMovil">
+            <i class="bi bi-people me-2"></i>Explorar partidos
+          </a>          
+          <a href="public/HTML/jugador/equipos-listado.html" class="btn btn-dark text-start" id="botonMiEquipoMovil">
+            <i class="bi bi-people me-2"></i>Mi Equipo
+          </a>
+          <a href="public/HTML/jugador/guest/foros-listado.html" class="btn btn-dark text-start" id="botonForosMovil">
+            <i class="bi bi-chat-dots me-2"></i>Foros
+          </a>
+          <a href="public/HTML/jugador/perfil-jugador-detalle.html" class="btn btn-dark text-start" id="botonPerfilMovil">
+            <i class="bi bi-person-circle me-2"></i>Mi Perfil
+          </a>
+        </div>
+      </div>
+      
+      <!-- Otros botones, configuración y cerrar sesión -->
+      <div class="mt-auto pt-3 border-top">
+        <div class="d-grid gap-2">
+          <button id="botonConfiguracionMovil" class="btn btn-dark text-start" type="button"
+                  data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
+            <i class="bi bi-gear me-2"></i>Configuración
+          </button>
+          <button id="btnCerrarSesionMovil" class="btn btn-outline-danger text-start" type="button">
+            <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!-- Scripts -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
