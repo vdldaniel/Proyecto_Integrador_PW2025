@@ -14,6 +14,13 @@
 .card-img-top{
     height: 300px;
     width: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display:grid;
+    justify-content:center;
+    align-content:center;
     
 }
 #textTitulo{

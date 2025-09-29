@@ -15,7 +15,7 @@ o si se uniría con su equipo completo (si es elegible esta situación)
   <title>FutMatch</title>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/FutMatch/public/assets/css/bootstrap.min.css" />
 
   <!-- Fuente -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,15 +23,118 @@ o si se uniría con su equipo completo (si es elegible esta situación)
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
+  <link rel="stylesheet" href="/FutMatch/src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
+  <link rel="stylesheet" href="/FutMatch/src/styles/navbar.css">
 </head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+<body>  
+  <header>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/FutMatch/public/HTML/jugador/inicio-jugador.html"
+            ><img class="logo" src="/FutMatch/public/img/logo-sinfondo.svg" alt="" />
+            <span class="brand-text">FutMatch</span></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/FutMatch/public/HTML/jugador/partidos-jugador.html">Mis partidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mi equipo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Foros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+              </li>
+            </ul>
+            <button
+              id="btn-configuracion"
+              class="btn btn-outline-light me-2"
+              type="button"
+            >
+              <i class="bi bi-gear"></i>
+            </button>
+            <button type="button" class="btn btn-danger">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+  <div class="container mt-5"> 
+       <div class="container mt-2 px-3 ">
+          <div class="row mt-3 align-items-center">
+                       <div class="card">
+                         <div class="card-header">
+                           Nombre equipo que busca gente
+                         </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Cancha</h5>
+                          <p class="card-text">Horario</p>
+                          <p class="card-text">Cantidad de jugadores/cantidad requerida</p>
+                          <p class="card-text">Posiciones</p>
+                          <!-- <img src="/FutMatch/public/img/bg1.jpg" class="rounded float-end img-fluid" alt="..."> -->
+                          <a href="/FutMatch/public/HTML/jugador/partidos-jugador.html" class="btn btn-primary">Unirse</a>
+                        </div>
+                      </div>
+          </div>
+          <div class="row mt-3 align-items-center">
+                       <div class="card">
+                         <div class="card-header">
+                           Nombre equipo que busca gente
+                         </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Cancha</h5>
+                          <p class="card-text">Horario</p>
+                          <p class="card-text">Cantidad de jugadores/cantidad requerida</p>
+                          <p class="card-text">Posiciones</p>
+                          <!-- <img src="/FutMatch/public/img/bg1.jpg" class="rounded float-end img-fluid" alt="..."> -->
+                          <a href="/FutMatch/public/HTML/jugador/partidos-jugador.html" class="btn btn-primary">Unirse</a>
+                        </div>
+                      </div>
+          </div>
+          <div class="row mt-3 align-items-center">
+                       <div class="card">
+                         <div class="card-header">
+                           Nombre equipo que busca gente
+                         </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Cancha</h5>
+                          <p class="card-text">Horario</p>
+                          <p class="card-text">Cantidad de jugadores/cantidad requerida</p>
+                          <p class="card-text">Posiciones</p>
+                          <!-- <img src="/FutMatch/public/img/bg1.jpg" class="rounded float-end img-fluid" alt="..."> -->
+                          <a href="/FutMatch/public/HTML/jugador/partidos-jugador.html" class="btn btn-primary">Unirse</a>
+                        </div>
+                      </div>
+          </div>
+
+       </div>
+
+
+
+
+  </div>
 
   <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
+  <script src=""></script>
+  <script src="/FutMatch/public/assets/js/bootstrap.bundle.min.js"></script> <!--cambiar por el script de la pagina-->
 </body>
 </html>
 
