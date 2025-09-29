@@ -10,6 +10,8 @@ Incluye:
 
 <!DOCTYPE html>
 <html lang="es">
+
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +21,14 @@ Incluye:
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+  <!-- Bootstrap JS (bundle con Popper incluido) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!--Iconos Bootstrap-->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+  />
 
   <!-- Fuente -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,15 +36,43 @@ Incluye:
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
+  <link rel="stylesheet" href="src/styles/style.css" />
+  <link rel="stylesheet" href="src/styles/navbar.css" />
 </head>
-<body>
-  <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
+
+
+<body class="bg-light">
+  <header> 
+    <nav id="navbarFutmatch"></nav>
+  </header>
+
+  <main class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h3 mb-0">Equipos Disponibles</h1>
+      <div>
+        <a href="#" id="btnMisEquipos" class="btn btn-primary me-2">Mis Equipos</a>
+        <a href="#" id="btnCrearEquipo" class="btn btn-success">Crear Equipo</a>
+      </div>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="mb-4">
+      <input
+        type="text"
+        id="searchInput"
+        class="form-control"
+        placeholder="Buscar equipos por nombre, ubicación, categoría..."
+      />
+    </div>
+
+    <!-- Lista de equipos -->
+    <div id="equiposList" class="row g-4">
+      <!-- Aquí se insertarán dinámicamente las tarjetas de los equipos -->
+    </div>
 
   <!-- Scripts -->
   <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/script.js"></script> <!--cambiar por el script de la pagina-->
+  <script src="src/scripts/pages/equipos-listado.js"></script>
 </body>
 </html>
 
