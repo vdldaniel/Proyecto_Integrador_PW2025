@@ -47,19 +47,15 @@ function showSection(section) {
   let content = document.getElementById("section-content");
   switch (section) {
     case "torneos":
-      window.location.href = "mis-torneos.html";
+      window.location.href = "public/HTML/admin-cancha/mis-torneos.html";
       break;
 
     case "canchas":
-      window.location.href = "canchas-listado.html";
+      window.location.href = "public/HTML/admin-cancha/canchas-listado.html";
       break;
 
     case "reservas":
-      window.location.href = "agenda.html";
-      break;
-
-    case "usuarios":
-      window.location.href = "cuenta-jugador.html";
+      window.location.href = "public/HTML/admin-cancha/agenda.html";
       break;
 
     default:
