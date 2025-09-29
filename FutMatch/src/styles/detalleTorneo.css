@@ -20,13 +20,13 @@ body {
   min-width: 95px;
 }
 
-/* Partidos table small inputs */
+
 .table td input, .table td select {
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Badges and small tweaks */
+
 #tournament-state-label {
   font-size: .95rem;
 }
