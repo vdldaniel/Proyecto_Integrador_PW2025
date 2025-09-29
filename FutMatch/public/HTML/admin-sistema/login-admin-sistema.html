@@ -10,7 +10,7 @@ Formulario de login para el administrador del sistema
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
   
-  <title>FutMatch</title>
+  <title>FutMatch - ADMIN -</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
@@ -21,11 +21,69 @@ Formulario de login para el administrador del sistema
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/style.css" /> <!--cambiar por style especifico si corresponde-->
+  <link rel="stylesheet" href="src/styles/style.css" />
 </head>
 <body>
+  <header class="hero bg-image" style="background-image: url('public/img/bg2.jpg');">
+    <div class="hero-overlay"></div>
+
+    <div class="container position-relative">
+      <!-- Logo - SVG -->
+      <!-- <div class="text-center mb-3">[SVG LOGO]</div> -->
+
+      <!-- Título y lema -->
+      <div class="row justify-content-center text-center text-light">
+        <div class="col-11 col-lg-9">
+          <h1 class="display-3 fw-800 brand-title mb-2">FutMatch - ADMIN</h1>
+          <p class="lead brand-tagline mb-5">
+            La pasión es la chispa que enciende el fuego del éxito
+          </p>
+        </div>
+      </div>
+
+      <!-- Tarjetas de acción -->
+      <div class="row g-4 justify-content-center">
+
+        <!-- Card: Iniciar sesión Admin  -->
+        <div class="col-11 col-md-5 col-lg-4">
+          <div class="guest card card-action h-100" id="loginAdminCard" role="button" tabindex="0">
+            <div class="card-body py-4">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h2 class="h4 fw-600 mb-1">Iniciar sesión</h2>
+                </div>
+              </div>
+ 
+              <!-- Formulario -->
+              <form id="loginForm" novalidate>
+                <div class="mb-3">
+                  <label for="usuarioAdmin" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="usuarioAdmin" name="email" 
+                          autocomplete="username" required />
+                  <div class="invalid-feedback">Ingrese su cuenta de administrador.</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="password" name="password" 
+                          autocomplete="current-password" required />
+                  <div class="invalid-feedback">La contraseña es obligatoria.</div>
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-success">
+                          Ingresar</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
   <!-- Contenido de la página -->
-  <!-- Dejar vacío por ahora -->
 
   <!-- Scripts -->
   <script src="public/assets/js/bootstrap.bundle.min.js"></script>
