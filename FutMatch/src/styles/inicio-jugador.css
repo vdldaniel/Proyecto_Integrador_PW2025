@@ -1,0 +1,31 @@
+.hero-image{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/FutMatch/public/img/bg1.jpg");
+    height: 300px;
+    margin-top:px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display:grid;
+    justify-content:center;
+    align-content:center;
+}
+
+.card-img-top{
+    height: 300px;
+    width: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display:grid;
+    justify-content:center;
+    align-content:center;
+    
+}
+#textTitulo{
+    color: aliceblue;
+}
+#titulo1{
+    color: aliceblue;
+}
