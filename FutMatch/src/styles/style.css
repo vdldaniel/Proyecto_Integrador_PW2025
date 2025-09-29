@@ -35,14 +35,7 @@ body.light-page {
   background-attachment: fixed; /* sutil efecto parallax en desktop */
 }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  /* Degradado + oscurecimiento; ajustá opacidad si tu foto es más oscura */
-  background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.65));
-}
-
-/* Título + lema: legibilidad extra */
+/* Título + lema */
 .brand-title,
 .brand-tagline {
   text-shadow: 0 2px 18px rgba(0,0,0,.45);
@@ -104,4 +97,17 @@ body.light-page {
   .card-action:hover {
     transform: none;
   }
+}
+
+/* Sidebar styles */
+.sidebar-fijo {
+    width: 280px;
+    min-height: calc(100vh - 72px);
+    overflow-y: auto;
+    background-color: var(--bs-body-bg);
+}
+
+/* Navbar bottom border */
+.navbar {
+    border-bottom: 1px solid white;
 }
