@@ -1,0 +1,298 @@
+/* ===================================
+   LAYOUT.CSS - Navbar, Sidebar, Containers, Grid
+   Estilo: Minimalista + Oscuro
+   =================================== */
+
+/* ===================================
+   CONTAINERS Y LAYOUTS PRINCIPALES
+   =================================== */
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  min-height: calc(100vh - 60px);
+  padding: 2rem;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding-top: 5vh;
+  padding-bottom: 8vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--hero-overlay-bg);
+  z-index: 1;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/Proyecto_Integrador_PW2025/FutMatch/public/img/bg5.jpg");
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.bg-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+/* ===================================
+   NAVBAR
+   =================================== */
+.navbar {
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.navbar .logo {
+  width: 45px;
+  height: auto;
+}
+
+/* Dropdown fixes para prevenir overflow */
+body {
+  overflow-x: hidden;
+}
+
+.navbar .dropdown {
+  position: static;
+}
+
+.navbar .dropdown-menu {
+  position: absolute;
+  right: 0;
+  left: auto;
+  min-width: 120px;
+  max-width: 200px;
+  transform: none !important;
+}
+
+.dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* ===================================
+   SIDEBAR
+   =================================== */
+.sidebar-fijo {
+  border-right: 1px solid var(--bs-border-color);
+  width: 280px;
+  min-height: calc(100vh - 72px);
+  overflow-y: auto;
+  background-color: var(--bs-body-bg);
+}
+
+.sidebar-fijo::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-fijo::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.sidebar-fijo::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.sidebar-fijo::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+[data-bs-theme="dark"] .sidebar-fijo {
+  background-color: var(--bs-dark-bg-subtle);
+  border-right-color: var(--bs-border-color);
+}
+
+/* Contenido con sidebar */
+@media (min-width: 992px) {
+  .content-with-sidebar {
+    margin-left: 280px;
+  }
+}
+
+/* ===================================
+   OFFCANVAS (MOBILE SIDEBAR)
+   =================================== */
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.offcanvas .list-group-item {
+  transition: background-color 0.2s ease;
+}
+
+.offcanvas .list-group-item:hover {
+  background-color: var(--bs-secondary-bg);
+}
+
+/* Botones del offcanvas - adaptados a dark mode */
+.btn-offcanvas {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--bs-body-color);
+  transition: all 0.2s ease;
+}
+
+.btn-offcanvas:hover {
+  background-color: var(--bs-secondary-bg);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--bs-body-color);
+}
+
+.btn-offcanvas.active {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
+}
+
+/* Títulos de sección en offcanvas */
+.offcanvas-section-title {
+  color: var(--bs-secondary-color);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+[data-bs-theme="dark"] .offcanvas-section-title {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===================================
+   NAVBAR - BOTONES ACTIVOS
+   =================================== */
+.navbar .btn.active {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
+}
+
+.navbar .btn-dark.active {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+/* ===================================
+   GRID Y CONTENEDORES
+   =================================== */
+.listado-grid {
+  padding: 15px 20px;
+  background: var(--bs-body-bg);
+  border-radius: 0 0 15px 15px;
+}
+
+#section-content {
+  padding: 30px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
+}
+
+#contenidoForos {
+  min-height: 600px;
+}
+
+/* ===================================
+   CALENDARIO Y VISTAS ESPECIALES
+   =================================== */
+/* Ocultar scroll en vista mensual */
+.vista-mensual-activa main {
+  overflow: hidden !important;
+}
+
+.vista-mensual-activa .table-responsive {
+  overflow: hidden !important;
+}
+
+/* Transición de navegación */
+.calendar-navigation {
+  transition: opacity 0.3s ease;
+}
+
+/* Anchos de columna iguales para vistas */
+#vistaMensual table,
+#vistaSemanal table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#vistaMensual th,
+#vistaMensual td,
+#vistaSemanal th:not(:first-child),
+#vistaSemanal td:not(:first-child) {
+  width: 14.28%; /* 100% / 7 días */
+}
+
+#vistaSemanal th:first-child,
+#vistaSemanal td:first-child {
+  width: 100px; /* Ancho fijo para columna de hora */
+}
+
+#vistaMensual .table {
+  height: 100%;
+}
+
+#vistaMensual tbody tr {
+  height: calc(100% / 6);
+}
+
+#vistaMensual td {
+  vertical-align: top;
+  position: relative;
+  min-height: 80px;
+  padding: 8px;
+}
+
+.vista-calendario {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (max-width: 576px) {
+  .d-flex .btn {
+    font-size: .85rem;
+    padding: .375rem .5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .navbar .form-control {
+    min-width: 200px;
+  }
+}

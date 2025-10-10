@@ -1,0 +1,192 @@
+/* ===================================
+   BASE.CSS - Variables, Reset y Tipografía
+   Estilo: Minimalista + Oscuro
+   =================================== */
+
+/* ===================================
+   VARIABLES CSS GLOBALES
+   =================================== */
+:root {
+  /* Radios y espaciados */
+  --radius: 1.25rem;
+  --card-radius: 12px;
+  
+  /* Colores de tema - Modo Claro */
+  --container-bg: #ffffff;
+  --accent: #198754;
+  --muted: #6c757d;
+  
+  /* Hero y Overlays */
+  --hero-overlay-bg: rgba(0, 0, 0, 0.3);
+  
+  /* Tarjetas - Modo Claro */
+  --light-card-bg: rgba(0, 0, 0, 0.02);
+  --light-card-header-bg: rgba(0, 0, 0, 0.03);
+  --light-card-border: rgba(0, 0, 0, 0.08);
+  --card-bg: var(--light-card-bg);
+  --card-header-bg: var(--light-card-header-bg);
+  --card-border: var(--light-card-border);
+  
+  /* Enlaces */
+  --link-cancha-color: rgba(255, 255, 255, 0.85);
+  --link-cancha-border: rgba(255, 255, 255, 0.3);
+  --link-cancha-hover-color: #ffffff;
+  --link-cancha-hover-border: rgba(255, 255, 255, 0.6);
+  
+  /* Badges con mejor contraste */
+  --badge-host-bg: #198754;
+  --badge-host-color: #ffffff;
+  --badge-guest-bg: #0d6efd;
+  --badge-guest-color: #ffffff;
+  --badge-applicant-bg: #fd7e14;
+  --badge-applicant-color: #000000;
+  
+  /* Estados de partido */
+  --status-confirmed-bg: #198754;
+  --status-confirmed-color: #ffffff;
+  --status-waiting-bg: #ffc107;
+  --status-waiting-color: #000000;
+  --status-pending-bg: #6c757d;
+  --status-pending-color: #ffffff;
+  --status-searching-bg: #6f42c1;
+  --status-searching-color: #ffffff;
+  
+  /* Tipografía */
+  font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+/* ===================================
+   VARIABLES MODO OSCURO
+   =================================== */
+[data-bs-theme="dark"] {
+  /* Hero overlay más intenso */
+  --hero-overlay-bg: rgba(0, 0, 0, 0.5);
+  
+  /* Tarjetas - Modo Oscuro */
+  --dark-card-bg: rgba(255, 255, 255, 0.03);
+  --dark-card-header-bg: rgba(255, 255, 255, 0.05);
+  --dark-card-border: rgba(255, 255, 255, 0.08);
+  --dark-text-primary: #ffffff;
+  --dark-text-secondary: #a0aec0;
+  
+  --card-bg: var(--dark-card-bg);
+  --card-header-bg: var(--dark-card-header-bg);
+  --card-border: var(--dark-card-border);
+  
+  /* Badges ajustados para dark mode */
+  --badge-applicant-bg: #ff8c00;
+  --status-waiting-bg: #ffb300;
+  --status-pending-bg: #718096;
+}
+
+/* ===================================
+   RESET Y CONFIGURACIÓN BASE
+   =================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: var(--bs-font-family, "Montserrat", sans-serif);
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ===================================
+   TIPOGRAFÍA GLOBAL
+   =================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.fw-800 { font-weight: 800; }
+.fw-600 { font-weight: 600; }
+
+/* Texto de marca/branding */
+.brand-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.brand-title,
+.brand-tagline {
+  text-shadow: 0 2px 18px rgba(0,0,0,.6);
+}
+
+[data-bs-theme="dark"] .brand-title,
+[data-bs-theme="dark"] .brand-tagline {
+  text-shadow: 0 2px 18px rgba(0,0,0,.8);
+}
+
+/* ===================================
+   COLORES DE TEXTO
+   =================================== */
+.text-success {
+  color: #20c997 !important;
+}
+
+[data-bs-theme="dark"] .text-success {
+  color: #20c997 !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* ===================================
+   SCROLLBAR PERSONALIZADO
+   =================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bs-tertiary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bs-secondary-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-secondary);
+}
+
+/* ===================================
+   UTILIDADES GLOBALES
+   =================================== */
+.icon-large {
+  font-size: 3rem;
+}
+
+/* Responsive: Reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

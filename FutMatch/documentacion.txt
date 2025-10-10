@@ -1,0 +1,62 @@
+** DOCUMENTACIÓN FUTMATCH **
+
+-----------------------------------------------------------------------------
+
+ESTRUCTURA BÁSICA DE LAS PÁGINAS: para evitar problemas con links
+
+<?php
+// 1. Cargar configuración: esto contiene todos los LINKS a archivos/páginas
+require_once '../../../src/app/config.php';
+
+// 2. Definir página actual para navbar activo
+$current_page = 'nombre-de-pagina'; // Ejemplo: 'inicio-jugador', 'partidos-jugador'
+
+// 3. Definir título y CSS específicos (opcional)
+$page_title = "Mi Página - FutMatch";
+$page_css = [
+  CSS_PAGES_AGENDA,  // Ejemplo de CSS específico de página
+  // Agregar más CSS si es necesario
+];
+
+// 4. Cargar head común (incluye <!DOCTYPE html> y <html lang="es" data-bs-theme="dark">)
+require_once HEAD_COMPONENT;
+?>
+<!-- El head.php ya incluye <!DOCTYPE html> y <html>, solo agregar <body> -->
+<body>
+  <?php 
+  // Incluir la navbar que corresponda
+  require_once NAVBAR_JUGADOR_COMPONENT; 
+  ?>
+  
+  <!-- Contenido de la página -->
+  <main>
+    <!-- Tu contenido aquí -->
+  </main>
+
+  <!-- Scripts -->
+  <script src="<?= JS_BOOTSTRAP ?>"></script>
+  <script src="<?= JS_INICIO_JUGADOR ?>"></script>
+</body>
+</html>
+
+-----------------------------------------------------------------------------
+
+CÓMO LLAMAR LINKS:
+
+Fijarse en el archivo config.php cómo están declarados los distintos links
+del proyecto. Es importante tener en cuenta esto si mueven archivos de lugar.
+
+Si llegan a cambiar el nombre de un archivo o el lugar de un archivo, tienen
+que actualizar correspondientemente config.php. Una vez hecho esto, no hace 
+falta modificar ningun otro archivo del proyecto que llame a ese link ya 
+que está estandarizado para minimizar el riesgo de conflicto. 
+
+IMPORTANTE: 
+- head.php ahora incluye <!DOCTYPE html> y <html lang="es" data-bs-theme="dark">
+- Todas las páginas usan require_once con las constantes de config.php
+- Los CSS específicos de página van en src/styles/pages/
+- Los JS específicos de página van en src/scripts/pages/
+- La variable $current_page activa automáticamente el botón de la navbar
+- El tema oscuro (dark mode) se aplica automáticamente en todas las páginas
+
+-----------------------------------------------------------------------------

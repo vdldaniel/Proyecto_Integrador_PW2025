@@ -1,0 +1,114 @@
+/* ===================================
+   AGENDA.CSS - Estilos específicos para calendario/agenda
+   =================================== */
+
+/* Badges de notificación específicas del calendario */
+.badge-notificacion {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 0.75rem;
+  z-index: 1000;
+}
+
+.badge-reserva {
+  background-color: #28a745 !important;
+}
+
+.badge-solicitud {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+/* Validación de inputs de tiempo */
+.form-control[type="time"] {
+  transition: all 0.3s ease;
+}
+
+.form-control[type="time"].is-valid {
+  border-color: #28a745;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='m2.3 6.73.94-.94 1.83-1.83.94-.94L3.66 1.67 2.72 2.6l-1.39 1.4z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control[type="time"].is-invalid {
+  border-color: #dc3545;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 4.6 1.4 1.4-1.4 1.4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.invalid-feedback.horario-error {
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.valid-feedback {
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  color: #28a745;
+}
+
+/* Picker de tiempo en dark mode */
+.form-control[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* Tablas específicas de calendario */
+.table-responsive {
+  flex: 1;
+}
+
+/* Encabezados de tabla en modo oscuro */
+[data-bs-theme="dark"] .table-light {
+  background-color: var(--bs-secondary-bg) !important;
+  color: var(--bs-body-color) !important;
+  border-color: var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .table-light th {
+  background-color: var(--bs-secondary-bg) !important;
+  color: var(--bs-body-color) !important;
+  border-color: var(--bs-border-color);
+}
+
+/* Celda del día de hoy */
+[data-bs-theme="dark"] .table-primary {
+  background-color: var(--bs-primary-bg-subtle) !important;
+  color: var(--bs-primary-text-emphasis) !important;
+  border-color: var(--bs-primary-border-subtle);
+}
+
+/* Celdas de reservas */
+[data-bs-theme="dark"] .table-success {
+  background-color: var(--bs-success-bg-subtle) !important;
+  color: var(--bs-success-text-emphasis) !important;
+  border-color: var(--bs-success-border-subtle);
+}
+
+[data-bs-theme="dark"] .table-warning {
+  background-color: var(--bs-warning-bg-subtle) !important;
+  color: var(--bs-warning-text-emphasis) !important;
+  border-color: var(--bs-warning-border-subtle);
+}
+
+/* Selectores de fecha en dark mode */
+[data-bs-theme="dark"] .form-control[type="date"]::-webkit-calendar-picker-indicator,
+[data-bs-theme="dark"] .form-control[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+[data-bs-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+[data-bs-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
