@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Lógica de demo: depende del "usuario" ingresado
       if (email.includes('jugador')) {
-        window.location.href = 'public/HTML/jugador/inicio-jugador.html';
+        window.location.href = 'public/HTML/jugador/inicioJugaddor.php';
       } 
       else if (email.includes('admin-cancha')) {
-        window.location.href = 'public/HTML/admin-cancha/inicio-admin-cancha.html';
+        window.location.href = 'public/HTML/admin-cancha/inicioAdminCancha.php';
       } 
       else {
         alert("Para la demo, usá un usuario que contenga 'jugador' o 'admin-cancha'");

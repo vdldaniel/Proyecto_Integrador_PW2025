@@ -410,7 +410,6 @@ class AplicacionAgenda {
     // Ver perfil de cancha
     verPerfilCancha() {
         // TODO: Redirigir a página de perfil de cancha o abrir modal de perfil
-        console.log('Ver perfil de cancha');
         alert('Redirigiendo a perfil de cancha...');
     }
     
@@ -434,7 +433,6 @@ class AplicacionAgenda {
         
         if (confirmacion) {
             // Limpiar datos de sesión si es necesario
-            console.log('Cerrando sesión...');
             
             // TODO: Llamar al backend para cerrar sesión
             // await this.cerrarSesionEnBackend();
@@ -919,7 +917,6 @@ class AplicacionAgenda {
         datosReserva.title = datosReserva.esExterna ? 'Reserva Externa' : `Reserva Jugador #${datosReserva.jugadorId}`;
         datosReserva.description = `Cancha ${this.obtenerNombreCancha(datosReserva.cancha)} - ${this.obtenerTextoEstado(datosReserva.status)}`;
 
-        console.log('Datos de la reserva:', datosReserva);
         
         if (esEdicion) {
             this.actualizarReserva(datosReserva);
@@ -1579,7 +1576,6 @@ AplicacionAgenda.prototype.generarDatosMuestra = function() {
 function aceptarSolicitud(idSolicitud) {
     if (confirm('¿Está seguro que desea aceptar esta solicitud de reserva?')) {
         // TODO: Enviar aceptación al backend
-        console.log('Aceptando solicitud:', idSolicitud);
         
         // Simular eliminación de la solicitud de la lista
         const elementoSolicitud = document.querySelector(`#detallesSolicitud${idSolicitud}`).closest('.card');
@@ -1595,7 +1591,6 @@ function aceptarSolicitud(idSolicitud) {
 function rechazarSolicitud(idSolicitud) {
     if (confirm('¿Está seguro que desea rechazar esta solicitud de reserva?')) {
         // TODO: Enviar rechazo al backend
-        console.log('Rechazando solicitud:', idSolicitud);
         
         // Simular eliminación de la solicitud de la lista
         const elementoSolicitud = document.querySelector(`#detallesSolicitud${idSolicitud}`).closest('.card');
@@ -1633,7 +1628,6 @@ function aceptarSolicitud(idSolicitud) {
     const solicitud = aplicacionAgenda.solicitudesPendientes[solicitudIndex];
     
     // Simular aceptación - en el futuro será una llamada al backend
-    console.log(`Aceptando solicitud de ${solicitud.jugador.nombre} para ${solicitud.cancha.nombre} el ${solicitud.fecha} a las ${solicitud.hora}`);
     
     // Remover de solicitudes pendientes
     aplicacionAgenda.solicitudesPendientes.splice(solicitudIndex, 1);
@@ -1659,8 +1653,7 @@ function rechazarSolicitud(idSolicitud) {
     const solicitud = aplicacionAgenda.solicitudesPendientes[solicitudIndex];
     
     // Simular rechazo - en el futuro será una llamada al backend
-    console.log(`Rechazando solicitud de ${solicitud.jugador.nombre} para ${solicitud.cancha.nombre} el ${solicitud.fecha} a las ${solicitud.hora}`);
-    
+
     // Remover de solicitudes pendientes
     aplicacionAgenda.solicitudesPendientes.splice(solicitudIndex, 1);
     
@@ -1679,7 +1672,6 @@ function rechazarSolicitud(idSolicitud) {
 
 function verPerfilJugador(idJugador) {
     // Simular navegación al perfil del jugador - en el futuro será una redirección real
-    console.log(`Navegando al perfil del jugador ID: ${idJugador}`);
     alert(`Función no implementada: Ver perfil del jugador ID ${idJugador}`);
 }
 
@@ -1687,7 +1679,6 @@ function verPerfilJugador(idJugador) {
 
 function verPerfilCancha() {
     // TODO: Redirigir a página de perfil de cancha o abrir modal de perfil
-    console.log('Ver perfil de cancha');
     alert('Redirigiendo a perfil de cancha...');
 }
 

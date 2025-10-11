@@ -24,7 +24,8 @@ define("CSS_COMPONENTS", SRC_PATH . "styles/components.css");
 
 // CSS de páginas específicas
 define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
-define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicio-jugador.css");
+define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
+define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -50,12 +51,16 @@ define("JS_CUENTA_JUGADOR", JS_SCRIPTS_PATH . "cuenta-jugador.js");
 define("JS_DETALLE_TORNEO", JS_SCRIPTS_PATH . "detalle-torneo.js");
 define("JS_EQUIPO_CREAR", JS_SCRIPTS_PATH . "equipo-crear.js");
 define("JS_EQUIPOS_LISTADO", JS_SCRIPTS_PATH . "equipos-listado.js");
+define("JS_FORGOT", JS_SCRIPTS_PATH . "forgot.js");
 define("JS_FOROS_LISTADO", JS_SCRIPTS_PATH . "foros-listado.js");
+define("JS_INICIO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "inicioAdminCancha.js");
 define("JS_INICIO_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "inicio-admin-sistema.js");
-define("JS_INICIO_JUGADOR", JS_SCRIPTS_PATH . "inicio-jugador.js");
+define("JS_INICIO_JUGADOR", JS_SCRIPTS_PATH . "inicioJugador.js");
 define("JS_LANDING", JS_SCRIPTS_PATH . "landing.js");
 define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidos-jugador.js");
 define("JS_PARTIDOS_LISTADO", JS_SCRIPTS_PATH . "partidos-listado.js");
+define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
+define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
 define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
 
@@ -71,20 +76,31 @@ define("IMG_LOGO_FONDOVERDE", IMG_PATH . "logo-fondoverde.svg");
 // ===================================
 define("HEAD_COMPONENT", __DIR__ . "/head.php");
 define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
-define("NAVBAR_ADMIN_COMPONENT", __DIR__ . "/navbarAdmin.php");
+define("NAVBAR_ADMIN_CANCHA_COMPONENT", __DIR__ . "/navbarAdminCancha.php");
+define("NAVBAR_ADMIN_SISTEMA_COMPONENT", __DIR__ . "/navbarAdminSistema.php");
 
 // ===================================
 // PÁGINAS - AUTH
 // ===================================
 define("PAGE_LANDING", PUBLIC_PATH . "HTML/auth/landing.html");
+define("PAGE_LANDING_PHP", PUBLIC_PATH . "HTML/auth/landing.php");
 define("PAGE_FORGOT", PUBLIC_PATH . "HTML/auth/forgot.html");
+define("PAGE_FORGOT_PHP", PUBLIC_PATH . "HTML/auth/forgot.php");
 define("PAGE_REGISTER_JUGADOR", PUBLIC_PATH . "HTML/auth/register-jugador.html");
+define("PAGE_REGISTRO_JUGADOR_PHP", PUBLIC_PATH . "HTML/auth/registroJugador.php");
 define("PAGE_REGISTER_ADMIN_CANCHA", PUBLIC_PATH . "HTML/auth/register-admin-canchas.html");
+define("PAGE_REGISTRO_ADMIN_CANCHA_PHP", PUBLIC_PATH . "HTML/auth/registroAdminCancha.php");
+
+// ===================================
+// PÁGINAS - COMUNES
+// ===================================
+define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/foros-listado.html");
+define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/foros-detalle.html");
 
 // ===================================
 // PÁGINAS - JUGADOR
 // ===================================
-define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicio-jugador.php");
+define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicioJugador.php");
 define("PAGE_PERFIL_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/jugador/perfil-jugador-detalle.html");
 define("PAGE_PERFIL_JUGADOR_EDITAR", PUBLIC_PATH . "HTML/jugador/perfil-jugador-editar.html");
 define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador.html");
@@ -116,13 +132,11 @@ define("PAGE_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/jugador/guest/canchas-listado
 define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/guest/cancha-perfil.html");
 define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/guest/partidos-listado.html");
 define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/guest/partido-detalle.html");
-define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/jugador/guest/foros-listado.html");
-define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/jugador/guest/foros-detalle.html");
 
 // ===================================
 // PÁGINAS - ADMIN CANCHA
 // ===================================
-define("PAGE_INICIO_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/inicio-admin-cancha.html");
+define("PAGE_INICIO_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/inicioAdminCancha.php");
 define("PAGE_CUENTA_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/cuenta-admin-cancha.html");
 define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.html");
 

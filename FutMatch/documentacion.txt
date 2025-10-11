@@ -1,9 +1,8 @@
 ** DOCUMENTACIÓN FUTMATCH **
 
 -----------------------------------------------------------------------------
-
 ESTRUCTURA BÁSICA DE LAS PÁGINAS: para evitar problemas con links
-
+-----------------------------------------------------------------------------
 <?php
 // 1. Cargar configuración: esto contiene todos los LINKS a archivos/páginas
 require_once '../../../src/app/config.php';
@@ -40,9 +39,8 @@ require_once HEAD_COMPONENT;
 </html>
 
 -----------------------------------------------------------------------------
-
 CÓMO LLAMAR LINKS:
-
+-----------------------------------------------------------------------------
 Fijarse en el archivo config.php cómo están declarados los distintos links
 del proyecto. Es importante tener en cuenta esto si mueven archivos de lugar.
 
@@ -59,4 +57,14 @@ IMPORTANTE:
 - La variable $current_page activa automáticamente el botón de la navbar
 - El tema oscuro (dark mode) se aplica automáticamente en todas las páginas
 
+
 -----------------------------------------------------------------------------
+ESTANDARIZACIÓN DE ESTILOS:
+-----------------------------------------------------------------------------
+Se estandarizaron los estilos de CSS para unificarlos:
+    * base.css = contiene variables globales y tipografías
+    * components.css = estilos de navbar, grids, sidebar, containers
+    * pages\ = contiene los estilos específicos de las páginas
+               (solo cuando son muy complejas)
+Si se agrega un archivo de estilo no olvidar agregar a config.php
+y luego llamarlo con el nombre de variable asignado

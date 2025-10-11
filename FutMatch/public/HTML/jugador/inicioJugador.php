@@ -14,48 +14,37 @@ Incluye:
   * configuración)
 - Noticias o actualizaciones recientes relacionadas con el fútbol o la plataforma
 -->
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" /> <!--Prefijo para evitar que las rutas relativas sean muy largas-->
-  
-  <title>FutMatch</title>
+<?php
+// Cargar configuración
+require_once '../../../src/app/config.php';
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+// Resalta la página actual en el navbar
+$current_page = 'inicioJugador';
 
-    <!--Iconos Bootstrap-->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-  />
+// Definir título de la página
+$page_title = 'Inicio - FutMatch';
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+// CSS adicional específico de esta página
+$page_css = [
+  CSS_PAGES_INICIO_JUGADOR
+];
 
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/inicio-jugador.css" />
-  <link rel="stylesheet" href="src/styles/navbar.css" />
-  <link rel="stylesheet" href="src/styles/style.css" />
-  
-  
-  
-</head>
+// Cargar head común
+require_once HEAD_COMPONENT;
+?>
 <body>
-  <header> 
-    <nav id="navbarFutmatch"></nav>
-  </header>
+  <?php 
+  // Cargar navbar
+  require_once NAVBAR_JUGADOR_COMPONENT; 
+  ?>
+  
   <!-- Contenido principal -->
-  <main class="container-fluid bg-dark d-flex align-items-center justify-content-center main-content">
+  <main class="container-fluid d-flex align-items-center justify-content-center main-content">
     <div class="w-100 px-4">
       <!-- Título principal -->
       <div class="text-center mb-5">
-        <h2 class="text-white mb-3">¿Qué te gustaría hacer?</h2>
-        <p class="text-light">Explora las opciones disponibles para disfrutar del fútbol</p>
+        <h2 class="mb-3">¿Qué te gustaría hacer?</h2>
+        <p class="text-body-secondary">Explora las opciones disponibles para disfrutar del fútbol</p>
       </div>
       
       <!-- Tarjetas principales -->
@@ -69,7 +58,7 @@ Incluye:
                 </div>
                 <h5 class="card-title mb-3">Reservar una cancha</h5>
                 <p class="card-text text-body-secondary mb-4">Encuentra y reserva las mejores canchas cerca de ti</p>
-                <a href="public/HTML/jugador/guest/canchas-listado.html" class="btn btn-success">
+                <a href="<?= PAGE_CANCHAS_LISTADO ?>" class="btn btn-success">
                   <i class="bi bi-plus-circle me-2"></i>Explorar canchas
                 </a>
               </div>
@@ -85,7 +74,7 @@ Incluye:
                 </div>
                 <h5 class="card-title mb-3">Unirse a partidos</h5>
                 <p class="card-text text-body-secondary mb-4">Únete a partidos organizados por otros jugadores</p>
-                <a href="public/HTML/jugador/guest/partidos-listado.html" class="btn btn-primary">
+                <a href="<?= PAGE_PARTIDOS_LISTADO ?>" class="btn btn-primary">
                   <i class="bi bi-play-circle me-2"></i>Explorar partidos
                 </a>
               </div>
@@ -96,11 +85,8 @@ Incluye:
     </div>
   </main>
 
-  
-
   <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/inicio-jugador.js"></script>
-  
+  <script src="<?= JS_BOOTSTRAP ?>"></script>
+  <script src="<?= JS_INICIO_JUGADOR ?>"></script>
 </body>
 </html>

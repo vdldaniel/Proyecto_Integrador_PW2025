@@ -296,3 +296,45 @@ body {
     min-width: 200px;
   }
 }
+
+/* ===================================
+   MODALES DE NAVBAR - Notificaciones y Configuración
+   =================================== */
+
+/* Estilos para las tabs de notificaciones */
+.nav-tabs .nav-link {
+  color: var(--bs-secondary-color);
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom-color: var(--bs-primary);
+  color: var(--bs-primary);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--bs-primary);
+  background-color: transparent;
+  border-bottom-color: var(--bs-primary);
+}
+
+/* List group items en foros y futmatch */
+.list-group-item {
+  background-color: var(--bs-card-bg);
+  border-color: var(--bs-border-color);
+  color: var(--bs-body-color);
+}
+
+/* Botones de acción en notificaciones */
+.notification-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+/* Modal de configuración más ancho */
+.modal-dialog-config {
+  max-width: 700px;
+}
