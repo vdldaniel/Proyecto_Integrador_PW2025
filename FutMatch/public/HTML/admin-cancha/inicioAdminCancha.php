@@ -25,8 +25,8 @@ require_once HEAD_COMPONENT;
 ?>
 <body>
   <?php 
-  // Cargar navbar de admin cancha
-  require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
+  // Cargar navbar de admin cancha 
+  require_once NAVBAR_ADMIKN_CANCHA_COMPONENT;
   ?>
   
   <!-- Contenido principal del Dashboard -->
