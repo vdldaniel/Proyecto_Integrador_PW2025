@@ -141,8 +141,8 @@ define("PAGE_CUENTA_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/cuenta-admin
 define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.html");
 
 // Gestión de canchas
-define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchas-listado.html");
-define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-crear.html");
+define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchas-listado.php");
+define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-crear.php");
 define("PAGE_ADMIN_CANCHA_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-editar.html");
 define("PAGE_ADMIN_CANCHA_PERFIL_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/cancha-perfil-detalle.html");
 define("PAGE_ADMIN_CANCHA_PERFIL_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-perfil-editar.html");
