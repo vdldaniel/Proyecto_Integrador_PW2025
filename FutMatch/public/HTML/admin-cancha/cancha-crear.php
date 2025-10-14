@@ -18,7 +18,7 @@ $current_page = 'misCanchas';
 // CSS adicional específico de esta página
 $page_title = "Crear Cancha - FutMatch";
 $page_css = [
-  PAGE_ADMIN_CANCHA_CREAR
+
 ];
 
 

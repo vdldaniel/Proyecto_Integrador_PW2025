@@ -14,7 +14,6 @@ require_once '../../../src/app/config.php';
 $current_page = 'misCanchas'; 
 $page_title = "Listado de canchas - FutMatch";
 $page_css = [
-  PAGE_ADMIN_CANCHAS_LISTADO
 ];
 
 
@@ -27,7 +26,7 @@ require_once HEAD_COMPONENT;
   require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
   ?>
     <main>
-      <div class="container-fluid mt-5">
+      <div class="container-fluid mt-5 pt-5 pb-5">
         <div class="card shadow-lg p-4 rounded-3">
           <div class="row">
             <div class="col-12 table-responsive">

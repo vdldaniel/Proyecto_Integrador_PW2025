@@ -8,92 +8,37 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
 - Ver/Aceptar/Rechazar las solicitudes de reservas de la canchas
 -->
 
+<?php
+// Cargar configuración
+require_once '../../../src/app/config.php';
 
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
-  
-  <title>FutMatch</title>
+// Resalta la página actual en el navbar
+$current_page = 'agenda'; 
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
-  
-  <!-- Iconos de Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+// CSS adicional específico de esta página
+$page_title = "Agenda - FutMatch";
+$page_css = [
 
-  <!-- Tipografía -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+];
 
-  <!-- Estilos de la agenda -->
-  <link rel="stylesheet" href="src/styles/style-agenda.css" />
-  <link rel="stylesheet" href="src/styles/navbar.css" /> <!--Para la brand-->
-
-</head>
-
+// Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
+require_once HEAD_COMPONENT;
+?>
 <body class="light-page monthly-view-active">
-  <!-- Barra superior -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <!-- Lado izquierdo: menú hamburguesa + título -->
-      <div class="d-flex align-items-center">
-        <button class="btn btn-dark me-3" 
-                type="button" data-bs-toggle="offcanvas" 
-                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-          <i class="bi bi-list"></i>
-        </button>
-        <a class="navbar-brand d-flex align-items-center" href="#"
-            ><img class="logo" src="public/img/logo-sinfondo.svg" alt="" />
-            <span class="brand-text d-none d-md-block">FutMatch</span></a>
-        
-        <span class="navbar-brand mb-0 h2 d-none d-md-block">AGENDA</span>
-      </div>
+  <?php 
+  // Cargar navbar de admin cancha
+  require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
+  ?>
 
+  <!-- Barra superior -->
+
+    <div class="container my-3">
       <!-- Centro: botón hoy + selector de fecha -->
       <div class="d-flex justify-content-sm-end justify-content-md-center align-items-center mx-auto">
         <button id="botonHoy" class="btn btn-primary me-2" type="button">Hoy</button>
-        <input type="date" class="form-control" id="selectorFecha">
-      </div>
-
-      <!-- Lado derecho: configuración + selector de vista -->
-      <div class="d-flex align-items-center">
-        <!-- Campanita de notificaciones - visible en todas las pantallas -->
-        <button class="btn btn-outline-warning position-relative me-3" 
-                type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
-                title="Solicitudes de reserva">
-          <i class="bi bi-bell"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            2
-            <span class="visually-hidden">Solicitudes pendientes</span>
-          </span>
-        </button>
-        <!-- Resto de botones - solo visible en pantallas medianas y grandes -->
-        <div class="d-none d-md-flex align-items-center">
-          <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
-                  data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-            <i class="bi bi-gear"></i>
-          </button>
-          <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-calendar-week me-1"></i>Vista
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item selector-vista" type="button" data-vista="mes">Mensual</a></li>
-              <li><a class="dropdown-item selector-vista" type="button" data-vista="semana">Semanal</a></li>
-              <li><a class="dropdown-item selector-vista" type="button" data-vista="dia">Diaria</a></li>
-            </ul>
-          </div>
-          <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
-              <i class="bi bi-box-arrow-right"></i>
-          </button>
-        </div>
+        <input type="date" class="form-control w-auto" id="selectorFecha">
       </div>
     </div>
-  </nav>
 
   <!-- Menú lateral deslizable -->
   <div class="offcanvas offcanvas-start" 

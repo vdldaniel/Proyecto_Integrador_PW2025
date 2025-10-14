@@ -26,7 +26,7 @@ define("CSS_COMPONENTS", SRC_PATH . "styles/components.css");
 define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
 define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
 define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
-
+define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
@@ -94,7 +94,7 @@ define("PAGE_REGISTRO_ADMIN_CANCHA_PHP", PUBLIC_PATH . "HTML/auth/registroAdminC
 // ===================================
 // PÁGINAS - COMUNES
 // ===================================
-define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/foros-listado.html");
+define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/foros-listado.php");
 define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/foros-detalle.html");
 
 // ===================================
@@ -138,7 +138,7 @@ define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/guest/partido-detalle
 // ===================================
 define("PAGE_INICIO_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/inicioAdminCancha.php");
 define("PAGE_CUENTA_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/cuenta-admin-cancha.html");
-define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.html");
+define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.php");
 
 // Gestión de canchas
 define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchas-listado.php");
@@ -148,7 +148,7 @@ define("PAGE_ADMIN_CANCHA_PERFIL_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/canc
 define("PAGE_ADMIN_CANCHA_PERFIL_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-perfil-editar.html");
 
 // Gestión de torneos
-define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos.html");
+define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos.php");
 define("PAGE_ADMIN_MIS_TORNEOS_CREAR", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos-crear.html");
 define("PAGE_ADMIN_MIS_TORNEOS_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos-detalle.html");
 
