@@ -63,7 +63,8 @@ ESTANDARIZACIÓN DE ESTILOS:
 -----------------------------------------------------------------------------
 Se estandarizaron los estilos de CSS para unificarlos:
     * base.css = contiene variables globales y tipografías
-    * components.css = estilos de navbar, grids, sidebar, containers
+    * layout = estilos de navbar, grids, sidebar, containers, modales
+    * components.css = botones, cards, badges, forms
     * pages\ = contiene los estilos específicos de las páginas
                (solo cuando son muy complejas)
 Si se agrega un archivo de estilo no olvidar agregar a config.php

@@ -155,6 +155,20 @@
 }
 
 /* ===================================
+   DIVISORES DE SECCIÓN
+   =================================== */
+/* Línea divisoria sutil para separar secciones del formulario */
+.form-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  opacity: 0.6;
+}
+
+[data-bs-theme="dark"] .form-divider {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ===================================
    ACCESIBILIDAD
    =================================== */
 /* Respetar usuarios con "reducir movimiento" */

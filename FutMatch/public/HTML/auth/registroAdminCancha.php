@@ -62,9 +62,23 @@ include HEAD_COMPONENT;
                     <div class="invalid-feedback">El apellido es obligatorio.</div>
                   </div>
 
+                  <!-- Divisor -->
+                  <div class="col-12">
+                    <hr class="form-divider my-4">
+                  </div>
+
+                  <!-- Sección: Información de la cancha -->
+                  <div class="col-12">
+                    <h5 class="mb-2">Información de la cancha</h5>
+                    <p class="text-muted fst-italic small mb-3">
+                      Requerimos esta información para verificar tu cancha. Si administrás más de una sede, 
+                      podrás registrarlas una vez que tu cuenta sea verificada.
+                    </p>
+                  </div>
+
                   <!-- Nombre de la cancha/predio -->
                   <div class="col-12">
-                    <label for="inputNombreCancha" class="form-label">Nombre de la cancha / predio</label>
+                    <label for="inputNombreCancha" class="form-label">Nombre de la cancha o predio</label>
                     <input
                       type="text"
                       class="form-control"
@@ -160,6 +174,19 @@ include HEAD_COMPONENT;
                     />
                   </div>
 
+                  <!-- Divisor -->
+                  <div class="col-12">
+                    <hr class="form-divider my-4">
+                  </div>
+
+                  <!-- Sección: Información de contacto -->
+                  <div class="col-12">
+                    <h5 class="mb-2">Información de contacto</h5>
+                    <p class="text-muted fst-italic small mb-3">
+                      Te contactaremos para verificar tu cuenta e introducirte en la propuesta de FutMatch.
+                    </p>
+                  </div>
+
                   <!-- Teléfono -->
                   <div class="col-12 col-md-6">
                     <label for="inputTelefono" class="form-label">Teléfono</label>
@@ -186,55 +213,6 @@ include HEAD_COMPONENT;
                       required
                     />
                     <div class="invalid-feedback">Ingresá un email válido.</div>
-                  </div>
-
-                  <!-- Contraseña -->
-                  <div class="col-12 col-md-6">
-                    <label for="inputPassword" class="form-label">Contraseña</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="inputPassword"
-                      name="password"
-                      placeholder="Mínimo 8 caracteres"
-                      required
-                    />
-                    <div class="invalid-feedback">
-                      Mínimo 8 caracteres, una minúscula y un número.
-                    </div>
-                  </div>
-
-                  <!-- Repetir contraseña -->
-                  <div class="col-12 col-md-6">
-                    <label for="inputPasswordConfirm" class="form-label">Repetir contraseña</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="inputPasswordConfirm"
-                      name="passwordConfirm"
-                      placeholder="Confirmá tu contraseña"
-                      required
-                    />
-                    <div class="invalid-feedback">Las contraseñas no coinciden.</div>
-                  </div>
-
-                  <!-- Términos y condiciones -->
-                  <div class="col-12">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="checkTerminos"
-                        name="terminos"
-                        required
-                      />
-                      <label class="form-check-label" for="checkTerminos">
-                        Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a> de FutMatch
-                      </label>
-                      <div class="invalid-feedback">
-                        Debes aceptar los términos y condiciones.
-                      </div>
-                    </div>
                   </div>
 
                   <!-- Preferencia de contacto -->
@@ -268,6 +246,45 @@ include HEAD_COMPONENT;
                       <option value="tarde">Tarde (12:00 - 18:00)</option>
                     </select>
                     <div class="invalid-feedback">Seleccioná un horario de preferencia.</div>
+                  </div>
+
+                  <!-- Divisor -->
+                  <div class="col-12">
+                    <hr class="form-divider my-4">
+                  </div>
+                  
+                  <!-- Términos y condiciones -->
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="checkTerminos"
+                        name="terminos"
+                        required
+                      />
+                      <label class="form-check-label" for="checkTerminos">
+                        Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a> de FutMatch
+                      </label>
+                      <div class="invalid-feedback">
+                        Debes aceptar los términos y condiciones.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Correos promocionales -->
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="checkPromociones"
+                        name="promociones"
+                      />
+                      <label class="form-check-label" for="checkPromociones">
+                        Acepto recibir correos promocionales de FutMatch
+                      </label>
+                    </div>
                   </div>
 
                   <!-- Botón Solicitar Registro -->

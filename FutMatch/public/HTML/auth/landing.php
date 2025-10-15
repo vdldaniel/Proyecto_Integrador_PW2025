@@ -88,7 +88,7 @@ include HEAD_COMPONENT;
                                     </div>
 
                                     <div class="text-center mt-3">
-                                        <a href="<?= PAGE_FORGOT_PHP ?>"
+                                        <a href="<?= PAGE_FORGOT ?>"
                                             class="small">¿Olvidaste tu contraseña?</a>
                                     </div>
                                 </form>
@@ -99,7 +99,7 @@ include HEAD_COMPONENT;
 
                 <!-- Enlace discreto para gestores de canchas -->
                 <div class="col-12 text-center">
-                    <a href="<?= PAGE_REGISTRO_ADMIN_CANCHA_PHP ?>"
+                    <a href="<?= PAGE_REGISTER_ADMIN_CANCHA ?>"
                         class="link-cancha">¿Sos dueño de una cancha? Te ayudamos a gestionarla</a>
                 </div>
             </div>

@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const inputCalle = document.getElementById('inputCalle');
   const inputTelefono = document.getElementById('inputTelefono');
   const inputEmail = document.getElementById('inputEmail');
-  const inputPassword = document.getElementById('inputPassword');
-  const inputPasswordConfirm = document.getElementById('inputPasswordConfirm');
   const checkTerminos = document.getElementById('checkTerminos');
   const inputContacto = document.getElementById('inputContacto');
   const inputHorario = document.getElementById('inputHorario');
@@ -90,55 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // ===================================
-  // VALIDACIÓN: Contraseña - Mínimo 8 chars, 1 minúscula, 1 número
-  // ===================================
-  function validarPassword(password) {
-    // Al menos 8 caracteres, una minúscula y un número
-    const minLength = password.length >= 8;
-    const hasLowercase = /[a-z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
-    
-    return minLength && hasLowercase && hasNumber;
-  }
-
-  inputPassword.addEventListener('input', function() {
-    if (this.value) {
-      if (validarPassword(this.value)) {
-        this.setCustomValidity('');
-        this.classList.remove('is-invalid');
-        this.classList.add('is-valid');
-      } else {
-        this.setCustomValidity('Mínimo 8 caracteres, una minúscula y un número');
-        this.classList.add('is-invalid');
-        this.classList.remove('is-valid');
-      }
-      
-      // Revalidar confirmación si ya hay algo escrito
-      if (inputPasswordConfirm.value) {
-        validarConfirmacionPassword();
-      }
-    }
-  });
-
-  // ===================================
-  // VALIDACIÓN: Confirmar contraseña
-  // ===================================
-  function validarConfirmacionPassword() {
-    if (inputPasswordConfirm.value !== inputPassword.value) {
-      inputPasswordConfirm.setCustomValidity('Las contraseñas no coinciden');
-      inputPasswordConfirm.classList.add('is-invalid');
-      inputPasswordConfirm.classList.remove('is-valid');
-      return false;
-    } else if (inputPasswordConfirm.value) {
-      inputPasswordConfirm.setCustomValidity('');
-      inputPasswordConfirm.classList.remove('is-invalid');
-      inputPasswordConfirm.classList.add('is-valid');
-      return true;
-    }
-  }
-
-  inputPasswordConfirm.addEventListener('input', validarConfirmacionPassword);
 
   // ===================================
   // VALIDACIÓN: Selects (País, Provincia, Localidad, Contacto, Horario)
@@ -166,9 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inputNombreCancha, 
     inputCalle, 
     inputTelefono, 
-    inputEmail, 
-    inputPassword, 
-    inputPasswordConfirm
+    inputEmail
   ];
   
   camposObligatorios.forEach(campo => {
@@ -246,18 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
       isValid = false;
     }
 
-    // Validar contraseña
-    if (!inputPassword.value || !validarPassword(inputPassword.value)) {
-      inputPassword.classList.add('is-invalid');
-      isValid = false;
-    }
-
-    // Validar confirmación de contraseña
-    if (inputPasswordConfirm.value !== inputPassword.value) {
-      inputPasswordConfirm.classList.add('is-invalid');
-      isValid = false;
-    }
-
     // Validar términos y condiciones
     if (!checkTerminos.checked) {
       checkTerminos.classList.add('is-invalid');
@@ -303,7 +238,6 @@ document.addEventListener('DOMContentLoaded', function() {
         detalle: document.getElementById('inputDetalle').value.trim(),
         email: inputEmail.value.trim(),
         telefono: inputTelefono.value.trim(),
-        password: inputPassword.value,
         terminos: checkTerminos.checked,
         contacto: inputContacto.value,
         horario: inputHorario.value
