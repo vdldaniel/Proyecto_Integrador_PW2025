@@ -76,6 +76,7 @@ define("IMG_LOGO_FONDOVERDE", IMG_PATH . "logo-fondoverde.svg");
 // ===================================
 define("HEAD_COMPONENT", __DIR__ . "/head.php");
 define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
+define("NAVBAR_GUEST_COMPONENT", __DIR__ . "/navbarGuest.php");
 define("NAVBAR_ADMIN_CANCHA_COMPONENT", __DIR__ . "/navbarAdminCancha.php");
 define("NAVBAR_ADMIN_SISTEMA_COMPONENT", __DIR__ . "/navbarAdminSistema.php");
 

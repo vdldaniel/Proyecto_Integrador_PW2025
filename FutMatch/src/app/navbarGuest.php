@@ -1,7 +1,7 @@
 <?php
 
 /**
- * NAVBAR JUGADOR - Componente de navegación para jugadores
+ * NAVBAR GUEST - Componente de navegación  
  * Incluye: Logo, menú principal, dropdown explorar, notificaciones, perfil
  * Soporte para página activa mediante la variable $current_page
  * Requiere: config.php cargado previamente
@@ -47,13 +47,6 @@ function isActive($page_name, $current)
                         <i class="bi bi-house-door"></i>
                         <span class="d-none d-lg-inline ms-1">Home</span>
                     </a>
-                    <a href="<?= PAGE_PARTIDOS_JUGADOR ?>"
-                        class="btn btn-dark me-2 <?= isActive('partidosJugador', $current_page) ?>"
-                        id="botonMisPartidos"
-                        title="Mis Partidos">
-                        <i class="bi bi-calendar-event"></i>
-                        <span class="d-none d-lg-inline ms-1">Mis Partidos</span>
-                    </a>
                     <!-- Dropdown Explorar -->
                     <div class="dropdown">
                         <button class="btn btn-dark dropdown-toggle me-2" type="button" id="dropdownExplorar"
@@ -64,21 +57,12 @@ function isActive($page_name, $current)
                         <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
                             <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_LISTADO ?>">
                                     <i class="bi bi-geo-alt me-2"></i>Explorar canchas
-                                </a>
-                            </li>
+                                </a></li>
                             <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_LISTADO ?>">
                                     <i class="bi bi-people me-2"></i>Explorar partidos
-                                </a>
-                            </li>
+                                </a></li>
                         </ul>
                     </div>
-                    <a href="<?= PAGE_EQUIPOS_LISTADO ?>"
-                        class="btn btn-dark me-2 <?= isActive('misEquipos', $current_page) ?>"
-                        id="botonMiEquipo"
-                        title="Mis Equipos">
-                        <i class="bi bi-people"></i>
-                        <span class="d-none d-lg-inline ms-1">Mis Equipos</span>
-                    </a>
                     <a href="<?= PAGE_FOROS_LISTADO ?>"
                         class="btn btn-dark me-2 <?= isActive('explorarForos', $current_page) ?>"
                         id="botonForos"
@@ -97,28 +81,8 @@ function isActive($page_name, $current)
                     id="botonMiPerfil"
                     title="Mi Perfil">
                     <i class="bi bi-person-circle"></i>
-                    <span class="d-none d-lg-inline ms-1">Mi Perfil</span>
+                    <span class="d-none d-lg-inline ms-1">Iniciar sesión</span>
                 </a>
-                <!-- Campanita de notificaciones -->
-                <button class="btn btn-outline-warning position-relative me-2"
-                    type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
-                    title="Notificaciones">
-                    <i class="bi bi-bell"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        2
-                    </span>
-                </button>
-                <!-- Botones solo en pantallas medianas y grandes -->
-                <div class="d-none-custom d-md-flex align-items-center">
-                    <button id="botonConfiguracion" class="btn btn-dark me-2" type="button"
-                        data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-                        <i class="bi bi-gear"></i>
-                    </button>
-                    <a href="<?= PAGE_LANDING_PHP ?>" class="btn btn-danger me-2 d-none d-lg-flex" id="btnCerrarSesion"
-                        title="Cerrar Sesión">
-                        <i class="bi bi-box-arrow-right text-white"></i>
-                    </a>
-                </div>
             </div>
         </div>
     </nav>
@@ -138,16 +102,6 @@ function isActive($page_name, $current)
                 class="btn btn-dark text-start <?= isActive('inicioJugador', $current_page) ?>"
                 title="Home">
                 <i class="bi bi-house-door me-2"></i>Home
-            </a>
-            <a href="<?= PAGE_PARTIDOS_JUGADOR ?>"
-                class="btn btn-dark text-start <?= isActive('MisPartidos', $current_page) ?>"
-                title="Mis Partidos">
-                <i class="bi bi-calendar-event me-2"></i>Mis Partidos
-            </a>
-            <a href="<?= PAGE_EQUIPOS_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('MisEquipos', $current_page) ?>"
-                title="Mis Equipos">
-                <i class="bi bi-people me-2"></i>Mis Equipos
             </a>
         </div>
 
@@ -174,15 +128,7 @@ function isActive($page_name, $current)
                 <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
                     class="btn btn-dark text-start <?= isActive('miPerfil', $current_page) ?>"
                     title="Mi Perfil">
-                    <i class="bi bi-person-circle me-2"></i>Mi Perfil
-                </a>
-                <button class="btn btn-dark text-start" type="button"
-                    data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-                    <i class="bi bi-gear me-2"></i>Configuración
-                </button>
-                <a href="<?= PAGE_LANDING_PHP ?>" class="btn btn-danger text-start"
-                    title="Cerrar Sesión">
-                    <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+                    <i class="bi bi-person-circle me-2"></i>Iniciar sesión
                 </a>
             </div>
         </div>

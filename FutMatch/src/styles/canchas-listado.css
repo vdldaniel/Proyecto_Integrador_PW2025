@@ -1,8 +1,18 @@
+/* ===================================
+   CANCHAS-LISTADO.CSS - Página de listado de canchas
+   Incluye: Barra de búsqueda, filtros, grid de tarjetas
+   =================================== */
+
+/* ===================================
+   CONTENEDOR PRINCIPAL DE BÚSQUEDA
+   =================================== */
+/* Contenedor centrado con ancho máximo */
 .busqueda-container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Wrapper principal con bordes redondeados y sombra */
 .busqueda-wrapper {
   background: var(--bs-card-bg);
   border-radius: 15px;
@@ -11,47 +21,66 @@
   border: var(--bs-border-width) solid var(--bs-border-color);
 }
 
+/* ===================================
+   HEADER DE BÚSQUEDA
+   =================================== */
+/* Encabezado con padding y separador inferior */
 .busqueda-header {
   padding: 20px;
   border-bottom: 1px solid var(--bs-border-color);
 }
 
+/* ===================================
+   BARRA DE BÚSQUEDA
+   =================================== */
+/* Contenedor flex para input y icono */
 .barra-de-busqueda {
   position: relative;
   display: flex;
   align-items: center;
 }
 
+/* Input de búsqueda con bordes redondeados */
 .input-busqueda {
   border: 2px solid var(--bs-border-color);
   border-radius: 30px;
   padding: 15px 25px;
-  padding-right: 50px;
+  padding-right: 50px; /* Espacio para el icono */
   width: 100%;
   transition: all 0.3s ease;
   background: var(--bs-body-bg);
   color: var(--bs-body-color);
 }
 
+/* Icono de lupa posicionado absolutamente */
 .busqueda-icon {
   position: absolute;
   right: 20px;
   color: var(--bs-secondary-color);
 }
 
+/* ===================================
+   FILTROS Y GRID
+   =================================== */
+/* Área de filtros con fondo diferenciado */
 .filtro-de-busquedas {
   padding: 15px 20px;
   background: var(--bs-tertiary-bg);
   border-radius: 0 0 15px 15px;
 }
 
+/* Grid donde se muestran las tarjetas de canchas */
 .listado-grid {
   padding: 15px 20px;
   background: var(--bs-body-bg);
   border-radius: 0 0 15px 15px;
 }
 
+/* ===================================
+   IMÁGENES DE CANCHAS
+   =================================== */
+/* Imagen de tarjeta con altura fija y object-fit */
 .card-img {
     height: 200px;
-    object-fit: cover;
+    object-fit: cover; /* Recorta la imagen manteniendo proporciones */
 }

@@ -1,4 +1,11 @@
+/* ===================================
+   PARTIDOS-JUGADOR.CSS - Página "Mis Partidos"
+   Incluye: Badges de roles, estados de partido, tarjetas, estados vacíos
+   =================================== */
 
+/* ===================================
+   VARIABLES CSS PARA COLORES
+   =================================== */
 /* Variables CSS para mejor gestión de colores */
 :root {
   /* Colores para badges con mejor contraste */
