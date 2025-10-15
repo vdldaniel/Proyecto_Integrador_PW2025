@@ -69,3 +69,5 @@ Se estandarizaron los estilos de CSS para unificarlos:
                (solo cuando son muy complejas)
 Si se agrega un archivo de estilo no olvidar agregar a config.php
 y luego llamarlo con el nombre de variable asignado
+
+LEER REEDME Y GUIA RAPIDA EN SRC / ... / ESTILOS PARA VER MÁS DETALLES SOBRE COLORES Y OBJETOS ...
