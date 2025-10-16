@@ -12,124 +12,26 @@ Página para ver un listado de "foros de discusión" creados por jugadores
             + SI ESTÁ LOGUEADO, REDIRIGIR A discusion-crear.html
 -->
 
+<?php
+// Cargar configuración
+require_once '../../src/app/config.php';
 
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+// Resalta la página actual en el navbar
+$current_page = 'explorarForos'; 
+$page_title = "Foros - FutMatch";
+$page_css = [
+  CSS_PAGES_FOROS_LISTADO
+];
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
-
-  <!--Iconos Bootstrap-->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-  />
-
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/navbar.css" />
-  <link rel="stylesheet" href="src/styles/foros-listado.css" />
-</head>
+// Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
+require_once HEAD_COMPONENT;
+?>
 <body>
-  <!-- Navbar -->
-  <header>
-    <nav id="navbarFutmatch" class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top border-bottom">
-      <div class="container-fluid">
-        <!-- Lado izquierdo: menú hamburguesa + título + botones navegación -->
-        <div class="d-flex align-items-center">
-          <button class="btn btn-dark me-3 d-lg-none" 
-                  type="button" data-bs-toggle="offcanvas" 
-                  data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-            <i class="bi bi-list text-white"></i>
-          </button>
-          <a class="navbar-brand d-flex align-items-center" href="public/HTML/jugador/inicio-jugador.html">
-              <img class="logo me-3" src="public/img/logo-sinfondo.svg" alt="" />
-              <span class="brand-text">FutMatch</span>
-          </a>          
-          <!--Botones que llevan a otras secciones del programa-->
-          <div class="d-flex align-items-center d-none d-md-flex ms-3">
-            <a href="public/HTML/jugador/inicio-jugador.html" class="btn btn-dark me-2" id="home" 
-               title="Home">
-              <i class="bi bi-house-door"></i>
-              <span class="d-none d-lg-inline ms-1">Home</span>
-            </a> 
-            <a href="public/HTML/jugador/partidos-jugador.html" class="btn btn-dark me-2" id="botonMisPartidos" 
-               title="Mis Partidos">
-              <i class="bi bi-calendar-event"></i>
-              <span class="d-none d-lg-inline ms-1">Mis Partidos</span>
-            </a>
-            <!-- Dropdown Explorar -->
-            <div class="dropdown">
-              <button class="btn btn-dark dropdown-toggle me-2" type="button" id="dropdownExplorar" 
-                      data-bs-toggle="dropdown" aria-expanded="false" title="Explorar">
-                <i class="bi bi-search"></i>
-                <span class="d-none d-lg-inline ms-1">Explorar</span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                <li><a class="dropdown-item" href="public/HTML/jugador/guest/canchas-listado.html">
-                  <i class="bi bi-geo-alt me-2"></i>Explorar canchas
-                </a></li>
-                <li><a class="dropdown-item" href="public/HTML/jugador/guest/partidos-listado.html">
-                  <i class="bi bi-people me-2"></i>Explorar partidos
-                </a></li>
-              </ul>
-            </div>
-            <a href="public/HTML/jugador/equipos-listado.html" class="btn btn-dark me-2" id="botonMiEquipo" 
-               title="Mi Equipo">
-              <i class="bi bi-people"></i>
-              <span class="d-none d-lg-inline ms-1">Mi Equipo</span>
-            </a>
-            <a href="public/HTML/jugador/guest/foros-listado.html" class="btn btn-dark me-2 active" id="botonForos" 
-               title="Foros">
-              <i class="bi bi-chat-dots"></i>
-              <span class="d-none d-lg-inline ms-1">Foros</span>
-            </a>
-          </div>
-        </div>
-        
-        <!-- Lado derecho: perfil, notificaciones y configuración -->
-        <div class="d-flex align-items-center">
-          <!-- Botón Mi Perfil -->
-          <a href="public/HTML/jugador/perfil-jugador-detalle.html" class="btn btn-dark me-2 d-none d-md-flex" id="botonPerfil" 
-             title="Mi Perfil">
-            <i class="bi bi-person-circle"></i>
-            <span class="d-none d-lg-inline ms-1">Mi Perfil</span>
-          </a>
-          <!-- Campanita de notificaciones -->
-          <button class="btn btn-outline-warning position-relative me-2" 
-                  type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
-                  title="Notificaciones">
-            <i class="bi bi-bell"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              2
-            </span>
-          </button>
-          <!-- Botones solo en pantallas medianas y grandes -->
-          <div class="d-none-custom d-md-flex align-items-center">
-            <button id="botonConfiguracion" class="btn btn-dark me-2" type="button" 
-                    data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-              <i class="bi bi-gear"></i>
-            </button>
-            <button type="button" id="btnCerrarSesion" class="btn btn-danger" title="Cerrar Sesión">
-              <i class="bi bi-box-arrow-right text-white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-</header>
+  <?php 
+  // Cargar navbar de admin cancha
+  require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
+  ?>
 
   <!-- Layout principal -->
   <div class="d-flex">

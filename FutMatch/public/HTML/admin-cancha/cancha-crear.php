@@ -7,40 +7,29 @@
 - [] Mostrar mensaje de éxito o error al guardar la cancha (MODAL)
 - [] Redirige al panel de administración tras guardar la cancha
 -->
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
-    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-    <title>Crear Cancha | FutMatch</title>
+<?php
+// Cargar configuración
+require_once '../../../src/app/config.php';
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+// Resalta la página actual en el navbar
+$current_page = 'misCanchas'; 
 
-    <!-- Fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-      rel="stylesheet"
-    />
+// CSS adicional específico de esta página
+$page_title = "Crear Cancha - FutMatch";
+$page_css = [
 
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body class="bg-light ">
-    <header>
-      <nav class="navbar bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="" alt="FutMatch" width="30" height="24" />
-          </a>
-        </div>
-      </nav>
-    </header>
+];
+
+
+// Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
+require_once HEAD_COMPONENT;
+?>
+<body>
+  <?php 
+  // Cargar navbar de admin cancha
+  require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
+  ?>
     <main>
       <div class="container py-5">
         <div class="card shadow border-0 rounded-4">

@@ -6,41 +6,27 @@ Listado inicial de canchas al ingresar a "Mis Canchas" en el panel de administra
 - Botón para cerrar sesión
 -->
 
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
-    <!--Prefijo para evitar que las rutas relativas sean muy largas-->
+<?php
+// Cargar configuración
+require_once '../../../src/app/config.php';
 
-    <title>Listado de Canchas | FutMatch</title>
+// Resalta la página actual en el navbar
+$current_page = 'misCanchas'; 
+$page_title = "Listado de canchas - FutMatch";
+$page_css = [
+];
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
-    <!-- Fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <nav class="navbar bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="" alt="FutMatch" width="30" height="24" />
-          </a>
-        </div>
-      </nav>
-    </header>
+// Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
+require_once HEAD_COMPONENT;
+?>
+<body>
+  <?php 
+  // Cargar navbar de admin cancha
+  require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
+  ?>
     <main>
-      <div class="container-fluid mt-5">
+      <div class="container-fluid mt-5 pt-5 pb-5">
         <div class="card shadow-lg p-4 rounded-3">
           <div class="row">
             <div class="col-12 table-responsive">
@@ -92,7 +78,7 @@ Listado inicial de canchas al ingresar a "Mis Canchas" en el panel de administra
                 </tbody>
               </table>
               <div class="d-flex gap-2 justify-content-end">
-                <a href="public/HTML/admin-cancha/cancha-nueva.html">
+                <a href="<?= PAGE_ADMIN_CANCHA_CREAR ?>">
                   <button type="button" class="btn btn-primary" id="">
                     Agregar cancha
                   </button></a
