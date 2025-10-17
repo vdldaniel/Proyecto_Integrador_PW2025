@@ -16,37 +16,29 @@ Página para explorar canchas disponibles para reservar
     - [] Servicios (iluminación, vestuarios, etc.)
     - [x] Botón de "Aplicar filtros" que actualice el listado y el mapa según los criterios seleccionados
 -->
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
-  <!--Prefijo para evitar que las rutas relativas sean muy largas-->
 
-  <title>Listado de Canchas | FutMatch</title>
+<?php
+// Cargar configuración
+require_once '../../../src/app/config.php';
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
-  <!--Iconos Bootstrap-->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"/>
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-    rel="stylesheet"
-  />
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="src/styles/canchas-listado.css" />
-  <link rel="stylesheet" href="src/styles/navbar.css" />
-</head>
+// Resalta la página actual en el navbar
+$current_page = 'dropdownExplorar'; 
+
+// CSS adicional específico de esta página
+$page_title = "Explorar canchas - FutMatch";
+$page_css = [
+  CSS_PAGES_CANCHAS_EXPLORAR
+];
+
+
+// Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
+require_once HEAD_COMPONENT;
+?>
 <body>
-  <header>
-    <nav id="navbarFutmatch"></nav>
-  </header>
+  <?php 
+  // Cargar navbar de admin cancha
+  require_once NAVBAR_JUGADOR_COMPONENT; 
+  ?>
     <main>
       <div class="bg-body-secondary">
         <div class="container-fluid py-5">
@@ -128,7 +120,7 @@ Página para explorar canchas disponibles para reservar
                           <button type="button" class="btn btn-primary btn-sm">
                             Ver detalles
                           </button>
-                          <button type="button" class="btn btn-primary btn-sm">
+                          <button type="button" class="btn btn-primary btn-sm btn-crear-reserva">
                             Reservar
                           </button>
                         </div>
@@ -156,7 +148,7 @@ Página para explorar canchas disponibles para reservar
                           <button type="button" class="btn btn-primary btn-sm">
                             Ver detalles
                           </button>
-                          <button type="button" class="btn btn-primary btn-sm">
+                          <button type="button" class="btn btn-primary btn-sm btn-crear-reserva">
                             Reservar
                           </button>
                         </div>
@@ -184,7 +176,7 @@ Página para explorar canchas disponibles para reservar
                           <button type="button" class="btn btn-primary btn-sm">
                             Ver detalles
                           </button>
-                          <button type="button" class="btn btn-primary btn-sm">
+                          <button type="button" class="btn btn-primary btn-sm btn-crear-reserva">
                             Reservar
                           </button>
                         </div>
@@ -209,7 +201,7 @@ Página para explorar canchas disponibles para reservar
                       <div class="card-footer bg-transparent border-top-0">
                         <!--Botones-->
                         <div class="d-flex gap-2 align-items-center">
-                          <button type="button" class="btn btn-primary btn-sm">
+                          <button type="button" class="btn btn-primary btn-sm btn-crear-reserva">
                             Ver detalles
                           </button>
                           <button type="button" class="btn btn-primary btn-sm">
@@ -225,10 +217,117 @@ Página para explorar canchas disponibles para reservar
           </div>
         </div>
       </div>
-    </main>
+      
 
-    <!-- Scripts -->
-    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="src/scripts/pages/canchas-listado.js"></script>
+    </main>
+    <!-------------------------------MODALES----------------------------------------------------->
+    <div class="modal fade" id="modalGestionReserva" tabindex="-1" aria-labelledby="tituloModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloModal">Crear Reserva</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- ID oculto para edición -->
+          <input type="hidden" id="idReserva">
+          
+          <form id="formularioGestionReserva">
+            <!-- Estado de la reserva (solo visible en modo edición) -->
+            <div id="seccionEstado" class="row mb-3 d-none">
+              <div class="col-md-6">
+                <label for="estadoReserva" class="form-label">Estado</label>
+                <select class="form-select" id="estadoReserva">
+                  <option value="pending">Pendiente</option>
+                  <option value="confirmed">Confirmada</option>
+                  <option value="cancelled">Cancelada</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Fecha de creación</label>
+                <input type="text" class="form-control" id="fechaCreacion" readonly>
+              </div>
+            </div>
+            
+            <!-- Datos del jugador -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="idJugador" class="form-label">ID # Jugador</label>
+                <input type="number" class="form-control" id="idJugador" min="1" required>
+              </div>
+              <div class="col-md-6 d-flex align-items-end">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="reservaExterna">
+                  <label class="form-check-label" for="reservaExterna">
+                    Reserva externa a la App
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Datos adicionales (deshabilitados hasta marcar reserva externa) -->
+            <div id="datosExternos">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="nombreExterno" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombreExterno" maxlength="100" disabled>
+                </div>
+                <div class="col-md-6">
+                  <label for="telefonoExterno" class="form-label">Teléfono</label>
+                  <input type="tel" class="form-control" id="telefonoExterno" disabled>
+                </div>
+              </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <!-- Detalles de la reserva -->
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label for="canchaReserva" class="form-label">Cancha</label>
+                <select class="form-select" id="canchaReserva" required>
+                  <option value="">Seleccione una cancha...</option>
+                  <option value="1">Cancha A - Fútbol 11</option>
+                  <option value="2">Cancha B - Fútbol 7</option>
+                  <option value="3">Cancha C - Fútbol 5</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="fechaReserva" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="fechaReserva" required>
+              </div>
+              <div class="col-md-4">
+                <label for="horaReserva" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="horaReserva" 
+                       min="08:00" max="22:00" step="3600" required>
+                <div class="form-text">Horario disponible: 8:00 AM - 10:00 PM</div>
+              </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <!-- Comentario -->
+            <div class="mb-3">
+              <label for="comentarioReserva" class="form-label">Comentario</label>
+              <textarea class="form-control" id="comentarioReserva" rows="3" maxlength="500" placeholder="Información adicional sobre la reserva..."></textarea>
+              <div class="form-text">Máximo 500 caracteres</div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" id="piePaginaModal">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" id="botonGuardarReserva">
+            <i class="bi bi-check-circle me-2"></i><span id="textoBoton">Crear Reserva</span>
+          </button>
+          <button type="button" class="btn btn-danger d-none" id="botonEliminarReserva">
+            <i class="bi bi-trash me-2"></i>Eliminar Reserva
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Scripts de JavaScript -->
+  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="src/scripts/pages/canchas-listado.js"></script>
   </body>
 </html>

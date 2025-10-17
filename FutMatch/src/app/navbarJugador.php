@@ -56,7 +56,7 @@ function isActive($page_name, $current)
                     </a>
                     <!-- Dropdown Explorar -->
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle me-2" type="button" id="dropdownExplorar"
+                        <button class="btn btn-dark dropdown-toggle me-2 <?= isActive('dropdownExplorar', $current_page) ?>" type="button" id="dropdownExplorar"
                             data-bs-toggle="dropdown" aria-expanded="false" title="Explorar">
                             <i class="bi bi-search"></i>
                             <span class="d-none d-lg-inline ms-1">Explorar</span>

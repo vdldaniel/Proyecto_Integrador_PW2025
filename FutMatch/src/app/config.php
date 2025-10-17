@@ -28,6 +28,7 @@ define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
 define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
 define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
+define("CSS_PAGES_CANCHAS_EXPLORAR", SRC_PATH . "styles/pages/canchas-listado.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -64,6 +65,7 @@ define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
 define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
 define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
+define("JS_PARTIDOS_LISTADO", JS_SCRIPTS_PATH . "partidos-listado.js");
 
 // ===================================
 // IMÁGENES
@@ -112,12 +114,12 @@ define("PAGE_EQUIPO_CREAR", PUBLIC_PATH . "HTML/jugador/equipo-crear (-MODAL).ht
 
 // Partidos
 define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidosJugador.php");
-define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/partidosListado.html");
+define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/partidosListado.php");
 define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/partidoDetalle.html");
 define("PAGE_PARTIDO_UNIRSE", PUBLIC_PATH . "HTML/jugador/partido-unirse (-MODAL).html");
 
 // Canchas
-define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.html");
+define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.php");
 define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/canchaPerfil.html");
 define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar (-MODAL).html");
 
