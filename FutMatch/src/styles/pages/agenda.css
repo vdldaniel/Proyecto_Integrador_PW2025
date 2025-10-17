@@ -2,7 +2,87 @@
    AGENDA.CSS - Estilos específicos para calendario/agenda
    =================================== */
 
-/* Badges de notificación específicas del calendario */
+/* ===================================
+   LAYOUT ESPECÍFICO PARA AGENDA
+   =================================== */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================================
+   VISTA DE CALENDARIO
+   =================================== */
+.vista-calendario {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-responsive {
+  flex: 1;
+}
+
+/* Ocultar scroll en vista mensual */
+.vista-mensual-activa main,
+.vista-mensual-activa .table-responsive {
+  overflow: hidden !important;
+}
+
+
+/* ===================================
+   ESTRUCTURA DE TABLAS
+   =================================== */
+/* Anchos iguales para vista mensual y semanal */
+#vistaMensual table,
+#vistaSemanal table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#vistaMensual th,
+#vistaMensual td,
+#vistaSemanal th:not(:first-child),
+#vistaSemanal td:not(:first-child) {
+  width: 14.28%; /* 100% / 7 días */
+}
+
+#vistaSemanal th:first-child,
+#vistaSemanal td:first-child {
+  width: 100px; /* Ancho fijo para columna de hora */
+}
+
+/* Estilo específico de celdas mensuales */
+#vistaMensual .table {
+  height: 100%;
+}
+
+#vistaMensual tbody tr {
+  height: calc(100% / 6);
+}
+
+#vistaMensual td {
+  vertical-align: top;
+  position: relative;
+  min-height: 80px;
+  padding: 8px;
+}
+
+/* ===================================
+   BADGES DE NOTIFICACIÓN
+   =================================== */
 .badge-notificacion {
   position: absolute;
   top: -5px;
@@ -20,7 +100,9 @@
   color: #000 !important;
 }
 
-/* Validación de inputs de tiempo */
+/* ===================================
+   VALIDACIÓN DE INPUTS DE TIEMPO
+   =================================== */
 .form-control[type="time"] {
   transition: all 0.3s ease;
 }
@@ -41,74 +123,45 @@
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
-.invalid-feedback.horario-error {
+.invalid-feedback.horario-error,
+.valid-feedback {
   display: block;
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
 .valid-feedback {
-  display: block;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
   color: #28a745;
 }
 
-/* Picker de tiempo en dark mode */
-.form-control[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  cursor: pointer;
-}
-
-/* Tablas específicas de calendario */
-.table-responsive {
-  flex: 1;
-}
-
-/* Encabezados de tabla en modo oscuro */
-[data-bs-theme="dark"] .table-light {
-  background-color: var(--bs-secondary-bg) !important;
-  color: var(--bs-body-color) !important;
-  border-color: var(--bs-border-color);
-}
-
+/* ===================================
+   DARK MODE - TABLAS
+   =================================== */
+/* Tablas - Encabezados */
+[data-bs-theme="dark"] .table-light,
 [data-bs-theme="dark"] .table-light th {
   background-color: var(--bs-secondary-bg) !important;
   color: var(--bs-body-color) !important;
   border-color: var(--bs-border-color);
 }
 
-/* Celda del día de hoy */
+/* Tablas - Día actual */
 [data-bs-theme="dark"] .table-primary {
   background-color: var(--bs-primary-bg-subtle) !important;
   color: var(--bs-primary-text-emphasis) !important;
   border-color: var(--bs-primary-border-subtle);
 }
 
-/* Celdas de reservas */
+/* Tablas - Reservas confirmadas */
 [data-bs-theme="dark"] .table-success {
   background-color: var(--bs-success-bg-subtle) !important;
   color: var(--bs-success-text-emphasis) !important;
   border-color: var(--bs-success-border-subtle);
 }
 
+/* Tablas - Reservas pendientes */
 [data-bs-theme="dark"] .table-warning {
   background-color: var(--bs-warning-bg-subtle) !important;
   color: var(--bs-warning-text-emphasis) !important;
   border-color: var(--bs-warning-border-subtle);
-}
-
-/* Selectores de fecha en dark mode */
-[data-bs-theme="dark"] .form-control[type="date"]::-webkit-calendar-picker-indicator,
-[data-bs-theme="dark"] .form-control[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-}
-
-[data-bs-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  opacity: 0.8;
-}
-
-[data-bs-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
 }

@@ -17,79 +17,66 @@ $current_page = 'agenda';
 
 // CSS adicional específico de esta página
 $page_title = "Agenda - FutMatch";
-$page_css = [
-
+$page_css = [CSS_PAGES_AGENDA
 ];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;
 ?>
-<body class="light-page monthly-view-active">
+<body class="monthly-view-active">
   <?php 
   // Cargar navbar de admin cancha
   require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
   ?>
 
-  <!-- Barra superior -->
-
-    <div class="container my-3">
-      <!-- Centro: botón hoy + selector de fecha -->
-      <div class="d-flex justify-content-sm-end justify-content-md-center align-items-center mx-auto">
-        <button id="botonHoy" class="btn btn-primary me-2" type="button">Hoy</button>
-        <input type="date" class="form-control w-auto" id="selectorFecha">
-      </div>
-    </div>
-
-  <!-- Menú lateral deslizable -->
-  <div class="offcanvas offcanvas-start" 
-       tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="sidebarMenuLabel">Menú</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
+  <!-- Barra superior de controles -->
+  <div class="container-fluid my-3">
+    <div class="row align-items-center g-2 justify-content-center justify-content-md-start">
       <!-- Selector de cancha -->
-      <div class="mb-3">
-        <label for="selectorCancha" class="form-label fw-semibold">Cancha:</label>
-        <select class="form-select" id="selectorCancha">
-          <option selected>Seleccione una cancha...</option> <!-- Datos fijos hasta conectar con backend -->
+      <div class="col-auto">
+        <select class="form-select" id="selectorCancha" style="width: auto; min-width: 200px;">
+          <option selected>Seleccionar cancha</option>
           <option value="1">Cancha A - Fútbol 11</option>
           <option value="2">Cancha B - Fútbol 7</option>
           <option value="3">Cancha C - Fútbol 5</option>
         </select>
       </div>
 
-      <hr> <!-- Separador -->
-
-      <!-- Botones de acción -->
-      <div class="d-grid gap-2">
-        <button id="botonCrearReserva" class="btn btn-success" type="button">
-          <i class="bi bi-plus-circle me-2"></i>Crear reserva
-        </button>
-        <button id="botonGestionarSolicitudes" class="btn btn-warning position-relative" type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones">
-          <i class="bi bi-clock-history me-2"></i>Gestionar solicitudes
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            2
-            <span class="visually-hidden">Solicitudes pendientes</span>
-          </span>
+      <!-- Botón crear reserva -->
+      <div class="col-auto">
+        <button id="botonCrearReserva" class="btn btn-success d-flex align-items-center justify-content-center" type="button" style="min-width: 38px;">
+          <i class="bi bi-plus-circle"></i><span class="d-none d-lg-inline ms-2">Crear reserva</span>
         </button>
       </div>
 
-      <!-- Opciones de vista pantallas pequeñas -->
-      <div class="d-md-none py-3">
-        <h6 class="fw-semibold">Vista</h6>
-        <div class="d-grid gap-2 mb-3">
-          <button class="btn btn-outline-secondary selector-vista" data-vista="mes">Mensual</button>
-          <button class="btn btn-outline-secondary selector-vista" data-vista="semana">Semanal</button>
-          <button class="btn btn-outline-secondary selector-vista" data-vista="dia">Diaria</button>
+      <!-- Botón Hoy -->
+      <div class="col-auto">
+        <button id="botonHoy" class="btn btn-primary" type="button">Hoy</button>
+      </div>
+
+      <!-- Selector de fecha -->
+      <div class="col-auto">
+        <div class="position-relative">
+          <input type="date" class="form-control d-none d-lg-block" id="selectorFecha">
+          <input type="date" class="form-control d-lg-none position-absolute opacity-0" id="selectorFechaOculto" style="width: 40px; pointer-events: none;">
+          <button class="btn btn-outline-secondary d-lg-none" type="button" id="botonAbrirSelectorFecha">
+            <i class="bi bi-calendar3"></i>
+          </button>
         </div>
-        <button id="botonConfiguracionMovil" class="btn btn-outline-secondary w-100" type="button"
-                data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
-          <i class="bi bi-gear me-2"></i>Configuración
-        </button>
-                <button id="btnCerrarSesionMovil" class="btn btn-outline-danger w-100 mt-2" type="button">
-          <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
-        </button>
+      </div>
+
+      <!-- Selector de vista -->
+      <div class="col-auto ms-md-auto">
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownVista" data-bs-toggle="dropdown" aria-expanded="false">
+            <span id="vistaActual">Mes</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownVista">
+            <li><a class="dropdown-item selector-vista" href="#" data-vista="mes">Mes</a></li>
+            <li><a class="dropdown-item selector-vista" href="#" data-vista="semana">Semana</a></li>
+            <li><a class="dropdown-item selector-vista" href="#" data-vista="dia">Día</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -97,7 +84,7 @@ require_once HEAD_COMPONENT;
   <!-- Área principal del calendario -->
   <div class="main-container">
     <div class="container-fluid h-100">
-      <div class="row h-100 p-1 p-sm-1 p-md-3 p-lg-4">
+      <div class="row h-100 p-3">
         <main class="col-12 d-flex flex-column">
           <!-- Encabezado con fecha y navegación -->
           <div class="d-flex justify-content-between align-items-center mb-3 date-header">
@@ -331,7 +318,7 @@ require_once HEAD_COMPONENT;
     </div>
   </div>
 
-  <div class="modal" id="modalGestionReserva" tabindex="-1">
+  <div class="modal fade" id="modalGestionReserva" tabindex="-1" aria-labelledby="tituloModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">

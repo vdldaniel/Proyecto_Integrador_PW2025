@@ -1042,6 +1042,30 @@ class AplicacionAgenda {
                 this.renderizarVistaActual();
             });
         }
+
+        // Configurar botón para abrir selector de fecha en pantallas móviles
+        const botonAbrirSelectorFecha = document.getElementById('botonAbrirSelectorFecha');
+        const selectorFechaOculto = document.getElementById('selectorFechaOculto');
+        
+        if (botonAbrirSelectorFecha && selectorFechaOculto) {
+            botonAbrirSelectorFecha.addEventListener('click', () => {
+                try {
+                    selectorFechaOculto.showPicker();
+                } catch (error) {
+                    // Fallback si showPicker() no está soportado
+                    selectorFechaOculto.click();
+                }
+            });
+
+            // Sincronizar cambios del selector oculto con el principal
+            selectorFechaOculto.addEventListener('change', (e) => {
+                if (this.elementos.selectorFecha) {
+                    this.elementos.selectorFecha.value = e.target.value;
+                    // Disparar evento change manualmente
+                    this.elementos.selectorFecha.dispatchEvent(new Event('change'));
+                }
+            });
+        }
     }
 
     // Cambiar vista del calendario
@@ -1054,9 +1078,23 @@ class AplicacionAgenda {
         
         // Mostrar vista seleccionada
         let idVistaObjetivo;
-        if (vista === 'mes') idVistaObjetivo = 'vistaMensual';
-        else if (vista === 'semana') idVistaObjetivo = 'vistaSemanal';
-        else if (vista === 'dia') idVistaObjetivo = 'vistaDiaria';
+        let textoVista;
+        if (vista === 'mes') {
+            idVistaObjetivo = 'vistaMensual';
+            textoVista = 'Mes';
+        } else if (vista === 'semana') {
+            idVistaObjetivo = 'vistaSemanal';
+            textoVista = 'Semana';
+        } else if (vista === 'dia') {
+            idVistaObjetivo = 'vistaDiaria';
+            textoVista = 'Día';
+        }
+        
+        // Actualizar texto del dropdown
+        const spanVistaActual = document.getElementById('vistaActual');
+        if (spanVistaActual) {
+            spanVistaActual.textContent = textoVista;
+        }
         
         const vistaObjetivo = document.getElementById(idVistaObjetivo);
         if (vistaObjetivo) {
@@ -1269,7 +1307,7 @@ class AplicacionAgenda {
                     celda.style.cursor = 'pointer';
                     celda.title = `Crear reserva para ${hora}`;
                     celda.classList.add('table-hover');
-                    celda.innerHTML = '<small class="text-muted">Disponible</small>';
+                    celda.innerHTML = '';
                     
                     // Agregar event listener para crear reserva en este horario
                     celda.addEventListener('click', ((fechaClicada, horaClicada) => {
@@ -1351,7 +1389,7 @@ class AplicacionAgenda {
                 celdaEvento.style.cursor = 'pointer';
                 celdaEvento.title = `Crear reserva para ${hora}`;
                 celdaEvento.classList.add('table-hover');
-                celdaEvento.innerHTML = '<small class="text-muted">Disponible</small>';
+                celdaEvento.innerHTML = '';
                 
                 // Agregar event listener para crear reserva en este horario
                 celdaEvento.addEventListener('click', () => {

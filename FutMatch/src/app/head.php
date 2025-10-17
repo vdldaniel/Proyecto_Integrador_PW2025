@@ -17,6 +17,9 @@ if (!defined('BASE_URL')) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <base href="<?= BASE_URL ?>" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="public/img/logo-sinfondo.svg" />
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="<?= CSS_BOOTSTRAP ?>" />
 
