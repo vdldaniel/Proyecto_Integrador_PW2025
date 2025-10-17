@@ -97,62 +97,51 @@ define("PAGE_REGISTRO_ADMIN_CANCHA_PHP", PUBLIC_PATH . "HTML/auth/registroAdminC
 // PÁGINAS - COMUNES
 // ===================================
 define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/foros-listado.php");
-define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/foros-detalle.html");
+define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/forosDetalle.html");
 
 // ===================================
 // PÁGINAS - JUGADOR
 // ===================================
 define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicioJugador.php");
-define("PAGE_PERFIL_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/jugador/perfil-jugador-detalle.html");
-define("PAGE_PERFIL_JUGADOR_EDITAR", PUBLIC_PATH . "HTML/jugador/perfil-jugador-editar.html");
-define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador.html");
+define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilJugador.html");
+define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador (-MODAL navbar).html");
 
 // Equipos
-define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equipos-listado.html");
-define("PAGE_EQUIPO_CREAR", PUBLIC_PATH . "HTML/jugador/equipo-crear.html");
-define("PAGE_EQUIPO_DETALLE", PUBLIC_PATH . "HTML/jugador/equipo-detalle.html");
-define("PAGE_EQUIPO_MODIFICAR", PUBLIC_PATH . "HTML/jugador/equipo-modificar.html");
+define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equiposListado.html");
+define("PAGE_EQUIPO_CREAR", PUBLIC_PATH . "HTML/jugador/equipo-crear (-MODAL).html");
 
 // Partidos
-define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidos-jugador.html");
-define("PAGE_PARTIDO_UNIRSE", PUBLIC_PATH . "HTML/jugador/partido-unirse.html");
-define("PAGE_PARTIDO_POST_MEDIA", PUBLIC_PATH . "HTML/jugador/partido-post-media.html");
+define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidosJugador.php");
+define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/partidosListado.html");
+define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/partidoDetalle.html");
+define("PAGE_PARTIDO_UNIRSE", PUBLIC_PATH . "HTML/jugador/partido-unirse (-MODAL).html");
 
 // Canchas
-define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar.html");
-define("PAGE_CANCHA_CALIFICAR", PUBLIC_PATH . "HTML/jugador/cancha-calificar.html");
+define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.html");
+define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/canchaPerfil.html");
+define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar (-MODAL).html");
 
 // Torneos
-define("PAGE_TORNEOS_LISTADO", PUBLIC_PATH . "HTML/jugador/torneos-listado.html");
-define("PAGE_TORNEO_DETALLE", PUBLIC_PATH . "HTML/jugador/torneo-detalle.html");
-
-// ===================================
-// PÁGINAS - JUGADOR GUEST
-// ===================================
-define("PAGE_INICIO_GUEST", PUBLIC_PATH . "HTML/jugador/guest/inicio-guest.html");
-define("PAGE_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/jugador/guest/canchas-listado.html");
-define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/guest/cancha-perfil.html");
-define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/guest/partidos-listado.html");
-define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/guest/partido-detalle.html");
+define("PAGE_TORNEOS_LISTADO", PUBLIC_PATH . "HTML/jugador/torneosListado (reciclar de mis-torneos).html");
+define("PAGE_TORNEO_DETALLE", PUBLIC_PATH . "HTML/jugador/torneosDetalle (dejar a Cami) .html");
 
 // ===================================
 // PÁGINAS - ADMIN CANCHA
 // ===================================
 define("PAGE_INICIO_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/inicioAdminCancha.php");
-define("PAGE_CUENTA_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/cuenta-admin-cancha.html");
 define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.php");
 
 // Gestión de canchas
 define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchas-listado.php");
 define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-crear.php");
-define("PAGE_ADMIN_CANCHA_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-editar.html");
-define("PAGE_ADMIN_CANCHA_PERFIL_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/cancha-perfil-detalle.html");
-define("PAGE_ADMIN_CANCHA_PERFIL_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-perfil-editar.html");
+define("PAGE_ADMIN_CANCHA_PERFIL", PUBLIC_PATH . "HTML/admin-cancha/canchaPerfil.html");
+define("PAGE_ADMIN_CANCHA_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/(pasar a MODAL) cancha-editar.html");
+define("PAGE_ADMIN_CANCHA_PERFIL_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/(UNIFICAR CON canchaPerfil) cancha-perfil-editar.html");
 
 // Gestión de torneos
 define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos.php");
-define("PAGE_ADMIN_MIS_TORNEOS_CREAR", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos-crear.html");
-define("PAGE_ADMIN_MIS_TORNEOS_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos-detalle.html");
+define("PAGE_ADMIN_MIS_TORNEOS_CREAR", PUBLIC_PATH . "HTML/admin-cancha/(pasar a MODAL) mis-torneos-crear.html");
+define("PAGE_ADMIN_MIS_TORNEOS_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/(dejar a Cami) mis-torneos-detalle.html");
 
 // ===================================
 // PÁGINAS - ADMIN SISTEMA
