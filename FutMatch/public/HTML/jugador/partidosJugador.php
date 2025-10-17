@@ -19,7 +19,7 @@ $page_title = 'Mis Partidos - FutMatch';
 
 // CSS adicional específico de esta página
 $page_css = [
-  CSS_PAGES_INICIO_JUGADOR
+  CSS_PAGES_PARTIDOS_JUGADOR
 ];
 
 // Cargar head común
@@ -90,48 +90,51 @@ require_once HEAD_COMPONENT;
       
       <!-- Partido 1 - Anfitrión, Confirmado -->
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" data-estado="confirmado">
-        <div class="card">
+        <div class="card partido-card">
+          <!-- Badge de estado estilo notificación -->
+          <span class="badge bg-success partido-badge">Confirmado</span>
+          
           <div class="card-body p-3">
-            <!-- Fila 1: Día, Fecha, Hora -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <div class="text-muted small">
-                <i class="bi bi-calendar3 me-1"></i>
-                <strong>Sábado</strong> 15/02/2025 - <strong>19:00</strong>
-              </div>
-              <span class="badge bg-success">Confirmado</span>
+            <!-- Línea 1: Fecha y hora -->
+            <div class="partido-fecha text-muted small mb-2 d-flex justify-content-between">
+              <span><i class="bi bi-calendar3 me-2"></i><strong>Sábado</strong></span>
+              <span>15/02/2025</span>
+              <span><strong>19:00</strong></span>
             </div>
 
-            <!-- Fila 2: Nombre de la cancha -->
-            <h6 class="fw-bold mb-1">Cancha Premium - Fútbol 5</h6>
+            <!-- Línea 2: Nombre de la cancha -->
+            <div class="partido-cancha-nombre">
+              <h6 class="fw-bold mb-0">Cancha Premium - Fútbol 5</h6>
+            </div>
 
-            <!-- Fila 3: Dirección + Botón ubicación -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="text-muted small mb-0">Av. Libertador 1234, Centro</p>
-              <button class="btn btn-sm btn-outline-secondary">
+            <!-- Línea 3: Dirección + Botón ubicación -->
+            <div class="partido-direccion-container mb-3">
+              <p class="partido-direccion text-muted small mb-0">Av. Libertador 1234, Centro</p>
+              <button class="btn btn-sm btn-outline-secondary btn-ubicacion">
                 <i class="bi bi-geo-alt"></i>
               </button>
             </div>
 
             <hr class="my-2">
 
-            <!-- Fila 4: Equipos -->
+            <!-- Fila 5: Equipos -->
             <div class="row g-2 mb-2">
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Tu equipo</small>
-                  <button class="btn btn-sm btn-outline-primary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Los Tigres
+                  <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
+                  <button class="btn btn-sm btn-outline-primary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Los Tigres</span>
                   </button>
-                  <small class="text-success fw-bold">5/5</small>
+                  <small class="equipo-contador text-success fw-bold">5/5</small>
                 </div>
               </div>
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Equipo rival</small>
-                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>FC Barcelona
+                  <small class="equipo-label text-muted d-block mb-1">Equipo rival</small>
+                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>FC Barcelona</span>
                   </button>
-                  <small class="text-muted fw-bold">5/5</small>
+                  <small class="equipo-contador text-muted fw-bold">5/5</small>
                 </div>
               </div>
             </div>
@@ -172,48 +175,51 @@ require_once HEAD_COMPONENT;
 
       <!-- Partido 2 - Invitado, Confirmado -->
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" data-estado="confirmado">
-        <div class="card">
+        <div class="card partido-card">
+          <!-- Badge de estado estilo notificación -->
+          <span class="badge bg-success partido-badge">Confirmado</span>
+          
           <div class="card-body p-3">
-            <!-- Fila 1: Día, Fecha, Hora -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <div class="text-muted small">
-                <i class="bi bi-calendar3 me-1"></i>
-                <strong>Domingo</strong> 16/02/2025 - <strong>16:30</strong>
-              </div>
-              <span class="badge bg-success">Confirmado</span>
+            <!-- Línea 1: Fecha y hora -->
+            <div class="partido-fecha text-muted small mb-2 d-flex justify-content-between">
+              <span><i class="bi bi-calendar3 me-2"></i><strong>Domingo</strong></span>
+              <span>16/02/2025</span>
+              <span><strong>16:30</strong></span>
             </div>
 
-            <!-- Fila 2: Nombre de la cancha -->
-            <h6 class="fw-bold mb-1">Deportivo Municipal - Fútbol 7</h6>
+            <!-- Línea 2: Nombre de la cancha -->
+            <div class="partido-cancha-nombre">
+              <h6 class="fw-bold mb-0">Deportivo Municipal - Fútbol 7</h6>
+            </div>
 
-            <!-- Fila 3: Dirección + Botón ubicación -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="text-muted small mb-0">Calle San Martín 567, Oeste</p>
-              <button class="btn btn-sm btn-outline-secondary">
+            <!-- Línea 3: Dirección + Botón ubicación -->
+            <div class="partido-direccion-container mb-3">
+              <p class="partido-direccion text-muted small mb-0">Calle San Martín 567, Oeste</p>
+              <button class="btn btn-sm btn-outline-secondary btn-ubicacion">
                 <i class="bi bi-geo-alt"></i>
               </button>
             </div>
 
             <hr class="my-2">
 
-            <!-- Fila 4: Equipos -->
+            <!-- Fila 5: Equipos -->
             <div class="row g-2 mb-2">
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Equipo local</small>
-                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Real Madrid
+                  <small class="equipo-label text-muted d-block mb-1">Equipo local</small>
+                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Real Madrid</span>
                   </button>
-                  <small class="text-success fw-bold">7/7</small>
+                  <small class="equipo-contador text-success fw-bold">7/7</small>
                 </div>
               </div>
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Tu equipo</small>
-                  <button class="btn btn-sm btn-outline-primary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Manchester
+                  <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
+                  <button class="btn btn-sm btn-outline-primary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Manchester</span>
                   </button>
-                  <small class="text-success fw-bold">7/7</small>
+                  <small class="equipo-contador text-success fw-bold">7/7</small>
                 </div>
               </div>
             </div>
@@ -251,48 +257,51 @@ require_once HEAD_COMPONENT;
 
       <!-- Partido 3 - Solicitante, Pendiente -->
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" data-estado="pendiente">
-        <div class="card">
+        <div class="card partido-card">
+          <!-- Badge de estado estilo notificación -->
+          <span class="badge bg-warning text-dark partido-badge">Pendiente</span>
+          
           <div class="card-body p-3">
-            <!-- Fila 1: Día, Fecha, Hora -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <div class="text-muted small">
-                <i class="bi bi-calendar3 me-1"></i>
-                <strong>Viernes</strong> 21/02/2025 - <strong>20:00</strong>
-              </div>
-              <span class="badge bg-warning text-dark">Pendiente</span>
+            <!-- Línea 1: Fecha y hora -->
+            <div class="partido-fecha text-muted small mb-2 d-flex justify-content-between">
+              <span><i class="bi bi-calendar3 me-2"></i><strong>Viernes</strong></span>
+              <span>21/02/2025</span>
+              <span><strong>20:00</strong></span>
             </div>
 
-            <!-- Fila 2: Nombre de la cancha -->
-            <h6 class="fw-bold mb-1">Estadio Central - Fútbol 11</h6>
+            <!-- Línea 2: Nombre de la cancha -->
+            <div class="partido-cancha-nombre">
+              <h6 class="fw-bold mb-0">Estadio Central - Fútbol 11</h6>
+            </div>
 
-            <!-- Fila 3: Dirección + Botón ubicación -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="text-muted small mb-0">Av. Independencia 890, Norte</p>
-              <button class="btn btn-sm btn-outline-secondary">
+            <!-- Línea 3: Dirección + Botón ubicación -->
+            <div class="partido-direccion-container mb-3">
+              <p class="partido-direccion text-muted small mb-0">Av. Independencia 890, Norte</p>
+              <button class="btn btn-sm btn-outline-secondary btn-ubicacion">
                 <i class="bi bi-geo-alt"></i>
               </button>
             </div>
 
             <hr class="my-2">
 
-            <!-- Fila 4: Equipos -->
+            <!-- Fila 5: Equipos -->
             <div class="row g-2 mb-2">
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Equipo anfitrión</small>
-                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Atlético Nacional
+                  <small class="equipo-label text-muted d-block mb-1">Equipo anfitrión</small>
+                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Atlético Nacional</span>
                   </button>
-                  <small class="text-success fw-bold">11/11</small>
+                  <small class="equipo-contador text-success fw-bold">11/11</small>
                 </div>
               </div>
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Tu equipo</small>
-                  <button class="btn btn-sm btn-outline-primary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Liverpool
+                  <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
+                  <button class="btn btn-sm btn-outline-primary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Liverpool</span>
                   </button>
-                  <small class="text-warning fw-bold">9/11</small>
+                  <small class="equipo-contador text-warning fw-bold">9/11</small>
                 </div>
               </div>
             </div>
@@ -330,48 +339,51 @@ require_once HEAD_COMPONENT;
 
       <!-- Partido 4 - Anfitrión, Buscando rival -->
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" data-estado="pendiente">
-        <div class="card">
+        <div class="card partido-card">
+          <!-- Badge de estado estilo notificación -->
+          <span class="badge bg-secondary partido-badge">Buscando rival</span>
+          
           <div class="card-body p-3">
-            <!-- Fila 1: Día, Fecha, Hora -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <div class="text-muted small">
-                <i class="bi bi-calendar3 me-1"></i>
-                <strong>Martes</strong> 25/02/2025 - <strong>18:00</strong>
-              </div>
-              <span class="badge bg-secondary">Buscando rival</span>
+            <!-- Línea 1: Fecha y hora -->
+            <div class="partido-fecha text-muted small mb-2 d-flex justify-content-between">
+              <span><i class="bi bi-calendar3 me-2"></i><strong>Martes</strong></span>
+              <span>25/02/2025</span>
+              <span><strong>18:00</strong></span>
             </div>
 
-            <!-- Fila 2: Nombre de la cancha -->
-            <h6 class="fw-bold mb-1">Complejo Deportivo Sur - Fútbol 5</h6>
+            <!-- Línea 2: Nombre de la cancha -->
+            <div class="partido-cancha-nombre">
+              <h6 class="fw-bold mb-0">Complejo Deportivo Sur - Fútbol 5</h6>
+            </div>
 
-            <!-- Fila 3: Dirección + Botón ubicación -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="text-muted small mb-0">Ruta Provincial 45, Km 12</p>
-              <button class="btn btn-sm btn-outline-secondary">
+            <!-- Línea 3: Dirección + Botón ubicación -->
+            <div class="partido-direccion-container mb-3">
+              <p class="partido-direccion text-muted small mb-0">Ruta Provincial 45, Km 12</p>
+              <button class="btn btn-sm btn-outline-secondary btn-ubicacion">
                 <i class="bi bi-geo-alt"></i>
               </button>
             </div>
 
             <hr class="my-2">
 
-            <!-- Fila 4: Equipos -->
+            <!-- Fila 5: Equipos -->
             <div class="row g-2 mb-2">
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Tu equipo</small>
-                  <button class="btn btn-sm btn-outline-primary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Los Cracks
+                  <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
+                  <button class="btn btn-sm btn-outline-primary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Los Cracks</span>
                   </button>
-                  <small class="text-success fw-bold">5/5</small>
+                  <small class="equipo-contador text-success fw-bold">5/5</small>
                 </div>
               </div>
               <div class="col-6">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Equipo rival</small>
-                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1 disabled">
-                    <i class="bi bi-question-circle me-1"></i>Por confirmar
+                  <small class="equipo-label text-muted d-block mb-1">Equipo rival</small>
+                  <button class="btn btn-sm btn-outline-secondary w-100 mb-1 disabled equipo-btn">
+                    <span><i class="bi bi-question-circle me-1"></i>Por confirmar</span>
                   </button>
-                  <small class="text-muted fw-bold">-/-</small>
+                  <small class="equipo-contador text-muted fw-bold">-/-</small>
                 </div>
               </div>
             </div>
@@ -415,42 +427,45 @@ require_once HEAD_COMPONENT;
 
       <!-- Partido 5 - Torneo -->
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" data-estado="confirmado">
-        <div class="card border-primary">
+        <div class="card border-primary partido-card">
+          <!-- Badge de estado estilo notificación -->
+          <span class="badge bg-primary partido-badge">Torneo</span>
+          
           <div class="card-body p-3">
-            <!-- Fila 1: Día, Fecha, Hora -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <div class="text-muted small">
-                <i class="bi bi-calendar3 me-1"></i>
-                <strong>Sábado</strong> 01/03/2025 - <strong>10:00</strong>
-              </div>
-              <span class="badge bg-primary">Torneo</span>
+            <!-- Línea 1: Fecha y hora -->
+            <div class="partido-fecha text-muted small mb-2 d-flex justify-content-between">
+              <span><i class="bi bi-calendar3 me-2"></i><strong>Sábado</strong></span>
+              <span>01/03/2025</span>
+              <span><strong>10:00</strong></span>
             </div>
 
-            <!-- Fila 2: Nombre de la cancha -->
-            <h6 class="fw-bold mb-1">
-              <i class="bi bi-trophy me-2 text-primary"></i>
-              Copa Primavera 2025 - Cancha Norte
-            </h6>
+            <!-- Línea 2: Nombre de la cancha -->
+            <div class="partido-cancha-nombre">
+              <h6 class="fw-bold mb-0">
+                <i class="bi bi-trophy me-2 text-primary"></i>
+                Copa Primavera 2025 - Cancha Norte
+              </h6>
+            </div>
 
-            <!-- Fila 3: Dirección + Botón ubicación -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <p class="text-muted small mb-0">Complejo Deportivo Norte, Zona Industrial</p>
-              <button class="btn btn-sm btn-outline-secondary">
+            <!-- Línea 3: Dirección + Botón ubicación -->
+            <div class="partido-direccion-container mb-3">
+              <p class="partido-direccion text-muted small mb-0">Complejo Deportivo Norte, Zona Industrial</p>
+              <button class="btn btn-sm btn-outline-secondary btn-ubicacion">
                 <i class="bi bi-geo-alt"></i>
               </button>
             </div>
 
             <hr class="my-2">
 
-            <!-- Fila 4: Equipos -->
+            <!-- Fila 5: Equipos -->
             <div class="row g-2 mb-2">
               <div class="col-12">
                 <div class="text-center">
-                  <small class="text-muted d-block mb-1">Tu equipo participa</small>
-                  <button class="btn btn-sm btn-outline-primary w-100 mb-1">
-                    <i class="bi bi-people-fill me-1"></i>Los Tigres
+                  <small class="equipo-label text-muted d-block mb-1">Tu equipo participa</small>
+                  <button class="btn btn-sm btn-outline-primary w-100 mb-1 equipo-btn">
+                    <span><i class="bi bi-people-fill me-1"></i>Los Tigres</span>
                   </button>
-                  <small class="text-success fw-bold">5/5 confirmados</small>
+                  <small class="equipo-contador text-success fw-bold">5/5 confirmados</small>
                 </div>
               </div>
             </div>

@@ -26,6 +26,7 @@ define("CSS_COMPONENTS", SRC_PATH . "styles/components.css");
 define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
 define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
 define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
+define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
