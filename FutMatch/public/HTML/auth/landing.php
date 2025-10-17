@@ -38,9 +38,7 @@ include HEAD_COMPONENT;
             <div class="row g-4 justify-content-center">
                 <!-- Card: Invitado -->
                 <div class="col-11 col-md-5 col-lg-4">
-                    <div class="card card-action h-100" role="button" tabindex="0" aria-label="Entrar como invitado"
-                        onclick="location.href='<?= PAGE_INICIO_GUEST ?>'"
-                        onkeydown="if(event.key==='Enter'){location.href='<?= PAGE_INICIO_GUEST ?>'}">
+                    <div class="card card-action h-100" role="button" tabindex="0" aria-label="Entrar como invitado">
                         <div class="card-body py-4">
                             <h2 class="h4 fw-600 mb-2">Entrar como invitado</h2>
                             <p class="text-muted mb-0">

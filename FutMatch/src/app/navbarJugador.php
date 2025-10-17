@@ -62,7 +62,7 @@ function isActive($page_name, $current)
                             <span class="d-none d-lg-inline ms-1">Explorar</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_LISTADO ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR ?>">
                                     <i class="bi bi-geo-alt me-2"></i>Explorar canchas
                                 </a>
                             </li>
@@ -92,7 +92,7 @@ function isActive($page_name, $current)
             <!-- Lado derecho: perfil, notificaciones y configuración -->
             <div class="d-flex align-items-center">
                 <!-- Botón Mi Perfil -->
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
+                <a href="<?= PAGE_PERFIL_JUGADOR ?>"
                     class="btn btn-dark me-2 d-none d-md-flex <?= isActive('miPerfil', $current_page) ?>"
                     id="botonMiPerfil"
                     title="Mi Perfil">
@@ -154,7 +154,7 @@ function isActive($page_name, $current)
         <!-- Sección Explorar -->
         <h6 class="offcanvas-section-title mb-2">Explorar</h6>
         <div class="d-grid gap-2 mb-4">
-            <a href="<?= PAGE_CANCHAS_LISTADO ?>"
+            <a href="<?= PAGE_CANCHAS_EXPLORAR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarCanchas', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Explorar Canchas
             </a>
@@ -171,7 +171,7 @@ function isActive($page_name, $current)
         <!-- Perfil y configuración -->
         <div class="mt-auto pt-3 border-top">
             <div class="d-grid gap-2">
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
+                <a href="<?= PAGE_PERFIL_JUGADOR ?>"
                     class="btn btn-dark text-start <?= isActive('miPerfil', $current_page) ?>"
                     title="Mi Perfil">
                     <i class="bi bi-person-circle me-2"></i>Mi Perfil

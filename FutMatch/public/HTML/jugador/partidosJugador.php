@@ -51,7 +51,7 @@ require_once HEAD_COMPONENT;
             <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_LISTADO ?>">
               <i class="bi bi-people me-2"></i>Partidos
             </a></li>
-            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_LISTADO ?>">
+            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR ?>">
               <i class="bi bi-geo-alt me-2"></i>Canchas
             </a></li>
           </ul>
