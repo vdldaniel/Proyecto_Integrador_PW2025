@@ -1,0 +1,110 @@
+/* ===================================
+   PÁGINA: MIS PARTIDOS (JUGADOR)
+   Estilos específicos para la vista de partidos del jugador
+   =================================== */
+
+/* CARDS DE PARTIDOS */
+.partido-card {
+  transition: box-shadow 0.2s ease;
+  position: relative; /* Para posicionar el badge absoluto */
+}
+
+.partido-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* BADGE DE ESTADO - Estilo campanita de notificaciones */
+.partido-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  z-index: 10;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* LÍNEA 1: Fecha y hora (ahora es la primera línea) */
+.partido-fecha {
+  height: 1.75rem; /* Altura fija para fecha */
+  display: flex;
+  align-items: center;
+}
+
+/* LÍNEA 2: Nombre de cancha */
+.partido-cancha-nombre {
+  height: 2.5rem; /* Altura fija para nombre de cancha (puede ser 2 líneas) */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* LÍNEA 3: Dirección */
+.partido-direccion-container {
+  height: 2.25rem; /* Altura fija para dirección */
+  display: flex;
+  align-items: center;
+}
+
+.partido-direccion {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* Standard property for compatibility */
+  -webkit-box-orient: vertical;
+  line-height: 1.125rem;
+}
+
+/* Botón de ubicación centrado */
+.btn-ubicacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0 !important;
+  flex-shrink: 0;
+}
+
+.btn-ubicacion i {
+  margin: 0 !important;
+}
+
+/* EQUIPOS: Botones con altura fija */
+.equipo-btn {
+  height: 3rem; /* Altura fija para botones de equipo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  padding: 0.25rem 0.5rem !important;
+}
+
+.equipo-btn span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Labels de equipos */
+.equipo-label {
+  height: 1.5rem; /* Altura fija para labels */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contador de jugadores */
+.equipo-contador {
+  height: 1.25rem; /* Altura fija para contadores */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

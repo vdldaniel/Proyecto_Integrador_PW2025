@@ -27,6 +27,8 @@ define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
 define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
 define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
 define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
+define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
+
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
@@ -57,8 +59,7 @@ define("JS_INICIO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "inicioAdminCancha.js");
 define("JS_INICIO_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "inicio-admin-sistema.js");
 define("JS_INICIO_JUGADOR", JS_SCRIPTS_PATH . "inicioJugador.js");
 define("JS_LANDING", JS_SCRIPTS_PATH . "landing.js");
-define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidos-jugador.js");
-define("JS_PARTIDOS_LISTADO", JS_SCRIPTS_PATH . "partidos-listado.js");
+define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidosJugador.js");
 define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
 define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
