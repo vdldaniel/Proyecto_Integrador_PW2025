@@ -50,14 +50,14 @@ $current_page = 'inicioAdminSistema';
 
         <div class="row justify-content-center">
           <div class="col-12 col-lg-8">
-            <a href="<?= PAGE_CANCHAS_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none" >
+            <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none" >
               <div class="card-body">
                 <h5 class="card-title">Listado de Canchas</h5>
                 <p class="card-text">Ver y gestionar las canchas disponibles.</p>
               </div>
             </a>
 
-            <a href="<?= PAGE_JUGADORES_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
               <div class="card-body">
                 <h5 class="card-title">Listado de Usuarios</h5>
                 <p class="card-text">Ver y gestionar los usuarios registrados.</p>
