@@ -96,7 +96,7 @@ define("PAGE_REGISTRO_ADMIN_CANCHA_PHP", PUBLIC_PATH . "HTML/auth/registroAdminC
 // ===================================
 // PÁGINAS - COMUNES
 // ===================================
-define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/foros-listado.php");
+define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/forosListado.php");
 define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/forosDetalle.html");
 
 // ===================================
@@ -134,14 +134,14 @@ define("PAGE_INICIO_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/inicioAdminC
 define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.php");
 
 // Gestión de canchas
-define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchas-listado.php");
-define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/cancha-crear.php");
+define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchasListado.php");
+define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/canchaCrear.php");
 define("PAGE_ADMIN_CANCHA_PERFIL", PUBLIC_PATH . "HTML/admin-cancha/canchaPerfil.html");
 define("PAGE_ADMIN_CANCHA_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/(pasar a MODAL) cancha-editar.html");
 define("PAGE_ADMIN_CANCHA_PERFIL_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/(UNIFICAR CON canchaPerfil) cancha-perfil-editar.html");
 
 // Gestión de torneos
-define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/mis-torneos.php");
+define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/misTorneos.php");
 define("PAGE_ADMIN_MIS_TORNEOS_CREAR", PUBLIC_PATH . "HTML/admin-cancha/(pasar a MODAL) mis-torneos-crear.html");
 define("PAGE_ADMIN_MIS_TORNEOS_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/(dejar a Cami) mis-torneos-detalle.html");
 
