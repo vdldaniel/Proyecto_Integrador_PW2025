@@ -106,7 +106,7 @@ define("PAGE_PERFIL_JUGADOR_EDITAR", PUBLIC_PATH . "HTML/jugador/perfil-jugador-
 define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador.html");
 
 // Equipos
-define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equipos-listado.html");
+define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equiposListado.php");
 define("PAGE_EQUIPO_CREAR", PUBLIC_PATH . "HTML/jugador/equipo-crear.html");
 define("PAGE_EQUIPO_DETALLE", PUBLIC_PATH . "HTML/jugador/equipo-detalle.html");
 define("PAGE_EQUIPO_MODIFICAR", PUBLIC_PATH . "HTML/jugador/equipo-modificar.html");

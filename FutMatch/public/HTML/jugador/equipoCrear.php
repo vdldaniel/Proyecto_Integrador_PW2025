@@ -10,10 +10,6 @@ $page_title = 'Crear Equipo - FutMatch';
 
 // CSS adicional específico de esta página
 
-$page_css = [
-  CSS_PAGES_INICIO_JUGADOR
-];
-
 // Cargar head común
 require_once HEAD_COMPONENT;
 ?>
