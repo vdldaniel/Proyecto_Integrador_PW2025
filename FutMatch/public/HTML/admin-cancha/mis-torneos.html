@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+
+  <title>FutMatch - Torneos</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
+
+  <!--Iconos Bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+
+  <!-- Tipografía -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="src/styles/adminInc.css" />
+  <link rel="stylesheet" href="src/styles/layout.css" />
+
+</head>
+
+
+<body>
+  <!-- navbar -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img class="logo" src="public/img/logo-sinfondo.svg" alt="" />
+        <span class="brand-text">FutMatch</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--fin navbar -->
+
+  <div class="container-fluid bg-image pt-5 pb-5" style="background-image: url('public/img/bg4.jpg')">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="text-white fw-bold display-4">Gestión de Torneos</h1>
+        <a href="inicio-admin-cancha.html" class="btn btn-light mt-3">
+          <i class="bi bi-arrow-left"></i> Volver a Panel Administrador
+        </a>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="mb-3 text-center">
+        <a href="mis-torneos-crear.html" id="crearTorneoBtn" class="btn btn-success m-2">
+          <i class="bi"></i> Crear Torneo
+        </a>
+        <button class="btn btn-secondary m-2">Historial de Torneos</button>
+      </div>
+
+      <div class="table-responsive mt-4">
+        <table class="table table-dark table-striped align-middle">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Fecha Inicio</th>
+              <th>Equipos</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="torneos-list">
+            <tr>
+              <td>1</td>
+              <td>Torneo Apertura</td>
+              <td>10/10/2025</td>
+              <td>8</td>
+              <td class="estado">Cancelado</td>
+              <td>
+                <a href="" id="crearTorneoBtn" class="btn btn-warning btn-sm me-22">
+                  <i class="bi"></i> Ver detalle
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" onclick="cancelarTorneo()">Cancelar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Copa FutMatch</td>
+              <td>11/10/2025</td>
+              <td>12</td>
+              <td class="estado">Inscripciones abiertas</td>
+              <td>
+                <a href="mis-torneos-detalle.html" id="crearTorneoBtn" class="btn btn-warning btn-sm me-22">
+                  <i class="bi"></i> Ver detalle
+                </a>
+
+                <button type="button" class="btn btn-danger btn-sm" onclick="cancelarTorneo()">Cancelar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Torneo Interclubes</td>
+              <td>10/02/2026</td>
+              <td>10</td>
+              <td class="estado">Inscripciones cerradas</td>
+              <td>
+                <a href="" id="crearTorneoBtn" class="btn btn-warning btn-sm me-22">
+                  <i class="bi"></i> Ver detalle
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" onclick="cancelarTorneo()">Cancelar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Torneo Federal</td>
+              <td>04/11/2025</td>
+              <td>20</td>
+              <td class="estado">Cancelado</td>
+              <td>
+                <a href="" id="crearTorneoBtn" class="btn btn-warning btn-sm me-22">
+                  <i class="bi"></i> Ver detalle
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" onclick="cancelarTorneo()">Cancelar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="src/scripts/pages/adminInc.js"></script>
+  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

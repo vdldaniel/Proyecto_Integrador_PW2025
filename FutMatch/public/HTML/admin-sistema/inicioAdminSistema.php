@@ -1,17 +1,18 @@
-<!--
-Pantalla de Inicio para el administrador del sistema con funcionalidades:
-- Ver listado de canchas
-- Ver listado de usuarios
-- Ver listado de reportes de incidentes
-- Botón para cerrar sesión
--->
+<?php
+
+// Cargar configuración
+require_once __DIR__ . '/../../../src/app/config.php';
+
+// Definir la página actual para el navbar
+$current_page = 'inicioAdminSistema';
+?>
 
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/Proyecto_Integrador_PW2025/FutMatch/" />
+    <base href="<?= BASE_URL ?>" />
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
@@ -38,40 +39,37 @@ Pantalla de Inicio para el administrador del sistema con funcionalidades:
   </head>
 
   <body>
-    <header>
-      <nav id="navbarFutmatchAdmin"></nav>
+
+  <header>
+    <?php include NAVBAR_ADMIN_SISTEMA_COMPONENT; ?>
     </header>
 
     <main>
       <div class="container mt-4">
-
         <h1 class="text-center mb-5">FUTMATCH - Administración</h1>
 
         <div class="row justify-content-center">
-
           <div class="col-12 col-lg-8">
-
-            <a href="public/HTML/admin-sistema/canchas-listado-sistema.html" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none" >
+            <a href="<?= PAGE_CANCHAS_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none" >
               <div class="card-body">
                 <h5 class="card-title">Listado de Canchas</h5>
                 <p class="card-text">Ver y gestionar las canchas disponibles.</p>
               </div>
             </a>
 
-            <a href="public/HTML/admin-sistema/jugadores-listado-sistema.html" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <a href="<?= PAGE_JUGADORES_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
               <div class="card-body">
                 <h5 class="card-title">Listado de Usuarios</h5>
                 <p class="card-text">Ver y gestionar los usuarios registrados.</p>
               </div>
             </a>
 
-            <a href="#" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <a href="<?= PAGE_REPORTES_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
               <div class="card-body">
                 <h5 class="card-title">Reportes de Incidentes</h5>
                 <p class="card-text">Ver y gestionar los reportes de incidentes.</p>
               </div>
             </a>
-
           </div>
         </div>
       </div>

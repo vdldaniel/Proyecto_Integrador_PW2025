@@ -107,8 +107,10 @@ define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilJugador.html");
 define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador (-MODAL navbar).html");
 
 // Equipos
-define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equiposListado.html");
+define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equiposListado.php");
 define("PAGE_EQUIPO_CREAR", PUBLIC_PATH . "HTML/jugador/equipo-crear (-MODAL).html");
+define("PAGE_EQUIPO_DETALLE", PUBLIC_PATH . "HTML/jugador/equipo-detalle.html");
+define("PAGE_EQUIPO_MODIFICAR", PUBLIC_PATH . "HTML/jugador/equipo-modificar.html");
 
 // Partidos
 define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidosJugador.php");
@@ -147,7 +149,7 @@ define("PAGE_ADMIN_MIS_TORNEOS_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/(dejar
 // PÁGINAS - ADMIN SISTEMA
 // ===================================
 define("PAGE_LOGIN_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/login-admin-sistema.html");
-define("PAGE_INICIO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/inicio-admin-sistema.html");
+define("PAGE_INICIO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/inicioAdminSistema.php");
 
 // Gestión de jugadores
 define("PAGE_SISTEMA_JUGADORES_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/jugadores-listado-sistema.html");

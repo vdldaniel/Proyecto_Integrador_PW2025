@@ -73,7 +73,7 @@ function isActive($page_name, $current)
                         </ul>
                     </div>
                     <a href="<?= PAGE_EQUIPOS_LISTADO ?>"
-                        class="btn btn-dark me-2 <?= isActive('misEquipos', $current_page) ?>"
+                        class="btn btn-dark me-2 <?= isActive('equiposListado', $current_page) ?>"
                         id="botonMiEquipo"
                         title="Mis Equipos">
                         <i class="bi bi-people"></i>
@@ -145,7 +145,7 @@ function isActive($page_name, $current)
                 <i class="bi bi-calendar-event me-2"></i>Mis Partidos
             </a>
             <a href="<?= PAGE_EQUIPOS_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('MisEquipos', $current_page) ?>"
+                class="btn btn-dark text-start <?= isActive('equiposListado', $current_page) ?>"
                 title="Mis Equipos">
                 <i class="bi bi-people me-2"></i>Mis Equipos
             </a>
