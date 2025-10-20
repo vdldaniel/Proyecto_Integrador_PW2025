@@ -63,13 +63,6 @@ $current_page = 'inicioAdminSistema';
                 <p class="card-text">Ver y gestionar los usuarios registrados.</p>
               </div>
             </a>
-
-            <a href="<?= PAGE_REPORTES_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
-              <div class="card-body">
-                <h5 class="card-title">Reportes de Incidentes</h5>
-                <p class="card-text">Ver y gestionar los reportes de incidentes.</p>
-              </div>
-            </a>
           </div>
         </div>
       </div>
