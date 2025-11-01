@@ -8,11 +8,6 @@
  * Requiere: config.php cargado previamente
  */
 
-// Asegurar que config.php está cargado
-if (!defined('BASE_URL')) {
-	require_once __DIR__ . '/config.php';
-}
-
 // Determinar página activa (si no está definida, intentar detectarla)
 if (!isset($current_page)) {
 	$current_page = basename($_SERVER['PHP_SELF'], '.php');
@@ -62,6 +57,13 @@ function isActive($page_name, $current)
 						<i class="bi bi-geo-alt-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Canchas</span>
 					</a>
+					<a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>"
+						class="btn btn-dark me-2 <?= isActive('canchaPerfil', $current_page) ?>"
+						id="botonPerfiles"
+						title="Perfiles">
+						<i class="bi bi-person-circle"></i>
+						<span class="d-none d-lg-inline ms-1">Perfiles</span>
+					</a>
 					<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>"
 						class="btn btn-dark me-2 <?= isActive('misTorneos', $current_page) ?>"
 						id="botonMisTorneos"
@@ -96,7 +98,7 @@ function isActive($page_name, $current)
 						data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
 						<i class="bi bi-gear"></i>
 					</button>
-					<a href="<?= PAGE_LANDING_PHP ?>" class="btn btn-danger me-2 d-none d-lg-flex" id="btnCerrarSesion"
+					<a href="<?= CONTROLLER_LOGOUT ?>" class="btn btn-danger me-2 d-none d-lg-flex" id="btnCerrarSesion"
 						title="Cerrar Sesión">
 						<i class="bi bi-box-arrow-right text-white"></i>
 					</a>
@@ -134,7 +136,12 @@ function isActive($page_name, $current)
 			<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>"
 				class="btn btn-dark text-start <?= isActive('misTorneos', $current_page) ?>"
 				title="Mis Torneos">
-				<i class="bi bi-geo-alt-fill me-2"></i>Mis Torneos
+				<i class="bi bi-trophy-fill me-2"></i>Mis Torneos
+			</a>
+			<a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>"
+				class="btn btn-dark text-start <?= isActive('canchaPerfil', $current_page) ?>"
+				title="Perfiles">
+				<i class="bi bi-person-circle me-2"></i>Perfiles
 			</a>
 		</div>
 
@@ -154,7 +161,7 @@ function isActive($page_name, $current)
 					data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
 					<i class="bi bi-gear me-2"></i>Configuración
 				</button>
-				<a href="<?= PAGE_LANDING_PHP ?>" class="btn btn-danger text-start"
+				<a href="<?= CONTROLLER_LOGOUT ?>" class="btn btn-danger text-start"
 					title="Cerrar Sesión">
 					<i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
 				</a>
@@ -165,7 +172,7 @@ function isActive($page_name, $current)
 <!-- ============================================ -->
 <!-- MODAL: NOTIFICACIONES -->
 <!-- ============================================ -->
-<div class="modal fade" id="modalNotificaciones" tabindex="-1" aria-labelledby="modalNotificacionesLabel" aria-hidden="true">
+<div class="modal fade" id="modalNotificaciones" tabindex="-1" aria-labelledby="modalNotificacionesLabel">
 	<div class="modal-dialog modal-lg modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">

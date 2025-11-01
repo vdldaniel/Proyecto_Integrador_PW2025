@@ -1,0 +1,686 @@
+-- =========================================================
+--  CREACIÓN DE BASE DE DATOS
+-- =========================================================
+CREATE DATABASE IF NOT EXISTS futmatch_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE futmatch_db;
+
+-- =========================================================
+--  TABLAS DE USUARIOS (ROLES + ESTADOS)
+-- =========================================================
+
+CREATE TABLE roles (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+    );
+
+INSERT INTO roles (nombre) VALUES 
+	('admin_sistema_viewer'), ('admin_sistema_moderador'), ('admin_sistema_manager'),
+    ('admin_cancha'), ('jugador');
+
+    
+CREATE TABLE permisos (
+    id_permiso INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+    );
+
+INSERT INTO permisos (nombre) VALUES
+	('Ver dashboard del sistema'),
+	('Gestionar usuarios'),
+	('Gestionar canchas'),
+	('Gestionar solicitudes'),
+	('Ver reportes'),
+	('Banear usuarios'),
+	('Gestionar torneos'),
+	('Crear cancha'),
+	('Editar cancha'),
+	('Eliminar cancha'),
+	('Ver reservas de cancha'),
+	('Gestionar horarios de cancha'),
+	('Crear torneo'),
+	('Gestionar equipos de torneo'),
+	('Crear equipo'),
+	('Unirse a equipo'),
+	('Crear partido'),
+	('Unirse a partido'),
+	('Hacer reserva'),
+	('Calificar jugador'),
+	('Calificar cancha'),
+	('Crear foro'),
+	('Responder en foro'),
+	('Ver perfil de jugador'),
+	('Editar perfil de jugador'),
+	('Ver estadísticas');
+
+CREATE TABLE roles_permisos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_rol INT NOT NULL,
+    id_permiso INT NOT NULL,
+    FOREIGN KEY (id_rol) REFERENCES roles(id_rol),
+    FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso)
+);
+
+-- Permisos para admin_sistema_viewer (id_rol = 1)
+INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
+	(1, 1),  -- Ver dashboard del sistema
+	(1, 5);  -- Ver reportes
+
+-- Permisos para admin_sistema_moderador (id_rol = 2)
+INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
+	(2, 1),  -- Ver dashboard del sistema
+	(2, 2),  -- Gestionar usuarios
+	(2, 3),  -- Gestionar canchas
+	(2, 4),  -- Gestionar solicitudes
+	(2, 5),  -- Ver reportes
+	(2, 6);  -- Banear usuarios
+
+-- Permisos para admin_sistema_manager (id_rol = 3)
+INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
+	(3, 1),  -- Ver dashboard del sistema
+	(3, 2),  -- Gestionar usuarios
+	(3, 3),  -- Gestionar canchas
+	(3, 4),  -- Gestionar solicitudes
+	(3, 5),  -- Ver reportes
+	(3, 6),  -- Banear usuarios
+	(3, 7);  -- Gestionar torneos
+
+-- Permisos para admin_cancha (id_rol = 4)
+INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
+	(4, 8),  -- Crear cancha
+	(4, 9),  -- Editar cancha
+	(4, 10), -- Eliminar cancha
+	(4, 11), -- Ver reservas de cancha
+	(4, 12), -- Gestionar horarios de cancha
+	(4, 13), -- Crear torneo
+	(4, 14), -- Gestionar equipos de torneo
+	(4, 22), -- Crear foro
+	(4, 23); -- Responder en foro
+
+-- Permisos para jugador (id_rol = 5)
+INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
+	(5, 15), -- Crear equipo
+	(5, 16), -- Unirse a equipo
+	(5, 17), -- Crear partido
+	(5, 18), -- Unirse a partido
+	(5, 19), -- Hacer reserva
+	(5, 20), -- Calificar jugador
+	(5, 21), -- Calificar cancha
+	(5, 22), -- Crear foro
+	(5, 23), -- Responder en foro
+	(5, 24), -- Ver perfil de jugador
+	(5, 25), -- Editar perfil de jugador
+	(5, 26); -- Ver estadísticas
+
+CREATE TABLE estados_usuarios (
+    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+    );
+    
+INSERT INTO estados_usuarios (nombre) VALUES 
+	('Activo'), ('Inactivo'), ('Suspendido');
+
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    id_estado INT NOT NULL DEFAULT 1,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_estado) REFERENCES estados_usuarios(id_estado)
+    );
+    
+INSERT INTO usuarios (nombre, apellido, email, password, id_estado) VALUES
+	('Camila','Santo','cnsanto@gmail.com','12345',1);
+
+CREATE TABLE usuarios_roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_rol INT NOT NULL,
+    FOREIGN KEY (id_rol) REFERENCES roles(id_rol),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+INSERT INTO usuarios_roles (id_usuario, id_rol) VALUES
+    (1, 3);
+
+    
+CREATE TABLE estados_solicitudes (
+    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50)
+    );
+
+INSERT INTO estados_solicitudes (nombre) VALUES
+	('Pendiente'), ('En revisión'), ('Aceptada'), ('Rechazada'), ('Cancelada');
+
+-- =========================================================
+--  TABLAS ESPACIOS (AUXILIAR DE FOROS)
+--  Todo lo que se pueda asociar a un foro o tenga un perfil, va a tener asignado un ESPACIO
+-- =========================================================
+
+CREATE TABLE tipos_espacios (
+    id_tipo_espacio INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
+    );
+    
+INSERT INTO tipos_espacios (nombre) VALUES
+	('global'),('jugador'),('equipo'),('reserva'),('torneo'),('cancha'),('futmatch');
+   
+CREATE TABLE espacios (
+    id_espacio INT AUTO_INCREMENT PRIMARY KEY,
+    id_tipo_espacio INT NOT NULL,
+    FOREIGN KEY (id_tipo_espacio) REFERENCES tipos_espacios(id_tipo_espacio)
+    );
+
+INSERT INTO espacios (id_tipo_espacio) VALUES
+    (1);
+
+CREATE TABLE usuarios_espacios (
+    id_espacio INT NOT NULL,
+    id_usuario INT NOT NULL,
+    PRIMARY KEY (id_espacio, id_usuario),
+    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+    );
+
+INSERT INTO usuarios_espacios (id_espacio, id_usuario) VALUES
+    (1, 1);
+    
+-- =========================================================
+--  TABLAS ADMIN_SISTEMA
+-- =========================================================
+
+CREATE TABLE admin_sistema (
+    id_admin_sistema INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+    
+CREATE TABLE direcciones (
+    id_direccion INT AUTO_INCREMENT PRIMARY KEY,
+    direccion_completa VARCHAR(500) NOT NULL,
+    latitud DECIMAL(10, 8) NOT NULL,
+    longitud DECIMAL(11, 8) NOT NULL,
+    pais VARCHAR(100),
+    provincia VARCHAR(100),
+    localidad VARCHAR(100)
+    );
+
+CREATE TABLE solicitudes_admin_cancha (
+    id_solicitud INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    telefono VARCHAR(20),
+    nombre_cancha VARCHAR(100) NOT NULL,
+    id_direccion INT NOT NULL,
+    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
+    id_estado INT NOT NULL DEFAULT 1,
+    id_verificador INT,
+    fecha_resolucion DATETIME,
+    observaciones VARCHAR(250),
+    FOREIGN KEY(id_direccion) REFERENCES direcciones(id_direccion),
+    FOREIGN KEY(id_estado) REFERENCES estados_solicitudes(id_estado),
+    FOREIGN KEY(id_verificador) REFERENCES admin_sistema(id_admin_sistema)
+    );
+    
+-- =========================================================
+--  TABLAS ADMIN_CANCHA
+-- =========================================================
+
+CREATE TABLE admin_canchas (
+    id_admin_cancha INT AUTO_INCREMENT PRIMARY KEY,
+    id_solicitud INT NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    FOREIGN KEY(id_solicitud) REFERENCES solicitudes_admin_cancha(id_solicitud)
+    );
+    
+CREATE TABLE estados_canchas (
+    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100)
+    );
+    
+INSERT INTO estados_canchas (nombre) VALUES
+	('Pendiente de verificación'),('En revisión'),('Habilitada'),('Deshabilitada'),('Suspendida');
+    
+CREATE TABLE canchas (
+    id_cancha INT AUTO_INCREMENT PRIMARY KEY,
+    id_admin_cancha INT NOT NULL,
+    id_direccion INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(250),
+    id_estado INT NOT NULL DEFAULT 1,
+    foto VARCHAR(255),
+    id_espacio INT NOT NULL,
+    FOREIGN KEY(id_admin_cancha) REFERENCES admin_canchas(id_admin_cancha),
+    FOREIGN KEY(id_direccion) REFERENCES direcciones(id_direccion),
+    FOREIGN KEY(id_estado) REFERENCES estados_canchas(id_estado),
+    FOREIGN KEY(id_espacio) REFERENCES espacios(id_espacio)
+    );
+    
+CREATE TABLE dias_semana (
+    id_dia INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
+    );
+    
+INSERT INTO dias_semana (nombre) VALUES	
+	('lunes'),('martes'),('miercoles'),('jueves'),('viernes'),('sabado'),('domingo');
+    
+CREATE TABLE horarios_cancha (
+    id_horario INT AUTO_INCREMENT PRIMARY KEY,
+    id_cancha INT NOT NULL,
+    id_dia INT NOT NULL,
+    hora_apertura TIME NOT NULL,
+    hora_cierre TIME NOT NULL,
+    FOREIGN KEY (id_cancha) REFERENCES canchas(id_cancha),
+    FOREIGN KEY (id_dia) REFERENCES dias_semana(id_dia)
+    );
+    
+-- =========================================================
+--  TABLAS JUGADOR
+-- =========================================================
+
+CREATE TABLE sexo (
+    id_sexo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+    );
+
+INSERT INTO sexo (nombre) VALUES
+	('femenino'),('masculino'),('otro');
+    
+CREATE TABLE posiciones (
+    id_posicion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL
+    );
+
+INSERT INTO posiciones (nombre) VALUES
+	('arquero'),('defensor'),('mediocampista'),('delantero');
+
+CREATE TABLE jugadores (
+    id_jugador INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20) UNIQUE NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    foto_perfil VARCHAR(255),
+    fecha_nacimiento DATE NOT NULL,
+    id_sexo INT NOT NULL,
+    id_posicion INT,
+    reputacion INT,
+    id_espacio INT NOT NULL, 
+    FOREIGN KEY (id_jugador) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_sexo) REFERENCES sexo(id_sexo),
+    FOREIGN KEY (id_posicion) REFERENCES posiciones(id_posicion),
+    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
+    );
+    
+CREATE TABLE equipos (
+    id_equipo INT AUTO_INCREMENT PRIMARY KEY,
+    id_lider INT NOT NULL,
+    nombre VARCHAR(50),
+    id_espacio INT NOT NULL,
+    FOREIGN KEY (id_lider) REFERENCES jugadores(id_jugador),
+    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
+    );
+    
+CREATE TABLE jugadores_equipos (
+    id_jugador INT NOT NULL,
+    id_equipo INT NOT NULL,
+    PRIMARY KEY (id_jugador, id_equipo),
+    FOREIGN KEY (id_jugador) REFERENCES jugadores(id_jugador),
+    FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo)
+    );
+    
+-- =========================================================
+--  TABLAS TORNEOS
+-- =========================================================
+
+CREATE TABLE etapas_torneo (
+    id_etapa INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50)
+    );
+    
+ INSERT INTO etapas_torneo (nombre) VALUES
+ 	('borrador'),('inscripciones abiertas'),('en curso'),('finalizado');
+
+CREATE TABLE fases_torneo (
+    id_fase INT AUTO_INCREMENT PRIMARY KEY,
+    n INT NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(200),
+    INDEX idx_n (n)
+);
+
+INSERT INTO fases_torneo (n, nombre, descripcion) VALUES
+    (0, 'Ganador', 'Equipo campeón del torneo'),
+    (1, 'Final', 'Partido final entre los 2 últimos equipos'),
+    (2, 'Semifinal', 'Partidos entre los 4 últimos equipos'),
+    (3, 'Cuartos de Final', 'Partidos entre los 8 últimos equipos'),
+    (4, 'Octavos de Final', 'Partidos entre los 16 últimos equipos'),
+    (5, 'Eliminatorias', 'Fase de eliminación directa inicial');
+
+
+CREATE TABLE torneos (
+    id_torneo INT AUTO_INCREMENT PRIMARY KEY,
+    id_organizador INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    fecha_inicio DATE, 
+    fecha_fin DATE,
+    fin_estimativo BOOLEAN, 
+    id_etapa INT NOT NULL DEFAULT 1,
+    id_espacio INT NOT NULL,
+    FOREIGN KEY (id_organizador) REFERENCES admin_canchas(id_admin_cancha),
+    FOREIGN KEY (id_etapa) REFERENCES etapas_torneo(id_etapa),
+    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
+    );
+
+
+CREATE TABLE equipos_torneos (
+    id_equipo INT NOT NULL,
+    id_torneo INT NOT NULL, 
+    id_estado INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (id_equipo, id_torneo),
+    FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo),
+    FOREIGN KEY (id_torneo) REFERENCES torneos(id_torneo),
+    FOREIGN KEY (id_estado) REFERENCES estados_solicitudes(id_estado)
+    );
+    
+-- =========================================================
+--  TABLAS RESERVAS Y PARTIDOS
+-- =========================================================
+
+CREATE TABLE tipos_partido (
+    id_tipo_partido INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(200)
+    );
+    
+INSERT INTO tipos_partido (nombre, descripcion) VALUES
+    ('Fútbol 5', 'Partido de fútbol con 5 jugadores por equipo'),
+    ('Fútbol 7', 'Partido de fútbol con 7 jugadores por equipo'),
+    ('Fútbol 11', 'Partido de fútbol con 11 jugadores por equipo'),
+    ('Fútbol Sala', 'Partido de fútbol sala/futsal con 5 jugadores por equipo'),
+    ('Fútbol Playa', 'Partido de fútbol playa con 5 jugadores por equipo');
+
+-- Tipos de reserva para mayor flexibilidad
+CREATE TABLE tipos_reserva (
+    id_tipo_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(200)
+);
+
+INSERT INTO tipos_reserva (nombre, descripcion) VALUES
+    ('jugador', 'Reserva realizada por un jugador desde la app'),
+    ('admin_torneo', 'Reserva del admin para partido de torneo'),
+    ('admin_mantenimiento', 'Reserva del admin para mantenimiento/limpieza'),
+    ('admin_evento', 'Reserva del admin para evento especial');
+
+CREATE TABLE reservas (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    id_cancha INT NOT NULL,
+    id_tipo_reserva INT NOT NULL DEFAULT 1,
+    fecha DATE NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    motivo VARCHAR(200), -- Descripción para reservas especiales
+    id_estado INT NOT NULL DEFAULT 1,
+    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_cancha) REFERENCES canchas(id_cancha),
+    FOREIGN KEY (id_tipo_reserva) REFERENCES tipos_reserva(id_tipo_reserva),
+    FOREIGN KEY (id_estado) REFERENCES estados_solicitudes(id_estado)
+);
+
+CREATE TABLE reservas_usuarios (
+    id_reserva INT NOT NULL,
+    id_usuario INT NOT NULL,
+    id_rol INT NOT NULL,
+    PRIMARY KEY (id_reserva, id_usuario),
+    FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva) ON DELETE CASCADE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_rol) REFERENCES roles(id_rol),
+    INDEX idx_usuario_tipo (id_usuario, id_rol),
+    INDEX idx_reserva (id_reserva)
+);
+    
+CREATE TABLE partidos (
+    id_partido INT AUTO_INCREMENT PRIMARY KEY,
+    id_reserva INT NOT NULL,
+    id_anfitrion INT NOT NULL,
+    id_tipo_partido INT NOT NULL DEFAULT 1,
+    FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
+    FOREIGN KEY (id_anfitrion) REFERENCES jugadores(id_jugador),
+    FOREIGN KEY (id_tipo_partido) REFERENCES tipos_partido(id_tipo_partido)
+	);
+
+CREATE TABLE partidos_torneos (
+    id_partido_torneo INT AUTO_INCREMENT PRIMARY KEY,
+    id_partido INT NOT NULL,
+    id_torneo INT NOT NULL,
+    id_fase INT NOT NULL,
+    orden_en_fase INT,
+    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,
+    FOREIGN KEY (id_torneo) REFERENCES torneos(id_torneo) ON DELETE CASCADE,
+    FOREIGN KEY (id_fase) REFERENCES fases_torneo(id_fase),
+    UNIQUE KEY unique_partido_torneo (id_partido, id_torneo),
+    INDEX idx_torneo_fase (id_torneo, id_fase)
+);
+
+CREATE TABLE equipos_partidos (
+    id_equipo INT NOT NULL,
+    id_partido INT NOT NULL,
+    goles_anotados INT DEFAULT 0,
+    es_ganador BOOLEAN DEFAULT FALSE,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_equipo, id_partido),
+    FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo) ON DELETE CASCADE,
+    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,
+    INDEX idx_partido (id_partido),
+    INDEX idx_equipo (id_equipo)
+);
+    
+CREATE TABLE roles_partidos (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+    );
+    
+INSERT INTO roles_partidos (nombre) VALUES
+	('anfitrion'),('invitado'),('solicitante');
+    
+CREATE TABLE participantes_partidos (
+    id_participante INT AUTO_INCREMENT PRIMARY KEY,
+    id_partido INT NOT NULL,
+    id_jugador INT NULL, -- si es solicitante o si es invitado del anfitrion, con cuenta
+    nombre_invitado VARCHAR(100), -- si es invitado del anfitrion, sin cuenta
+    id_rol INT NOT NULL,
+    id_estado INT NOT NULL DEFAULT 1,
+    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido),
+    FOREIGN KEY (id_jugador) REFERENCES jugadores(id_jugador),
+    FOREIGN KEY (id_rol) REFERENCES roles_partidos(id_rol),
+    FOREIGN KEY (id_estado) REFERENCES estados_solicitudes(id_estado)
+    );
+    
+CREATE TABLE estadisticas_partido (
+    id_estadistica INT AUTO_INCREMENT PRIMARY KEY, 
+    id_partido INT NOT NULL,
+    id_participante INT NOT NULL,
+    goles INT,
+    asistencias INT,
+    faltas INT,
+    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido),
+    FOREIGN KEY (id_participante) REFERENCES participantes_partidos(id_participante)
+	);
+
+CREATE TABLE calificaciones_jugadores (
+    id_calificacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_partido INT NOT NULL,
+    id_jugador_evaluador INT NOT NULL,
+    id_jugador_evaluado INT NOT NULL,
+    puntuacion INT NOT NULL,
+    reportado BOOLEAN NOT NULL,
+    comentario VARCHAR(250),
+    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido),
+    FOREIGN KEY (id_jugador_evaluador) REFERENCES jugadores(id_jugador),
+    FOREIGN KEY (id_jugador_evaluado) REFERENCES jugadores(id_jugador)
+	);
+
+CREATE TABLE resenias_canchas (
+    id_resenia INT AUTO_INCREMENT PRIMARY KEY,
+    id_cancha INT NOT NULL,
+    id_jugador INT NOT NULL,
+    titulo VARCHAR(100),
+    texto VARCHAR(500),
+    calificacion INT NOT NULL,
+    foto VARCHAR(250),
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_cancha) REFERENCES canchas(id_cancha),
+    FOREIGN KEY (id_jugador) REFERENCES jugadores(id_jugador)
+	);
+
+-- =========================================================
+--  TABLAS FOROS
+-- =========================================================
+
+CREATE TABLE foros (
+    id_foro INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    texto VARCHAR(500),
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+	);
+
+CREATE TABLE respuestas_foros (
+    id_respuesta INT AUTO_INCREMENT PRIMARY KEY,
+    id_foro INT NOT NULL,
+    id_usuario INT NOT NULL,
+    texto VARCHAR(500),
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_foro) REFERENCES foros(id_foro),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+    );
+
+
+CREATE TABLE foros_espacios ( 
+    id_foro INT NOT NULL,
+    id_espacio INT NOT NULL,
+    es_origen BOOLEAN DEFAULT FALSE,
+    fecha_vinculacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY (id_foro, id_espacio),
+    FOREIGN KEY (id_foro) REFERENCES foros(id_foro) ON DELETE CASCADE,
+    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio) ON DELETE CASCADE,
+    INDEX idx_espacio_activo (id_espacio, activo),
+    INDEX idx_foro_origen (id_foro, es_origen)
+);
+    
+
+-- =========================================================
+--  ÍNDICES ADICIONALES PARA OPTIMIZACIÓN
+-- =========================================================
+
+-- Índices para consultas frecuentes de torneos
+CREATE INDEX idx_torneos_organizador_etapa ON torneos(id_organizador, id_etapa);
+CREATE INDEX idx_equipos_torneos_estado ON equipos_torneos(id_torneo, id_estado);
+
+-- Índices para partidos y reservas
+CREATE INDEX idx_partidos_anfitrion ON partidos(id_anfitrion);
+CREATE INDEX idx_reservas_fecha_cancha ON reservas(fecha, id_cancha);
+CREATE INDEX idx_participantes_partido_estado ON participantes_partidos(id_partido, id_estado);
+
+-- Índices para foros
+CREATE INDEX idx_foros_usuario_fecha ON foros(id_usuario, fecha);
+CREATE INDEX idx_respuestas_foro_fecha ON respuestas_foros(id_foro, fecha);
+
+-- =========================================================
+--  TRIGGERS PARA INTEGRIDAD DE DATOS
+-- =========================================================
+
+DELIMITER //
+
+-- Trigger: Validar que un torneo no tenga más de 2 equipos por partido
+CREATE TRIGGER validate_equipos_partido
+BEFORE INSERT ON equipos_partidos
+FOR EACH ROW
+BEGIN
+    DECLARE equipos_count INT;
+    SELECT COUNT(*) INTO equipos_count 
+    FROM equipos_partidos 
+    WHERE id_partido = NEW.id_partido;
+    
+    IF equipos_count >= 2 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Un partido no puede tener más de 2 equipos';
+    END IF;
+END//
+
+-- Trigger: Auto-actualizar reputación jugador tras calificación
+CREATE TRIGGER actualizar_reputacion_jugador
+AFTER INSERT ON calificaciones_jugadores
+FOR EACH ROW
+BEGIN
+    UPDATE jugadores 
+    SET reputacion = (
+        SELECT AVG(puntuacion) 
+        FROM calificaciones_jugadores 
+        WHERE id_jugador_evaluado = NEW.id_jugador_evaluado
+    )
+    WHERE id_jugador = NEW.id_jugador_evaluado;
+END//
+
+DELIMITER ;
+
+-- =========================================================
+--  VISTAS OPTIMIZADAS
+-- =========================================================
+
+CREATE OR REPLACE VIEW vista_usuarios AS
+SELECT 
+    u.id_usuario,
+    u.nombre,
+    u.apellido,
+    u.email,
+    GROUP_CONCAT(r.nombre SEPARATOR ', ') AS roles,
+    e.nombre AS estado,
+    u.fecha_registro
+FROM usuarios u
+LEFT JOIN usuarios_roles ur ON u.id_usuario = ur.id_usuario
+LEFT JOIN roles r ON ur.id_rol = r.id_rol
+JOIN estados_usuarios e ON u.id_estado = e.id_estado
+GROUP BY u.id_usuario, u.nombre, u.apellido, u.email, e.nombre, u.fecha_registro;
+
+-- Vista para bracket de torneos
+CREATE OR REPLACE VIEW vista_bracket_torneos AS
+SELECT 
+    t.id_torneo,
+    t.nombre AS torneo_nombre,
+    pt.id_fase,
+    f.nombre AS fase_nombre,
+    f.n AS fase_numero,
+    pt.orden_en_fase,
+    p.id_partido,
+    GROUP_CONCAT(
+        CONCAT(eq.nombre, ':', ep.goles_anotados, IF(ep.es_ganador, ' (G)', ''))
+        ORDER BY ep.es_ganador DESC
+        SEPARATOR ' vs '
+    ) AS equipos_resultado
+FROM torneos t
+JOIN partidos_torneos pt ON t.id_torneo = pt.id_torneo
+JOIN fases_torneo f ON pt.id_fase = f.id_fase
+JOIN partidos p ON pt.id_partido = p.id_partido
+JOIN equipos_partidos ep ON p.id_partido = ep.id_partido
+JOIN equipos eq ON ep.id_equipo = eq.id_equipo
+GROUP BY t.id_torneo, pt.id_fase, p.id_partido
+ORDER BY t.id_torneo, f.n, pt.orden_en_fase;
+
+-- Vista para estadísticas de equipos en torneos
+CREATE OR REPLACE VIEW vista_estadisticas_equipos_torneo AS
+SELECT 
+    et.id_torneo,
+    et.id_equipo,
+    eq.nombre AS equipo_nombre,
+    COUNT(ep.id_partido) AS partidos_jugados,
+    SUM(ep.goles_anotados) AS goles_a_favor,
+    SUM(CASE WHEN ep.es_ganador THEN 1 ELSE 0 END) AS victorias,
+    COUNT(ep.id_partido) - SUM(CASE WHEN ep.es_ganador THEN 1 ELSE 0 END) AS derrotas
+FROM equipos_torneos et
+JOIN equipos eq ON et.id_equipo = eq.id_equipo
+LEFT JOIN equipos_partidos ep ON et.id_equipo = ep.id_equipo
+LEFT JOIN partidos_torneos pt ON ep.id_partido = pt.id_partido AND pt.id_torneo = et.id_torneo
+WHERE et.id_estado = 3 -- Solo equipos aceptados
+GROUP BY et.id_torneo, et.id_equipo, eq.nombre;

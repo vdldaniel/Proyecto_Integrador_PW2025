@@ -11,6 +11,9 @@ $page_css = [SRC_PATH . "styles/pages/landing.css"];
 include HEAD_COMPONENT;
 ?>
 
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 <title><?= $page_title ?></title>
 </head>
 
@@ -34,7 +37,7 @@ include HEAD_COMPONENT;
           <!-- Card con efecto glassmorphism -->
           <div class="card card-action" style="cursor: default;">
             <div class="card-body p-4">
-              <form id="formRegistroAdmin" class="needs-validation" novalidate>
+              <form id="formRegistroAdmin" action="<?= CONTROLLER_REGISTRO_ADMIN_CANCHA ?>" method="POST" class="needs-validation" novalidate>
                 <div class="row g-3">
                   <!-- Nombre -->
                   <div class="col-12 col-md-6">
@@ -45,6 +48,7 @@ include HEAD_COMPONENT;
                       id="inputNombre"
                       name="nombre"
                       required
+                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">El nombre es obligatorio.</div>
                   </div>
@@ -58,6 +62,7 @@ include HEAD_COMPONENT;
                       id="inputApellido"
                       name="apellido"
                       required
+                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">El apellido es obligatorio.</div>
                   </div>
@@ -86,92 +91,55 @@ include HEAD_COMPONENT;
                       name="nombreCancha"
                       placeholder="Ej: Complejo Deportivo Las Palmeras"
                       required
+                      value="<?= htmlspecialchars($_POST['nombreCancha'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">El nombre de la cancha es obligatorio.</div>
                   </div>
 
-                  <!-- DIRECCIÓN - País -->
-                  <div class="col-12 col-md-6">
-                    <label for="inputPais" class="form-label">País</label>
-                    <select
-                      class="form-select"
-                      id="inputPais"
-                      name="pais"
-                      required
-                    >
-                      <option value="" selected disabled>Seleccionar país</option>
-                      <option value="argentina">Argentina</option>
-                      <option value="uruguay">Uruguay</option>
-                      <option value="chile">Chile</option>
-                      <option value="paraguay">Paraguay</option>
-                      <option value="brasil">Brasil</option>
-                    </select>
-                    <div class="invalid-feedback">El país es obligatorio.</div>
-                  </div>
-
-                  <!-- DIRECCIÓN - Provincia -->
-                  <div class="col-12 col-md-6">
-                    <label for="inputProvincia" class="form-label">Provincia</label>
-                    <select
-                      class="form-select"
-                      id="inputProvincia"
-                      name="provincia"
-                      required
-                    >
-                      <option value="" selected disabled>Seleccionar provincia</option>
-                      <option value="buenos-aires">Buenos Aires</option>
-                      <option value="caba">CABA</option>
-                      <option value="cordoba">Córdoba</option>
-                      <option value="santa-fe">Santa Fe</option>
-                      <option value="mendoza">Mendoza</option>
-                      <option value="otras">Otras</option>
-                    </select>
-                    <div class="invalid-feedback">La provincia es obligatoria.</div>
-                  </div>
-
-                  <!-- DIRECCIÓN - Localidad -->
-                  <div class="col-12 col-md-6">
-                    <label for="inputLocalidad" class="form-label">Localidad</label>
-                    <select
-                      class="form-select"
-                      id="inputLocalidad"
-                      name="localidad"
-                      required
-                    >
-                      <option value="" selected disabled>Seleccionar localidad</option>
-                      <option value="la-plata">La Plata</option>
-                      <option value="berisso">Berisso</option>
-                      <option value="ensenada">Ensenada</option>
-                      <option value="city-bell">City Bell</option>
-                      <option value="otras">Otras</option>
-                    </select>
-                    <div class="invalid-feedback">La localidad es obligatoria.</div>
-                  </div>
-
-                  <!-- DIRECCIÓN - Calle y Número -->
-                  <div class="col-12 col-md-6">
-                    <label for="inputCalle" class="form-label">Calle y número</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputCalle"
-                      name="calle"
-                      placeholder="Ej: Av. 7 N° 1234"
-                      required
-                    />
-                    <div class="invalid-feedback">La calle y número son obligatorios.</div>
-                  </div>
-
-                  <!-- DIRECCIÓN - Detalle adicional -->
+                  <!-- UBICACIÓN CON MAPA -->
                   <div class="col-12">
-                    <label for="inputDetalle" class="form-label">Detalle adicional (opcional)</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputDetalle"
-                      name="detalle"
-                      placeholder="Ej: Entre calles 50 y 51, al lado del polideportivo"
-                    />
+                    <label for="inputDireccion" class="form-label">Ubicación de la cancha</label>
+                    <p class="text-muted small mb-2">
+                      Buscá la dirección o arrastrá el marcador en el mapa para indicar la ubicación exacta.
+                    </p>
+                    
+                    <!-- Buscador de dirección -->
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputBuscadorDireccion"
+                        placeholder="Ej: Av. 7 1234, La Plata, Buenos Aires"
+                      />
+                      <button class="btn btn-outline-secondary" type="button" id="btnBuscarDireccion">
+                        <i class="bi bi-search"></i> Buscar
+                      </button>
+                    </div>
+
+                    <!-- Mapa -->
+                    <div id="map" style="height: 400px; border-radius: 8px; margin-bottom: 1rem;"></div>
+
+                    <!-- Campo oculto para la dirección completa -->
+                    <input type="hidden" id="inputDireccion" name="direccion" required />
+                    
+                    <!-- Campos ocultos para coordenadas -->
+                    <input type="hidden" id="inputLatitud" name="latitud" required />
+                    <input type="hidden" id="inputLongitud" name="longitud" required />
+
+                    <!-- Campos opcionales para país, provincia, localidad (extraídos del geocoding) -->
+                    <input type="hidden" id="inputPais" name="pais" />
+                    <input type="hidden" id="inputProvincia" name="provincia" />
+                    <input type="hidden" id="inputLocalidad" name="localidad" />
+
+                    <!-- Mensaje de validación -->
+                    <div class="invalid-feedback" id="errorDireccion">
+                      Debes seleccionar una ubicación en el mapa.
+                    </div>
+
+                    <!-- Dirección seleccionada (visible para el usuario) -->
+                    <div id="direccionSeleccionada" class="alert alert-info d-none mt-2">
+                      <strong>Dirección seleccionada:</strong> <span id="textoDireccion"></span>
+                    </div>
                   </div>
 
                   <!-- Divisor -->
@@ -311,6 +279,8 @@ include HEAD_COMPONENT;
 
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="<?= JS_REGISTRO_ADMIN_CANCHA ?>"></script>
 </body>
 </html>

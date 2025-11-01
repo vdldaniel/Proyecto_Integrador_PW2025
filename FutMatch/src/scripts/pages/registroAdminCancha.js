@@ -1,7 +1,8 @@
 /**
- * REGISTRO ADMIN CANCHA - Validaciones del formulario
- * ====================================================
+ * REGISTRO ADMIN CANCHA - Validaciones del formulario + Mapa Leaflet
+ * ====================================================================
  * Validaciones en tiempo real y al submit
+ * Implementación de mapa interactivo para seleccionar ubicación
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,15 +10,127 @@ document.addEventListener('DOMContentLoaded', function() {
   const inputNombre = document.getElementById('inputNombre');
   const inputApellido = document.getElementById('inputApellido');
   const inputNombreCancha = document.getElementById('inputNombreCancha');
-  const inputPais = document.getElementById('inputPais');
-  const inputProvincia = document.getElementById('inputProvincia');
-  const inputLocalidad = document.getElementById('inputLocalidad');
-  const inputCalle = document.getElementById('inputCalle');
   const inputTelefono = document.getElementById('inputTelefono');
   const inputEmail = document.getElementById('inputEmail');
   const checkTerminos = document.getElementById('checkTerminos');
   const inputContacto = document.getElementById('inputContacto');
   const inputHorario = document.getElementById('inputHorario');
+
+  // Campos del mapa
+  const inputBuscadorDireccion = document.getElementById('inputBuscadorDireccion');
+  const btnBuscarDireccion = document.getElementById('btnBuscarDireccion');
+  const inputDireccion = document.getElementById('inputDireccion');
+  const inputLatitud = document.getElementById('inputLatitud');
+  const inputLongitud = document.getElementById('inputLongitud');
+  const inputPais = document.getElementById('inputPais');
+  const inputProvincia = document.getElementById('inputProvincia');
+  const inputLocalidad = document.getElementById('inputLocalidad');
+  const direccionSeleccionada = document.getElementById('direccionSeleccionada');
+  const textoDireccion = document.getElementById('textoDireccion');
+
+  // ===================================
+  // INICIALIZACIÓN DEL MAPA LEAFLET
+  // ===================================
+  // Centrado en La Plata, Argentina por defecto
+  const map = L.map('map').setView([-34.9214, -57.9544], 13);
+
+  // Añadir capa de OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Marcador arrastrable
+  let marker = L.marker([-34.9214, -57.9544], {
+    draggable: true
+  }).addTo(map);
+
+  // Actualizar coordenadas cuando se arrastra el marcador
+  marker.on('dragend', function(e) {
+    const position = marker.getLatLng();
+    obtenerDireccionPorCoordenadas(position.lat, position.lng);
+  });
+
+  // ===================================
+  // GEOCODIFICACIÓN: Búsqueda de dirección
+  // ===================================
+  btnBuscarDireccion.addEventListener('click', buscarDireccion);
+  inputBuscadorDireccion.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      buscarDireccion();
+    }
+  });
+
+  function buscarDireccion() {
+    const query = inputBuscadorDireccion.value.trim();
+    if (!query) {
+      alert('Por favor, ingresá una dirección para buscar.');
+      return;
+    }
+
+    // Usar Nominatim (geocoding de OpenStreetMap)
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const result = data[0];
+          const lat = parseFloat(result.lat);
+          const lon = parseFloat(result.lon);
+
+          // Mover el mapa y el marcador
+          map.setView([lat, lon], 16);
+          marker.setLatLng([lat, lon]);
+
+          // Obtener dirección detallada
+          obtenerDireccionPorCoordenadas(lat, lon);
+        } else {
+          alert('No se encontró la dirección. Intentá con otra búsqueda o arrastrá el marcador en el mapa.');
+        }
+      })
+      .catch(error => {
+        console.error('Error en la búsqueda:', error);
+        alert('Error al buscar la dirección. Intentá nuevamente.');
+      });
+  }
+
+  // ===================================
+  // GEOCODIFICACIÓN INVERSA: Coordenadas -> Dirección
+  // ===================================
+  function obtenerDireccionPorCoordenadas(lat, lon) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.address) {
+          const address = data.address;
+          const displayName = data.display_name;
+
+          // Guardar dirección completa
+          inputDireccion.value = displayName;
+          inputLatitud.value = lat;
+          inputLongitud.value = lon;
+
+          // Extraer componentes de la dirección
+          inputPais.value = address.country || '';
+          inputProvincia.value = address.state || '';
+          inputLocalidad.value = address.city || address.town || address.village || '';
+
+          // Mostrar dirección seleccionada
+          textoDireccion.textContent = displayName;
+          direccionSeleccionada.classList.remove('d-none');
+
+          // Marcar como válido
+          inputDireccion.setCustomValidity('');
+        }
+      })
+      .catch(error => {
+        console.error('Error en geocodificación inversa:', error);
+      });
+  }
 
   // ===================================
   // VALIDACIÓN: Nombre y Apellido - Solo letras y espacios
@@ -39,6 +152,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   validarSoloLetras(inputNombre);
   validarSoloLetras(inputApellido);
+
+  // Validación de campos al escribir
+  [inputNombre, inputApellido, inputNombreCancha].forEach(campo => {
+    campo.addEventListener('input', function() {
+      if (this.value.trim()) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+      } else {
+        this.classList.remove('is-valid');
+      }
+    });
+  });
 
   // ===================================
   // VALIDACIÓN: Teléfono - Solo números y guiones
@@ -90,9 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   // ===================================
-  // VALIDACIÓN: Selects (País, Provincia, Localidad, Contacto, Horario)
+  // VALIDACIÓN: Selects (Contacto, Horario)
   // ===================================
-  const selects = [inputPais, inputProvincia, inputLocalidad, inputContacto, inputHorario];
+  const selects = [inputContacto, inputHorario];
   
   selects.forEach(select => {
     select.addEventListener('change', function() {
@@ -112,8 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const camposObligatorios = [
     inputNombre, 
     inputApellido, 
-    inputNombreCancha, 
-    inputCalle, 
+    inputNombreCancha,
     inputTelefono, 
     inputEmail
   ];
@@ -155,27 +279,10 @@ document.addEventListener('DOMContentLoaded', function() {
       isValid = false;
     }
 
-    // Validar país
-    if (!inputPais.value) {
-      inputPais.classList.add('is-invalid');
-      isValid = false;
-    }
-
-    // Validar provincia
-    if (!inputProvincia.value) {
-      inputProvincia.classList.add('is-invalid');
-      isValid = false;
-    }
-
-    // Validar localidad
-    if (!inputLocalidad.value) {
-      inputLocalidad.classList.add('is-invalid');
-      isValid = false;
-    }
-
-    // Validar calle
-    if (!inputCalle.value.trim()) {
-      inputCalle.classList.add('is-invalid');
+    // Validar dirección (coordenadas del mapa)
+    if (!inputDireccion.value || !inputLatitud.value || !inputLongitud.value) {
+      inputDireccion.setCustomValidity('Debes seleccionar una ubicación en el mapa');
+      document.getElementById('errorDireccion').style.display = 'block';
       isValid = false;
     }
 
@@ -226,32 +333,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Si todo es válido, enviar
     if (isValid) {
-      // Datos del formulario
-      const formData = {
-        nombre: inputNombre.value.trim(),
-        apellido: inputApellido.value.trim(),
-        nombreCancha: inputNombreCancha.value.trim(),
-        pais: inputPais.value,
-        provincia: inputProvincia.value,
-        localidad: inputLocalidad.value,
-        calle: inputCalle.value.trim(),
-        detalle: document.getElementById('inputDetalle').value.trim(),
-        email: inputEmail.value.trim(),
-        telefono: inputTelefono.value.trim(),
-        terminos: checkTerminos.checked,
-        contacto: inputContacto.value,
-        horario: inputHorario.value
-      };
-
-      console.log('Formulario válido. Datos:', formData);
-      
-      // TODO: Aquí iría la llamada AJAX al backend
-      
-      // Mensaje de confirmación y redirección
-      alert('Gracias por tu solicitud. Serás contactado a la brevedad por uno de los asesores de FutMatch.');
-      
-      // Redireccionar a landing después del alert
-      window.location.href = '/Proyecto_Integrador_PW2025/FutMatch/public/HTML/auth/landing.php';
+      console.log('Formulario válido. Enviando...');
+      // Enviar el formulario al servidor
+      form.submit();
     } else {
       // Scroll al primer campo inválido
       const primerInvalido = form.querySelector('.is-invalid');

@@ -8,16 +8,21 @@ También enlaza al formulario para inscribirse como admin. de canchas.
 <?php
 require_once __DIR__ . '/../../../src/app/config.php';
 
+// Iniciar sesión para mostrar errores de login
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $page_title = "FutMatch";
-$page_css = [SRC_PATH . "styles/pages/landing.css"];
+
+$page_css = [CSS_PAGES_LANDING];
+
 include HEAD_COMPONENT;
+
 ?>
 
-<title><?= $page_title ?></title>
-</head>
-
 <body>
-    <header class="hero bg-image" style="background-image: url('<?= IMG_PATH ?>bg2.jpg');">
+    <header class="hero bg-image" style="background-image: url('<?= IMG_BG2 ?>');">
         <div class="hero-overlay"></div>
 
         <div class="container position-relative">
@@ -38,14 +43,16 @@ include HEAD_COMPONENT;
             <div class="row g-4 justify-content-center">
                 <!-- Card: Invitado -->
                 <div class="col-11 col-md-5 col-lg-4">
-                    <div class="card card-action h-100" role="button" tabindex="0" aria-label="Entrar como invitado">
-                        <div class="card-body py-4">
-                            <h2 class="h4 fw-600 mb-2">Entrar como invitado</h2>
-                            <p class="text-muted mb-0">
-                                Explorá canchas y partidos sin registrarte. Ideal para una primera mirada rápida.
-                            </p>
+                    <a href="<?= PAGE_INICIO_JUGADOR ?>" class="text-decoration-none">
+                        <div class="card card-action h-100" role="button" tabindex="0" aria-label="Entrar como invitado">
+                            <div class="card-body py-4">
+                                <h2 class="h4 fw-600 mb-2">Entrar como invitado</h2>
+                                <p class="text-muted mb-0">
+                                    Explorá canchas y partidos sin registrarte. Ideal para una primera mirada rápida.
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Card: Iniciar sesión / Registrarse (expandible) -->
@@ -61,13 +68,23 @@ include HEAD_COMPONENT;
                                 <span class="chevron" aria-hidden="true">▾</span>
                             </div>
 
+                            <!-- Mostrar error si existe -->
+                            <?php if (isset($_SESSION['login_error'])): ?>
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                    <?= htmlspecialchars($_SESSION['login_error']) ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
                             <!-- Contenido expandible -->
-                            <div class="collapse mt-3" id="loginCollapse">
-                                <form id="loginForm" novalidate>
+                            <div class="collapse mt-3 <?= isset($_SESSION['login_error']) ? 'show' : '' ?>" id="loginCollapse">
+                                <form id="loginForm" action="<?= CONTROLLER_LOGIN ?>" method="POST" novalidate>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="email" name="email"
-                                            autocomplete="username" required />
+                                            autocomplete="username" required 
+                                            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" />
                                         <div class="invalid-feedback">Ingresá un email válido.</div>
                                     </div>
 
@@ -80,13 +97,16 @@ include HEAD_COMPONENT;
 
                                     <div class="d-grid gap-2">
                                         <button type="submit" class="btn btn-success">
-                                            Ingresar</button>
+                                            <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
+                                        </button>
                                         <a class="btn btn-outline-secondary"
-                                            href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>">Registrarme</a>
+                                            href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>">
+                                            <i class="bi bi-person-plus me-2"></i>Registrarme
+                                        </a>
                                     </div>
 
                                     <div class="text-center mt-3">
-                                        <a href="<?= PAGE_FORGOT ?>"
+                                        <a href="<?= PAGE_FORGOT_PHP ?>"
                                             class="small">¿Olvidaste tu contraseña?</a>
                                     </div>
                                 </form>
@@ -97,7 +117,7 @@ include HEAD_COMPONENT;
 
                 <!-- Enlace discreto para gestores de canchas -->
                 <div class="col-12 text-center">
-                    <a href="<?= PAGE_REGISTER_ADMIN_CANCHA ?>"
+                    <a href="<?= PAGE_REGISTRO_ADMIN_CANCHA_PHP ?>"
                         class="link-cancha">¿Sos dueño de una cancha? Te ayudamos a gestionarla</a>
                 </div>
             </div>
@@ -107,6 +127,27 @@ include HEAD_COMPONENT;
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
     <script src="<?= JS_LANDING ?>"></script>
+    
+    <script>
+        // Auto-expandir formulario si hay error de login
+        <?php if (isset($_SESSION['login_error'])): ?>
+            document.addEventListener('DOMContentLoaded', function() {
+                const loginCard = document.getElementById('loginCard');
+                if (loginCard) {
+                    loginCard.setAttribute('aria-expanded', 'true');
+                }
+                // Focus en el campo de email
+                const emailInput = document.getElementById('email');
+                if (emailInput) {
+                    emailInput.focus();
+                }
+            });
+            <?php 
+            // Limpiar el error después de mostrarlo
+            unset($_SESSION['login_error']); 
+            ?>
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>

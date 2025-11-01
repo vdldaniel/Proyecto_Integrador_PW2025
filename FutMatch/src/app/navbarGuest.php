@@ -7,11 +7,6 @@
  * Requiere: config.php cargado previamente
  */
 
-// Asegurar que config.php está cargado
-if (!defined('BASE_URL')) {
-    require_once __DIR__ . '/config.php';
-}
-
 // Determinar página activa (si no está definida, intentar detectarla)
 if (!isset($current_page)) {
     $current_page = basename($_SERVER['PHP_SELF'], '.php');
@@ -75,14 +70,15 @@ function isActive($page_name, $current)
 
             <!-- Lado derecho: perfil, notificaciones y configuración -->
             <div class="d-flex align-items-center">
-                <!-- Botón Mi Perfil -->
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
-                    class="btn btn-dark me-2 d-none d-md-flex <?= isActive('miPerfil', $current_page) ?>"
-                    id="botonMiPerfil"
-                    title="Mi Perfil">
+                <!-- Botón Iniciar Sesión -->
+                <button type="button"
+                    class="btn btn-dark me-2 d-none d-md-flex"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalLogin"
+                    title="Iniciar Sesión">
                     <i class="bi bi-person-circle"></i>
                     <span class="d-none d-lg-inline ms-1">Iniciar sesión</span>
-                </a>
+                </button>
             </div>
         </div>
     </nav>
@@ -125,11 +121,13 @@ function isActive($page_name, $current)
         <!-- Perfil y configuración -->
         <div class="mt-auto pt-3 border-top">
             <div class="d-grid gap-2">
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
-                    class="btn btn-dark text-start <?= isActive('miPerfil', $current_page) ?>"
-                    title="Mi Perfil">
+                <button type="button"
+                    class="btn btn-dark text-start"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalLogin"
+                    title="Iniciar Sesión">
                     <i class="bi bi-person-circle me-2"></i>Iniciar sesión
-                </a>
+                </button>
             </div>
         </div>
     </div>

@@ -1,48 +1,26 @@
 <?php
 
 // Cargar configuración
-require_once __DIR__ . '/../../../src/app/config.php';
+require_once("../../../src/app/config.php");
 
 // Definir la página actual para el navbar
 $current_page = 'inicioAdminSistema';
+
+// Iniciar sesión para mostrar errores de login
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$page_title = "Sistema - FutMatch";
+
+$page_css = [];
+
+include HEAD_COMPONENT;
+
 ?>
 
-<!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="<?= BASE_URL ?>" />
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="public/assets/css/bootstrap.min.css" />
-    <!-- Bootstrap JS (bundle con Popper incluido) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!--Iconos Bootstrap-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
-
-    <!-- Fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="src/styles/base.css" />
-    <link rel="stylesheet" href="src/styles/layout.css" />
-  </head>
-
   <body>
-
-  <header>
     <?php include NAVBAR_ADMIN_SISTEMA_COMPONENT; ?>
-    </header>
 
     <main>
       <div class="container mt-4">
@@ -69,7 +47,7 @@ $current_page = 'inicioAdminSistema';
     </main>
 
   <!-- Scripts -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/inicio-admin-sistema.js"></script>
+  <script src="<?= JS_BOOTSTRAP ?>"></script>
+  <script src="<?= JS_INICIO_ADMIN_SISTEMA ?>"></script>
   </body>
 </html>

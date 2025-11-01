@@ -6,13 +6,96 @@
  * Así evitamos hardcodear paths en distintos archivos.
  */
 
+
+// ===================================
+// CONEXIÓN A LA BASE DE DATOS
+// ===================================
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'futmatch_db');
+
+try {
+    $conn = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USERNAME, DB_PASSWORD);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error de conexión a la base de datos: " . $e->getMessage());
+}
+
+// ===================================
+// NOMBRES DE TABLAS
+// ===================================
+
+// Usuarios y Roles
+define('TABLE_USUARIOS', 'usuarios');
+define('TABLE_ROLES_USUARIOS', 'roles_usuarios');
+define('TABLE_ESTADOS_USUARIOS', 'estados_usuarios');
+
+// Admin Sistema
+define('TABLE_ADMIN_SISTEMA', 'admin_sistema');
+define('TABLE_PERMISOS', 'permisos');
+define('TABLE_SOLICITUDES_ADMIN_CANCHA', 'solicitudes_admin_cancha');
+
+// Admin Cancha
+define('TABLE_ADMIN_CANCHAS', 'admin_canchas');
+define('TABLE_CANCHAS', 'canchas');
+define('TABLE_ESTADOS_CANCHAS', 'estados_canchas');
+define('TABLE_HORARIOS_CANCHA', 'horarios_cancha');
+
+// Direcciones
+define('TABLE_DIRECCIONES', 'direcciones');
+
+// Días de la semana
+define('TABLE_DIAS_SEMANA', 'dias_semana');
+
+// Jugadores
+define('TABLE_JUGADORES', 'jugadores');
+define('TABLE_SEXO', 'sexo');
+define('TABLE_POSICIONES', 'posiciones');
+
+// Equipos
+define('TABLE_EQUIPOS', 'equipos');
+define('TABLE_JUGADORES_EQUIPOS', 'jugadores_equipos');
+
+// Torneos
+define('TABLE_TORNEOS', 'torneos');
+define('TABLE_ETAPAS_TORNEO', 'etapas_torneo');
+define('TABLE_EQUIPOS_TORNEOS', 'equipos_torneos');
+
+// Reservas y Partidos
+define('TABLE_RESERVAS', 'reservas');
+define('TABLE_PARTIDOS', 'partidos');
+define('TABLE_ROLES_PARTIDOS', 'roles_partidos');
+define('TABLE_PARTICIPANTES_PARTIDOS', 'participantes_partidos');
+define('TABLE_ESTADISTICAS_PARTIDO', 'estadisticas_partido');
+
+// Estados y Solicitudes
+define('TABLE_ESTADOS_SOLICITUDES', 'estados_solicitudes');
+
+// Calificaciones y Reseñas
+define('TABLE_CALIFICACIONES_JUGADORES', 'calificaciones_jugadores');
+define('TABLE_RESENIAS_CANCHAS', 'resenias_canchas');
+
+// Foros
+define('TABLE_FOROS', 'foros');
+define('TABLE_RESPUESTAS_FOROS', 'respuestas_foros');
+
+// Espacios (Sistema de visibilidad)
+define('TABLE_ESPACIOS', 'espacios');
+define('TABLE_TIPOS_ESPACIOS', 'tipos_espacios');
+define('TABLE_USUARIOS_ESPACIOS', 'usuarios_espacios');
+
 // ===================================
 // RUTAS BASE
 // ===================================
-define("BASE_URL", "/Proyecto_Integrador_PW2025/FutMatch/");
+define("BASE_URL", "/FutMatch/FutMatch/");
 define("PUBLIC_PATH", BASE_URL . "public/");
 define("SRC_PATH", BASE_URL . "src/");
 define("ASSETS_PATH", PUBLIC_PATH . "assets/");
+
+// Ruta del archivo de configuración
+define("CONFIG_PATH", __DIR__ . "/config.php");
 
 // ===================================
 // CSS - ARCHIVOS UNIFICADOS
@@ -23,11 +106,13 @@ define("CSS_LAYOUT", SRC_PATH . "styles/layout.css");
 define("CSS_COMPONENTS", SRC_PATH . "styles/components.css");
 
 // CSS de páginas específicas
+define("CSS_PAGES_LANDING", SRC_PATH . "styles/pages/landing.css");
 define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
 define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
 define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
 define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
+define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/detalleTorneo.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -71,20 +156,30 @@ define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
 define("IMG_PATH", PUBLIC_PATH . "img/");
 define("IMG_LOGO_SINFONDO", IMG_PATH . "logo-sinfondo.svg");
 define("IMG_LOGO_FONDOVERDE", IMG_PATH . "logo-fondoverde.svg");
+define("IMG_BG2", IMG_PATH . "bg2.jpg");
 
 // ===================================
 // COMPONENTES PHP
 // ===================================
 define("HEAD_COMPONENT", __DIR__ . "/head.php");
+define("AUTH_REQUIRED_COMPONENT", __DIR__ . "/auth-required.php");
+define("MODAL_LOGIN_COMPONENT", __DIR__ . "/modalLogin.php");
 define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 define("NAVBAR_GUEST_COMPONENT", __DIR__ . "/navbarGuest.php");
 define("NAVBAR_ADMIN_CANCHA_COMPONENT", __DIR__ . "/navbarAdminCancha.php");
 define("NAVBAR_ADMIN_SISTEMA_COMPONENT", __DIR__ . "/navbarAdminSistema.php");
 
 // ===================================
+// CONTROLADORES
+// ===================================
+define("CONTROLLER_LOGIN", BASE_URL . "src/controllers/login_controller.php");
+define("CONTROLLER_LOGOUT", BASE_URL . "src/controllers/logout.php");
+define("CONTROLLER_REGISTRO_JUGADOR", BASE_URL . "src/controllers/registroJugador_controller.php");
+define("CONTROLLER_REGISTRO_ADMIN_CANCHA", BASE_URL . "src/controllers/registroAdminCancha_controller.php");
+
+// ===================================
 // PÁGINAS - AUTH
 // ===================================
-define("PAGE_LANDING", PUBLIC_PATH . "HTML/auth/landing.html");
 define("PAGE_LANDING_PHP", PUBLIC_PATH . "HTML/auth/landing.php");
 define("PAGE_FORGOT", PUBLIC_PATH . "HTML/auth/forgot.html");
 define("PAGE_FORGOT_PHP", PUBLIC_PATH . "HTML/auth/forgot.php");
@@ -104,6 +199,7 @@ define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/forosDetalle.html");
 // ===================================
 define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicioJugador.php");
 define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilJugador.html");
+define("PAGE_PERFIL_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/jugador/perfilJugador.html");
 define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador (-MODAL navbar).html");
 
 // Equipos
@@ -114,11 +210,13 @@ define("PAGE_EQUIPO_MODIFICAR", PUBLIC_PATH . "HTML/jugador/equipo-modificar.htm
 
 // Partidos
 define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidosJugador.php");
+define("PAGE_PARTIDOS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/partidosExplorar.php");
 define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/partidosListado.html");
 define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/partidoDetalle.html");
 define("PAGE_PARTIDO_UNIRSE", PUBLIC_PATH . "HTML/jugador/partido-unirse (-MODAL).html");
 
 // Canchas
+define("PAGE_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/jugador/canchasExplorar.html");
 define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.html");
 define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/canchaPerfil.html");
 define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar (-MODAL).html");
@@ -136,20 +234,21 @@ define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.php");
 // Gestión de canchas
 define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchasListado.php");
 define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/canchaCrear.php");
-define("PAGE_ADMIN_CANCHA_PERFIL", PUBLIC_PATH . "HTML/admin-cancha/canchaPerfil.html");
-define("PAGE_ADMIN_CANCHA_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/(pasar a MODAL) cancha-editar.html");
-define("PAGE_ADMIN_CANCHA_PERFIL_EDITAR", PUBLIC_PATH . "HTML/admin-cancha/(UNIFICAR CON canchaPerfil) cancha-perfil-editar.html");
+define("PAGE_ADMIN_CANCHA_PERFIL", PUBLIC_PATH . "HTML/admin-cancha/canchaPerfil.php");
 
 // Gestión de torneos
 define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/misTorneos.php");
-define("PAGE_ADMIN_MIS_TORNEOS_CREAR", PUBLIC_PATH . "HTML/admin-cancha/(pasar a MODAL) mis-torneos-crear.html");
-define("PAGE_ADMIN_MIS_TORNEOS_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/(dejar a Cami) mis-torneos-detalle.html");
+define("PAGE_ADMIN_TORNEO_DETALLE", PUBLIC_PATH . "HTML/admin-cancha/torneoDetalle.php");
+
+// Gestión de equipos
+define("PAGE_ADMIN_EQUIPO_PERFIL", PUBLIC_PATH . "HTML/equipoPerfil.php");
 
 // ===================================
 // PÁGINAS - ADMIN SISTEMA
 // ===================================
 define("PAGE_LOGIN_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/login-admin-sistema.html");
 define("PAGE_INICIO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/inicioAdminSistema.php");
+define("PAGE_ESTADISTICAS_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/estadisticasSistema.php");
 
 // Gestión de jugadores
 define("PAGE_SISTEMA_JUGADORES_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/jugadores-listado-sistema.html");
