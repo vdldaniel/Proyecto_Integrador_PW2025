@@ -241,7 +241,15 @@ CREATE TABLE estados_canchas (
     
 INSERT INTO estados_canchas (nombre) VALUES
 	('Pendiente de verificación'),('En revisión'),('Habilitada'),('Deshabilitada'),('Suspendida');
-    
+
+CREATE TABLE superficies_canchas (
+    id_superficie INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100)
+)
+
+INSERT INTO superficies_canchas (nombre) VALUES
+    ('Sintético'),('Cemento'),('Parquet'),('Césped natural')
+
 CREATE TABLE canchas (
     id_cancha INT AUTO_INCREMENT PRIMARY KEY,
     id_admin_cancha INT NOT NULL,
@@ -250,11 +258,10 @@ CREATE TABLE canchas (
     descripcion VARCHAR(250),
     id_estado INT NOT NULL DEFAULT 1,
     foto VARCHAR(255),
-    id_espacio INT NOT NULL,
+    id_superficie VARCHAR(100) NOT NULL,
     FOREIGN KEY(id_admin_cancha) REFERENCES admin_canchas(id_admin_cancha),
     FOREIGN KEY(id_direccion) REFERENCES direcciones(id_direccion),
-    FOREIGN KEY(id_estado) REFERENCES estados_canchas(id_estado),
-    FOREIGN KEY(id_espacio) REFERENCES espacios(id_espacio)
+    FOREIGN KEY(id_estado) REFERENCES estados_canchas(id_estado)
     );
     
 CREATE TABLE dias_semana (
@@ -304,20 +311,16 @@ CREATE TABLE jugadores (
     id_sexo INT NOT NULL,
     id_posicion INT,
     reputacion INT,
-    id_espacio INT NOT NULL, 
     FOREIGN KEY (id_jugador) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_sexo) REFERENCES sexo(id_sexo),
     FOREIGN KEY (id_posicion) REFERENCES posiciones(id_posicion),
-    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
     );
     
 CREATE TABLE equipos (
     id_equipo INT AUTO_INCREMENT PRIMARY KEY,
     id_lider INT NOT NULL,
     nombre VARCHAR(50),
-    id_espacio INT NOT NULL,
     FOREIGN KEY (id_lider) REFERENCES jugadores(id_jugador),
-    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
     );
     
 CREATE TABLE jugadores_equipos (
@@ -365,10 +368,8 @@ CREATE TABLE torneos (
     fecha_fin DATE,
     fin_estimativo BOOLEAN, 
     id_etapa INT NOT NULL DEFAULT 1,
-    id_espacio INT NOT NULL,
     FOREIGN KEY (id_organizador) REFERENCES admin_canchas(id_admin_cancha),
     FOREIGN KEY (id_etapa) REFERENCES etapas_torneo(id_etapa),
-    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio)
     );
 
 
@@ -398,6 +399,35 @@ INSERT INTO tipos_partido (nombre, descripcion) VALUES
     ('Fútbol 11', 'Partido de fútbol con 11 jugadores por equipo'),
     ('Fútbol Sala', 'Partido de fútbol sala/futsal con 5 jugadores por equipo'),
     ('Fútbol Playa', 'Partido de fútbol playa con 5 jugadores por equipo');
+
+-- =========================================================
+--  TABLA DE RELACIÓN CANCHAS - TIPOS DE PARTIDO (3FN)
+-- =========================================================
+
+-- Tabla many-to-many para relacionar qué tipos de partido permite cada cancha
+-- Una cancha puede permitir múltiples tipos de partido (ej: Fútbol 5 y Fútbol 7)
+-- Un tipo de partido puede ser jugado en múltiples canchas
+CREATE TABLE canchas_tipos_partido (
+    id_cancha INT NOT NULL,
+    id_tipo_partido INT NOT NULL,
+    activo BOOLEAN DEFAULT TRUE,
+    fecha_habilitacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_cancha, id_tipo_partido),
+    FOREIGN KEY (id_cancha) REFERENCES canchas(id_cancha) ON DELETE CASCADE,
+    FOREIGN KEY (id_tipo_partido) REFERENCES tipos_partido(id_tipo_partido) ON DELETE CASCADE,
+    INDEX idx_cancha_activo (id_cancha, activo),
+    INDEX idx_tipo_partido_activo (id_tipo_partido, activo)
+);
+
+-- Datos de ejemplo: qué tipos de partido permite cada cancha
+-- Nota: Estos datos dependen de que existan canchas creadas primero
+-- INSERT INTO canchas_tipos_partido (id_cancha, id_tipo_partido) VALUES
+--     (1, 1), -- Cancha 1 permite Fútbol 5
+--     (1, 2), -- Cancha 1 también permite Fútbol 7 (campo más grande)
+--     (2, 2), -- Cancha 2 permite Fútbol 7
+--     (2, 3), -- Cancha 2 también permite Fútbol 11 (campo grande)
+--     (3, 4), -- Cancha 3 permite Fútbol Sala (cancha cubierta)
+--     (3, 1); -- Cancha 3 también permite Fútbol 5
 
 -- Tipos de reserva para mayor flexibilidad
 CREATE TABLE tipos_reserva (

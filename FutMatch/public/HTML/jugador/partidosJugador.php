@@ -48,7 +48,7 @@ require_once HEAD_COMPONENT;
             <i class="bi bi-search me-1"></i>Explorar
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_LISTADO ?>">
+            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_EXPLORAR ?>">
               <i class="bi bi-people me-2"></i>Partidos
             </a></li>
             <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR ?>">

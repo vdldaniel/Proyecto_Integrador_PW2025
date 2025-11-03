@@ -113,7 +113,9 @@ define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdm
 define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
 define("CSS_PAGES_MODALES_FOROS", SRC_PATH . "styles/pages/modales-foros.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
+define("CSS_PAGES_PARTIDOS_EXPLORAR", SRC_PATH . "styles/pages/partidos-explorar.css");
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/detalleTorneo.css");
+define("CSS_PAGES_CANCHAS_EXPLORAR", SRC_PATH . "styles/pages/canchas-explorar.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -148,10 +150,12 @@ define("JS_INICIO_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "inicio-admin-sistema.js");
 define("JS_INICIO_JUGADOR", JS_SCRIPTS_PATH . "inicioJugador.js");
 define("JS_LANDING", JS_SCRIPTS_PATH . "landing.js");
 define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidosJugador.js");
+define("JS_PARTIDOS_EXPLORAR", JS_SCRIPTS_PATH . "partidos-explorar.js");
 define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
 define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
 define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
+define("JS_CANCHAS_EXPLORAR", JS_SCRIPTS_PATH . "canchas-explorar.js");
 
 // ===================================
 // IMÁGENES
@@ -169,6 +173,7 @@ define("AUTH_REQUIRED_COMPONENT", __DIR__ . "/auth-required.php");
 define("MODAL_LOGIN_COMPONENT", __DIR__ . "/modalLogin.php");
 define("MODAL_NUEVO_FORO_COMPONENT", __DIR__ . "/../../public/HTML/forosNuevoModal.php");
 define("MODAL_FOROS_BORRADORES", __DIR__ . "/../../public/HTML/forosBorradoresModal.php");
+define("FILTRO_EXPLORAR_MODAL", __DIR__ . "/../../public/HTML/jugador/filtroExplorarModal.php");
 define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 define("NAVBAR_GUEST_COMPONENT", __DIR__ . "/navbarGuest.php");
 define("NAVBAR_ADMIN_CANCHA_COMPONENT", __DIR__ . "/navbarAdminCancha.php");
@@ -216,13 +221,9 @@ define("PAGE_EQUIPO_MODIFICAR", PUBLIC_PATH . "HTML/jugador/equipo-modificar.htm
 // Partidos
 define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidosJugador.php");
 define("PAGE_PARTIDOS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/partidosExplorar.php");
-define("PAGE_PARTIDOS_LISTADO", PUBLIC_PATH . "HTML/jugador/partidosListado.html");
-define("PAGE_PARTIDO_DETALLE", PUBLIC_PATH . "HTML/jugador/partidoDetalle.html");
-define("PAGE_PARTIDO_UNIRSE", PUBLIC_PATH . "HTML/jugador/partido-unirse (-MODAL).html");
 
 // Canchas
-define("PAGE_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/jugador/canchasExplorar.html");
-define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.html");
+define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.php");
 define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/canchaPerfil.html");
 define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar (-MODAL).html");
 

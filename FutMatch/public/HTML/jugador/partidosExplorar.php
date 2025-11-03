@@ -1,222 +1,226 @@
-<!-- Página que el usuario puede utilizar para explorar los partidos disponibles -->
-
 <?php
-require_once("../../../src/app/config.php");
+// Cargar configuración
+require_once __DIR__ . '/../../../src/app/config.php';
 
-// Definir página actual para navbar activo
-$current_page = 'partidosExplorar';
+// Resalta la página actual en el navbar
+$current_page = 'partidosExplorar'; 
+$page_title = "Explorar Partidos - FutMatch";
+$page_css = [CSS_PAGES_PARTIDOS_EXPLORAR, CSS_PAGES_PARTIDOS_JUGADOR];
 
-// Definir título de la página
-$page_title = 'Explorar Partidos - FutMatch';
-
-// CSS adicional específico de esta página
-$page_css = [
-  CSS_PAGES_PARTIDOS_JUGADOR
-];
-
-// Iniciar sesión
-require_once AUTH_REQUIRED_COMPONENT;
-
-// Verificar que el usuario esté autenticado
-// Si no está autenticado, será redirigido automáticamente al login
-requireAuth();
-
-// Verificar que sea un jugador
-requireUserType('jugador');
-
-// Obtener información del usuario actual
-$currentUser = getCurrentUser();
-
-// Cargar head común
+// Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;
 ?>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 <body>
   <?php 
   // Cargar navbar de jugador
   require_once NAVBAR_JUGADOR_COMPONENT; 
   ?>
   
-  <!-- Contenido principal -->
-  <main>
-    <div class="bg-body-secondary">
-      <div class="container-fluid py-5">
-        <div class="busqueda-container">
-          <!--Barra de búsqueda-->
-          <div class="busqueda-wrapper">
-            <div class="busqueda-header">
-              <div class="barra-de-busqueda">
-                <input
-                  type="text"
-                  class="input-busqueda form-control"
-                  placeholder="Buscar partidos..."
-                  id="inputBusqueda"
-                />
-                <i class="bi bi-search busqueda-icon"></i>
-              </div>
-            </div>
-            
-            <!--Filtros de búsqueda-->
-            <div class="container-fluid filtro-de-busquedas">
-              <form id="filtrosForm">
-                <div class="row g-3">
-                  <!--Ubicación-->
-                  <div class="col-md-4">
-                    <label for="ubicacion" class="form-label">Ubicación</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="ubicacion"
-                      name="ubicacion"
-                      placeholder="Ingrese una ubicación..."
-                    />
+  <!-- Contenido Principal -->
+  <main class="container mt-4">
+    <!-- Línea 1: Header con título y botones de navegación -->
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-6">
+        <h1 class="fw-bold mb-1">Explorar Partidos</h1>
+        <p class="text-muted mb-0">Encuentra y únete a partidos disponibles</p>
+      </div>
+      <div class="col-md-6 text-end">
+        <div class="d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-secondary" id="btnCambiarVista">
+            <i class="bi bi-map" id="iconoVista"></i> <span id="textoVista">Mapa</span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalFiltros">
+            <i class="bi bi-funnel"></i> Filtros
+          </button>
+          <div class="input-group" style="width: 300px;">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" id="busquedaPartidos" placeholder="Buscar partidos...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Filtros activos -->
+      <div id="filtrosActivos" class="mb-3 d-none">
+        <div class="d-flex gap-2 align-items-center flex-wrap">
+          <span class="text-muted">Filtros activos:</span>
+          <div id="badgesFiltros" class="d-flex gap-1 flex-wrap"></div>
+          <button type="button" class="btn btn-sm btn-outline-secondary" id="limpiarFiltros">
+            <i class="bi bi-x"></i> Limpiar todo
+          </button>
+        </div>
+      </div>
+
+      <!-- Vista de Listado -->
+      <div id="vistaListado">
+        <!-- Lista de partidos -->
+        <div class="row" id="listaPartidos">
+          <!-- Partido 1 -->
+          <div class="col-12 col-md-6 col-lg-4 mb-4 partido-item" data-nombre="Partido amistoso en MegaFutbol" data-ubicacion="Llavallol" data-tipo="futbol-5" data-genero="masculino">
+            <div class="card h-100 shadow">
+              <img src="<?= IMG_PATH ?>bg4.jpg" class="card-img-top" alt="Partido" style="height: 200px; object-fit: cover;">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Partido amistoso - Fútbol 5</h5>
+                <p class="card-text text-muted mb-2">
+                  <i class="bi bi-geo-alt"></i> MegaFutbol Llavallol
+                </p>
+                <div class="mb-2">
+                  <span class="badge bg-success me-1">Fútbol 5</span>
+                  <span class="badge bg-info me-1">Masculino</span>
+                  <span class="badge bg-warning text-dark">4/10 jugadores</span>
+                </div>
+                <p class="card-text small text-muted mb-2">
+                  <i class="bi bi-calendar-event"></i> Hoy, 27 de octubre
+                </p>
+                <p class="card-text small text-muted mb-3">
+                  <i class="bi bi-clock"></i> 17:00 - 18:00 hs
+                </p>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div>
+                    <small class="text-muted">Organizador:</small>
+                    <div class="fw-bold">Juan Pérez</div>
                   </div>
-                  
-                  <!--Tipo de cancha-->
-                  <div class="col-md-2">
-                    <label for="jugadores" class="form-label">Tipo de cancha</label>
-                    <select class="form-select" id="jugadores" name="tipo_cancha">
-                      <option value="" selected>Todos</option>
-                      <option value="5">Fútbol 5</option>
-                      <option value="7">Fútbol 7</option>
-                      <option value="11">Fútbol 11</option>
-                    </select>
+                  <div class="text-end">
+                    <span class="h6 mb-0 text-success">$500 c/u</span>
                   </div>
-                  
-                  <!--Género-->
-                  <div class="col-md-2">
-                    <label for="genero" class="form-label">Género</label>
-                    <select class="form-select" id="genero" name="genero">
-                      <option value="" selected>Todos</option>
-                      <option value="M">Masculino</option>
-                      <option value="F">Femenino</option>
-                      <option value="MIX">Mixto</option>
-                    </select>
-                  </div>
-                  
-                  <!--Fecha-->
-                  <div class="col-md-2">
-                    <label for="fecha" class="form-label">Fecha</label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="fecha"
-                      name="fecha"
-                    />
-                  </div>
-                  
-                  <!--Botón aplicar filtros-->
-                  <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100">
-                      <i class="bi bi-funnel me-2"></i>Aplicar filtros
+                </div>
+                <div class="mt-auto">
+                  <div class="d-grid gap-2 d-md-flex">
+                    <button class="btn btn-outline-primary btn-sm flex-fill" onclick="verDetallePartido(1)">
+                      <i class="bi bi-eye"></i> Ver detalles
+                    </button>
+                    <button class="btn btn-success btn-sm flex-fill" onclick="unirsePartido(1)">
+                      <i class="bi bi-person-plus"></i> Unirse
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
+          </div>
 
-            <!--Listado de partidos GRID VIEW-->
-            <div class="listado-grid border-top">
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1" id="partidosContainer">
-                <?php
-                // TODO: Reemplazar con consulta a la base de datos
-                // Por ahora, mostramos datos de ejemplo
-                
-                // Simulación de datos de partidos
-                $partidos = [
-                  [
-                    'id' => 1,
-                    'cancha' => 'MegaFutbol Llavallol',
-                    'ubicacion' => 'Antártida Argentina 2340, B1833CDN Llavallol, Provincia de Buenos Aires',
-                    'fecha' => '2025-10-27',
-                    'hora_inicio' => '17:00',
-                    'hora_fin' => '18:00',
-                    'imagen' => 'https://www.megafutbol.com.ar/fotos/foto040.jpg',
-                    'tipo' => '5',
-                    'genero' => 'M'
-                  ],
-                  [
-                    'id' => 2,
-                    'cancha' => 'Cancha del Parque',
-                    'ubicacion' => 'Av. Libertador 1234, CABA',
-                    'fecha' => '2025-10-28',
-                    'hora_inicio' => '19:00',
-                    'hora_fin' => '20:00',
-                    'imagen' => 'https://www.megafutbol.com.ar/fotos/foto040.jpg',
-                    'tipo' => '7',
-                    'genero' => 'MIX'
-                  ],
-                  [
-                    'id' => 3,
-                    'cancha' => 'Complejo Deportivo Sur',
-                    'ubicacion' => 'Calle 50 N° 789, La Plata',
-                    'fecha' => '2025-10-29',
-                    'hora_inicio' => '15:00',
-                    'hora_fin' => '16:30',
-                    'imagen' => 'https://www.megafutbol.com.ar/fotos/foto040.jpg',
-                    'tipo' => '11',
-                    'genero' => 'F'
-                  ]
-                ];
-                
-                foreach ($partidos as $partido):
-                ?>
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="<?= htmlspecialchars($partido['imagen']) ?>"
-                      class="card-img"
-                      alt="Imagen de <?= htmlspecialchars($partido['cancha']) ?>"
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title"><?= htmlspecialchars($partido['cancha']) ?></h5>
-                      <p class="d-flex gap-1">
-                        <i class="bi bi-geo-alt"></i>
-                        <?= htmlspecialchars($partido['ubicacion']) ?>
-                      </p>
-                      <p class="d-flex gap-1">
-                        <i class="bi bi-calendar-event"></i> 
-                        <?= date('d/m/Y', strtotime($partido['fecha'])) ?>
-                      </p>
-                      <p class="d-flex gap-1">
-                        <i class="bi bi-clock"></i>
-                        <?= htmlspecialchars($partido['hora_inicio']) ?> a <?= htmlspecialchars($partido['hora_fin']) ?> hs
-                      </p>
-                      <div class="d-flex gap-2">
-                        <span class="badge bg-primary">Fútbol <?= htmlspecialchars($partido['tipo']) ?></span>
-                        <span class="badge bg-secondary">
-                          <?php
-                          $generos = ['M' => 'Masculino', 'F' => 'Femenino', 'MIX' => 'Mixto'];
-                          echo $generos[$partido['genero']] ?? 'No especificado';
-                          ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                      <!--Botones-->
-                      <div class="d-flex gap-2 align-items-center">
-                        <a href="partidoDetalle.html?id=<?= $partido['id'] ?>" 
-                           class="btn btn-primary btn-sm flex-grow-1">
-                          Ver detalles
-                        </a>
-                        <button type="button" 
-                                class="btn btn-success btn-sm flex-grow-1"
-                                data-partido-id="<?= $partido['id'] ?>">
-                          Unirse
-                        </button>
-                      </div>
-                    </div>
+          <!-- Partido 2 -->
+          <div class="col-12 col-md-6 col-lg-4 mb-4 partido-item" data-nombre="Torneo relámpago" data-ubicacion="Palermo" data-tipo="futbol-7" data-genero="mixto">
+            <div class="card h-100 shadow">
+              <img src="<?= IMG_PATH ?>bg5.jpg" class="card-img-top" alt="Partido" style="height: 200px; object-fit: cover;">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Torneo relámpago - Fútbol 7</h5>
+                <p class="card-text text-muted mb-2">
+                  <i class="bi bi-geo-alt"></i> Deportivo San Lorenzo
+                </p>
+                <div class="mb-2">
+                  <span class="badge bg-success me-1">Fútbol 7</span>
+                  <span class="badge bg-purple me-1">Mixto</span>
+                  <span class="badge bg-danger">Completo</span>
+                </div>
+                <p class="card-text small text-muted mb-2">
+                  <i class="bi bi-calendar-event"></i> Mañana, 28 de octubre
+                </p>
+                <p class="card-text small text-muted mb-3">
+                  <i class="bi bi-clock"></i> 19:00 - 21:00 hs
+                </p>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div>
+                    <small class="text-muted">Organizador:</small>
+                    <div class="fw-bold">María García</div>
+                  </div>
+                  <div class="text-end">
+                    <span class="h6 mb-0 text-success">$800 c/u</span>
                   </div>
                 </div>
-                <?php endforeach; ?>
+                <div class="mt-auto">
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-outline-secondary" disabled>
+                      <i class="bi bi-person-x"></i> Partido completo
+                    </button>
+                  </div>
+                </div>
               </div>
-              
-              <?php if (empty($partidos)): ?>
-              <div class="text-center py-5">
-                <i class="bi bi-search display-1 text-muted"></i>
-                <h4 class="mt-3">No se encontraron partidos</h4>
-                <p class="text-muted">Intenta ajustar los filtros de búsqueda</p>
+            </div>
+          </div>
+
+          <!-- Partido 3 -->
+          <div class="col-12 col-md-6 col-lg-4 mb-4 partido-item" data-nombre="Fútbol femenino competitivo" data-ubicacion="Recoleta" data-tipo="futbol-sala" data-genero="femenino">
+            <div class="card h-100 shadow">
+              <img src="<?= IMG_PATH ?>uniserPartido.png" class="card-img-top" alt="Partido" style="height: 200px; object-fit: cover;">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Fútbol femenino competitivo</h5>
+                <p class="card-text text-muted mb-2">
+                  <i class="bi bi-geo-alt"></i> Futsal Elite
+                </p>
+                <div class="mb-2">
+                  <span class="badge bg-success me-1">Fútbol Sala</span>
+                  <span class="badge bg-pink me-1">Femenino</span>
+                  <span class="badge bg-warning text-dark">6/10 jugadoras</span>
+                </div>
+                <p class="card-text small text-muted mb-2">
+                  <i class="bi bi-calendar-event"></i> Viernes, 29 de octubre
+                </p>
+                <p class="card-text small text-muted mb-3">
+                  <i class="bi bi-clock"></i> 20:30 - 22:00 hs
+                </p>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div>
+                    <small class="text-muted">Organizador:</small>
+                    <div class="fw-bold">Ana Rodríguez</div>
+                  </div>
+                  <div class="text-end">
+                    <span class="h6 mb-0 text-success">$600 c/u</span>
+                  </div>
+                </div>
+                <div class="mt-auto">
+                  <div class="d-grid gap-2 d-md-flex">
+                    <button class="btn btn-outline-primary btn-sm flex-fill" onclick="verDetallePartido(3)">
+                      <i class="bi bi-eye"></i> Ver detalles
+                    </button>
+                    <button class="btn btn-success btn-sm flex-fill" onclick="unirsePartido(3)">
+                      <i class="bi bi-person-plus"></i> Unirse
+                    </button>
+                  </div>
+                </div>
               </div>
-              <?php endif; ?>
+            </div>
+          </div>
+
+          <!-- Estado vacío -->
+          <div class="col-12 text-center py-5 d-none" id="estadoVacio">
+            <i class="bi bi-search text-muted" style="font-size: 4rem;"></i>
+            <h5 class="text-muted mt-3">No se encontraron partidos</h5>
+            <p class="text-muted">Intenta ajustar los filtros de búsqueda.</p>
+            <button type="button" class="btn btn-primary" id="limpiarBusqueda">
+              <i class="bi bi-arrow-clockwise"></i> Limpiar búsqueda
+            </button>
+          </div>
+        </div>
+
+        <!-- Paginación -->
+        <nav aria-label="Paginación de partidos" class="mt-4">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Anterior</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Siguiente</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Vista de Mapa -->
+      <div id="vistaMapa" class="d-none">
+        <div class="row">
+          <div class="col-12">
+            <div class="card shadow">
+              <div class="card-body p-0">
+                <div id="map" style="height: 600px; border-radius: 8px;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -224,36 +228,15 @@ require_once HEAD_COMPONENT;
     </div>
   </main>
 
+  <?php require_once FILTRO_EXPLORAR_MODAL; ?>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="<?= CSS_ICONS ?>">
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  <script>
-    // Script para manejar filtros
-    document.getElementById('filtrosForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // TODO: Implementar lógica de filtrado con AJAX
-      const formData = new FormData(this);
-      console.log('Filtros aplicados:', Object.fromEntries(formData));
-      
-      // Por ahora solo mostramos un mensaje
-      alert('Funcionalidad de filtros en desarrollo');
-    });
-    
-    // Script para manejar el botón de unirse
-    document.querySelectorAll('[data-partido-id]').forEach(button => {
-      button.addEventListener('click', function() {
-        const partidoId = this.getAttribute('data-partido-id');
-        
-        // TODO: Implementar lógica para unirse al partido
-        if (confirm('¿Deseas unirte a este partido?')) {
-          console.log('Unirse al partido:', partidoId);
-          alert('Funcionalidad de unirse en desarrollo');
-        }
-      });
-    });
-  </script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="<?= JS_PARTIDOS_EXPLORAR ?>"></script>
 </body>
 </html>
-
-
 

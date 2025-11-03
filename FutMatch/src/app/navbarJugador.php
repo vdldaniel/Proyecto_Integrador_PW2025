@@ -61,7 +61,7 @@ function isActive($page_name, $current)
                                     <i class="bi bi-geo-alt me-2"></i>Explorar canchas
                                 </a>
                             </li>
-                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_LISTADO ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_EXPLORAR ?>">
                                     <i class="bi bi-people me-2"></i>Explorar partidos
                                 </a>
                             </li>
@@ -153,7 +153,7 @@ function isActive($page_name, $current)
                 class="btn btn-dark text-start <?= isActive('explorarCanchas', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Explorar Canchas
             </a>
-            <a href="<?= PAGE_PARTIDOS_LISTADO ?>"
+            <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarPartidos', $current_page) ?>">
                 <i class="bi bi-people me-2"></i>Explorar Partidos
             </a>
