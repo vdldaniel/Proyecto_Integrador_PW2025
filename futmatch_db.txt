@@ -543,6 +543,7 @@ CREATE TABLE foros (
     titulo VARCHAR(100) NOT NULL,
     texto VARCHAR(500),
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    foto VARCHAR(255),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 	);
 

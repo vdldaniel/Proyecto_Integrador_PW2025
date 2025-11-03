@@ -89,7 +89,7 @@ define('TABLE_USUARIOS_ESPACIOS', 'usuarios_espacios');
 // ===================================
 // RUTAS BASE
 // ===================================
-define("BASE_URL", "/FutMatch/FutMatch/");
+define("BASE_URL", "/proyecto_Integrador_PW2025/FutMatch/"); // Ajusta según tu configuración de servidor
 define("PUBLIC_PATH", BASE_URL . "public/");
 define("SRC_PATH", BASE_URL . "src/");
 define("ASSETS_PATH", PUBLIC_PATH . "assets/");
@@ -111,6 +111,7 @@ define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
 define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
 define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
 define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
+define("CSS_PAGES_MODALES_FOROS", SRC_PATH . "styles/pages/modales-foros.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/detalleTorneo.css");
 
@@ -133,11 +134,13 @@ define("JS_SCRIPTS_PATH", SRC_PATH . "scripts/pages/");
 define("JS_AGENDA", JS_SCRIPTS_PATH . "agenda.js");
 define("JS_ADMIN_INC", JS_SCRIPTS_PATH . "adminInc.js");
 define("JS_CANCHA_RESERVAR", JS_SCRIPTS_PATH . "cancha-reservar.js");
+define("JS_CANCHA_PERFIL", JS_SCRIPTS_PATH . "canchaPerfil.js");
 define("JS_CANCHAS_LISTADO", JS_SCRIPTS_PATH . "canchas-listado.js");
 define("JS_CUENTA_JUGADOR", JS_SCRIPTS_PATH . "cuenta-jugador.js");
 define("JS_DETALLE_TORNEO", JS_SCRIPTS_PATH . "detalle-torneo.js");
 define("JS_EQUIPO_CREAR", JS_SCRIPTS_PATH . "equipo-crear.js");
 define("JS_EQUIPOS_LISTADO", JS_SCRIPTS_PATH . "equipos-listado.js");
+define("JS_FOROS_NUEVO_MODAL", JS_SCRIPTS_PATH . "forosNuevoModal.js");
 define("JS_FORGOT", JS_SCRIPTS_PATH . "forgot.js");
 define("JS_FOROS_LISTADO", JS_SCRIPTS_PATH . "foros-listado.js");
 define("JS_INICIO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "inicioAdminCancha.js");
@@ -164,6 +167,8 @@ define("IMG_BG2", IMG_PATH . "bg2.jpg");
 define("HEAD_COMPONENT", __DIR__ . "/head.php");
 define("AUTH_REQUIRED_COMPONENT", __DIR__ . "/auth-required.php");
 define("MODAL_LOGIN_COMPONENT", __DIR__ . "/modalLogin.php");
+define("MODAL_NUEVO_FORO_COMPONENT", __DIR__ . "/../../public/HTML/forosNuevoModal.php");
+define("MODAL_FOROS_BORRADORES", __DIR__ . "/../../public/HTML/forosBorradoresModal.php");
 define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 define("NAVBAR_GUEST_COMPONENT", __DIR__ . "/navbarGuest.php");
 define("NAVBAR_ADMIN_CANCHA_COMPONENT", __DIR__ . "/navbarAdminCancha.php");

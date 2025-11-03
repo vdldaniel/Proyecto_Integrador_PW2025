@@ -1,0 +1,177 @@
+/**
+ * Estilos para los modales de foros
+ * Mejora la presentación y usa dropups para evitar solapamientos
+ */
+
+/* ==========================================
+   MODAL DE BORRADORES DE FOROS
+   ========================================== */
+
+/* Botones de acciones con iconos únicamente */
+#modalforosBorradores .borrador-item .btn-sm {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mejorar el hover de los botones de acciones */
+#modalforosBorradores .borrador-item .btn-outline-primary:hover {
+    transform: translateY(-1px);
+}
+
+#modalforosBorradores .borrador-item .btn-outline-success:hover {
+    transform: translateY(-1px);
+}
+
+#modalforosBorradores .borrador-item .btn-outline-info:hover {
+    transform: translateY(-1px);
+}
+
+#modalforosBorradores .borrador-item .btn-outline-danger:hover {
+    transform: translateY(-1px);
+}
+
+/* Mejorar la presentación de las tarjetas de borradores */
+#modalforosBorradores .borrador-item .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#modalforosBorradores .borrador-item .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Espacio entre elementos de borrador */
+#modalforosBorradores .borrador-item {
+    margin-bottom: 1rem;
+}
+
+/* Mejorar visibilidad de badges */
+#modalforosBorradores .badge {
+    font-size: 0.75em;
+    padding: 0.375rem 0.75rem;
+}
+
+/* Estilo para el estado de búsqueda vacía */
+#modalforosBorradores #estadoVacio {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==========================================
+   MODAL DE NUEVO FORO
+   ========================================== */
+
+/* Mejorar el estilo de la vista previa de imagen */
+#modalNuevoForo #previewContainer {
+    border: 2px dashed var(--bs-border-color);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    background-color: var(--bs-body-bg);
+}
+
+#modalNuevoForo #previewImage {
+    border-radius: 0.375rem;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilo para contadores de caracteres con colores de advertencia */
+#modalNuevoForo .text-warning {
+    color: #ffc107 !important;
+}
+
+#modalNuevoForo .text-danger {
+    color: #dc3545 !important;
+}
+
+/* ==========================================
+   NOTIFICACIONES TOAST
+   ========================================== */
+
+/* Asegurar que los toasts aparezcan por encima de todo */
+.toast {
+    z-index: 1200 !important;
+}
+
+/* Mejorar el estilo de los toasts */
+.toast .toast-body {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+}
+
+.toast .toast-body a {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.toast .toast-body a:hover {
+    text-decoration: none;
+}
+
+/* ==========================================
+   UTILIDADES GENERALES PARA MODALES
+   ========================================== */
+
+/* Corregir problemas de scroll en modales grandes */
+.modal-dialog-scrollable .modal-content {
+    max-height: 80vh;
+}
+
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+}
+
+/* Mejorar la presentación de botones en footers de modal */
+.modal-footer .btn {
+    margin-left: 0.5rem;
+}
+
+.modal-footer .btn:first-child {
+    margin-left: 0;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    #modalforosBorradores .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    #modalforosBorradores .borrador-item .d-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+
+/* Suavizar transiciones de modales */
+.modal.fade .modal-dialog {
+    transform: translateY(-50px);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+/* Transiciones suaves para botones de acciones */
+#modalforosBorradores .btn-sm {
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+#modalforosBorradores .btn-sm:hover {
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
