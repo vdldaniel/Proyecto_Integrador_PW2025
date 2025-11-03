@@ -58,7 +58,7 @@ require_once HEAD_COMPONENT;
                 </div>
                 <h5 class="card-title mb-3">Reservar una cancha</h5>
                 <p class="card-text text-body-secondary mb-4">Encuentra y reserva las mejores canchas cerca de ti</p>
-                <a href="<?= PAGE_CANCHAS_LISTADO ?>" class="btn btn-success">
+                <a href="<?= PAGE_CANCHAS_EXPLORAR?>" class="btn btn-success">
                   <i class="bi bi-plus-circle me-2"></i>Explorar canchas
                 </a>
               </div>
@@ -74,7 +74,7 @@ require_once HEAD_COMPONENT;
                 </div>
                 <h5 class="card-title mb-3">Unirse a partidos</h5>
                 <p class="card-text text-body-secondary mb-4">Únete a partidos organizados por otros jugadores</p>
-                <a href="<?= PAGE_PARTIDOS_LISTADO ?>" class="btn btn-primary">
+                <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>" class="btn btn-primary">
                   <i class="bi bi-play-circle me-2"></i>Explorar partidos
                 </a>
               </div>
