@@ -14,7 +14,7 @@ require_once HEAD_COMPONENT;
 <body>
   <?php
   // Cargar navbar de admin sistema
-  require_once NAVBAR_ADMIN_SISTEMA_COMPONENT;
+  require_once NAVBAR_ADMIN_CANCHA_COMPONENT;
   ?>
 
     <main>
@@ -672,44 +672,7 @@ require_once HEAD_COMPONENT;
 
     <!-- Scripts -->
     <script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Alternar vistas de equipos
-      document.querySelectorAll('[data-view]').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const view = this.dataset.view;
-          
-          // Cambiar botones activos
-          document.querySelectorAll('[data-view]').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          
-          // Mostrar/ocultar vistas
-          if (view === 'table') {
-            document.getElementById('equipos-table-view').classList.remove('d-none');
-            document.getElementById('equipos-cards-view').classList.add('d-none');
-          } else {
-            document.getElementById('equipos-table-view').classList.add('d-none');
-            document.getElementById('equipos-cards-view').classList.remove('d-none');
-          }
-        });
-      });
-
-      // Crear foro
-      document.getElementById('btnCrearForo').addEventListener('click', function() {
-        // Aquí iría la lógica para crear el foro
-        alert('Foro creado exitosamente');
-        bootstrap.Modal.getInstance(document.getElementById('modalCrearForo')).hide();
-      });
-
-      // Agregar interactividad a las tarjetas de foro
-      document.querySelectorAll('.card .btn').forEach(btn => {
-        if (btn.textContent.trim() === 'Ver Foro') {
-          btn.addEventListener('click', function() {
-            // Aquí se redirigiría al foro específico
-            alert('Redirigiendo al foro...');
-          });
-        }
-      });
-    </script>
+    <script src="<?= JS_TORNEO_DETALLE ?>"></script>
   </body>
 
   </html>

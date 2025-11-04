@@ -438,11 +438,11 @@ CREATE TABLE tipos_reserva (
 
 INSERT INTO tipos_reserva (nombre, descripcion) VALUES
     ('jugador', 'Reserva realizada por un jugador desde la app'),
-    ('admin_torneo', 'Reserva del admin para partido de torneo'),
-    ('admin_mantenimiento', 'Reserva del admin para mantenimiento/limpieza'),
-    ('admin_evento', 'Reserva del admin para evento especial');
+    ('torneo', 'Reserva del admin para partido de torneo'),
+    ('mantenimiento', 'Reserva del admin para mantenimiento/limpieza'),
+    ('evento', 'Reserva del admin para evento especial');
 
-CREATE TABLE reservas (
+CREATE TABLE reservas ( --se usa para reservar un espacio de la agenda de la cancha
     id_reserva INT AUTO_INCREMENT PRIMARY KEY,
     id_cancha INT NOT NULL,
     id_tipo_reserva INT NOT NULL DEFAULT 1,
@@ -471,7 +471,6 @@ CREATE TABLE reservas_usuarios (
     
 CREATE TABLE partidos (
     id_partido INT AUTO_INCREMENT PRIMARY KEY,
-    id_reserva INT NOT NULL,
     id_anfitrion INT NOT NULL,
     id_tipo_partido INT NOT NULL DEFAULT 1,
     FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
@@ -479,7 +478,14 @@ CREATE TABLE partidos (
     FOREIGN KEY (id_tipo_partido) REFERENCES tipos_partido(id_tipo_partido)
 	);
 
-CREATE TABLE partidos_torneos (
+CREATE TABLE partidos_reservas ( --si el origen del partido es una reserva
+    id_partido INT NOT NULL,
+    id_reserva INT NOT NULL,
+    FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
+    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido)
+)
+
+CREATE TABLE partidos_torneos ( --si el origen del partido es un torneo
     id_partido_torneo INT AUTO_INCREMENT PRIMARY KEY,
     id_partido INT NOT NULL,
     id_torneo INT NOT NULL,

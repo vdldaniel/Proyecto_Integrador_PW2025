@@ -156,6 +156,8 @@ define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
 define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
 define("JS_CANCHAS_EXPLORAR", JS_SCRIPTS_PATH . "canchas-explorar.js");
+define("JS_MIS_TORNEOS", JS_SCRIPTS_PATH . "mis-torneos.js");
+define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "torneo-detalle.js");
 
 // ===================================
 // IMÁGENES
