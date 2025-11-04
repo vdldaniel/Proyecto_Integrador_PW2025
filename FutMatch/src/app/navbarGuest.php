@@ -50,21 +50,14 @@ function isActive($page_name, $current)
                             <span class="d-none d-lg-inline ms-1">Explorar</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_LISTADO ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR ?>">
                                     <i class="bi bi-geo-alt me-2"></i>Explorar canchas
                                 </a></li>
-                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_LISTADO ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_EXPLORAR ?>">
                                     <i class="bi bi-people me-2"></i>Explorar partidos
                                 </a></li>
                         </ul>
                     </div>
-                    <a href="<?= PAGE_FOROS_LISTADO ?>"
-                        class="btn btn-dark me-2 <?= isActive('explorarForos', $current_page) ?>"
-                        id="botonForos"
-                        title="Foros">
-                        <i class="bi bi-chat-dots"></i>
-                        <span class="d-none d-lg-inline ms-1">Foros</span>
-                    </a>
                 </div>
             </div>
 
@@ -104,17 +97,13 @@ function isActive($page_name, $current)
         <!-- Sección Explorar -->
         <h6 class="offcanvas-section-title mb-2">Explorar</h6>
         <div class="d-grid gap-2 mb-4">
-            <a href="<?= PAGE_CANCHAS_LISTADO ?>"
+            <a href="<?= PAGE_CANCHAS_EXPLORAR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarCanchas', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Explorar Canchas
             </a>
-            <a href="<?= PAGE_PARTIDOS_LISTADO ?>"
+            <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarPartidos', $current_page) ?>">
                 <i class="bi bi-people me-2"></i>Explorar Partidos
-            </a>
-            <a href="<?= PAGE_FOROS_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('explorarForos', $current_page) ?>">
-                <i class="bi bi-chat-dots me-2"></i>Foros
             </a>
         </div>
 

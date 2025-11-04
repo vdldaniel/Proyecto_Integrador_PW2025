@@ -74,13 +74,6 @@ function isActive($page_name, $current)
                         <i class="bi bi-people"></i>
                         <span class="d-none d-lg-inline ms-1">Mis Equipos</span>
                     </a>
-                    <a href="<?= PAGE_FOROS_LISTADO ?>"
-                        class="btn btn-dark me-2 <?= isActive('explorarForos', $current_page) ?>"
-                        id="botonForos"
-                        title="Foros">
-                        <i class="bi bi-chat-dots"></i>
-                        <span class="d-none d-lg-inline ms-1">Foros</span>
-                    </a>
                 </div>
             </div>
 
@@ -156,10 +149,6 @@ function isActive($page_name, $current)
             <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarPartidos', $current_page) ?>">
                 <i class="bi bi-people me-2"></i>Explorar Partidos
-            </a>
-            <a href="<?= PAGE_FOROS_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('explorarForos', $current_page) ?>">
-                <i class="bi bi-chat-dots me-2"></i>Foros
             </a>
         </div>
 

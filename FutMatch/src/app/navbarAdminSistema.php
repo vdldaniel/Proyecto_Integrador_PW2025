@@ -54,12 +54,6 @@ function isActive($page_name, $current)
                                 title="Jugadores">
                                 <span class="d-none d-lg-inline ms-1">Jugadores</span>
                             </a>
-                            <a href="<?= PAGE_FOROS_LISTADO ?>"
-                                class="btn btn-dark me-2 <?= isActive('forosSistema', $current_page) ?>"
-                                id="botonAdminForos"
-                                title="Foros">
-                                <span class="d-none d-lg-inline ms-1">Foros</span>
-                            </a>
                             <a href="<?= PAGE_ESTADISTICAS_SISTEMA ?>"
                                 class="btn btn-dark me-2 <?= isActive('EstadisticasSistema', $current_page) ?>"
                                 id="botonEstadisticasSistema"

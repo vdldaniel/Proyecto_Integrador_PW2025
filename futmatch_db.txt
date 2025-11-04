@@ -245,10 +245,10 @@ INSERT INTO estados_canchas (nombre) VALUES
 CREATE TABLE superficies_canchas (
     id_superficie INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100)
-)
+    );
 
 INSERT INTO superficies_canchas (nombre) VALUES
-    ('Sintético'),('Cemento'),('Parquet'),('Césped natural')
+    ('Sintético'),('Cemento'),('Parquet'),('Césped natural');
 
 CREATE TABLE canchas (
     id_cancha INT AUTO_INCREMENT PRIMARY KEY,
@@ -320,6 +320,8 @@ CREATE TABLE equipos (
     id_equipo INT AUTO_INCREMENT PRIMARY KEY,
     id_lider INT NOT NULL,
     nombre VARCHAR(50),
+    foto VARCHAR(250),
+    clave VARCHAR(10), --cambiaría cada cierto tiempo
     FOREIGN KEY (id_lider) REFERENCES jugadores(id_jugador),
     );
     
@@ -481,9 +483,10 @@ CREATE TABLE partidos (
 CREATE TABLE partidos_reservas ( --si el origen del partido es una reserva
     id_partido INT NOT NULL,
     id_reserva INT NOT NULL,
+    PRIMARY KEY (id_partido, id_resera),
     FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
     FOREIGN KEY (id_partido) REFERENCES partidos(id_partido)
-)
+    );
 
 CREATE TABLE partidos_torneos ( --si el origen del partido es un torneo
     id_partido_torneo INT AUTO_INCREMENT PRIMARY KEY,

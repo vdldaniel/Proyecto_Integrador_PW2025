@@ -3,7 +3,7 @@
 /**
  * NAVBAR ADMIN_CANCHA - Componente de navegación para administradores de canchas
  * Incluye botones: Logo, 'Home', 'Agenda', 'Mis Canchas', 
- *                  'Mis Torneos', 'Foros', Notificaciones, Perfil
+ *                  'Mis Torneos', Notificaciones, Perfil
  * Soporte para página activa mediante la variable $current_page
  * Requiere: config.php cargado previamente
  */
@@ -70,13 +70,6 @@ function isActive($page_name, $current)
 						title="Mis Torneos">
 						<i class="bi bi-trophy-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Torneos</span>
-					</a>
-					<a href="<?= PAGE_FOROS_LISTADO ?>"
-						class="btn btn-dark me-2 <?= isActive('explorarForos', $current_page) ?>"
-						id="botonForos"
-						title="Foros">
-						<i class="bi bi-chat-dots"></i>
-						<span class="d-none d-lg-inline ms-1">Foros</span>
 					</a>
 				</div>
 			</div>
@@ -145,15 +138,6 @@ function isActive($page_name, $current)
 			</a>
 		</div>
 
-		<!-- Sección Explorar -->
-		<h6 class="offcanvas-section-title mb-2">Explorar</h6>
-		<div class="d-grid gap-2 mb-4">
-			<a href="<?= PAGE_FOROS_LISTADO ?>"
-				class="btn btn-dark text-start <?= isActive('explorarForos', $current_page) ?>">
-				<i class="bi bi-chat-dots me-2"></i>Foros
-			</a>
-		</div>
-
 		<!-- Perfil y configuración -->
 		<div class="mt-auto pt-3 border-top">
 			<div class="d-grid gap-2">
@@ -192,11 +176,6 @@ function isActive($page_name, $current)
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="tab-torneos" data-bs-toggle="tab" data-bs-target="#content-torneos" type="button" role="tab">
 							<i class="bi bi-trophy me-1"></i>Torneos
-						</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="tab-foros" data-bs-toggle="tab" data-bs-target="#content-foros" type="button" role="tab">
-							<i class="bi bi-chat-dots me-1"></i>Foros
 						</button>
 					</li>
 					<li class="nav-item" role="presentation">
@@ -365,118 +344,6 @@ function isActive($page_name, $current)
 							</table>
 						</div>
 					</div>
-
-					<!-- TAB 3: FOROS -->
-					<div class="tab-pane fade" id="content-foros" role="tabpanel">
-						<div class="d-flex justify-content-between align-items-center mb-3">
-							<h6 class="mb-0">Respuestas en Foros</h6>
-							<a href="<?= PAGE_FOROS_LISTADO ?>" class="btn btn-sm btn-outline-primary">
-								<i class="bi bi-chat-dots me-1"></i>Ver Todos los Foros
-							</a>
-						</div>
-
-						<!-- Lista de notificaciones de foros -->
-						<div class="list-group">
-							<div class="list-group-item">
-								<div class="d-flex gap-2">
-									<!-- Contenido a la izquierda -->
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-center mb-1">
-											<h6 class="mb-0">Laura Martínez</h6>
-										</div>
-										<p class="mb-1">Ha respondido a tu foro: <strong>"¿Mejores horarios para torneos?"</strong></p>
-										<small class="text-muted">"Creo que los fines de semana son ideales..."</small>
-										<small class="text-muted">Hace 2 horas</small>
-									</div>
-									<!-- Botones a la derecha-->
-									<div class="notification-actions flex-shrink-0">
-										<button class="btn btn-sm btn-outline-primary" title="Ver">
-											<i class="bi bi-eye"></i>
-										</button>
-										<button class="btn btn-sm btn-outline-danger" onclick="eliminarNotificacion(this)" title="Eliminar">
-											<i class="bi bi-x-lg"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="list-group-item">
-								<div class="d-flex gap-2">
-									<!-- Contenido a la izquierda -->
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-center mb-1">
-											<h6 class="mb-0">Diego Torres</h6>
-										</div>
-										<p class="mb-1">Ha respondido a tu foro: <strong>"Nuevas canchas techadas"</strong></p>
-										<small class="text-muted">"Excelente iniciativa! Cuando estarían..."</small>
-										<small class="text-muted">Hace 5 horas</small>
-									</div>
-									<!-- Botones a la derecha -->
-									<div class="notification-actions flex-shrink-0">
-										<button class="btn btn-sm btn-outline-primary" title="Ver">
-											<i class="bi bi-eye"></i>
-										</button>
-										<button class="btn btn-sm btn-outline-danger" onclick="eliminarNotificacion(this)" title="Eliminar">
-											<i class="bi bi-x-lg"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="list-group-item">
-								<div class="d-flex gap-2">
-									<!-- Contenido a la izquierda -->
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-center mb-1">
-											<h6 class="mb-0">Roberto Sánchez</h6>
-										</div>
-										<p class="mb-1">Ha respondido a tu foro: <strong>"Consulta sobre reservas"</strong></p>
-										<small class="text-muted">"Hola, me gustaría saber si..."</small>
-										<small class="text-muted">Hace 1 día</small>
-									</div>
-									<!-- Botones a la derecha -->
-									<div class="notification-actions flex-shrink-0">
-										<button class="btn btn-sm btn-outline-primary" title="Ver">
-											<i class="bi bi-eye"></i>
-										</button>
-										<button class="btn btn-sm btn-outline-danger" onclick="eliminarNotificacion(this)" title="Eliminar">
-											<i class="bi bi-x-lg"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- TAB 4: FUTMATCH -->
-					<div class="tab-pane fade" id="content-futmatch" role="tabpanel">
-						<div class="mb-3">
-							<h6 class="mb-3">Mensajes del Sistema</h6>
-						</div>
-
-						<!-- Mensajes de administración -->
-						<div class="list-group">
-							<div class="list-group-item list-group-item-info">
-								<div class="d-flex w-100 justify-content-between">
-									<h6 class="mb-1"><i class="bi bi-megaphone me-2"></i>Actualización del Sistema</h6>
-									<small>10/10/2025</small>
-								</div>
-								<p class="mb-1">Hemos implementado nuevas funcionalidades en el dashboard. Ahora puedes visualizar estadísticas de ocupación en tiempo real.</p>
-							</div>
-							<div class="list-group-item list-group-item-warning">
-								<div class="d-flex w-100 justify-content-between">
-									<h6 class="mb-1"><i class="bi bi-exclamation-triangle me-2"></i>Mantenimiento Programado</h6>
-									<small>05/10/2025</small>
-								</div>
-								<p class="mb-1">El sistema estará en mantenimiento el día 15/10/2025 de 02:00 a 04:00 hs. Disculpe las molestias.</p>
-							</div>
-							<div class="list-group-item">
-								<div class="d-flex w-100 justify-content-between">
-									<h6 class="mb-1"><i class="bi bi-info-circle me-2"></i>Nuevas Políticas</h6>
-									<small>01/10/2025</small>
-								</div>
-								<p class="mb-1">Se han actualizado los términos y condiciones del servicio. Por favor, revísalos en tu cuenta.</p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -579,7 +446,6 @@ function isActive($page_name, $current)
 									Una vez eliminada la cuenta, las reservas próximas serán canceladas.
 									Su información de contacto será eliminada y sus canchas dejarán de aparecer en el sistema.
 									El historial de partidos y torneos seguirá visible en el historial de los usuarios.
-									Sus publicaciones en Foros serán eliminadas después de 12 meses.
 								</p>
 								<button class="btn btn-danger" type="button" onclick="confirmarEliminacion()">
 									<i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminación
