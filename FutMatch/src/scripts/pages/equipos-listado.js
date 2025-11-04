@@ -76,6 +76,7 @@ function cargarMisEquipos() {
             foto: "", // Foto vacía por ahora
             integrantes: 8,
             torneosActivos: 2,
+            partidosProximos: 4,
             claveTemp: "ABC123"
         },
         {
@@ -84,6 +85,7 @@ function cargarMisEquipos() {
             foto: "", // Foto vacía por ahora
             integrantes: 6,
             torneosActivos: 1,
+            partidosProximos: 2,
             claveTemp: "XYZ789"
         },
         {
@@ -92,6 +94,7 @@ function cargarMisEquipos() {
             foto: "", // Foto vacía por ahora
             integrantes: 10,
             torneosActivos: 3,
+            partidosProximos: 5,
             claveTemp: "RAY456"
         }
     ];
@@ -114,7 +117,7 @@ function mostrarEquipos(equipos) {
                         <div class="row align-items-center">
                             <div class="col-md-2 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" 
-                                     style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
+                                     style="width: 60px; height: 60px; border: 2px;">
                                     <i class="bi bi-people text-muted" style="font-size: 1.5rem;"></i>
                                 </div>
                             </div>
@@ -130,12 +133,17 @@ function mostrarEquipos(equipos) {
                                     <i class="bi bi-people"></i> ${equipo.integrantes} integrantes
                                 </a>
                             </div>
-                            <div class="col-md-3">
-                                <a href="equipoDetalle.php?id=${equipo.id}" class="btn btn-outline-success btn-sm">
+                            <div class="col-md-2">
+                                <a href="equipoDetalle.php?id=${equipo.id}" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-trophy"></i> ${equipo.torneosActivos} torneos activos
                                 </a>
                             </div>
-                            <div class="col-md-2 text-end">
+                            <div class="col-md-2">
+                                <a href="equipoDetalle.php?id=${equipo.id}" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-calendar-event"></i> ${equipo.partidosProximos} partidos próx.
+                                </a>
+                            </div>
+                            <div class="col-md-1 text-end">
                                 <button class="btn btn-outline-warning btn-sm" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#modalInvitarJugador"

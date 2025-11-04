@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     inicializarEventos();
+    inicializarBusqueda();
 });
 
 /**
@@ -16,6 +17,34 @@ function inicializarEventos() {
     inicializarAlertasUbicacion();
     inicializarModalSuspender();
     inicializarCapturarIds();
+}
+
+/**
+ * Inicializa la funcionalidad de búsqueda de canchas
+ */
+function inicializarBusqueda() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filtrarCanchas(this.value);
+        });
+    }
+}
+
+/**
+ * Filtra las canchas basado en el término de búsqueda
+ */
+function filtrarCanchas(termino) {
+    const cards = document.querySelectorAll('#canchasList .col-12');
+    
+    cards.forEach(card => {
+        const texto = card.textContent.toLowerCase();
+        if (texto.includes(termino.toLowerCase())) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 }
 
 /**

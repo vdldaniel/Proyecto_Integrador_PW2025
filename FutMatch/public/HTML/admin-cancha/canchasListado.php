@@ -25,99 +25,179 @@ require_once HEAD_COMPONENT;
   // Cargar navbar de admin cancha
   require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
   ?>
-    <main>
-      <div class="container-fluid mt-4 pt-4 pb-5">
-        <!-- Header del body principal -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <button type="button" class="btn btn-outline-secondary" id="btnHistorialCanchas">
-            <i class="bi bi-clock-history"></i> Ver historial de canchas
-          </button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarCancha">
-            <i class="bi bi-plus-circle"></i> Agregar cancha
-          </button>
-        </div>
+  <!-- Contenido Principal -->
+  <main class="container mt-4">
+    <!-- Línea 1: Header con título y botones de navegación -->
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-6">
+        <h1 class="fw-bold mb-1">Mis Canchas</h1>
+        <p class="text-muted mb-0">Gestiona tus canchas y agrega nuevas</p>
+      </div>
+      <div class="col-md-6 text-end">
+        <button type="button" class="btn btn-outline-secondary me-2" id="btnHistorialCanchas" data-bs-toggle="modal" data-bs-target="#modalHistorialCanchas">
+          <i class="bi bi-clock-history"></i> Historial de Canchas
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarCancha">
+          <i class="bi bi-plus-circle"></i> Agregar Cancha
+        </button>
+      </div>
+    </div>
 
-        <div class="card shadow-lg p-4 rounded-3">
-          <div class="row">
-            <div class="col-12 table-responsive">
-              <h2 class="mb-4">Listado de Canchas</h2>
-              <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                  <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Capacidad</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>La Previa Cancha C1-F5</td>
-                    <td>Futbol 5</td>
-                    <td><span class="badge bg-success">Habilitada</span></td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-info" onclick="window.location.href='<?= PAGE_ADMIN_CANCHA_PERFIL ?>'">
-                        <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1">
-                        <i class="bi bi-pencil"></i><span class="d-none d-lg-inline ms-1">Editar</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="1">
-                        <i class="bi bi-pause-circle"></i><span class="d-none d-lg-inline ms-1">Cierre temp.</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="1">
-                        <i class="bi bi-trash"></i><span class="d-none d-lg-inline ms-1">Eliminar</span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>MegaFutbol Cancha A2-F9</td>
-                    <td>Futbol 9</td>
-                    <td><span class="badge bg-warning text-dark">En revisión</span></td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-info" onclick="window.location.href='<?= PAGE_ADMIN_CANCHA_PERFIL ?>'">
-                        <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2">
-                        <i class="bi bi-pencil"></i><span class="d-none d-lg-inline ms-1">Editar</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="2">
-                        <i class="bi bi-pause-circle"></i><span class="d-none d-lg-inline ms-1">Cierre temp.</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="2">
-                        <i class="bi bi-trash"></i><span class="d-none d-lg-inline ms-1">Eliminar</span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Cancha Delantera</td>
-                    <td>Futbol 5</td>
-                    <td><span class="badge bg-secondary">Pendiente de verificación</span></td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-info" onclick="window.location.href='<?= PAGE_ADMIN_CANCHA_PERFIL ?>'">
-                        <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3">
-                        <i class="bi bi-pencil"></i><span class="d-none d-lg-inline ms-1">Editar</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="3">
-                        <i class="bi bi-pause-circle"></i><span class="d-none d-lg-inline ms-1">Cierre temp.</span>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="3">
-                        <i class="bi bi-trash"></i><span class="d-none d-lg-inline ms-1">Eliminar</span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+    <!-- Línea 2: Filtros y búsqueda -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-search"></i>
+          </span>
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Buscar canchas por nombre, tipo o capacidad..."
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de canchas -->
+    <div id="canchasList" class="row g-3">
+      <!-- Cancha 1 -->
+      <div class="col-12">
+        <div class="card shadow-sm border-0 mb-2">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-md-2 text-center">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" 
+                     style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
+                  <i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <h5 class="card-title mb-1">
+                  <a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>" class="text-decoration-none">
+                    La Previa Cancha C1-F5
+                  </a>
+                </h5>
+              </div>
+              <div class="col-md-2">
+                <span class="text-muted">
+                  <i class="bi bi-people"></i> Fútbol 5
+                </span>
+              </div>
+              <div class="col-md-2">
+                <span class="badge bg-success">Habilitada</span>
+              </div>
+              <div class="col-md-3 text-end">
+                <button class="btn btn-outline-info btn-sm me-1" onclick="window.location.href='<?= PAGE_ADMIN_CANCHA_PERFIL ?>'" title="Ver perfil">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="1" title="Cierre temporal">
+                  <i class="bi bi-pause-circle"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="1" title="Eliminar">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Cancha 2 -->
+      <div class="col-12">
+        <div class="card shadow-sm border-0 mb-2">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-md-2 text-center">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" 
+                     style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
+                  <i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <h5 class="card-title mb-1">
+                  <a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>" class="text-decoration-none">
+                    MegaFutbol Cancha A2-F9
+                  </a>
+                </h5>
+              </div>
+              <div class="col-md-2">
+                <span class="text-muted">
+                  <i class="bi bi-people"></i> Fútbol 9
+                </span>
+              </div>
+              <div class="col-md-2">
+                <span class="badge bg-warning text-dark">En revisión</span>
+              </div>
+              <div class="col-md-3 text-end">
+                <button class="btn btn-outline-info btn-sm me-1" onclick="window.location.href='<?= PAGE_ADMIN_CANCHA_PERFIL ?>'" title="Ver perfil">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="2" title="Cierre temporal">
+                  <i class="bi bi-pause-circle"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="2" title="Eliminar">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cancha 3 -->
+      <div class="col-12">
+        <div class="card shadow-sm border-0 mb-2">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-md-2 text-center">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" 
+                     style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
+                  <i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <h5 class="card-title mb-1">
+                  <a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>" class="text-decoration-none">
+                    Cancha Delantera
+                  </a>
+                </h5>
+              </div>
+              <div class="col-md-2">
+                <span class="text-muted">
+                  <i class="bi bi-people"></i> Fútbol 5
+                </span>
+              </div>
+              <div class="col-md-2">
+                <span class="badge bg-secondary">Pendiente de verificación</span>
+              </div>
+              <div class="col-md-3 text-end">
+                <button class="btn btn-outline-info btn-sm me-1" onclick="window.location.href='<?= PAGE_ADMIN_CANCHA_PERFIL ?>'" title="Ver perfil">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="3" title="Cierre temporal">
+                  <i class="bi bi-pause-circle"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="3" title="Eliminar">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
       <!-- Modal Agregar Cancha -->
       <div class="modal fade" id="modalAgregarCancha" tabindex="-1" aria-labelledby="modalAgregarCanchaLabel">

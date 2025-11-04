@@ -5,6 +5,9 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Inicializar búsqueda de torneos
+    inicializarBusqueda();
+    
     // Mostrar/ocultar campo de fecha de cierre al marcar checkbox
     const abrirInscripciones = document.getElementById('abrirInscripciones');
     if (abrirInscripciones) {
@@ -115,3 +118,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
+
+/**
+ * Inicializa la funcionalidad de búsqueda de torneos
+ */
+function inicializarBusqueda() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filtrarTorneos(this.value);
+        });
+    }
+}
+
+/**
+ * Filtra los torneos basado en el término de búsqueda
+ */
+function filtrarTorneos(termino) {
+    const cards = document.querySelectorAll('#torneosList .col-12');
+    
+    cards.forEach(card => {
+        const texto = card.textContent.toLowerCase();
+        if (texto.includes(termino.toLowerCase())) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}

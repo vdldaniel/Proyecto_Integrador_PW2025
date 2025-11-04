@@ -232,6 +232,9 @@ define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar (-MOD
 // Torneos
 define("PAGE_TORNEOS_LISTADO", PUBLIC_PATH . "HTML/jugador/torneosListado (reciclar de mis-torneos).html");
 define("PAGE_TORNEO_DETALLE", PUBLIC_PATH . "HTML/jugador/torneosDetalle (dejar a Cami) .html");
+define("PAGE_TORNEOS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/torneosExplorar.php");
+define("PAGE_TORNEOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/torneosJugador.php");
+
 
 // ===================================
 // PÁGINAS - ADMIN CANCHA
