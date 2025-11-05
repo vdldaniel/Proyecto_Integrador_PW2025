@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuración global de rutas y links del proyecto FutMatch
  * ------------------------------------------------------------
@@ -89,7 +90,7 @@ define('TABLE_USUARIOS_ESPACIOS', 'usuarios_espacios');
 // ===================================
 // RUTAS BASE
 // ===================================
-define("BASE_URL", "/proyecto_Integrador_PW2025/FutMatch/"); // Ajusta según tu configuración de servidor
+define("BASE_URL", "/Proyecto_Integrador_PW2025/FutMatch/"); // Ajusta según tu configuración de servidor
 define("PUBLIC_PATH", BASE_URL . "public/");
 define("SRC_PATH", BASE_URL . "src/");
 define("ASSETS_PATH", PUBLIC_PATH . "assets/");
@@ -133,10 +134,17 @@ define("JS_BOOTSTRAP_CDN", "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js
 
 // Scripts de páginas
 define("JS_SCRIPTS_PATH", SRC_PATH . "scripts/pages/");
+define("JS_COMPONENTS_PATH", SRC_PATH . "scripts/components/");
 define("JS_AGENDA", JS_SCRIPTS_PATH . "agenda.js");
+
+// Scripts de componentes
+define("JS_PERFIL_CANCHA_BASE", JS_COMPONENTS_PATH . "perfilCancha.js");
+define("JS_AGENDA_ADMIN", JS_SCRIPTS_PATH . "agenda-admin.js");
+define("JS_CALENDARIO_JUGADOR", JS_SCRIPTS_PATH . "calendarioJugador.js");
 define("JS_ADMIN_INC", JS_SCRIPTS_PATH . "adminInc.js");
 define("JS_CANCHA_RESERVAR", JS_SCRIPTS_PATH . "cancha-reservar.js");
 define("JS_CANCHA_PERFIL", JS_SCRIPTS_PATH . "canchaPerfil.js");
+define("JS_PERFILES_CANCHAS", JS_SCRIPTS_PATH . "perfiles-canchas.js");
 define("JS_CANCHAS_LISTADO", JS_SCRIPTS_PATH . "canchas-listado.js");
 define("JS_CUENTA_JUGADOR", JS_SCRIPTS_PATH . "cuenta-jugador.js");
 define("JS_DETALLE_TORNEO", JS_SCRIPTS_PATH . "detalle-torneo.js");
@@ -204,21 +212,22 @@ define("PAGE_REGISTRO_ADMIN_CANCHA_PHP", PUBLIC_PATH . "HTML/auth/registroAdminC
 // PÁGINAS - COMUNES
 // ===================================
 define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/forosListado.php");
-define("PAGE_FOROS_DETALLE", PUBLIC_PATH . "HTML/forosDetalle.html");
+
+// ===================================
+// COMPONENTES - RUTAS LOCALES PARA INCLUDES
+// ===================================
+define("CALENDARIO_COMPONENT", __DIR__ . "/../../public/HTML/calendario.php");
+define("CANCHA_PERFIL_COMPONENT", __DIR__ . "/../../public/HTML/canchaPerfil.php");
 
 // ===================================
 // PÁGINAS - JUGADOR
 // ===================================
 define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicioJugador.php");
-define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilJugador.html");
-define("PAGE_PERFIL_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/jugador/perfilJugador.html");
-define("PAGE_CUENTA_JUGADOR", PUBLIC_PATH . "HTML/jugador/cuenta-jugador (-MODAL navbar).html");
+define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilJugador.php");
 
 // Equipos
 define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equiposListado.php");
-define("PAGE_EQUIPO_CREAR", PUBLIC_PATH . "HTML/jugador/equipo-crear (-MODAL).html");
 define("PAGE_EQUIPO_DETALLE", PUBLIC_PATH . "HTML/jugador/equipoDetalle.php");
-define("PAGE_EQUIPO_MODIFICAR", PUBLIC_PATH . "HTML/jugador/equipo-modificar.html");
 
 // Partidos
 define("PAGE_PARTIDOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/partidosJugador.php");
@@ -226,12 +235,10 @@ define("PAGE_PARTIDOS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/partidosExplorar.ph
 
 // Canchas
 define("PAGE_CANCHAS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/canchasExplorar.php");
-define("PAGE_CANCHA_PERFIL", PUBLIC_PATH . "HTML/jugador/canchaPerfil.html");
-define("PAGE_CANCHA_RESERVAR", PUBLIC_PATH . "HTML/jugador/cancha-reservar (-MODAL).html");
+define("PAGE_CANCHA_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/canchaPerfilJugador.php");
+define("PAGE_CALENDARIO_CANCHA", PUBLIC_PATH . "HTML/jugador/calendarioCancha.php");
 
 // Torneos
-define("PAGE_TORNEOS_LISTADO", PUBLIC_PATH . "HTML/jugador/torneosListado (reciclar de mis-torneos).html");
-define("PAGE_TORNEO_DETALLE", PUBLIC_PATH . "HTML/jugador/torneosDetalle (dejar a Cami) .html");
 define("PAGE_TORNEOS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/torneosExplorar.php");
 define("PAGE_TORNEOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/torneosJugador.php");
 
@@ -245,7 +252,7 @@ define("PAGE_AGENDA", PUBLIC_PATH . "HTML/admin-cancha/agenda.php");
 // Gestión de canchas
 define("PAGE_ADMIN_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-cancha/canchasListado.php");
 define("PAGE_ADMIN_CANCHA_CREAR", PUBLIC_PATH . "HTML/admin-cancha/canchaCrear.php");
-define("PAGE_ADMIN_CANCHA_PERFIL", PUBLIC_PATH . "HTML/admin-cancha/canchaPerfil.php");
+define("PAGE_ADMIN_PERFILES_CANCHAS", PUBLIC_PATH . "HTML/admin-cancha/perfilesCanchas.php");
 
 // Gestión de torneos
 define("PAGE_ADMIN_MIS_TORNEOS", PUBLIC_PATH . "HTML/admin-cancha/misTorneos.php");
@@ -269,4 +276,3 @@ define("PAGE_SISTEMA_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/admin-sistema/jugador
 define("PAGE_SISTEMA_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/canchas-listado-sistema.html");
 define("PAGE_SISTEMA_CANCHA_DETALLE", PUBLIC_PATH . "HTML/admin-sistema/cancha-detalle-sistema.html");
 define("PAGE_SISTEMA_CANCHA_VERIFICAR", PUBLIC_PATH . "HTML/admin-sistema/cancha-verificar-sistema.html");
-?>

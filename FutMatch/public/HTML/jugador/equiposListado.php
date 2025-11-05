@@ -20,11 +20,11 @@ require_once HEAD_COMPONENT;
 
 <body>
 
-  <?php 
+  <?php
   // Cargar navbar
-  require_once NAVBAR_JUGADOR_COMPONENT; 
+  require_once NAVBAR_JUGADOR_COMPONENT;
   ?>
-  
+
   <!-- Contenido Principal -->
   <main class="container mt-4">
     <!-- Línea 1: Header con título y botones de navegación -->
@@ -54,8 +54,7 @@ require_once HEAD_COMPONENT;
             type="text"
             id="searchInput"
             class="form-control"
-            placeholder="Buscar equipos por nombre..."
-          />
+            placeholder="Buscar equipos por nombre..." />
         </div>
       </div>
     </div>
@@ -77,9 +76,9 @@ require_once HEAD_COMPONENT;
         <div class="modal-body">
           <div class="mb-3">
             <label for="codigoEquipo" class="form-label">Código de equipo</label>
-            <input type="text" class="form-control form-control-lg text-center" id="codigoEquipo" 
-                   placeholder="00000" maxlength="5" pattern="[0-9]{5}" 
-                   style="letter-spacing: 0.5rem; font-size: 1.5rem;">
+            <input type="text" class="form-control form-control-lg text-center" id="codigoEquipo"
+              placeholder="00000" maxlength="5" pattern="[0-9]{5}"
+              style="letter-spacing: 0.5rem; font-size: 1.5rem;">
             <div class="form-text">Ingresa el código de 5 dígitos proporcionado por el equipo</div>
           </div>
         </div>
@@ -111,13 +110,13 @@ require_once HEAD_COMPONENT;
                 <input type="file" class="form-control" id="fotoEquipo" accept="image/*">
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label class="form-label">Jugadores del equipo</label>
               <div id="jugadoresContainer">
                 <div class="input-group mb-2">
                   <input type="text" class="form-control" placeholder="Username del jugador" name="jugador[]">
-                  <button class="btn btn-outline-danger" type="button" onclick="removeJugador(this)" disabled>
+                  <button class="btn btn-outline-danger remove-jugador-btn" type="button" disabled>
                     <i class="bi bi-dash"></i>
                   </button>
                 </div>
@@ -164,9 +163,179 @@ require_once HEAD_COMPONENT;
     </div>
   </div>
 
+  <!-- Modal: Editar Equipo -->
+  <div class="modal fade" id="modalEditarEquipo" tabindex="-1" aria-labelledby="modalEditarEquipoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarEquipoLabel">Editar equipo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarEquipo">
+            <!-- Información básica del equipo -->
+            <div class="row mb-3">
+              <div class="col-md-8">
+                <label for="editNombreEquipo" class="form-label">Nombre del equipo</label>
+                <div class="position-relative">
+                  <input type="text" class="form-control" id="editNombreEquipo" value="Los Tigres FC" disabled
+                    data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo">
+                  <i class="bi bi-lock-fill position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="editFotoEquipo" class="form-label">Foto del equipo</label>
+                <div class="position-relative">
+                  <input type="file" class="form-control" id="editFotoEquipo" accept="image/*" disabled
+                    data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo">
+                  <i class="bi bi-lock-fill position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Información del líder (solo lectura) -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Líder del equipo</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-success text-white">
+                    <i class="bi bi-star-fill"></i>
+                  </span>
+                  <input type="text" class="form-control" value="@jugador_lider" readonly>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Fecha de creación</label>
+                <input type="text" class="form-control" value="15 de Octubre, 2024" readonly>
+              </div>
+            </div>
+
+            <!-- Estadísticas del equipo (solo lectura) -->
+            <div class="row mb-4">
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="bg-primary text-white rounded-3 p-3">
+                    <h4 class="mb-0">8</h4>
+                    <small>Integrantes</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="bg-warning text-dark rounded-3 p-3">
+                    <h4 class="mb-0">2</h4>
+                    <small>Torneos Activos</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="bg-info text-white rounded-3 p-3">
+                    <h4 class="mb-0">12</h4>
+                    <small>Partidos Jugados</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- Jugadores del equipo (editable si eres el líder) -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label class="form-label mb-0">Jugadores del equipo</label>
+                <span class="badge bg-secondary">Puedes agregar/quitar jugadores</span>
+              </div>
+
+              <div id="editJugadoresContainer">
+                <!-- Jugador líder (no removible) -->
+                <div class="input-group mb-2">
+                  <span class="input-group-text bg-success text-white">
+                    <i class="bi bi-star-fill"></i>
+                  </span>
+                  <input type="text" class="form-control" value="@jugador_lider" readonly>
+                  <button class="btn btn-outline-secondary" type="button" disabled>
+                    <i class="bi bi-shield-check"></i> Líder
+                  </button>
+                </div>
+
+                <!-- Jugadores editables -->
+                <div class="input-group mb-2">
+                  <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>
+                  </span>
+                  <input type="text" class="form-control" value="@jugador_miembro1" name="jugadorEdit[]">
+                  <button class="btn btn-outline-danger remove-jugador-edit-btn" type="button">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                </div>
+
+                <div class="input-group mb-2">
+                  <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>
+                  </span>
+                  <input type="text" class="form-control" value="@jugador_miembro2" name="jugadorEdit[]">
+                  <button class="btn btn-outline-danger remove-jugador-edit-btn" type="button">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                </div>
+
+                <div class="input-group mb-2">
+                  <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>
+                  </span>
+                  <input type="text" class="form-control" placeholder="Username del nuevo jugador" name="jugadorEdit[]">
+                  <button class="btn btn-outline-danger remove-jugador-edit-btn" type="button">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-outline-primary btn-sm" id="btnAgregarJugadorEdit">
+                <i class="bi bi-plus"></i> Agregar jugador
+              </button>
+            </div>
+
+            <!-- Opciones peligrosas -->
+            <div class="mt-4">
+              <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                  <h6 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Acciones peligrosas</h6>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-outline-warning w-100"
+                        data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo" disabled>
+                        <i class="bi bi-arrow-right-circle"></i> Transferir liderazgo
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-outline-danger w-100"
+                        data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo" disabled>
+                        <i class="bi bi-trash"></i> Disolver equipo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarEdicionEquipo">
+            <i class="bi bi-save"></i> Guardar cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  <script src ="<?= JS_EQUIPOS_LISTADO ?>"></script>
+  <script src="<?= JS_EQUIPOS_LISTADO ?>"></script>
 
 </body>
+
 </html>

@@ -120,7 +120,7 @@ function isActive($page_name, $current)
         <!-- Perfil y configuración -->
         <div class="mt-auto pt-3 border-top">
             <div class="d-grid gap-2">
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
+                <a href="<?= PAGE_PERFIL_JUGADOR ?>"
                     class="btn btn-dark text-start <?= isActive('miPerfil', $current_page) ?>"
                     title="Mi Perfil">
                     <i class="bi bi-person-circle me-2"></i>Mi Perfil

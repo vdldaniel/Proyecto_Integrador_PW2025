@@ -13,176 +13,71 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
 require_once '../../../src/app/config.php';
 
 // Resalta la página actual en el navbar
-$current_page = 'agenda'; 
+$current_page = 'agenda';
 
 // CSS adicional específico de esta página
 $page_title = "Agenda - FutMatch";
-$page_css = [CSS_PAGES_AGENDA
+$page_css = [
+  CSS_PAGES_AGENDA
 ];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;
 ?>
+
 <body class="monthly-view-active">
-  <?php 
+  <?php
   // Cargar navbar de admin cancha
-  require_once NAVBAR_ADMIN_CANCHA_COMPONENT; 
+  require_once NAVBAR_ADMIN_CANCHA_COMPONENT;
   ?>
 
-  <!-- Barra superior de controles -->
-  <div class="container-fluid my-3">
-    <div class="row align-items-center g-2 justify-content-center justify-content-md-start">
-      <!-- Selector de cancha -->
-      <div class="col-auto">
-        <select class="form-select" id="selectorCancha" style="width: auto; min-width: 200px;">
-          <option selected>Seleccionar cancha</option>
-          <option value="1">Cancha A - Fútbol 11</option>
-          <option value="2">Cancha B - Fútbol 7</option>
-          <option value="3">Cancha C - Fútbol 5</option>
-        </select>
+  <!-- Contenido Principal -->
+  <main class="container mt-4">
+    <!-- Línea 1: Header con título y botones de navegación -->
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-8">
+        <h1 class="fw-bold mb-1" id="displayFechaActual">Noviembre 2025</h1>
+        <p class="text-muted mb-0">Gestiona las reservas de tus canchas</p>
       </div>
-
-      <!-- Botón crear reserva -->
-      <div class="col-auto">
-        <button id="botonCrearReserva" class="btn btn-success d-flex align-items-center justify-content-center" type="button" style="min-width: 38px;">
-          <i class="bi bi-plus-circle"></i><span class="d-none d-lg-inline ms-2">Crear reserva</span>
+      <div class="col-md-4 text-end">
+        <button id="configurarHorarios" class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalConfigurarHorarios">
+          <i class="bi bi-gear"></i> Configuración
+        </button>
+        <button id="botonCrearReserva" class="btn btn-success" type="button">
+          <i class="bi bi-plus-circle"></i> Crear Reserva
         </button>
       </div>
+    </div>
 
-      <!-- Botón Hoy -->
-      <div class="col-auto">
-        <button id="botonHoy" class="btn btn-primary" type="button">Hoy</button>
-      </div>
+    <!-- Incluir componente calendario con funcionalidades específicas del admin -->
+    <?php
+    // Cargar el componente calendario base
+    $calendario_admin_mode = true; // Flag para identificar que está en modo admin
+    include CALENDARIO_COMPONENT;
+    ?>
 
-      <!-- Selector de fecha -->
-      <div class="col-auto">
-        <div class="position-relative">
-          <input type="date" class="form-control d-none d-lg-block" id="selectorFecha">
-          <input type="date" class="form-control d-lg-none position-absolute opacity-0" id="selectorFechaOculto" style="width: 40px; pointer-events: none;">
-          <button class="btn btn-outline-secondary d-lg-none" type="button" id="botonAbrirSelectorFecha">
-            <i class="bi bi-calendar3"></i>
-          </button>
+    <!-- Controles adicionales específicos del admin -->
+    <div class="row mb-3">
+      <div class="col-md-8">
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-search"></i>
+          </span>
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Buscar reservas..." />
         </div>
       </div>
-
-      <!-- Selector de vista -->
-      <div class="col-auto ms-md-auto">
-        <div class="dropdown">
-          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownVista" data-bs-toggle="dropdown" aria-expanded="false">
-            <span id="vistaActual">Mes</span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownVista">
-            <li><a class="dropdown-item selector-vista" href="#" data-vista="mes">Mes</a></li>
-            <li><a class="dropdown-item selector-vista" href="#" data-vista="semana">Semana</a></li>
-            <li><a class="dropdown-item selector-vista" href="#" data-vista="dia">Día</a></li>
-          </ul>
-        </div>
+      <div class="col-md-4">
+        <!-- Espacio reservado para controles adicionales futuros -->
       </div>
     </div>
-  </div>
-
-  <!-- Área principal del calendario -->
-  <div class="main-container">
-    <div class="container-fluid h-100">
-      <div class="row h-100 p-3">
-        <main class="col-12 d-flex flex-column">
-          <!-- Encabezado con fecha y navegación -->
-          <div class="d-flex justify-content-between align-items-center mb-3 date-header">
-            <h3 id="displayFechaActual" class="mb-0">Septiembre 2025</h3> <!-- Se actualiza con actualizarDisplayFecha() en agenda.js -->
-            <div class="btn-group navegacion-calendario" role="group" aria-label="Navigate calendar">
-              <button type="button" class="btn btn-outline-secondary" id="botonAnterior">
-                <i class="bi bi-chevron-left"></i> <!-- Ir al período anterior -->
-              </button>
-              <button type="button" class="btn btn-outline-secondary" id="botonSiguiente">
-                <i class="bi bi-chevron-right"></i> <!-- Ir al período siguiente -->
-              </button>
-            </div>
-          </div>
-
-        <!-- Contenido del calendario -->
-        <div id="contenidoCalendario" class="d-flex flex-column flex-grow-1">
-          <!-- Vista mensual -->
-          <div id="vistaMensual" class="vista-calendario d-flex flex-column">
-            <div class="table-responsive flex-grow-1">
-              <table class="table table-bordered h-100">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col">Dom</th>
-                    <th scope="col">Lun</th>
-                    <th scope="col">Mar</th>
-                    <th scope="col">Mié</th>
-                    <th scope="col">Jue</th>
-                    <th scope="col">Vie</th>
-                    <th scope="col">Sáb</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Se llena con renderizarVistaMensual() en agenda.js -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Vista semanal -->
-          <div id="vistaSemanal" class="vista-calendario d-none">
-            <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col" width="100">Hora</th>
-                    <th scope="col">Dom</th>
-                    <th scope="col">Lun</th>
-                    <th scope="col">Mar</th>
-                    <th scope="col">Mié</th>
-                    <th scope="col">Jue</th>
-                    <th scope="col">Vie</th>
-                    <th scope="col">Sáb</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Se llena con renderizarVistaSemanal() en agenda.js -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Vista diaria -->
-          <div id="vistaDiaria" class="vista-calendario d-none">
-            <div class="row">
-              <div class="col-md-8">
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                    <thead class="table-light">
-                      <tr>
-                        <th scope="col" width="100">Hora</th>
-                        <th scope="col" id="encabezadoVistaDiaria">Día</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Se llena con renderizarVistaDiaria() en agenda.js -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card">
-                  <div class="card-header">
-                    <h6 class="mb-0">Resumen del día</h6>
-                  </div>
-                  <div class="card-body">
-                    <!-- Se llena con actualizarResumenDia() en agenda.js -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  </div>
+  </main>
 
   <!--MODALES-->
-  
+
   <!-- Modal de Notificaciones/Solicitudes -->
   <div class="modal fade" id="modalNotificaciones" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -197,7 +92,7 @@ require_once HEAD_COMPONENT;
           <div id="listaSolicitudes">
             <!-- Las solicitudes se renderizan dinámicamente desde JavaScript -->
           </div>
-          
+
           <div id="sinSolicitudes" class="text-center d-none">
             <i class="bi bi-bell-slash text-muted" style="font-size: 3rem;"></i>
             <p class="text-muted mt-3">No hay solicitudes pendientes</p>
@@ -209,10 +104,10 @@ require_once HEAD_COMPONENT;
       </div>
     </div>
   </div>
-  
+
   <!-- Modal de Configuración -->
-  <div class="modal fade" id="modalConfiguracion" tabindex="-1">
-    <div class="modal-dialog">
+  <div class="modal fade" id="modalConfigurarHorarios">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
@@ -228,14 +123,14 @@ require_once HEAD_COMPONENT;
               <div class="row mb-3">
                 <div class="col-md-6">
                   <label for="horaApertura" class="form-label">Hora de apertura</label>
-                  <input type="time" class="form-control" id="horaApertura" 
-                         value="08:00" min="06:00" max="23:00" required>
+                  <input type="time" class="form-control" id="horaApertura"
+                    value="08:00" min="06:00" max="23:00" required>
                   <div class="form-text">Horario mínimo: 06:00</div>
                 </div>
                 <div class="col-md-6">
                   <label for="horaCierre" class="form-label">Hora de cierre</label>
-                  <input type="time" class="form-control" id="horaCierre" 
-                         value="22:00" min="07:00" max="24:00" required>
+                  <input type="time" class="form-control" id="horaCierre"
+                    value="22:00" min="07:00" max="24:00" required>
                   <div class="form-text">Horario máximo: 24:00</div>
                 </div>
               </div>
@@ -244,7 +139,7 @@ require_once HEAD_COMPONENT;
                 <small>El horario de cierre debe ser posterior al de apertura</small>
               </div>
             </div>
-            
+
             <!-- Días de operación -->
             <div class="mb-4">
               <h6 class="fw-bold mb-3">Días de Operación</h6>
@@ -283,7 +178,7 @@ require_once HEAD_COMPONENT;
                 </div>
               </div>
             </div>
-            
+
             <!-- Información de la cancha -->
             <div class="mb-4">
               <h6 class="fw-bold mb-3">Información del Complejo</h6>
@@ -297,9 +192,9 @@ require_once HEAD_COMPONENT;
                     <div class="col-md-6">
                       <p class="mb-2"><strong>Teléfono:</strong><br><span id="telefonoComplejo">+54 11 1234-5678</span></p>
                       <div class="d-grid">
-                        <button type="button" class="btn btn-outline-info" id="botonVerPerfilCancha">
+                        <a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" type="button" class="btn btn-outline-info" id="botonVerPerfilCancha">
                           <i class="bi bi-building me-2"></i>Ver Perfil Completo
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -328,7 +223,7 @@ require_once HEAD_COMPONENT;
         <div class="modal-body">
           <!-- ID oculto para edición -->
           <input type="hidden" id="idReserva">
-          
+
           <form id="formularioGestionReserva">
             <!-- Estado de la reserva (solo visible en modo edición) -->
             <div id="seccionEstado" class="row mb-3 d-none">
@@ -345,7 +240,7 @@ require_once HEAD_COMPONENT;
                 <input type="text" class="form-control" id="fechaCreacion" readonly>
               </div>
             </div>
-            
+
             <!-- Datos del jugador -->
             <div class="row mb-3">
               <div class="col-md-6">
@@ -361,7 +256,7 @@ require_once HEAD_COMPONENT;
                 </div>
               </div>
             </div>
-            
+
             <!-- Datos adicionales (deshabilitados hasta marcar reserva externa) -->
             <div id="datosExternos">
               <div class="row mb-3">
@@ -375,9 +270,9 @@ require_once HEAD_COMPONENT;
                 </div>
               </div>
             </div>
-            
+
             <hr class="my-4">
-            
+
             <!-- Detalles de la reserva -->
             <div class="row mb-3">
               <div class="col-md-4">
@@ -395,14 +290,14 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="col-md-4">
                 <label for="horaReserva" class="form-label">Hora</label>
-                <input type="time" class="form-control" id="horaReserva" 
-                       min="08:00" max="22:00" step="3600" required>
+                <input type="time" class="form-control" id="horaReserva"
+                  min="08:00" max="22:00" step="3600" required>
                 <div class="form-text">Horario disponible: 8:00 AM - 10:00 PM</div>
               </div>
             </div>
-            
+
             <hr class="my-4">
-            
+
             <!-- Comentario -->
             <div class="mb-3">
               <label for="comentarioReserva" class="form-label">Comentario</label>
@@ -422,13 +317,16 @@ require_once HEAD_COMPONENT;
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 
   <!-- Scripts de JavaScript -->
-  <script src="public/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="src/scripts/pages/agenda.js"></script>
+  <script src="<?= JS_BOOTSTRAP ?>"></script>
+
+  <!-- Script base del calendario (debe ir primero) -->
+  <script src="<?= JS_AGENDA ?>"></script>
+
+  <!-- Script específico del admin (extiende el base) -->
+  <script src="<?= JS_AGENDA_ADMIN ?>"></script>
 </body>
+
 </html>
-
-
-

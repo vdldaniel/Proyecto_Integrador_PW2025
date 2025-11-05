@@ -259,9 +259,25 @@ CREATE TABLE canchas (
     id_estado INT NOT NULL DEFAULT 1,
     foto VARCHAR(255),
     id_superficie VARCHAR(100) NOT NULL,
+    politicas_reservas TEXT,
     FOREIGN KEY(id_admin_cancha) REFERENCES admin_canchas(id_admin_cancha),
     FOREIGN KEY(id_direccion) REFERENCES direcciones(id_direccion),
     FOREIGN KEY(id_estado) REFERENCES estados_canchas(id_estado)
+    );
+
+CREATE TABLE servicios (
+    id_servicio INT AUTO_INCREMENT PRIMARY KEY, 
+    nombre VARCHAR(100) NOT NULL
+    );
+
+INSERT INTO servicios (nombre) VALUES
+    ('Vestuarios', 'Estacionamiento', 'Bar', 'Duchas', 'WIFI gratis');
+
+CREATE TABLE servicios_canchas (
+    id_servicio INT NOT NULL, 
+    id_cancha INT NOT NULL,
+    FOREIGN KEY(id_servicio) REFERENCES servicios(id_servicio),
+    FOREIGN KEY(id_cancha) REFERENCES canchas(id_cancha)
     );
     
 CREATE TABLE dias_semana (
@@ -370,6 +386,7 @@ CREATE TABLE torneos (
     fecha_fin DATE,
     fin_estimativo BOOLEAN, 
     id_etapa INT NOT NULL DEFAULT 1,
+    descripcion TEXT,
     FOREIGN KEY (id_organizador) REFERENCES admin_canchas(id_admin_cancha),
     FOREIGN KEY (id_etapa) REFERENCES etapas_torneo(id_etapa),
     );

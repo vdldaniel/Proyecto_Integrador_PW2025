@@ -57,7 +57,7 @@ function isActive($page_name, $current)
 						<i class="bi bi-geo-alt-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Canchas</span>
 					</a>
-					<a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>"
+					<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>"
 						class="btn btn-dark me-2 <?= isActive('canchaPerfil', $current_page) ?>"
 						id="botonPerfiles"
 						title="Perfiles">
@@ -131,7 +131,7 @@ function isActive($page_name, $current)
 				title="Mis Torneos">
 				<i class="bi bi-trophy-fill me-2"></i>Mis Torneos
 			</a>
-			<a href="<?= PAGE_ADMIN_CANCHA_PERFIL ?>"
+			<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>"
 				class="btn btn-dark text-start <?= isActive('canchaPerfil', $current_page) ?>"
 				title="Perfiles">
 				<i class="bi bi-person-circle me-2"></i>Perfiles
