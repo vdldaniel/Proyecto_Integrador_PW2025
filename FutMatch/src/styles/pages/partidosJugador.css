@@ -124,7 +124,7 @@
 }
 
 .semana-divider h4 {
-  border-bottom: 2px solid var(--bs-primary);
+  border-bottom: 2px solid var(--bs-secondary);
   padding-bottom: 0.5rem;
   margin-bottom: 2rem;
 }

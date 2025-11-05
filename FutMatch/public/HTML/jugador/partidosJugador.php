@@ -69,7 +69,7 @@ require_once HEAD_COMPONENT;
       <div class="semana-divider mb-4">
         <div class="row">
           <div class="col">
-            <h4 class="fw-bold text-primary mb-3">
+            <h4 class="fw-bold text-secondary mb-3">
               <i class="bi bi-calendar-week me-2"></i>Esta semana
             </h4>
           </div>
@@ -82,7 +82,7 @@ require_once HEAD_COMPONENT;
             <div class="partido-datetime">
               <div class="fw-bold">Sábado</div>
               <div class="text-muted small">15/02/2025</div>
-              <div class="fw-bold text-primary">19:00</div>
+              <div class="fw-bold">19:00</div>
             </div>
 
             <!-- Columna central: Información de la cancha -->
@@ -175,7 +175,7 @@ require_once HEAD_COMPONENT;
             <div class="partido-datetime">
               <div class="fw-bold">Domingo</div>
               <div class="text-muted small">16/02/2025</div>
-              <div class="fw-bold text-primary">16:30</div>
+              <div class="fw-bold">16:30</div>
             </div>
 
             <!-- Columna central: Información de la cancha -->
@@ -264,7 +264,7 @@ require_once HEAD_COMPONENT;
       <div class="semana-divider mb-4">
         <div class="row">
           <div class="col">
-            <h4 class="fw-bold text-primary mb-3">
+            <h4 class="fw-bold text-secondary mb-3">
               <i class="bi bi-calendar-plus me-2"></i>Próxima semana
             </h4>
           </div>
@@ -277,7 +277,7 @@ require_once HEAD_COMPONENT;
             <div class="partido-datetime">
               <div class="fw-bold">Martes</div>
               <div class="text-muted small">18/02/2025</div>
-              <div class="fw-bold text-primary">20:00</div>
+              <div class="fw-bold">20:00</div>
             </div>
 
             <!-- Columna central: Información de la cancha -->
@@ -462,7 +462,7 @@ require_once HEAD_COMPONENT;
       <div class="semana-divider mb-4">
         <div class="row">
           <div class="col">
-            <h4 class="fw-bold text-primary mb-3">
+            <h4 class="fw-bold text-secondary mb-3">
               <i class="bi bi-calendar-event me-2"></i>Más adelante
             </h4>
           </div>
@@ -475,13 +475,13 @@ require_once HEAD_COMPONENT;
             <div class="partido-datetime">
               <div class="fw-bold">Sábado</div>
               <div class="text-muted small">01/03/2025</div>
-              <div class="fw-bold text-primary">10:00</div>
+              <div class="fw-bold">10:00</div>
             </div>
 
             <!-- Columna central: Información de la cancha -->
             <div class="partido-cancha flex-fill mx-3">
               <h6 class="fw-bold mb-1">
-                <i class="bi bi-trophy me-2 text-primary"></i>
+                <i class="bi bi-trophy me-2 text-warning"></i>
                 Copa Primavera 2025 - Cancha Norte
               </h6>
               <div class="d-flex align-items-center">
