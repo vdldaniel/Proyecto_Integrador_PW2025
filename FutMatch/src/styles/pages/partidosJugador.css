@@ -109,3 +109,156 @@
   align-items: center;
   justify-content: center;
 }
+
+/* ===================================
+   NUEVO DISEÑO DE FILAS CON DIVISIÓN SEMANAL
+   =================================== */
+
+/* Divisiones semanales */
+.semana-divider {
+  margin-bottom: 3rem;
+}
+
+.semana-divider:first-child {
+  margin-top: 0;
+}
+
+.semana-divider h4 {
+  border-bottom: 2px solid var(--bs-primary);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Filas de partidos */
+.partido-fila {
+  background: var(--card-bg, rgba(0, 0, 0, 0.02));
+  border: 1px solid var(--card-border, rgba(0, 0, 0, 0.08));
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.partido-fila:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Columna de fecha y hora */
+.partido-datetime {
+  min-width: 100px;
+  text-align: left;
+}
+
+.partido-datetime > div:first-child {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.partido-datetime > div:nth-child(2) {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.partido-datetime > div:last-child {
+  font-size: 1rem;
+}
+
+/* Información de la cancha */
+.partido-cancha {
+  flex: 1;
+}
+
+.partido-cancha h6 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.partido-cancha .d-flex {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+
+
+/* Columna de chips */
+.partido-chips {
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.partido-chips .badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Acciones del partido */
+.partido-acciones {
+  min-width: 140px;
+}
+
+/* Badge especial para "Buscando rival" */
+.bg-purple {
+  background-color: #6f42c1 !important;
+  color: white !important;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .partido-fila .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  .partido-datetime {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .partido-datetime > div {
+    margin-bottom: 0 !important;
+  }
+
+  .partido-cancha {
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .partido-chips {
+    width: 100%;
+    margin: 0 !important;
+    justify-content: flex-start;
+  }
+
+  .partido-chips .d-flex {
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+
+  .partido-acciones {
+    width: 100%;
+    text-align: left !important;
+  }
+}
+
+/* Modo oscuro ajustes */
+[data-bs-theme="dark"] .partido-fila {
+  background: var(--dark-card-bg, rgba(255, 255, 255, 0.03));
+  border-color: var(--dark-card-border, rgba(255, 255, 255, 0.08));
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-bs-theme="dark"] .partido-fila:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] .semana-divider h4 {
+  color: var(--dark-text-primary, #ffffff);
+}

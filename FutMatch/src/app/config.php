@@ -115,6 +115,7 @@ define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
 define("CSS_PAGES_MODALES_FOROS", SRC_PATH . "styles/pages/modales-foros.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
 define("CSS_PAGES_PARTIDOS_EXPLORAR", SRC_PATH . "styles/pages/partidos-explorar.css");
+define("CSS_PAGES_PARTIDOS_MODALES", SRC_PATH . "styles/pages/partidos-modales.css");
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/detalleTorneo.css");
 define("CSS_PAGES_CANCHAS_EXPLORAR", SRC_PATH . "styles/pages/canchas-explorar.css");
 
@@ -165,7 +166,8 @@ define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
 define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
 define("JS_CANCHAS_EXPLORAR", JS_SCRIPTS_PATH . "canchas-explorar.js");
 define("JS_MIS_TORNEOS", JS_SCRIPTS_PATH . "mis-torneos.js");
-define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "torneo-detalle.js");
+define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "pages/torneoDetalle.js");
+define("JS_TORNEOS_JUGADOR", JS_SCRIPTS_PATH . "pages/torneos-jugador.js");
 
 // ===================================
 // IMÁGENES
@@ -218,12 +220,13 @@ define("PAGE_FOROS_LISTADO", PUBLIC_PATH . "HTML/forosListado.php");
 // ===================================
 define("CALENDARIO_COMPONENT", __DIR__ . "/../../public/HTML/calendario.php");
 define("CANCHA_PERFIL_COMPONENT", __DIR__ . "/../../public/HTML/canchaPerfil.php");
+define("PERFIL_JUGADOR_COMPONENT", __DIR__ . "/../../public/HTML/perfilJugador.php");
 
 // ===================================
 // PÁGINAS - JUGADOR
 // ===================================
 define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicioJugador.php");
-define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilJugador.php");
+define("PAGE_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/miPerfilJugador.php");
 
 // Equipos
 define("PAGE_EQUIPOS_LISTADO", PUBLIC_PATH . "HTML/jugador/equiposListado.php");
@@ -241,6 +244,7 @@ define("PAGE_CALENDARIO_CANCHA", PUBLIC_PATH . "HTML/jugador/calendarioCancha.ph
 // Torneos
 define("PAGE_TORNEOS_EXPLORAR", PUBLIC_PATH . "HTML/jugador/torneosExplorar.php");
 define("PAGE_TORNEOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/torneosJugador.php");
+define("PAGE_TORNEO_DETALLE_JUGADOR", PUBLIC_PATH . "HTML/jugador/torneoDetalle.php");
 
 
 // ===================================

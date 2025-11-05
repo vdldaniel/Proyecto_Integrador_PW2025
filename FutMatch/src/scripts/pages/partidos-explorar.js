@@ -13,7 +13,29 @@ document.addEventListener('DOMContentLoaded', function() {
     inicializarFiltros();
     inicializarCambioVista();
     inicializarTooltips();
+    inicializarEventListeners();
 });
+
+/**
+ * Inicializa los event listeners para los botones de partidos
+ */
+function inicializarEventListeners() {
+    // Event listeners para botones de ver detalle
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.ver-detalle-btn')) {
+            e.preventDefault();
+            const boton = e.target.closest('.ver-detalle-btn');
+            const partidoId = boton.dataset.partidoId;
+            const tipoPartido = boton.dataset.tipoPartido;
+            
+            if (tipoPartido === 'equipo') {
+                abrirModalUnirseEquipo(partidoId);
+            } else {
+                abrirModalSolicitarUnirse(partidoId);
+            }
+        }
+    });
+}
 
 /**
  * Inicializa la funcionalidad de búsqueda
@@ -181,7 +203,6 @@ function actualizarMarcadoresMapa() {
             fecha: 'Hoy, 27 de octubre',
             hora: '17:00 - 18:00',
             jugadores: '4/10',
-            precio: '$500 c/u',
             tipo: 'Fútbol 5',
             genero: 'Masculino'
         },
@@ -194,7 +215,6 @@ function actualizarMarcadoresMapa() {
             fecha: 'Mañana, 28 de octubre',
             hora: '19:00 - 21:00',
             jugadores: 'Completo',
-            precio: '$800 c/u',
             tipo: 'Fútbol 7',
             genero: 'Mixto'
         },
@@ -207,7 +227,6 @@ function actualizarMarcadoresMapa() {
             fecha: 'Viernes, 29 de octubre',
             hora: '20:30 - 22:00',
             jugadores: '6/10',
-            precio: '$600 c/u',
             tipo: 'Fútbol Sala',
             genero: 'Femenino'
         }
@@ -246,7 +265,9 @@ function actualizarMarcadoresMapa() {
                 </div>
                 <p class="mb-1"><strong>${partido.precio}</strong></p>
                 <p class="mb-2">Jugadores: ${partido.jugadores}</p>
-                <button class="btn btn-sm btn-primary" onclick="verDetallePartido(${partido.id})">
+                <button class="btn btn-sm btn-primary ver-detalle-btn" 
+                        data-partido-id="${partido.id}" 
+                        data-tipo-partido="${partido.tipo_requiere_equipo ? 'equipo' : 'individual'}">
                     Ver detalles
                 </button>
             </div>
@@ -587,30 +608,273 @@ function mostrarToast(mensaje, tipo = 'info') {
 /**
  * Ver detalles de un partido
  */
-function verDetallePartido(idPartido) {
-    console.log('Viendo detalles de partido:', idPartido);
-    mostrarToast(`Cargando detalles del partido ${idPartido}...`, 'info');
+function abrirModalSolicitarUnirse(idPartido) {
+    console.log('Abriendo modal para solicitar unirse:', idPartido);
     
-    // Simulación de carga
-    setTimeout(() => {
-        // Redirigir a página de detalles de partido
-        // window.location.href = `partido-detalle.php?id=${idPartido}`;
-        mostrarToast(`Función de detalles en desarrollo`, 'info');
-    }, 1000);
+    // Cargar información del partido
+    const infoPartido = obtenerInfoPartido(idPartido);
+    
+    // Cargar información en el modal con mejor estructura
+    const contenedorInfo = document.getElementById('infoPartidoSolicitar');
+    contenedorInfo.innerHTML = `
+        <div class="card border-light">
+            <div class="card-body">
+                <h6 class="card-title mb-4">${infoPartido.titulo}</h6>
+                
+                <div class="row mb-3 align-items-center">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-geo-alt me-2"></i>Cancha:
+                    </div>
+                    <div class="col-5">${infoPartido.cancha}</div>
+                    <div class="col-3 text-end">
+                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/canchaPerfilJugador.php?id=${infoPartido.canchaId}" 
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye me-1"></i>Ver cancha
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-calendar-event me-2"></i>Fecha:
+                    </div>
+                    <div class="col-8">${infoPartido.fecha}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-clock me-2"></i>Hora:
+                    </div>
+                    <div class="col-8">${infoPartido.hora}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-people me-2"></i>Jugadores:
+                    </div>
+                    <div class="col-8">${infoPartido.jugadores}</div>
+                </div>
+                
+                <div class="row mb-3 align-items-center">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-person me-2"></i>Organizador:
+                    </div>
+                    <div class="col-5">${infoPartido.organizador}</div>
+                    <div class="col-3 text-end">
+                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilJugador.php?id=${infoPartido.organizadorId}" 
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye me-1"></i>Ver perfil
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">Modalidad:</div>
+                    <div class="col-8">${infoPartido.badges}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">Descripción:</div>
+                    <div class="col-8 text-muted">${infoPartido.descripcion}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Configurar botón de solicitar unirse
+    const btnSolicitarUnirse = document.getElementById('btnSolicitarUnirse');
+    btnSolicitarUnirse.onclick = () => {
+        // Simular envío de solicitud
+        btnSolicitarUnirse.innerHTML = '<i class="bi spinner-border spinner-border-sm me-2"></i>Enviando...';
+        btnSolicitarUnirse.disabled = true;
+        
+        setTimeout(() => {
+            document.getElementById('modalSolicitarUnirse').querySelector('.btn-close').click();
+            mostrarToast('¡Solicitud enviada con éxito!', 'success');
+            
+            // Resetear botón
+            btnSolicitarUnirse.innerHTML = '<i class="bi bi-send me-2"></i>Solicitar participación';
+            btnSolicitarUnirse.disabled = false;
+        }, 2000);
+    };
+    
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('modalSolicitarUnirse'));
+    modal.show();
+}
+
+
+
+/**
+ * Abre el modal para unirse como equipo
+ */
+function abrirModalUnirseEquipo(idPartido) {
+    console.log('Abriendo modal para unirse como equipo:', idPartido);
+    
+    // Cargar información del partido
+    const infoPartido = obtenerInfoPartido(idPartido);
+    
+    // Cargar información en el modal con la misma estructura que el modal individual
+    const contenedorInfo = document.getElementById('infoPartidoEquipo');
+    contenedorInfo.innerHTML = `
+        <div class="card border-light">
+            <div class="card-body">
+                <h6 class="card-title mb-4">${infoPartido.titulo}</h6>
+                
+                <div class="row mb-3 align-items-center">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-geo-alt me-2"></i>Cancha:
+                    </div>
+                    <div class="col-5">${infoPartido.cancha}</div>
+                    <div class="col-3 text-end">
+                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/canchaPerfilJugador.php?id=${infoPartido.canchaId}" 
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye me-1"></i>Ver cancha
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-calendar-event me-2"></i>Fecha:
+                    </div>
+                    <div class="col-8">${infoPartido.fecha}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-clock me-2"></i>Hora:
+                    </div>
+                    <div class="col-8">${infoPartido.hora}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">
+                        <i class="bi bi-trophy me-2"></i>Estado:
+                    </div>
+                    <div class="col-8">${infoPartido.equipos || "Buscando equipos"}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-4 text-primary fw-bold">Modalidad:</div>
+                    <div class="col-8">${infoPartido.badges}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Cargar información del equipo anfitrión
+    const equipoAnfitrionInfo = document.getElementById('equipoAnfitrionInfo');
+    const equipoAnfitrion = {
+        nombre: infoPartido.equipoAnfitrion || "Los Leones FC",
+        partidosGanados: 15,
+        partidosJugados: 23,
+        integrantes: 12,
+        id: 1
+    };
+    
+    equipoAnfitrionInfo.innerHTML = `
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h6 class="card-title mb-2">${equipoAnfitrion.nombre}</h6>
+                        <div class="row text-sm">
+                            <div class="col-6">
+                                <span class="text-muted">Partidos ganados:</span><br>
+                                <strong class="text-success">${equipoAnfitrion.partidosGanados}/${equipoAnfitrion.partidosJugados}</strong>
+                            </div>
+                            <div class="col-6">
+                                <span class="text-muted">Integrantes:</span><br>
+                                <strong class="text-info">${equipoAnfitrion.integrantes} jugadores</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/equipoDetalle.php?id=${equipoAnfitrion.id}" 
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye me-1"></i>Ver equipo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Configurar botón solicitar
+    const btnSolicitarEquipo = document.getElementById('btnSolicitarEquipo');
+    btnSolicitarEquipo.onclick = () => {
+        const equipoSeleccionado = document.getElementById('selectorEquipo').value;
+        const equipoNombre = document.getElementById('selectorEquipo').selectedOptions[0]?.text;
+        
+        if (!equipoSeleccionado) {
+            alert('Por favor selecciona un equipo para participar');
+            return;
+        }
+        
+        // Simular envío de solicitud
+        btnSolicitarEquipo.innerHTML = '<i class="bi spinner-border spinner-border-sm me-2"></i>Enviando...';
+        btnSolicitarEquipo.disabled = true;
+        
+        setTimeout(() => {
+            document.getElementById('modalUnirseEquipo').querySelector('.btn-close').click();
+            mostrarToast(`¡Solicitud enviada con éxito! ${equipoNombre} ha sido inscrito al partido.`, 'success');
+            
+            // Resetear formulario y botón
+            document.getElementById('selectorEquipo').value = '';
+            btnSolicitarEquipo.innerHTML = '<i class="bi bi-send me-2"></i>Solicitar participación';
+            btnSolicitarEquipo.disabled = false;
+        }, 2000);
+    };
+    
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('modalUnirseEquipo'));
+    modal.show();
 }
 
 /**
- * Unirse a un partido
+ * Obtiene información simulada de un partido
  */
-function unirsePartido(idPartido) {
-    console.log('Uniéndose a partido:', idPartido);
+function obtenerInfoPartido(idPartido) {
+    const partidos = {
+        1: {
+            titulo: "Partido amistoso - Fútbol 5",
+            cancha: "MegaFutbol Llavallol",
+            canchaId: 1,
+            fecha: "Hoy, 27 de octubre",
+            hora: "17:00 - 18:00 hs",
+            jugadores: "4/10 jugadores",
+            organizador: "Juan Pérez",
+            organizadorId: 1,
+            descripcion: "Partido amistoso para pasar un buen rato. Todos los niveles son bienvenidos. Se juega con reglas estándar de fútbol 5.",
+            badges: '<span class="badge bg-success me-1">Fútbol 5</span><span class="badge bg-info me-1">Masculino</span><span class="badge bg-warning text-dark">4/10 jugadores</span>'
+        },
+        2: {
+            titulo: "Torneo relámpago - Fútbol 7",
+            cancha: "Deportivo San Lorenzo",
+            canchaId: 2,
+            fecha: "Mañana, 28 de octubre",
+            hora: "19:00 - 21:00 hs",
+            equipos: "Buscando equipos",
+            organizador: "Carlos Martínez",
+            organizadorId: 2,
+            equipoAnfitrion: "Los Leones FC",
+            descripcion: "Torneo relámpago por equipos. Se buscan equipos completos para participar en un emocionante torneo de fútbol 7.",
+            badges: '<span class="badge bg-success me-1">Fútbol 7</span><span class="badge bg-purple me-1">Mixto</span><span class="badge bg-warning text-dark">Buscando equipos</span>'
+        },
+        3: {
+            titulo: "Fútbol femenino competitivo",
+            cancha: "Futsal Elite",
+            canchaId: 3,
+            fecha: "Viernes, 29 de octubre",
+            hora: "20:30 - 22:00 hs",
+            jugadores: "6/10 jugadoras",
+            organizador: "María González",
+            organizadorId: 3,
+            descripcion: "Partido competitivo para jugadoras con experiencia. Buen nivel técnico requerido.",
+            badges: '<span class="badge bg-success me-1">Fútbol Sala</span><span class="badge bg-pink me-1">Femenino</span><span class="badge bg-warning text-dark">6/10 jugadoras</span>'
+        }
+    };
     
-    if (confirm('¿Deseas unirte a este partido?')) {
-        // Simular proceso de unión
-        mostrarToast(`Procesando solicitud para unirse al partido ${idPartido}...`, 'info');
-        
-        setTimeout(() => {
-            mostrarToast(`¡Te has unido al partido exitosamente!`, 'success');
-        }, 2000);
-    }
+    return partidos[idPartido] || partidos[1];
 }

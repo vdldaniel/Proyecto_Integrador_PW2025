@@ -88,9 +88,9 @@ require_once HEAD_COMPONENT;
                 <span class="badge bg-success">Habilitada</span>
               </div>
               <div class="col-md-3 text-end">
-                <button class="btn btn-outline-info btn-sm me-1" onclick="window.location.href='<?= PAGE_ADMIN_PERFILES_CANCHAS ?>'" title="Ver perfil">
+                <a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" title="Ver perfil">
                   <i class="bi bi-eye"></i>
-                </button>
+                </a>
                 <button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1" title="Editar">
                   <i class="bi bi-pencil"></i>
                 </button>
@@ -133,9 +133,9 @@ require_once HEAD_COMPONENT;
                 <span class="badge bg-warning text-dark">En revisión</span>
               </div>
               <div class="col-md-3 text-end">
-                <button class="btn btn-outline-info btn-sm me-1" onclick="window.location.href='<?= PAGE_ADMIN_PERFILES_CANCHAS ?>'" title="Ver perfil">
+                <a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" title="Ver perfil">
                   <i class="bi bi-eye"></i>
-                </button>
+                </a>
                 <button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
                   <i class="bi bi-pencil"></i>
                 </button>
@@ -178,9 +178,9 @@ require_once HEAD_COMPONENT;
                 <span class="badge bg-secondary">Pendiente de verificación</span>
               </div>
               <div class="col-md-3 text-end">
-                <button class="btn btn-outline-info btn-sm me-1" onclick="window.location.href='<?= PAGE_ADMIN_PERFILES_CANCHAS ?>'" title="Ver perfil">
+                <a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" title="Ver perfil">
                   <i class="bi bi-eye"></i>
-                </button>
+                </a>
                 <button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
                   <i class="bi bi-pencil"></i>
                 </button>
