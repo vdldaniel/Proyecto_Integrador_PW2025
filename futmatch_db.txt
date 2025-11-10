@@ -222,6 +222,16 @@ CREATE TABLE solicitudes_admin_cancha (
     FOREIGN KEY(id_estado) REFERENCES estados_solicitudes(id_estado),
     FOREIGN KEY(id_verificador) REFERENCES admin_sistema(id_admin_sistema)
     );
+
+CREATE TABLE observaciones_canchas (
+    id_observacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_solicitud INT NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    observaciones VARCHAR(250),
+    FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY(id_solicitud) REFERENCES solicitudes_admin_cancha(id_solicitud)
+    );
     
 -- =========================================================
 --  TABLAS ADMIN_CANCHA

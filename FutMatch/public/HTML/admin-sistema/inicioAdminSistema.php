@@ -8,7 +8,7 @@ $current_page = 'inicioAdminSistema';
 
 // Iniciar sesión para mostrar errores de login
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 $page_title = "Sistema - FutMatch";
@@ -19,35 +19,43 @@ include HEAD_COMPONENT;
 
 ?>
 
-  <body>
-    <?php include NAVBAR_ADMIN_SISTEMA_COMPONENT; ?>
+<body>
+  <?php include NAVBAR_ADMIN_SISTEMA_COMPONENT; ?>
 
-    <main>
-      <div class="container mt-4">
-        <h1 class="text-center mb-5">FUTMATCH - Administración</h1>
+  <main>
+    <div class="container mt-4">
 
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-8">
-            <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none" >
-              <div class="card-body">
-                <h5 class="card-title">Listado de Canchas</h5>
-                <p class="card-text">Ver y gestionar las canchas disponibles.</p>
-              </div>
-            </a>
-
-            <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
-              <div class="card-body">
-                <h5 class="card-title">Listado de Usuarios</h5>
-                <p class="card-text">Ver y gestionar los usuarios registrados.</p>
-              </div>
-            </a>
-          </div>
+      <!-- Línea 1: Header con título y botones de navegación -->
+      <div class="row mb-4 align-items-center">
+        <div class="col">
+          <h1 class="fw-bold mb-1">Administración</h1>
+          <p class="text-muted mb-0">Gestioná usuarios y canchas</p>
         </div>
       </div>
-    </main>
+
+      <div class="row">
+        <div class="col">
+          <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <div class="card-body">
+              <h5 class="card-title">Listado de Canchas</h5>
+              <p class="card-text">Ver y gestionar las canchas disponibles.</p>
+            </div>
+          </a>
+
+          <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <div class="card-body">
+              <h5 class="card-title">Listado de Usuarios</h5>
+              <p class="card-text">Ver y gestionar los usuarios registrados.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
   <script src="<?= JS_INICIO_ADMIN_SISTEMA ?>"></script>
-  </body>
+</body>
+
 </html>

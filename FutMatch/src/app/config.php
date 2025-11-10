@@ -118,6 +118,7 @@ define("CSS_PAGES_PARTIDOS_EXPLORAR", SRC_PATH . "styles/pages/partidos-explorar
 define("CSS_PAGES_PARTIDOS_MODALES", SRC_PATH . "styles/pages/partidos-modales.css");
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/pages/torneoDetalle.css");
 define("CSS_PAGES_CANCHAS_EXPLORAR", SRC_PATH . "styles/pages/canchas-explorar.css");
+define("CSS_PAGES_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/canchasAdminSistema.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -168,6 +169,7 @@ define("JS_CANCHAS_EXPLORAR", JS_SCRIPTS_PATH . "canchas-explorar.js");
 define("JS_MIS_TORNEOS", JS_SCRIPTS_PATH . "mis-torneos.js");
 define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "torneo-detalle.js");
 define("JS_TORNEOS_JUGADOR", JS_SCRIPTS_PATH . "pages/torneos-jugador.js");
+define("JS_CANCHAS_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "canchasAdminSistema.js");
 
 // ===================================
 // IMÁGENES
@@ -273,10 +275,12 @@ define("PAGE_INICIO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/inicioAdmi
 define("PAGE_ESTADISTICAS_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/estadisticasSistema.php");
 
 // Gestión de jugadores
-define("PAGE_SISTEMA_JUGADORES_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/jugadores-listado-sistema.html");
+define("PAGE_SISTEMA_JUGADORES_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/jugadoresAdminSistema.php");
+define("PAGE_JUGADORES_REPORTADOS_ADMIN", PUBLIC_PATH . "HTML/admin-sistema/jugadoresReportadosAdmin.php");
 define("PAGE_SISTEMA_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/admin-sistema/jugador-detalle-sistema.html");
 
 // Gestión de canchas (sistema)
-define("PAGE_SISTEMA_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/canchas-listado-sistema.html");
+define("PAGE_SISTEMA_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/canchasAdminSistema.php");
+define("PAGE_CANCHAS_REPORTADAS_ADMIN", PUBLIC_PATH . "HTML/admin-sistema/canchasReportadasAdmin.php");
 define("PAGE_SISTEMA_CANCHA_DETALLE", PUBLIC_PATH . "HTML/admin-sistema/cancha-detalle-sistema.html");
 define("PAGE_SISTEMA_CANCHA_VERIFICAR", PUBLIC_PATH . "HTML/admin-sistema/cancha-verificar-sistema.html");

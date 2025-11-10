@@ -16,22 +16,16 @@ function isActive($page_name, $current)
 <header>
     <nav id="navbarFutmatchAdmin" class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top border-bottom">
         <div class="container-fluid">
-
             <div class="d-flex align-items-center">
-
-
                 <button class="btn btn-dark m-3 d-lg-none"
                     type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
                     <i class="bi bi-list text-white"></i>
                 </button>
-                
                 <a class="navbar-brand d-flex align-items-center" href="<?= PAGE_INICIO_JUGADOR ?>">
                     <img class="logo me-3" src="<?= IMG_LOGO_SINFONDO ?>" alt="FutMatch Logo" />
                     <span class="brand-text">FutMatch</span>
                 </a>
-            
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -43,40 +37,53 @@ function isActive($page_name, $current)
                                 <span class="d-none d-lg-inline ms-1">Home</span>
                             </a>
                             <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>"
-                                class="btn btn-dark me-2 <?= isActive('canchasListadoSistema', $current_page) ?>"
+                                class="btn btn-dark me-2 <?= isActive('canchasAdminSistema', $current_page) ?>"
                                 id="botonCanchas"
                                 title="Canchas">
                                 <span class="d-none d-lg-inline ms-1">Canchas</span>
                             </a>
                             <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>"
-                                class="btn btn-dark me-2 <?= isActive('jugadoresListadoSistema', $current_page) ?>"
+                                class="btn btn-dark me-2 <?= isActive('jugadoresAdminSistema', $current_page) ?>"
                                 id="botonAdminJugadores"
                                 title="Jugadores">
                                 <span class="d-none d-lg-inline ms-1">Jugadores</span>
                             </a>
-                            <a href="<?= PAGE_ESTADISTICAS_SISTEMA ?>"
-                                class="btn btn-dark me-2 <?= isActive('EstadisticasSistema', $current_page) ?>"
-                                id="botonEstadisticasSistema"
-                                title="Estadisticas">
-                                <span class="d-none d-lg-inline ms-1">Estadísticas</span>
-                            </a>
                         </li>
+
+                        <!-- Dropdown Reportes -->
+                        <div class="dropdown">
+                            <button class="btn btn-dark dropdown-toggle me-2" type="button" id="dropdownExplorar"
+                                data-bs-toggle="dropdown" aria-expanded="false" title="Explorar">
+                                <i class="bi bi-search"></i>
+                                <span class="d-none d-lg-inline ms-1">Reportes</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
+                                <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN ?>">
+                                        <i class="bi bi-geo-alt me-2"></i>Canchas reportadas
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>">
+                                        <i class="bi bi-people me-2"></i>Jugadores reportados
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="d-flex align-items-center">
                 <button class="btn btn-outline-warning position-relative me-2"
-                        type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
-                        title="Notificaciones">
-                        <i class="bi bi-bell"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            0
-                        </span>
+                    type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
+                    title="Notificaciones">
+                    <i class="bi bi-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
                 </button>
 
                 <button id="botonConfiguracionAdmin" class="btn btn-dark me-2" type="button"
-                        data-bs-toggle="modal" data-bs-target="#modalConfiguracionAdmin" title="Configuración">
+                    data-bs-toggle="modal" data-bs-target="#modalConfiguracionAdmin" title="Configuración">
                     <i class="bi bi-gear"></i>
                 </button>
 
@@ -106,14 +113,27 @@ function isActive($page_name, $current)
                 <i class="bi bi-house-door me-2"></i>Home
             </a>
             <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('canchasListadoSistema', $current_page) ?>"
+                class="btn btn-dark text-start <?= isActive('canchasAdminSistema', $current_page) ?>"
                 title="Mis Partidos">
                 <i class="bi bi-calendar-event me-2"></i>Canchas
             </a>
             <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('jugadoresListadoSistema', $current_page) ?>"
+                class="btn btn-dark text-start <?= isActive('jugadoresAdminSistema', $current_page) ?>"
                 title="Mis Equipos">
                 <i class="bi bi-people me-2"></i>Jugadores
+            </a>
+        </div>
+
+        <!-- Sección Reportes -->
+        <h6 class="offcanvas-section-title mb-2">Reportes</h6>
+        <div class="d-grid gap-2 mb-4">
+            <a href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN ?>"
+                class="btn btn-dark text-start <?= isActive('canchasReportadasAdmin', $current_page) ?>">
+                <i class="bi bi-geo-alt me-2"></i>Canchas reportadas
+            </a>
+            <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>"
+                class="btn btn-dark text-start <?= isActive('jugadoresReportadosAdmin', $current_page) ?>">
+                <i class="bi bi-people me-2"></i>Jugadores reportados
             </a>
         </div>
 
