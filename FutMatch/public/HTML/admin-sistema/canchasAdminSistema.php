@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $page_title = "Sistema - FutMatch";
 
-$page_css = [CSS_PAGES_CANCHAS_ADMIN_SISTEMA];
+$page_css = [CSS_PAGES_TABLAS_ADMIN_SISTEMA];
 
 include HEAD_COMPONENT;
 
@@ -33,7 +33,7 @@ include HEAD_COMPONENT;
                 </div>
 
                 <div class="col-md-6 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN ?>">
+                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>">
                         <i class="bi bi-flag-fill"></i> Ir a Canchas Reportadas
                     </a>
                 </div>
@@ -90,7 +90,7 @@ include HEAD_COMPONENT;
             </ul>
 
             <!-- Contenido de las pestañas -->
-            <div class="tab-content solicitudes-table" id="canchasTabsContent">
+            <div class="tab-content tabla-admin" id="canchasTabsContent">
 
                 <div class="table-header  header-card">
                     <div class=" card-body">
@@ -110,7 +110,7 @@ include HEAD_COMPONENT;
                 <div class="tab-pane fade show active" id="solicitudes" role="tabpanel">
 
                     <!-- Solicitud 1 - Pendiente -->
-                    <div class="card solicitud-card estado-pendiente" data-estado="solicitudes" data-solicitud-id="SOL-001">
+                    <div class="card row-card-tabla-admin estado-pendiente" data-estado="solicitudes" data-solicitud-id="SOL-001">
                         <div class="card-body">
                             <div class="row solicitud-row">
                                 <div class="col-md-1">
@@ -133,16 +133,16 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <button class="btn btn-accion btn-ver" data-solicitud-id="SOL-001" data-bs-toggle="tooltip" title="Ver solicitud">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-001" data-bs-toggle="tooltip" title="Ver solicitud">
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-mapa" data-direccion="Av. Libertador 1234, CABA" data-bs-toggle="tooltip" title="Ver en mapa">
+                                        <button class="btn btn-dark" data-direccion="Av. Libertador 1234, CABA" data-bs-toggle="tooltip" title="Ver en mapa">
                                             <i class="bi bi-geo-alt"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-canchas" data-admin-id="ADM-001" data-bs-toggle="tooltip" title="Ver canchas del admin">
+                                        <button class="btn btn-dark" data-admin-id="ADM-001" data-bs-toggle="tooltip" title="Ver canchas del admin">
                                             <i class="bi bi-building"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-tomar" data-solicitud-id="SOL-001" data-bs-toggle="tooltip" title="Tomar caso">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-001" data-bs-toggle="tooltip" title="Tomar caso">
                                             <i class="bi bi-arrow-right"></i>
                                         </button>
                                     </div>
@@ -152,7 +152,7 @@ include HEAD_COMPONENT;
                     </div>
 
                     <!-- Solicitud 2 - Pendiente -->
-                    <div class="card solicitud-card estado-pendiente" data-estado="solicitudes" data-solicitud-id="SOL-002">
+                    <div class="card row-card-tabla-admin estado-pendiente" data-estado="solicitudes" data-solicitud-id="SOL-002">
                         <div class="card-body">
                             <div class="row solicitud-row">
                                 <div class="col-md-1">
@@ -175,16 +175,16 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <button class="btn btn-accion btn-ver" data-solicitud-id="SOL-002" data-bs-toggle="tooltip" title="Ver solicitud">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-002" data-bs-toggle="tooltip" title="Ver solicitud">
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-mapa" data-direccion="San Martín 567, Belgrano" data-bs-toggle="tooltip" title="Ver en mapa">
+                                        <button class="btn btn-dark" data-direccion="San Martín 567, Belgrano" data-bs-toggle="tooltip" title="Ver en mapa">
                                             <i class="bi bi-geo-alt"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-canchas" data-admin-id="ADM-002" data-bs-toggle="tooltip" title="Ver canchas del admin">
+                                        <button class="btn btn-dark" data-admin-id="ADM-002" data-bs-toggle="tooltip" title="Ver canchas del admin">
                                             <i class="bi bi-building"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-tomar" data-solicitud-id="SOL-002" data-bs-toggle="tooltip" title="Tomar caso">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-002" data-bs-toggle="tooltip" title="Tomar caso">
                                             <i class="bi bi-arrow-right"></i>
                                         </button>
                                     </div>
@@ -199,7 +199,7 @@ include HEAD_COMPONENT;
                 <div class="tab-pane fade" id="verificando" role="tabpanel">
 
                     <!-- Solicitud 3 - En verificación -->
-                    <div class="card solicitud-card estado-verificando" data-estado="verificando" data-solicitud-id="SOL-003">
+                    <div class="card row-card-tabla-admin estado-verificando" data-estado="verificando" data-solicitud-id="SOL-003">
                         <div class="card-body">
                             <div class="row solicitud-row">
                                 <div class="col-md-1">
@@ -222,13 +222,13 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <button class="btn btn-accion btn-ver" data-solicitud-id="SOL-003" data-bs-toggle="tooltip" title="Ver solicitud">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-003" data-bs-toggle="tooltip" title="Ver solicitud">
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-mapa" data-direccion="Rivadavia 890, Caballito" data-bs-toggle="tooltip" title="Ver en mapa">
+                                        <button class="btn btn-dark" data-direccion="Rivadavia 890, Caballito" data-bs-toggle="tooltip" title="Ver en mapa">
                                             <i class="bi bi-geo-alt"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-canchas" data-admin-id="ADM-003" data-bs-toggle="tooltip" title="Ver canchas del admin">
+                                        <button class="btn btn-dark" data-admin-id="ADM-003" data-bs-toggle="tooltip" title="Ver canchas del admin">
                                             <i class="bi bi-building"></i>
                                         </button>
                                     </div>
@@ -243,7 +243,7 @@ include HEAD_COMPONENT;
                 <div class="tab-pane fade" id="verificadas" role="tabpanel">
 
                     <!-- Solicitud 4 - Verificada -->
-                    <div class="card solicitud-card estado-verificada" data-estado="verificadas" data-solicitud-id="SOL-004">
+                    <div class="card row-card-tabla-admin estado-verificada" data-estado="verificadas" data-solicitud-id="SOL-004">
                         <div class="card-body">
                             <div class="row solicitud-row">
                                 <div class="col-md-1">
@@ -266,13 +266,13 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <button class="btn btn-accion btn-ver" data-solicitud-id="SOL-004" data-bs-toggle="tooltip" title="Ver solicitud">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-004" data-bs-toggle="tooltip" title="Ver solicitud">
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-mapa" data-direccion="Corrientes 2345, Centro" data-bs-toggle="tooltip" title="Ver en mapa">
+                                        <button class="btn btn-dark" data-direccion="Corrientes 2345, Centro" data-bs-toggle="tooltip" title="Ver en mapa">
                                             <i class="bi bi-geo-alt"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-canchas" data-admin-id="ADM-004" data-bs-toggle="tooltip" title="Ver canchas del admin">
+                                        <button class="btn btn-dark" data-admin-id="ADM-004" data-bs-toggle="tooltip" title="Ver canchas del admin">
                                             <i class="bi bi-building"></i>
                                         </button>
                                     </div>
@@ -287,7 +287,7 @@ include HEAD_COMPONENT;
                 <div class="tab-pane fade" id="rechazadas" role="tabpanel">
 
                     <!-- Solicitud 5 - Rechazada -->
-                    <div class="card solicitud-card estado-rechazada" data-estado="rechazadas" data-solicitud-id="SOL-005">
+                    <div class="card row-card-tabla-admin estado-rechazada" data-estado="rechazadas" data-solicitud-id="SOL-005">
                         <div class="card-body">
                             <div class="row solicitud-row">
                                 <div class="col-md-1">
@@ -310,13 +310,13 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <button class="btn btn-accion btn-ver" data-solicitud-id="SOL-005" data-bs-toggle="tooltip" title="Ver solicitud">
+                                        <button class="btn btn-dark" data-solicitud-id="SOL-005" data-bs-toggle="tooltip" title="Ver solicitud">
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-mapa" data-direccion="Dirección Inexistente 000" data-bs-toggle="tooltip" title="Ver en mapa">
+                                        <button class="btn btn-dark" data-direccion="Dirección Inexistente 000" data-bs-toggle="tooltip" title="Ver en mapa">
                                             <i class="bi bi-geo-alt"></i>
                                         </button>
-                                        <button class="btn btn-accion btn-canchas" data-admin-id="ADM-005" data-bs-toggle="tooltip" title="Ver canchas del admin">
+                                        <button class="btn btn-dark" data-admin-id="ADM-005" data-bs-toggle="tooltip" title="Ver canchas del admin">
                                             <i class="bi bi-building"></i>
                                         </button>
                                     </div>
@@ -331,7 +331,7 @@ include HEAD_COMPONENT;
                 <div class="tab-pane fade" id="administradores" role="tabpanel">
 
                     <!-- Lista de administradores con sus canchas -->
-                    <div class="card solicitud-card" data-estado="administradores">
+                    <div class="card row-card-tabla-admin" data-estado="administradores">
                         <div class="card-body">
                             <div class="row solicitud-row">
                                 <div class="col-md-1">
@@ -354,7 +354,7 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <button class="btn btn-accion btn-canchas" data-admin-id="ADM-01" data-bs-toggle="tooltip" title="Ver canchas del admin">
+                                        <button class="btn btn-dark" data-admin-id="ADM-01" data-bs-toggle="tooltip" title="Ver canchas del admin">
                                             <i class="bi bi-building"></i>
                                         </button>
                                     </div>

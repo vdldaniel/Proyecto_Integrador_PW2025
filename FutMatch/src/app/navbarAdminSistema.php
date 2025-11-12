@@ -58,7 +58,7 @@ function isActive($page_name, $current)
                                 <span class="d-none d-lg-inline ms-1">Reportes</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                                <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN ?>">
+                                <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>">
                                         <i class="bi bi-geo-alt me-2"></i>Canchas reportadas
                                     </a>
                                 </li>
@@ -127,7 +127,7 @@ function isActive($page_name, $current)
         <!-- Sección Reportes -->
         <h6 class="offcanvas-section-title mb-2">Reportes</h6>
         <div class="d-grid gap-2 mb-4">
-            <a href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN ?>"
+            <a href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>"
                 class="btn btn-dark text-start <?= isActive('canchasReportadasAdmin', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Canchas reportadas
             </a>

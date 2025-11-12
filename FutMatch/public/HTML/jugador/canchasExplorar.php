@@ -3,19 +3,20 @@
 require_once __DIR__ . '/../../../src/app/config.php';
 
 // Resalta la página actual en el navbar
-$current_page = 'canchasExplorar'; 
+$current_page = 'canchasExplorar';
 $page_title = "Explorar Canchas - FutMatch";
 $page_css = [CSS_PAGES_CANCHAS_EXPLORAR, CSS_PAGES_PARTIDOS_JUGADOR];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;
 ?>
+
 <body>
-  <?php 
+  <?php
   // Cargar navbar de jugador
-  require_once NAVBAR_JUGADOR_COMPONENT; 
+  require_once NAVBAR_JUGADOR_COMPONENT;
   ?>
-  
+
   <!-- Contenido Principal -->
   <main class="container mt-4">
     <!-- Línea 1: Header con título y botones de navegación -->
@@ -42,21 +43,21 @@ require_once HEAD_COMPONENT;
       </div>
     </div>
 
-      <!-- Filtros activos -->
-      <div id="filtrosActivos" class="mb-3 d-none">
-        <div class="d-flex gap-2 align-items-center flex-wrap">
-          <span class="text-muted">Filtros activos:</span>
-          <div id="badgesFiltros" class="d-flex gap-1 flex-wrap"></div>
-          <button type="button" class="btn btn-sm btn-outline-secondary" id="limpiarFiltros">
-            <i class="bi bi-x"></i> Limpiar todo
-          </button>
-        </div>
+    <!-- Filtros activos -->
+    <div id="filtrosActivos" class="mb-3 d-none">
+      <div class="d-flex gap-2 align-items-center flex-wrap">
+        <span class="text-muted">Filtros activos:</span>
+        <div id="badgesFiltros" class="d-flex gap-1 flex-wrap"></div>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="limpiarFiltros">
+          <i class="bi bi-x"></i> Limpiar todo
+        </button>
       </div>
+    </div>
 
-      <!-- Vista de listado -->
-      <div id="vistaListado">
-        <!-- Lista de canchas -->
-        <div class="row" id="listaCanchas">
+    <!-- Vista de listado -->
+    <div id="vistaListado">
+      <!-- Lista de canchas -->
+      <div class="row" id="listaCanchas">
         <!-- Cancha 1 -->
         <div class="col-12 col-md-6 col-lg-4 mb-4 cancha-item" data-nombre="Mega Fútbol Central" data-ubicacion="Palermo" data-tipo="futbol-5" data-superficie="sintetico">
           <div class="card h-100 shadow">
@@ -196,35 +197,35 @@ require_once HEAD_COMPONENT;
           </button>
         </div>
       </div>
-      </div>
-      
-      <!-- Vista de mapa -->
-      <div id="vistaMapa" class="d-none">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-body p-0">
-                <div id="map" style="height: 500px; width: 100%;"></div>
-              </div>
+    </div>
+
+    <!-- Vista de mapa -->
+    <div id="vistaMapa" class="d-none">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body p-0">
+              <div id="map" style="height: 500px; width: 100%;"></div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Paginación -->
-      <nav aria-label="Paginación de canchas" class="mt-4">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Anterior</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
+    <!-- Paginación -->
+    <nav aria-label="Paginación de canchas" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Anterior</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Siguiente</a>
+        </li>
+      </ul>
+    </nav>
     </div>
   </main>
 
@@ -232,20 +233,21 @@ require_once HEAD_COMPONENT;
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="<?= CSS_ICONS ?>">
-  
+
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
-        crossorigin=""/>
-  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  
+
   <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
-          crossorigin=""></script>
-          
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
   <script src="<?= JS_CANCHAS_EXPLORAR ?>"></script>
 </body>
+
 </html>

@@ -46,7 +46,7 @@ function initializeSearchFilter() {
  * Filtrar solicitudes por término de búsqueda
  */
 function filterSolicitudes(searchTerm) {
-  const solicitudCards = document.querySelectorAll(".solicitud-card");
+  const solicitudCards = document.querySelectorAll(".row-card-tabla-admin");
 
   solicitudCards.forEach((card) => {
     const text = card.textContent.toLowerCase();
@@ -126,7 +126,7 @@ function initializeTabFilters() {
  * Filtrar solicitudes por estado
  */
 function filtrarPorEstado(estado) {
-  const allCards = document.querySelectorAll(".solicitud-card");
+  const allCards = document.querySelectorAll(".row-card-tabla-admin");
 
   allCards.forEach((card) => {
     const cardEstado = card.dataset.estado;

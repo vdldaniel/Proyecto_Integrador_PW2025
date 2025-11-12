@@ -119,6 +119,9 @@ define("CSS_PAGES_PARTIDOS_MODALES", SRC_PATH . "styles/pages/partidos-modales.c
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/pages/torneoDetalle.css");
 define("CSS_PAGES_CANCHAS_EXPLORAR", SRC_PATH . "styles/pages/canchas-explorar.css");
 define("CSS_PAGES_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/canchasAdminSistema.css");
+define("CSS_PAGES_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresAdminSistema.css");
+define("CSS_PAGES_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresReportadosAdminSistema.css");
+define("CSS_PAGES_TABLAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/tablasAdminSistema.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -169,7 +172,10 @@ define("JS_CANCHAS_EXPLORAR", JS_SCRIPTS_PATH . "canchas-explorar.js");
 define("JS_MIS_TORNEOS", JS_SCRIPTS_PATH . "mis-torneos.js");
 define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "torneo-detalle.js");
 define("JS_TORNEOS_JUGADOR", JS_SCRIPTS_PATH . "pages/torneos-jugador.js");
-define("JS_CANCHAS_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "canchasAdminSistema.js");
+define("JS_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasAdminSistema.js");
+define("JS_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresAdminSistema.js");
+define("JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresReportadosAdminSistema.js");
+define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReportadasAdminSistema.js");
 
 // ===================================
 // IMÁGENES
@@ -278,9 +284,12 @@ define("PAGE_ESTADISTICAS_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/estadistic
 define("PAGE_SISTEMA_JUGADORES_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/jugadoresAdminSistema.php");
 define("PAGE_JUGADORES_REPORTADOS_ADMIN", PUBLIC_PATH . "HTML/admin-sistema/jugadoresReportadosAdmin.php");
 define("PAGE_SISTEMA_JUGADOR_DETALLE", PUBLIC_PATH . "HTML/admin-sistema/jugador-detalle-sistema.html");
+define("PAGE_PERFIL_JUGADOR_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/perfilJugadorAdminSistema.php");
 
 // Gestión de canchas (sistema)
 define("PAGE_SISTEMA_CANCHAS_LISTADO", PUBLIC_PATH . "HTML/admin-sistema/canchasAdminSistema.php");
-define("PAGE_CANCHAS_REPORTADAS_ADMIN", PUBLIC_PATH . "HTML/admin-sistema/canchasReportadasAdmin.php");
+define("PAGE_CANCHAS_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/canchasAdminSistema.php");
+define("PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/canchasReportadasAdminSistema.php");
 define("PAGE_SISTEMA_CANCHA_DETALLE", PUBLIC_PATH . "HTML/admin-sistema/cancha-detalle-sistema.html");
+define("PAGE_CANCHA_DETALLE_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/cancha-detalle-sistema.php");
 define("PAGE_SISTEMA_CANCHA_VERIFICAR", PUBLIC_PATH . "HTML/admin-sistema/cancha-verificar-sistema.html");
