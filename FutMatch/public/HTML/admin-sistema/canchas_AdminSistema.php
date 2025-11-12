@@ -33,7 +33,7 @@ include HEAD_COMPONENT;
                 </div>
 
                 <div class="col-md-6 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>">
+                    <a type="button" class="btn btn-dark me-2" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>">
                         <i class="bi bi-flag-fill"></i> Ir a Canchas Reportadas
                     </a>
                 </div>
@@ -117,7 +117,7 @@ include HEAD_COMPONENT;
                                     <strong>SOL-001</strong>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-success usuario-estado">Usuario Nuevo</span>
+                                    <span class="badge text-bg-dark usuario-estado">Usuario Nuevo</span>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="fw-bold">Cancha Los Pinos</div>
@@ -159,7 +159,7 @@ include HEAD_COMPONENT;
                                     <strong>SOL-002</strong>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-info usuario-estado">Usuario Existente</span>
+                                    <span class="badge text-bg-dark usuario-estado">Usuario Existente</span>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="fw-bold">Deportivo Central</div>
@@ -206,7 +206,7 @@ include HEAD_COMPONENT;
                                     <strong>SOL-003</strong>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-success usuario-estado">Usuario Nuevo</span>
+                                    <span class="badge text-bg-dark usuario-estado">Usuario Nuevo</span>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="fw-bold">Futsal Arena</div>
@@ -250,7 +250,7 @@ include HEAD_COMPONENT;
                                     <strong>SOL-004</strong>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-info usuario-estado">Usuario Existente</span>
+                                    <span class="badge text-bg-dark usuario-estado">Usuario Existente</span>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="fw-bold">Club Atlético Norte</div>
@@ -294,7 +294,7 @@ include HEAD_COMPONENT;
                                     <strong>SOL-005</strong>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-success usuario-estado">Usuario Nuevo</span>
+                                    <span class="badge text-bg-dark usuario-estado">Usuario Nuevo</span>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="fw-bold">Cancha Fantasma</div>
@@ -338,7 +338,7 @@ include HEAD_COMPONENT;
                                     <strong>ADM-01</strong>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-primary">Admin Activo</span>
+                                    <span class="badge text-bg-dark">Admin Activo</span>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="fw-bold">3 Canchas Activas</div>

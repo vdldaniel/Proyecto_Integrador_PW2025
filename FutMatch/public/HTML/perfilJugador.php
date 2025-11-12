@@ -79,7 +79,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                                 <h2 class="mb-1" id="nombreJugador">Carlos Fernández</h2>
                                 <p class="mb-1 opacity-75" id="usernameJugador">@carlos_futbol</p>
                                 <div class="d-flex align-items-center">
-                                    <span class="badge bg-success me-2" id="estadoJugador">Activo</span>
+                                    <span class="badge text-bg-dark me-2" id="estadoJugador">Activo</span>
                                     <span class="text-warning me-2" id="calificacionJugador">
                                         ★★★★☆ <small class="text-light">(4.3)</small>
                                     </span>
@@ -122,7 +122,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <!-- Partido 1 -->
                 <div class="border-bottom p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="badge bg-success me-3 p-2">
+                        <div class="badge text-bg-dark me-3 p-2">
                             <i class="bi bi-check-circle"></i>
                         </div>
                         <div class="flex-grow-1">
@@ -130,8 +130,8 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                             <p class="text-muted mb-0">Complejo Deportivo Norte • 08/11/2025</p>
                         </div>
                         <div class="text-end">
-                            <span class="badge bg-warning text-dark">2 goles</span>
-                            <span class="badge bg-info text-dark ms-1">1 asistencia</span>
+                            <span class="badge text-bg-dark text-dark">2 goles</span>
+                            <span class="badge text-bg-dark text-dark ms-1">1 asistencia</span>
                         </div>
                     </div>
                     <p class="mb-3">Excelente partido donde el equipo mostró una gran coordinación ofensiva.</p>
@@ -149,7 +149,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <!-- Partido 2 -->
                 <div class="border-bottom p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="badge bg-danger me-3 p-2">
+                        <div class="badge text-bg-dark me-3 p-2">
                             <i class="bi bi-x-circle"></i>
                         </div>
                         <div class="flex-grow-1">
@@ -157,7 +157,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                             <p class="text-muted mb-0">Futbol Club Centro • 05/11/2025</p>
                         </div>
                         <div class="text-end">
-                            <span class="badge bg-warning text-dark">1 gol</span>
+                            <span class="badge text-bg-dark text-dark">1 gol</span>
                         </div>
                     </div>
                     <p class="mb-3">Partido complicado contra un equipo muy organizado defensivamente.</p>
@@ -175,7 +175,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <!-- Partido 3 -->
                 <div class="p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="badge bg-secondary me-3 p-2">
+                        <div class="badge text-bg-dark me-3 p-2">
                             <i class="bi bi-dash-circle"></i>
                         </div>
                         <div class="flex-grow-1">
@@ -183,7 +183,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                             <p class="text-muted mb-0">Cancha Municipal • 02/11/2025</p>
                         </div>
                         <div class="text-end">
-                            <span class="badge bg-info text-dark">2 asistencias</span>
+                            <span class="badge text-bg-dark text-dark">2 asistencias</span>
                         </div>
                     </div>
                     <p class="mb-3">Partido equilibrado donde ambos equipos tuvieron buenas oportunidades.</p>
@@ -215,7 +215,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                                     <p class="card-text text-muted">Equipo actual • Desde Marzo 2025</p>
                                     <div class="d-flex justify-content-between">
                                         <small>23 partidos jugados</small>
-                                        <span class="badge bg-success">Activo</span>
+                                        <span class="badge text-bg-dark">Activo</span>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                                     <p class="card-text text-muted">Enero 2025 - Marzo 2025</p>
                                     <div class="d-flex justify-content-between">
                                         <small>15 partidos jugados</small>
-                                        <span class="badge bg-secondary">Inactivo</span>
+                                        <span class="badge text-bg-dark">Inactivo</span>
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +298,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
             <div class="card-body">
                 <div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">Posición Preferida</label>
-                    <span class="badge bg-primary" id="posicionJugador">Mediocampista</span>
+                    <span class="badge text-bg-dark" id="posicionJugador">Mediocampista</span>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">Pie Hábil</label>
@@ -307,9 +307,9 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <div class="mb-0">
                     <label class="fw-bold text-muted d-block mb-2">Especialidades</label>
                     <div class="d-flex flex-wrap gap-1">
-                        <span class="badge bg-success">Pases largos</span>
-                        <span class="badge bg-warning text-dark">Centros</span>
-                        <span class="badge bg-info">Visión de juego</span>
+                        <span class="badge text-bg-dark">Pases largos</span>
+                        <span class="badge text-bg-dark text-dark">Centros</span>
+                        <span class="badge text-bg-dark">Visión de juego</span>
                     </div>
                 </div>
             </div>
@@ -357,7 +357,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <!-- Botón ver estadísticas completas (si no es admin) -->
                 <?php if (!$perfil_jugador_admin_mode && $perfil_jugador_es_propio): ?>
                     <div class="mt-3 text-center">
-                        <button class="btn btn-sm btn-outline-secondary" id="btnVerEstadisticas">
+                        <button class="btn btn-sm btn-dark" id="btnVerEstadisticas">
                             <i class="bi bi-graph-up"></i> Ver estadísticas completas
                         </button>
                     </div>

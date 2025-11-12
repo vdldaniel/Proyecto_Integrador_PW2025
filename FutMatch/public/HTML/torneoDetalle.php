@@ -33,7 +33,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
         <h1 class="fw-bold mb-1"><?= $torneo_detalle_titulo_header ?></h1>
         <p class="text-muted mb-0">
             <i class="bi bi-calendar3"></i> <?= $torneo_detalle_subtitulo_header ?>
-            <span class="badge bg-primary ms-2"><?= $torneo_detalle_datos_torneo['estado'] ?></span>
+            <span class="badge text-bg-dark ms-2"><?= $torneo_detalle_datos_torneo['estado'] ?></span>
         </p>
     </div>
     <div class="col-md-4 text-end">
@@ -313,7 +313,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
         <div class="tab-pane fade <?= !in_array('bracket', $torneo_detalle_mostrar_pestanas) ? 'show active' : '' ?>" id="equipos" role="tabpanel">
             <div class="d-flex justify-content-between align-items-center equipos-header">
                 <h3>Equipos Participantes</h3>
-                <span class="badge bg-primary"><?= $torneo_detalle_datos_torneo['equipos_registrados'] ?> equipos registrados</span>
+                <span class="badge text-bg-dark"><?= $torneo_detalle_datos_torneo['equipos_registrados'] ?> equipos registrados</span>
             </div>
 
             <!-- Lista de equipos en formato fila -->
@@ -334,7 +334,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Campeón del torneo</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge bg-success">Campeón</span>
+                                    <span class="badge text-bg-dark">Campeón</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">7 partidos</small>
@@ -343,7 +343,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                 </div>
                                 <div class="col-md-2 text-end">
                                     <?php if ($torneo_detalle_admin_mode): ?>
-                                        <button class="btn btn-sm btn-outline-primary">
+                                        <button class="btn btn-sm btn-dark">
                                             <i class="bi bi-eye"></i> Ver
                                         </button>
                                     <?php endif; ?>
@@ -369,7 +369,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Subcampeón del torneo</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge bg-secondary">Subcampeón</span>
+                                    <span class="badge text-bg-dark">Subcampeón</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">7 partidos</small>
@@ -378,7 +378,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                 </div>
                                 <div class="col-md-2 text-end">
                                     <?php if ($torneo_detalle_admin_mode): ?>
-                                        <button class="btn btn-sm btn-outline-primary">
+                                        <button class="btn btn-sm btn-dark">
                                             <i class="bi bi-eye"></i> Ver
                                         </button>
                                     <?php endif; ?>
@@ -394,7 +394,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-1 text-center">
-                                    <span class="badge bg-warning text-dark">3°</span>
+                                    <span class="badge text-bg-dark text-dark">3°</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img src="<?= IMG_PATH ?>team-placeholder.png" alt="Escudo" class="team-logo" width="50" height="50">
@@ -404,7 +404,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Semifinalista</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge bg-warning text-dark">Semifinal</span>
+                                    <span class="badge text-bg-dark text-dark">Semifinal</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">6 partidos</small>
@@ -413,7 +413,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                 </div>
                                 <div class="col-md-2 text-end">
                                     <?php if ($torneo_detalle_admin_mode): ?>
-                                        <button class="btn btn-sm btn-outline-primary">
+                                        <button class="btn btn-sm btn-dark">
                                             <i class="bi bi-eye"></i> Ver
                                         </button>
                                     <?php endif; ?>
@@ -429,7 +429,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-1 text-center">
-                                    <span class="badge bg-warning text-dark">4°</span>
+                                    <span class="badge text-bg-dark text-dark">4°</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img src="<?= IMG_PATH ?>team-placeholder.png" alt="Escudo" class="team-logo" width="50" height="50">
@@ -439,7 +439,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Semifinalista</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge bg-warning text-dark">Semifinal</span>
+                                    <span class="badge text-bg-dark text-dark">Semifinal</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">6 partidos</small>
@@ -448,7 +448,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                 </div>
                                 <div class="col-md-2 text-end">
                                     <?php if ($torneo_detalle_admin_mode): ?>
-                                        <button class="btn btn-sm btn-outline-primary">
+                                        <button class="btn btn-sm btn-dark">
                                             <i class="bi bi-eye"></i> Ver
                                         </button>
                                     <?php endif; ?>
@@ -474,7 +474,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Eliminado en cuartos</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge bg-danger">Eliminado</span>
+                                    <span class="badge text-bg-dark">Eliminado</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">5 partidos</small>
@@ -483,7 +483,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                 </div>
                                 <div class="col-md-2 text-end">
                                     <?php if ($torneo_detalle_admin_mode): ?>
-                                        <button class="btn btn-sm btn-outline-secondary">
+                                        <button class="btn btn-sm btn-dark">
                                             <i class="bi bi-eye"></i> Ver
                                         </button>
                                     <?php endif; ?>
@@ -545,10 +545,10 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                 <button class="btn btn-primary">
                                     <i class="bi bi-plus-circle"></i> Agregar Equipo
                                 </button>
-                                <button class="btn btn-outline-warning">
+                                <button class="btn btn-dark">
                                     <i class="bi bi-pencil"></i> Editar Equipos
                                 </button>
-                                <button class="btn btn-outline-danger">
+                                <button class="btn btn-dark">
                                     <i class="bi bi-trash"></i> Eliminar Equipo
                                 </button>
                             </div>
@@ -624,7 +624,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                 <a href="#" id="modal-btn-ver-completo" class="btn btn-primary">
                     <i class="bi bi-eye"></i> Ver Partido Completo
                 </a>

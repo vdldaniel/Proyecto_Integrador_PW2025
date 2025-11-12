@@ -30,14 +30,14 @@ $perfil_jugador_botones_header = [
         'tipo' => 'link',
         'texto' => 'Volver',
         'icono' => 'bi-arrow-left',
-        'clase' => 'btn-outline-secondary',
+        'clase' => 'btn-dark',
         'url' => PAGE_AGENDA_ADMIN_CANCHA // O la página de donde vino
     ],
     [
         'tipo' => 'button',
         'texto' => 'Reportar',
         'icono' => 'bi-flag',
-        'clase' => 'btn-outline-danger',
+        'clase' => 'btn-dark',
         'modal' => '#modalReportarJugador'
     ]
 ];
@@ -100,7 +100,7 @@ include HEAD_COMPONENT;
                                         <br>
                                         <small class="text-muted">Cancha A1-F5 • Partido amistoso</small>
                                     </div>
-                                    <span class="badge bg-success">Cumplida</span>
+                                    <span class="badge text-bg-dark">Cumplida</span>
                                 </div>
                                 <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
@@ -108,7 +108,7 @@ include HEAD_COMPONENT;
                                         <br>
                                         <small class="text-muted">Cancha A2-F9 • Entrenamiento</small>
                                     </div>
-                                    <span class="badge bg-success">Cumplida</span>
+                                    <span class="badge text-bg-dark">Cumplida</span>
                                 </div>
                                 <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
@@ -116,7 +116,7 @@ include HEAD_COMPONENT;
                                         <br>
                                         <small class="text-muted">Cancha A1-F5 • Partido amistoso</small>
                                     </div>
-                                    <span class="badge bg-warning text-dark">No show</span>
+                                    <span class="badge text-bg-dark text-dark">No show</span>
                                 </div>
                             </div>
                         </div>

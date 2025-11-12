@@ -128,7 +128,7 @@ function createCanchaRow(cancha) {
             <small class="text-muted">${cancha.propietario_email}</small>
         </td>
         <td>
-            <span class="badge bg-warning text-dark">
+            <span class="badge text-bg-dark text-dark">
                 ${cancha.total_reportes} reporte${
     cancha.total_reportes !== 1 ? "s" : ""
   }

@@ -48,18 +48,6 @@ button i {
   --bs-btn-hover-border-color: #6c757d;
 }
 
-/* Botones sidebar */
-.sidebar-fijo .btn-outline-secondary {
-  border-color: #6c757d;
-  color: #6c757d;
-}
-
-.sidebar-fijo .btn-outline-secondary:hover {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  color: white;
-}
-
 .list-group-item .btn {
   min-width: 95px;
 }
@@ -230,24 +218,6 @@ form {
 .table td select {
   width: 100%;
   box-sizing: border-box;
-}
-
-/* Dark mode form adjustments */
-[data-bs-theme="dark"] .form-control {
-  background-color: var(--bs-body-bg);
-  border-color: var(--bs-border-color);
-  color: var(--bs-body-color);
-}
-
-[data-bs-theme="dark"] .form-control:focus {
-  background-color: var(--bs-body-bg);
-  border-color: var(--bs-primary);
-  color: var(--bs-body-color);
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-[data-bs-theme="dark"] .form-label {
-  color: var(--bs-body-color);
 }
 
 /* ===================================

@@ -16,7 +16,7 @@ $perfil_equipo_botones_header = [
     [
         'tipo' => 'button',
         'texto' => 'Información del equipo',
-        'clase' => 'btn-outline-info',
+        'clase' => 'btn-dark',
         'icono' => 'bi bi-info-circle',
         'modal' => '#modalInfoEquipo'
     ],
@@ -151,7 +151,7 @@ require_once HEAD_COMPONENT;
                             <label class="form-label">Código del equipo</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" value="<?= $perfil_equipo_datos_equipo['codigo_equipo'] ?>" readonly>
-                                <button class="btn btn-outline-secondary" type="button" id="btnGenerarCodigo">
+                                <button class="btn btn-dark" type="button" id="btnGenerarCodigo">
                                     <i class="bi bi-arrow-clockwise"></i>
                                 </button>
                             </div>
@@ -167,10 +167,10 @@ require_once HEAD_COMPONENT;
 
                     <h6 class="text-danger">Zona de Peligro</h6>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-danger">
+                        <button class="btn btn-dark">
                             <i class="bi bi-people"></i> Transferir Liderazgo
                         </button>
-                        <button class="btn btn-outline-danger">
+                        <button class="btn btn-dark">
                             <i class="bi bi-trash"></i> Disolver Equipo
                         </button>
                     </div>

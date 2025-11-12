@@ -15,7 +15,7 @@ $torneo_detalle_botones_header = [
     [
         'tipo' => 'button',
         'texto' => 'Detalles del torneo',
-        'clase' => 'btn-outline-info',
+        'clase' => 'btn-dark',
         'icono' => 'bi bi-info-circle',
         'modal' => '#modalDetallesTorneo'
     ]
@@ -281,7 +281,7 @@ require_once HEAD_COMPONENT;
     <div class="tab-pane fade" id="equipos" role="tabpanel">
         <div class="d-flex justify-content-between align-items-center equipos-header">
             <h3>Equipos Participantes</h3>
-            <span class="badge bg-primary">16 equipos registrados</span>
+            <span class="badge text-bg-dark">16 equipos registrados</span>
         </div>
 
         <!-- Lista de equipos en formato fila -->
@@ -292,7 +292,7 @@ require_once HEAD_COMPONENT;
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-md-1 text-center">
-                                <span class="badge bg-success fs-6 team-position-badge">1°</span>
+                                <span class="badge text-bg-dark fs-6 team-position-badge">1°</span>
                             </div>
                             <div class="col-md-1 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center team-avatar first-place">
@@ -313,7 +313,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 1 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -329,7 +329,7 @@ require_once HEAD_COMPONENT;
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-md-1 text-center">
-                                <span class="badge bg-success fs-6 team-position-badge">2°</span>
+                                <span class="badge text-bg-dark fs-6 team-position-badge">2°</span>
                             </div>
                             <div class="col-md-1 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center team-avatar second-place">
@@ -350,7 +350,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 0 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -366,7 +366,7 @@ require_once HEAD_COMPONENT;
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-md-1 text-center">
-                                <span class="badge bg-warning fs-6 team-position-badge">3°</span>
+                                <span class="badge text-bg-dark fs-6 team-position-badge">3°</span>
                             </div>
                             <div class="col-md-1 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center team-avatar third-place">
@@ -387,7 +387,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 2 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -403,7 +403,7 @@ require_once HEAD_COMPONENT;
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-md-1 text-center">
-                                <span class="badge bg-warning fs-6 team-position-badge">4°</span>
+                                <span class="badge text-bg-dark fs-6 team-position-badge">4°</span>
                             </div>
                             <div class="col-md-1 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center team-avatar default-place">
@@ -424,7 +424,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 0 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -440,7 +440,7 @@ require_once HEAD_COMPONENT;
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-md-1 text-center">
-                                <span class="badge bg-secondary fs-6 team-position-badge">-</span>
+                                <span class="badge text-bg-dark fs-6 team-position-badge">-</span>
                             </div>
                             <div class="col-md-1 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center team-avatar default-place">
@@ -461,7 +461,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted d-block"><i class="bi bi-dash"></i> - goles</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-secondary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -507,9 +507,9 @@ require_once HEAD_COMPONENT;
                                     </div>
                                     <div class="col-3 text-center">
                                         <h2 class="mb-1">
-                                            <span id="modal-goles1" class="badge bg-success fs-4">3</span>
+                                            <span id="modal-goles1" class="badge text-bg-dark fs-4">3</span>
                                             <span class="text-muted mx-2">-</span>
-                                            <span id="modal-goles2" class="badge bg-secondary fs-4">1</span>
+                                            <span id="modal-goles2" class="badge text-bg-dark fs-4">1</span>
                                         </h2>
                                     </div>
                                     <div class="col-4 text-start">
@@ -540,7 +540,7 @@ require_once HEAD_COMPONENT;
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Estado:</td>
-                                    <td><span id="modal-estado" class="badge bg-success">Finalizado</span></td>
+                                    <td><span id="modal-estado" class="badge text-bg-dark">Finalizado</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -548,7 +548,7 @@ require_once HEAD_COMPONENT;
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                 <a href="#" id="modal-btn-ver-completo" class="btn btn-primary">
                     <i class="bi bi-eye"></i> Ver Partido Completo
                 </a>
@@ -584,7 +584,7 @@ require_once HEAD_COMPONENT;
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Fecha de Fin:</td>
-                                    <td>15/12/2025 <span class="badge bg-warning text-dark">Estimativa</span></td>
+                                    <td>15/12/2025 <span class="badge text-bg-dark text-dark">Estimativa</span></td>
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Equipos Máximos:</td>
@@ -592,7 +592,7 @@ require_once HEAD_COMPONENT;
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Estado:</td>
-                                    <td><span class="badge bg-primary">En curso</span></td>
+                                    <td><span class="badge text-bg-dark">En curso</span></td>
                                 </tr>
                             </tbody>
                         </table>

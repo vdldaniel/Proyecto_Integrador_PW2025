@@ -30,21 +30,21 @@ $perfil_jugador_botones_header = [
         'tipo' => 'link',
         'texto' => 'Volver a Reportes',
         'icono' => 'bi-arrow-left',
-        'clase' => 'btn-outline-secondary',
+        'clase' => 'btn-dark',
         'url' => PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA
     ],
     [
         'tipo' => 'button',
         'texto' => 'Suspender',
         'icono' => 'bi-person-fill-x',
-        'clase' => 'btn-outline-danger',
+        'clase' => 'btn-dark',
         'modal' => '#modalSuspenderJugador'
     ],
     [
         'tipo' => 'button',
         'texto' => 'Reestablecer',
         'icono' => 'bi-person-fill-check',
-        'clase' => 'btn-outline-success',
+        'clase' => 'btn-dark',
         'modal' => '#modalRestablecerJugador'
     ]
 ];
@@ -87,7 +87,7 @@ include HEAD_COMPONENT;
                                             <p class="mb-1 text-muted">Reportado por: @carlos_futbol</p>
                                             <small class="text-muted">10/11/2025 • PAR-445</small>
                                         </div>
-                                        <span class="badge bg-warning">Pendiente</span>
+                                        <span class="badge text-bg-dark">Pendiente</span>
                                     </div>
                                 </div>
                                 <div class="list-group-item">
@@ -97,7 +97,7 @@ include HEAD_COMPONENT;
                                             <p class="mb-1 text-muted">Reportado por: @maria_goals</p>
                                             <small class="text-muted">08/11/2025 • PAR-458</small>
                                         </div>
-                                        <span class="badge bg-success">Resuelto</span>
+                                        <span class="badge text-bg-dark">Resuelto</span>
                                     </div>
                                 </div>
                                 <div class="list-group-item">
@@ -107,7 +107,7 @@ include HEAD_COMPONENT;
                                             <p class="mb-1 text-muted">Reportado por: @futbol_pro</p>
                                             <small class="text-muted">05/11/2025 • PAR-423</small>
                                         </div>
-                                        <span class="badge bg-danger">Rechazado</span>
+                                        <span class="badge text-bg-dark">Rechazado</span>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ include HEAD_COMPONENT;
                                             <p class="mb-1 text-muted">Por: Admin_Carlos</p>
                                             <small class="text-muted">01/10/2025</small>
                                         </div>
-                                        <span class="badge bg-info">Cumplida</span>
+                                        <span class="badge text-bg-dark">Cumplida</span>
                                     </div>
                                 </div>
                                 <div class="list-group-item text-center text-muted py-4">

@@ -22,19 +22,19 @@
             <label class="form-label small text-muted" for="selectorFecha">Ir a fecha</label>
         </div>
         <div class="col-md-4 text-end">
-            <button id="botonHoy" class="btn btn-outline-secondary me-2" type="button">
+            <button id="botonHoy" class="btn btn-dark me-2" type="button">
                 <i class="bi bi-calendar-today"></i> Hoy
             </button>
             <div class="btn-group me-2" role="group" aria-label="Navigate calendar">
-                <button type="button" class="btn btn-outline-secondary" id="botonAnterior">
+                <button type="button" class="btn btn-dark" id="botonAnterior">
                     <i class="bi bi-chevron-left"></i>
                 </button>
-                <button type="button" class="btn btn-outline-secondary" id="botonSiguiente">
+                <button type="button" class="btn btn-dark" id="botonSiguiente">
                     <i class="bi bi-chevron-right"></i>
                 </button>
             </div>
             <div class="dropdown d-inline-block">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownVista" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownVista" data-bs-toggle="dropdown" aria-expanded="false">
                     <span id="vistaActual">Mes</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownVista">

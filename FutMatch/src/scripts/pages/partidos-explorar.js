@@ -263,8 +263,8 @@ function actualizarMarcadoresMapa() {
                 }</p>
                 <p class="mb-1"><i class="bi bi-clock"></i> ${partido.hora}</p>
                 <div class="mb-2">
-                    <span class="badge bg-primary">${partido.tipo}</span>
-                    <span class="badge bg-secondary">${partido.genero}</span>
+                    <span class="badge text-bg-dark">${partido.tipo}</span>
+                    <span class="badge text-bg-dark">${partido.genero}</span>
                 </div>
                 <p class="mb-1"><strong>${partido.precio}</strong></p>
                 <p class="mb-2">Jugadores: ${partido.jugadores}</p>
@@ -659,7 +659,7 @@ function abrirModalSolicitarUnirse(idPartido) {
                     <div class="col-5">${infoPartido.cancha}</div>
                     <div class="col-3 text-end">
                         <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilCancha_Jugador.php?id=${infoPartido.canchaId}" 
-                           class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-dark">
                             <i class="bi bi-eye me-1"></i>Ver cancha
                         </a>
                     </div>
@@ -693,7 +693,7 @@ function abrirModalSolicitarUnirse(idPartido) {
                     <div class="col-5">${infoPartido.organizador}</div>
                     <div class="col-3 text-end">
                         <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilJugador.php?id=${infoPartido.organizadorId}" 
-                           class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-dark">
                             <i class="bi bi-eye me-1"></i>Ver perfil
                         </a>
                     </div>
@@ -766,7 +766,7 @@ function abrirModalUnirseEquipo(idPartido) {
                         <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilCancha_Jugador.php?id=${
                           infoPartido.canchaId
                         }" 
-                           class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-dark">
                             <i class="bi bi-eye me-1"></i>Ver cancha
                         </a>
                     </div>
@@ -832,7 +832,7 @@ function abrirModalUnirseEquipo(idPartido) {
                     </div>
                     <div class="col-4 text-end">
                         <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilEquipo_Jugador.php?id=${equipoAnfitrion.id}" 
-                           class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-dark">
                             <i class="bi bi-eye me-1"></i>Ver equipo
                         </a>
                     </div>
@@ -900,7 +900,7 @@ function obtenerInfoPartido(idPartido) {
       descripcion:
         "Partido amistoso para pasar un buen rato. Todos los niveles son bienvenidos. Se juega con reglas estándar de fútbol 5.",
       badges:
-        '<span class="badge bg-success me-1">Fútbol 5</span><span class="badge bg-info me-1">Masculino</span><span class="badge bg-warning text-dark">4/10 jugadores</span>',
+        '<span class="badge text-bg-dark me-1">Fútbol 5</span><span class="badge text-bg-dark me-1">Masculino</span><span class="badge text-bg-dark text-dark">4/10 jugadores</span>',
     },
     2: {
       titulo: "Torneo relámpago - Fútbol 7",
@@ -915,7 +915,7 @@ function obtenerInfoPartido(idPartido) {
       descripcion:
         "Torneo relámpago por equipos. Se buscan equipos completos para participar en un emocionante torneo de fútbol 7.",
       badges:
-        '<span class="badge bg-success me-1">Fútbol 7</span><span class="badge bg-purple me-1">Mixto</span><span class="badge bg-warning text-dark">Buscando equipos</span>',
+        '<span class="badge text-bg-dark me-1">Fútbol 7</span><span class="badge text-bg-dark me-1">Mixto</span><span class="badge text-bg-dark text-dark">Buscando equipos</span>',
     },
     3: {
       titulo: "Fútbol femenino competitivo",
@@ -929,7 +929,7 @@ function obtenerInfoPartido(idPartido) {
       descripcion:
         "Partido competitivo para jugadoras con experiencia. Buen nivel técnico requerido.",
       badges:
-        '<span class="badge bg-success me-1">Fútbol Sala</span><span class="badge bg-pink me-1">Femenino</span><span class="badge bg-warning text-dark">6/10 jugadoras</span>',
+        '<span class="badge text-bg-dark me-1">Fútbol Sala</span><span class="badge text-bg-dark">Femenino</span><span class="badge text-bg-dark text-dark">6/10 jugadoras</span>',
     },
   };
 

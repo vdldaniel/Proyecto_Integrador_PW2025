@@ -27,10 +27,10 @@ require_once HEAD_COMPONENT;
       </div>
       <div class="col-md-6 text-end">
         <div class="d-flex gap-2 justify-content-end">
-          <button type="button" class="btn btn-outline-secondary" id="btnCambiarVista">
+          <button type="button" class="btn btn-dark" id="btnCambiarVista">
             <i class="bi bi-map" id="iconoVista"></i> <span id="textoVista">Mapa</span>
           </button>
-          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalFiltros">
+          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalFiltros">
             <i class="bi bi-funnel"></i> Filtros
           </button>
           <div class="input-group" style="width: 300px;">
@@ -48,7 +48,7 @@ require_once HEAD_COMPONENT;
       <div class="d-flex gap-2 align-items-center flex-wrap">
         <span class="text-muted">Filtros activos:</span>
         <div id="badgesFiltros" class="d-flex gap-1 flex-wrap"></div>
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="limpiarFiltros">
+        <button type="button" class="btn btn-sm btn-dark" id="limpiarFiltros">
           <i class="bi bi-x"></i> Limpiar todo
         </button>
       </div>
@@ -68,9 +68,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Palermo, Buenos Aires
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 5</span>
-                <span class="badge bg-info me-1">Sintético</span>
-                <span class="badge bg-warning text-dark">Disponible</span>
+                <span class="badge text-bg-dark me-1">Fútbol 5</span>
+                <span class="badge text-bg-dark me-1">Sintético</span>
+                <span class="badge text-bg-dark text-dark">Disponible</span>
               </div>
               <p class="card-text small text-muted mb-3">
                 Cancha de fútbol 5 con césped sintético de última generación. Vestuarios, duchas y estacionamiento incluido.
@@ -86,13 +86,10 @@ require_once HEAD_COMPONENT;
                     <small class="text-muted">(4.2)</small>
                   </div>
                 </div>
-                <div class="text-end">
-                  <span class="h6 mb-0">$2500/h</span>
-                </div>
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2">
-                  <a class="btn btn-primary" href=<? PAGE_PERFIL_CANCHA_JUGADOR . '?id=1' ?>>
+                  <a type="button" class="btn btn-primary" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
                     <i class="bi bi-eye"></i> Ver detalles
                   </a>
                 </div>
@@ -111,9 +108,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> San Telmo, Buenos Aires
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 7</span>
-                <span class="badge bg-success me-1">Césped natural</span>
-                <span class="badge bg-danger">Ocupada</span>
+                <span class="badge text-bg-dark me-1">Fútbol 7</span>
+                <span class="badge text-bg-dark me-1">Césped natural</span>
+                <span class="badge text-bg-dark">Ocupada</span>
               </div>
               <p class="card-text small text-muted mb-3">
                 Cancha de fútbol 7 con césped natural. Ideal para partidos más competitivos con mayor espacio de juego.
@@ -129,13 +126,10 @@ require_once HEAD_COMPONENT;
                     <small class="text-muted">(4.8)</small>
                   </div>
                 </div>
-                <div class="text-end">
-                  <span class="h6 mb-0">$3200/h</span>
-                </div>
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2">
-                  <button class="btn btn-outline-primary" onclick="verDetalleCancha(2)" disabled>
+                  <button class="btn btn-dark" onclick="verDetalleCancha(2)" disabled>
                     <i class="bi bi-clock"></i> No disponible
                   </button>
                 </div>
@@ -154,9 +148,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Recoleta, Buenos Aires
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol Sala</span>
-                <span class="badge bg-secondary me-1">Parquet</span>
-                <span class="badge bg-warning text-dark">Disponible</span>
+                <span class="badge text-bg-dark me-1">Fútbol Sala</span>
+                <span class="badge text-bg-dark me-1">Parquet</span>
+                <span class="badge text-bg-dark text-dark">Disponible</span>
               </div>
               <p class="card-text small text-muted mb-3">
                 Cancha de futsal profesional con piso de parquet. Climatizada con aire acondicionado y sonido profesional.
@@ -172,15 +166,12 @@ require_once HEAD_COMPONENT;
                     <small class="text-muted">(4.5)</small>
                   </div>
                 </div>
-                <div class="text-end">
-                  <span class="h6 mb-0">$2800/h</span>
-                </div>
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2">
-                  <button class="btn btn-primary" onclick="verDetalleCancha(3)">
+                  <a type="button" class="btn btn-primary" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
                     <i class="bi bi-eye"></i> Ver detalles
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

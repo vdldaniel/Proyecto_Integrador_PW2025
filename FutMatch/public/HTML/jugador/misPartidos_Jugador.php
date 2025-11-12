@@ -43,17 +43,17 @@ require_once HEAD_COMPONENT;
       <div class="col-12">
         <div class="d-flex gap-2 flex-wrap align-items-center">
           <!-- Botón Filtro -->
-          <button class="btn btn-outline-secondary" id="btnFiltros">
+          <button class="btn btn-dark" id="btnFiltros">
             <i class="bi bi-funnel"></i>
           </button>
           <!-- Filtros de estado -->
-          <button class="btn btn-sm btn-outline-primary active" data-filter="todos">
+          <button class="btn btn-sm btn-dark active" data-filter="todos">
             Todos
           </button>
-          <button class="btn btn-sm btn-outline-success" data-filter="confirmados">
+          <button class="btn btn-sm btn-dark" data-filter="confirmados">
             Confirmados
           </button>
-          <button class="btn btn-sm btn-outline-warning" data-filter="pendientes">
+          <button class="btn btn-sm btn-dark" data-filter="pendientes">
             Pendientes
           </button>
         </div>
@@ -88,7 +88,7 @@ require_once HEAD_COMPONENT;
               <h6 class="fw-bold mb-1">Cancha Premium - Fútbol 5</h6>
               <div class="d-flex align-items-center">
                 <span class="text-muted small me-2">Av. Libertador 1234, Centro</span>
-                <a href="#" class="btn btn-sm btn-outline-secondary">
+                <a href="#" class="btn btn-sm btn-dark">
                   <i class="bi bi-geo-alt"></i> Ver en mapa
                 </a>
               </div>
@@ -97,8 +97,8 @@ require_once HEAD_COMPONENT;
             <!-- Columna intermedia: Chips de estado y rol -->
             <div class="partido-chips mx-2">
               <div class="d-flex flex-column gap-1">
-                <span class="badge bg-success">Confirmado</span>
-                <span class="badge bg-info">
+                <span class="badge text-bg-dark">Confirmado</span>
+                <span class="badge text-bg-dark">
                   <i class="bi bi-star me-1"></i>Anfitrión
                 </span>
               </div>
@@ -106,7 +106,7 @@ require_once HEAD_COMPONENT;
 
             <!-- Columna derecha: Acciones -->
             <div class="partido-acciones text-end">
-              <button class="btn btn-sm btn-outline-secondary"
+              <button class="btn btn-sm btn-dark"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#partido1Detalles" aria-expanded="false">
                 <i class="bi bi-chevron-down"></i> Ver detalles
@@ -124,7 +124,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
-                        <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>Los Tigres
                         </a>
                         <small class="equipo-contador text-success fw-bold">5/5</small>
@@ -133,7 +133,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Equipo rival</small>
-                        <a href="#" class="btn btn-sm btn-outline-secondary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>FC Barcelona
                         </a>
                         <small class="equipo-contador text-muted fw-bold">5/5</small>
@@ -150,13 +150,13 @@ require_once HEAD_COMPONENT;
                 <div class="col-md-6">
                   <!-- Acciones de anfitrión -->
                   <div class="d-grid gap-2">
-                    <a href="#" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-envelope-open me-2"></i>Ver solicitudes (2 pendientes)
                     </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-chat-dots me-2"></i>Ver foro del partido
                     </a>
-                    <a href="#" class="btn btn-sm btn-outline-danger">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-x-circle me-2"></i>Cancelar partido
                     </a>
                   </div>
@@ -181,7 +181,7 @@ require_once HEAD_COMPONENT;
               <h6 class="fw-bold mb-1">Deportivo Municipal - Fútbol 7</h6>
               <div class="d-flex align-items-center">
                 <span class="text-muted small me-2">Calle San Martín 567, Oeste</span>
-                <a href="#" class="btn btn-sm btn-outline-secondary">
+                <a href="#" class="btn btn-sm btn-dark">
                   <i class="bi bi-geo-alt"></i> Ver en mapa
                 </a>
               </div>
@@ -190,8 +190,8 @@ require_once HEAD_COMPONENT;
             <!-- Columna intermedia: Chips de estado y rol -->
             <div class="partido-chips mx-2">
               <div class="d-flex flex-column gap-1">
-                <span class="badge bg-success">Confirmado</span>
-                <span class="badge bg-primary">
+                <span class="badge text-bg-dark">Confirmado</span>
+                <span class="badge text-bg-dark">
                   <i class="bi bi-person-check me-1"></i>Invitado
                 </span>
               </div>
@@ -199,7 +199,7 @@ require_once HEAD_COMPONENT;
 
             <!-- Columna derecha: Acciones -->
             <div class="partido-acciones text-end">
-              <button class="btn btn-sm btn-outline-secondary"
+              <button class="btn btn-sm btn-dark"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#partido2Detalles" aria-expanded="false">
                 <i class="bi bi-chevron-down"></i> Ver detalles
@@ -217,7 +217,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Equipo local</small>
-                        <a href="#" class="btn btn-sm btn-outline-secondary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>Real Madrid
                         </a>
                         <small class="equipo-contador text-success fw-bold">7/7</small>
@@ -226,7 +226,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
-                        <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>Manchester
                         </a>
                         <small class="equipo-contador text-success fw-bold">7/7</small>
@@ -243,10 +243,10 @@ require_once HEAD_COMPONENT;
                 <div class="col-md-6">
                   <!-- Acciones de invitado -->
                   <div class="d-grid gap-2">
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-chat-dots me-2"></i>Ver foro del partido
                     </a>
-                    <a href="#" class="btn btn-sm btn-outline-warning">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-person-dash me-2"></i>Cancelar participación
                     </a>
                   </div>
@@ -283,7 +283,7 @@ require_once HEAD_COMPONENT;
               <h6 class="fw-bold mb-1">Complejo San Lorenzo - Fútbol 11</h6>
               <div class="d-flex align-items-center">
                 <span class="text-muted small me-2">Ruta Provincial 6 Km 12, Sur</span>
-                <a href="#" class="btn btn-sm btn-outline-secondary">
+                <a href="#" class="btn btn-sm btn-dark">
                   <i class="bi bi-geo-alt"></i> Ver en mapa
                 </a>
               </div>
@@ -292,8 +292,8 @@ require_once HEAD_COMPONENT;
             <!-- Columna intermedia: Chips de estado y rol -->
             <div class="partido-chips mx-2">
               <div class="d-flex flex-column gap-1">
-                <span class="badge bg-secondary">Pendiente</span>
-                <span class="badge bg-warning text-dark">
+                <span class="badge text-bg-dark">Pendiente</span>
+                <span class="badge text-bg-dark text-dark">
                   <i class="bi bi-hourglass-split me-1"></i>Solicitante
                 </span>
               </div>
@@ -301,7 +301,7 @@ require_once HEAD_COMPONENT;
 
             <!-- Columna derecha: Acciones -->
             <div class="partido-acciones text-end">
-              <button class="btn btn-sm btn-outline-secondary"
+              <button class="btn btn-sm btn-dark"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#partido3Detalles" aria-expanded="false">
                 <i class="bi bi-chevron-down"></i> Ver detalles
@@ -319,7 +319,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Equipo local</small>
-                        <a href="#" class="btn btn-sm btn-outline-secondary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>Juventus
                         </a>
                         <small class="equipo-contador text-success fw-bold">11/11</small>
@@ -328,7 +328,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
-                        <a href="#" class="btn btn-sm btn-outline-warning w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>AC Milan
                         </a>
                         <small class="equipo-contador text-warning fw-bold">10/11</small>
@@ -345,10 +345,10 @@ require_once HEAD_COMPONENT;
                 <div class="col-md-6">
                   <!-- Acciones de solicitante -->
                   <div class="d-grid gap-2">
-                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                    <button class="btn btn-sm btn-dark" disabled>
                       <i class="bi bi-chat-dots me-2"></i>Foro (disponible si te aceptan)
                     </button>
-                    <a href="#" class="btn btn-sm btn-outline-danger">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-x-circle me-2"></i>Cancelar solicitud
                     </a>
                   </div>
@@ -373,7 +373,7 @@ require_once HEAD_COMPONENT;
               <h6 class="fw-bold mb-1">Polideportivo Este - Fútbol 8</h6>
               <div class="d-flex align-items-center">
                 <span class="text-muted small me-2">Av. Costanera 890, Este</span>
-                <a href="#" class="btn btn-sm btn-outline-secondary">
+                <a href="#" class="btn btn-sm btn-dark">
                   <i class="bi bi-geo-alt"></i> Ver en mapa
                 </a>
               </div>
@@ -382,8 +382,8 @@ require_once HEAD_COMPONENT;
             <!-- Columna intermedia: Chips de estado y rol -->
             <div class="partido-chips mx-2">
               <div class="d-flex flex-column gap-1">
-                <span class="badge bg-purple">Buscando rival</span>
-                <span class="badge bg-info">
+                <span class="badge text-bg-dark">Buscando rival</span>
+                <span class="badge text-bg-dark">
                   <i class="bi bi-star me-1"></i>Anfitrión
                 </span>
               </div>
@@ -391,7 +391,7 @@ require_once HEAD_COMPONENT;
 
             <!-- Columna derecha: Acciones -->
             <div class="partido-acciones text-end">
-              <button class="btn btn-sm btn-outline-secondary"
+              <button class="btn btn-sm btn-dark"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#partido4Detalles" aria-expanded="false">
                 <i class="bi bi-chevron-down"></i> Ver detalles
@@ -409,7 +409,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
-                        <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>Los Tigres
                         </a>
                         <small class="equipo-contador text-success fw-bold">8/8</small>
@@ -418,7 +418,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-6">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Equipo rival</small>
-                        <div class="btn btn-sm btn-outline-secondary w-100 mb-1 text-muted disabled">
+                        <div class="btn btn-sm btn-dark w-100 mb-1 text-muted disabled">
                           <i class="bi bi-search me-1"></i>Buscando...
                         </div>
                         <small class="equipo-contador text-muted fw-bold">-/-</small>
@@ -438,13 +438,13 @@ require_once HEAD_COMPONENT;
                     <a href="#" class="btn btn-sm btn-success">
                       <i class="bi bi-envelope-open me-2"></i>Abrir convocatoria
                     </a>
-                    <a href="#" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-plus-circle me-2"></i>Invitar equipo
                     </a>
-                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                    <button class="btn btn-sm btn-dark" disabled>
                       <i class="bi bi-chat-dots me-2"></i>Crear foro
                     </button>
-                    <a href="#" class="btn btn-sm btn-outline-danger">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-x-circle me-2"></i>Cancelar partido
                     </a>
                   </div>
@@ -484,7 +484,7 @@ require_once HEAD_COMPONENT;
               </h6>
               <div class="d-flex align-items-center">
                 <span class="text-muted small me-2">Complejo Deportivo Norte, Zona Industrial</span>
-                <a href="#" class="btn btn-sm btn-outline-secondary">
+                <a href="#" class="btn btn-sm btn-dark">
                   <i class="bi bi-geo-alt"></i> Ver en mapa
                 </a>
               </div>
@@ -493,8 +493,8 @@ require_once HEAD_COMPONENT;
             <!-- Columna intermedia: Chips de estado y rol -->
             <div class="partido-chips mx-2">
               <div class="d-flex flex-column gap-1">
-                <span class="badge bg-success">Confirmado</span>
-                <span class="badge bg-dark">
+                <span class="badge text-bg-dark">Confirmado</span>
+                <span class="badge text-bg-dark">
                   <i class="bi bi-trophy me-1"></i>Torneo
                 </span>
               </div>
@@ -502,7 +502,7 @@ require_once HEAD_COMPONENT;
 
             <!-- Columna derecha: Acciones -->
             <div class="partido-acciones text-end">
-              <button class="btn btn-sm btn-outline-secondary"
+              <button class="btn btn-sm btn-dark"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#partido5Detalles" aria-expanded="false">
                 <i class="bi bi-chevron-down"></i> Ver detalles
@@ -520,7 +520,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-12">
                       <div class="text-center">
                         <small class="equipo-label text-muted d-block mb-1">Tu equipo participa</small>
-                        <a href="#" class="btn btn-sm btn-outline-primary w-100 mb-1">
+                        <a href="#" class="btn btn-sm btn-dark w-100 mb-1">
                           <i class="bi bi-people-fill me-1"></i>Los Tigres
                         </a>
                         <small class="equipo-contador text-success fw-bold">5/5 confirmados</small>
@@ -540,10 +540,10 @@ require_once HEAD_COMPONENT;
                     <a href="#" class="btn btn-sm btn-primary">
                       <i class="bi bi-info-circle me-2"></i>Ver información del torneo
                     </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-chat-dots me-2"></i>Ver foro del torneo
                     </a>
-                    <a href="#" class="btn btn-sm btn-outline-danger">
+                    <a href="#" class="btn btn-sm btn-dark">
                       <i class="bi bi-x-circle me-2"></i>No asistiré
                     </a>
                   </div>

@@ -30,14 +30,14 @@ $perfil_jugador_botones_header = [
         'tipo' => 'link',
         'texto' => 'Ver Partidos',
         'icono' => 'bi-calendar-check',
-        'clase' => 'btn-outline-primary',
+        'clase' => 'btn-dark',
         'url' => PAGE_MIS_PARTIDOS_JUGADOR
     ],
     [
         'tipo' => 'button',
         'texto' => 'Configuración',
         'icono' => 'bi-gear',
-        'clase' => 'btn-outline-secondary',
+        'clase' => 'btn-dark',
         'modal' => '#modalConfiguracion'
     ],
     [

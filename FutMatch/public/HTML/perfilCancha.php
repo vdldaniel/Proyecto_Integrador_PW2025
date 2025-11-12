@@ -32,17 +32,17 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
             <a type="button" class="btn btn-success me-2" href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>">
                 <i class="bi bi-calendar-week"></i> Ir a Agenda
             </a>
-            <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#modalEditarCancha">
+            <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalEditarCancha">
                 <i class="bi bi-gear"></i> Configuración
             </button>
             <button type="button" class="btn btn-primary" id="btnEditarPerfil">
                 <i class="bi bi-pencil-square"></i> Editar Perfil
             </button>
         <?php else: ?>
-            <button type="button" class="btn btn-outline-primary me-2" id="btnVerTorneos">
+            <button type="button" class="btn btn-dark me-2" id="btnVerTorneos">
                 <i class="bi bi-trophy"></i> Ver Torneos
             </button>
-            <button type="button" class="btn btn-outline-secondary" id="btnCompartirCancha">
+            <button type="button" class="btn btn-dark" id="btnCompartirCancha">
                 <i class="bi bi-share"></i> Compartir
             </button>
         <?php endif; ?>
@@ -54,7 +54,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                <button class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
                     <i class="bi bi-building"></i> MegaFutbol Cancha A1-F5
                 </button>
                 <ul class="dropdown-menu w-100">
@@ -120,26 +120,21 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                             <small class="text-muted">Fútbol 5 • <?= $perfil_cancha_admin_mode ? '16' : '12/16' ?> equipos • Inicia: 15 de enero</small>
                         </div>
                         <div>
-                            <span class="badge bg-success">Inscripciones Abiertas</span>
+                            <span class="badge text-bg-dark">Inscripciones Abiertas</span>
                         </div>
                     </div>
                     <p class="mb-3">Torneo de temporada de verano con premios para los 3 primeros puestos. Modalidad todos contra todos + eliminatorias.</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <?php if (!$perfil_cancha_admin_mode): ?>
-                            <div>
-                                <span class="text-success fw-bold">$15,000</span> <small class="text-muted">primer premio</small>
-                                <span class="text-muted mx-2">•</span>
-                                <small class="text-muted">Inscripción: $2,500/equipo</small>
-                            </div>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary btnVerDetalles" data-torneo-id="1">Ver Detalles</button>
+                                <button class="btn btn-sm btn-dark btnVerDetalles" data-torneo-id="1">Ver Detalles</button>
                                 <button class="btn btn-sm btn-success btnInscribirEquipo" data-torneo-id="1">
                                     <i class="bi bi-trophy"></i> Inscribirse
                                 </button>
                             </div>
                         <?php else: ?>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary">Ver Detalles</button>
+                                <button class="btn btn-sm btn-dark">Ver Detalles</button>
                                 <button class="btn btn-sm btn-primary">Gestionar</button>
                             </div>
                         <?php endif; ?>
@@ -157,26 +152,21 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                             <small class="text-muted">Fútbol 5 • 12 equipos • En curso</small>
                         </div>
                         <div>
-                            <span class="badge bg-info">En Curso</span>
+                            <span class="badge text-bg-dark">En Curso</span>
                         </div>
                     </div>
                     <p class="mb-3">Liga amateur semanal. Próxima fecha: Sábado 9 de noviembre a partir de las 14:00.</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <?php if (!$perfil_cancha_admin_mode): ?>
-                            <div>
-                                <span class="text-info fw-bold">$8,000</span> <small class="text-muted">primer premio</small>
-                                <span class="text-muted mx-2">•</span>
-                                <small class="text-muted">Cupos completos</small>
-                            </div>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary" data-action="verDetallesTorneo" data-torneo-id="2">Ver Detalles</button>
+                                <button class="btn btn-sm btn-dark" data-action="verDetallesTorneo" data-torneo-id="2">Ver Detalles</button>
                                 <button class="btn btn-sm btn-secondary" disabled>
                                     <i class="bi bi-lock"></i> Cupos Llenos
                                 </button>
                             </div>
                         <?php else: ?>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary">Ver Detalles</button>
+                                <button class="btn btn-sm btn-dark">Ver Detalles</button>
                                 <button class="btn btn-sm btn-primary">Gestionar</button>
                             </div>
                         <?php endif; ?>
@@ -194,26 +184,21 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                             <small class="text-muted">Fútbol 5 • <?= $perfil_cancha_admin_mode ? '8' : '0/8' ?> equipos • Viernes por la noche</small>
                         </div>
                         <div>
-                            <span class="badge bg-warning text-dark">Próximamente</span>
+                            <span class="badge bg-text-dark">Próximamente</span>
                         </div>
                     </div>
                     <p class="mb-3">Torneo express de eliminación directa. Ideal para equipos que quieren competir sin comprometerse toda la temporada.</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <?php if (!$perfil_cancha_admin_mode): ?>
-                            <div>
-                                <span class="text-success fw-bold">$5,000</span> <small class="text-muted">primer premio</small>
-                                <span class="text-muted mx-2">•</span>
-                                <small class="text-muted">Inscripción: $1,200/equipo</small>
-                            </div>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary btnVerDetalles" data-torneo-id="3">Ver Detalles</button>
+                                <button class="btn btn-sm btn-dark btnVerDetalles" data-torneo-id="3">Ver Detalles</button>
                                 <button class="btn btn-sm btn-warning btnNotificarInicio" data-torneo-id="3">
                                     <i class="bi bi-bell"></i> Notificar Inicio
                                 </button>
                             </div>
                         <?php else: ?>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary">Ver Detalles</button>
+                                <button class="btn btn-sm btn-dark">Ver Detalles</button>
                                 <button class="btn btn-sm btn-primary">Gestionar</button>
                             </div>
                         <?php endif; ?>
@@ -238,10 +223,10 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                                 </div>
                                 <div class="card-body p-2">
                                     <div class="d-grid gap-1">
-                                        <button class="btn btn-sm btn-outline-success btnReservarHorario" data-fecha="2024-11-04" data-hora="20:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-04" data-hora="20:00">
                                             20:00 - 21:00
                                         </button>
-                                        <button class="btn btn-sm btn-outline-success btnReservarHorario" data-fecha="2024-11-04" data-hora="21:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-04" data-hora="21:00">
                                             21:00 - 22:00
                                         </button>
                                     </div>
@@ -257,13 +242,13 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                                 </div>
                                 <div class="card-body p-2">
                                     <div class="d-grid gap-1">
-                                        <button class="btn btn-sm btn-outline-primary btnReservarHorario" data-fecha="2024-11-05" data-hora="16:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-05" data-hora="16:00">
                                             16:00 - 17:00
                                         </button>
-                                        <button class="btn btn-sm btn-outline-primary btnReservarHorario" data-fecha="2024-11-05" data-hora="18:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-05" data-hora="18:00">
                                             18:00 - 19:00
                                         </button>
-                                        <button class="btn btn-sm btn-outline-primary btnReservarHorario" data-fecha="2024-11-05" data-hora="22:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-05" data-hora="22:00">
                                             22:00 - 23:00
                                         </button>
                                     </div>
@@ -279,13 +264,13 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                                 </div>
                                 <div class="card-body p-2">
                                     <div class="d-grid gap-1">
-                                        <button class="btn btn-sm btn-outline-info btnReservarHorario" data-fecha="2024-11-06" data-hora="15:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-06" data-hora="15:00">
                                             15:00 - 16:00
                                         </button>
-                                        <button class="btn btn-sm btn-outline-info btnReservarHorario" data-fecha="2024-11-06" data-hora="17:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-06" data-hora="17:00">
                                             17:00 - 18:00
                                         </button>
-                                        <button class="btn btn-sm btn-outline-info btnReservarHorario" data-fecha="2024-11-06" data-hora="19:00">
+                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-06" data-hora="19:00">
                                             19:00 - 20:00
                                         </button>
                                     </div>
@@ -330,7 +315,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                     </label>
                     <p class="mb-0" id="direccionCancha">Av. Corrientes 1234, CABA, Buenos Aires, Argentina</p>
                     <?php if (!$perfil_cancha_admin_mode): ?>
-                        <button class="btn btn-sm btn-outline-secondary mt-1" id="btnVerEnMapa">
+                        <button class="btn btn-sm btn-dark mt-1" id="btnVerEnMapa">
                             <i class="bi bi-map"></i> Ver en mapa
                         </button>
                     <?php endif; ?>
@@ -358,7 +343,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                         <label class="fw-bold text-muted d-block mb-1">
                             <i class="bi bi-clipboard-check"></i> Estado
                         </label>
-                        <span class="badge bg-success" id="estadoCancha">Habilitada</span>
+                        <span class="badge text-bg-dark" id="estadoCancha">Habilitada</span>
                     </div>
                 <?php endif; ?>
             </div>
@@ -452,7 +437,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                 </div>
                 <!-- Botón ver reseñas para jugadores -->
                 <div class="mt-3 text-center">
-                    <button class="btn btn-sm btn-outline-secondary" id="btnVerResenas">
+                    <button class="btn btn-sm btn-dark" id="btnVerResenas">
                         <i class="bi bi-chat-left-text"></i> Ver todas las reseñas
                     </button>
                 </div>

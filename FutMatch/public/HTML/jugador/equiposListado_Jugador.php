@@ -114,12 +114,12 @@ require_once HEAD_COMPONENT;
               <div id="jugadoresContainer">
                 <div class="input-group mb-2">
                   <input type="text" class="form-control" placeholder="Username del jugador" name="jugador[]">
-                  <button class="btn btn-outline-danger remove-jugador-btn" type="button" disabled>
+                  <button class="btn btn-dark remove-jugador-btn" type="button" disabled>
                     <i class="bi bi-dash"></i>
                   </button>
                 </div>
               </div>
-              <button type="button" class="btn btn-outline-primary btn-sm" id="btnAgregarJugador">
+              <button type="button" class="btn btn-dark btn-sm" id="btnAgregarJugador">
                 <i class="bi bi-plus"></i> Agregar jugador
               </button>
             </div>
@@ -242,7 +242,7 @@ require_once HEAD_COMPONENT;
             <div class="mb-3">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <label class="form-label mb-0">Jugadores del equipo</label>
-                <span class="badge bg-secondary">Puedes agregar/quitar jugadores</span>
+                <span class="badge text-bg-dark">Puedes agregar/quitar jugadores</span>
               </div>
 
               <div id="editJugadoresContainer">
@@ -252,7 +252,7 @@ require_once HEAD_COMPONENT;
                     <i class="bi bi-star-fill"></i>
                   </span>
                   <input type="text" class="form-control" value="@jugador_lider" readonly>
-                  <button class="btn btn-outline-secondary" type="button" disabled>
+                  <button class="btn btn-dark" type="button" disabled>
                     <i class="bi bi-shield-check"></i> Líder
                   </button>
                 </div>
@@ -263,7 +263,7 @@ require_once HEAD_COMPONENT;
                     <i class="bi bi-person-fill"></i>
                   </span>
                   <input type="text" class="form-control" value="@jugador_miembro1" name="jugadorEdit[]">
-                  <button class="btn btn-outline-danger remove-jugador-edit-btn" type="button">
+                  <button class="btn btn-dark remove-jugador-edit-btn" type="button">
                     <i class="bi bi-dash"></i>
                   </button>
                 </div>
@@ -273,7 +273,7 @@ require_once HEAD_COMPONENT;
                     <i class="bi bi-person-fill"></i>
                   </span>
                   <input type="text" class="form-control" value="@jugador_miembro2" name="jugadorEdit[]">
-                  <button class="btn btn-outline-danger remove-jugador-edit-btn" type="button">
+                  <button class="btn btn-dark remove-jugador-edit-btn" type="button">
                     <i class="bi bi-dash"></i>
                   </button>
                 </div>
@@ -283,13 +283,13 @@ require_once HEAD_COMPONENT;
                     <i class="bi bi-person-fill"></i>
                   </span>
                   <input type="text" class="form-control" placeholder="Username del nuevo jugador" name="jugadorEdit[]">
-                  <button class="btn btn-outline-danger remove-jugador-edit-btn" type="button">
+                  <button class="btn btn-dark remove-jugador-edit-btn" type="button">
                     <i class="bi bi-dash"></i>
                   </button>
                 </div>
               </div>
 
-              <button type="button" class="btn btn-outline-primary btn-sm" id="btnAgregarJugadorEdit">
+              <button type="button" class="btn btn-dark btn-sm" id="btnAgregarJugadorEdit">
                 <i class="bi bi-plus"></i> Agregar jugador
               </button>
             </div>
@@ -303,13 +303,13 @@ require_once HEAD_COMPONENT;
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
-                      <button type="button" class="btn btn-outline-warning w-100"
+                      <button type="button" class="btn btn-dark w-100"
                         data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo" disabled>
                         <i class="bi bi-arrow-right-circle"></i> Transferir liderazgo
                       </button>
                     </div>
                     <div class="col-md-6">
-                      <button type="button" class="btn btn-outline-danger w-100"
+                      <button type="button" class="btn btn-dark w-100"
                         data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo" disabled>
                         <i class="bi bi-trash"></i> Disolver equipo
                       </button>

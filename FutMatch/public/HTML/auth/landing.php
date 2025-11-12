@@ -83,7 +83,7 @@ include HEAD_COMPONENT;
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="email" name="email"
-                                            autocomplete="username" required 
+                                            autocomplete="username" required
                                             value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" />
                                         <div class="invalid-feedback">Ingresá un email válido.</div>
                                     </div>
@@ -99,7 +99,7 @@ include HEAD_COMPONENT;
                                         <button type="submit" class="btn btn-success">
                                             <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
                                         </button>
-                                        <a class="btn btn-outline-secondary"
+                                        <a class="btn btn-dark"
                                             href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>">
                                             <i class="bi bi-person-plus me-2"></i>Registrarme
                                         </a>
@@ -127,7 +127,7 @@ include HEAD_COMPONENT;
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
     <script src="<?= JS_LANDING ?>"></script>
-    
+
     <script>
         // Auto-expandir formulario si hay error de login
         <?php if (isset($_SESSION['login_error'])): ?>
@@ -142,9 +142,9 @@ include HEAD_COMPONENT;
                     emailInput.focus();
                 }
             });
-            <?php 
+            <?php
             // Limpiar el error después de mostrarlo
-            unset($_SESSION['login_error']); 
+            unset($_SESSION['login_error']);
             ?>
         <?php endif; ?>
     </script>

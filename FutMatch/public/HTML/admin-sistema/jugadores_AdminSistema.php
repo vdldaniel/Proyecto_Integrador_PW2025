@@ -33,7 +33,7 @@ include HEAD_COMPONENT;
                 </div>
 
                 <div class="col-md-6 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>">
+                    <a type="button" class="btn btn-dark me-2" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>">
                         <i class="bi bi-flag-fill"></i> Ir a Jugadores Reportados
                     </a>
                 </div>
@@ -113,7 +113,7 @@ include HEAD_COMPONENT;
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-info">12 partidos</span>
+                                    <span class="badge text-bg-dark">12 partidos</span>
                                 </div>
                                 <div class="col-md-1">
                                     <small>15/08/2025</small>
@@ -155,7 +155,7 @@ include HEAD_COMPONENT;
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-info">25 partidos</span>
+                                    <span class="badge text-bg-dark">25 partidos</span>
                                 </div>
                                 <div class="col-md-1">
                                     <small>02/09/2025</small>
@@ -197,7 +197,7 @@ include HEAD_COMPONENT;
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-info">8 partidos</span>
+                                    <span class="badge text-bg-dark">8 partidos</span>
                                 </div>
                                 <div class="col-md-1">
                                     <small>20/10/2025</small>
@@ -245,7 +245,7 @@ include HEAD_COMPONENT;
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="badge bg-secondary">5 partidos</span>
+                                    <span class="badge text-bg-dark">5 partidos</span>
                                 </div>
                                 <div class="col-md-1">
                                     <small>05/07/2025</small>

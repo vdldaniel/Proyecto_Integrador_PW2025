@@ -129,7 +129,6 @@
 }
 
 .tabla-admin-modal .modal-body {
-  max-height: 70vh;
   overflow-y: auto;
 }
 
@@ -334,7 +333,6 @@
 }
 
 .modal-solicitud .modal-body {
-  max-height: 70vh;
   overflow-y: auto;
 }
 
@@ -343,7 +341,6 @@
 }
 
 .modal-jugador .modal-body {
-  max-height: 70vh;
   overflow-y: auto;
 }
 
@@ -352,7 +349,6 @@
 }
 
 .modal-reporte .modal-body {
-  max-height: 70vh;
   overflow-y: auto;
 }
 

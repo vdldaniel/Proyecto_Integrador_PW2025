@@ -29,10 +29,10 @@ require_once HEAD_COMPONENT;
       </div>
       <div class="col-md-6 text-end">
         <div class="d-flex gap-2 justify-content-end">
-          <button type="button" class="btn btn-outline-secondary" id="btnCambiarVista">
+          <button type="button" class="btn btn-dark" id="btnCambiarVista">
             <i class="bi bi-map" id="iconoVista"></i> <span id="textoVista">Mapa</span>
           </button>
-          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalFiltros">
+          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalFiltros">
             <i class="bi bi-funnel"></i> Filtros
           </button>
           <div class="input-group" style="width: 300px;">
@@ -50,7 +50,7 @@ require_once HEAD_COMPONENT;
       <div class="d-flex gap-2 align-items-center flex-wrap">
         <span class="text-muted">Filtros activos:</span>
         <div id="badgesFiltros" class="d-flex gap-1 flex-wrap"></div>
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="limpiarFiltros">
+        <button type="button" class="btn btn-sm btn-dark" id="limpiarFiltros">
           <i class="bi bi-x"></i> Limpiar todo
         </button>
       </div>
@@ -70,9 +70,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> MegaFutbol Llavallol
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 5</span>
-                <span class="badge bg-info me-1">Masculino</span>
-                <span class="badge bg-warning text-dark">4/10 jugadores</span>
+                <span class="badge text-bg-dark me-1">Fútbol 5</span>
+                <span class="badge text-bg-dark me-1">Masculino</span>
+                <span class="badge text-bg-dark text-dark">4/10 jugadores</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Hoy, 27 de octubre
@@ -101,9 +101,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Deportivo San Lorenzo
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 7</span>
-                <span class="badge bg-purple me-1">Mixto</span>
-                <span class="badge bg-warning text-dark">Buscando equipos</span>
+                <span class="badge text-bg-dark me-1">Fútbol 7</span>
+                <span class="badge text-bg-dark me-1">Mixto</span>
+                <span class="badge text-bg-dark text-dark">Buscando equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Mañana, 28 de octubre
@@ -132,9 +132,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Futsal Elite
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol Sala</span>
-                <span class="badge bg-pink me-1">Femenino</span>
-                <span class="badge bg-warning text-dark">6/10 jugadoras</span>
+                <span class="badge text-bg-dark me-1">Fútbol Sala</span>
+                <span class="badge text-bg-dark">Femenino</span>
+                <span class="badge text-bg-dark text-dark">6/10 jugadoras</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Viernes, 29 de octubre

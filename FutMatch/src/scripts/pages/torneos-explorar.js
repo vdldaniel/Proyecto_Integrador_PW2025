@@ -149,7 +149,7 @@ function aplicarFiltros() {
 
 function crearBadgeFiltro(texto, contenedor) {
   const badge = document.createElement("span");
-  badge.className = "badge bg-secondary me-1";
+  badge.className = "badge text-bg-dark me-1";
   badge.innerHTML = `${texto} <i class="bi bi-x-circle ms-1" style="cursor: pointer;" onclick="this.parentElement.remove()"></i>`;
   contenedor.appendChild(badge);
 }

@@ -170,17 +170,17 @@ function mostrarEquipos(equipos) {
                                 <small class="text-muted d-block"><i class="bi bi-calendar-event"></i> ${equipo.partidosProximos} partidos</small>
                             </div>
                             <div class="col-md-2 text-end">
-                                <a href="#" class="btn btn-outline-primary btn-sm me-1 equipo-ver-btn" 
+                                <a href="#" class="btn btn-dark btn-sm me-1 equipo-ver-btn" 
                                    data-equipo-id="${equipo.id}"
                                    data-bs-toggle="tooltip" title="Ver detalles del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <button class="btn btn-outline-warning btn-sm me-1 equipo-editar-btn" 
+                                <button class="btn btn-dark btn-sm me-1 equipo-editar-btn" 
                                         data-equipo-id="${equipo.id}"
                                         data-bs-toggle="tooltip" title="Editar equipo">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                                <button class="btn btn-outline-success btn-sm equipo-agregar-btn" 
+                                <button class="btn btn-dark btn-sm equipo-agregar-btn" 
                                         data-equipo-id="${equipo.id}"
                                         data-clave-temp="${equipo.claveTemp}"
                                         data-bs-toggle="tooltip" title="Invitar jugadores">
@@ -290,7 +290,7 @@ function agregarCampoJugador() {
   const nuevoJugador = `
         <div class="input-group mb-2">
             <input type="text" class="form-control" placeholder="Username del jugador" name="jugador[]">
-            <button class="btn btn-outline-danger" type="button" onclick="removeJugador(this)">
+            <button class="btn btn-dark" type="button" onclick="removeJugador(this)">
                 <i class="bi bi-dash"></i>
             </button>
         </div>
@@ -381,7 +381,7 @@ function agregarCampoJugadorEdit() {
                 <i class="bi bi-person-fill"></i>
             </span>
             <input type="text" class="form-control" placeholder="Username del nuevo jugador" name="jugadorEdit[]">
-            <button class="btn btn-outline-danger" type="button" onclick="removeJugadorEdit(this)">
+            <button class="btn btn-dark" type="button" onclick="removeJugadorEdit(this)">
                 <i class="bi bi-dash"></i>
             </button>
         </div>

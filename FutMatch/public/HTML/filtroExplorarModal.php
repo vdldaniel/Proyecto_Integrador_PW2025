@@ -5,7 +5,7 @@
       <!-- Header del Modal -->
       <div class="modal-header">
         <h5 class="modal-title" id="modalFiltrosLabel">
-          <i class="bi bi-funnel"></i> Filtros de búsqueda
+          Filtros de búsqueda
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -17,10 +17,10 @@
           <div class="row mb-3">
             <div class="col-12">
               <label for="filtroUbicacion" class="form-label">
-                <i class="bi bi-geo-alt"></i> Ubicación
+                Ubicación
               </label>
-              <input type="text" class="form-control" id="filtroUbicacion" 
-                     placeholder="Ej: Palermo, Recoleta, Villa Crespo...">
+              <input type="text" class="form-control" id="filtroUbicacion"
+                placeholder="Ej: Palermo, Recoleta, Villa Crespo...">
             </div>
           </div>
 
@@ -28,7 +28,7 @@
           <div class="row mb-3">
             <div class="col-6">
               <label class="form-label">
-                <i class="bi bi-calendar-range"></i> Rango de Fechas
+                Rango de Fechas
               </label>
               <div class="row g-2">
                 <div class="col-6">
@@ -43,7 +43,7 @@
             </div>
             <div class="col-6">
               <label class="form-label">
-                <i class="bi bi-clock"></i> Rango de Horario
+                Rango de Horario
               </label>
               <div class="row g-2">
                 <div class="col-6">
@@ -62,7 +62,7 @@
           <div class="row mb-3">
             <div class="col-6">
               <label for="filtroTamano" class="form-label">
-                <i class="bi bi-people"></i> Tamaño de la cancha
+                Tamaño de la cancha
               </label>
               <select class="form-select" id="filtroTamano">
                 <option value="">Todos los tamaños</option>
@@ -74,7 +74,7 @@
             </div>
             <div class="col-6" id="seccionSuperficie">
               <label for="filtroSuperficie" class="form-label">
-                <i class="bi bi-grid"></i> Tipo de superficie
+                Tipo de superficie
               </label>
               <select class="form-select" id="filtroSuperficie">
                 <option value="">Todas las superficies</option>
@@ -87,7 +87,7 @@
             <!-- Género para partidos (se muestra/oculta dinámicamente) -->
             <div class="col-6 d-none" id="seccionGenero">
               <label for="filtroGenero" class="form-label">
-                <i class="bi bi-gender-ambiguous"></i> Género
+                Género
               </label>
               <select class="form-select" id="filtroGenero">
                 <option value="">Todos los géneros</option>
@@ -101,7 +101,7 @@
       </div>
 
       <!-- Footer del Modal -->
-      <div class="modal-footer">
+      <div class="modal-footer me-3">
         <button type="button" class="btn btn-secondary" id="limpiarFiltrosModal">
           <i class="bi bi-arrow-clockwise"></i> Limpiar filtros
         </button>
@@ -117,36 +117,36 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Detectar tipo de página para mostrar/ocultar secciones
-  const currentPage = window.location.pathname;
-  const isPartidosPage = currentPage.includes('partidos');
-  
-  // Mostrar/ocultar secciones según el tipo de página
-  const seccionSuperficie = document.getElementById('seccionSuperficie');
-  const seccionGenero = document.getElementById('seccionGenero');
-  
-  if (isPartidosPage) {
-    // Página de partidos: mostrar género, ocultar superficie
-    seccionSuperficie.classList.add('d-none');
-    seccionGenero.classList.remove('d-none');
-    
-    // Cambiar título
-    document.getElementById('modalFiltrosLabel').innerHTML = 
-      '<i class="bi bi-funnel"></i> Filtros de partidos';
-  } else {
-    // Página de canchas: mostrar superficie, ocultar género
-    seccionGenero.classList.add('d-none');
-    seccionSuperficie.classList.remove('d-none');
-    
-    // Cambiar título
-    document.getElementById('modalFiltrosLabel').innerHTML = 
-      '<i class="bi bi-funnel"></i> Filtros de canchas';
-  }
-  
-  // Establecer fecha mínima como hoy
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('filtroFechaDesde').setAttribute('min', today);
-  document.getElementById('filtroFechaHasta').setAttribute('min', today);
-});
+  document.addEventListener('DOMContentLoaded', function() {
+    // Detectar tipo de página para mostrar/ocultar secciones
+    const currentPage = window.location.pathname;
+    const isPartidosPage = currentPage.includes('partidos');
+
+    // Mostrar/ocultar secciones según el tipo de página
+    const seccionSuperficie = document.getElementById('seccionSuperficie');
+    const seccionGenero = document.getElementById('seccionGenero');
+
+    if (isPartidosPage) {
+      // Página de partidos: mostrar género, ocultar superficie
+      seccionSuperficie.classList.add('d-none');
+      seccionGenero.classList.remove('d-none');
+
+      // Cambiar título
+      document.getElementById('modalFiltrosLabel').innerHTML =
+        'Filtros de partidos';
+    } else {
+      // Página de canchas: mostrar superficie, ocultar género
+      seccionGenero.classList.add('d-none');
+      seccionSuperficie.classList.remove('d-none');
+
+      // Cambiar título
+      document.getElementById('modalFiltrosLabel').innerHTML =
+        'Filtros de canchas';
+    }
+
+    // Establecer fecha mínima como hoy
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('filtroFechaDesde').setAttribute('min', today);
+    document.getElementById('filtroFechaHasta').setAttribute('min', today);
+  });
 </script>

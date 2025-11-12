@@ -23,7 +23,7 @@ require_once HEAD_COMPONENT;
         <div class="row mb-4 align-items-center">
             <div class="col-md-8">
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-outline-secondary me-3" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
+                    <a class="btn btn-dark me-3" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
                         <i class="bi bi-arrow-left"></i>
                     </a>
                     <div>
@@ -53,7 +53,7 @@ require_once HEAD_COMPONENT;
                         <strong>Horarios:</strong> 7:00 AM - 11:00 PM •
                         <strong>Duración:</strong> 1-3 horas
                     </div>
-                    <button class="btn btn-sm btn-outline-primary" id="btnVerPoliticas1">
+                    <button class="btn btn-sm btn-dark" id="btnVerPoliticas1">
                         <i class="bi bi-file-text"></i> Políticas
                     </button>
                 </div>

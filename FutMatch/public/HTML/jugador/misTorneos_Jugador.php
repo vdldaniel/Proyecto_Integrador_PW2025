@@ -26,7 +26,7 @@ require_once HEAD_COMPONENT;
                 <p class="text-muted mb-0">Ver torneos activos y explorar nuevos</p>
             </div>
             <div class="col-md-6 text-end">
-                <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#modalHistorialTorneos">
+                <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalHistorialTorneos">
                     <i class="bi bi-clock-history"></i> Historial de Torneos
                 </button>
                 <a href="<?= PAGE_TORNEOS_EXPLORAR_JUGADOR ?>" class="btn btn-primary">
@@ -71,7 +71,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted">11/10/2025 - 15/12/2025 • 16 equipos</small>
                             </div>
                             <div class="col-md-3">
-                                <span class="badge bg-success fs-6">Participando</span>
+                                <span class="badge text-bg-dark fs-6">Participando</span>
                             </div>
                             <div class="col-md-3 text-end">
                                 <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
@@ -101,7 +101,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted">01/09/2025 - 30/11/2025 • 12 equipos</small>
                             </div>
                             <div class="col-md-3">
-                                <span class="badge bg-primary fs-6">En curso</span>
+                                <span class="badge text-bg-dark fs-6">En curso</span>
                             </div>
                             <div class="col-md-3 text-end">
                                 <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
@@ -131,7 +131,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted">15/01/2026 - 28/02/2026 • 8/20 equipos</small>
                             </div>
                             <div class="col-md-3">
-                                <span class="badge bg-warning text-dark fs-6">Inscripciones abiertas</span>
+                                <span class="badge text-bg-dark text-dark fs-6">Inscripciones abiertas</span>
                             </div>
                             <div class="col-md-3 text-end">
                                 <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
@@ -161,7 +161,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted">20/12/2025 - 22/12/2025 • 8 equipos</small>
                             </div>
                             <div class="col-md-3">
-                                <span class="badge bg-info fs-6">Próximamente</span>
+                                <span class="badge text-bg-dark fs-6">Próximamente</span>
                             </div>
                             <div class="col-md-3 text-end">
                                 <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
@@ -216,9 +216,9 @@ require_once HEAD_COMPONENT;
                                         <tr>
                                             <td>Copa Verano 2024</td>
                                             <td>10/01/2024 - 28/02/2024</td>
-                                            <td><span class="badge bg-success">Campeón</span></td>
+                                            <td><span class="badge text-bg-dark">Campeón</span></td>
                                             <td>
-                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-outline-info">
+                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-dark">
                                                     <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                                                 </a>
                                             </td>
@@ -226,9 +226,9 @@ require_once HEAD_COMPONENT;
                                         <tr>
                                             <td>Torneo Clausura 2023</td>
                                             <td>15/09/2023 - 15/12/2023</td>
-                                            <td><span class="badge bg-secondary">3° Puesto</span></td>
+                                            <td><span class="badge text-bg-dark">3° Puesto</span></td>
                                             <td>
-                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-outline-info">
+                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-dark">
                                                     <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                                                 </a>
                                             </td>
@@ -255,7 +255,7 @@ require_once HEAD_COMPONENT;
                                             <td>04/11/2025 - 30/11/2025</td>
                                             <td><span class="text-muted">Cancelado por organizador</span></td>
                                             <td>
-                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-outline-info">
+                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-dark">
                                                     <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                                                 </a>
                                             </td>

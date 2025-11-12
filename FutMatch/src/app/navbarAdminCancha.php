@@ -77,7 +77,7 @@ function isActive($page_name, $current)
 			<!-- Lado derecho: perfil, notificaciones y configuración -->
 			<div class="d-flex align-items-center">
 				<!-- Campanita de notificaciones -->
-				<button class="btn btn-outline-warning position-relative me-2"
+				<button class="btn btn-dark position-relative me-2"
 					type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
 					title="Notificaciones">
 					<i class="bi bi-bell"></i>
@@ -191,7 +191,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade show active" id="content-agenda" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Reserva</h6>
-							<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-calendar-event me-1"></i>Ver Agenda Completa
 							</a>
 						</div>
@@ -287,7 +287,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-torneos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Torneos</h6>
-							<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-trophy me-1"></i>Ver Mis Torneos
 							</a>
 						</div>
@@ -309,7 +309,7 @@ function isActive($page_name, $current)
 										<td>Los Tigres FC</td>
 										<td>Copa Primavera 2025</td>
 										<td>
-											<a href="#" class="btn btn-sm btn-outline-info">
+											<a href="#" class="btn btn-sm btn-dark">
 												<i class="bi bi-eye me-1"></i>Ver Equipo
 											</a>
 										</td>
@@ -327,7 +327,7 @@ function isActive($page_name, $current)
 										<td>Águilas United</td>
 										<td>Liga Nocturna</td>
 										<td>
-											<a href="#" class="btn btn-sm btn-outline-info">
+											<a href="#" class="btn btn-sm btn-dark">
 												<i class="bi bi-eye me-1"></i>Ver Equipo
 											</a>
 										</td>
@@ -382,7 +382,7 @@ function isActive($page_name, $current)
 					<label class="form-label">Teléfono</label>
 					<div class="input-group">
 						<input type="tel" class="form-control" id="inputTelefono" value="+54 9 11 1234-5678" readonly>
-						<button class="btn btn-outline-primary" type="button" onclick="editarCampo('inputTelefono')">
+						<button class="btn btn-dark" type="button" onclick="editarCampo('inputTelefono')">
 							<i class="bi bi-pencil"></i>
 						</button>
 					</div>
@@ -393,7 +393,7 @@ function isActive($page_name, $current)
 					<label class="form-label">Dirección de E-mail</label>
 					<div class="input-group">
 						<input type="email" class="form-control" id="inputEmail" value="admin@futmatch.com" readonly>
-						<button class="btn btn-outline-primary" type="button" onclick="editarCampo('inputEmail')">
+						<button class="btn btn-dark" type="button" onclick="editarCampo('inputEmail')">
 							<i class="bi bi-pencil"></i>
 						</button>
 					</div>

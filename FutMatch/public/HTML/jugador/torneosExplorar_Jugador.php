@@ -27,10 +27,10 @@ require_once HEAD_COMPONENT;
       </div>
       <div class="col-md-6 text-end">
         <div class="d-flex gap-2 justify-content-end">
-          <button type="button" class="btn btn-outline-secondary" id="btnCambiarVista">
+          <button type="button" class="btn btn-dark" id="btnCambiarVista">
             <i class="bi bi-map" id="iconoVista"></i> <span id="textoVista">Mapa</span>
           </button>
-          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalFiltros">
+          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalFiltros">
             <i class="bi bi-funnel"></i> Filtros
           </button>
           <div class="input-group" style="width: 300px;">
@@ -48,7 +48,7 @@ require_once HEAD_COMPONENT;
       <div class="d-flex gap-2 align-items-center flex-wrap">
         <span class="text-muted">Filtros activos:</span>
         <div id="badgesFiltros" class="d-flex gap-1 flex-wrap"></div>
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="limpiarFiltros">
+        <button type="button" class="btn btn-sm btn-dark" id="limpiarFiltros">
           <i class="bi bi-x"></i> Limpiar todo
         </button>
       </div>
@@ -68,8 +68,8 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Mega Fútbol Central, Palermo
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 5</span>
-                <span class="badge bg-warning text-dark">12/20 equipos</span>
+                <span class="badge text-bg-dark me-1">Fútbol 5</span>
+                <span class="badge text-bg-dark text-dark">12/20 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 15 de enero 2026
@@ -89,7 +89,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2 d-md-flex">
-                  <button class="btn btn-outline-primary btn-sm flex-fill" onclick="verDetalleTorneo(1)">
+                  <button class="btn btn-dark btn-sm flex-fill" onclick="verDetalleTorneo(1)">
                     <i class="bi bi-eye"></i> Ver detalles
                   </button>
                   <button class="btn btn-success btn-sm flex-fill" onclick="inscribirseTorneo(1)">
@@ -111,8 +111,8 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Deportivo San Lorenzo, San Telmo
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 7</span>
-                <span class="badge bg-info">0/16 equipos</span>
+                <span class="badge text-bg-dark me-1">Fútbol 7</span>
+                <span class="badge text-bg-dark">0/16 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 1 de marzo 2026
@@ -132,7 +132,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2">
-                  <button class="btn btn-outline-secondary" disabled>
+                  <button class="btn btn-dark" disabled>
                     <i class="bi bi-clock"></i> Próximamente
                   </button>
                 </div>
@@ -151,8 +151,8 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Futsal Elite, Recoleta
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol Sala</span>
-                <span class="badge bg-danger">8/8 equipos</span>
+                <span class="badge text-bg-dark me-1">Fútbol Sala</span>
+                <span class="badge text-bg-dark">8/8 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 20 de diciembre 2025
@@ -172,7 +172,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2">
-                  <button class="btn btn-outline-info" onclick="verDetalleTorneo(3)">
+                  <button class="btn btn-dark" onclick="verDetalleTorneo(3)">
                     <i class="bi bi-eye"></i> Ver detalles
                   </button>
                 </div>
@@ -191,8 +191,8 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Complejo Deportivo Norte
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 11</span>
-                <span class="badge bg-primary">En curso - Fecha 6/10</span>
+                <span class="badge text-bg-dark me-1">Fútbol 11</span>
+                <span class="badge text-bg-dark">En curso - Fecha 6/10</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Finaliza: 15 de diciembre 2025
@@ -231,9 +231,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Complejo Belgrano Sport
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 5</span>
-                <span class="badge bg-pink me-1">Femenino</span>
-                <span class="badge bg-warning text-dark">6/12 equipos</span>
+                <span class="badge text-bg-dark me-1">Fútbol 5</span>
+                <span class="badge text-bg-dark">Femenino</span>
+                <span class="badge text-bg-dark text-dark">6/12 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 5 de febrero 2026
@@ -253,7 +253,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2 d-md-flex">
-                  <button class="btn btn-outline-primary btn-sm flex-fill" onclick="verDetalleTorneo(5)">
+                  <button class="btn btn-dark btn-sm flex-fill" onclick="verDetalleTorneo(5)">
                     <i class="bi bi-eye"></i> Ver detalles
                   </button>
                   <button class="btn btn-success btn-sm flex-fill" onclick="inscribirseTorneo(5)">
@@ -275,9 +275,9 @@ require_once HEAD_COMPONENT;
                 <i class="bi bi-geo-alt"></i> Cancha La Bombonera
               </p>
               <div class="mb-2">
-                <span class="badge bg-success me-1">Fútbol 7</span>
-                <span class="badge bg-info me-1">Sub-21</span>
-                <span class="badge bg-warning text-dark">8/16 equipos</span>
+                <span class="badge text-bg-dark me-1">Fútbol 7</span>
+                <span class="badge text-bg-dark me-1">Sub-21</span>
+                <span class="badge text-bg-dark text-dark">8/16 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 20 de febrero 2026
@@ -297,7 +297,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2 d-md-flex">
-                  <button class="btn btn-outline-primary btn-sm flex-fill" onclick="verDetalleTorneo(6)">
+                  <button class="btn btn-dark btn-sm flex-fill" onclick="verDetalleTorneo(6)">
                     <i class="bi bi-eye"></i> Ver detalles
                   </button>
                   <button class="btn btn-success btn-sm flex-fill" onclick="inscribirseTorneo(6)">
@@ -444,7 +444,7 @@ require_once HEAD_COMPONENT;
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-outline-secondary" id="btnLimpiarFiltros">Limpiar filtros</button>
+          <button type="button" class="btn btn-dark" id="btnLimpiarFiltros">Limpiar filtros</button>
           <button type="button" class="btn btn-primary" id="btnAplicarFiltros">Aplicar filtros</button>
         </div>
       </div>

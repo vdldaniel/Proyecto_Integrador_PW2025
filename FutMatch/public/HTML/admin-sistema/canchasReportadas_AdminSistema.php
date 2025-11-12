@@ -34,7 +34,7 @@ include HEAD_COMPONENT;
                 </div>
 
                 <div class="col-md-6 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA ?>">
+                    <a type="button" class="btn btn-dark me-2" href="<?= PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA ?>">
                         <i class="bi bi-building-fill"></i> Ir a Verificación de Canchas
                     </a>
                 </div>

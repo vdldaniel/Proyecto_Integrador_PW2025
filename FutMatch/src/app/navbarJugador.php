@@ -99,7 +99,7 @@ function isActive($page_name, $current)
 					<span class="d-none d-lg-inline ms-1">Mi Perfil</span>
 				</a>
 				<!-- Campanita de notificaciones -->
-				<button class="btn btn-outline-warning position-relative me-2"
+				<button class="btn btn-dark position-relative me-2"
 					type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
 					title="Notificaciones">
 					<i class="bi bi-bell"></i>
@@ -231,7 +231,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade show active" id="content-reservas" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Estado de Reservas</h6>
-							<a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-calendar-event me-1"></i>Ver Mis Partidos
 							</a>
 						</div>
@@ -250,7 +250,7 @@ function isActive($page_name, $current)
 										<small class="text-muted">Sábado 16/11/2025 - 18:00 hs</small>
 									</div>
 									<div>
-										<button class="btn btn-sm btn-outline-success">
+										<button class="btn btn-sm btn-dark">
 											<i class="bi bi-check-lg me-1"></i>Ver Detalle
 										</button>
 									</div>
@@ -266,7 +266,7 @@ function isActive($page_name, $current)
 										<small class="text-muted">Domingo 17/11/2025 - 20:00 hs</small>
 									</div>
 									<div>
-										<button class="btn btn-sm btn-outline-primary">
+										<button class="btn btn-sm btn-dark">
 											<i class="bi bi-search me-1"></i>Buscar Alternativas
 										</button>
 									</div>
@@ -282,7 +282,7 @@ function isActive($page_name, $current)
 										<small class="text-muted">Viernes 22/11/2025 - 19:30 hs</small>
 									</div>
 									<div>
-										<button class="btn btn-sm btn-outline-warning">
+										<button class="btn btn-sm btn-dark">
 											<i class="bi bi-hourglass-split me-1"></i>Esperando
 										</button>
 									</div>
@@ -295,7 +295,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-solicitantes" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes para tus Partidos</h6>
-							<a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-people me-1"></i>Gestionar Partidos
 							</a>
 						</div>
@@ -338,7 +338,7 @@ function isActive($page_name, $current)
 											<button class="btn btn-sm btn-danger" title="Rechazar">
 												<i class="bi bi-x-lg"></i>
 											</button>
-											<button class="btn btn-sm btn-outline-info" title="Ver perfil">
+											<button class="btn btn-sm btn-dark" title="Ver perfil">
 												<i class="bi bi-eye"></i>
 											</button>
 										</td>
@@ -369,7 +369,7 @@ function isActive($page_name, $current)
 											<button class="btn btn-sm btn-danger" title="Rechazar">
 												<i class="bi bi-x-lg"></i>
 											</button>
-											<button class="btn btn-sm btn-outline-info" title="Ver perfil">
+											<button class="btn btn-sm btn-dark" title="Ver perfil">
 												<i class="bi bi-eye"></i>
 											</button>
 										</td>
@@ -383,7 +383,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-equipos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Equipos</h6>
-							<a href="<?= PAGE_EQUIPOS_LISTADO_JUGADOR ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_EQUIPOS_LISTADO_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-people me-1"></i>Ver Mis Equipos
 							</a>
 						</div>
@@ -424,7 +424,7 @@ function isActive($page_name, $current)
 											<small class="text-muted">Ahora eres parte del equipo</small>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-primary">
+											<button class="btn btn-sm btn-dark">
 												<i class="bi bi-arrow-right me-1"></i>Ver Equipo
 											</button>
 										</div>
@@ -442,7 +442,7 @@ function isActive($page_name, $current)
 											<small class="text-muted">Esperando respuesta del capitán</small>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-secondary">
+											<button class="btn btn-sm btn-dark">
 												<i class="bi bi-hourglass-split me-1"></i>Esperando
 											</button>
 										</div>
@@ -456,7 +456,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-torneos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Actualizaciones de Torneos</h6>
-							<a href="<?= PAGE_MIS_TORNEOS_JUGADOR ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_MIS_TORNEOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-trophy me-1"></i>Ver Mis Torneos
 							</a>
 						</div>
@@ -476,7 +476,7 @@ function isActive($page_name, $current)
 											<small class="text-muted">Próximo partido: Viernes 29/11 vs Águilas United</small>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-success">
+											<button class="btn btn-sm btn-dark">
 												<i class="bi bi-calendar-event me-1"></i>Ver Fixture
 											</button>
 										</div>
@@ -494,7 +494,7 @@ function isActive($page_name, $current)
 											<small class="text-muted">Equipo: Rayos Azules • Inicio: 1/12/2025</small>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-primary">
+											<button class="btn btn-sm btn-dark">
 												<i class="bi bi-info-circle me-1"></i>Ver Detalles
 											</button>
 										</div>
@@ -512,7 +512,7 @@ function isActive($page_name, $current)
 											<small class="text-muted">Sábado 25/11 - 16:00 hs - Cancha Los Pinos</small>
 										</div>
 										<div>
-											<button class="btn btn-sm btn-outline-warning">
+											<button class="btn btn-sm btn-dark">
 												<i class="bi bi-bell me-1"></i>Recordar
 											</button>
 										</div>
@@ -559,7 +559,7 @@ function isActive($page_name, $current)
 					<label class="form-label">Teléfono</label>
 					<div class="input-group">
 						<input type="tel" class="form-control" id="inputTelefono" value="+54 9 11 5555-6666" readonly>
-						<button class="btn btn-outline-primary" type="button" onclick="editarCampo('inputTelefono')">
+						<button class="btn btn-dark" type="button" onclick="editarCampo('inputTelefono')">
 							<i class="bi bi-pencil"></i>
 						</button>
 					</div>
@@ -570,7 +570,7 @@ function isActive($page_name, $current)
 					<label class="form-label">Dirección de E-mail</label>
 					<div class="input-group">
 						<input type="email" class="form-control" id="inputEmail" value="jugador@futmatch.com" readonly>
-						<button class="btn btn-outline-primary" type="button" onclick="editarCampo('inputEmail')">
+						<button class="btn btn-dark" type="button" onclick="editarCampo('inputEmail')">
 							<i class="bi bi-pencil"></i>
 						</button>
 					</div>

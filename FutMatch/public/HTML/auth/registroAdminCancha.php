@@ -48,8 +48,7 @@ include HEAD_COMPONENT;
                       id="inputNombre"
                       name="nombre"
                       required
-                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"
-                    />
+                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>" />
                     <div class="invalid-feedback">El nombre es obligatorio.</div>
                   </div>
 
@@ -62,8 +61,7 @@ include HEAD_COMPONENT;
                       id="inputApellido"
                       name="apellido"
                       required
-                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"
-                    />
+                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>" />
                     <div class="invalid-feedback">El apellido es obligatorio.</div>
                   </div>
 
@@ -76,7 +74,7 @@ include HEAD_COMPONENT;
                   <div class="col-12">
                     <h5 class="mb-2">Información de la cancha</h5>
                     <p class="text-muted fst-italic small mb-3">
-                      Requerimos esta información para verificar tu cancha. Si administrás más de una sede, 
+                      Requerimos esta información para verificar tu cancha. Si administrás más de una sede,
                       podrás registrarlas una vez que tu cuenta sea verificada.
                     </p>
                   </div>
@@ -91,8 +89,7 @@ include HEAD_COMPONENT;
                       name="nombreCancha"
                       placeholder="Ej: Complejo Deportivo Las Palmeras"
                       required
-                      value="<?= htmlspecialchars($_POST['nombreCancha'] ?? '') ?>"
-                    />
+                      value="<?= htmlspecialchars($_POST['nombreCancha'] ?? '') ?>" />
                     <div class="invalid-feedback">El nombre de la cancha es obligatorio.</div>
                   </div>
 
@@ -102,16 +99,15 @@ include HEAD_COMPONENT;
                     <p class="text-muted small mb-2">
                       Buscá la dirección o arrastrá el marcador en el mapa para indicar la ubicación exacta.
                     </p>
-                    
+
                     <!-- Buscador de dirección -->
                     <div class="input-group mb-3">
                       <input
                         type="text"
                         class="form-control"
                         id="inputBuscadorDireccion"
-                        placeholder="Ej: Av. 7 1234, La Plata, Buenos Aires"
-                      />
-                      <button class="btn btn-outline-secondary" type="button" id="btnBuscarDireccion">
+                        placeholder="Ej: Av. 7 1234, La Plata, Buenos Aires" />
+                      <button class="btn btn-dark" type="button" id="btnBuscarDireccion">
                         <i class="bi bi-search"></i> Buscar
                       </button>
                     </div>
@@ -121,7 +117,7 @@ include HEAD_COMPONENT;
 
                     <!-- Campo oculto para la dirección completa -->
                     <input type="hidden" id="inputDireccion" name="direccion" required />
-                    
+
                     <!-- Campos ocultos para coordenadas -->
                     <input type="hidden" id="inputLatitud" name="latitud" required />
                     <input type="hidden" id="inputLongitud" name="longitud" required />
@@ -164,8 +160,7 @@ include HEAD_COMPONENT;
                       id="inputTelefono"
                       name="telefono"
                       placeholder="Ej: 221-456-7890"
-                      required
-                    />
+                      required />
                     <div class="invalid-feedback">Ingresá un teléfono válido (solo números y guiones).</div>
                   </div>
 
@@ -178,8 +173,7 @@ include HEAD_COMPONENT;
                       id="inputEmail"
                       name="email"
                       placeholder="tu@email.com"
-                      required
-                    />
+                      required />
                     <div class="invalid-feedback">Ingresá un email válido.</div>
                   </div>
 
@@ -190,8 +184,7 @@ include HEAD_COMPONENT;
                       class="form-select"
                       id="inputContacto"
                       name="contacto"
-                      required
-                    >
+                      required>
                       <option value="" selected disabled>Seleccionar método</option>
                       <option value="whatsapp">WhatsApp</option>
                       <option value="mail">Mail</option>
@@ -207,8 +200,7 @@ include HEAD_COMPONENT;
                       class="form-select"
                       id="inputHorario"
                       name="horario"
-                      required
-                    >
+                      required>
                       <option value="" selected disabled>Seleccionar horario</option>
                       <option value="manana">Mañana (08:00 - 12:00)</option>
                       <option value="tarde">Tarde (12:00 - 18:00)</option>
@@ -220,7 +212,7 @@ include HEAD_COMPONENT;
                   <div class="col-12">
                     <hr class="form-divider my-4">
                   </div>
-                  
+
                   <!-- Términos y condiciones -->
                   <div class="col-12">
                     <div class="form-check">
@@ -229,8 +221,7 @@ include HEAD_COMPONENT;
                         type="checkbox"
                         id="checkTerminos"
                         name="terminos"
-                        required
-                      />
+                        required />
                       <label class="form-check-label" for="checkTerminos">
                         Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a> de FutMatch
                       </label>
@@ -247,8 +238,7 @@ include HEAD_COMPONENT;
                         class="form-check-input"
                         type="checkbox"
                         id="checkPromociones"
-                        name="promociones"
-                      />
+                        name="promociones" />
                       <label class="form-check-label" for="checkPromociones">
                         Acepto recibir correos promocionales de FutMatch
                       </label>
@@ -283,4 +273,5 @@ include HEAD_COMPONENT;
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="<?= JS_REGISTRO_ADMIN_CANCHA ?>"></script>
 </body>
+
 </html>

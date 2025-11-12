@@ -30,14 +30,14 @@ $perfil_jugador_botones_header = [
         'tipo' => 'button',
         'texto' => 'Volver',
         'icono' => 'bi-arrow-left',
-        'clase' => 'btn-outline-secondary',
+        'clase' => 'btn-dark',
         'id' => 'btnVolver'
     ],
     [
         'tipo' => 'button',
         'texto' => 'Reportar',
         'icono' => 'bi-flag',
-        'clase' => 'btn-outline-danger',
+        'clase' => 'btn-dark',
         'modal' => '#modalReportarJugador'
     ]
 ];

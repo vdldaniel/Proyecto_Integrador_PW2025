@@ -15,7 +15,7 @@ $torneo_detalle_botones_header = [
     [
         'tipo' => 'button',
         'texto' => 'Info del torneo',
-        'clase' => 'btn-outline-info',
+        'clase' => 'btn-dark',
         'icono' => 'bi bi-info-circle',
         'modal' => '#modalDetallesTorneo'
     ],

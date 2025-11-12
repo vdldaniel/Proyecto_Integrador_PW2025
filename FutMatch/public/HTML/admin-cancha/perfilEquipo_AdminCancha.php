@@ -16,14 +16,14 @@ $perfil_equipo_botones_header = [
     [
         'tipo' => 'button',
         'texto' => 'Información completa',
-        'clase' => 'btn-outline-info',
+        'clase' => 'btn-dark',
         'icono' => 'bi bi-info-circle',
         'modal' => '#modalInfoEquipo'
     ],
     [
         'tipo' => 'button',
         'texto' => 'Gestionar equipo',
-        'clase' => 'btn-outline-warning',
+        'clase' => 'btn-dark',
         'icono' => 'bi bi-gear',
         'id' => 'btnGestionarEquipo'
     ],
@@ -132,17 +132,17 @@ require_once HEAD_COMPONENT;
                 </div>
                 <div class="modal-body">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-primary">
+                        <button class="btn btn-dark">
                             <i class="bi bi-ban"></i> Suspender Equipo
                         </button>
-                        <button class="btn btn-outline-warning">
+                        <button class="btn btn-dark">
                             <i class="bi bi-exclamation-triangle"></i> Enviar Advertencia
                         </button>
-                        <button class="btn btn-outline-info">
+                        <button class="btn btn-dark">
                             <i class="bi bi-envelope"></i> Contactar Líder
                         </button>
                         <hr>
-                        <button class="btn btn-outline-danger">
+                        <button class="btn btn-dark">
                             <i class="bi bi-trash"></i> Eliminar Equipo
                         </button>
                     </div>

@@ -28,7 +28,7 @@ require_once HEAD_COMPONENT;
       </div>
       <div class="col-md-6 text-end">
         <div class="dropdown d-inline-block me-2">
-          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-clock-history"></i> Historial de Torneos
           </button>
           <ul class="dropdown-menu">
@@ -80,14 +80,14 @@ require_once HEAD_COMPONENT;
                 <small class="text-muted">10/10/2025 • 8/16 equipos</small>
               </div>
               <div class="col-md-2">
-                <span class="badge bg-secondary">Borrador</span>
+                <span class="badge text-bg-dark">Borrador</span>
               </div>
               <div class="col-md-5 text-end">
-                <button class="btn btn-outline-success btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="1" title="Abrir inscripciones">
+                <button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="1" title="Abrir inscripciones">
                   <i class="bi bi-unlock"></i>
                   <span class="d-none d-lg-inline ms-1">Abrir inscripciones</span>
                 </button>
-                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="1" title="Cancelar">
+                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="1" title="Cancelar">
                   <i class="bi bi-x-circle"></i>
                   <span class="d-none d-lg-inline ms-1">Cancelar</span>
                 </button>
@@ -117,14 +117,14 @@ require_once HEAD_COMPONENT;
                 <small class="text-muted">11/10/2025 • 12/20 equipos</small>
               </div>
               <div class="col-md-2">
-                <span class="badge bg-success">Inscripciones abiertas</span>
+                <span class="badge text-bg-dark">Inscripciones abiertas</span>
               </div>
               <div class="col-md-5 text-end">
-                <button class="btn btn-outline-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalSolicitudesTorneo" data-torneo-id="2" title="Ver solicitudes">
+                <button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalSolicitudesTorneo" data-torneo-id="2" title="Ver solicitudes">
                   <i class="bi bi-people"></i>
                   <span class="d-none d-lg-inline ms-1">Solicitudes</span>
                 </button>
-                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="2" title="Cancelar">
+                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="2" title="Cancelar">
                   <i class="bi bi-x-circle"></i>
                   <span class="d-none d-lg-inline ms-1">Cancelar</span>
                 </button>
@@ -154,14 +154,14 @@ require_once HEAD_COMPONENT;
                 <small class="text-muted">10/02/2026 • 16/16 equipos</small>
               </div>
               <div class="col-md-2">
-                <span class="badge bg-warning text-dark">Inscripciones cerradas</span>
+                <span class="badge text-bg-dark text-dark">Inscripciones cerradas</span>
               </div>
               <div class="col-md-5 text-end">
-                <a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" title="Gestionar torneo">
+                <a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" title="Gestionar torneo">
                   <i class="bi bi-gear"></i>
                   <span class="d-none d-lg-inline ms-1">Gestionar</span>
                 </a>
-                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="3" title="Cancelar">
+                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="3" title="Cancelar">
                   <i class="bi bi-x-circle"></i>
                   <span class="d-none d-lg-inline ms-1">Cancelar</span>
                 </button>
@@ -191,14 +191,14 @@ require_once HEAD_COMPONENT;
                 <small class="text-muted">15/11/2025 • 6/12 equipos</small>
               </div>
               <div class="col-md-2">
-                <span class="badge bg-primary">En curso</span>
+                <span class="badge text-bg-dark">En curso</span>
               </div>
               <div class="col-md-5 text-end">
-                <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-outline-info btn-sm me-1" title="Gestionar torneo">
+                <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm me-1" title="Gestionar torneo">
                   <i class="bi bi-gear"></i>
                   <span class="d-none d-lg-inline ms-1">Gestionar</span>
                 </a>
-                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="4" title="Cancelar">
+                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="4" title="Cancelar">
                   <i class="bi bi-x-circle"></i>
                   <span class="d-none d-lg-inline ms-1">Cancelar</span>
                 </button>
@@ -331,7 +331,7 @@ require_once HEAD_COMPONENT;
                   <td>Los Cracks FC</td>
                   <td>9 jugadores</td>
                   <td>
-                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
                     </a>
                   </td>
@@ -340,7 +340,7 @@ require_once HEAD_COMPONENT;
                   <td>Deportivo Fútbol</td>
                   <td>7 jugadores</td>
                   <td>
-                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
                     </a>
                   </td>
@@ -423,7 +423,7 @@ require_once HEAD_COMPONENT;
                   <td>04/11/2025</td>
                   <td>30/11/2025</td>
                   <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>
@@ -433,7 +433,7 @@ require_once HEAD_COMPONENT;
                   <td>15/06/2024</td>
                   <td>30/07/2024</td>
                   <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>
@@ -476,7 +476,7 @@ require_once HEAD_COMPONENT;
                   <td>10/01/2024</td>
                   <td>28/02/2024</td>
                   <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>
@@ -486,7 +486,7 @@ require_once HEAD_COMPONENT;
                   <td>15/09/2023</td>
                   <td>15/12/2023</td>
                   <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>

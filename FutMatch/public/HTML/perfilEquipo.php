@@ -97,9 +97,9 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                         <h1 class="fw-bold mb-2"><?= $perfil_equipo_titulo_header ?></h1>
                         <p class="mb-1"><?= $perfil_equipo_subtitulo_header ?></p>
                         <div class="d-flex flex-wrap gap-2 mt-2">
-                            <span class="badge bg-success"><i class="bi bi-people"></i> <?= $perfil_equipo_datos_equipo['integrantes'] ?> integrantes</span>
-                            <span class="badge bg-warning text-dark"><i class="bi bi-trophy"></i> <?= $perfil_equipo_datos_equipo['torneos_activos'] ?> torneos</span>
-                            <span class="badge bg-info"><i class="bi bi-calendar-event"></i> <?= $perfil_equipo_datos_equipo['partidos_jugados'] ?> partidos</span>
+                            <span class="badge text-bg-dark"><i class="bi bi-people"></i> <?= $perfil_equipo_datos_equipo['integrantes'] ?> integrantes</span>
+                            <span class="badge text-bg-dark text-dark"><i class="bi bi-trophy"></i> <?= $perfil_equipo_datos_equipo['torneos_activos'] ?> torneos</span>
+                            <span class="badge text-bg-dark"><i class="bi bi-calendar-event"></i> <?= $perfil_equipo_datos_equipo['partidos_jugados'] ?> partidos</span>
                         </div>
                     </div>
                     <div class="col-md-4 text-md-end text-center mt-3 mt-md-0">
@@ -198,7 +198,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                         <i class="bi bi-key"></i> Código de Equipo
                                     </label>
                                     <p class="mb-0">
-                                        <span class="badge bg-secondary"><?= $perfil_equipo_datos_equipo['codigo_equipo'] ?></span>
+                                        <span class="badge text-bg-dark"><?= $perfil_equipo_datos_equipo['codigo_equipo'] ?></span>
                                     </p>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                 </div>
                             </div>
                             <div class="mt-3 text-center">
-                                <span class="badge bg-info">Diferencia: +<?= $perfil_equipo_estadisticas['diferencia_goles'] ?></span>
+                                <span class="badge text-bg-dark">Diferencia: +<?= $perfil_equipo_estadisticas['diferencia_goles'] ?></span>
                             </div>
                         </div>
                     </div>
@@ -283,7 +283,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="fw-bold text-muted d-block mb-1">Estado</label>
-                                <span class="badge bg-success"><?= $perfil_equipo_datos_equipo['estado'] ?></span>
+                                <span class="badge text-bg-dark"><?= $perfil_equipo_datos_equipo['estado'] ?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fw-bold text-muted d-block mb-1">Racha Actual</label>
@@ -339,7 +339,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                         <small class="text-muted"><?= $jugador['username'] ?></small>
                                     </div>
                                     <div class="col-md-2">
-                                        <span class="badge bg-info"><?= $jugador['posicion'] ?></span>
+                                        <span class="badge text-bg-dark"><?= $jugador['posicion'] ?></span>
                                     </div>
                                     <div class="col-md-2 text-center">
                                         <div class="rating">
@@ -353,7 +353,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                     </div>
                                     <div class="col-md-2 text-end">
                                         <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                            <button class="btn btn-sm btn-dark dropdown-toggle"
                                                 type="button" data-bs-toggle="dropdown">
                                                 <i class="bi bi-three-dots"></i>
                                             </button>
@@ -444,13 +444,13 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                 <h3><i class="bi bi-calendar-week"></i> Historial de Partidos</h3>
                 <div class="btn-group" role="group">
                     <input type="radio" class="btn-check" name="filtroPartidos" id="todos" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="todos">Todos</label>
+                    <label class="btn btn-dark" for="todos">Todos</label>
 
                     <input type="radio" class="btn-check" name="filtroPartidos" id="ganados" autocomplete="off">
-                    <label class="btn btn-outline-success" for="ganados">Ganados</label>
+                    <label class="btn btn-dark" for="ganados">Ganados</label>
 
                     <input type="radio" class="btn-check" name="filtroPartidos" id="perdidos" autocomplete="off">
-                    <label class="btn btn-outline-danger" for="perdidos">Perdidos</label>
+                    <label class="btn btn-dark" for="perdidos">Perdidos</label>
                 </div>
             </div>
 
@@ -476,7 +476,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                     <small class="text-muted">15:30 - 16:30</small>
                                 </div>
                                 <div class="col-md-2 text-end">
-                                    <button class="btn btn-sm btn-outline-primary">
+                                    <button class="btn btn-sm btn-dark">
                                         <i class="bi bi-eye"></i> Ver Detalle
                                     </button>
                                 </div>
@@ -487,7 +487,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
 
                 <!-- Más partidos -->
                 <div class="col-12 text-center">
-                    <button class="btn btn-outline-secondary">
+                    <button class="btn btn-dark">
                         <i class="bi bi-arrow-clockwise"></i> Cargar más partidos
                     </button>
                 </div>
@@ -558,7 +558,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                 </tr>
                                 <tr>
                                     <td><strong>Estado:</strong></td>
-                                    <td><span class="badge bg-success"><?= $perfil_equipo_datos_equipo['estado'] ?></span></td>
+                                    <td><span class="badge text-bg-dark"><?= $perfil_equipo_datos_equipo['estado'] ?></span></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -40,7 +40,7 @@ require_once HEAD_COMPONENT;
         <p class="text-muted mb-0">Gestiona las reservas de tus canchas</p>
       </div>
       <div class="col-md-4 text-end">
-        <button id="configurarHorarios" class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalConfigurarHorarios">
+        <button id="configurarHorarios" class="btn btn-dark me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalConfigurarHorarios">
           <i class="bi bi-gear"></i> Configuración
         </button>
         <button id="botonCrearReserva" class="btn btn-success" type="button">
@@ -192,7 +192,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-md-6">
                       <p class="mb-2"><strong>Teléfono:</strong><br><span id="telefonoComplejo">+54 11 1234-5678</span></p>
                       <div class="d-grid">
-                        <a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" type="button" class="btn btn-outline-info" id="botonVerPerfilCancha">
+                        <a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" type="button" class="btn btn-dark" id="botonVerPerfilCancha">
                           <i class="bi bi-building me-2"></i>Ver Perfil Completo
                         </a>
                       </div>

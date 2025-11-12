@@ -73,7 +73,7 @@ function isActive($page_name, $current)
             </div>
 
             <div class="d-flex align-items-center">
-                <button class="btn btn-outline-warning position-relative me-2"
+                <button class="btn btn-dark position-relative me-2"
                     type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
                     title="Notificaciones">
                     <i class="bi bi-bell"></i>

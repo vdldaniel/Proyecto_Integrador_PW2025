@@ -34,7 +34,7 @@ require_once HEAD_COMPONENT;
 				<p class="text-muted mb-0">Gestiona tus canchas y agrega nuevas</p>
 			</div>
 			<div class="col-md-6 text-end">
-				<button type="button" class="btn btn-outline-secondary me-2" id="btnHistorialCanchas" data-bs-toggle="modal" data-bs-target="#modalHistorialCanchas">
+				<button type="button" class="btn btn-dark me-2" id="btnHistorialCanchas" data-bs-toggle="modal" data-bs-target="#modalHistorialCanchas">
 					<i class="bi bi-clock-history"></i> Historial de Canchas
 				</button>
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarCancha">
@@ -85,19 +85,19 @@ require_once HEAD_COMPONENT;
 								</span>
 							</div>
 							<div class="col-md-2">
-								<span class="badge bg-success">Habilitada</span>
+								<span class="badge text-bg-dark">Habilitada</span>
 							</div>
 							<div class="col-md-3 text-end">
-								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
+								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
 									<i class="bi bi-eye"></i>
 								</a>
-								<button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1" title="Editar">
+								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1" title="Editar">
 									<i class="bi bi-pencil"></i>
 								</button>
-								<button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="1" title="Cierre temporal">
+								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="1" title="Cierre temporal">
 									<i class="bi bi-pause-circle"></i>
 								</button>
-								<button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="1" title="Eliminar">
+								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="1" title="Eliminar">
 									<i class="bi bi-trash"></i>
 								</button>
 							</div>
@@ -130,19 +130,19 @@ require_once HEAD_COMPONENT;
 								</span>
 							</div>
 							<div class="col-md-2">
-								<span class="badge bg-warning text-dark">En revisión</span>
+								<span class="badge text-bg-dark text-dark">En revisión</span>
 							</div>
 							<div class="col-md-3 text-end">
-								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
+								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
 									<i class="bi bi-eye"></i>
 								</a>
-								<button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
+								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
 									<i class="bi bi-pencil"></i>
 								</button>
-								<button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="2" title="Cierre temporal">
+								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="2" title="Cierre temporal">
 									<i class="bi bi-pause-circle"></i>
 								</button>
-								<button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="2" title="Eliminar">
+								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="2" title="Eliminar">
 									<i class="bi bi-trash"></i>
 								</button>
 							</div>
@@ -175,19 +175,19 @@ require_once HEAD_COMPONENT;
 								</span>
 							</div>
 							<div class="col-md-2">
-								<span class="badge bg-secondary">Pendiente de verificación</span>
+								<span class="badge text-bg-dark">Pendiente de verificación</span>
 							</div>
 							<div class="col-md-3 text-end">
-								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
+								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
 									<i class="bi bi-eye"></i>
 								</a>
-								<button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
+								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
 									<i class="bi bi-pencil"></i>
 								</button>
-								<button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="3" title="Cierre temporal">
+								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="3" title="Cierre temporal">
 									<i class="bi bi-pause-circle"></i>
 								</button>
-								<button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="3" title="Eliminar">
+								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="3" title="Eliminar">
 									<i class="bi bi-trash"></i>
 								</button>
 							</div>
@@ -424,7 +424,7 @@ require_once HEAD_COMPONENT;
 									<td>Fútbol 7</td>
 									<td>15/03/2024</td>
 									<td>
-										<button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalRestaurarCancha" data-cancha-id="4">
+										<button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modalRestaurarCancha" data-cancha-id="4">
 											<i class="bi bi-arrow-clockwise"></i><span class="d-none d-lg-inline ms-1">Restaurar</span>
 										</button>
 									</td>
