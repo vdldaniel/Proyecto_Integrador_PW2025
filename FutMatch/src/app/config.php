@@ -220,7 +220,7 @@ define("PAGE_REGISTRO_ADMIN_CANCHA_PHP", PUBLIC_PATH . "HTML/auth/registroAdminC
 // COMPONENTES - RUTAS LOCALES PARA INCLUDES
 // ===================================
 define("CALENDARIO_COMPONENT", __DIR__ . "/../../public/HTML/calendario.php");
-define("FILTRO_EXPLORAR_MODAL", __DIR__ . "/../../public/HTML/jugador/filtroExplorarModal.php");
+define("FILTRO_EXPLORAR_MODAL", __DIR__ . "/../../public/HTML/filtroExplorarModal.php");
 define("PERFIL_CANCHA_COMPONENT", __DIR__ . "/../../public/HTML/perfilCancha.php");
 define("PERFIL_EQUIPO_COMPONENT", __DIR__ . "/../../public/HTML/perfilEquipo.php");
 define("PERFIL_JUGADOR_COMPONENT", __DIR__ . "/../../public/HTML/perfilJugador.php");
