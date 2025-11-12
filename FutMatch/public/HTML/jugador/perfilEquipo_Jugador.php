@@ -5,36 +5,14 @@ require_once __DIR__ . '/../../../src/app/config.php';
 // Resalta la página actual en el navbar
 $current_page = 'perfilEquipo';
 $page_title = "Perfil de Equipo - FutMatch";
-// No necesitamos CSS específico adicional para esta página
+
+$page_css = [CSS_PAGES_PERFILES];
 
 // Configuración del componente de perfil equipo - Vista Jugador
 $perfil_equipo_admin_mode = false;
 $perfil_equipo_editar_mode = true; // Asumimos que es el líder del equipo
 $perfil_equipo_titulo_header = 'Los Tigres FC';
 $perfil_equipo_subtitulo_header = 'Tu equipo • Fundado el 15 de Octubre, 2024';
-$perfil_equipo_botones_header = [
-    [
-        'tipo' => 'button',
-        'texto' => 'Información del equipo',
-        'clase' => 'btn-dark',
-        'icono' => 'bi bi-info-circle',
-        'modal' => '#modalInfoEquipo'
-    ],
-    [
-        'tipo' => 'button',
-        'texto' => 'Configurar equipo',
-        'clase' => 'btn-warning text-white',
-        'icono' => 'bi bi-gear',
-        'id' => 'btnConfigEquipo'
-    ],
-    [
-        'tipo' => 'link',
-        'texto' => 'Ver torneos',
-        'clase' => 'btn-primary',
-        'icono' => 'bi bi-trophy',
-        'url' => '../misTorneos_Jugador.php'
-    ]
-];
 $perfil_equipo_mostrar_pestanas = ['info', 'jugadores', 'estadisticas'];
 $perfil_equipo_datos_equipo = [
     'nombre' => 'Los Tigres FC',

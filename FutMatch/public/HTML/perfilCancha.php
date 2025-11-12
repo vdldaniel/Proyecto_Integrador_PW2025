@@ -12,47 +12,63 @@
 $perfil_cancha_admin_mode = $perfil_cancha_admin_mode ?? false;
 $perfil_cancha_mostrar_selector = $perfil_cancha_mostrar_selector ?? false;
 $perfil_cancha_titulo_seccion = $perfil_cancha_titulo_seccion ?? 'Torneos Disponibles';
+$perfil_cancha_skip_header = $perfil_cancha_skip_header ?? false;
+$perfil_cancha_descripcion = $perfil_cancha_descripcion ?? 'Información detallada de la cancha';
 $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
     'texto' => 'Ver disponibilidad',
     'icono' => 'bi-calendar-plus',
     'url' => '#'
 ];
+
+// Información básica de la cancha
+$perfil_cancha_nombre = $perfil_cancha_nombre ?? 'Nombre de la Cancha';
+$perfil_cancha_descripcion_banner = $perfil_cancha_descripcion_banner ?? 'Descripción de la cancha aquí.';
+$perfil_cancha_direccion = $perfil_cancha_direccion ?? 'Dirección de la cancha';
+$perfil_cancha_tipo = $perfil_cancha_tipo ?? 'Fútbol 5';
+$perfil_cancha_superficie = $perfil_cancha_superficie ?? 'Césped sintético';
+$perfil_cancha_capacidad = $perfil_cancha_capacidad ?? '10 jugadores';
+$perfil_cancha_calificacion = $perfil_cancha_calificacion ?? '4.8';
+$perfil_cancha_total_resenas = $perfil_cancha_total_resenas ?? '127';
+$perfil_cancha_total_jugadores = $perfil_cancha_total_jugadores ?? '342';
+$perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
+
+// Horarios de funcionamiento
+$perfil_cancha_dias_atencion = $perfil_cancha_dias_atencion ?? 'Lunes a Domingo';
+$perfil_cancha_horario = $perfil_cancha_horario ?? '07:00 - 23:00';
+$perfil_cancha_estado_actual = $perfil_cancha_estado_actual ?? 'Abierto ahora';
+$perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
 ?>
 
-<!-- Línea 1: Header con título y botones de navegación -->
-<div class="row mb-4 align-items-center">
-    <div class="col-md-6">
-        <h1 class="fw-bold mb-1">Perfil de Cancha</h1>
-        <p class="text-muted mb-0">
-            <?= $perfil_cancha_admin_mode ? 'Gestiona la información y configuración de tu cancha' : 'Información detallada y disponibilidad de la cancha' ?>
-        </p>
+<?php if (!$perfil_cancha_skip_header): ?>
+    <!-- Línea 1: Header con título y botones de navegación -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6">
+            <h1 class="fw-bold mb-1">Perfil de Cancha</h1>
+            <p class="text-muted mb-0">
+                <?= $perfil_cancha_descripcion ?? 'Información detallada de la cancha' ?>
+            </p>
+        </div>
+        <div class="col-md-6 text-end">
+            <!-- Los botones específicos se manejan en cada página individual -->
+            <!-- Para admin de cancha, se definen en misPerfiles_AdminCancha.php -->
+            <!-- Para admin de sistema, se definen en perfilCancha_AdminSistema.php -->
+            <!-- Para jugadores, botones básicos aquí -->
+            <?php if (!$perfil_cancha_admin_mode): ?>
+                <button type="button" class="btn btn-dark me-2" id="btnVerTorneos">
+                    <i class="bi bi-trophy"></i> Ver Torneos
+                </button>
+                <button type="button" class="btn btn-dark" id="btnCompartirCancha">
+                    <i class="bi bi-share"></i> Compartir
+                </button>
+            <?php endif; ?>
+        </div>
     </div>
-    <div class="col-md-6 text-end">
-        <?php if ($perfil_cancha_admin_mode): ?>
-            <a type="button" class="btn btn-success me-2" href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>">
-                <i class="bi bi-calendar-week"></i> Ir a Agenda
-            </a>
-            <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalEditarCancha">
-                <i class="bi bi-gear"></i> Configuración
-            </button>
-            <button type="button" class="btn btn-primary" id="btnEditarPerfil">
-                <i class="bi bi-pencil-square"></i> Editar Perfil
-            </button>
-        <?php else: ?>
-            <button type="button" class="btn btn-dark me-2" id="btnVerTorneos">
-                <i class="bi bi-trophy"></i> Ver Torneos
-            </button>
-            <button type="button" class="btn btn-dark" id="btnCompartirCancha">
-                <i class="bi bi-share"></i> Compartir
-            </button>
-        <?php endif; ?>
-    </div>
-</div>
+<?php endif; ?>
 
 <!-- Línea 2: Selector de cancha (solo admin) -->
 <?php if ($perfil_cancha_mostrar_selector): ?>
     <div class="row mb-4">
-        <div class="col-md-4">
+        <div class="col-md-4 ms-auto">
             <div class="dropdown">
                 <button class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
                     <i class="bi bi-building"></i> MegaFutbol Cancha A1-F5
@@ -72,25 +88,39 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
     <div class="col-12">
         <div class="card shadow-lg rounded-3 overflow-hidden">
             <!-- Imagen de banner -->
-            <div class="position-relative">
-                <img src="<?= IMG_PATH ?>bg2.jpg" class="card-img-top" alt="Banner de la cancha" style="height: 300px; object-fit: cover;">
-                <div class="position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 text-white p-4">
-                    <div class="d-flex justify-content-between align-items-end">
-                        <div>
-                            <h1 class="mb-2" id="nombreCancha">MegaFutbol Cancha A1-F5</h1>
-                            <p class="mb-0 fs-5" id="descripcionCancha">Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.</p>
-                        </div>
-                        <div class="text-end">
-                            <div class="text-warning mb-2">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                                <span class="ms-1">4.8</span>
+            <div class="position-relative profile-banner-wrapper">
+                <div class="profile-banner-image" style="background-image: url('<?= IMG_BANNER_PERFIL_CANCHA_DEFAULT ?>');">
+                </div>
+
+                <!-- Botón editar portada (solo para admin de cancha) -->
+                <?php if ($perfil_cancha_admin_mode && !isset($perfil_cancha_es_admin_sistema)): ?>
+                    <button class="btn btn-dark btn-sm profile-banner-edit-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalCambiarBanner">
+                        <i class="bi bi-camera-fill"></i> Editar portada
+                    </button>
+                <?php endif; ?>
+
+                <!-- Overlay con información de la cancha -->
+                <div class="profile-banner-overlay">
+                    <div class="profile-info-container bg-dark bg-opacity-75 p-4 rounded">
+                        <div class="d-flex justify-content-between align-items-end">
+                            <div>
+                                <h1 class="mb-2 text-white" id="nombreCancha"><?= $perfil_cancha_nombre ?></h1>
+                                <p class="mb-0 fs-5 text-light" id="descripcionCancha"><?= $perfil_cancha_descripcion_banner ?></p>
                             </div>
-                            <div class="text-light">
-                                <i class="bi bi-people"></i> <?= $perfil_cancha_admin_mode ? 'Admin View' : '342 jugadores' ?>
+                            <div class="text-end">
+                                <div class="text-warning mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="ms-1"><?= $perfil_cancha_calificacion ?></span>
+                                </div>
+                                <div class="text-light">
+                                    <i class="bi bi-people"></i> <?= $perfil_cancha_admin_mode ? 'Admin View' : $perfil_cancha_total_jugadores . ' jugadores' ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -313,7 +343,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-geo-alt"></i> Dirección
                     </label>
-                    <p class="mb-0" id="direccionCancha">Av. Corrientes 1234, CABA, Buenos Aires, Argentina</p>
+                    <p class="mb-0" id="direccionCancha"><?= $perfil_cancha_direccion ?></p>
                     <?php if (!$perfil_cancha_admin_mode): ?>
                         <button class="btn btn-sm btn-dark mt-1" id="btnVerEnMapa">
                             <i class="bi bi-map"></i> Ver en mapa
@@ -324,19 +354,19 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-tag"></i> Tipo de Cancha
                     </label>
-                    <p class="mb-0" id="tipoCancha">Fútbol 5</p>
+                    <p class="mb-0" id="tipoCancha"><?= $perfil_cancha_tipo ?></p>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-layers"></i> Superficie
                     </label>
-                    <p class="mb-0" id="superficieCancha">Césped sintético</p>
+                    <p class="mb-0" id="superficieCancha"><?= $perfil_cancha_superficie ?></p>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-people"></i> Capacidad
                     </label>
-                    <p class="mb-0" id="capacidadCancha">10 jugadores</p>
+                    <p class="mb-0" id="capacidadCancha"><?= $perfil_cancha_capacidad ?></p>
                 </div>
                 <?php if ($perfil_cancha_admin_mode): ?>
                     <div class="mb-0">
@@ -355,14 +385,14 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                 <h5 class="mb-0"><i class="bi bi-clock"></i> Horarios</h5>
             </div>
             <div class="card-body">
-                <small class="text-muted">Lunes a Domingo</small>
-                <p class="fw-bold mb-2">07:00 - 23:00</p>
+                <small class="text-muted"><?= $perfil_cancha_dias_atencion ?></small>
+                <p class="fw-bold mb-2"><?= $perfil_cancha_horario ?></p>
                 <hr class="my-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="text-success fw-bold">
-                        <i class="bi bi-circle-fill"></i> Abierto ahora
+                        <i class="bi bi-circle-fill"></i> <?= $perfil_cancha_estado_actual ?>
                     </span>
-                    <small class="text-muted">Cierra a las 23:00</small>
+                    <small class="text-muted">Cierra a las <?= $perfil_cancha_hora_cierre ?></small>
                 </div>
             </div>
         </div>
@@ -419,19 +449,19 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-half"></i>
                     </div>
-                    <h3 class="text-warning mb-0">4.8</h3>
-                    <small class="text-muted">Basado en 127 reseñas</small>
+                    <h3 class="text-warning mb-0"><?= $perfil_cancha_calificacion ?></h3>
+                    <small class="text-muted">Basado en <?= $perfil_cancha_total_resenas ?> reseñas</small>
                 </div>
                 <hr class="my-3">
 
                 <!-- Primera fila de estadísticas -->
                 <div class="row text-center">
                     <div class="col-6 border-end">
-                        <h4 class="text-primary mb-1">156</h4>
+                        <h4 class="text-primary mb-1"><?= $perfil_cancha_total_partidos ?></h4>
                         <small class="text-muted">Partidos jugados</small>
                     </div>
                     <div class="col-6">
-                        <h4 class="text-info mb-1">342</h4>
+                        <h4 class="text-info mb-1"><?= $perfil_cancha_total_jugadores ?></h4>
                         <small class="text-muted">Jugadores únicos</small>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ $page_js = [JS_PERFIL_JUGADOR, JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA];
 // Variables para el componente perfilJugador.php
 $perfil_jugador_admin_mode = true; // Admin de sistema tiene permisos completos
 $perfil_jugador_es_propio = false;
-$perfil_jugador_titulo_header = 'Perfil de Jugador - Moderación';
+$perfil_jugador_titulo_header = 'Perfil de Jugador';
 $perfil_jugador_subtitulo_header = 'Revisión y moderación del comportamiento del jugador en la plataforma';
 $perfil_jugador_titulo_partidos = 'Historial de Partidos';
 $perfil_jugador_titulo_estadisticas = 'Estadísticas y Comportamiento';

@@ -5,7 +5,6 @@
   $perfil_equipo_editar_mode - Boolean para permitir edición (líder del equipo)
   $perfil_equipo_titulo_header - String para título del equipo
   $perfil_equipo_subtitulo_header - String para subtítulo/descripción
-  $perfil_equipo_botones_header - Array con botones del header
   $perfil_equipo_mostrar_pestanas - Array con pestañas a mostrar ['info', 'jugadores', 'estadisticas', 'partidos']
   $perfil_equipo_datos_equipo - Array con información del equipo
   $perfil_equipo_jugadores - Array con lista de jugadores
@@ -18,7 +17,6 @@ $perfil_equipo_admin_mode = $perfil_equipo_admin_mode ?? false;
 $perfil_equipo_editar_mode = $perfil_equipo_editar_mode ?? false;
 $perfil_equipo_titulo_header = $perfil_equipo_titulo_header ?? 'Los Tigres FC';
 $perfil_equipo_subtitulo_header = $perfil_equipo_subtitulo_header ?? 'Equipo fundado el 15 de Octubre, 2024';
-$perfil_equipo_botones_header = $perfil_equipo_botones_header ?? [];
 $perfil_equipo_mostrar_pestanas = $perfil_equipo_mostrar_pestanas ?? ['info', 'jugadores', 'estadisticas'];
 $perfil_equipo_datos_equipo = $perfil_equipo_datos_equipo ?? [
     'nombre' => 'Los Tigres FC',
@@ -87,7 +85,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                     <div class="col-md-2 text-center">
                         <!-- Escudo/Logo del equipo -->
                         <div class="team-logo-container mb-3 mb-md-0">
-                            <div class="rounded-circle bg-white d-flex align-items-center justify-content-center mx-auto"
+                            <div class="team-logo rounded-circle bg-dark d-flex align-items-center justify-content-center mx-auto"
                                 style="width: 80px; height: 80px;">
                                 <i class="bi bi-shield text-primary fs-1"></i>
                             </div>
@@ -103,20 +101,34 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                         </div>
                     </div>
                     <div class="col-md-4 text-md-end text-center mt-3 mt-md-0">
-                        <?php foreach ($perfil_equipo_botones_header as $boton): ?>
-                            <?php if ($boton['tipo'] === 'link'): ?>
-                                <a href="<?= $boton['url'] ?>" class="btn <?= $boton['clase'] ?> me-2 mb-2">
-                                    <i class="<?= $boton['icono'] ?>"></i> <?= $boton['texto'] ?>
-                                </a>
-                            <?php else: ?>
-                                <button type="button"
-                                    class="btn <?= $boton['clase'] ?> me-2 mb-2"
-                                    <?= isset($boton['modal']) ? 'data-bs-toggle="modal" data-bs-target="' . $boton['modal'] . '"' : '' ?>
-                                    <?= isset($boton['id']) ? 'id="' . $boton['id'] . '"' : '' ?>>
-                                    <i class="<?= $boton['icono'] ?>"></i> <?= $boton['texto'] ?>
-                                </button>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <?php if ($perfil_equipo_admin_mode): ?>
+                            <button type="button" class="btn btn-dark me-2 mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoEquipo">
+                                <i class="bi bi-info-circle"></i> Información completa
+                            </button>
+                            <button type="button" class="btn btn-dark me-2 mb-2" id="btnGestionarEquipo">
+                                <i class="bi bi-gear"></i> Gestionar equipo
+                            </button>
+                            <a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>" class="btn btn-primary me-2 mb-2">
+                                <i class="bi bi-trophy"></i> Ver torneos
+                            </a>
+                        <?php elseif ($perfil_equipo_editar_mode): ?>
+                            <button type="button" class="btn btn-dark me-2 mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoEquipo">
+                                <i class="bi bi-info-circle"></i> Información del equipo
+                            </button>
+                            <button type="button" class="btn btn-dark me-2 mb-2" id="btnConfigEquipo">
+                                <i class="bi bi-gear"></i> Configurar equipo
+                            </button>
+                            <a href="<?= PAGE_MIS_TORNEOS_JUGADOR ?>" class="btn btn-dark me-2 mb-2">
+                                <i class="bi bi-trophy"></i> Ver torneos
+                            </a>
+                        <?php else: ?>
+                            <button type="button" class="btn btn-dark me-2 mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoEquipo">
+                                <i class="bi bi-info-circle"></i> Información del equipo
+                            </button>
+                            <button type="button" class="btn btn-dark me-2 mb-2" id="btnSolicitarUnirse">
+                                <i class="bi bi-person-plus"></i> Solicitar unirse
+                            </button>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -139,14 +151,6 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
             <button class="nav-link <?= !in_array('info', $perfil_equipo_mostrar_pestanas) ? 'active' : '' ?>"
                 id="jugadores-tab" data-bs-toggle="tab" data-bs-target="#jugadores" type="button" role="tab">
                 <i class="bi bi-people"></i> Jugadores (<?= count($perfil_equipo_jugadores) ?>)
-            </button>
-        </li>
-    <?php endif; ?>
-
-    <?php if (in_array('estadisticas', $perfil_equipo_mostrar_pestanas)): ?>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="estadisticas-tab" data-bs-toggle="tab" data-bs-target="#estadisticas" type="button" role="tab">
-                <i class="bi bi-bar-chart"></i> Estadísticas
             </button>
         </li>
     <?php endif; ?>
@@ -285,19 +289,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                                 <label class="fw-bold text-muted d-block mb-1">Estado</label>
                                 <span class="badge text-bg-dark"><?= $perfil_equipo_datos_equipo['estado'] ?></span>
                             </div>
-                            <div class="mb-3">
-                                <label class="fw-bold text-muted d-block mb-1">Racha Actual</label>
-                                <div class="racha-container">
-                                    <?php
-                                    $racha = str_split($perfil_equipo_estadisticas['racha_actual'], 2);
-                                    foreach ($racha as $resultado):
-                                        $letra = $resultado[0];
-                                        $clase = $letra === 'G' ? 'bg-success' : ($letra === 'E' ? 'bg-warning' : 'bg-danger');
-                                    ?>
-                                        <span class="badge <?= $clase ?> me-1"><?= $letra ?></span>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -373,66 +365,6 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <!-- PESTAÑA: ESTADÍSTICAS -->
-    <?php if (in_array('estadisticas', $perfil_equipo_mostrar_pestanas)): ?>
-        <div class="tab-pane fade" id="estadisticas" role="tabpanel">
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Gráfico de rendimiento -->
-                    <div class="card shadow-sm border-0 mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="bi bi-graph-up"></i> Rendimiento por Mes</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-placeholder bg-light rounded p-4 text-center">
-                                <i class="bi bi-bar-chart fs-1 text-muted"></i>
-                                <p class="text-muted mt-2">Gráfico de rendimiento mensual</p>
-                                <small class="text-muted">Aquí iría un gráfico con Chart.js o similar</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <!-- Estadísticas detalladas -->
-                    <div class="card shadow-sm border-0">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="bi bi-list-ul"></i> Estadísticas Detalladas</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="stats-list">
-                                <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span class="text-muted">Partidos Jugados</span>
-                                    <span class="fw-bold"><?= $perfil_equipo_estadisticas['partidos_jugados'] ?></span>
-                                </div>
-                                <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span class="text-success">Partidos Ganados</span>
-                                    <span class="fw-bold text-success"><?= $perfil_equipo_estadisticas['partidos_ganados'] ?></span>
-                                </div>
-                                <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span class="text-warning">Partidos Empatados</span>
-                                    <span class="fw-bold text-warning"><?= $perfil_equipo_estadisticas['partidos_empatados'] ?></span>
-                                </div>
-                                <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span class="text-danger">Partidos Perdidos</span>
-                                    <span class="fw-bold text-danger"><?= $perfil_equipo_estadisticas['partidos_perdidos'] ?></span>
-                                </div>
-                                <div class="stat-item d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span class="text-muted">Puntos</span>
-                                    <span class="fw-bold"><?= $perfil_equipo_estadisticas['puntos'] ?></span>
-                                </div>
-                                <div class="stat-item d-flex justify-content-between align-items-center py-2">
-                                    <span class="text-muted">Promedio de Goles</span>
-                                    <span class="fw-bold"><?= round($perfil_equipo_estadisticas['goles_favor'] / $perfil_equipo_estadisticas['partidos_jugados'], 1) ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     <?php endif; ?>
@@ -574,52 +506,5 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
 
 <!-- Estilos CSS adicionales para el componente -->
 <style>
-    .timeline {
-        position: relative;
-        padding-left: 30px;
-    }
 
-    .timeline-item {
-        position: relative;
-        padding-bottom: 20px;
-    }
-
-    .timeline-item:not(:last-child)::before {
-        content: '';
-        position: absolute;
-        left: -23px;
-        top: 15px;
-        bottom: -20px;
-        width: 2px;
-        background-color: #e9ecef;
-    }
-
-    .timeline-marker {
-        position: absolute;
-        left: -30px;
-        top: 8px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0 0 0 2px #e9ecef;
-    }
-
-    .player-card:hover {
-        transform: translateY(-2px);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .racha-container {
-        display: flex;
-        gap: 2px;
-    }
-
-    .chart-placeholder {
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
 </style>
