@@ -10,9 +10,7 @@ $current_page = 'partidosJugador';
 $page_title = 'Mis Partidos - FutMatch';
 
 // CSS adicional específico de esta página
-$page_css = [
-  CSS_PAGES_PARTIDOS_JUGADOR
-];
+$page_css = [CSS_PAGES_PARTIDOS_JUGADOR];
 
 // Cargar head común
 require_once HEAD_COMPONENT;

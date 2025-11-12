@@ -16,9 +16,7 @@ $current_page = 'inicioAdminCancha';
 $page_title = 'Dashboard - FutMatch';
 
 // CSS adicional específico de esta página
-$page_css = [
-  CSS_PAGES_DASHBOARD_ADMIN_CANCHA
-];
+$page_css = [];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;

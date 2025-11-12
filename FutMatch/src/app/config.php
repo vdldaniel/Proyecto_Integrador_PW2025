@@ -78,10 +78,6 @@ define('TABLE_ESTADOS_SOLICITUDES', 'estados_solicitudes');
 define('TABLE_CALIFICACIONES_JUGADORES', 'calificaciones_jugadores');
 define('TABLE_RESENIAS_CANCHAS', 'resenias_canchas');
 
-// Foros
-define('TABLE_FOROS', 'foros');
-define('TABLE_RESPUESTAS_FOROS', 'respuestas_foros');
-
 // Espacios (Sistema de visibilidad)
 define('TABLE_ESPACIOS', 'espacios');
 define('TABLE_TIPOS_ESPACIOS', 'tipos_espacios');
@@ -109,15 +105,8 @@ define("CSS_COMPONENTS", SRC_PATH . "styles/components.css");
 // CSS de páginas específicas
 define("CSS_PAGES_LANDING", SRC_PATH . "styles/pages/landing.css");
 define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
-define("CSS_PAGES_INICIO_JUGADOR", SRC_PATH . "styles/pages/inicioJugador.css");
-define("CSS_PAGES_DASHBOARD_ADMIN_CANCHA", SRC_PATH . "styles/pages/dashboardAdminCancha.css");
-define("CSS_PAGES_FOROS_LISTADO", SRC_PATH . "styles/pages/foros-listado.css");
-define("CSS_PAGES_MODALES_FOROS", SRC_PATH . "styles/pages/modales-foros.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
-define("CSS_PAGES_PARTIDOS_EXPLORAR", SRC_PATH . "styles/pages/partidos-explorar.css");
-define("CSS_PAGES_PARTIDOS_MODALES", SRC_PATH . "styles/pages/partidos-modales.css");
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/pages/torneoDetalle.css");
-define("CSS_PAGES_CANCHAS_EXPLORAR", SRC_PATH . "styles/pages/canchas-explorar.css");
 define("CSS_PAGES_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/canchasAdminSistema.css");
 define("CSS_PAGES_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresAdminSistema.css");
 define("CSS_PAGES_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresReportadosAdminSistema.css");
@@ -155,9 +144,7 @@ define("JS_CUENTA_JUGADOR", JS_SCRIPTS_PATH . "cuenta-jugador.js");
 define("JS_DETALLE_TORNEO", JS_SCRIPTS_PATH . "detalle-torneo.js");
 define("JS_EQUIPO_CREAR", JS_SCRIPTS_PATH . "equipo-crear.js");
 define("JS_EQUIPOS_LISTADO", JS_SCRIPTS_PATH . "equipos-listado.js");
-define("JS_FOROS_NUEVO_MODAL", JS_SCRIPTS_PATH . "forosNuevoModal.js");
 define("JS_FORGOT", JS_SCRIPTS_PATH . "forgot.js");
-define("JS_FOROS_LISTADO", JS_SCRIPTS_PATH . "foros-listado.js");
 define("JS_INICIO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "inicioAdminCancha.js");
 define("JS_INICIO_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "inicio-admin-sistema.js");
 define("JS_INICIO_JUGADOR", JS_SCRIPTS_PATH . "inicioJugador.js");
@@ -224,7 +211,7 @@ define("FILTRO_EXPLORAR_MODAL", __DIR__ . "/../../public/HTML/filtroExplorarModa
 define("PERFIL_CANCHA_COMPONENT", __DIR__ . "/../../public/HTML/perfilCancha.php");
 define("PERFIL_EQUIPO_COMPONENT", __DIR__ . "/../../public/HTML/perfilEquipo.php");
 define("PERFIL_JUGADOR_COMPONENT", __DIR__ . "/../../public/HTML/perfilJugador.php");
-define("TORNEO_DETALLE_COMPONENT", __DIR__ . "/../../public/HTML/jugador/torneoDetalle.php");
+define("TORNEO_DETALLE_COMPONENT", __DIR__ . "/../../public/HTML/torneoDetalle.php");
 
 // ===================================
 // PÁGINAS - JUGADOR

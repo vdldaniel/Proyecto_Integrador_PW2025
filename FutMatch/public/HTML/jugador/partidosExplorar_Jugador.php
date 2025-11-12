@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../src/app/config.php';
 // Resalta la página actual en el navbar
 $current_page = 'partidosExplorar';
 $page_title = "Explorar Partidos - FutMatch";
-$page_css = [CSS_PAGES_PARTIDOS_EXPLORAR, CSS_PAGES_PARTIDOS_JUGADOR, CSS_PAGES_PARTIDOS_MODALES];
+$page_css = [];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;

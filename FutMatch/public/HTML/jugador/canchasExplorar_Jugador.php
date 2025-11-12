@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../src/app/config.php';
 // Resalta la página actual en el navbar
 $current_page = 'canchasExplorar';
 $page_title = "Explorar Canchas - FutMatch";
-$page_css = [CSS_PAGES_CANCHAS_EXPLORAR, CSS_PAGES_PARTIDOS_JUGADOR];
+$page_css = [];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;
@@ -92,9 +92,9 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="mt-auto">
                 <div class="d-grid gap-2">
-                  <button class="btn btn-primary" onclick="verDetalleCancha(1)">
+                  <a class="btn btn-primary" href=<? PAGE_PERFIL_CANCHA_JUGADOR . '?id=1' ?>>
                     <i class="bi bi-eye"></i> Ver detalles
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

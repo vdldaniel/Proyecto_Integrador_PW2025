@@ -10,9 +10,7 @@ $page_title = 'Listado Equipos - FutMatch';
 
 // CSS adicional específico de esta página
 
-$page_css = [
-  CSS_PAGES_INICIO_JUGADOR
-];
+$page_css = [];
 
 // Cargar head común
 require_once HEAD_COMPONENT;

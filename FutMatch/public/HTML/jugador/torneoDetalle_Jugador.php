@@ -1,6 +1,6 @@
 <?php
 // Cargar configuración
-require_once __DIR__ . '/../../src/app/config.php';
+require_once __DIR__ . '/../../../src/app/config.php';
 
 // Resalta la página actual en el navbar
 $current_page = 'torneoDetalle';
@@ -35,7 +35,6 @@ $torneo_detalle_datos_torneo = [
     'estado' => 'En curso',
     'equipos_registrados' => 16,
     'formato' => 'Eliminación directa',
-    'premio' => '$50,000'
 ];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
@@ -50,10 +49,9 @@ require_once HEAD_COMPONENT;
 
     <!-- Contenido Principal -->
     <main class="container mt-4">
-        <?php
-        // Incluir componente de detalle de torneo
-        include __DIR__ . '/torneoDetalle.php';
-        ?>
+
+        <?php include TORNEO_DETALLE_COMPONENT; ?>
+
     </main>
 
     <!-- Bootstrap Icons -->
