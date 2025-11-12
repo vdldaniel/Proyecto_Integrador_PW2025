@@ -293,7 +293,7 @@ require_once HEAD_COMPONENT;
             <div class="partido-chips mx-2">
               <div class="d-flex flex-column gap-1">
                 <span class="badge text-bg-dark">Pendiente</span>
-                <span class="badge text-bg-dark text-dark">
+                <span class="badge text-bg-dark">
                   <i class="bi bi-hourglass-split me-1"></i>Solicitante
                 </span>
               </div>

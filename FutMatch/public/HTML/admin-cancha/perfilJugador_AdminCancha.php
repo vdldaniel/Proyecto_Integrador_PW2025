@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $page_title = "Perfil de Jugador - FutMatch Admin";
 
-$page_css = [];
+$page_css = [CSS_PAGES_PERFILES];
 $page_js = [JS_PERFIL_JUGADOR];
 
 // Variables para el componente perfilJugador.php
@@ -24,6 +24,7 @@ $perfil_jugador_subtitulo_header = 'Información del jugador que utiliza sus ser
 $perfil_jugador_titulo_partidos = 'Partidos en tu Cancha';
 $perfil_jugador_titulo_estadisticas = 'Estadísticas del Jugador';
 $perfil_jugador_mostrar_reportar = true;
+$perfil_jugador_mostrar_equipos = true;
 
 $perfil_jugador_botones_header = [
     [
@@ -116,7 +117,7 @@ include HEAD_COMPONENT;
                                         <br>
                                         <small class="text-muted">Cancha A1-F5 • Partido amistoso</small>
                                     </div>
-                                    <span class="badge text-bg-dark text-dark">No show</span>
+                                    <span class="badge text-bg-dark">No show</span>
                                 </div>
                             </div>
                         </div>

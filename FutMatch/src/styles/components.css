@@ -6,9 +6,6 @@
 /* ===================================
    BUTTONS / BOTONES
    =================================== */
-button i {
-  margin-right: 5px;
-}
 
 .btn {
   transition: all 0.2s ease-in-out;

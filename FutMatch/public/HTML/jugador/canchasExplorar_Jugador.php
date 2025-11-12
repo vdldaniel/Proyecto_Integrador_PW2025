@@ -70,7 +70,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol 5</span>
                 <span class="badge text-bg-dark me-1">Sintético</span>
-                <span class="badge text-bg-dark text-dark">Disponible</span>
+                <span class="badge text-bg-dark">Disponible</span>
               </div>
               <p class="card-text small text-muted mb-3">
                 Cancha de fútbol 5 con césped sintético de última generación. Vestuarios, duchas y estacionamiento incluido.
@@ -150,7 +150,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol Sala</span>
                 <span class="badge text-bg-dark me-1">Parquet</span>
-                <span class="badge text-bg-dark text-dark">Disponible</span>
+                <span class="badge text-bg-dark">Disponible</span>
               </div>
               <p class="card-text small text-muted mb-3">
                 Cancha de futsal profesional con piso de parquet. Climatizada con aire acondicionado y sonido profesional.

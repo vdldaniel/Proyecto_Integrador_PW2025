@@ -130,7 +130,7 @@ require_once HEAD_COMPONENT;
 								</span>
 							</div>
 							<div class="col-md-2">
-								<span class="badge text-bg-dark text-dark">En revisión</span>
+								<span class="badge text-bg-dark">En revisión</span>
 							</div>
 							<div class="col-md-3 text-end">
 								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">

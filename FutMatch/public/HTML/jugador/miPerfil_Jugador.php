@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $page_title = "Mi Perfil - FutMatch";
 
-$page_css = [];
+$page_css = [CSS_PAGES_PERFILES];
 $page_js = [JS_PERFIL_JUGADOR];
 
 // Variables para el componente perfilJugador.php
@@ -24,6 +24,7 @@ $perfil_jugador_subtitulo_header = 'Gestiona tu información personal y estadís
 $perfil_jugador_titulo_partidos = 'Mis Partidos Recientes';
 $perfil_jugador_titulo_estadisticas = 'Mis Estadísticas';
 $perfil_jugador_mostrar_reportar = false;
+$perfil_jugador_mostrar_equipos = true;
 
 $perfil_jugador_botones_header = [
     [
@@ -105,7 +106,7 @@ include HEAD_COMPONENT;
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Posición preferida</label>
+                                    <label class="form-label">Posición</label>
                                     <select class="form-select" name="posicion">
                                         <option value="arquero">Arquero</option>
                                         <option value="defensor">Defensor</option>

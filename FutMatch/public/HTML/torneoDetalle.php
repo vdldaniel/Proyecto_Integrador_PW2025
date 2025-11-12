@@ -394,7 +394,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-1 text-center">
-                                    <span class="badge text-bg-dark text-dark">3°</span>
+                                    <span class="badge text-bg-dark">3°</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img src="<?= IMG_PATH ?>team-placeholder.png" alt="Escudo" class="team-logo" width="50" height="50">
@@ -404,7 +404,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Semifinalista</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge text-bg-dark text-dark">Semifinal</span>
+                                    <span class="badge text-bg-dark">Semifinal</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">6 partidos</small>
@@ -429,7 +429,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-1 text-center">
-                                    <span class="badge text-bg-dark text-dark">4°</span>
+                                    <span class="badge text-bg-dark">4°</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img src="<?= IMG_PATH ?>team-placeholder.png" alt="Escudo" class="team-logo" width="50" height="50">
@@ -439,7 +439,7 @@ $torneo_detalle_datos_torneo = $torneo_detalle_datos_torneo ?? [
                                     <p class="text-muted mb-0">Semifinalista</p>
                                 </div>
                                 <div class="col-md-2 text-center">
-                                    <span class="badge text-bg-dark text-dark">Semifinal</span>
+                                    <span class="badge text-bg-dark">Semifinal</span>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <small class="text-muted">6 partidos</small>

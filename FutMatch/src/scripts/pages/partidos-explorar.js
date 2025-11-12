@@ -900,7 +900,7 @@ function obtenerInfoPartido(idPartido) {
       descripcion:
         "Partido amistoso para pasar un buen rato. Todos los niveles son bienvenidos. Se juega con reglas estándar de fútbol 5.",
       badges:
-        '<span class="badge text-bg-dark me-1">Fútbol 5</span><span class="badge text-bg-dark me-1">Masculino</span><span class="badge text-bg-dark text-dark">4/10 jugadores</span>',
+        '<span class="badge text-bg-dark me-1">Fútbol 5</span><span class="badge text-bg-dark me-1">Masculino</span><span class="badge text-bg-dark">4/10 jugadores</span>',
     },
     2: {
       titulo: "Torneo relámpago - Fútbol 7",
@@ -915,7 +915,7 @@ function obtenerInfoPartido(idPartido) {
       descripcion:
         "Torneo relámpago por equipos. Se buscan equipos completos para participar en un emocionante torneo de fútbol 7.",
       badges:
-        '<span class="badge text-bg-dark me-1">Fútbol 7</span><span class="badge text-bg-dark me-1">Mixto</span><span class="badge text-bg-dark text-dark">Buscando equipos</span>',
+        '<span class="badge text-bg-dark me-1">Fútbol 7</span><span class="badge text-bg-dark me-1">Mixto</span><span class="badge text-bg-dark">Buscando equipos</span>',
     },
     3: {
       titulo: "Fútbol femenino competitivo",
@@ -929,7 +929,7 @@ function obtenerInfoPartido(idPartido) {
       descripcion:
         "Partido competitivo para jugadoras con experiencia. Buen nivel técnico requerido.",
       badges:
-        '<span class="badge text-bg-dark me-1">Fútbol Sala</span><span class="badge text-bg-dark">Femenino</span><span class="badge text-bg-dark text-dark">6/10 jugadoras</span>',
+        '<span class="badge text-bg-dark me-1">Fútbol Sala</span><span class="badge text-bg-dark">Femenino</span><span class="badge text-bg-dark">6/10 jugadoras</span>',
     },
   };
 

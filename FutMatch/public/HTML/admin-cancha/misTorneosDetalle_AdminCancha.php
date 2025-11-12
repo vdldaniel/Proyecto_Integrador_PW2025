@@ -584,7 +584,7 @@ require_once HEAD_COMPONENT;
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Fecha de Fin:</td>
-                                    <td>15/12/2025 <span class="badge text-bg-dark text-dark">Estimativa</span></td>
+                                    <td>15/12/2025 <span class="badge text-bg-dark">Estimativa</span></td>
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Equipos Máximos:</td>

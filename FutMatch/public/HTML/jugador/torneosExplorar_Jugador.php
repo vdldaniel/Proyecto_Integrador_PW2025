@@ -69,7 +69,7 @@ require_once HEAD_COMPONENT;
               </p>
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol 5</span>
-                <span class="badge text-bg-dark text-dark">12/20 equipos</span>
+                <span class="badge text-bg-dark">12/20 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 15 de enero 2026
@@ -233,7 +233,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol 5</span>
                 <span class="badge text-bg-dark">Femenino</span>
-                <span class="badge text-bg-dark text-dark">6/12 equipos</span>
+                <span class="badge text-bg-dark">6/12 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 5 de febrero 2026
@@ -277,7 +277,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol 7</span>
                 <span class="badge text-bg-dark me-1">Sub-21</span>
-                <span class="badge text-bg-dark text-dark">8/16 equipos</span>
+                <span class="badge text-bg-dark">8/16 equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Inicio: 20 de febrero 2026

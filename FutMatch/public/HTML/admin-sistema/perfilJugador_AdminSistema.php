@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $page_title = "Perfil de Jugador - Admin Sistema - FutMatch";
 
-$page_css = [CSS_PAGES_TABLAS_ADMIN_SISTEMA];
+$page_css = [CSS_PAGES_TABLAS_ADMIN_SISTEMA, CSS_PAGES_PERFILES];
 $page_js = [JS_PERFIL_JUGADOR, JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA];
 
 // Variables para el componente perfilJugador.php
@@ -24,6 +24,7 @@ $perfil_jugador_subtitulo_header = 'Revisión y moderación del comportamiento d
 $perfil_jugador_titulo_partidos = 'Historial de Partidos';
 $perfil_jugador_titulo_estadisticas = 'Estadísticas y Comportamiento';
 $perfil_jugador_mostrar_reportar = false; // Admin no puede reportar
+$perfil_jugador_mostrar_equipos = true;
 
 $perfil_jugador_botones_header = [
     [

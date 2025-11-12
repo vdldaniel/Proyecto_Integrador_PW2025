@@ -72,7 +72,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol 5</span>
                 <span class="badge text-bg-dark me-1">Masculino</span>
-                <span class="badge text-bg-dark text-dark">4/10 jugadores</span>
+                <span class="badge text-bg-dark">4/10 jugadores</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Hoy, 27 de octubre
@@ -103,7 +103,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol 7</span>
                 <span class="badge text-bg-dark me-1">Mixto</span>
-                <span class="badge text-bg-dark text-dark">Buscando equipos</span>
+                <span class="badge text-bg-dark">Buscando equipos</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Mañana, 28 de octubre
@@ -134,7 +134,7 @@ require_once HEAD_COMPONENT;
               <div class="mb-2">
                 <span class="badge text-bg-dark me-1">Fútbol Sala</span>
                 <span class="badge text-bg-dark">Femenino</span>
-                <span class="badge text-bg-dark text-dark">6/10 jugadoras</span>
+                <span class="badge text-bg-dark">6/10 jugadoras</span>
               </div>
               <p class="card-text small text-muted mb-2">
                 <i class="bi bi-calendar-event"></i> Viernes, 29 de octubre

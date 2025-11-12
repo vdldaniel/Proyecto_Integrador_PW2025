@@ -304,7 +304,7 @@ function renderizarVistaMensual() {
         indicador.innerHTML =
           '<span class="badge text-bg-dark">Sin horarios</span>';
       } else if (disponibilidad.disponibles <= 3) {
-        indicador.innerHTML = `<span class="badge text-bg-dark text-dark">${disponibilidad.disponibles} horarios</span>`;
+        indicador.innerHTML = `<span class="badge text-bg-dark">${disponibilidad.disponibles} horarios</span>`;
       } else {
         indicador.innerHTML = `<span class="badge text-bg-dark">${disponibilidad.disponibles} horarios</span>`;
       }

@@ -154,7 +154,7 @@ require_once HEAD_COMPONENT;
                 <small class="text-muted">10/02/2026 • 16/16 equipos</small>
               </div>
               <div class="col-md-2">
-                <span class="badge text-bg-dark text-dark">Inscripciones cerradas</span>
+                <span class="badge text-bg-dark">Inscripciones cerradas</span>
               </div>
               <div class="col-md-5 text-end">
                 <a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" title="Gestionar torneo">

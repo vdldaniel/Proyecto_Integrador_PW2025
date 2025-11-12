@@ -111,6 +111,7 @@ define("CSS_PAGES_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/canchasAdminS
 define("CSS_PAGES_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresAdminSistema.css");
 define("CSS_PAGES_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresReportadosAdminSistema.css");
 define("CSS_PAGES_TABLAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/tablasAdminSistema.css");
+define("CSS_PAGES_PERFILES", SRC_PATH . "styles/pages/perfiles.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -171,6 +172,9 @@ define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReporta
 define("IMG_PATH", PUBLIC_PATH . "img/");
 define("IMG_LOGO_SINFONDO", IMG_PATH . "logo-sinfondo.svg");
 define("IMG_LOGO_FONDOVERDE", IMG_PATH . "logo-fondoverde.svg");
+define("IMG_FOTO_PERFIL_JUGADOR", IMG_PATH . "foto_perfil_jugador.png");
+define("IMG_BANNER_JUGADOR_DEFAULT", IMG_PATH . "banner_jugador.png");
+define("IMG_BANNER_PERFIL_CANCHA_DEFAULT", IMG_PATH . "banner_perfil_cancha.png");
 define("IMG_BG2", IMG_PATH . "bg2.jpg");
 
 // ===================================

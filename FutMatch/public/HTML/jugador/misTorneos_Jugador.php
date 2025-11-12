@@ -131,7 +131,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted">15/01/2026 - 28/02/2026 • 8/20 equipos</small>
                             </div>
                             <div class="col-md-3">
-                                <span class="badge text-bg-dark text-dark fs-6">Inscripciones abiertas</span>
+                                <span class="badge text-bg-dark fs-6">Inscripciones abiertas</span>
                             </div>
                             <div class="col-md-3 text-end">
                                 <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">

@@ -1,7 +1,7 @@
 <?php
 
 // Cargar configuración
-require_once("../../src/app/config.php");
+require_once __DIR__ . '/../../../src/app/config.php';
 
 // Definir la página actual para el navbar
 $current_page = 'perfilJugadorExterno';
@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $page_title = "Perfil de Jugador - FutMatch";
 
-$page_css = [];
+$page_css = [CSS_PAGES_PERFILES];
 $page_js = [JS_PERFIL_JUGADOR];
 
 // Variables para el componente perfilJugador.php
@@ -24,6 +24,7 @@ $perfil_jugador_subtitulo_header = 'Información y estadísticas del jugador';
 $perfil_jugador_titulo_partidos = 'Partidos Recientes';
 $perfil_jugador_titulo_estadisticas = 'Estadísticas del Jugador';
 $perfil_jugador_mostrar_reportar = true;
+$perfil_jugador_mostrar_equipos = true;
 
 $perfil_jugador_botones_header = [
     [

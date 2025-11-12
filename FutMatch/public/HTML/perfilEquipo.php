@@ -98,7 +98,7 @@ $perfil_equipo_estadisticas = $perfil_equipo_estadisticas ?? [
                         <p class="mb-1"><?= $perfil_equipo_subtitulo_header ?></p>
                         <div class="d-flex flex-wrap gap-2 mt-2">
                             <span class="badge text-bg-dark"><i class="bi bi-people"></i> <?= $perfil_equipo_datos_equipo['integrantes'] ?> integrantes</span>
-                            <span class="badge text-bg-dark text-dark"><i class="bi bi-trophy"></i> <?= $perfil_equipo_datos_equipo['torneos_activos'] ?> torneos</span>
+                            <span class="badge text-bg-dark"><i class="bi bi-trophy"></i> <?= $perfil_equipo_datos_equipo['torneos_activos'] ?> torneos</span>
                             <span class="badge text-bg-dark"><i class="bi bi-calendar-event"></i> <?= $perfil_equipo_datos_equipo['partidos_jugados'] ?> partidos</span>
                         </div>
                     </div>

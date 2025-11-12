@@ -9,6 +9,7 @@
   $perfil_jugador_titulo_partidos - String para título de la sección de partidos
   $perfil_jugador_titulo_estadisticas - String para título de la sección de estadísticas
   $perfil_jugador_mostrar_reportar - Boolean para mostrar botón reportar
+  $perfil_jugador_mostrar_equipos - Boolean para mostrar sección de equipos
 -->
 
 <?php
@@ -21,6 +22,7 @@ $perfil_jugador_botones_header = $perfil_jugador_botones_header ?? [];
 $perfil_jugador_titulo_partidos = $perfil_jugador_titulo_partidos ?? 'Mis Partidos Recientes';
 $perfil_jugador_titulo_estadisticas = $perfil_jugador_titulo_estadisticas ?? 'Mis Estadísticas';
 $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
+$perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
 ?>
 
 <!-- Línea 1: Header con título y botones de navegación -->
@@ -50,58 +52,50 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
 <!-- Banner del jugador -->
 <div class="row mb-4">
     <div class="col-12">
-        <div class="card shadow-lg rounded-3 overflow-hidden">
+        <div class="card shadow-lg rounded-3 overflow-hidden profile-banner-container">
             <!-- Imagen de banner -->
-            <div class="position-relative">
-                <img src="<?= IMG_PATH ?>bg3.jpg" class="card-img-top" alt="Banner del jugador" style="height: 250px; object-fit: cover;">
-                <div class="position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 text-white p-4">
-                    <div class="d-flex justify-content-between align-items-end">
-                        <div class="d-flex align-items-end">
-                            <!-- Avatar del jugador -->
-                            <div class="position-relative me-3">
-                                <img src="<?= IMG_PATH ?>default-avatar.png"
-                                    class="rounded-circle border border-3 border-light"
-                                    alt="Avatar"
-                                    width="100"
-                                    height="100"
-                                    id="avatarJugador">
-                                <?php if ($perfil_jugador_es_propio): ?>
-                                    <button class="btn btn-light btn-sm rounded-circle position-absolute bottom-0 end-0"
-                                        style="width: 30px; height: 30px; padding: 0;"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalCambiarAvatar">
-                                        <i class="bi bi-camera-fill"></i>
-                                    </button>
-                                <?php endif; ?>
-                            </div>
-                            <!-- Información básica -->
-                            <div>
-                                <h2 class="mb-1" id="nombreJugador">Carlos Fernández</h2>
-                                <p class="mb-1 opacity-75" id="usernameJugador">@carlos_futbol</p>
-                                <div class="d-flex align-items-center">
-                                    <span class="badge text-bg-dark me-2" id="estadoJugador">Activo</span>
-                                    <span class="text-warning me-2" id="calificacionJugador">
-                                        ★★★★☆ <small class="text-light">(4.3)</small>
-                                    </span>
-                                </div>
-                            </div>
+            <div class="position-relative profile-banner-wrapper">
+                <div class="profile-banner-image" style="background-image: url('<?= IMG_BANNER_JUGADOR_DEFAULT ?>');">
+                </div>
+
+                <!-- Botón editar portada (solo si es perfil propio) -->
+                <?php if ($perfil_jugador_es_propio): ?>
+                    <button class="btn btn-dark btn-sm profile-banner-edit-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalCambiarBanner">
+                        <i class="bi bi-camera-fill"></i> Editar portada
+                    </button>
+                <?php endif; ?>
+
+                <!-- Overlay con información -->
+                <div class="profile-banner-overlay">
+                    <!-- Avatar del jugador (esquina inferior izquierda) -->
+                    <div class="profile-avatar-container">
+                        <div class="position-relative">
+                            <img src="<?= IMG_FOTO_PERFIL_JUGADOR ?>"
+                                class="profile-avatar"
+                                alt="Avatar"
+                                id="avatarJugador">
+                            <?php if ($perfil_jugador_es_propio): ?>
+                                <button class="btn btn-dark profile-avatar-edit-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalCambiarAvatar">
+                                    <i class="bi bi-camera-fill"></i>
+                                </button>
+                            <?php endif; ?>
                         </div>
-                        <!-- Estadísticas rápidas -->
-                        <div class="text-end d-none d-md-block">
-                            <div class="row text-center">
-                                <div class="col">
-                                    <div class="fw-bold fs-4" id="totalPartidos">127</div>
-                                    <small class="text-light">Partidos</small>
-                                </div>
-                                <div class="col">
-                                    <div class="fw-bold fs-4" id="golesAnotados">45</div>
-                                    <small class="text-light">Goles</small>
-                                </div>
-                                <div class="col">
-                                    <div class="fw-bold fs-4" id="asistencias">32</div>
-                                    <small class="text-light">Asistencias</small>
-                                </div>
-                            </div>
+                    </div>
+
+                    <!-- Información básica del jugador -->
+                    <div class="profile-info-container">
+                        <h2 class="profile-name mb-1" id="nombreJugador">Carlos Fernández</h2>
+                        <p class="profile-username mb-2" id="usernameJugador">@carlos_futbol</p>
+                        <div class="profile-badges">
+                            <span class="badge bg-success me-2" id="estadoJugador">Activo</span>
+                            <span class="badge bg-secondary" id="posicionJugador">Mediocampista</span>
+                            <span class="profile-rating me-2" id="calificacionJugador">
+                                ★★★★☆ <small class="ms-1">(4.3)</small>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -122,7 +116,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <!-- Partido 1 -->
                 <div class="border-bottom p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="badge text-bg-dark me-3 p-2">
+                        <div class="badge text-bg-success me-3 p-2">
                             <i class="bi bi-check-circle"></i>
                         </div>
                         <div class="flex-grow-1">
@@ -130,8 +124,8 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                             <p class="text-muted mb-0">Complejo Deportivo Norte • 08/11/2025</p>
                         </div>
                         <div class="text-end">
-                            <span class="badge text-bg-dark text-dark">2 goles</span>
-                            <span class="badge text-bg-dark text-dark ms-1">1 asistencia</span>
+                            <span class="badge text-bg-dark">2 goles</span>
+                            <span class="badge text-bg-dark ms-1">1 asistencia</span>
                         </div>
                     </div>
                     <p class="mb-3">Excelente partido donde el equipo mostró una gran coordinación ofensiva.</p>
@@ -149,7 +143,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 <!-- Partido 2 -->
                 <div class="border-bottom p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="badge text-bg-dark me-3 p-2">
+                        <div class="badge text-bg-danger me-3 p-2">
                             <i class="bi bi-x-circle"></i>
                         </div>
                         <div class="flex-grow-1">
@@ -157,7 +151,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                             <p class="text-muted mb-0">Futbol Club Centro • 05/11/2025</p>
                         </div>
                         <div class="text-end">
-                            <span class="badge text-bg-dark text-dark">1 gol</span>
+                            <span class="badge text-bg-dark">1 gol</span>
                         </div>
                     </div>
                     <p class="mb-3">Partido complicado contra un equipo muy organizado defensivamente.</p>
@@ -173,9 +167,9 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                 </div>
 
                 <!-- Partido 3 -->
-                <div class="p-4">
+                <div class="border-bottom p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="badge text-bg-dark me-3 p-2">
+                        <div class="badge text-bg-secondary me-3 p-2">
                             <i class="bi bi-dash-circle"></i>
                         </div>
                         <div class="flex-grow-1">
@@ -183,7 +177,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                             <p class="text-muted mb-0">Cancha Municipal • 02/11/2025</p>
                         </div>
                         <div class="text-end">
-                            <span class="badge text-bg-dark text-dark">2 asistencias</span>
+                            <span class="badge text-bg-dark">2 asistencias</span>
                         </div>
                     </div>
                     <p class="mb-3">Partido equilibrado donde ambos equipos tuvieron buenas oportunidades.</p>
@@ -197,11 +191,16 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                         </div>
                     </div>
                 </div>
+                <div class="p-4 text-center">
+                    <button class="btn btn-sm btn-dark" id="btnVerCalificaciones">
+                        <i class="bi bi-graph-up"></i> Ver todas las calificaciones
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Sección de Historial de Equipos (solo para admins o perfil propio) -->
-        <?php if ($perfil_jugador_admin_mode || $perfil_jugador_es_propio): ?>
+        <!-- Sección de Historial de Equipos -->
+        <?php if ($perfil_jugador_mostrar_equipos): ?>
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-info text-white">
                     <h4 class="mb-0"><i class="bi bi-people"></i> Historial de Equipos</h4>
@@ -215,7 +214,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                                     <p class="card-text text-muted">Equipo actual • Desde Marzo 2025</p>
                                     <div class="d-flex justify-content-between">
                                         <small>23 partidos jugados</small>
-                                        <span class="badge text-bg-dark">Activo</span>
+                                        <span class="badge bg-success">Activo</span>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +226,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                                     <p class="card-text text-muted">Enero 2025 - Marzo 2025</p>
                                     <div class="d-flex justify-content-between">
                                         <small>15 partidos jugados</small>
-                                        <span class="badge text-bg-dark">Inactivo</span>
+                                        <span class="badge bg-secondary">Inactivo</span>
                                     </div>
                                 </div>
                             </div>
@@ -256,62 +255,37 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label class="fw-bold text-muted d-block mb-1">
+                    <label class="text-muted d-block mb-1">
                         <i class="bi bi-envelope me-1"></i>Email
                     </label>
                     <p class="mb-0" id="emailJugador">carlos.fernandez@email.com</p>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold text-muted d-block mb-1">
+                    <label class="text-muted d-block mb-1">
                         <i class="bi bi-telephone me-1"></i>Teléfono
                     </label>
                     <p class="mb-0" id="telefonoJugador">+54 11 1234-5678</p>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold text-muted d-block mb-1">
+                    <label class="text-muted d-block mb-1">
                         <i class="bi bi-calendar me-1"></i>Edad
                     </label>
                     <p class="mb-0" id="edadJugador">28 años</p>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold text-muted d-block mb-1">
+                    <label class="text-muted d-block mb-1">
                         <i class="bi bi-geo-alt me-1"></i>Ubicación
                     </label>
                     <p class="mb-0" id="ubicacionJugador">CABA, Buenos Aires</p>
                 </div>
                 <?php if ($perfil_jugador_es_propio): ?>
                     <div class="mb-0">
-                        <label class="fw-bold text-muted d-block mb-1">
+                        <label class="text-muted d-block mb-1">
                             <i class="bi bi-calendar-plus me-1"></i>Miembro desde
                         </label>
-                        <p class="mb-0 text-success">Enero 2025</p>
+                        <p class="mb-0">Enero 2025</p>
                     </div>
                 <?php endif; ?>
-            </div>
-        </div>
-
-        <!-- Posición y habilidades -->
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header bg-info text-white">
-                <h5 class="mb-0"><i class="bi bi-award"></i> Habilidades</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label class="fw-bold text-muted d-block mb-1">Posición Preferida</label>
-                    <span class="badge text-bg-dark" id="posicionJugador">Mediocampista</span>
-                </div>
-                <div class="mb-3">
-                    <label class="fw-bold text-muted d-block mb-1">Pie Hábil</label>
-                    <p class="mb-0" id="pieJugador">Derecho</p>
-                </div>
-                <div class="mb-0">
-                    <label class="fw-bold text-muted d-block mb-2">Especialidades</label>
-                    <div class="d-flex flex-wrap gap-1">
-                        <span class="badge text-bg-dark">Pases largos</span>
-                        <span class="badge text-bg-dark text-dark">Centros</span>
-                        <span class="badge text-bg-dark">Visión de juego</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -329,6 +303,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                     <h3 class="text-warning mb-0">4.3</h3>
                     <small class="text-muted">Basado en 89 calificaciones</small>
                 </div>
+
                 <hr class="my-3">
 
                 <!-- Estadísticas de juego -->
@@ -343,7 +318,7 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                     </div>
                 </div>
 
-                <div class="row text-center">
+                <div class="row text-center mb-3">
                     <div class="col-6 border-end">
                         <div class="fw-bold text-warning fs-5">45</div>
                         <small class="text-muted">Goles</small>
@@ -354,14 +329,13 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
                     </div>
                 </div>
 
-                <!-- Botón ver estadísticas completas (si no es admin) -->
-                <?php if (!$perfil_jugador_admin_mode && $perfil_jugador_es_propio): ?>
-                    <div class="mt-3 text-center">
-                        <button class="btn btn-sm btn-dark" id="btnVerEstadisticas">
-                            <i class="bi bi-graph-up"></i> Ver estadísticas completas
-                        </button>
-                    </div>
-                <?php endif; ?>
+                <hr class="my-3">
+
+                <div class="mt-3 text-center">
+                    <button class="btn btn-sm btn-dark" id="btnVerEstadisticas">
+                        <i class="bi bi-graph-up"></i> Ver estadísticas completas
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -373,18 +347,66 @@ $perfil_jugador_mostrar_reportar = $perfil_jugador_mostrar_reportar ?? false;
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Cambiar Avatar</h5>
+                    <h5 class="modal-title"><i class="bi bi-person-circle"></i> Cambiar Foto de Perfil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center">
-                        <img id="previewAvatar" src="<?= IMG_PATH ?>default-avatar.png" class="rounded-circle mb-3" width="120" height="120">
-                        <input type="file" class="form-control" id="inputAvatar" accept="image/*">
+                    <!-- Zona de arrastrar y soltar -->
+                    <div class="avatar-upload-zone" id="avatarUploadZone">
+                        <div class="text-center p-4">
+                            <i class="bi bi-cloud-upload fs-1 text-muted mb-3"></i>
+                            <h5>Arrastra tu imagen aquí</h5>
+                            <p class="text-muted">o haz clic para seleccionar un archivo</p>
+                            <input type="file" class="d-none" id="inputAvatar" accept="image/*">
+                        </div>
+                    </div>
+
+                    <!-- Preview del avatar -->
+                    <div class="mt-3" id="avatarPreviewContainer" style="display: none;">
+                        <label class="form-label">Vista previa:</label>
+                        <div class="avatar-preview-wrapper">
+                            <div class="avatar-preview" id="avatarPreview"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarAvatar">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarAvatar" disabled>Guardar Foto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para cambiar banner -->
+    <div class="modal fade" id="modalCambiarBanner" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-image"></i> Cambiar Portada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Zona de arrastrar y soltar -->
+                    <div class="banner-upload-zone" id="bannerUploadZone">
+                        <div class="text-center p-4">
+                            <i class="bi bi-cloud-upload fs-1 text-muted mb-3"></i>
+                            <h5>Arrastra tu imagen aquí</h5>
+                            <p class="text-muted">o haz clic para seleccionar un archivo</p>
+                            <input type="file" class="d-none" id="inputBanner" accept="image/*">
+                        </div>
+                    </div>
+
+                    <!-- Preview del banner -->
+                    <div class="mt-3" id="bannerPreviewContainer" style="display: none;">
+                        <label class="form-label">Vista previa:</label>
+                        <div class="banner-preview-wrapper">
+                            <div class="banner-preview" id="bannerPreview"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarBanner" disabled>Guardar Portada</button>
                 </div>
             </div>
         </div>
