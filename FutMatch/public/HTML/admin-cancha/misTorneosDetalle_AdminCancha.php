@@ -313,7 +313,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 1 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -350,7 +350,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 0 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -387,7 +387,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 2 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -424,7 +424,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-danger d-block"><i class="bi bi-dash-circle"></i> 0 goles en contra</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-outline-primary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-primary btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>
@@ -461,7 +461,7 @@ require_once HEAD_COMPONENT;
                                 <small class="text-muted d-block"><i class="bi bi-dash"></i> - goles</small>
                             </div>
                             <div class="col-md-1 text-end">
-                                <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-outline-secondary btn-sm"
+                                <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-outline-secondary btn-sm"
                                     data-bs-toggle="tooltip" title="Ver perfil del equipo">
                                     <i class="bi bi-eye"></i>
                                 </a>

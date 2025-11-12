@@ -31,7 +31,7 @@ $perfil_jugador_botones_header = [
         'texto' => 'Volver',
         'icono' => 'bi-arrow-left',
         'clase' => 'btn-outline-secondary',
-        'url' => PAGE_AGENDA // O la página de donde vino
+        'url' => PAGE_AGENDA_ADMIN_CANCHA // O la página de donde vino
     ],
     [
         'tipo' => 'button',

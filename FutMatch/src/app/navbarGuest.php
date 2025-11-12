@@ -50,10 +50,10 @@ function isActive($page_name, $current)
                             <span class="d-none d-lg-inline ms-1">Explorar</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR_JUGADOR ?>">
                                     <i class="bi bi-geo-alt me-2"></i>Explorar canchas
                                 </a></li>
-                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_EXPLORAR ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_EXPLORAR_JUGADOR ?>">
                                     <i class="bi bi-people me-2"></i>Explorar partidos
                                 </a></li>
                         </ul>
@@ -97,11 +97,11 @@ function isActive($page_name, $current)
         <!-- Sección Explorar -->
         <h6 class="offcanvas-section-title mb-2">Explorar</h6>
         <div class="d-grid gap-2 mb-4">
-            <a href="<?= PAGE_CANCHAS_EXPLORAR ?>"
+            <a href="<?= PAGE_CANCHAS_EXPLORAR_JUGADOR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarCanchas', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Explorar Canchas
             </a>
-            <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>"
+            <a href="<?= PAGE_PARTIDOS_EXPLORAR_JUGADOR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarPartidos', $current_page) ?>">
                 <i class="bi bi-people me-2"></i>Explorar Partidos
             </a>

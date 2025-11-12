@@ -34,7 +34,7 @@ require_once HEAD_COMPONENT;
         <p class="text-muted mb-0">Gestiona tus partidos y encuentra nuevos rivales</p>
       </div>
       <div class="col-md-6 text-end">
-        <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>" class="btn btn-primary">
+        <a href="<?= PAGE_PARTIDOS_EXPLORAR_JUGADOR ?>" class="btn btn-primary">
           <i class="bi bi-plus-circle me-2"></i>Buscar nuevo partido
         </a>
       </div>

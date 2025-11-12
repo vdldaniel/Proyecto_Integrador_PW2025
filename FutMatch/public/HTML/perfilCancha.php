@@ -29,7 +29,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
     </div>
     <div class="col-md-6 text-end">
         <?php if ($perfil_cancha_admin_mode): ?>
-            <a type="button" class="btn btn-success me-2" href="<?= PAGE_AGENDA ?>">
+            <a type="button" class="btn btn-success me-2" href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>">
                 <i class="bi bi-calendar-week"></i> Ir a Agenda
             </a>
             <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#modalEditarCancha">
@@ -294,7 +294,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <a href="<?= PAGE_CALENDARIO_CANCHA ?>" class="btn btn-primary" id="btnVerCalendarioCompleto">
+                        <a href="<?= PAGE_CALENDARIO_CANCHA_JUGADOR ?>" class="btn btn-primary" id="btnVerCalendarioCompleto">
                             <i class="bi bi-calendar-week"></i> Ver Calendario Completo
                         </a>
                     </div>
@@ -308,7 +308,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
         <!-- Botón principal -->
         <div class="mb-4">
             <?php if ($perfil_cancha_admin_mode): ?>
-                <button type="button" class="btn btn-success btn-lg w-100" data-url="<?= PAGE_AGENDA ?>">
+                <button type="button" class="btn btn-success btn-lg w-100" data-url="<?= PAGE_AGENDA_ADMIN_CANCHA ?>">
                     <i class="bi bi-calendar-check"></i> Ver Disponibilidad
                 </button>
             <?php else: ?>

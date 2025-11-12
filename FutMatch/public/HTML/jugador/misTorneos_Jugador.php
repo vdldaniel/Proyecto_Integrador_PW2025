@@ -29,7 +29,7 @@ require_once HEAD_COMPONENT;
                 <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="modal" data-bs-target="#modalHistorialTorneos">
                     <i class="bi bi-clock-history"></i> Historial de Torneos
                 </button>
-                <a href="<?= PAGE_TORNEOS_EXPLORAR ?>" class="btn btn-primary">
+                <a href="<?= PAGE_TORNEOS_EXPLORAR_JUGADOR ?>" class="btn btn-primary">
                     <i class="bi bi-search"></i> Explorar Torneos
                 </a>
             </div>

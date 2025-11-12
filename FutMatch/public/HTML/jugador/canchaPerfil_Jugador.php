@@ -27,7 +27,7 @@ require_once HEAD_COMPONENT;
         $perfil_cancha_boton_primario = [
             'texto' => 'Ver disponibilidad',
             'icono' => 'bi-calendar-plus',
-            'url' => PAGE_CALENDARIO_CANCHA
+            'url' => PAGE_CALENDARIO_CANCHA_JUGADOR
         ];
 
         // Incluir componente de perfil de cancha

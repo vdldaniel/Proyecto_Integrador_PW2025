@@ -47,7 +47,7 @@ require_once HEAD_COMPONENT;
 
     <div class="row">
       <div class="col">
-        <a href="<?= PAGE_AGENDA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+        <a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
           <div class="card-body">
             <h5 class="card-title">Agenda</h5>
             <p class="card-text">Ver y gestionar eventos de la agenda.</p>
@@ -61,7 +61,7 @@ require_once HEAD_COMPONENT;
           </div>
         </a>
 
-        <a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+        <a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
           <div class="card-body">
             <h5 class="card-title">Perfiles de Canchas</h5>
             <p class="card-text">Ver y gestionar los perfiles de mis canchas.</p>

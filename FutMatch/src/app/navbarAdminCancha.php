@@ -43,7 +43,7 @@ function isActive($page_name, $current)
 						<i class="bi bi-house-door"></i>
 						<span class="d-none d-lg-inline ms-1">Home</span>
 					</a>
-					<a href="<?= PAGE_AGENDA ?>"
+					<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('agenda', $current_page) ?>"
 						id="botonAgenda"
 						title="Agenda">
@@ -57,7 +57,7 @@ function isActive($page_name, $current)
 						<i class="bi bi-geo-alt-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Canchas</span>
 					</a>
-					<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>"
+					<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('canchaPerfil', $current_page) ?>"
 						id="botonPerfiles"
 						title="Perfiles">
@@ -116,7 +116,7 @@ function isActive($page_name, $current)
 				title="Home">
 				<i class="bi bi-house-door me-2"></i>Home
 			</a>
-			<a href="<?= PAGE_AGENDA ?>"
+			<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('agenda', $current_page) ?>"
 				title="Agenda">
 				<i class="bi bi-calendar-event me-2"></i>Agenda
@@ -131,7 +131,7 @@ function isActive($page_name, $current)
 				title="Mis Torneos">
 				<i class="bi bi-trophy-fill me-2"></i>Mis Torneos
 			</a>
-			<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>"
+			<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('canchaPerfil', $current_page) ?>"
 				title="Perfiles">
 				<i class="bi bi-person-circle me-2"></i>Perfiles
@@ -191,7 +191,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade show active" id="content-agenda" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Reserva</h6>
-							<a href="<?= PAGE_AGENDA ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-primary">
 								<i class="bi bi-calendar-event me-1"></i>Ver Agenda Completa
 							</a>
 						</div>

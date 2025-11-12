@@ -11,20 +11,24 @@ Este documento explica cómo funciona el sistema de autenticación y sesiones im
 ### Componentes Principales
 
 1. **`config.php`** - Configuración global
+
    - Conexión a base de datos centralizada
    - Constantes de rutas y nombres de tablas
    - Credenciales de BD como constantes
 
 2. **`auth-required.php`** - Sistema de autenticación
+
    - Manejo de sesiones
    - Funciones de verificación de usuario
    - Control de acceso por tipo de usuario
 
 3. **`modalLogin.php`** - Modal de login reutilizable
+
    - Componente visual para login
    - Puede incluirse en cualquier página
 
 4. **`login_controller.php`** - Controlador de login
+
    - Procesa credenciales
    - Establece sesiones
    - Redirige según tipo de usuario
@@ -56,19 +60,19 @@ require_once HEAD_COMPONENT;
 ?>
 <body>
   <?php require_once NAVBAR_GUEST_COMPONENT; ?>
-  
+
   <!-- Contenido -->
-  
-  <?php 
+
+  <?php
   // Incluir modal de login al final
-  require_once MODAL_LOGIN_COMPONENT; 
+  require_once MODAL_LOGIN_COMPONENT;
   ?>
 </body>
 ```
 
 ### 2. Página que REQUIERE autenticación
 
-```php
+````php
 <?php
 require_once("../../../src/app/config.php");
 
@@ -106,17 +110,18 @@ require_once HEAD_COMPONENT;
 ?>
 <body>
   <?php require_once NAVBAR_JUGADOR_COMPONENT; ?>
-  
+
   <h1>Bienvenido <?= htmlspecialchars($currentUser['nombre']) ?></h1>
-  
+
 </body>
-```
+````
 
 ---
 
 ## Funciones Disponibles (auth-required.php)
 
 ### `isLoggedIn()`
+
 ```php
 if (isLoggedIn()) {
     echo "Usuario autenticado";
@@ -124,11 +129,13 @@ if (isLoggedIn()) {
 ```
 
 ### `requireAuth()`
+
 ```php
 requireAuth(); // Redirige al login si no está autenticado
 ```
 
 ### `isUserType($type)`
+
 ```php
 if (isUserType('admin_cancha')) {
     echo "Es administrador de cancha";
@@ -136,11 +143,13 @@ if (isUserType('admin_cancha')) {
 ```
 
 ### `requireUserType($type)`
+
 ```php
 requireUserType('jugador'); // Solo permite jugadores
 ```
 
 ### `getCurrentUser()`
+
 ```php
 $user = getCurrentUser();
 echo $user['nombre']; // Nombre del usuario
@@ -204,9 +213,11 @@ TABLE_USUARIOS
 TABLE_ROLES_USUARIOS
 TABLE_ESTADOS_USUARIOS
 ```
+
 (Revisar config.php para ver todos)
 
 Usar en consultas:
+
 ```php
 $stmt = $conn->prepare("SELECT * FROM " . TABLE_PARTIDOS . " WHERE fecha >= ?");
 ```
@@ -214,6 +225,7 @@ $stmt = $conn->prepare("SELECT * FROM " . TABLE_PARTIDOS . " WHERE fecha >= ?");
 ### Nota Importante sobre el Login
 
 El sistema mapea los roles de la BD a tipos de usuario en la sesión:
+
 - `id_rol = 1` → `$_SESSION['user_type'] = 'admin_sistema'`
 - `id_rol = 2` → `$_SESSION['user_type'] = 'admin_cancha'`
 - `id_rol = 3` → `$_SESSION['user_type'] = 'jugador'`
@@ -225,6 +237,7 @@ El estado del usuario debe ser `id_estado = 1` (Activo) para poder iniciar sesi�
 ## Seguridad Implementada
 
 ### 1. Contraseñas
+
 - **Almacenamiento**: Texto plano (proyecto académico)
 - **Verificación**: Comparación directa
 
@@ -236,6 +249,7 @@ if ($password === $usuario['password']) {
 ```
 
 ### 2. Consultas Preparadas (PDO)
+
 ```php
 // Utilizar prepare:
 $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = :email");
@@ -246,11 +260,11 @@ $query = "SELECT * FROM usuarios WHERE email = '$email'";
 ```
 
 ### 3. Sanitización de Salida
+
 ```php
 // Siempre usar htmlspecialchars() al mostrar datos
 echo htmlspecialchars($user['nombre']);
 ```
-
 
 ## Ejemplos Prácticos
 
@@ -258,7 +272,7 @@ echo htmlspecialchars($user['nombre']);
 
 ```php
 <?php if (isLoggedIn()): ?>
-    <a href="<?= PAGE_PARTIDOS_JUGADOR ?>">Mis Partidos</a>
+    <a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>">Mis Partidos</a>
 <?php else: ?>
     <button data-bs-toggle="modal" data-bs-target="#modalLogin">
         Iniciar sesión para ver tus partidos
@@ -282,8 +296,8 @@ if ($user):
 ```php
 try {
     $stmt = $conn->prepare("
-        SELECT * FROM " . TABLE_PARTIDOS . " 
-        WHERE fecha >= CURDATE() 
+        SELECT * FROM " . TABLE_PARTIDOS . "
+        WHERE fecha >= CURDATE()
         AND genero = :genero
     ");
     $stmt->execute(['genero' => $genero]);
@@ -299,6 +313,7 @@ try {
 ## Buenas Prácticas
 
 ### HACER:
+
 1. Usar `requireAuth()` en todas las páginas privadas
 2. Usar consultas preparadas SIEMPRE
 3. Sanitizar con `htmlspecialchars()` al mostrar datos
@@ -307,6 +322,7 @@ try {
 6. Validar datos tanto en cliente como servidor
 
 ### NO HACER:
+
 1. Concatenar variables en SQL directamente
 2. Guardar contraseñas en texto plano
 3. Confiar solo en validación JavaScript

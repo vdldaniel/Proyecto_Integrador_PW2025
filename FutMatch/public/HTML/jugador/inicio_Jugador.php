@@ -32,12 +32,13 @@ $page_css = [
 // Cargar head común
 require_once HEAD_COMPONENT;
 ?>
+
 <body>
-  <?php 
+  <?php
   // Cargar navbar
-  require_once NAVBAR_JUGADOR_COMPONENT; 
+  require_once NAVBAR_JUGADOR_COMPONENT;
   ?>
-  
+
   <!-- Contenido principal -->
   <main class="container-fluid d-flex align-items-center justify-content-center main-content">
     <div class="w-100 px-4">
@@ -46,42 +47,42 @@ require_once HEAD_COMPONENT;
         <h2 class="mb-3">¿Qué te gustaría hacer?</h2>
         <p class="text-body-secondary">Explora las opciones disponibles para disfrutar del fútbol</p>
       </div>
-      
+
       <!-- Tarjetas principales -->
       <div class="row g-4 justify-content-center">
         <!-- Tarjeta Reservar Cancha -->
         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
           <div class="card h-100 border-0 shadow-lg">
-              <div class="card-body text-center p-4">
-                <div class="mb-3">
-                  <i class="bi bi-geo-alt text-success icon-large"></i>
-                </div>
-                <h5 class="card-title mb-3">Reservar una cancha</h5>
-                <p class="card-text text-body-secondary mb-4">Encuentra y reserva las mejores canchas cerca de ti</p>
-                <a href="<?= PAGE_CANCHAS_EXPLORAR?>" class="btn btn-success">
-                  <i class="bi bi-plus-circle me-2"></i>Explorar canchas
-                </a>
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="bi bi-geo-alt text-success icon-large"></i>
               </div>
+              <h5 class="card-title mb-3">Reservar una cancha</h5>
+              <p class="card-text text-body-secondary mb-4">Encuentra y reserva las mejores canchas cerca de ti</p>
+              <a href="<?= PAGE_CANCHAS_EXPLORAR_JUGADOR ?>" class="btn btn-success">
+                <i class="bi bi-plus-circle me-2"></i>Explorar canchas
+              </a>
             </div>
           </div>
-          
-          <!-- Tarjeta Unirse a Partidos -->
-          <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card h-100 border-0 shadow-lg">
-              <div class="card-body text-center p-4">
-                <div class="mb-3">
-                  <i class="bi bi-people text-primary icon-large"></i>
-                </div>
-                <h5 class="card-title mb-3">Unirse a partidos</h5>
-                <p class="card-text text-body-secondary mb-4">Únete a partidos organizados por otros jugadores</p>
-                <a href="<?= PAGE_PARTIDOS_EXPLORAR ?>" class="btn btn-primary">
-                  <i class="bi bi-play-circle me-2"></i>Explorar partidos
-                </a>
+        </div>
+
+        <!-- Tarjeta Unirse a Partidos -->
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+          <div class="card h-100 border-0 shadow-lg">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="bi bi-people text-primary icon-large"></i>
               </div>
+              <h5 class="card-title mb-3">Unirse a partidos</h5>
+              <p class="card-text text-body-secondary mb-4">Únete a partidos organizados por otros jugadores</p>
+              <a href="<?= PAGE_PARTIDOS_EXPLORAR_JUGADOR ?>" class="btn btn-primary">
+                <i class="bi bi-play-circle me-2"></i>Explorar partidos
+              </a>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </main>
 
@@ -89,4 +90,5 @@ require_once HEAD_COMPONENT;
   <script src="<?= JS_BOOTSTRAP ?>"></script>
   <script src="<?= JS_INICIO_JUGADOR ?>"></script>
 </body>
+
 </html>

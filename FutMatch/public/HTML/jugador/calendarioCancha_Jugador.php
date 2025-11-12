@@ -23,7 +23,7 @@ require_once HEAD_COMPONENT;
         <div class="row mb-4 align-items-center">
             <div class="col-md-8">
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-outline-secondary me-3" href="<?= PAGE_CANCHA_PERFIL_JUGADOR ?>">
+                    <a class="btn btn-outline-secondary me-3" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
                         <i class="bi bi-arrow-left"></i>
                     </a>
                     <div>

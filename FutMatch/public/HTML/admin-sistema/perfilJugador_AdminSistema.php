@@ -31,7 +31,7 @@ $perfil_jugador_botones_header = [
         'texto' => 'Volver a Reportes',
         'icono' => 'bi-arrow-left',
         'clase' => 'btn-outline-secondary',
-        'url' => PAGE_JUGADORES_REPORTADOS_ADMIN
+        'url' => PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA
     ],
     [
         'tipo' => 'button',

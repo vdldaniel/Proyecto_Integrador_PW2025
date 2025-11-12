@@ -36,13 +36,13 @@ function isActive($page_name, $current)
                                 <i class="bi bi-house-door"></i>
                                 <span class="d-none d-lg-inline ms-1">Home</span>
                             </a>
-                            <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>"
+                            <a href="<?= PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA ?>"
                                 class="btn btn-dark me-2 <?= isActive('canchasAdminSistema', $current_page) ?>"
                                 id="botonCanchas"
                                 title="Canchas">
                                 <span class="d-none d-lg-inline ms-1">Canchas</span>
                             </a>
-                            <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>"
+                            <a href="<?= PAGE_JUGADORES_LISTADO_ADMIN_SISTEMA ?>"
                                 class="btn btn-dark me-2 <?= isActive('jugadoresAdminSistema', $current_page) ?>"
                                 id="botonAdminJugadores"
                                 title="Jugadores">
@@ -62,7 +62,7 @@ function isActive($page_name, $current)
                                         <i class="bi bi-geo-alt me-2"></i>Canchas reportadas
                                     </a>
                                 </li>
-                                <li><a class="dropdown-item" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>">
+                                <li><a class="dropdown-item" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>">
                                         <i class="bi bi-people me-2"></i>Jugadores reportados
                                     </a>
                                 </li>
@@ -112,12 +112,12 @@ function isActive($page_name, $current)
                 title="Home">
                 <i class="bi bi-house-door me-2"></i>Home
             </a>
-            <a href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>"
+            <a href="<?= PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA ?>"
                 class="btn btn-dark text-start <?= isActive('canchasAdminSistema', $current_page) ?>"
                 title="Mis Partidos">
                 <i class="bi bi-calendar-event me-2"></i>Canchas
             </a>
-            <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>"
+            <a href="<?= PAGE_JUGADORES_LISTADO_ADMIN_SISTEMA ?>"
                 class="btn btn-dark text-start <?= isActive('jugadoresAdminSistema', $current_page) ?>"
                 title="Mis Equipos">
                 <i class="bi bi-people me-2"></i>Jugadores
@@ -131,7 +131,7 @@ function isActive($page_name, $current)
                 class="btn btn-dark text-start <?= isActive('canchasReportadasAdmin', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Canchas reportadas
             </a>
-            <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>"
+            <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>"
                 class="btn btn-dark text-start <?= isActive('jugadoresReportadosAdmin', $current_page) ?>">
                 <i class="bi bi-people me-2"></i>Jugadores reportados
             </a>
@@ -140,7 +140,7 @@ function isActive($page_name, $current)
         <!-- Perfil y configuración -->
         <div class="mt-auto pt-3 border-top">
             <div class="d-grid gap-2">
-                <a href="<?= PAGE_PERFIL_JUGADOR ?>"
+                <a href="<?= PAGE_MI_PERFIL_JUGADOR ?>"
                     class="btn btn-dark text-start <?= isActive('miPerfil', $current_page) ?>"
                     title="Mi Perfil">
                     <i class="bi bi-person-circle me-2"></i>Mi Perfil

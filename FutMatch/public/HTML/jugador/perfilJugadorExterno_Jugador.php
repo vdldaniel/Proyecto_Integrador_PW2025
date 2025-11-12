@@ -71,7 +71,7 @@ include HEAD_COMPONENT;
                         window.history.back();
                     } else {
                         // Fallback si no hay referrer
-                        window.location.href = '<?= PAGE_PARTIDOS_JUGADOR ?>';
+                        window.location.href = '<?= PAGE_MIS_PARTIDOS_JUGADOR ?>';
                     }
                 });
             }

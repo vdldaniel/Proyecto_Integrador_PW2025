@@ -33,7 +33,7 @@ include HEAD_COMPONENT;
                 </div>
 
                 <div class="col-md-6 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>">
+                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>">
                         <i class="bi bi-flag-fill"></i> Ir a Jugadores Reportados
                     </a>
                 </div>
@@ -123,7 +123,7 @@ include HEAD_COMPONENT;
                                         <a href="<?= PAGE_PERFIL_JUGADOR_ADMIN_SISTEMA ?>?id=JUG-001" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver perfil">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
+                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
                                             <i class="bi bi-flag"></i>
                                         </a>
                                         <button class="btn btn-dark" data-jugador-id="JUG-001" data-bs-toggle="tooltip" title="Suspender cuenta">
@@ -165,7 +165,7 @@ include HEAD_COMPONENT;
                                         <a href="<?= PAGE_PERFIL_JUGADOR_ADMIN_SISTEMA ?>?id=JUG-002" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver perfil">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
+                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
                                             <i class="bi bi-flag"></i>
                                         </a>
                                         <button class="btn btn-dark" data-jugador-id="JUG-002" data-bs-toggle="tooltip" title="Suspender cuenta">
@@ -207,7 +207,7 @@ include HEAD_COMPONENT;
                                         <a href="<?= PAGE_PERFIL_JUGADOR_ADMIN_SISTEMA ?>?id=JUG-003" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver perfil">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
+                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
                                             <i class="bi bi-flag"></i>
                                         </a>
                                         <button class="btn btn-dark" data-jugador-id="JUG-003" data-bs-toggle="tooltip" title="Suspender cuenta">
@@ -255,7 +255,7 @@ include HEAD_COMPONENT;
                                         <a href="<?= PAGE_PERFIL_JUGADOR_ADMIN_SISTEMA ?>?id=JUG-004" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver perfil">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
+                                        <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver reportes">
                                             <i class="bi bi-flag"></i>
                                         </a>
                                         <button class="btn btn-dark" data-jugador-id="JUG-004" data-bs-toggle="tooltip" title="Reestablecer cuenta">

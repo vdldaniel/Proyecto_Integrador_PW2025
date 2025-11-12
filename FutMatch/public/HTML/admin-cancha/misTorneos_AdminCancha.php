@@ -73,7 +73,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="col-md-3">
                 <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="text-decoration-none">
+                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
                     Torneo Apertura
                   </a>
                 </h5>
@@ -110,7 +110,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="col-md-3">
                 <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="text-decoration-none">
+                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
                     Copa FutMatch
                   </a>
                 </h5>
@@ -147,7 +147,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="col-md-3">
                 <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="text-decoration-none">
+                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
                     Torneo Interclubes
                   </a>
                 </h5>
@@ -157,7 +157,7 @@ require_once HEAD_COMPONENT;
                 <span class="badge bg-warning text-dark">Inscripciones cerradas</span>
               </div>
               <div class="col-md-5 text-end">
-                <a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" title="Gestionar torneo">
+                <a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" title="Gestionar torneo">
                   <i class="bi bi-gear"></i>
                   <span class="d-none d-lg-inline ms-1">Gestionar</span>
                 </a>
@@ -184,7 +184,7 @@ require_once HEAD_COMPONENT;
               </div>
               <div class="col-md-3">
                 <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="text-decoration-none">
+                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
                     Liga Primavera
                   </a>
                 </h5>
@@ -194,7 +194,7 @@ require_once HEAD_COMPONENT;
                 <span class="badge bg-primary">En curso</span>
               </div>
               <div class="col-md-5 text-end">
-                <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="btn btn-outline-info btn-sm me-1" title="Gestionar torneo">
+                <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-outline-info btn-sm me-1" title="Gestionar torneo">
                   <i class="bi bi-gear"></i>
                   <span class="d-none d-lg-inline ms-1">Gestionar</span>
                 </a>
@@ -331,7 +331,7 @@ require_once HEAD_COMPONENT;
                   <td>Los Cracks FC</td>
                   <td>9 jugadores</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
                     </a>
                   </td>
@@ -340,7 +340,7 @@ require_once HEAD_COMPONENT;
                   <td>Deportivo Fútbol</td>
                   <td>7 jugadores</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
                     </a>
                   </td>
@@ -349,7 +349,7 @@ require_once HEAD_COMPONENT;
                   <td>Racing Club</td>
                   <td>9 jugadores</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_EQUIPO_PERFIL ?>" class="btn btn-sm btn-info">
+                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-info">
                       <i class="bi bi-eye"></i><span class="d-none d-md-inline ms-1">Ver perfil</span>
                     </a>
                   </td>
@@ -423,7 +423,7 @@ require_once HEAD_COMPONENT;
                   <td>04/11/2025</td>
                   <td>30/11/2025</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>
@@ -433,7 +433,7 @@ require_once HEAD_COMPONENT;
                   <td>15/06/2024</td>
                   <td>30/07/2024</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>
@@ -476,7 +476,7 @@ require_once HEAD_COMPONENT;
                   <td>10/01/2024</td>
                   <td>28/02/2024</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>
@@ -486,7 +486,7 @@ require_once HEAD_COMPONENT;
                   <td>15/09/2023</td>
                   <td>15/12/2023</td>
                   <td>
-                    <a href="<?= PAGE_ADMIN_TORNEO_DETALLE ?>" class="btn btn-sm btn-outline-info">
+                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-info">
                       <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
                     </a>
                   </td>

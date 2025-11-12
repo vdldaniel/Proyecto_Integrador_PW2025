@@ -658,7 +658,7 @@ function abrirModalSolicitarUnirse(idPartido) {
                     </div>
                     <div class="col-5">${infoPartido.cancha}</div>
                     <div class="col-3 text-end">
-                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/canchaPerfil_Jugador.php?id=${infoPartido.canchaId}" 
+                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilCancha_Jugador.php?id=${infoPartido.canchaId}" 
                            class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-eye me-1"></i>Ver cancha
                         </a>
@@ -763,7 +763,7 @@ function abrirModalUnirseEquipo(idPartido) {
                     </div>
                     <div class="col-5">${infoPartido.cancha}</div>
                     <div class="col-3 text-end">
-                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/canchaPerfil_Jugador.php?id=${
+                        <a href="/Proyecto_Integrador_PW2025/FutMatch/public/HTML/jugador/perfilCancha_Jugador.php?id=${
                           infoPartido.canchaId
                         }" 
                            class="btn btn-sm btn-outline-primary">

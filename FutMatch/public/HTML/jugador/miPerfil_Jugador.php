@@ -31,7 +31,7 @@ $perfil_jugador_botones_header = [
         'texto' => 'Ver Partidos',
         'icono' => 'bi-calendar-check',
         'clase' => 'btn-outline-primary',
-        'url' => PAGE_PARTIDOS_JUGADOR
+        'url' => PAGE_MIS_PARTIDOS_JUGADOR
     ],
     [
         'tipo' => 'button',

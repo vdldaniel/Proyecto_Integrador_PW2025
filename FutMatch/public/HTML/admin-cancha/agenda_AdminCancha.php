@@ -192,7 +192,7 @@ require_once HEAD_COMPONENT;
                     <div class="col-md-6">
                       <p class="mb-2"><strong>Teléfono:</strong><br><span id="telefonoComplejo">+54 11 1234-5678</span></p>
                       <div class="d-grid">
-                        <a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" type="button" class="btn btn-outline-info" id="botonVerPerfilCancha">
+                        <a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" type="button" class="btn btn-outline-info" id="botonVerPerfilCancha">
                           <i class="bi bi-building me-2"></i>Ver Perfil Completo
                         </a>
                       </div>
