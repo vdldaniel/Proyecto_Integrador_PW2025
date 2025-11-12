@@ -34,7 +34,7 @@ include HEAD_COMPONENT;
                 </div>
 
                 <div class="col-md-6 text-end">
-                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_CANCHAS_ADMIN_SISTEMA ?>">
+                    <a type="button" class="btn btn-outline-secondary me-2" href="<?= PAGE_SISTEMA_CANCHAS_LISTADO ?>">
                         <i class="bi bi-building-fill"></i> Ir a Verificación de Canchas
                     </a>
                 </div>
@@ -127,7 +127,7 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <a href="<?= PAGE_CANCHA_DETALLE_ADMIN_SISTEMA ?>?id=CAN-025" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
+                                        <a href="<?= PAGE_PERFIL_CANCHA_ADMIN_SISTEMA ?>?id=CAN-025" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
                                             <i class="bi bi-eye"></i>
                                         </a>
                                         <button class="btn btn-dark btn-ver-detalle-reporte" data-cancha-id="CAN-025" data-reporte-id="REP-C001" data-bs-toggle="tooltip" title="Ver detalle del reporte">
@@ -174,7 +174,7 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-2">
                                     <div class="acciones-container">
-                                        <a href="<?= PAGE_CANCHA_DETALLE_ADMIN_SISTEMA ?>?id=CAN-041" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
+                                        <a href="<?= PAGE_PERFIL_CANCHA_ADMIN_SISTEMA ?>?id=CAN-041" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
                                             <i class="bi bi-eye"></i>
                                         </a>
                                         <button class="btn btn-dark btn-ver-detalle-reporte" data-cancha-id="CAN-041" data-reporte-id="REP-C002" data-bs-toggle="tooltip" title="Ver detalle del reporte">
@@ -227,7 +227,7 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-3">
                                     <div class="acciones-container">
-                                        <a href="<?= PAGE_CANCHA_DETALLE_ADMIN_SISTEMA ?>?id=CAN-055" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
+                                        <a href="<?= PAGE_PERFIL_CANCHA_ADMIN_SISTEMA ?>?id=CAN-055" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
                                             <i class="bi bi-eye"></i>
                                         </a>
                                         <button class="btn btn-dark btn-ver-detalle-reporte" data-cancha-id="CAN-055" data-reporte-id="REP-C003" data-bs-toggle="tooltip" title="Ver detalle del reporte">
@@ -280,7 +280,7 @@ include HEAD_COMPONENT;
                                 </div>
                                 <div class="col-md-3">
                                     <div class="acciones-container">
-                                        <a href="<?= PAGE_CANCHA_DETALLE_ADMIN_SISTEMA ?>?id=CAN-067" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
+                                        <a href="<?= PAGE_PERFIL_CANCHA_ADMIN_SISTEMA ?>?id=CAN-067" class="btn btn-dark" data-bs-toggle="tooltip" title="Ver cancha">
                                             <i class="bi bi-eye"></i>
                                         </a>
                                         <button class="btn btn-dark btn-ver-detalle-reporte" data-cancha-id="CAN-067" data-reporte-id="REP-C004" data-bs-toggle="tooltip" title="Ver detalle del reporte">

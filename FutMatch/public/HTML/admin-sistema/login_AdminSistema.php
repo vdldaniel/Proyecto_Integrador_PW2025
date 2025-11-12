@@ -44,18 +44,18 @@ include HEAD_COMPONENT;
 
               <!-- Formulario -->
               <form id="loginForm" novalidate>
-                
+
                 <div class="mb-3">
                   <label for="usuarioAdmin" class="form-label">Email</label>
                   <input type="email" class="form-control" id="usuarioAdmin" name="email"
-                         autocomplete="username" required />
+                    autocomplete="username" required />
                   <div class="invalid-feedback">Ingrese su cuenta de administrador.</div>
                 </div>
 
                 <div class="mb-3">
                   <label for="password" class="form-label">Contraseña</label>
                   <input type="password" class="form-control" id="password" name="password"
-                         autocomplete="current-password" required />
+                    autocomplete="current-password" required />
                   <div class="invalid-feedback">La contraseña es obligatoria.</div>
                 </div>
 
@@ -74,7 +74,8 @@ include HEAD_COMPONENT;
   </header>
 </body>
 
-  <!-- Scripts -->
-  <script src="<?= JS_BOOTSTRAP ?>"></script>
-  <!-- Script específico de la página (opcional) -->
+<!-- Scripts -->
+<script src="<?= JS_BOOTSTRAP ?>"></script>
+<!-- Script específico de la página (opcional) -->
+
 </html>

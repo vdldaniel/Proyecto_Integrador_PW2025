@@ -50,21 +50,21 @@ function isActive($page_name, $current)
 						<i class="bi bi-calendar-event"></i>
 						<span class="d-none d-lg-inline ms-1">Agenda</span>
 					</a>
-					<a href="<?= PAGE_ADMIN_CANCHAS_LISTADO ?>"
+					<a href="<?= PAGE_MIS_CANCHAS_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('misCanchas', $current_page) ?>"
 						id="botonMisCanchas"
 						title="Mis Canchas">
 						<i class="bi bi-geo-alt-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Canchas</span>
 					</a>
-					<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>"
+					<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('canchaPerfil', $current_page) ?>"
 						id="botonPerfiles"
 						title="Perfiles">
 						<i class="bi bi-person-circle"></i>
 						<span class="d-none d-lg-inline ms-1">Perfiles</span>
 					</a>
-					<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>"
+					<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('misTorneos', $current_page) ?>"
 						id="botonMisTorneos"
 						title="Mis Torneos">
@@ -121,17 +121,17 @@ function isActive($page_name, $current)
 				title="Agenda">
 				<i class="bi bi-calendar-event me-2"></i>Agenda
 			</a>
-			<a href="<?= PAGE_ADMIN_CANCHAS_LISTADO ?>"
+			<a href="<?= PAGE_MIS_CANCHAS_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('misCanchas', $current_page) ?>"
 				title="Mis Canchas">
 				<i class="bi bi-geo-alt-fill me-2"></i>Mis Canchas
 			</a>
-			<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>"
+			<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('misTorneos', $current_page) ?>"
 				title="Mis Torneos">
 				<i class="bi bi-trophy-fill me-2"></i>Mis Torneos
 			</a>
-			<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>"
+			<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('canchaPerfil', $current_page) ?>"
 				title="Perfiles">
 				<i class="bi bi-person-circle me-2"></i>Perfiles
@@ -287,7 +287,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-torneos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Torneos</h6>
-							<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>" class="btn btn-sm btn-outline-primary">
 								<i class="bi bi-trophy me-1"></i>Ver Mis Torneos
 							</a>
 						</div>

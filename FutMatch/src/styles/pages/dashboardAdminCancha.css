@@ -1,6 +1,6 @@
 /* 
  * DASHBOARD ADMIN CANCHA - Estilos específicos para el dashboard del admin de cancha
- * Página: inicioAdminCancha.php
+ * Página: inicio_AdminCancha.php
  */
 
 /* Contenedor principal del dashboard */
@@ -88,7 +88,7 @@
     height: auto;
     overflow: auto;
   }
-  
+
   .dashboard-card {
     height: auto;
   }
@@ -388,17 +388,17 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .dashboard-title {
     font-size: 1.5rem;
   }
-  
+
   .events-table th,
   .events-table td {
     padding: 0.5rem 0.25rem;
     font-size: 0.75rem;
   }
-  
+
   .simple-bar-chart {
     height: 200px;
   }

@@ -42,10 +42,24 @@ include HEAD_COMPONENT;
             </div>
           </a>
 
+          <a href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <div class="card-body">
+              <h5 class="card-title">Canchas reportadas</h5>
+              <p class="card-text">Ver y gestionar los reportes recibidos de los usuarios</p>
+            </div>
+          </a>
+
           <a href="<?= PAGE_SISTEMA_JUGADORES_LISTADO ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
             <div class="card-body">
               <h5 class="card-title">Listado de Usuarios</h5>
               <p class="card-text">Ver y gestionar los usuarios registrados.</p>
+            </div>
+          </a>
+
+          <a href="<?= PAGE_JUGADORES_REPORTADOS_ADMIN ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+            <div class="card-body">
+              <h5 class="card-title">Listado de Usuarios</h5>
+              <p class="card-text">Ver y gestionar los reportes recibidos de los usuairos</p>
             </div>
           </a>
         </div>

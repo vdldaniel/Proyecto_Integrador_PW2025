@@ -1,6 +1,6 @@
 <?php
 // Componente de Calendario Reutilizable
-// Extrae la funcionalidad base del calendario desde agenda.php
+// Extrae la funcionalidad base del calendario desde agenda_AdminCancha.php
 // Sin elementos específicos del admin, solo la funcionalidad esencial
 ?>
 

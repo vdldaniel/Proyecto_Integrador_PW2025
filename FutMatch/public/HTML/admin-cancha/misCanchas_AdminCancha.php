@@ -74,7 +74,7 @@ require_once HEAD_COMPONENT;
 							</div>
 							<div class="col-md-3">
 								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" class="text-decoration-none">
+									<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
 										La Previa Cancha C1-F5
 									</a>
 								</h5>
@@ -88,7 +88,7 @@ require_once HEAD_COMPONENT;
 								<span class="badge bg-success">Habilitada</span>
 							</div>
 							<div class="col-md-3 text-end">
-								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" title="Ver perfil">
+								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
 									<i class="bi bi-eye"></i>
 								</a>
 								<button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1" title="Editar">
@@ -119,7 +119,7 @@ require_once HEAD_COMPONENT;
 							</div>
 							<div class="col-md-3">
 								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" class="text-decoration-none">
+									<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
 										MegaFutbol Cancha A2-F9
 									</a>
 								</h5>
@@ -133,7 +133,7 @@ require_once HEAD_COMPONENT;
 								<span class="badge bg-warning text-dark">En revisión</span>
 							</div>
 							<div class="col-md-3 text-end">
-								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" title="Ver perfil">
+								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
 									<i class="bi bi-eye"></i>
 								</a>
 								<button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
@@ -164,7 +164,7 @@ require_once HEAD_COMPONENT;
 							</div>
 							<div class="col-md-3">
 								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" class="text-decoration-none">
+									<a href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
 										Cancha Delantera
 									</a>
 								</h5>
@@ -178,7 +178,7 @@ require_once HEAD_COMPONENT;
 								<span class="badge bg-secondary">Pendiente de verificación</span>
 							</div>
 							<div class="col-md-3 text-end">
-								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_ADMIN_PERFILES_CANCHAS ?>" title="Ver perfil">
+								<a class="btn btn-outline-info btn-sm me-1" href="<?= PAGE_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
 									<i class="bi bi-eye"></i>
 								</a>
 								<button class="btn btn-outline-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
