@@ -63,9 +63,17 @@ function isActive($page_name, $current)
 
             <!-- Lado derecho: perfil, notificaciones y configuración -->
             <div class="d-flex align-items-center">
+                <!-- Botón Registrarse -->
+                <a href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>"
+                    class="btn btn-outline-light me-2 d-none d-md-flex"
+                    title="Registrarse">
+                    <i class="bi bi-person-plus"></i>
+                    <span class="d-none d-lg-inline ms-1">Registrarse</span>
+                </a>
+                
                 <!-- Botón Iniciar Sesión -->
                 <button type="button"
-                    class="btn btn-dark me-2 d-none d-md-flex"
+                    class="btn btn-primary me-2 d-none d-md-flex"
                     data-bs-toggle="modal"
                     data-bs-target="#modalLogin"
                     title="Iniciar Sesión">
@@ -110,8 +118,13 @@ function isActive($page_name, $current)
         <!-- Perfil y configuración -->
         <div class="mt-auto pt-3 border-top">
             <div class="d-grid gap-2">
+                <a href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>"
+                    class="btn btn-outline-dark text-start"
+                    title="Registrarse">
+                    <i class="bi bi-person-plus me-2"></i>Registrarse
+                </a>
                 <button type="button"
-                    class="btn btn-dark text-start"
+                    class="btn btn-primary text-start"
                     data-bs-toggle="modal"
                     data-bs-target="#modalLogin"
                     title="Iniciar Sesión">

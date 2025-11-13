@@ -20,7 +20,7 @@ require_once '../../../src/app/config.php';
 
 // Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 // Verificar si el usuario está logueado
@@ -43,11 +43,11 @@ require_once HEAD_COMPONENT;
   <?php
   // Cargar navbar según el estado de autenticación
   if ($is_authenticated && isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'jugador') {
-      // Usuario logueado como jugador - mostrar navbar de jugador
-      require_once NAVBAR_JUGADOR_COMPONENT;
+    // Usuario logueado como jugador - mostrar navbar de jugador
+    require_once NAVBAR_JUGADOR_COMPONENT;
   } else {
-      // Usuario no logueado o no es jugador - mostrar navbar de guest
-      require_once NAVBAR_GUEST_COMPONENT;
+    // Usuario no logueado o no es jugador - mostrar navbar de guest
+    require_once NAVBAR_GUEST_COMPONENT;
   }
   ?>
 
@@ -57,7 +57,7 @@ require_once HEAD_COMPONENT;
 
       <?php if ($is_authenticated): ?>
         <!-- Contenido para usuarios logueados -->
-        
+
         <!-- Mensaje de bienvenida para nuevos usuarios -->
         <?php if (isset($_SESSION['registration_success'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -71,7 +71,7 @@ require_once HEAD_COMPONENT;
         <!-- Título principal para usuarios logueados -->
         <div class="text-center mb-5">
           <h2 class="mb-3">
-            ¡Hola <?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : 'Jugador' ?>! 
+            ¡Hola <?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : 'Jugador' ?>!
             ¿Qué te gustaría hacer?
           </h2>
           <p class="text-body-secondary">Explora las opciones disponibles para disfrutar del fútbol</p>
@@ -130,7 +130,7 @@ require_once HEAD_COMPONENT;
 
       <?php else: ?>
         <!-- Contenido para visitantes no logueados -->
-        
+
         <div class="text-center mb-5">
           <h2 class="mb-3">¡Bienvenido a FutMatch!</h2>
           <p class="text-body-secondary">La plataforma para encontrar canchas y organizar partidos de fútbol</p>
@@ -203,6 +203,13 @@ require_once HEAD_COMPONENT;
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
   <script src="<?= JS_INICIO_JUGADOR ?>"></script>
+  
+  <?php
+  // Incluir modal de login solo si el usuario no está autenticado
+  if (!$is_authenticated) {
+      require_once MODAL_LOGIN_COMPONENT;
+  }
+  ?>
 </body>
 
 </html>
