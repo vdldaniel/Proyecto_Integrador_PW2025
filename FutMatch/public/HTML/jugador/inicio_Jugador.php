@@ -203,11 +203,11 @@ require_once HEAD_COMPONENT;
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
   <script src="<?= JS_INICIO_JUGADOR ?>"></script>
-  
+
   <?php
   // Incluir modal de login solo si el usuario no está autenticado
   if (!$is_authenticated) {
-      require_once MODAL_LOGIN_COMPONENT;
+    require_once MODAL_LOGIN_COMPONENT;
   }
   ?>
 </body>

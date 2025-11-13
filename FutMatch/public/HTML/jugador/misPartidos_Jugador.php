@@ -3,6 +3,14 @@
 require_once '../../../src/app/config.php';
 require_once '../../../src/app/auth-required.php';
 
+// Iniciar sesión si no está iniciada
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+// Verificar si el usuario está logueado
+$is_authenticated = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+
 // Resalta la página actual en el navbar
 $current_page = 'partidosJugador';
 

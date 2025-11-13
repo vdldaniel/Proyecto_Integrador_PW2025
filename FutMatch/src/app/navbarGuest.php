@@ -70,7 +70,7 @@ function isActive($page_name, $current)
                     <i class="bi bi-person-plus"></i>
                     <span class="d-none d-lg-inline ms-1">Registrarse</span>
                 </a>
-                
+
                 <!-- Botón Iniciar Sesión -->
                 <button type="button"
                     class="btn btn-primary me-2 d-none d-md-flex"
