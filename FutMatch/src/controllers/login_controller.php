@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Login Controller - Procesa el inicio de sesión
  * -----------------------------------------------
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     error_log("[LOGIN] Email recibido: " . $email);
-    
+
     // Validaciones básicas
     if (empty($email) || empty($password)) {
         error_log("[LOGIN] Error: Campos vacíos");
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ' . PAGE_LANDING_PHP);
         exit();
     }
-    
+
     try {
         // Buscar usuario por email
         $query = "SELECT * FROM " . TABLE_USUARIOS . " WHERE email = :email AND id_estado = 1";
@@ -40,21 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['email' => $email]);
         $usuario = $stmt->fetch();
         error_log("[LOGIN] Usuario encontrado: " . ($usuario ? 'Sí (ID: ' . $usuario['id_usuario'] . ')' : 'No'));
-        
-        if ($usuario && $password === $usuario['password']) {
+
+        if ($usuario && password_verify($password, $usuario['password'])) {
             // Login exitoso - establecer sesión
-            error_log("[LOGIN] Contraseña verificada correctamente");
-            error_log("[LOGIN] ID Rol: " . $usuario['id_rol']);
+            error_log("[LOGIN] Contraseña verificada correctamente con hash");
             $_SESSION['user_id'] = $usuario['id_usuario'];
             $_SESSION['email'] = $usuario['email'];
 
-            // Obtener el nombre del rol desde la tabla roles_usuarios
-            $queryRol = "SELECT nombre FROM " . TABLE_ROLES_USUARIOS . " WHERE id_rol = :id_rol";
+            // Obtener el rol del usuario desde la tabla usuarios_roles
+            $queryRol = "SELECT r.nombre FROM roles r 
+                        INNER JOIN usuarios_roles ur ON r.id_rol = ur.id_rol 
+                        WHERE ur.id_usuario = :id_usuario";
             error_log("[LOGIN] Query de rol: " . $queryRol);
             $stmtRol = $conn->prepare($queryRol);
-            $stmtRol->execute(['id_rol' => $usuario['id_rol']]);
+            $stmtRol->execute(['id_usuario' => $usuario['id_usuario']]);
             $rol = $stmtRol->fetch();
-            
+
             if ($rol) {
                 $_SESSION['user_type'] = $rol['nombre'];
                 error_log("[LOGIN] Rol obtenido de BD: " . $_SESSION['user_type']);
@@ -63,15 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_type'] = 'jugador';
                 error_log("[LOGIN] Rol no encontrado, usando fallback: jugador");
             }
-            
+
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['apellido'] = $usuario['apellido'] ?? '';
-            
+
             error_log("[LOGIN] Sesión establecida para: " . $_SESSION['nombre'] . " (" . $_SESSION['user_type'] . ")");
-            
+
             // Limpiar error si existía
             unset($_SESSION['login_error']);
-            
+
             // Redirigir a la página correspondiente
             if (isset($_SESSION['redirect_after_login'])) {
                 $redirect = $_SESSION['redirect_after_login'];
@@ -105,12 +107,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /**
  * Redirige al home según el tipo de usuario
  */
-function redirectToHome() {
+function redirectToHome()
+{
     if (!isset($_SESSION['user_type'])) {
         header('Location: ' . PAGE_LANDING_PHP);
         exit();
     }
-    
+
     switch ($_SESSION['user_type']) {
         case 'jugador':
             header('Location: ' . PAGE_INICIO_JUGADOR);
@@ -126,4 +129,3 @@ function redirectToHome() {
     }
     exit();
 }
-?>

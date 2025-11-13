@@ -40,6 +40,17 @@ require_once HEAD_COMPONENT;
   <!-- Contenido principal -->
   <main class="container-fluid d-flex align-items-center justify-content-center main-content">
     <div class="w-100 px-4">
+
+      <!-- Mensaje de bienvenida para nuevos usuarios -->
+      <?php if (isset($_SESSION['registration_success'])): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <i class="bi bi-check-circle-fill"></i>
+          <?= htmlspecialchars($_SESSION['registration_success']) ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <?php unset($_SESSION['registration_success']); ?>
+      <?php endif; ?>
+
       <!-- Título principal -->
       <div class="text-center mb-5">
         <h2 class="mb-3">¿Qué te gustaría hacer?</h2>

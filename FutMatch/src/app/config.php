@@ -78,11 +78,6 @@ define('TABLE_ESTADOS_SOLICITUDES', 'estados_solicitudes');
 define('TABLE_CALIFICACIONES_JUGADORES', 'calificaciones_jugadores');
 define('TABLE_RESENIAS_CANCHAS', 'resenias_canchas');
 
-// Espacios (Sistema de visibilidad)
-define('TABLE_ESPACIOS', 'espacios');
-define('TABLE_TIPOS_ESPACIOS', 'tipos_espacios');
-define('TABLE_USUARIOS_ESPACIOS', 'usuarios_espacios');
-
 // ===================================
 // RUTAS BASE
 // ===================================

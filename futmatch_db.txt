@@ -1,6 +1,7 @@
 -- =========================================================
 --  CREACIÓN DE BASE DE DATOS
 -- =========================================================
+DROP DATABASE IF EXISTS futmatch_db;
 CREATE DATABASE IF NOT EXISTS futmatch_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE futmatch_db;
 
@@ -14,8 +15,12 @@ CREATE TABLE roles (
     );
 
 INSERT INTO roles (nombre) VALUES 
-	('admin_sistema_viewer'), ('admin_sistema_moderador'), ('admin_sistema_manager'),
-    ('admin_cancha'), ('jugador');
+    ('jugador'),
+    ('admin_cancha'),
+	('admin_sistema_viewer'),  
+    ('admin_sistema_verificador'),
+    ('admin_sistema_moderador'),
+    ('admin_sistema_manager');
 
     
 CREATE TABLE permisos (
@@ -24,32 +29,97 @@ CREATE TABLE permisos (
     );
 
 INSERT INTO permisos (nombre) VALUES
-	('Ver dashboard del sistema'),
-	('Gestionar usuarios'),
-	('Gestionar canchas'),
-	('Gestionar solicitudes'),
-	('Ver reportes'),
-	('Banear usuarios'),
-	('Gestionar torneos'),
-	('Crear cancha'),
-	('Editar cancha'),
-	('Eliminar cancha'),
-	('Ver reservas de cancha'),
-	('Gestionar horarios de cancha'),
-	('Crear torneo'),
-	('Gestionar equipos de torneo'),
-	('Crear equipo'),
-	('Unirse a equipo'),
-	('Crear partido'),
-	('Unirse a partido'),
-	('Hacer reserva'),
-	('Calificar jugador'),
-	('Calificar cancha'),
-	('Crear foro'),
-	('Responder en foro'),
-	('Ver perfil de jugador'),
-	('Editar perfil de jugador'),
-	('Ver estadísticas');
+    -- GUEST_JUGADOR -todos los usuarios
+    -- ('Obtener listado de Canchas disponibles'),
+    -- ('Obtener listado de Partidos disponibles'), 
+    -- ('Ver detalle de Partido disponible'),  
+    -- ('Ver perfil de Jugador'),                  
+    -- ('Ver perfil de Cancha'),
+    -- ('Crear una cuenta de Jugador'),
+    -- ('Solicitar cuenta de Administrador de Cancha'),
+    
+    -- USUARIO REGISTRADO
+    ('Modificar detalles de cuenta'),
+    ('Eliminar cuenta de usuario'),
+    ('Suspender cuenta de usuario'),
+
+    ('Solicitar reserva de cancha'),
+    ('Solicitar participación en partido'),
+    ('Editar perfil de Jugador'),
+    ('Obtener listado de Equipos abiertos'),
+    ('Solicitar unirse a un Equipo'),
+    ('Crear un Equipo'),
+    ('Ver perfil de Equipo'),
+
+    -- USUARIO VINCULADO A PARTIDO
+    ('Calificar jugador'),
+
+    -- JUGADOR PARTICIPANTE
+    ('Cancelar participación en un partido'),
+    ('Ver partidos vinculados a mi perfil'),
+    ('Ver detalle de partido vinculado a mi perfil'),
+    ('Ver historial de partidos'),    
+    ('Ver detalle post-partido'),
+    ('Compartir partido jugado en redes sociales'),    
+    ('Calificar cancha'),
+    
+    -- JUGADOR MIEMBRO DE UN EQUIPO
+    ('Invitar jugador a tu Equipo'),
+    
+    -- JUGADOR LIDER DE UN EQUIPO
+    ('Solicitar participación en un Torneo'),
+
+    -- JUGADOR ANFITRIÓN
+    ('Aceptar o rechazar solicitante'),
+    ('Modificar detalles del partido'),
+    ('Agregar estadísticas del partido'),
+    ('Eliminar solicitante previamente aceptado'),
+    ('Solicitar modificación de reserva'),
+
+    -- ADMIN CANCHA
+    ('Obtener listado de canchas vinculadas a mi cuenta'),
+    ('Crear cancha'),
+    ('Modificar cancha'),
+    ('Modificar perfil de cancha'),
+    ('Eliminar cancha'),
+    ('Crear un torneo'),
+    ('Ver historial de torneos'),
+    ('Modificar un torneo'),
+    ('Cancelar un torneo'),
+    ('Ver solicitudes de participación de Equipos en un torneo'),
+    ('Aceptar o rechazar participación de Equipos en un torneo'),
+    ('Abrir convocatorias al torneo'),
+    ('Cerrar convocatorias al torneo'),
+    ('Agendar partidos de un torneo'),
+    ('Ver solicitudes de Reserva'),
+    ('Aceptar o rechazar solicitudes de Reserva'),
+    ('Ver detalle de reserva'),
+    ('Cancelar reserva'),
+    ('Modificar reserva'),
+    ('Crear reserva'),
+    ('Ver agenda'),
+    ('Ver historial de reservas'),
+    ('Configurar horario de cancha'),
+
+    -- ADMIN SISTEMA VIEWER
+    ('Obtener listado de solicitudes de admin de cancha'),
+    ('Ver solicitud de admin de cancha'),
+    ('Obtener listado de jugadores registrados'),
+    ('Ver detalle de partidos de jugadores registrados'),
+    ('Obtener reportes o denuncias de jugadores'),
+    ('Obtener reportes de canchas'),
+
+    -- ADMIN SISTEMA VERIFICADOR
+    ('Verificar solicitud de admin de cancha'),
+    ('Aceptar o rechazar solicitud de admin de cancha'),
+    ('Inhabilitar cancha'),
+    ('Habilitar cancha'),
+
+    -- ADMIN SISTEMA MODERADOR
+    ('Suspender cuenta de jugador'),
+    ('Restablecer cuenta de jugador'),
+    ('Suspender cuenta de admin de cancha'),
+    ('Restablecer cuenta de admin de cancha');
 
 CREATE TABLE roles_permisos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,56 +129,30 @@ CREATE TABLE roles_permisos (
     FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso)
 );
 
--- Permisos para admin_sistema_viewer (id_rol = 1)
-INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
-	(1, 1),  -- Ver dashboard del sistema
-	(1, 5);  -- Ver reportes
+INSERT INTO roles_permisos (id_rol, id_permiso) VALUES 
 
--- Permisos para admin_sistema_moderador (id_rol = 2)
-INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
-	(2, 1),  -- Ver dashboard del sistema
-	(2, 2),  -- Gestionar usuarios
-	(2, 3),  -- Gestionar canchas
-	(2, 4),  -- Gestionar solicitudes
-	(2, 5),  -- Ver reportes
-	(2, 6);  -- Banear usuarios
+    -- JUGADOR
+    (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10),
+    (1,11), (1,12), (1,13), (1,14), (1,15), (1,16), (1,17), (1,18), (1,19), (1,20),
+    (1,21), (1,22), (1,23), (1,24), (1,25),
 
--- Permisos para admin_sistema_manager (id_rol = 3)
-INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
-	(3, 1),  -- Ver dashboard del sistema
-	(3, 2),  -- Gestionar usuarios
-	(3, 3),  -- Gestionar canchas
-	(3, 4),  -- Gestionar solicitudes
-	(3, 5),  -- Ver reportes
-	(3, 6),  -- Banear usuarios
-	(3, 7);  -- Gestionar torneos
+    -- ADMIN_CANCHA
+    (2,1), (2,2), (2,3), (2,26), (2,27), (2,28), (2,29), (2,30), 
+    (2,31), (2,32), (2,33), (2,34), (2,35), (2,36), (2,37), (2,38), (2,39), (2,40),
+    (2,41), (2,42), (2,43), (2,44), (2,45), (2,46), (2,47), (2,48), 
 
--- Permisos para admin_cancha (id_rol = 4)
-INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
-	(4, 8),  -- Crear cancha
-	(4, 9),  -- Editar cancha
-	(4, 10), -- Eliminar cancha
-	(4, 11), -- Ver reservas de cancha
-	(4, 12), -- Gestionar horarios de cancha
-	(4, 13), -- Crear torneo
-	(4, 14), -- Gestionar equipos de torneo
-	(4, 22), -- Crear foro
-	(4, 23); -- Responder en foro
-
--- Permisos para jugador (id_rol = 5)
-INSERT INTO roles_permisos (id_rol, id_permiso) VALUES
-	(5, 15), -- Crear equipo
-	(5, 16), -- Unirse a equipo
-	(5, 17), -- Crear partido
-	(5, 18), -- Unirse a partido
-	(5, 19), -- Hacer reserva
-	(5, 20), -- Calificar jugador
-	(5, 21), -- Calificar cancha
-	(5, 22), -- Crear foro
-	(5, 23), -- Responder en foro
-	(5, 24), -- Ver perfil de jugador
-	(5, 25), -- Editar perfil de jugador
-	(5, 26); -- Ver estadísticas
+    -- ADMIN_SISTEMA_VIEWER
+    (3,49), (3,50), (3,51), (3,52), (3,53), (3,54), 
+    
+    -- ADMIN_SISTEMA_VERIFICADOR
+    (4,55), (4,56), (4,57), (4,58), 
+    
+    -- ADMIN_SISTEMA_MODERADOR
+    (5,59), (5,60), (5,61), (5,62),
+    
+    -- ADMIN_SISTEMA_MANAGER
+    (6,49), (6,50), (6,51), (6,52), (6,53), (6,54), (6,55), (6,56), (6,57), (6,58), 
+    (6,59), (6,60), (6,61), (6,62);
 
 CREATE TABLE estados_usuarios (
     id_estado INT AUTO_INCREMENT PRIMARY KEY,
@@ -128,9 +172,6 @@ CREATE TABLE usuarios (
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_estado) REFERENCES estados_usuarios(id_estado)
     );
-    
-INSERT INTO usuarios (nombre, apellido, email, password, id_estado) VALUES
-	('Camila','Santo','cnsanto@gmail.com','12345',1);
 
 CREATE TABLE usuarios_roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -139,9 +180,6 @@ CREATE TABLE usuarios_roles (
     FOREIGN KEY (id_rol) REFERENCES roles(id_rol),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
-
-INSERT INTO usuarios_roles (id_usuario, id_rol) VALUES
-    (1, 3);
 
     
 CREATE TABLE estados_solicitudes (
@@ -152,39 +190,6 @@ CREATE TABLE estados_solicitudes (
 INSERT INTO estados_solicitudes (nombre) VALUES
 	('Pendiente'), ('En revisión'), ('Aceptada'), ('Rechazada'), ('Cancelada');
 
--- =========================================================
---  TABLAS ESPACIOS (AUXILIAR DE FOROS)
---  Todo lo que se pueda asociar a un foro o tenga un perfil, va a tener asignado un ESPACIO
--- =========================================================
-
-CREATE TABLE tipos_espacios (
-    id_tipo_espacio INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(20) NOT NULL
-    );
-    
-INSERT INTO tipos_espacios (nombre) VALUES
-	('global'),('jugador'),('equipo'),('reserva'),('torneo'),('cancha'),('futmatch');
-   
-CREATE TABLE espacios (
-    id_espacio INT AUTO_INCREMENT PRIMARY KEY,
-    id_tipo_espacio INT NOT NULL,
-    FOREIGN KEY (id_tipo_espacio) REFERENCES tipos_espacios(id_tipo_espacio)
-    );
-
-INSERT INTO espacios (id_tipo_espacio) VALUES
-    (1);
-
-CREATE TABLE usuarios_espacios (
-    id_espacio INT NOT NULL,
-    id_usuario INT NOT NULL,
-    PRIMARY KEY (id_espacio, id_usuario),
-    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio),
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-    );
-
-INSERT INTO usuarios_espacios (id_espacio, id_usuario) VALUES
-    (1, 1);
-    
 -- =========================================================
 --  TABLAS ADMIN_SISTEMA
 -- =========================================================
@@ -269,20 +274,19 @@ CREATE TABLE canchas (
     id_estado INT NOT NULL DEFAULT 1,
     foto VARCHAR(255),
     banner VARCHAR(255),
-    id_superficie VARCHAR(100) NOT NULL,
+    id_superficie INT NOT NULL,
     politicas_reservas TEXT,
     FOREIGN KEY(id_admin_cancha) REFERENCES admin_canchas(id_admin_cancha),
     FOREIGN KEY(id_direccion) REFERENCES direcciones(id_direccion),
-    FOREIGN KEY(id_estado) REFERENCES estados_canchas(id_estado)
-    );
-
-CREATE TABLE servicios (
+    FOREIGN KEY(id_estado) REFERENCES estados_canchas(id_estado),
+    FOREIGN KEY(id_superficie) REFERENCES superficies_canchas(id_superficie)
+);CREATE TABLE servicios (
     id_servicio INT AUTO_INCREMENT PRIMARY KEY, 
     nombre VARCHAR(100) NOT NULL
     );
 
 INSERT INTO servicios (nombre) VALUES
-    ('Vestuarios', 'Estacionamiento', 'Bar', 'Duchas', 'WIFI gratis');
+    ('Vestuarios'), ('Estacionamiento'), ('Bar'), ('Duchas'), ('WIFI gratis');
 
 CREATE TABLE servicios_canchas (
     id_servicio INT NOT NULL, 
@@ -341,17 +345,18 @@ CREATE TABLE jugadores (
     reputacion INT,
     FOREIGN KEY (id_jugador) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_sexo) REFERENCES sexo(id_sexo),
-    FOREIGN KEY (id_posicion) REFERENCES posiciones(id_posicion),
-    );
+    FOREIGN KEY (id_posicion) REFERENCES posiciones(id_posicion)
+);
     
 CREATE TABLE equipos (
     id_equipo INT AUTO_INCREMENT PRIMARY KEY,
     id_lider INT NOT NULL,
     nombre VARCHAR(50),
     foto VARCHAR(250),
-    clave VARCHAR(10), --cambiaría cada cierto tiempo
-    FOREIGN KEY (id_lider) REFERENCES jugadores(id_jugador),
-    );
+    clave VARCHAR(10), -- cambiaría cada cierto tiempo
+    abierto BOOLEAN default FALSE,
+    FOREIGN KEY (id_lider) REFERENCES jugadores(id_jugador)
+);
     
 CREATE TABLE jugadores_equipos (
     id_jugador INT NOT NULL,
@@ -400,8 +405,8 @@ CREATE TABLE torneos (
     id_etapa INT NOT NULL DEFAULT 1,
     descripcion TEXT,
     FOREIGN KEY (id_organizador) REFERENCES admin_canchas(id_admin_cancha),
-    FOREIGN KEY (id_etapa) REFERENCES etapas_torneo(id_etapa),
-    );
+    FOREIGN KEY (id_etapa) REFERENCES etapas_torneo(id_etapa)
+);
 
 
 CREATE TABLE equipos_torneos (
@@ -473,7 +478,7 @@ INSERT INTO tipos_reserva (nombre, descripcion) VALUES
     ('mantenimiento', 'Reserva del admin para mantenimiento/limpieza'),
     ('evento', 'Reserva del admin para evento especial');
 
-CREATE TABLE reservas ( --se usa para reservar un espacio de la agenda de la cancha
+CREATE TABLE reservas ( -- se usa para reservar un espacio de la agenda de la cancha
     id_reserva INT AUTO_INCREMENT PRIMARY KEY,
     id_cancha INT NOT NULL,
     id_tipo_reserva INT NOT NULL DEFAULT 1,
@@ -504,20 +509,19 @@ CREATE TABLE partidos (
     id_partido INT AUTO_INCREMENT PRIMARY KEY,
     id_anfitrion INT NOT NULL,
     id_tipo_partido INT NOT NULL DEFAULT 1,
-    FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
     FOREIGN KEY (id_anfitrion) REFERENCES jugadores(id_jugador),
     FOREIGN KEY (id_tipo_partido) REFERENCES tipos_partido(id_tipo_partido)
-	);
+);
 
-CREATE TABLE partidos_reservas ( --si el origen del partido es una reserva
+CREATE TABLE partidos_reservas ( -- si el origen del partido es una reserva
     id_partido INT NOT NULL,
     id_reserva INT NOT NULL,
-    PRIMARY KEY (id_partido, id_resera),
+    PRIMARY KEY (id_partido, id_reserva),
     FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
     FOREIGN KEY (id_partido) REFERENCES partidos(id_partido)
-    );
+);
 
-CREATE TABLE partidos_torneos ( --si el origen del partido es un torneo
+CREATE TABLE partidos_torneos ( -- si el origen del partido es un torneo
     id_partido_torneo INT AUTO_INCREMENT PRIMARY KEY,
     id_partido INT NOT NULL,
     id_torneo INT NOT NULL,
@@ -600,44 +604,6 @@ CREATE TABLE resenias_canchas (
     FOREIGN KEY (id_cancha) REFERENCES canchas(id_cancha),
     FOREIGN KEY (id_jugador) REFERENCES jugadores(id_jugador)
 	);
-
--- =========================================================
---  TABLAS FOROS
--- =========================================================
-
-CREATE TABLE foros (
-    id_foro INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    titulo VARCHAR(100) NOT NULL,
-    texto VARCHAR(500),
-    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-    foto VARCHAR(255),
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-	);
-
-CREATE TABLE respuestas_foros (
-    id_respuesta INT AUTO_INCREMENT PRIMARY KEY,
-    id_foro INT NOT NULL,
-    id_usuario INT NOT NULL,
-    texto VARCHAR(500),
-    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_foro) REFERENCES foros(id_foro),
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-    );
-
-
-CREATE TABLE foros_espacios ( 
-    id_foro INT NOT NULL,
-    id_espacio INT NOT NULL,
-    es_origen BOOLEAN DEFAULT FALSE,
-    fecha_vinculacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    activo BOOLEAN DEFAULT TRUE,
-    PRIMARY KEY (id_foro, id_espacio),
-    FOREIGN KEY (id_foro) REFERENCES foros(id_foro) ON DELETE CASCADE,
-    FOREIGN KEY (id_espacio) REFERENCES espacios(id_espacio) ON DELETE CASCADE,
-    INDEX idx_espacio_activo (id_espacio, activo),
-    INDEX idx_foro_origen (id_foro, es_origen)
-);
     
 
 -- =========================================================
@@ -652,10 +618,6 @@ CREATE INDEX idx_equipos_torneos_estado ON equipos_torneos(id_torneo, id_estado)
 CREATE INDEX idx_partidos_anfitrion ON partidos(id_anfitrion);
 CREATE INDEX idx_reservas_fecha_cancha ON reservas(fecha, id_cancha);
 CREATE INDEX idx_participantes_partido_estado ON participantes_partidos(id_partido, id_estado);
-
--- Índices para foros
-CREATE INDEX idx_foros_usuario_fecha ON foros(id_usuario, fecha);
-CREATE INDEX idx_respuestas_foro_fecha ON respuestas_foros(id_foro, fecha);
 
 -- =========================================================
 --  TRIGGERS PARA INTEGRIDAD DE DATOS
@@ -693,6 +655,155 @@ BEGIN
 END//
 
 DELIMITER ;
+
+-- =========================================================
+--  DATOS DE EJEMPLO
+-- =========================================================
+
+
+-- Insertar direcciones de ejemplo
+INSERT INTO direcciones (direccion_completa, latitud, longitud, pais, provincia, localidad) VALUES
+    ('Av. Corrientes 1234, Buenos Aires', -34.603851, -58.381775, 'Argentina', 'Buenos Aires', 'CABA'),
+    ('San Martín 567, La Plata', -34.921312, -57.954567, 'Argentina', 'Buenos Aires', 'La Plata'),
+    ('Mitre 890, Rosario', -32.944321, -60.650543, 'Argentina', 'Santa Fe', 'Rosario'),
+    ('Belgrano 445, Córdoba', -31.416775, -64.183441, 'Argentina', 'Córdoba', 'Córdoba'),
+    ('9 de Julio 123, Mendoza', -32.889458, -68.845839, 'Argentina', 'Mendoza', 'Mendoza');
+
+-- Insertar usuarios de ejemplo (password para todos: "password")
+INSERT INTO usuarios (nombre, apellido, email, password, id_estado) VALUES
+    ('Juan', 'Pérez', 'juan.perez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('María', 'González', 'maria.gonzalez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Carlos', 'López', 'carlos.lopez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Ana', 'Martínez', 'ana.martinez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Diego', 'Rodríguez', 'diego.rodriguez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Laura', 'Fernández', 'laura.fernandez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Admin', 'Sistema', 'admin@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Roberto', 'Silva', 'cancha.centro@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
+    ('Patricia', 'Morales', 'cancha.norte@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1);
+
+-- Asignar roles a usuarios
+INSERT INTO usuarios_roles (id_usuario, id_rol) VALUES
+    (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), -- Jugadores
+    (7, 4), -- Admin sistema verificador
+    (8, 2), (9, 2); -- Admin canchas
+
+-- Insertar jugadores de ejemplo
+INSERT INTO jugadores (id_jugador, username, telefono, fecha_nacimiento, id_sexo, id_posicion) VALUES
+    (1, 'juanpe', '+541123456789', '1995-03-15', 2, 3),
+    (2, 'mariag', '+541123456790', '1992-07-20', 1, 2),
+    (3, 'carlosl', '+541123456791', '1988-11-05', 2, 1),
+    (4, 'anam', '+541123456792', '1996-09-12', 1, 4),
+    (5, 'diegor', '+541123456793', '1990-01-25', 2, 2),
+    (6, 'lauraf', '+541123456794', '1994-05-30', 1, 3);
+
+-- Insertar admin sistema
+INSERT INTO admin_sistema (id_usuario) VALUES (7);
+
+-- Insertar solicitudes de admin cancha (algunas aprobadas)
+INSERT INTO solicitudes_admin_cancha (nombre, apellido, email, telefono, nombre_cancha, id_direccion, id_estado, id_verificador, fecha_resolucion) VALUES
+    ('Roberto', 'Silva', 'cancha.centro@email.com', '+541155555001', 'Cancha Centro', 1, 3, 1, NOW()),
+    ('Patricia', 'Morales', 'cancha.norte@email.com', '+541155555002', 'Cancha Norte', 2, 3, 1, NOW()),
+    ('Miguel', 'Torres', 'miguel.torres@email.com', '+541155555003', 'Complejo Sur', 3, 1, NULL, NULL);
+
+-- Insertar admin canchas aprobados
+INSERT INTO admin_canchas (id_solicitud, telefono) VALUES
+    (1, '+541155555001'),
+    (2, '+541155555002');
+
+-- Insertar canchas
+INSERT INTO canchas (id_admin_cancha, id_direccion, nombre, descripcion, id_estado, id_superficie) VALUES
+    (1, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', 3, 1),
+    (2, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', 3, 1),
+    (1, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', 3, 2);
+
+-- Relacionar canchas con tipos de partido
+INSERT INTO canchas_tipos_partido (id_cancha, id_tipo_partido) VALUES
+    (1, 1), -- Cancha Centro permite Fútbol 5
+    (2, 1), (2, 2), -- Cancha Norte permite Fútbol 5 y 7
+    (3, 1), (3, 4); -- Cancha Centro 2 permite Fútbol 5 y Sala
+
+-- Insertar servicios a canchas
+INSERT INTO servicios_canchas (id_servicio, id_cancha) VALUES
+    (1, 1), (2, 1), (4, 1), -- Cancha Centro: vestuarios, estacionamiento, duchas
+    (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), -- Cancha Norte: todos los servicios
+    (1, 3), (4, 3), (5, 3); -- Cancha Centro 2: vestuarios, duchas, wifi
+
+-- Insertar horarios para las canchas (ejemplo: lunes a viernes)
+INSERT INTO horarios_cancha (id_cancha, id_dia, hora_apertura, hora_cierre) VALUES
+    -- Cancha Centro
+    (1, 1, '08:00', '22:00'), (1, 2, '08:00', '22:00'), (1, 3, '08:00', '22:00'), (1, 4, '08:00', '22:00'), (1, 5, '08:00', '22:00'),
+    (1, 6, '09:00', '24:00'), (1, 7, '09:00', '24:00'),
+    -- Cancha Norte
+    (2, 1, '07:00', '23:00'), (2, 2, '07:00', '23:00'), (2, 3, '07:00', '23:00'), (2, 4, '07:00', '23:00'), (2, 5, '07:00', '23:00'),
+    (2, 6, '08:00', '24:00'), (2, 7, '08:00', '24:00'),
+    -- Cancha Centro 2
+    (3, 1, '09:00', '21:00'), (3, 2, '09:00', '21:00'), (3, 3, '09:00', '21:00'), (3, 4, '09:00', '21:00'), (3, 5, '09:00', '21:00');
+
+-- Insertar equipos de ejemplo
+INSERT INTO equipos (id_lider, nombre, abierto) VALUES
+    (1, 'Los Tigres FC', TRUE),
+    (3, 'Águilas Rojas', FALSE),
+    (5, 'Deportivo Unión', TRUE);
+
+-- Insertar jugadores en equipos
+INSERT INTO jugadores_equipos (id_jugador, id_equipo) VALUES
+    (1, 1), (2, 1), (4, 1), -- Los Tigres FC
+    (3, 2), (5, 2), -- Águilas Rojas
+    (5, 3), (6, 3), (1, 3); -- Deportivo Unión (Juan juega en dos equipos)
+
+-- Insertar algunas reservas de ejemplo
+INSERT INTO reservas (id_cancha, fecha, hora_inicio, hora_fin, id_estado) VALUES
+    (1, '2025-11-15', '18:00', '19:00', 3),
+    (1, '2025-11-16', '20:00', '21:00', 1),
+    (2, '2025-11-17', '19:00', '20:00', 3),
+    (2, '2025-11-18', '21:00', '22:00', 1);
+
+-- Relacionar reservas con usuarios
+INSERT INTO reservas_usuarios (id_reserva, id_usuario, id_rol) VALUES
+    (1, 1, 1), -- Juan reservó
+    (2, 3, 1), -- Carlos reservó
+    (3, 5, 1), -- Diego reservó
+    (4, 2, 1); -- María reservó
+
+-- Insertar torneos de ejemplo
+INSERT INTO torneos (id_organizador, nombre, fecha_inicio, fecha_fin, descripcion) VALUES
+    (1, 'Copa Primavera 2025', '2025-12-01', '2025-12-15', 'Torneo de fútbol 5 para equipos amateur'),
+    (2, 'Torneo Relámpago', '2025-11-20', '2025-11-20', 'Torneo de un día en múltiples canchas');
+
+-- Insertar equipos en torneos
+INSERT INTO equipos_torneos (id_equipo, id_torneo, id_estado) VALUES
+    (1, 1, 3), -- Los Tigres en Copa Primavera (aceptado)
+    (2, 1, 3), -- Águilas Rojas en Copa Primavera (aceptado)
+    (3, 1, 1), -- Deportivo Unión en Copa Primavera (pendiente)
+    (1, 2, 3), -- Los Tigres en Torneo Relámpago (aceptado)
+    (3, 2, 3); -- Deportivo Unión en Torneo Relámpago (aceptado)
+
+-- Insertar algunos partidos de ejemplo
+INSERT INTO partidos (id_anfitrion, id_tipo_partido) VALUES
+    (1, 1), -- Juan organiza partido de Fútbol 5
+    (3, 1), -- Carlos organiza partido de Fútbol 5
+    (5, 2); -- Diego organiza partido de Fútbol 7
+
+-- Relacionar partidos con reservas
+INSERT INTO partidos_reservas (id_partido, id_reserva) VALUES
+    (1, 1),
+    (2, 3);
+
+-- Insertar participantes en partidos
+INSERT INTO participantes_partidos (id_partido, id_jugador, id_rol, id_estado) VALUES
+    (1, 1, 1, 3), -- Juan como anfitrión (aceptado)
+    (1, 2, 2, 3), -- María como invitada (aceptada)
+    (1, 4, 3, 1), -- Ana como solicitante (pendiente)
+    (2, 3, 1, 3), -- Carlos como anfitrión (aceptado)
+    (2, 5, 2, 3), -- Diego como invitado (aceptado)
+    (3, 5, 1, 3); -- Diego como anfitrión (aceptado)
+
+-- Insertar algunas reseñas de canchas
+INSERT INTO resenias_canchas (id_cancha, id_jugador, titulo, texto, calificacion) VALUES
+    (1, 2, 'Muy buena cancha', 'Excelente estado del césped sintético', 5),
+    (1, 4, 'Recomendable', 'Buenos vestuarios y estacionamiento', 4),
+    (2, 1, 'Complejo completo', 'Tiene todo lo que necesitas', 5),
+    (2, 6, 'Buen lugar', 'Aunque un poco caro', 4);
 
 -- =========================================================
 --  VISTAS OPTIMIZADAS
