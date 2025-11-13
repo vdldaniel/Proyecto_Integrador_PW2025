@@ -539,7 +539,6 @@ CREATE TABLE equipos_partidos (
     id_partido INT NOT NULL,
     goles_anotados INT DEFAULT 0,
     es_ganador BOOLEAN DEFAULT FALSE,
-    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id_equipo, id_partido),
     FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo) ON DELETE CASCADE,
     FOREIGN KEY (id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,

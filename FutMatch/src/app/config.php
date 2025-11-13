@@ -190,6 +190,7 @@ define("CONTROLLER_LOGIN", BASE_URL . "src/controllers/login_controller.php");
 define("CONTROLLER_LOGOUT", BASE_URL . "src/controllers/logout.php");
 define("CONTROLLER_REGISTRO_JUGADOR", BASE_URL . "src/controllers/registroJugador_controller.php");
 define("CONTROLLER_REGISTRO_ADMIN_CANCHA", BASE_URL . "src/controllers/registroAdminCancha_controller.php");
+define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");
 
 // ===================================
 // PÁGINAS - AUTH

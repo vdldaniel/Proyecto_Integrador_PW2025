@@ -3,115 +3,8 @@
    Estilos específicos para la vista de partidos del jugador
    =================================== */
 
-/* CARDS DE PARTIDOS */
-.partido-card {
-  transition: box-shadow 0.2s ease;
-  position: relative; /* Para posicionar el badge absoluto */
-}
-
-.partido-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* BADGE DE ESTADO - Estilo campanita de notificaciones */
-.partido-badge {
-  position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
-  z-index: 10;
-  font-size: 0.75rem;
-  padding: 0.35rem 0.65rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* LÍNEA 1: Fecha y hora (ahora es la primera línea) */
-.partido-fecha {
-  height: 1.75rem; /* Altura fija para fecha */
-  display: flex;
-  align-items: center;
-}
-
-/* LÍNEA 2: Nombre de cancha */
-.partido-cancha-nombre {
-  height: 2.5rem; /* Altura fija para nombre de cancha (puede ser 2 líneas) */
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* LÍNEA 3: Dirección */
-.partido-direccion-container {
-  height: 2.25rem; /* Altura fija para dirección */
-  display: flex;
-  align-items: center;
-}
-
-.partido-direccion {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2; /* Standard property for compatibility */
-  -webkit-box-orient: vertical;
-  line-height: 1.125rem;
-}
-
-/* Botón de ubicación centrado */
-.btn-ubicacion {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  padding: 0 !important;
-  flex-shrink: 0;
-}
-
-.btn-ubicacion i {
-  margin: 0 !important;
-}
-
-/* EQUIPOS: Botones con altura fija */
-.equipo-btn {
-  height: 3rem; /* Altura fija para botones de equipo */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2;
-  padding: 0.25rem 0.5rem !important;
-}
-
-.equipo-btn span {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2; /* Standard property for compatibility */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Labels de equipos */
-.equipo-label {
-  height: 1.5rem; /* Altura fija para labels */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Contador de jugadores */
-.equipo-contador {
-  height: 1.25rem; /* Altura fija para contadores */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /* ===================================
-   NUEVO DISEÑO DE FILAS CON DIVISIÓN SEMANAL
+   DISEÑO DE FILAS CON DIVISIÓN SEMANAL
    =================================== */
 
 /* Divisiones semanales */
@@ -119,14 +12,14 @@
   margin-bottom: 3rem;
 }
 
-.semana-divider:first-child {
-  margin-top: 0;
-}
-
 .semana-divider h4 {
+  font-weight: 700;
+  color: var(--bs-secondary);
   border-bottom: 2px solid var(--bs-secondary);
   padding-bottom: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 /* Filas de partidos */
@@ -135,7 +28,6 @@
   border: 1px solid var(--card-border, rgba(0, 0, 0, 0.08));
   border-radius: 0.75rem;
   padding: 1.5rem;
-  margin-bottom: 1rem;
   transition: all 0.2s ease;
 }
 
@@ -144,111 +36,113 @@
   transform: translateY(-2px);
 }
 
+.partido-fila .row {
+  align-items: center;
+}
+
 /* Columna de fecha y hora */
 .partido-datetime {
-  min-width: 100px;
-  text-align: left;
-}
-
-.partido-datetime > div:first-child {
-  font-size: 0.95rem;
-  margin-bottom: 0.25rem;
-}
-
-.partido-datetime > div:nth-child(2) {
-  font-size: 0.85rem;
-  margin-bottom: 0.25rem;
-}
-
-.partido-datetime > div:last-child {
-  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 /* Información de la cancha */
-.partido-cancha {
-  flex: 1;
-}
-
 .partido-cancha h6 {
-  margin-bottom: 0.5rem;
   font-size: 1rem;
+  line-height: 1.3;
 }
 
-.partido-cancha .d-flex {
+.partido-cancha span {
+  display: block;
+  line-height: 1.4;
+}
+
+/* Botón de mapa */
+.partido-mapa {
+  display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  justify-content: flex-end;
 }
-
-
 
 /* Columna de chips */
 .partido-chips {
-  min-width: 120px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .partido-chips .badge {
   font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.35rem 0.6rem;
   white-space: nowrap;
+  width: 100%;
   text-align: center;
 }
 
 /* Acciones del partido */
 .partido-acciones {
-  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-/* Badge especial para "Buscando rival" */
-.bg-purple {
-  background-color: #6f42c1 !important;
-  color: white !important;
+/* Labels y contadores de equipos */
+.equipo-label {
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.equipo-contador {
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Responsive para móviles */
-@media (max-width: 768px) {
-  .partido-fila .d-flex {
-    flex-direction: column;
-    align-items: flex-start !important;
-    gap: 1rem;
+@media (max-width: 767px) {
+  .partido-fila .row {
+    row-gap: 1rem;
   }
 
+  /* Fecha ocupa toda la fila con space-between */
   .partido-datetime {
-    display: flex;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
   }
 
   .partido-datetime > div {
-    margin-bottom: 0 !important;
+    margin: 0;
   }
 
-  .partido-cancha {
-    width: 100%;
-    margin: 0 !important;
+  /* Botón mapa alineado a la derecha */
+  .partido-mapa {
+    justify-content: flex-end;
   }
 
+  /* Chips alineados a la izquierda */
   .partido-chips {
-    width: 100%;
-    margin: 0 !important;
+    flex-direction: row;
     justify-content: flex-start;
+    gap: 0.5rem;
   }
 
-  .partido-chips .d-flex {
-    flex-direction: row !important;
-    gap: 0.5rem !important;
+  .partido-chips .badge {
+    width: auto;
   }
 
+  /* Botón detalles alineado a la derecha */
   .partido-acciones {
-    width: 100%;
-    text-align: left !important;
+    justify-content: flex-end;
   }
 }
 
-/* Modo oscuro ajustes */
+/* Modo oscuro */
 [data-bs-theme="dark"] .partido-fila {
   background: var(--dark-card-bg, rgba(255, 255, 255, 0.03));
   border-color: var(--dark-card-border, rgba(255, 255, 255, 0.08));
