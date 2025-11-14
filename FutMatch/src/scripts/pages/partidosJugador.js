@@ -266,7 +266,7 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
         <!-- Fecha y hora -->
         <div class="col-12 col-md-2 partido-datetime">
           <div class="fw-bold">${partido.dia_semana}</div>
-          <div class="text-muted small">${partido.fecha_partido}</div>
+          <div class="fw-bold">${partido.fecha_partido}</div>
           <div class="fw-bold">${partido.hora_partido}</div>
         </div>
 

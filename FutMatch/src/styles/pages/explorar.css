@@ -29,6 +29,15 @@
   position: relative;
 }
 
+.partido-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Título de la tarjeta */
 .tarjeta-titulo {
   font-size: 1.1rem;

@@ -121,7 +121,6 @@ define("FONT_MONTSERRAT", "https://fonts.googleapis.com/css2?family=Montserrat:w
 // ⚙️ JAVASCRIPT
 // ===================================
 define("JS_BOOTSTRAP", ASSETS_PATH . "js/bootstrap.bundle.min.js");
-define("JS_BOOTSTRAP_CDN", "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js");
 
 // Scripts de páginas
 define("JS_SCRIPTS_PATH", SRC_PATH . "scripts/pages/");
@@ -136,7 +135,6 @@ define("JS_ADMIN_INC", JS_SCRIPTS_PATH . "adminInc.js");
 define("JS_CANCHA_RESERVAR", JS_SCRIPTS_PATH . "cancha-reservar.js");
 define("JS_CANCHA_PERFIL", JS_SCRIPTS_PATH . "canchaPerfil.js");
 define("JS_PERFILES_CANCHAS", JS_SCRIPTS_PATH . "perfiles-canchas.js");
-define("JS_CANCHAS_LISTADO", JS_SCRIPTS_PATH . "canchas-listado.js");
 define("JS_CUENTA_JUGADOR", JS_SCRIPTS_PATH . "cuenta-jugador.js");
 define("JS_DETALLE_TORNEO", JS_SCRIPTS_PATH . "detalle-torneo.js");
 define("JS_EQUIPO_CREAR", JS_SCRIPTS_PATH . "equipo-crear.js");
@@ -146,13 +144,8 @@ define("JS_INICIO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "inicioAdminCancha.js");
 define("JS_INICIO_ADMIN_SISTEMA", JS_SCRIPTS_PATH . "inicio-admin-sistema.js");
 define("JS_INICIO_JUGADOR", JS_SCRIPTS_PATH . "inicioJugador.js");
 define("JS_LANDING", JS_SCRIPTS_PATH . "landing.js");
-define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidosJugador.js");
-define("JS_PARTIDOS_EXPLORAR", JS_SCRIPTS_PATH . "partidos-explorar.js");
-define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
-define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_SCRIPT_MAPA", JS_SCRIPTS_PATH . "ScriptMapa.js");
 define("JS_TORNEO_LISTADO", JS_SCRIPTS_PATH . "torneo-listado.js");
-define("JS_CANCHAS_EXPLORAR", JS_SCRIPTS_PATH . "canchas-explorar.js");
 define("JS_MIS_TORNEOS", JS_SCRIPTS_PATH . "mis-torneos.js");
 define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "torneo-detalle.js");
 define("JS_TORNEOS_JUGADOR", JS_SCRIPTS_PATH . "pages/torneos-jugador.js");
@@ -161,7 +154,19 @@ define("JS_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasAdminSistema.js");
 define("JS_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresAdminSistema.js");
 define("JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresReportadosAdminSistema.js");
 define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReportadasAdminSistema.js");
+
+// ==================================
+// JS - PAGINAS BACKEND
+// ==================================
+
+// Jugador
+define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
+define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidosJugador.js");
 define("JS_CANCHAS_EXPLORAR_JUGADOR", SRC_PATH . "scripts/pages/canchasExplorar_Jugador.js");
+define("JS_PARTIDOS_EXPLORAR_JUGADOR", SRC_PATH . "scripts/pages/partidosExplorar_Jugador.js");
+
+// Admin Cancha
+define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
 
 // ===================================
 // IMÁGENES
@@ -174,6 +179,7 @@ define("IMG_BANNER_JUGADOR_DEFAULT", IMG_PATH . "banner_jugador.png");
 define("IMG_BANNER_PERFIL_CANCHA_DEFAULT", IMG_PATH . "banner_perfil_cancha.png");
 define("IMG_BG2", IMG_PATH . "bg2.jpg");
 define("IMG_CANCHA_DEFAULT", IMG_PATH . "foto_cancha_default.png");
+define("IMG_PARTIDO_DEFAULT", IMG_PATH . "foto_partido_default.png");
 
 // ===================================
 // COMPONENTES PHP
@@ -195,6 +201,8 @@ define("CONTROLLER_REGISTRO_JUGADOR", BASE_URL . "src/controllers/registroJugado
 define("CONTROLLER_REGISTRO_ADMIN_CANCHA", BASE_URL . "src/controllers/registroAdminCancha_controller.php");
 define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");
 define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchasDisponibles_Jugador.php");
+define("GET_PARTIDOS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getPartidosDisponibles_Jugador.php");
+define("POST_SOLICITANTE_PARTIDO_JUGADOR", BASE_URL . "src/controllers/postSolicitantePartido_Jugador.php");
 
 // ===================================
 // PÁGINAS - AUTH

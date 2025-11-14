@@ -128,30 +128,3 @@ LEFT JOIN equipos e_propio ON ep_propio.id_equipo = e_propio.id_equipo
 LEFT JOIN equipos_partidos ep_rival ON p.id_partido = ep_rival.id_partido 
     AND ep_rival.id_equipo != ep_propio.id_equipo
 LEFT JOIN equipos e_rival ON ep_rival.id_equipo = e_rival.id_equipo;
-
-
--- =========================================================
--- EJEMPLOS DE USO DE LA VISTA
--- =========================================================
-
--- Ejemplo 1: Obtener todos los partidos del jugador ID 1
--- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1 ORDER BY fecha_partido ASC, hora_inicio_raw ASC;
-
--- Ejemplo 2: Obtener solo partidos confirmados del jugador ID 2
--- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 2 AND estado_solicitud = 'Aceptada' ORDER BY fecha_partido ASC;
-
--- Ejemplo 3: Obtener partidos pendientes de cualquier jugador
--- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1 AND estado_solicitud = 'Pendiente';
-
--- Ejemplo 4: Obtener partidos futuros del jugador ID 1
--- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1 AND fecha_partido >= CURDATE() ORDER BY fecha_partido ASC;
-
--- Ejemplo 5: Obtener partidos por cancha específica
--- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1 AND id_cancha = 1;
-
--- Ejemplo 6: Contar partidos por estado
--- SELECT estado_solicitud, COUNT(*) as total FROM vista_partidos_jugador WHERE id_jugador = 1 GROUP BY estado_solicitud;
-
--- Ejemplo 7: Obtener partidos donde el jugador es anfitrión
--- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1 AND rol_usuario = 'anfitrion';
-
