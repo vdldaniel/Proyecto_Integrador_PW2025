@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../src/app/config.php';
 // Resalta la página actual en el navbar
 $current_page = 'canchasExplorar';
 $page_title = "Explorar Canchas - FutMatch";
-$page_css = [];
+$page_css = [CSS_PAGES_EXPLORAR];
 
 // Cargar head común (incluye <!DOCTYPE html> y <html data-bs-theme="dark">)
 require_once HEAD_COMPONENT;
@@ -43,6 +43,8 @@ require_once HEAD_COMPONENT;
       </div>
     </div>
 
+
+
     <!-- Filtros activos -->
     <div id="filtrosActivos" class="mb-3 d-none">
       <div class="d-flex gap-2 align-items-center flex-wrap">
@@ -58,136 +60,10 @@ require_once HEAD_COMPONENT;
     <div id="vistaListado">
       <!-- Lista de canchas -->
       <div class="row" id="listaCanchas">
-        <!-- Cancha 1 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-4 cancha-item" data-nombre="Mega Fútbol Central" data-ubicacion="Palermo" data-tipo="futbol-5" data-superficie="sintetico">
-          <div class="card h-100 shadow">
-            <img src="<?= IMG_PATH ?>bg1.jpg" class="card-img-top" alt="Cancha" style="height: 200px; object-fit: cover;">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Mega Fútbol Central</h5>
-              <p class="card-text text-muted mb-2">
-                <i class="bi bi-geo-alt"></i> Palermo, Buenos Aires
-              </p>
-              <div class="mb-2">
-                <span class="badge text-bg-dark me-1">Fútbol 5</span>
-                <span class="badge text-bg-dark me-1">Sintético</span>
-                <span class="badge text-bg-dark">Disponible</span>
-              </div>
-              <p class="card-text small text-muted mb-3">
-                Cancha de fútbol 5 con césped sintético de última generación. Vestuarios, duchas y estacionamiento incluido.
-              </p>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div>
-                  <div class="text-warning">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <small class="text-muted">(4.2)</small>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-auto">
-                <div class="d-grid gap-2">
-                  <a type="button" class="btn btn-primary" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
-                    <i class="bi bi-eye"></i> Ver detalles
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Cancha 2 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-4 cancha-item" data-nombre="Deportivo San Lorenzo" data-ubicacion="San Telmo" data-tipo="futbol-7" data-superficie="cesped-natural">
-          <div class="card h-100 shadow">
-            <img src="<?= IMG_PATH ?>bg2.jpg" class="card-img-top" alt="Cancha" style="height: 200px; object-fit: cover;">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Deportivo San Lorenzo</h5>
-              <p class="card-text text-muted mb-2">
-                <i class="bi bi-geo-alt"></i> San Telmo, Buenos Aires
-              </p>
-              <div class="mb-2">
-                <span class="badge text-bg-dark me-1">Fútbol 7</span>
-                <span class="badge text-bg-dark me-1">Césped natural</span>
-                <span class="badge text-bg-dark">Ocupada</span>
-              </div>
-              <p class="card-text small text-muted mb-3">
-                Cancha de fútbol 7 con césped natural. Ideal para partidos más competitivos con mayor espacio de juego.
-              </p>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div>
-                  <div class="text-warning">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <small class="text-muted">(4.8)</small>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-auto">
-                <div class="d-grid gap-2">
-                  <button class="btn btn-dark" onclick="verDetalleCancha(2)" disabled>
-                    <i class="bi bi-clock"></i> No disponible
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Cancha 3 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-4 cancha-item" data-nombre="Futsal Elite" data-ubicacion="Recoleta" data-tipo="futbol-sala" data-superficie="parquet">
-          <div class="card h-100 shadow">
-            <img src="<?= IMG_PATH ?>bg3.jpg" class="card-img-top" alt="Cancha" style="height: 200px; object-fit: cover;">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Futsal Elite</h5>
-              <p class="card-text text-muted mb-2">
-                <i class="bi bi-geo-alt"></i> Recoleta, Buenos Aires
-              </p>
-              <div class="mb-2">
-                <span class="badge text-bg-dark me-1">Fútbol Sala</span>
-                <span class="badge text-bg-dark me-1">Parquet</span>
-                <span class="badge text-bg-dark">Disponible</span>
-              </div>
-              <p class="card-text small text-muted mb-3">
-                Cancha de futsal profesional con piso de parquet. Climatizada con aire acondicionado y sonido profesional.
-              </p>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div>
-                  <div class="text-warning">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <small class="text-muted">(4.5)</small>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-auto">
-                <div class="d-grid gap-2">
-                  <a type="button" class="btn btn-primary" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
-                    <i class="bi bi-eye"></i> Ver detalles
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Estado vacío -->
-        <div class="col-12 text-center py-5 d-none" id="estadoVacio">
-          <i class="bi bi-search text-muted" style="font-size: 4rem;"></i>
-          <h5 class="text-muted mt-3">No se encontraron canchas</h5>
-          <p class="text-muted">Intenta ajustar los filtros de búsqueda.</p>
-          <button type="button" class="btn btn-primary" id="limpiarBusqueda">
-            <i class="bi bi-arrow-clockwise"></i> Limpiar búsqueda
-          </button>
-        </div>
       </div>
+
     </div>
 
     <!-- Vista de mapa -->
@@ -203,24 +79,29 @@ require_once HEAD_COMPONENT;
       </div>
     </div>
 
+    <div class="row mb-3">
+      <div class="col-12 text-center">
+        <small class="text-muted">
+          <i class="bi bi-info-circle me-1"></i>Obtené un mejor resultado utilizando filtros
+        </small>
+      </div>
+    </div>
+
     <!-- Paginación -->
-    <nav aria-label="Paginación de canchas" class="mt-4">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Anterior</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Siguiente</a>
-        </li>
+    <nav aria-label="Paginación de canchas">
+      <ul class="pagination justify-content-center pagination-explorar">
+        <!-- Se genera dinámicamente con JavaScript -->
       </ul>
     </nav>
-    </div>
   </main>
 
   <?php require_once FILTRO_EXPLORAR_MODAL; ?>
+
+  <script>
+    const GET_CANCHAS_DISPONIBLES_JUGADOR = '<?= GET_CANCHAS_DISPONIBLES_JUGADOR ?>';
+    const IMG_CANCHA_DEFAULT = '<?= IMG_CANCHA_DEFAULT ?>';
+    const PAGE_PERFIL_CANCHA_JUGADOR = '<?= PAGE_PERFIL_CANCHA_JUGADOR ?>';
+  </script>
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="<?= CSS_ICONS ?>">
@@ -238,7 +119,7 @@ require_once HEAD_COMPONENT;
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
-  <script src="<?= JS_CANCHAS_EXPLORAR ?>"></script>
+  <script src="<?= JS_CANCHAS_EXPLORAR_JUGADOR ?>"></script>
 </body>
 
 </html>

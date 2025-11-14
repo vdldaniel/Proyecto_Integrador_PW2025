@@ -101,6 +101,7 @@ define("CSS_COMPONENTS", SRC_PATH . "styles/components.css");
 define("CSS_PAGES_LANDING", SRC_PATH . "styles/pages/landing.css");
 define("CSS_PAGES_AGENDA", SRC_PATH . "styles/pages/agenda.css");
 define("CSS_PAGES_PARTIDOS_JUGADOR", SRC_PATH . "styles/pages/partidosJugador.css");
+define("CSS_PAGES_EXPLORAR", SRC_PATH . "styles/pages/explorar.css");
 define("CSS_PAGES_DETALLE_TORNEO", SRC_PATH . "styles/pages/torneoDetalle.css");
 define("CSS_PAGES_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/canchasAdminSistema.css");
 define("CSS_PAGES_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresAdminSistema.css");
@@ -160,6 +161,7 @@ define("JS_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasAdminSistema.js");
 define("JS_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresAdminSistema.js");
 define("JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresReportadosAdminSistema.js");
 define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReportadasAdminSistema.js");
+define("JS_CANCHAS_EXPLORAR_JUGADOR", SRC_PATH . "scripts/pages/canchasExplorar_Jugador.js");
 
 // ===================================
 // IMÁGENES
@@ -171,6 +173,7 @@ define("IMG_FOTO_PERFIL_JUGADOR", IMG_PATH . "foto_perfil_jugador.png");
 define("IMG_BANNER_JUGADOR_DEFAULT", IMG_PATH . "banner_jugador.png");
 define("IMG_BANNER_PERFIL_CANCHA_DEFAULT", IMG_PATH . "banner_perfil_cancha.png");
 define("IMG_BG2", IMG_PATH . "bg2.jpg");
+define("IMG_CANCHA_DEFAULT", IMG_PATH . "foto_cancha_default.png");
 
 // ===================================
 // COMPONENTES PHP
@@ -191,6 +194,7 @@ define("CONTROLLER_LOGOUT", BASE_URL . "src/controllers/logout.php");
 define("CONTROLLER_REGISTRO_JUGADOR", BASE_URL . "src/controllers/registroJugador_controller.php");
 define("CONTROLLER_REGISTRO_ADMIN_CANCHA", BASE_URL . "src/controllers/registroAdminCancha_controller.php");
 define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");
+define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchasDisponibles_Jugador.php");
 
 // ===================================
 // PÁGINAS - AUTH

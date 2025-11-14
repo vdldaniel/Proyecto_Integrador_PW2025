@@ -14,7 +14,7 @@ async function cargarPartidosJugador() {
       throw new Error("Error en la solicitud: " + response.status);
     }
     let partidos = await response.json();
-    console.log(partidos);
+    //console.log(partidos);
 
     // Organizar partidos por secciones
     const hoy = new Date();
