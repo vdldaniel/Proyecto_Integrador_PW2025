@@ -18,7 +18,6 @@ try {
     // Verificar si hay usuario autenticado
     $id_jugador = null;
     if (isset($_SESSION['user_id'])) {
-        // En esta BD, id_usuario = id_jugador (la tabla jugadores tiene id_jugador como PK que referencia a usuarios)
         $id_jugador = $_SESSION['user_id'];
         error_log("GET_PARTIDOS: id_jugador de sesión: " . $id_jugador);
     } else {

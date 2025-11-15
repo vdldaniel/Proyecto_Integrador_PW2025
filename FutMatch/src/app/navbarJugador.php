@@ -71,7 +71,7 @@ function isActive($page_name, $current)
 							</li>
 						</ul>
 					</div>
-					<a href="<?= PAGE_EQUIPOS_LISTADO_JUGADOR ?>"
+					<a href="<?= PAGE_MIS_EQUIPOS_JUGADOR ?>"
 						class="btn btn-dark me-2 <?= isActive('equiposListado', $current_page) ?>"
 						id="botonMiEquipo"
 						title="Mis Equipos">
@@ -143,7 +143,7 @@ function isActive($page_name, $current)
 				title="Mis Partidos">
 				<i class="bi bi-calendar-event me-2"></i>Mis Partidos
 			</a>
-			<a href="<?= PAGE_EQUIPOS_LISTADO_JUGADOR ?>"
+			<a href="<?= PAGE_MIS_EQUIPOS_JUGADOR ?>"
 				class="btn btn-dark text-start <?= isActive('equiposListado', $current_page) ?>"
 				title="Mis Equipos">
 				<i class="bi bi-people me-2"></i>Mis Equipos
@@ -383,7 +383,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-equipos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Equipos</h6>
-							<a href="<?= PAGE_EQUIPOS_LISTADO_JUGADOR ?>" class="btn btn-sm btn-dark">
+							<a href="<?= PAGE_MIS_EQUIPOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-people me-1"></i>Ver Mis Equipos
 							</a>
 						</div>

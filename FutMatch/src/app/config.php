@@ -164,6 +164,7 @@ define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidosJugador.js");
 define("JS_CANCHAS_EXPLORAR_JUGADOR", SRC_PATH . "scripts/pages/canchasExplorar_Jugador.js");
 define("JS_PARTIDOS_EXPLORAR_JUGADOR", SRC_PATH . "scripts/pages/partidosExplorar_Jugador.js");
+define("JS_MIS_EQUIPOS_JUGADOR", JS_SCRIPTS_PATH . "misEquipos_Jugador.js");
 
 // Admin Cancha
 define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
@@ -180,6 +181,7 @@ define("IMG_BANNER_PERFIL_CANCHA_DEFAULT", IMG_PATH . "banner_perfil_cancha.png"
 define("IMG_BG2", IMG_PATH . "bg2.jpg");
 define("IMG_CANCHA_DEFAULT", IMG_PATH . "foto_cancha_default.png");
 define("IMG_PARTIDO_DEFAULT", IMG_PATH . "foto_partido_default.png");
+define("IMG_EQUIPO_DEFAULT", IMG_PATH . "foto_perfil_equipo_default.png");
 
 // ===================================
 // COMPONENTES PHP
@@ -203,6 +205,13 @@ define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.p
 define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchasDisponibles_Jugador.php");
 define("GET_PARTIDOS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getPartidosDisponibles_Jugador.php");
 define("POST_SOLICITANTE_PARTIDO_JUGADOR", BASE_URL . "src/controllers/postSolicitantePartido_Jugador.php");
+
+// EQUIPOS
+define("GET_EQUIPOS_JUGADOR", BASE_URL . "src/controllers/getEquipos_Jugador.php");
+define("POST_EQUIPO_JUGADOR", BASE_URL . "src/controllers/postEquipo_Jugador.php");
+
+//USUARIOS
+define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");
 
 // ===================================
 // PÁGINAS - AUTH
@@ -232,7 +241,7 @@ define("PAGE_INICIO_JUGADOR", PUBLIC_PATH . "HTML/jugador/inicio_Jugador.php");
 define("PAGE_MI_PERFIL_JUGADOR", PUBLIC_PATH . "HTML/jugador/miPerfil_Jugador.php");
 
 // Equipos
-define("PAGE_EQUIPOS_LISTADO_JUGADOR", PUBLIC_PATH . "HTML/jugador/equiposListado_Jugador.php");
+define("PAGE_MIS_EQUIPOS_JUGADOR", PUBLIC_PATH . "HTML/jugador/misEquipos_Jugador.php");
 define("PAGE_PERFIL_EQUIPO_JUGADOR", PUBLIC_PATH . "HTML/jugador/perfilEquipo_Jugador.php");
 
 // Partidos

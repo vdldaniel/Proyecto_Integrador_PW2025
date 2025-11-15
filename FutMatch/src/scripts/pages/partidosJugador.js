@@ -14,7 +14,7 @@ async function cargarPartidosJugador() {
       throw new Error("Error en la solicitud: " + response.status);
     }
     let partidos = await response.json();
-    //console.log(partidos);
+    console.log(partidos);
 
     // Organizar partidos por secciones
     const hoy = new Date();
@@ -94,18 +94,28 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
     let cantMiEquipo, cantEquipoRival;
 
     if (!partido.id_equipo_del_jugador) {
+      // Si equipo NO definido
       if (partido.equipo_asignado === 1) {
+        // Asignado a Equipo A
         equipoAsignado = "Equipo A";
         equipoRival = "Equipo B";
         cantMiEquipo = partido.cant_participantes_equipo_a;
         cantEquipoRival = partido.cant_participantes_equipo_b;
       } else if (partido.equipo_asignado === 2) {
+        // Asignado a Equipo B
         equipoAsignado = "Equipo B";
         equipoRival = "Equipo A";
         cantMiEquipo = partido.cant_participantes_equipo_b;
         cantEquipoRival = partido.cant_participantes_equipo_a;
+      } else if (!partido.equipo_asignado) {
+        // No asignado a ningún equipo aún
+        equipoAsignado = "Equipo A";
+        equipoRival = "Equipo B";
+        cantMiEquipo = partido.cant_participantes_equipo_a;
+        cantEquipoRival = partido.cant_participantes_equipo_b;
       }
     } else {
+      // Equipo definido
       equipoAsignado = partido.nombre_equipo_del_jugador;
       equipoRival = partido.nombre_equipo_rival || "Buscando rival...";
       equiposDefinidos = true;
@@ -259,6 +269,12 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
     const colorRival =
       cantEquipoRival === maxParticipantes ? "text-success" : "text-warning";
 
+    let infoIconHTML = "";
+    if (!partido.equipo_asignado && partido.id_rol === 3) {
+      infoIconHTML = `<i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+															title="Sujeto a cambios por el anfitrión"></i>`;
+    }
+
     const partidoItem = document.createElement("div");
     partidoItem.className = "partido-fila mb-3";
     partidoItem.innerHTML = `
@@ -271,7 +287,7 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
         </div>
 
         <!-- Info de la cancha -->
-        <div class="col-6 col-md-5 partido-cancha">
+        <div class="col-6 col-md-4 partido-cancha">
           <h6 class="fw-bold mb-1">${partido.nombre_cancha} - ${partido.tipo_partido}</h6>
           <span class="text-muted small">${partido.direccion_cancha}</span>
         </div>
@@ -286,7 +302,7 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
         </div>
 
         <!-- Badges -->
-        <div class="col-6 col-md-1 partido-chips">
+        <div class="col-6 col-md-2 partido-chips">
           <span class="badge text-bg-dark">${estadoPartido}</span>
           <span class="badge text-bg-dark">${partido.rol_usuario}</span>
         </div>
@@ -312,7 +328,8 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
               <div class="row g-2 mb-3">
                 <div class="col-6">
                   <div class="text-center">
-                    <small class="equipo-label text-muted d-block mb-1">Tu equipo</small>
+                    <small class="equipo-label text-muted d-block mb-1">Tu equipo ${infoIconHTML}
+										</small>
                     ${equipoAsignadoHTML}
                     <small class="equipo-contador ${colorMiEquipo} fw-bold">${cantMiEquipo}/${maxParticipantes}</small>
                   </div>

@@ -120,7 +120,7 @@ require_once HEAD_COMPONENT;
                 </div>
                 <h5 class="card-title mb-3">Mis Equipos</h5>
                 <p class="card-text text-body-secondary mb-4">Gestiona tus equipos y encuentra nuevos compañeros</p>
-                <a href="<?= PAGE_EQUIPOS_LISTADO_JUGADOR ?>" class="btn btn-warning">
+                <a href="<?= PAGE_MIS_EQUIPOS_JUGADOR ?>" class="btn btn-warning">
                   <i class="bi bi-people-fill me-2"></i>Ver equipos
                 </a>
               </div>
