@@ -193,11 +193,11 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
 
                 <hr class="my-3">
 
-                <div class="mt-3 text-center">
+                <!--<div class="mt-3 text-center">
                     <button class="btn btn-sm btn-dark" id="btnVerEstadisticas">
                         <i class="bi bi-graph-up"></i> Ver estadísticas completas
                     </button>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -213,11 +213,11 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                 <div id="listaPartidosRecientes">
                     <!-- Los partidos se cargan dinámicamente con JavaScript -->
                 </div>
-                <div class="p-4 text-center">
+                <!--<div class="p-4 text-center">
                     <button class="btn btn-sm btn-dark" id="btnVerCalificaciones">
                         <i class="bi bi-graph-up"></i> Ver todas las calificaciones
                     </button>
-                </div>
+                </div>-->
             </div>
         </div>
 
