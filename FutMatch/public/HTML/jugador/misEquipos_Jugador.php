@@ -14,9 +14,7 @@ $current_page = 'equiposListado';
 // Definir título de la página
 $page_title = 'Mis Equipos - FutMatch';
 
-// CSS adicional específico de esta página
-
-$page_css = [];
+$page_css = [CSS_PAGES_EQUIPOS_JUGADOR];
 
 // Cargar head común
 require_once HEAD_COMPONENT;
@@ -38,16 +36,18 @@ require_once HEAD_COMPONENT;
         <p class="text-muted mb-0">Gestiona tus equipos y únete a nuevos</p>
       </div>
       <div class="col-md-6 text-end">
-        <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalUnirseEquipo">
+        <!-- 
+        <button type="button" class=" hidden btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalUnirseEquipo">
           <i class="bi bi-person-plus"></i> Unirse a un Equipo
         </button>
+        -->
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrearEquipo">
           <i class="bi bi-plus-circle"></i> Crear Equipo
         </button>
       </div>
     </div>
 
-    <!-- Línea 2: Filtros y búsqueda -->
+    <!-- Línea 2: Filtros y búsqueda 
     <div class="row mb-4">
       <div class="col-12">
         <div class="input-group">
@@ -62,12 +62,19 @@ require_once HEAD_COMPONENT;
         </div>
       </div>
     </div>
+    -->
 
     <!-- Lista de equipos -->
     <div id="equiposList" class="row g-3">
       <script>
+        const BASE_URL = '<?= BASE_URL ?>';
         const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
+        const GET_EQUIPO_JUGADOR = '<?= GET_EQUIPO_JUGADOR ?>';
         const GET_USUARIOS = '<?= GET_USUARIOS ?>';
+        const POST_EQUIPO_JUGADOR = '<?= POST_EQUIPO_JUGADOR ?>';
+        const POST_INVITAR_JUGADOR = '<?= POST_INVITAR_JUGADOR ?>';
+        const UPDATE_EQUIPO_JUGADOR = '<?= UPDATE_EQUIPO_JUGADOR ?>';
+        const CURRENT_USER_ID = <?= $_SESSION['user_id'] ?>;
       </script>
     </div>
   </main>
@@ -83,9 +90,8 @@ require_once HEAD_COMPONENT;
         <div class="modal-body">
           <div class="mb-3">
             <label for="codigoEquipo" class="form-label">Código de equipo</label>
-            <input type="text" class="form-control form-control-lg text-center" id="codigoEquipo"
-              placeholder="00000" maxlength="5" pattern="[0-9]{5}"
-              style="letter-spacing: 0.5rem; font-size: 1.5rem;">
+            <input type="text" class="form-control form-control-lg codigo-equipo" id="codigoEquipo"
+              placeholder="00000" maxlength="5" pattern="[0-9]{5}">
             <div class="form-text">Ingresa el código de 5 dígitos proporcionado por el equipo</div>
           </div>
         </div>
@@ -98,76 +104,86 @@ require_once HEAD_COMPONENT;
   </div>
 
   <!-- Modal: Crear Equipo -->
-  <div class="modal fade" id="modalCrearEquipo" tabindex="-1" aria-labelledby="modalCrearEquipoLabel" aria-hidden="true">
+  <div class="modal fade" id="modalCrearEquipo" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalCrearEquipoLabel">Crear un equipo</h5>
+          <h5 class="modal-title" id="tituloModalEquipo">Crear un equipo</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
           <form id="formCrearEquipo">
-            <div class="row mb-3">
-              <div class="col-md-8">
-                <label for="nombreEquipo" class="form-label">Nombre del equipo</label>
-                <input type="text" class="form-control" id="nombreEquipo" required>
-              </div>
-              <div class="col-md-4">
-                <label for="fotoEquipo" class="form-label">Foto del equipo</label>
-                <input type="file" class="form-control" id="fotoEquipo" accept="image/*">
+            <input type="hidden" id="inputIdEquipo" value="">
+            <div class="input foto-perfil mb-3">
+              <label for="inputFotoPrincipal" class="form-label">Foto del equipo</label>
+              <div class="foto-principal" id="dropZoneFoto">
+                <div class="upload-icon">
+                  <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                  <span class="upload-text">Click o arrastra una imagen</span>
+                </div>
+                <input type="file" name="foto" class="d-none" id="inputFotoPrincipal" accept="image/*">
               </div>
             </div>
-            <div class="col-12 mb-3">
-              <label for="descripcionEquipo" class="form-label">Descripción</label>
-              <textarea type="text" class="form-control" id="descripcionEquipo" rows="3" placeholder="Describe tu equipo..."></textarea>
+            <div class="mb-3 input texto-principal">
+              <label for="inputNombreEquipo" class="form-label">Nombre del equipo</label>
+              <input type="text" name="nombre" id="inputNombreEquipo" class="form-control">
             </div>
-            <div class="mb-3">
-              <label class="form-label">Jugadores del equipo</label>
-              <div id="jugadoresContainer">
-                <div class="input-group mb-2">
-                  <input type="text" class="form-control input-jugador-inicial" placeholder="Username del jugador" name="jugador[]">
-                  <button class="btn btn-dark remove-jugador-btn" type="button" disabled>
-                    <i class="bi bi-dash"></i>
+            <div class="mb-3 input texto-largo">
+              <label for="inputDescripcionEquipo" class="form-label">Descripción del equipo</label>
+              <textarea type="text" name="descripcion" id="inputDescripcionEquipo" rows="3" class="form-control"></textarea>
+              <div class="form-text">Opcional. Describe brevemente el objetivo o estilo de tu equipo.</div>
+            </div>
+            <div class="mb-3 input elementos" id="invitarJugadoresSection">
+              <!-- Invitar jugadores-->
+            </div>
+
+            <!-- Sección de transferir liderazgo (solo visible en modo edición) -->
+            <div class="mb-3 d-none" id="seccionTransferirLiderazgo">
+              <hr>
+              <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                <strong>Transferir liderazgo del equipo</strong>
+              </div>
+              <button type="button" class="btn btn-warning w-100 mb-2" id="btnMostrarTransferirLiderazgo">
+                <i class="bi bi-arrow-right-circle me-1"></i> Transferir liderazgo
+              </button>
+              <div class="d-none" id="inputTransferirLiderazgo">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="inputNuevoLider" placeholder="Username del nuevo líder">
+                  <button class="btn btn-success" type="button" id="btnValidarNuevoLider" disabled>
+                    <i class="bi bi-check-lg"></i>
                   </button>
                 </div>
+                <div class="form-text">El nuevo líder debe ser un miembro actual del equipo</div>
               </div>
-              <button type="button" class="btn btn-dark btn-sm" id="btnAgregarJugador">
-                <i class="bi bi-plus"></i> Agregar jugador
-              </button>
             </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" id="btnCrearEquipoSubmit">Crear</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnCrearEquipoSubmit">Confirmar</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <!-- Modal: Invitar Jugador -->
   <div class="modal fade" id="modalInvitarJugador" tabindex="-1" aria-labelledby="modalInvitarJugadorLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalInvitarJugadorLabel">Invitar a un jugador al equipo</h5>
+          <h5 class="modal-title" id="modalInvitarJugadorLabel">Invitar jugadores al equipo</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <p class="text-muted">El jugador puede ingresar esta clave:</p>
-            <div class="alert alert-info text-center">
-              <strong id="claveTemporalEquipo" style="font-size: 1.5rem; letter-spacing: 0.3rem;">12345</strong>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="usernameInvitar" class="form-label">Username del jugador</label>
-            <input type="text" class="form-control" id="usernameInvitar" placeholder="Ingresa el username">
+          <div class="mb-3" id="invitarJugadoresSectionModal">
+            <!-- Los inputs de jugadores se agregarán aquí dinámicamente -->
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="btnInvitarJugador">Invitar</button>
+          <button type="button" class="btn btn-primary" id="btnConfirmarInvitaciones">Invitar</button>
         </div>
       </div>
     </div>
@@ -182,7 +198,7 @@ require_once HEAD_COMPONENT;
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
-          <form id="formEditarEquipo">
+          <form id="formEditarEquipo" action="" method="POST">
             <!-- Información básica del equipo -->
             <div class="row mb-3">
               <div class="col-md-8">
@@ -344,7 +360,16 @@ require_once HEAD_COMPONENT;
 
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
+  <script src="<?= JS_TOAST_MODULE ?>"></script>
   <script src="<?= JS_MIS_EQUIPOS_JUGADOR ?>"></script>
+  <script>
+    const IMG_EQUIPO_DEFAULT = '<?= IMG_EQUIPO_DEFAULT ?>';
+  </script>
+
+  <!-- Estilos adicionales -->
+  <style>
+
+  </style>
 
 </body>
 

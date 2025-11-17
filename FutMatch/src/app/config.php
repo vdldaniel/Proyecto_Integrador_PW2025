@@ -108,6 +108,7 @@ define("CSS_PAGES_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresAd
 define("CSS_PAGES_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/jugadoresReportadosAdminSistema.css");
 define("CSS_PAGES_TABLAS_ADMIN_SISTEMA", SRC_PATH . "styles/pages/tablasAdminSistema.css");
 define("CSS_PAGES_PERFILES", SRC_PATH . "styles/pages/perfiles.css");
+define("CSS_PAGES_EQUIPOS_JUGADOR", SRC_PATH . "styles/pages/equiposJugador.css");
 
 // CDN Externos
 define("CSS_ICONS", "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
@@ -159,6 +160,9 @@ define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReporta
 // JS - PAGINAS BACKEND
 // ==================================
 
+// Módulos compartidos
+define("JS_TOAST_MODULE", SRC_PATH . "scripts/modules/toast.js");
+
 // Jugador
 define("JS_REGISTRO_JUGADOR", JS_SCRIPTS_PATH . "registroJugador.js");
 define("JS_PARTIDOS_JUGADOR", JS_SCRIPTS_PATH . "partidosJugador.js");
@@ -208,7 +212,10 @@ define("POST_SOLICITANTE_PARTIDO_JUGADOR", BASE_URL . "src/controllers/postSolic
 
 // EQUIPOS
 define("GET_EQUIPOS_JUGADOR", BASE_URL . "src/controllers/getEquipos_Jugador.php");
+define("GET_EQUIPO_JUGADOR", BASE_URL . "src/controllers/getEquipo_Jugador.php");
 define("POST_EQUIPO_JUGADOR", BASE_URL . "src/controllers/postEquipo_Jugador.php");
+define("POST_INVITAR_JUGADOR", BASE_URL . "src/controllers/postInvitarJugador_Equipo.php");
+define("UPDATE_EQUIPO_JUGADOR", BASE_URL . "src/controllers/updateEquipo_Jugador.php");
 
 //USUARIOS
 define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");

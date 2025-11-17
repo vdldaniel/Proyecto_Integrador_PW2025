@@ -1,0 +1,81 @@
+.hover-shadow {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-title a:hover {
+  color: #0d6efd !important;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input .foto-perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input .foto-principal {
+  border: 2px dashed #828588;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+.input .foto-principal:hover {
+  border-color: #0d6efd;
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.input .foto-principal.dragover {
+  border-color: #2b60af;
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.input .foto-principal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.input .foto-principal .upload-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.input .foto-principal .upload-text {
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+.codigo-equipo {
+  letter-spacing: 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+}
