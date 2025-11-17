@@ -20,6 +20,8 @@ SELECT
     p.id_partido,
     p.id_anfitrion,
     p.abierto,
+    p.goles_equipo_A,
+    p.goles_equipo_B,
     
     -- Fecha y hora (de la reserva)
     r.id_reserva,

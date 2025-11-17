@@ -176,8 +176,15 @@ include HEAD_COMPONENT;
     </main>
 
     <!-- Scripts -->
-    <script src="<?= JS_BOOTSTRAP ?>"></script>
-    <script src="<?= JS_PERFIL_JUGADOR ?>"></script>
+    <!-- Los principales están en perfilJugador.php -->
+    <script>
+        const CURRENT_USER_ID = '<?= $_SESSION['user_id'] ?>';
+        const TIPO_PERFIL = 'jugador';
+        const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
+        const GET_PARTIDOS_JUGADOR = '<?= GET_PARTIDOS_JUGADOR ?>';
+    </script>
+
+    <script src="<?= JS_PERFIL_JUGADOR_BASE ?>"></script>
 
 </body>
 

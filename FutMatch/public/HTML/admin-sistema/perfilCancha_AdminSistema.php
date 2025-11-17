@@ -381,6 +381,11 @@ include HEAD_COMPONENT;
 
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
+    <script src="<?= JS_PERFILES ?>"></script>
+
+    <script>
+        const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -110,6 +110,7 @@ CREATE TABLE `canchas` (
   `id_direccion` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
+  `telefono` varchar(20) NOT NULL,
   `id_estado` int(11) NOT NULL DEFAULT 1,
   `foto` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL,

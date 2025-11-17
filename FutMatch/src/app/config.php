@@ -130,6 +130,10 @@ define("JS_AGENDA", JS_SCRIPTS_PATH . "agenda.js");
 
 // Scripts de componentes
 define("JS_PERFIL_CANCHA_BASE", JS_COMPONENTS_PATH . "perfilCancha.js");
+define("JS_PERFILES", BASE_URL . "src/scripts/components/perfiles.js");
+define("JS_PERFIL_JUGADOR_BASE", SRC_PATH . "scripts/components/perfilJugador.js");
+
+// pages
 define("JS_AGENDA_ADMIN", JS_SCRIPTS_PATH . "agenda-admin.js");
 define("JS_CALENDARIO_JUGADOR", JS_SCRIPTS_PATH . "calendarioJugador.js");
 define("JS_ADMIN_INC", JS_SCRIPTS_PATH . "adminInc.js");
@@ -180,12 +184,13 @@ define("IMG_PATH", PUBLIC_PATH . "img/");
 define("IMG_LOGO_SINFONDO", IMG_PATH . "logo-sinfondo.svg");
 define("IMG_LOGO_FONDOVERDE", IMG_PATH . "logo-fondoverde.svg");
 define("IMG_FOTO_PERFIL_JUGADOR", IMG_PATH . "foto_perfil_jugador.png");
-define("IMG_BANNER_JUGADOR_DEFAULT", IMG_PATH . "banner_jugador.png");
 define("IMG_BANNER_PERFIL_CANCHA_DEFAULT", IMG_PATH . "banner_perfil_cancha.png");
+define("IMG_BANNER_PERFIL_JUGADOR_DEFAULT", IMG_PATH . "banner_perfil_jugador.png");
 define("IMG_BG2", IMG_PATH . "bg2.jpg");
 define("IMG_CANCHA_DEFAULT", IMG_PATH . "foto_cancha_default.png");
 define("IMG_PARTIDO_DEFAULT", IMG_PATH . "foto_partido_default.png");
 define("IMG_EQUIPO_DEFAULT", IMG_PATH . "foto_perfil_equipo_default.png");
+
 
 // ===================================
 // COMPONENTES PHP
@@ -219,6 +224,10 @@ define("UPDATE_EQUIPO_JUGADOR", BASE_URL . "src/controllers/updateEquipo_Jugador
 
 //USUARIOS
 define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");
+
+// PERFILES
+define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");
+
 
 // ===================================
 // PÁGINAS - AUTH

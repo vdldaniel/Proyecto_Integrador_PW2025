@@ -4,6 +4,8 @@
  * Incluye upload de avatar, banner y todas las interacciones del perfil
  */
 
+addEventListener("DOMContentLoaded", function () {});
+
 class PerfilJugador {
   constructor() {
     this.initializeEventListeners();

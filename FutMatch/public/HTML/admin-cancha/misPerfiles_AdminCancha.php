@@ -184,6 +184,12 @@ require_once HEAD_COMPONENT;
   <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
   <!-- Script específico del admin (extiende el base) -->
   <script src="<?= JS_PERFILES_CANCHAS ?>"></script>
+  <script src="<?= JS_PERFILES ?>"></script>
+
+  <script>
+    const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
+  </script>
+
 </body>
 
 </html>

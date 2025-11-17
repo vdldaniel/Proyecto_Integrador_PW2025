@@ -311,9 +311,10 @@ include HEAD_COMPONENT;
     </main>
 
     <!-- Scripts -->
-    <script src="<?= JS_BOOTSTRAP ?>"></script>
-    <script src="<?= JS_PERFIL_JUGADOR ?>"></script>
     <script src="<?= JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA ?>"></script>
+    <!-- El resto está en perfilJugador.php -->
+
+
 
 </body>
 

@@ -55,7 +55,7 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
         <div class="card shadow-lg rounded-3 overflow-hidden profile-banner-container">
             <!-- Imagen de banner -->
             <div class="position-relative profile-banner-wrapper">
-                <div class="profile-banner-image" style="background-image: url('<?= IMG_BANNER_JUGADOR_DEFAULT ?>');">
+                <div class="profile-banner-image" style="background-image: url('<?= IMG_BANNER_PERFIL_JUGADOR_DEFAULT ?>');">
                 </div>
 
                 <!-- Botón editar portada (solo si es perfil propio) -->
@@ -88,13 +88,12 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
 
                     <!-- Información básica del jugador -->
                     <div class="profile-info-container">
-                        <h2 class="profile-name mb-1" id="nombreJugador">Carlos Fernández</h2>
-                        <p class="profile-username mb-2" id="usernameJugador">@carlos_futbol</p>
+                        <h2 class="profile-name mb-1" id="nombreJugador"></h2>
+                        <p class="profile-username mb-2" id="usernameJugador"></p>
                         <div class="profile-badges">
-                            <span class="badge bg-success me-2" id="estadoJugador">Activo</span>
-                            <span class="badge bg-secondary" id="posicionJugador">Mediocampista</span>
+                            <span class="badge bg-success me-2" id="estadoJugador"></span>
                             <span class="profile-rating me-2" id="calificacionJugador">
-                                ★★★★☆ <small class="ms-1">(4.3)</small>
+
                             </span>
                         </div>
                     </div>
@@ -113,83 +112,7 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                 <h4 class="mb-0"><i class="bi bi-trophy"></i> <?= $perfil_jugador_titulo_partidos ?></h4>
             </div>
             <div class="card-body p-0">
-                <!-- Partido 1 -->
-                <div class="border-bottom p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="badge text-bg-success me-3 p-2">
-                            <i class="bi bi-check-circle"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h5 class="mb-1">Victoria 4-2</h5>
-                            <p class="text-muted mb-0">Complejo Deportivo Norte • 08/11/2025</p>
-                        </div>
-                        <div class="text-end">
-                            <span class="badge text-bg-dark">2 goles</span>
-                            <span class="badge text-bg-dark ms-1">1 asistencia</span>
-                        </div>
-                    </div>
-                    <p class="mb-3">Excelente partido donde el equipo mostró una gran coordinación ofensiva.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <small class="text-muted">Equipo: Los Cracks FC</small>
-                        </div>
-                        <div>
-                            <span class="text-warning">★★★★★</span>
-                            <small class="text-muted ms-1">Calificación recibida</small>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Partido 2 -->
-                <div class="border-bottom p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="badge text-bg-danger me-3 p-2">
-                            <i class="bi bi-x-circle"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h5 class="mb-1">Derrota 1-3</h5>
-                            <p class="text-muted mb-0">Futbol Club Centro • 05/11/2025</p>
-                        </div>
-                        <div class="text-end">
-                            <span class="badge text-bg-dark">1 gol</span>
-                        </div>
-                    </div>
-                    <p class="mb-3">Partido complicado contra un equipo muy organizado defensivamente.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <small class="text-muted">Equipo: Los Cracks FC</small>
-                        </div>
-                        <div>
-                            <span class="text-warning">★★★☆☆</span>
-                            <small class="text-muted ms-1">Calificación recibida</small>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Partido 3 -->
-                <div class="border-bottom p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="badge text-bg-secondary me-3 p-2">
-                            <i class="bi bi-dash-circle"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h5 class="mb-1">Empate 2-2</h5>
-                            <p class="text-muted mb-0">Cancha Municipal • 02/11/2025</p>
-                        </div>
-                        <div class="text-end">
-                            <span class="badge text-bg-dark">2 asistencias</span>
-                        </div>
-                    </div>
-                    <p class="mb-3">Partido equilibrado donde ambos equipos tuvieron buenas oportunidades.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <small class="text-muted">Equipo: Los Cracks FC</small>
-                        </div>
-                        <div>
-                            <span class="text-warning">★★★★☆</span>
-                            <small class="text-muted ms-1">Calificación recibida</small>
-                        </div>
-                    </div>
+                <div id="listaPartidosRecientes">
                 </div>
                 <div class="p-4 text-center">
                     <button class="btn btn-sm btn-dark" id="btnVerCalificaciones">
@@ -451,3 +374,5 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
         </div>
     </div>
 <?php endif; ?>
+
+<script src="<?= JS_BOOTSTRAP ?>"></script>

@@ -56,9 +56,6 @@ include HEAD_COMPONENT;
         </div>
     </main>
 
-    <!-- Scripts -->
-    <script src="<?= JS_BOOTSTRAP ?>"></script>
-    <script src="<?= JS_PERFIL_JUGADOR ?>"></script>
 
     <script>
         // Funcionalidad específica para perfil externo
@@ -78,6 +75,9 @@ include HEAD_COMPONENT;
             }
         });
     </script>
+
+    <!-- Scripts -->
+    <!-- Están en perfilJugador.php -->
 
 </body>
 
