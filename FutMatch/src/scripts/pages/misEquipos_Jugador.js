@@ -479,9 +479,7 @@ function crearTarjetaEquipo(equipo) {
             <!-- Información del equipo -->
             <div class="col-md-4">
               <h5 class="card-title mb-1">
-                <a href="perfilEquipo_Jugador.php?id=${
-                  equipo.id_equipo
-                }" class="text-decoration-none">
+                <a class="text-decoration-none">
                   ${equipo.nombre_equipo}
                 </a>
                 ${badgeRol}
@@ -519,11 +517,6 @@ function crearTarjetaEquipo(equipo) {
 
             <!-- Acciones -->
             <div class="col-auto ms-auto">
-              <a href="perfilEquipo_Jugador.php?id=${
-                equipo.id_equipo
-              }" class="btn btn-dark btn-sm">
-                <i class="bi bi-eye me-1"></i>Ver perfil
-              </a>
               <button class="btn btn-dark btn-sm ms-1" onclick="abrirModalInvitarJugadores(${
                 equipo.id_equipo
               })">
