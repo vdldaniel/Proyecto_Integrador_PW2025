@@ -12,12 +12,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-/*
-$query = 'SELECT * FROM incidentes';
-if (isset($_GET['filtro_nombre'])) {
-    $query .= " AND nombre_completo LIKE '%:nombre%'";
-}
-*/
 
 $id_jugador = $_SESSION['user_id'];
 $query =

@@ -31,6 +31,8 @@ try {
         j.username,
         u.nombre,
         u.apellido,
+        u.email,
+        u.telefono,
         j.foto_perfil
     FROM jugadores j
     INNER JOIN usuarios u ON j.id_jugador = u.id_usuario

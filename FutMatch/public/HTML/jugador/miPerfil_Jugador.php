@@ -77,31 +77,27 @@ include HEAD_COMPONENT;
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre completo</label>
-                                    <input type="text" class="form-control" name="nombre" value="Carlos Fernández" required>
+                                    <input type="text" class="form-control" name="nombre" id="configNombre" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Username</label>
-                                    <input type="text" class="form-control" name="username" value="carlos_futbol" required>
+                                    <input type="text" class="form-control" name="username" id="configUsername" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" value="carlos.fernandez@email.com" required>
+                                    <input type="email" class="form-control" name="email" id="configEmail" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" name="telefono" value="+54 11 1234-5678">
+                                    <input type="tel" class="form-control" name="telefono" id="configTelefono">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Fecha de nacimiento</label>
-                                    <input type="date" class="form-control" name="fecha_nacimiento" value="1997-03-15">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Ubicación</label>
-                                    <input type="text" class="form-control" name="ubicacion" value="CABA, Buenos Aires">
+                                    <input type="date" class="form-control" name="fecha_nacimiento" id="configFechaNacimiento">
                                 </div>
                             </div>
                             <div class="row">
@@ -178,10 +174,14 @@ include HEAD_COMPONENT;
     <!-- Scripts -->
     <!-- Los principales están en perfilJugador.php -->
     <script>
+        const BASE_URL = '<?= BASE_URL ?>';
         const CURRENT_USER_ID = '<?= $_SESSION['user_id'] ?>';
         const TIPO_PERFIL = 'jugador';
         const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
         const GET_PARTIDOS_JUGADOR = '<?= GET_PARTIDOS_JUGADOR ?>';
+        const GET_RESEÑAS_JUGADORES = '<?= GET_RESEÑAS_JUGADORES ?>';
+        const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
+        const GET_ESTADISTICAS_JUGADOR = '<?= GET_ESTADISTICAS_JUGADOR ?>';
     </script>
 
     <script src="<?= JS_PERFIL_JUGADOR_BASE ?>"></script>

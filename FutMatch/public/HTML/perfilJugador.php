@@ -105,63 +105,8 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
 
 <!-- Contenido principal -->
 <div class="row">
-    <div class="col-lg-8">
-        <!-- Sección de Partidos Recientes -->
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0"><i class="bi bi-trophy"></i> <?= $perfil_jugador_titulo_partidos ?></h4>
-            </div>
-            <div class="card-body p-0">
-                <div id="listaPartidosRecientes">
-                </div>
-                <div class="p-4 text-center">
-                    <button class="btn btn-sm btn-dark" id="btnVerCalificaciones">
-                        <i class="bi bi-graph-up"></i> Ver todas las calificaciones
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección de Historial de Equipos -->
-        <?php if ($perfil_jugador_mostrar_equipos): ?>
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-info text-white">
-                    <h4 class="mb-0"><i class="bi bi-people"></i> Historial de Equipos</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="card-title">Los Cracks FC</h6>
-                                    <p class="card-text text-muted">Equipo actual • Desde Marzo 2025</p>
-                                    <div class="d-flex justify-content-between">
-                                        <small>23 partidos jugados</small>
-                                        <span class="badge bg-success">Activo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="card-title">Deportivo Unidos</h6>
-                                    <p class="card-text text-muted">Enero 2025 - Marzo 2025</p>
-                                    <div class="d-flex justify-content-between">
-                                        <small>15 partidos jugados</small>
-                                        <span class="badge bg-secondary">Inactivo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
-    </div>
-
-    <!-- Sidebar derecha con información -->
-    <div class="col-lg-4">
+    <!-- Sidebar derecha con información (aparece primero en móvil) -->
+    <div class="col-lg-4 order-lg-2">
         <!-- Botón de acción principal (si es necesario) -->
         <?php if ($perfil_jugador_mostrar_reportar): ?>
             <div class="mb-4">
@@ -181,32 +126,26 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                     <label class="text-muted d-block mb-1">
                         <i class="bi bi-envelope me-1"></i>Email
                     </label>
-                    <p class="mb-0" id="emailJugador">carlos.fernandez@email.com</p>
+                    <p class="mb-0" id="emailJugador">—</p>
                 </div>
                 <div class="mb-3">
                     <label class="text-muted d-block mb-1">
                         <i class="bi bi-telephone me-1"></i>Teléfono
                     </label>
-                    <p class="mb-0" id="telefonoJugador">+54 11 1234-5678</p>
+                    <p class="mb-0" id="telefonoJugador">—</p>
                 </div>
                 <div class="mb-3">
                     <label class="text-muted d-block mb-1">
                         <i class="bi bi-calendar me-1"></i>Edad
                     </label>
-                    <p class="mb-0" id="edadJugador">28 años</p>
-                </div>
-                <div class="mb-3">
-                    <label class="text-muted d-block mb-1">
-                        <i class="bi bi-geo-alt me-1"></i>Ubicación
-                    </label>
-                    <p class="mb-0" id="ubicacionJugador">CABA, Buenos Aires</p>
+                    <p class="mb-0" id="edadJugador">—</p>
                 </div>
                 <?php if ($perfil_jugador_es_propio): ?>
                     <div class="mb-0">
                         <label class="text-muted d-block mb-1">
                             <i class="bi bi-calendar-plus me-1"></i>Miembro desde
                         </label>
-                        <p class="mb-0">Enero 2025</p>
+                        <p class="mb-0" id="miembroDesdeJugador">—</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -220,11 +159,11 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
             <div class="card-body">
                 <!-- Calificación promedio -->
                 <div class="text-center mb-3">
-                    <div class="text-warning mb-2" style="font-size: 1.5rem;">
-                        ★★★★☆
+                    <div class="text-warning mb-2" style="font-size: 1.5rem;" id="estrellasCalificacion">
+                        ☆☆☆☆☆
                     </div>
-                    <h3 class="text-warning mb-0">4.3</h3>
-                    <small class="text-muted">Basado en 89 calificaciones</small>
+                    <h3 class="text-warning mb-0" id="promedioCalificacion">0.0</h3>
+                    <small class="text-muted" id="basadoEnReseñas">Basado en 0 calificaciones</small>
                 </div>
 
                 <hr class="my-3">
@@ -232,22 +171,22 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                 <!-- Estadísticas de juego -->
                 <div class="row text-center mb-3">
                     <div class="col-6 border-end">
-                        <div class="fw-bold text-success fs-5">127</div>
+                        <div class="fw-bold text-success fs-5" id="totalPartidos">0</div>
                         <small class="text-muted">Partidos</small>
                     </div>
                     <div class="col-6">
-                        <div class="fw-bold text-primary fs-5">89%</div>
+                        <div class="fw-bold text-primary fs-5" id="porcentajeAsistencia">0%</div>
                         <small class="text-muted">Asistencia</small>
                     </div>
                 </div>
 
                 <div class="row text-center mb-3">
                     <div class="col-6 border-end">
-                        <div class="fw-bold text-warning fs-5">45</div>
+                        <div class="fw-bold text-warning fs-5" id="totalGoles">0</div>
                         <small class="text-muted">Goles</small>
                     </div>
                     <div class="col-6">
-                        <div class="fw-bold text-info fs-5">32</div>
+                        <div class="fw-bold text-info fs-5" id="totalAsistencias">0</div>
                         <small class="text-muted">Asistencias</small>
                     </div>
                 </div>
@@ -261,6 +200,40 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Columna de partidos (aparece después en móvil, antes en desktop) -->
+    <div class="col-lg-8 order-lg-1">
+        <!-- Sección de Partidos Recientes -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-trophy"></i> <?= $perfil_jugador_titulo_partidos ?></h4>
+            </div>
+            <div class="card-body p-0">
+                <div id="listaPartidosRecientes">
+                    <!-- Los partidos se cargan dinámicamente con JavaScript -->
+                </div>
+                <div class="p-4 text-center">
+                    <button class="btn btn-sm btn-dark" id="btnVerCalificaciones">
+                        <i class="bi bi-graph-up"></i> Ver todas las calificaciones
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Historial de Equipos -->
+        <?php if ($perfil_jugador_mostrar_equipos): ?>
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="bi bi-people"></i> Historial de Equipos</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="listaEquiposJugador">
+                        <!-- Los equipos se cargan dinámicamente con JavaScript -->
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

@@ -17,7 +17,7 @@ try {
     // Obtener el id_jugador desde GET o sesión
     $id_jugador = isset($_GET['id']) ? intval($_GET['id']) : $_SESSION['user_id'];
 
-    $query = 'SELECT * FROM vista_partidos_jugador WHERE id_jugador = :id ORDER BY fecha_partido DESC';
+    $query = 'SELECT * FROM calificaciones_jugadores WHERE id_jugador_evaluado = :id OR id_jugador_evaluador = :id';
 
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $id_jugador, PDO::PARAM_INT);
@@ -27,7 +27,7 @@ try {
     header('Content-Type: application/json');
     echo json_encode($partidos);
 } catch (PDOException $e) {
-    error_log("GET_PARTIDOS_JUGADOR ERROR: " . $e->getMessage());
+    error_log("GET_RESEÑAS_JUGADORES ERROR: " . $e->getMessage());
     http_response_code(500);
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Error al obtener partidos', 'details' => $e->getMessage()]);

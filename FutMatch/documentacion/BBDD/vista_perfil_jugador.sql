@@ -26,6 +26,7 @@ SELECT
     u.id_usuario,
     u.nombre,
     u.apellido,
+    u.email,
     u.fecha_registro,
     
     j.id_jugador,

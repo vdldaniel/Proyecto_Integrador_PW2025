@@ -210,10 +210,16 @@ define("CONTROLLER_LOGIN", BASE_URL . "src/controllers/login_controller.php");
 define("CONTROLLER_LOGOUT", BASE_URL . "src/controllers/logout.php");
 define("CONTROLLER_REGISTRO_JUGADOR", BASE_URL . "src/controllers/registroJugador_controller.php");
 define("CONTROLLER_REGISTRO_ADMIN_CANCHA", BASE_URL . "src/controllers/registroAdminCancha_controller.php");
-define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");
-define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchasDisponibles_Jugador.php");
-define("GET_PARTIDOS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getPartidosDisponibles_Jugador.php");
-define("POST_SOLICITANTE_PARTIDO_JUGADOR", BASE_URL . "src/controllers/postSolicitantePartido_Jugador.php");
+
+//CANCHAS
+define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchasDisponibles_Jugador.php"); //EXPLORAR
+
+// PARTIDOS
+define("GET_PARTIDOS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getPartidosDisponibles_Jugador.php"); //EXPLORAR
+define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");                        //MIS PARTIDOS
+define("POST_SOLICITANTE_PARTIDO_JUGADOR", BASE_URL . "src/controllers/postSolicitantePartido_Jugador.php"); //SOLICITAR PARTICIPACIÓN
+define("GET_RESEÑAS_JUGADORES", BASE_URL . "src/controllers/getReseñas_Jugadores.php");
+define("GET_ESTADISTICAS_JUGADOR", BASE_URL . "src/controllers/getEstadisticas_Jugador.php");
 
 // EQUIPOS
 define("GET_EQUIPOS_JUGADOR", BASE_URL . "src/controllers/getEquipos_Jugador.php");

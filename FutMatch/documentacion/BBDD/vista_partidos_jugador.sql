@@ -62,7 +62,11 @@ SELECT
     tp.min_participantes as min_participantes,
     tp.max_participantes as max_participantes,
     
-    pp.equipo as equipo_asignado,
+    CASE pp.equipo 
+    WHEN 1 THEN 'Equipo A'
+    WHEN 2 THEN 'Equipo B'
+    ELSE 'Sin asignar'
+    END as equipo_asignado,
 
     -- Cantidad de participantes por equipo
     (SELECT COUNT(*) FROM participantes_partidos pp_a 
@@ -70,21 +74,43 @@ SELECT
     (SELECT COUNT(*) FROM participantes_partidos pp_b 
      WHERE pp_b.id_partido = p.id_partido AND pp_b.equipo = 2) AS cant_participantes_equipo_b,
 
+    
+    -- NO SE USA
     -- Información del equipo del jugador (el equipo al que pertenece)
-    e_propio.id_equipo AS id_equipo_del_jugador,
-    e_propio.nombre AS nombre_equipo_del_jugador,
-    e_propio.foto AS foto_equipo_del_jugador,
-    ep_propio.goles_anotados AS goles_mi_equipo,
-    ep_propio.es_ganador AS mi_equipo_gano,
+    -- e_propio.id_equipo AS id_equipo_del_jugador,
+    -- e_propio.nombre AS nombre_equipo_del_jugador,
+    -- e_propio.foto AS foto_equipo_del_jugador,
     
     -- Información del equipo rival
-    e_rival.id_equipo AS id_equipo_rival,
-    e_rival.nombre AS nombre_equipo_rival,
-    e_rival.foto AS foto_equipo_rival,
-    ep_rival.goles_anotados AS goles_equipo_rival,
-    ep_rival.es_ganador AS equipo_rival_gano
+    -- e_rival.id_equipo AS id_equipo_rival,
+    -- e_rival.nombre AS nombre_equipo_rival,
+    -- e_rival.foto AS foto_equipo_rival,
 
+    -- Información del torneo si la hubiere 
+    
+    -- tabla TORNEOS
+    t.id_torneo,
+    t.nombre AS nombre_torneo,
+    -- t.id_etapa 
+    
+    -- tabla ETAPAS_TORNEOS
+    et.nombre AS etapa_torneo,
+    
+    -- tabla PARTIDOS_TORNEOS
+    -- acá es donde se puede linkear el id_partido con el id_torneo y su info
+    pt.id_fase,
+    pt.orden_en_fase,
+    pt.id_equipo_A,
+    pt.id_equipo_B,
 
+    -- TABLA EQUIPOS
+    eqa.nombre AS nombre_equipo_A,
+    eqa.foto AS foto_equipo_A,
+    eqa.descripcion AS descripcion_equipo_A,
+    eqb.nombre AS nombre_equipo_B,
+    eqb.foto AS foto_equipo_B,
+    eqb.descripcion AS descripcion_equipo_B
+    
 
 FROM participantes_partidos pp
 
@@ -117,16 +143,30 @@ LEFT JOIN direcciones d ON c.id_direccion = d.id_direccion
 
 -- Join para obtener el equipo PROPIO del jugador
 -- (el equipo al que el jugador pertenece en este partido)
-LEFT JOIN equipos_partidos ep_propio ON p.id_partido = ep_propio.id_partido 
-    AND ep_propio.id_equipo IN (
-        SELECT je.id_equipo 
-        FROM jugadores_equipos je 
-        WHERE je.id_jugador = pp.id_jugador
-    )
-LEFT JOIN equipos e_propio ON ep_propio.id_equipo = e_propio.id_equipo
+-- LEFT JOIN equipos_partidos ep_propio ON p.id_partido = ep_propio.id_partido 
+    -- AND ep_propio.id_equipo IN (
+        -- SELECT je.id_equipo 
+        -- FROM jugadores_equipos je 
+        -- WHERE je.id_jugador = pp.id_jugador
+    -- )
+-- LEFT JOIN equipos e_propio ON ep_propio.id_equipo = e_propio.id_equipo
 
 -- Join para obtener el equipo RIVAL
 -- (el otro equipo que participa en el partido, diferente al del jugador)
-LEFT JOIN equipos_partidos ep_rival ON p.id_partido = ep_rival.id_partido 
-    AND ep_rival.id_equipo != ep_propio.id_equipo
-LEFT JOIN equipos e_rival ON ep_rival.id_equipo = e_rival.id_equipo;
+-- LEFT JOIN equipos_partidos ep_rival ON p.id_partido = ep_rival.id_partido 
+    -- AND ep_rival.id_equipo != ep_propio.id_equipo
+-- LEFT JOIN equipos e_rival ON ep_rival.id_equipo = e_rival.id_equipo
+
+-- Join con la tabla PARTIDOS_TORNEOS para obtener info del torneo
+LEFT JOIN partidos_torneos pt ON p.id_partido = pt.id_partido
+
+-- Join con la tabla TORNEOS para obtener info del torneo
+LEFT JOIN torneos t ON pt.id_torneo = t.id_torneo
+
+-- Join con la tabla ETAPAS_TORNEOS para obtener info de la etapa del torneo
+LEFT JOIN etapas_torneo et ON t.id_etapa = et.id_etapa
+
+LEFT JOIN equipos eqa ON pt.id_equipo_A = eqa.id_equipo
+LEFT JOIN equipos eqb ON pt.id_equipo_B = eqb.id_equipo;
+
+-- =========================================================
