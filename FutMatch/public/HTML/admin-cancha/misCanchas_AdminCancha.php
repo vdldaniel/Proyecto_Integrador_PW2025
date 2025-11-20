@@ -105,96 +105,8 @@ require_once HEAD_COMPONENT;
 					</div>
 				</div>
 			</div>
-
-			<!-- Cancha 2 -->
-			<div class="col-12">
-				<div class="card shadow-sm border-0 mb-2">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-md-2 text-center">
-								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-									style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-									<i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
-										MegaFutbol Cancha A2-F9
-									</a>
-								</h5>
-							</div>
-							<div class="col-md-2">
-								<span class="text-muted">
-									<i class="bi bi-people"></i> Fútbol 9
-								</span>
-							</div>
-							<div class="col-md-2">
-								<span class="badge text-bg-dark">En revisión</span>
-							</div>
-							<div class="col-md-3 text-end">
-								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
-									<i class="bi bi-eye"></i>
-								</a>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
-									<i class="bi bi-pencil"></i>
-								</button>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="2" title="Cierre temporal">
-									<i class="bi bi-pause-circle"></i>
-								</button>
-								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="2" title="Eliminar">
-									<i class="bi bi-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Cancha 3 -->
-			<div class="col-12">
-				<div class="card shadow-sm border-0 mb-2">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-md-2 text-center">
-								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-									style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-									<i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
-										Cancha Delantera
-									</a>
-								</h5>
-							</div>
-							<div class="col-md-2">
-								<span class="text-muted">
-									<i class="bi bi-people"></i> Fútbol 5
-								</span>
-							</div>
-							<div class="col-md-2">
-								<span class="badge text-bg-dark">Pendiente de verificación</span>
-							</div>
-							<div class="col-md-3 text-end">
-								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
-									<i class="bi bi-eye"></i>
-								</a>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
-									<i class="bi bi-pencil"></i>
-								</button>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="3" title="Cierre temporal">
-									<i class="bi bi-pause-circle"></i>
-								</button>
-								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="3" title="Eliminar">
-									<i class="bi bi-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!-- //listadode canchas -->
+			<div class="row" id="canchasList"></div>
 		</div>
 	</main>
 
@@ -470,6 +382,9 @@ require_once HEAD_COMPONENT;
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="<?= CSS_ICONS ?>">
 	<!-- Scripts -->
+	 <script>
+		const BASE_URL = "<?= BASE_URL ?>";
+	</script>
 	<script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="<?= JS_CANCHAS_LISTADO ?>"></script>
 </body>
