@@ -112,7 +112,7 @@
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 0.25rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .profile-username {
@@ -197,12 +197,10 @@
 
   .profile-banner-overlay {
     padding: 20px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 15px;
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(2px);
   }
 
   .profile-avatar {
@@ -212,6 +210,7 @@
 
   .profile-name {
     font-size: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .profile-username {
@@ -237,6 +236,7 @@
 
   .profile-name {
     font-size: 1.25rem;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .profile-badges {

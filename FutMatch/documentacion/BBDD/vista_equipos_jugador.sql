@@ -16,7 +16,7 @@ SELECT
 
     -- Cantidad de integrantes del equipo
     (SELECT COUNT(*) 
-     FROM jugadores_equipo je 
+     FROM jugadores_equipos je 
      WHERE je.id_equipo = e.id_equipo) AS cantidad_integrantes,
      je.id_jugador,
 
@@ -32,5 +32,5 @@ SELECT
      WHERE ep.id_equipo = e.id_equipo) AS partidos_jugados
 
 FROM equipos e
-INNER JOIN usuarios u ON e.id_lider = u.id_usuario;
-INNER JOIN jugadores_equipo je ON e.id_equipo = je.id_equipo;
+INNER JOIN usuarios u ON e.id_lider = u.id_usuario
+INNER JOIN jugadores_equipos je ON e.id_equipo = je.id_equipo;

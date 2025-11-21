@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2025 at 03:21 PM
+-- Generation Time: Nov 21, 2025 at 04:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1262,311 +1262,6 @@ INSERT INTO `usuarios_roles` (`id`, `id_usuario`, `id_rol`) VALUES
 (9, 9, 2),
 (10, 10, 1);
 
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_bracket_torneos`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_bracket_torneos`;
-CREATE TABLE `vista_bracket_torneos` (
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_equipos_jugador`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_equipos_jugador`;
-CREATE TABLE `vista_equipos_jugador` (
-`id_equipo` int(11)
-,`id_lider` int(11)
-,`nombre_equipo` varchar(50)
-,`foto_equipo` varchar(250)
-,`abierto` tinyint(1)
-,`clave` varchar(10)
-,`descripcion` varchar(200)
-,`nombre_lider` varchar(100)
-,`apellido_lider` varchar(100)
-,`cantidad_integrantes` bigint(21)
-,`id_jugador` int(11)
-,`torneos_participados` bigint(21)
-,`partidos_jugados` bigint(21)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_estadisticas_equipos_torneo`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_estadisticas_equipos_torneo`;
-CREATE TABLE `vista_estadisticas_equipos_torneo` (
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_explorar_canchas`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_explorar_canchas`;
-CREATE TABLE `vista_explorar_canchas` (
-`id_cancha` int(11)
-,`nombre_cancha` varchar(100)
-,`foto_cancha` varchar(255)
-,`descripcion_cancha` varchar(250)
-,`direccion_completa` varchar(500)
-,`latitud` decimal(10,8)
-,`longitud` decimal(11,8)
-,`tipo_superficie` varchar(100)
-,`tipo_partido_max` varchar(50)
-,`calificacion_promedio` decimal(14,4)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_explorar_partidos`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_explorar_partidos`;
-CREATE TABLE `vista_explorar_partidos` (
-`id_partido` int(11)
-,`id_anfitrion` int(11)
-,`abierto` tinyint(1)
-,`id_reserva` int(11)
-,`fecha_partido` date
-,`fecha_partido_formato` varchar(10)
-,`dia_semana` varchar(9)
-,`hora_inicio` varchar(10)
-,`hora_fin` varchar(10)
-,`hora_inicio_raw` time
-,`titulo` varchar(50)
-,`descripcion` varchar(200)
-,`id_tipo_reserva` int(11)
-,`id_cancha` int(11)
-,`nombre_cancha` varchar(100)
-,`foto_cancha` varchar(255)
-,`direccion_completa` varchar(500)
-,`latitud` decimal(10,8)
-,`longitud` decimal(11,8)
-,`id_tipo_partido` int(11)
-,`tipo_partido` varchar(50)
-,`min_participantes` int(11)
-,`max_participantes` int(11)
-,`tipo_superficie` varchar(100)
-,`id_jugador_anfitrion` int(11)
-,`username_anfitrion` varchar(20)
-,`participantes_actuales` bigint(21)
-,`cant_participantes_equipo_A` bigint(21)
-,`cant_participantes_equipo_B` bigint(21)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_partidos_jugador`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_partidos_jugador`;
-CREATE TABLE `vista_partidos_jugador` (
-`id_jugador` int(11)
-,`mi_username` varchar(20)
-,`id_partido` int(11)
-,`id_anfitrion` int(11)
-,`abierto` tinyint(1)
-,`goles_equipo_A` int(10)
-,`goles_equipo_B` int(10)
-,`id_reserva` int(11)
-,`fecha_partido` varchar(10)
-,`dia_semana` varchar(9)
-,`hora_partido` varchar(10)
-,`hora_fin` varchar(10)
-,`id_tipo_reserva` int(11)
-,`id_cancha` int(11)
-,`nombre_cancha` varchar(100)
-,`direccion_cancha` varchar(500)
-,`latitud_cancha` decimal(10,8)
-,`longitud_cancha` decimal(11,8)
-,`id_estado` int(11)
-,`estado_solicitud` varchar(50)
-,`id_rol` int(11)
-,`rol_usuario` varchar(50)
-,`id_tipo_partido` int(11)
-,`tipo_partido` varchar(50)
-,`min_participantes` int(11)
-,`max_participantes` int(11)
-,`equipo_asignado` varchar(11)
-,`cant_participantes_equipo_a` bigint(21)
-,`cant_participantes_equipo_b` bigint(21)
-,`id_torneo` int(11)
-,`nombre_torneo` varchar(100)
-,`etapa_torneo` varchar(50)
-,`id_fase` int(11)
-,`orden_en_fase` int(11)
-,`id_equipo_A` int(11)
-,`id_equipo_B` int(11)
-,`nombre_equipo_A` varchar(50)
-,`foto_equipo_A` varchar(250)
-,`descripcion_equipo_A` varchar(200)
-,`nombre_equipo_B` varchar(50)
-,`foto_equipo_B` varchar(250)
-,`descripcion_equipo_B` varchar(200)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_perfil_cancha`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_perfil_cancha`;
-CREATE TABLE `vista_perfil_cancha` (
-`id_cancha` int(11)
-,`nombre_cancha` varchar(100)
-,`descripcion_cancha` varchar(250)
-,`foto_cancha` varchar(255)
-,`banner_cancha` varchar(255)
-,`direccion_cancha` varchar(500)
-,`latitud_cancha` decimal(10,8)
-,`longitud_cancha` decimal(11,8)
-,`tipo_superficie` varchar(100)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_perfil_jugador`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_perfil_jugador`;
-CREATE TABLE `vista_perfil_jugador` (
-`id_usuario` int(11)
-,`nombre` varchar(100)
-,`apellido` varchar(100)
-,`email` varchar(150)
-,`fecha_registro` datetime
-,`id_jugador` int(11)
-,`username` varchar(20)
-,`telefono` varchar(20)
-,`foto_perfil` varchar(255)
-,`banner` varchar(255)
-,`fecha_nacimiento` date
-,`id_sexo` int(11)
-,`reputacion` float
-,`sexo` varchar(50)
-,`estado_usuario` varchar(50)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vista_usuarios`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `vista_usuarios`;
-CREATE TABLE `vista_usuarios` (
-`id_usuario` int(11)
-,`nombre` varchar(100)
-,`apellido` varchar(100)
-,`email` varchar(150)
-,`roles` mediumtext
-,`estado` varchar(50)
-,`fecha_registro` datetime
-);
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_bracket_torneos`
---
-DROP TABLE IF EXISTS `vista_bracket_torneos`;
-
-DROP VIEW IF EXISTS `vista_bracket_torneos`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_bracket_torneos`  AS SELECT `t`.`id_torneo` AS `id_torneo`, `t`.`nombre` AS `torneo_nombre`, `pt`.`id_fase` AS `id_fase`, `f`.`nombre` AS `fase_nombre`, `f`.`n` AS `fase_numero`, `pt`.`orden_en_fase` AS `orden_en_fase`, `p`.`id_partido` AS `id_partido`, group_concat(concat(`eq`.`nombre`,':',`ep`.`goles_anotados`,if(`ep`.`es_ganador`,' (G)','')) order by `ep`.`es_ganador` DESC separator ' vs ') AS `equipos_resultado` FROM (((((`torneos` `t` join `partidos_torneos` `pt` on(`t`.`id_torneo` = `pt`.`id_torneo`)) join `fases_torneo` `f` on(`pt`.`id_fase` = `f`.`id_fase`)) join `partidos` `p` on(`pt`.`id_partido` = `p`.`id_partido`)) join `equipos_partidos` `ep` on(`p`.`id_partido` = `ep`.`id_partido`)) join `equipos` `eq` on(`ep`.`id_equipo` = `eq`.`id_equipo`)) GROUP BY `t`.`id_torneo`, `pt`.`id_fase`, `p`.`id_partido` ORDER BY `t`.`id_torneo` ASC, `f`.`n` ASC, `pt`.`orden_en_fase` ASC ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_equipos_jugador`
---
-DROP TABLE IF EXISTS `vista_equipos_jugador`;
-
-DROP VIEW IF EXISTS `vista_equipos_jugador`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_equipos_jugador`  AS SELECT `e`.`id_equipo` AS `id_equipo`, `e`.`id_lider` AS `id_lider`, `e`.`nombre` AS `nombre_equipo`, `e`.`foto` AS `foto_equipo`, `e`.`abierto` AS `abierto`, `e`.`clave` AS `clave`, `e`.`descripcion` AS `descripcion`, `u`.`nombre` AS `nombre_lider`, `u`.`apellido` AS `apellido_lider`, (select count(0) from `jugadores_equipos` `je` where `je`.`id_equipo` = `e`.`id_equipo`) AS `cantidad_integrantes`, `je`.`id_jugador` AS `id_jugador`, (select count(distinct `t`.`id_torneo`) from (`torneos` `t` join `equipos_torneos` `et` on(`t`.`id_torneo` = `et`.`id_torneo`)) where `et`.`id_equipo` = `e`.`id_equipo`) AS `torneos_participados`, (select count(0) from `equipos_partidos` `ep` where `ep`.`id_equipo` = `e`.`id_equipo`) AS `partidos_jugados` FROM ((`equipos` `e` join `usuarios` `u` on(`e`.`id_lider` = `u`.`id_usuario`)) join `jugadores_equipos` `je` on(`e`.`id_equipo` = `je`.`id_equipo`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_estadisticas_equipos_torneo`
---
-DROP TABLE IF EXISTS `vista_estadisticas_equipos_torneo`;
-
-DROP VIEW IF EXISTS `vista_estadisticas_equipos_torneo`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_estadisticas_equipos_torneo`  AS SELECT `et`.`id_torneo` AS `id_torneo`, `et`.`id_equipo` AS `id_equipo`, `eq`.`nombre` AS `equipo_nombre`, count(`ep`.`id_partido`) AS `partidos_jugados`, sum(`ep`.`goles_anotados`) AS `goles_a_favor`, sum(case when `ep`.`es_ganador` then 1 else 0 end) AS `victorias`, count(`ep`.`id_partido`) - sum(case when `ep`.`es_ganador` then 1 else 0 end) AS `derrotas` FROM (((`equipos_torneos` `et` join `equipos` `eq` on(`et`.`id_equipo` = `eq`.`id_equipo`)) left join `equipos_partidos` `ep` on(`et`.`id_equipo` = `ep`.`id_equipo`)) left join `partidos_torneos` `pt` on(`ep`.`id_partido` = `pt`.`id_partido` and `pt`.`id_torneo` = `et`.`id_torneo`)) WHERE `et`.`id_estado` = 3 GROUP BY `et`.`id_torneo`, `et`.`id_equipo`, `eq`.`nombre` ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_explorar_canchas`
---
-DROP TABLE IF EXISTS `vista_explorar_canchas`;
-
-DROP VIEW IF EXISTS `vista_explorar_canchas`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_explorar_canchas`  AS SELECT `c`.`id_cancha` AS `id_cancha`, `c`.`nombre` AS `nombre_cancha`, `c`.`foto` AS `foto_cancha`, `c`.`descripcion` AS `descripcion_cancha`, `d`.`direccion_completa` AS `direccion_completa`, `d`.`latitud` AS `latitud`, `d`.`longitud` AS `longitud`, `s`.`nombre` AS `tipo_superficie`, (select `tp_max`.`nombre` from (`canchas_tipos_partido` `ctp` join `tipos_partido` `tp_max` on(`ctp`.`id_tipo_partido` = `tp_max`.`id_tipo_partido`)) where `ctp`.`id_cancha` = `c`.`id_cancha` order by `tp_max`.`max_participantes` desc limit 1) AS `tipo_partido_max`, (select avg(`r`.`calificacion`) from `resenias_canchas` `r` where `r`.`id_cancha` = `c`.`id_cancha`) AS `calificacion_promedio` FROM ((`canchas` `c` join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) join `superficies_canchas` `s` on(`c`.`id_superficie` = `s`.`id_superficie`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_explorar_partidos`
---
-DROP TABLE IF EXISTS `vista_explorar_partidos`;
-
-DROP VIEW IF EXISTS `vista_explorar_partidos`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_explorar_partidos`  AS SELECT `p`.`id_partido` AS `id_partido`, `p`.`id_anfitrion` AS `id_anfitrion`, `p`.`abierto` AS `abierto`, `r`.`id_reserva` AS `id_reserva`, `r`.`fecha` AS `fecha_partido`, date_format(`r`.`fecha`,'%d/%m/%Y') AS `fecha_partido_formato`, CASE ENDselect count(0) END FROM `participantes_partidos` AS `pp` WHERE `pp`.`id_partido` = `p`.`id_partido`select count(0) from `participantes_partidos` `pp` where `pp`.`id_partido` = `p`.`id_partido` and `pp`.`equipo` = 1) AS `cant_participantes_equipo_A`,(select count(0) from `participantes_partidos` `pp` where `pp`.`id_partido` = `p`.`id_partido` and `pp`.`equipo` = 2) AS `cant_participantes_equipo_B` from (((((((`partidos` `p` join `partidos_reservas` `pr` on(`p`.`id_partido` = `pr`.`id_partido`)) join `reservas` `r` on(`pr`.`id_reserva` = `r`.`id_reserva`)) join `canchas` `c` on(`r`.`id_cancha` = `c`.`id_cancha`)) join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) join `tipos_partido` `tp` on(`p`.`id_tipo_partido` = `tp`.`id_tipo_partido`)) join `superficies_canchas` `s` on(`c`.`id_superficie` = `s`.`id_superficie`)) join `jugadores` `j_anfitrion` on(`p`.`id_anfitrion` = `j_anfitrion`.`id_jugador`)) where `p`.`abierto` = 1 and `r`.`fecha` >= curdate() and `r`.`id_tipo_reserva` = 1 order by `r`.`fecha`,`r`.`hora_inicio`  ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_partidos_jugador`
---
-DROP TABLE IF EXISTS `vista_partidos_jugador`;
-
-DROP VIEW IF EXISTS `vista_partidos_jugador`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_partidos_jugador`  AS SELECT `pp`.`id_jugador` AS `id_jugador`, `j`.`username` AS `mi_username`, `p`.`id_partido` AS `id_partido`, `p`.`id_anfitrion` AS `id_anfitrion`, `p`.`abierto` AS `abierto`, `p`.`goles_equipo_A` AS `goles_equipo_A`, `p`.`goles_equipo_B` AS `goles_equipo_B`, `r`.`id_reserva` AS `id_reserva`, date_format(`r`.`fecha`,'%d/%m/%Y') AS `fecha_partido`, CASE ENDselect count(0) END FROM `participantes_partidos` AS `pp_a` WHERE `pp_a`.`id_partido` = `p`.`id_partido` AND `pp_a`.`equipo` = 1select count(0) from `participantes_partidos` `pp_b` where `pp_b`.`id_partido` = `p`.`id_partido` and `pp_b`.`equipo` = 2) AS `cant_participantes_equipo_b`,`t`.`id_torneo` AS `id_torneo`,`t`.`nombre` AS `nombre_torneo`,`et`.`nombre` AS `etapa_torneo`,`pt`.`id_fase` AS `id_fase`,`pt`.`orden_en_fase` AS `orden_en_fase`,`pt`.`id_equipo_A` AS `id_equipo_A`,`pt`.`id_equipo_B` AS `id_equipo_B`,`eqa`.`nombre` AS `nombre_equipo_A`,`eqa`.`foto` AS `foto_equipo_A`,`eqa`.`descripcion` AS `descripcion_equipo_A`,`eqb`.`nombre` AS `nombre_equipo_B`,`eqb`.`foto` AS `foto_equipo_B`,`eqb`.`descripcion` AS `descripcion_equipo_B` from ((((((((((((((`participantes_partidos` `pp` join `jugadores` `j` on(`pp`.`id_jugador` = `j`.`id_jugador`)) join `partidos` `p` on(`pp`.`id_partido` = `p`.`id_partido`)) join `tipos_partido` `tp` on(`p`.`id_tipo_partido` = `tp`.`id_tipo_partido`)) join `estados_solicitudes` `es` on(`pp`.`id_estado` = `es`.`id_estado`)) join `roles_partidos` `rp` on(`pp`.`id_rol` = `rp`.`id_rol`)) left join `partidos_reservas` `pr` on(`p`.`id_partido` = `pr`.`id_partido`)) left join `reservas` `r` on(`pr`.`id_reserva` = `r`.`id_reserva`)) left join `canchas` `c` on(`r`.`id_cancha` = `c`.`id_cancha`)) left join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) left join `partidos_torneos` `pt` on(`p`.`id_partido` = `pt`.`id_partido`)) left join `torneos` `t` on(`pt`.`id_torneo` = `t`.`id_torneo`)) left join `etapas_torneo` `et` on(`t`.`id_etapa` = `et`.`id_etapa`)) left join `equipos` `eqa` on(`pt`.`id_equipo_A` = `eqa`.`id_equipo`)) left join `equipos` `eqb` on(`pt`.`id_equipo_B` = `eqb`.`id_equipo`))  ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_perfil_cancha`
---
-DROP TABLE IF EXISTS `vista_perfil_cancha`;
-
-DROP VIEW IF EXISTS `vista_perfil_cancha`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_perfil_cancha`  AS SELECT `c`.`id_cancha` AS `id_cancha`, `c`.`nombre` AS `nombre_cancha`, `c`.`descripcion` AS `descripcion_cancha`, `c`.`foto` AS `foto_cancha`, `c`.`banner` AS `banner_cancha`, `d`.`direccion_completa` AS `direccion_cancha`, `d`.`latitud` AS `latitud_cancha`, `d`.`longitud` AS `longitud_cancha`, `s`.`nombre` AS `tipo_superficie` FROM ((`canchas` `c` join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) join `superficies_canchas` `s` on(`c`.`id_superficie` = `s`.`id_superficie`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_perfil_jugador`
---
-DROP TABLE IF EXISTS `vista_perfil_jugador`;
-
-DROP VIEW IF EXISTS `vista_perfil_jugador`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_perfil_jugador`  AS SELECT `u`.`id_usuario` AS `id_usuario`, `u`.`nombre` AS `nombre`, `u`.`apellido` AS `apellido`, `u`.`email` AS `email`, `u`.`fecha_registro` AS `fecha_registro`, `j`.`id_jugador` AS `id_jugador`, `j`.`username` AS `username`, `j`.`telefono` AS `telefono`, `j`.`foto_perfil` AS `foto_perfil`, `j`.`banner` AS `banner`, `j`.`fecha_nacimiento` AS `fecha_nacimiento`, `j`.`id_sexo` AS `id_sexo`, `j`.`reputacion` AS `reputacion`, `s`.`nombre` AS `sexo`, `e`.`nombre` AS `estado_usuario` FROM (((`usuarios` `u` join `jugadores` `j` on(`u`.`id_usuario` = `j`.`id_jugador`)) join `sexo` `s` on(`j`.`id_sexo` = `s`.`id_sexo`)) join `estados_usuarios` `e` on(`u`.`id_estado` = `e`.`id_estado`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vista_usuarios`
---
-DROP TABLE IF EXISTS `vista_usuarios`;
-
-DROP VIEW IF EXISTS `vista_usuarios`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_usuarios`  AS SELECT `u`.`id_usuario` AS `id_usuario`, `u`.`nombre` AS `nombre`, `u`.`apellido` AS `apellido`, `u`.`email` AS `email`, group_concat(`r`.`nombre` separator ', ') AS `roles`, `e`.`nombre` AS `estado`, `u`.`fecha_registro` AS `fecha_registro` FROM (((`usuarios` `u` left join `usuarios_roles` `ur` on(`u`.`id_usuario` = `ur`.`id_usuario`)) left join `roles` `r` on(`ur`.`id_rol` = `r`.`id_rol`)) join `estados_usuarios` `e` on(`u`.`id_estado` = `e`.`id_estado`)) GROUP BY `u`.`id_usuario`, `u`.`nombre`, `u`.`apellido`, `u`.`email`, `e`.`nombre`, `u`.`fecha_registro` ;
-
 --
 -- Indexes for dumped tables
 --
@@ -2303,3 +1998,602 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- agregamos vistas
+
+DROP VIEW IF EXISTS vista_equipos_jugador;
+
+CREATE OR REPLACE VIEW vista_equipos_jugador AS
+SELECT 
+    e.id_equipo,
+    e.id_lider,
+    -- agregar nombre del lider
+    e.nombre AS nombre_equipo,
+    e.foto AS foto_equipo,
+    e.abierto,
+    e.clave,
+    e.descripcion,
+
+    u.nombre AS nombre_lider,
+    u.apellido AS apellido_lider,
+
+    -- Cantidad de integrantes del equipo
+    (SELECT COUNT(*) 
+     FROM jugadores_equipos je 
+     WHERE je.id_equipo = e.id_equipo) AS cantidad_integrantes,
+     je.id_jugador,
+
+    -- Cantidad de torneos participados por el equipo
+    (SELECT COUNT(DISTINCT t.id_torneo)
+     FROM torneos t
+     INNER JOIN equipos_torneos et ON t.id_torneo = et.id_torneo
+     WHERE et.id_equipo = e.id_equipo) AS torneos_participados,
+
+    -- Cantidad de partidos jugados por el equipo
+    (SELECT COUNT(*) 
+     FROM equipos_partidos ep
+     WHERE ep.id_equipo = e.id_equipo) AS partidos_jugados
+
+FROM equipos e
+INNER JOIN usuarios u ON e.id_lider = u.id_usuario
+INNER JOIN jugadores_equipos je ON e.id_equipo = je.id_equipo;
+
+DROP VIEW IF EXISTS vista_equipos_jugador;
+
+CREATE OR REPLACE VIEW vista_equipos_jugador AS
+SELECT 
+    e.id_equipo,
+    e.id_lider,
+    -- agregar nombre del lider
+    e.nombre AS nombre_equipo,
+    e.foto AS foto_equipo,
+    e.abierto,
+    e.clave,
+    e.descripcion,
+
+    u.nombre AS nombre_lider,
+    u.apellido AS apellido_lider,
+
+    -- Cantidad de integrantes del equipo
+    (SELECT COUNT(*) 
+     FROM jugadores_equipos je 
+     WHERE je.id_equipo = e.id_equipo) AS cantidad_integrantes,
+     je.id_jugador,
+
+    -- Cantidad de torneos participados por el equipo
+    (SELECT COUNT(DISTINCT t.id_torneo)
+     FROM torneos t
+     INNER JOIN equipos_torneos et ON t.id_torneo = et.id_torneo
+     WHERE et.id_equipo = e.id_equipo) AS torneos_participados,
+
+    -- Cantidad de partidos jugados por el equipo
+    (SELECT COUNT(*) 
+     FROM equipos_partidos ep
+     WHERE ep.id_equipo = e.id_equipo) AS partidos_jugados
+
+FROM equipos e
+INNER JOIN usuarios u ON e.id_lider = u.id_usuario
+INNER JOIN jugadores_equipos je ON e.id_equipo = je.id_equipo;
+
+-- VISTA PARA EXPLORAR CANCHAS DISPONIBLES PARA RESERVAR
+-- Muestra información de las canchas disponibles para reservar por parte de un jugador
+
+DROP VIEW IF EXISTS vista_explorar_canchas;
+
+CREATE OR REPLACE VIEW vista_explorar_canchas AS
+SELECT 
+    c.id_cancha,
+    c.nombre AS nombre_cancha,
+    c.foto AS foto_cancha,
+    c.descripcion AS descripcion_cancha,
+
+    -- Direccion de la cancha
+    d.direccion_completa,
+    d.latitud,
+    d.longitud,
+
+    -- Tipo de superficie
+    s.nombre AS tipo_superficie,
+
+    -- Tipo de partido con máximo participantes disponible en esta cancha
+    (SELECT tp_max.nombre 
+     FROM canchas_tipos_partido ctp
+     INNER JOIN tipos_partido tp_max ON ctp.id_tipo_partido = tp_max.id_tipo_partido
+     WHERE ctp.id_cancha = c.id_cancha
+     ORDER BY tp_max.max_participantes DESC
+     LIMIT 1) AS tipo_partido_max,
+
+    (SELECT AVG(r.calificacion) 
+     FROM resenias_canchas r
+     WHERE r.id_cancha = c.id_cancha) AS calificacion_promedio
+
+FROM canchas c
+
+INNER JOIN direcciones d ON c.id_direccion = d.id_direccion
+INNER JOIN superficies_canchas s ON c.id_superficie = s.id_superficie;
+
+
+
+-- =========================================================
+-- VISTA: Explorar Partidos Disponibles
+-- =========================================================
+-- Muestra partidos abiertos disponibles para que los jugadores soliciten participar
+-- Excluye partidos en los que el jugador ya participa (usar filtro en el WHERE del controller)
+--
+-- Ejemplo de uso:
+-- SELECT * FROM vista_explorar_partidos WHERE fecha_partido >= CURDATE() ORDER BY fecha_partido ASC;
+-- SELECT * FROM vista_explorar_partidos WHERE id_tipo_partido = 1;
+
+DROP VIEW IF EXISTS vista_explorar_partidos;
+
+CREATE OR REPLACE VIEW vista_explorar_partidos AS
+SELECT 
+    -- Información del partido
+    p.id_partido,
+    p.id_anfitrion,
+    p.abierto,
+    
+    -- Información de la reserva
+    r.id_reserva,
+    r.fecha AS fecha_partido,
+    DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha_partido_formato,
+    CASE DAYOFWEEK(r.fecha)
+        WHEN 1 THEN 'Domingo'
+        WHEN 2 THEN 'Lunes'
+        WHEN 3 THEN 'Martes'
+        WHEN 4 THEN 'Miércoles'
+        WHEN 5 THEN 'Jueves'
+        WHEN 6 THEN 'Viernes'
+        WHEN 7 THEN 'Sábado'
+    END as dia_semana,
+    TIME_FORMAT(r.hora_inicio, '%H:%i') as hora_inicio,
+    TIME_FORMAT(r.hora_fin, '%H:%i') as hora_fin,
+    r.hora_inicio as hora_inicio_raw,
+    r.titulo,
+    r.descripcion,
+    r.id_tipo_reserva,
+    
+    -- Información de la cancha
+    c.id_cancha,
+    c.nombre AS nombre_cancha,
+    c.foto AS foto_cancha,
+    
+    -- Dirección de la cancha
+    d.direccion_completa,
+    d.latitud,
+    d.longitud,
+    
+    -- Información del tipo de partido
+    tp.id_tipo_partido,
+    tp.nombre AS tipo_partido,
+    tp.min_participantes,
+    tp.max_participantes,
+    
+    -- Superficie de la cancha
+    s.nombre AS tipo_superficie,
+    
+    -- Información del anfitrión
+    j_anfitrion.id_jugador AS id_jugador_anfitrion,
+    j_anfitrion.username AS username_anfitrion,
+    
+    -- Cantidad de participantes actual
+    (SELECT COUNT(*) 
+        FROM participantes_partidos pp 
+        WHERE pp.id_partido = p.id_partido) AS participantes_actuales,
+
+     -- Cantidad de participantes en pp.equipo=1
+    (SELECT COUNT(*)
+        FROM participantes_partidos pp 
+        WHERE pp.id_partido = p.id_partido AND pp.equipo = 1) AS cant_participantes_equipo_A,
+
+    -- Cantidad de participantes en pp.equipo=2
+    (SELECT COUNT(*)
+        FROM participantes_partidos pp 
+        WHERE pp.id_partido = p.id_partido AND pp.equipo = 2) AS cant_participantes_equipo_B
+
+FROM partidos p
+
+-- Unir con partidos_reservas para obtener id_reserva
+INNER JOIN partidos_reservas pr ON p.id_partido = pr.id_partido
+
+-- Unir con reservas para obtener fecha, hora y cancha
+INNER JOIN reservas r ON pr.id_reserva = r.id_reserva
+
+-- Unir con canchas
+INNER JOIN canchas c ON r.id_cancha = c.id_cancha
+
+-- Unir con direcciones
+INNER JOIN direcciones d ON c.id_direccion = d.id_direccion
+
+-- Unir con tipo de partido
+INNER JOIN tipos_partido tp ON p.id_tipo_partido = tp.id_tipo_partido
+
+-- Unir con superficie de cancha
+INNER JOIN superficies_canchas s ON c.id_superficie = s.id_superficie
+
+-- Información del anfitrión
+INNER JOIN jugadores j_anfitrion ON p.id_anfitrion = j_anfitrion.id_jugador
+
+-- Condiciones: solo partidos abiertos y futuros
+WHERE p.abierto = 1 
+  AND r.fecha >= CURDATE()
+  AND r.id_tipo_reserva = 1 -- Solo partidos (no torneos)
+
+ORDER BY r.fecha ASC, r.hora_inicio ASC;
+
+-- =========================================================
+-- VISTA: Explorar Partidos Disponibles
+-- =========================================================
+-- Muestra partidos abiertos disponibles para que los jugadores soliciten participar
+-- Excluye partidos en los que el jugador ya participa (usar filtro en el WHERE del controller)
+--
+-- Ejemplo de uso:
+-- SELECT * FROM vista_explorar_partidos WHERE fecha_partido >= CURDATE() ORDER BY fecha_partido ASC;
+-- SELECT * FROM vista_explorar_partidos WHERE id_tipo_partido = 1;
+
+DROP VIEW IF EXISTS vista_explorar_partidos;
+
+CREATE OR REPLACE VIEW vista_explorar_partidos AS
+SELECT 
+    -- Información del partido
+    p.id_partido,
+    p.id_anfitrion,
+    p.abierto,
+    
+    -- Información de la reserva
+    r.id_reserva,
+    r.fecha AS fecha_partido,
+    DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha_partido_formato,
+    CASE DAYOFWEEK(r.fecha)
+        WHEN 1 THEN 'Domingo'
+        WHEN 2 THEN 'Lunes'
+        WHEN 3 THEN 'Martes'
+        WHEN 4 THEN 'Miércoles'
+        WHEN 5 THEN 'Jueves'
+        WHEN 6 THEN 'Viernes'
+        WHEN 7 THEN 'Sábado'
+    END as dia_semana,
+    TIME_FORMAT(r.hora_inicio, '%H:%i') as hora_inicio,
+    TIME_FORMAT(r.hora_fin, '%H:%i') as hora_fin,
+    r.hora_inicio as hora_inicio_raw,
+    r.titulo,
+    r.descripcion,
+    r.id_tipo_reserva,
+    
+    -- Información de la cancha
+    c.id_cancha,
+    c.nombre AS nombre_cancha,
+    c.foto AS foto_cancha,
+    
+    -- Dirección de la cancha
+    d.direccion_completa,
+    d.latitud,
+    d.longitud,
+    
+    -- Información del tipo de partido
+    tp.id_tipo_partido,
+    tp.nombre AS tipo_partido,
+    tp.min_participantes,
+    tp.max_participantes,
+    
+    -- Superficie de la cancha
+    s.nombre AS tipo_superficie,
+    
+    -- Información del anfitrión
+    j_anfitrion.id_jugador AS id_jugador_anfitrion,
+    j_anfitrion.username AS username_anfitrion,
+    
+    -- Cantidad de participantes actual
+    (SELECT COUNT(*) 
+        FROM participantes_partidos pp 
+        WHERE pp.id_partido = p.id_partido) AS participantes_actuales,
+
+     -- Cantidad de participantes en pp.equipo=1
+    (SELECT COUNT(*)
+        FROM participantes_partidos pp 
+        WHERE pp.id_partido = p.id_partido AND pp.equipo = 1) AS cant_participantes_equipo_A,
+
+    -- Cantidad de participantes en pp.equipo=2
+    (SELECT COUNT(*)
+        FROM participantes_partidos pp 
+        WHERE pp.id_partido = p.id_partido AND pp.equipo = 2) AS cant_participantes_equipo_B
+
+FROM partidos p
+
+-- Unir con partidos_reservas para obtener id_reserva
+INNER JOIN partidos_reservas pr ON p.id_partido = pr.id_partido
+
+-- Unir con reservas para obtener fecha, hora y cancha
+INNER JOIN reservas r ON pr.id_reserva = r.id_reserva
+
+-- Unir con canchas
+INNER JOIN canchas c ON r.id_cancha = c.id_cancha
+
+-- Unir con direcciones
+INNER JOIN direcciones d ON c.id_direccion = d.id_direccion
+
+-- Unir con tipo de partido
+INNER JOIN tipos_partido tp ON p.id_tipo_partido = tp.id_tipo_partido
+
+-- Unir con superficie de cancha
+INNER JOIN superficies_canchas s ON c.id_superficie = s.id_superficie
+
+-- Información del anfitrión
+INNER JOIN jugadores j_anfitrion ON p.id_anfitrion = j_anfitrion.id_jugador
+
+-- Condiciones: solo partidos abiertos y futuros
+WHERE p.abierto = 1 
+  AND r.fecha >= CURDATE()
+  AND r.id_tipo_reserva = 1 -- Solo partidos (no torneos)
+
+ORDER BY r.fecha ASC, r.hora_inicio ASC;
+
+-- =========================================================
+-- VISTA: Partidos por Jugador
+-- =========================================================
+-- Esta vista permite consultar los partidos de cualquier jugador
+-- simplemente filtrando por id_jugador en el WHERE
+--
+-- Ejemplo de uso:
+-- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1;
+-- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 2 ORDER BY fecha_partido DESC;
+
+DROP VIEW IF EXISTS vista_partidos_jugador;
+
+CREATE VIEW vista_partidos_jugador AS
+SELECT 
+    -- Información del jugador
+    pp.id_jugador,
+    j.username as mi_username,
+    
+    -- Información del partido
+    p.id_partido,
+    p.id_anfitrion,
+    p.abierto,
+    p.goles_equipo_A,
+    p.goles_equipo_B,
+    
+    -- Fecha y hora (de la reserva)
+    r.id_reserva,
+    DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha_partido,
+    CASE DAYOFWEEK(r.fecha)
+        WHEN 1 THEN 'Domingo'
+        WHEN 2 THEN 'Lunes'
+        WHEN 3 THEN 'Martes'
+        WHEN 4 THEN 'Miércoles'
+        WHEN 5 THEN 'Jueves'
+        WHEN 6 THEN 'Viernes'
+        WHEN 7 THEN 'Sábado'
+    END as dia_semana,
+    TIME_FORMAT(r.hora_inicio, '%H:%i') as hora_partido,
+    TIME_FORMAT(r.hora_fin, '%H:%i') as hora_fin,
+    r.id_tipo_reserva,
+    
+    -- Información de la cancha
+    c.id_cancha,
+    c.nombre as nombre_cancha,
+    
+    -- Dirección de la cancha
+    d.direccion_completa as direccion_cancha,
+    d.latitud as latitud_cancha,
+    d.longitud as longitud_cancha,
+    
+    -- Estado de la solicitud del usuario
+    es.id_estado,
+    es.nombre as estado_solicitud,
+    
+    -- Rol del usuario en el partido
+    rp.id_rol,
+    rp.nombre as rol_usuario,
+    
+    -- Información del tipo de partido
+    tp.id_tipo_partido,
+    tp.nombre as tipo_partido,
+    tp.min_participantes as min_participantes,
+    tp.max_participantes as max_participantes,
+    
+    CASE pp.equipo 
+    WHEN 1 THEN 'Equipo A'
+    WHEN 2 THEN 'Equipo B'
+    ELSE 'Sin asignar'
+    END as equipo_asignado,
+
+    -- Cantidad de participantes por equipo
+    (SELECT COUNT(*) FROM participantes_partidos pp_a 
+     WHERE pp_a.id_partido = p.id_partido AND pp_a.equipo = 1) AS cant_participantes_equipo_a,
+    (SELECT COUNT(*) FROM participantes_partidos pp_b 
+     WHERE pp_b.id_partido = p.id_partido AND pp_b.equipo = 2) AS cant_participantes_equipo_b,
+
+    
+    -- NO SE USA
+    -- Información del equipo del jugador (el equipo al que pertenece)
+    -- e_propio.id_equipo AS id_equipo_del_jugador,
+    -- e_propio.nombre AS nombre_equipo_del_jugador,
+    -- e_propio.foto AS foto_equipo_del_jugador,
+    
+    -- Información del equipo rival
+    -- e_rival.id_equipo AS id_equipo_rival,
+    -- e_rival.nombre AS nombre_equipo_rival,
+    -- e_rival.foto AS foto_equipo_rival,
+
+    -- Información del torneo si la hubiere 
+    
+    -- tabla TORNEOS
+    t.id_torneo,
+    t.nombre AS nombre_torneo,
+    -- t.id_etapa 
+    
+    -- tabla ETAPAS_TORNEOS
+    et.nombre AS etapa_torneo,
+    
+    -- tabla PARTIDOS_TORNEOS
+    -- acá es donde se puede linkear el id_partido con el id_torneo y su info
+    pt.id_fase,
+    pt.orden_en_fase,
+    pt.id_equipo_A,
+    pt.id_equipo_B,
+
+    -- TABLA EQUIPOS
+    eqa.nombre AS nombre_equipo_A,
+    eqa.foto AS foto_equipo_A,
+    eqa.descripcion AS descripcion_equipo_A,
+    eqb.nombre AS nombre_equipo_B,
+    eqb.foto AS foto_equipo_B,
+    eqb.descripcion AS descripcion_equipo_B
+    
+
+FROM participantes_partidos pp
+
+-- Join con jugadores para obtener info del usuario
+INNER JOIN jugadores j ON pp.id_jugador = j.id_jugador
+
+-- Join con partidos
+INNER JOIN partidos p ON pp.id_partido = p.id_partido
+
+-- Join con tipos de partido
+INNER JOIN tipos_partido tp ON p.id_tipo_partido = tp.id_tipo_partido
+
+-- Join con estados de solicitud
+INNER JOIN estados_solicitudes es ON pp.id_estado = es.id_estado
+
+-- Join con roles de partidos
+INNER JOIN roles_partidos rp ON pp.id_rol = rp.id_rol
+
+-- Join con partidos_reservas para obtener la reserva
+LEFT JOIN partidos_reservas pr ON p.id_partido = pr.id_partido
+
+-- Join con reservas para obtener fecha y hora
+LEFT JOIN reservas r ON pr.id_reserva = r.id_reserva
+
+-- Join con canchas para obtener información de la cancha
+LEFT JOIN canchas c ON r.id_cancha = c.id_cancha
+
+-- Join con direcciones para obtener la dirección de la cancha
+LEFT JOIN direcciones d ON c.id_direccion = d.id_direccion
+
+-- Join para obtener el equipo PROPIO del jugador
+-- (el equipo al que el jugador pertenece en este partido)
+-- LEFT JOIN equipos_partidos ep_propio ON p.id_partido = ep_propio.id_partido 
+    -- AND ep_propio.id_equipo IN (
+        -- SELECT je.id_equipo 
+        -- FROM jugadores_equipos je 
+        -- WHERE je.id_jugador = pp.id_jugador
+    -- )
+-- LEFT JOIN equipos e_propio ON ep_propio.id_equipo = e_propio.id_equipo
+
+-- Join para obtener el equipo RIVAL
+-- (el otro equipo que participa en el partido, diferente al del jugador)
+-- LEFT JOIN equipos_partidos ep_rival ON p.id_partido = ep_rival.id_partido 
+    -- AND ep_rival.id_equipo != ep_propio.id_equipo
+-- LEFT JOIN equipos e_rival ON ep_rival.id_equipo = e_rival.id_equipo
+
+-- Join con la tabla PARTIDOS_TORNEOS para obtener info del torneo
+LEFT JOIN partidos_torneos pt ON p.id_partido = pt.id_partido
+
+-- Join con la tabla TORNEOS para obtener info del torneo
+LEFT JOIN torneos t ON pt.id_torneo = t.id_torneo
+
+-- Join con la tabla ETAPAS_TORNEOS para obtener info de la etapa del torneo
+LEFT JOIN etapas_torneo et ON t.id_etapa = et.id_etapa
+
+LEFT JOIN equipos eqa ON pt.id_equipo_A = eqa.id_equipo
+LEFT JOIN equipos eqb ON pt.id_equipo_B = eqb.id_equipo;
+
+-- =========================================================
+
+
+/*PERFIL CANCHA
+
+BBDD: CANCHA
+id_cancha, => sale del boton "ver perfil cancha"
+id_admin_cancha => NO aparece en el perfil, pero sirve para contacto
+nombre_cancha, => aparece en el perfil
+id_direccion => se usa para buscar la direccion en tabla DIRECIONES
+descripcion => aparece en el perfil
+id_estado => aparece en el perfil (determina si mostrarse o no)
+foto => aparece en el perfil (FOTO_PERFIL)
+banner => aparece en el perfil
+id_superficie => se usa para buscar el tipo de superficie en tabla superficies_canchas
+politicas_reservas => NO aparece en el perfil, pero sirve para AGENDA.
+
+BBDD: DIRECCIONES
+id_direccion, = id_direccion de la cancha
+direccion_completa => aparece en el perfil
+latitud => NO aparece en el perfil, pero sirve para el mapa
+longitud => NO aparece en el perfil, pero sirve para el mapa
+
+BBDD: SUPERFICIES_CANCHAS
+id_superficie, = id_superficie de la cancha
+nombre => aparece en el perfil
+*/
+
+DROP VIEW IF EXISTS vista_perfil_cancha;
+CREATE VIEW vista_perfil_cancha AS
+SELECT
+    c.id_cancha,
+    c.nombre AS nombre_cancha,
+    c.descripcion AS descripcion_cancha,
+    c.foto AS foto_cancha,
+    c.banner AS banner_cancha,
+    
+    -- Dirección de la cancha
+    d.direccion_completa AS direccion_cancha,
+    d.latitud AS latitud_cancha,
+    d.longitud AS longitud_cancha,
+    
+    -- Tipo de superficie
+    s.nombre AS tipo_superficie
+
+FROM canchas c
+INNER JOIN direcciones d ON c.id_direccion = d.id_direccion
+INNER JOIN superficies_canchas s ON c.id_superficie = s.id_superficie;
+
+/* PERFIL JUGADOR
+
+BBDD: USUARIOS
+id_usuario, =session ID_USER
+email, => no aparece en el perfil, pero sirve para traer el contacto
+nombre, => aparece en el perfil
+apellido, => aparece en el perfil
+id_estado, => aparece en el perfil
+fecha_registro => aparece en el perfil (usuario desde...)
+
+BBDD: JUGADOR:
+id_jugador, = id_usuario
+username, => aparece en el perfil
+telefono => no aparece en el perfil, pero sirve para contacto
+foto_perfil, => aparece en el perfil
+banner => aparece en el perfil
+fecha_nacimiento, => aparece en el perfil (edad)
+id_sexo, => aparece en el perfil
+id_posicion, => NO SE USA
+reputación, => aparece en el perfil
+*/
+
+DROP VIEW IF EXISTS vista_perfil_jugador;
+CREATE VIEW vista_perfil_jugador AS
+SELECT 
+    u.id_usuario,
+    u.nombre,
+    u.apellido,
+    u.email,
+    u.fecha_registro,
+    
+    j.id_jugador,
+    j.username,
+    j.telefono,
+    j.foto_perfil,
+    j.banner,
+    j.fecha_nacimiento,
+    j.id_sexo,
+    j.reputacion,
+
+    -- Sexo
+    s.nombre AS sexo,
+    
+    e.nombre AS estado_usuario
+
+FROM usuarios u
+INNER JOIN jugadores j ON u.id_usuario = j.id_jugador
+INNER JOIN sexo s ON j.id_sexo = s.id_sexo
+INNER JOIN estados_usuarios e ON u.id_estado = e.id_estado;
