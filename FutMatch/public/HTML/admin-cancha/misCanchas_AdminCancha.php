@@ -61,7 +61,7 @@ require_once HEAD_COMPONENT;
 
 		<!-- Lista de canchas -->
 		<div id="canchasList" class="row g-3">
-			<!-- Cancha 1 -->
+			<!-- Cancha 1
 			<div class="col-12">
 				<div class="card shadow-sm border-0 mb-2">
 					<div class="card-body">
@@ -104,7 +104,7 @@ require_once HEAD_COMPONENT;
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- //listadode canchas -->
 			<div class="row" id="canchasList"></div>
 		</div>
@@ -129,13 +129,7 @@ require_once HEAD_COMPONENT;
 							<!-- Tipo de superficie -->
 							<div class="mb-3 col-12 col-lg-6">
 								<label for="tipoSuperficie" class="form-label">Tipo de superficie</label>
-								<select class="form-select" id="tipoSuperficie" required>
-									<option value="">Seleccionar...</option>
-									<option value="1">Sintético</option>
-									<option value="2">Cemento</option>
-									<option value="3">Parquet</option>
-									<option value="4">Césped natural</option>
-								</select>
+								<select class="form-select" id="tipoSuperficie" required></select>
 							</div>
 							<!-- Ubicación -->
 							<div class="mb-3 col-12">
@@ -382,7 +376,7 @@ require_once HEAD_COMPONENT;
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="<?= CSS_ICONS ?>">
 	<!-- Scripts -->
-	 <script>
+	<script>
 		const BASE_URL = "<?= BASE_URL ?>";
 	</script>
 	<script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>

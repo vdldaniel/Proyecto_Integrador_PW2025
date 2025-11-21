@@ -3,6 +3,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS cargado correctamente");
     cargarCanchas();
+    cargarSuperficies();
+    document.getElementById("btnGuardarCancha")
+        .addEventListener("click", agregarCancha);
 });
 
 function cargarCanchas() {
@@ -11,6 +14,7 @@ function cargarCanchas() {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
+                CANCHAS_CACHE = data.data;   // ← necesario para editar
                 renderCanchas(data.data);
             } else {
                 console.error("Error cargando canchas:", data.message);
@@ -20,8 +24,7 @@ function cargarCanchas() {
 }
 
 
-// =====================================================================
-// 2) Renderizar las tarjetas de cada cancha
+// Renderizar las tarjetas de cada cancha
 // =====================================================================
 
 function renderCanchas(canchas) {
@@ -46,7 +49,7 @@ function renderCanchas(canchas) {
                                 </div>
                             </div>
 
-                        PAGE_MIS_PERFILES_ADMIN_CANCHA
+                        
 
                             <div class="col-md-2">
                                 <span class="text-muted">
@@ -67,6 +70,7 @@ function renderCanchas(canchas) {
                                     data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
+
 
                                 <button class="btn btn-dark btn-sm me-1"
                                     data-bs-toggle="modal"
@@ -91,9 +95,14 @@ function renderCanchas(canchas) {
     });
 }
 
+document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-cancha-id]") && e.target.closest("#modalEditarCancha") === null) {
+        const idCancha = e.target.closest("[data-cancha-id]").getAttribute("data-cancha-id");
+        abrirModalEditar(idCancha);
+    }
+});
 
-// =====================================================================
-// 3) Funciones auxiliares (texto y clases de estado, tipo de superficie)
+// Funciones auxiliares (texto y clases de estado, tipo de superficie)
 // =====================================================================
 
 function obtenerCapacidad(idSuperficie) {
@@ -126,81 +135,126 @@ function obtenerClaseEstado(idEstado) {
     }
 }
 
-
-// =====================================================================
-// 4) Gestión de MODAL — EDITAR CANCHA
-// =====================================================================
-
-const modalEditar = document.getElementById('modalEditarCancha');
-
-modalEditar.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget; // botón que abrió el modal
-    const canchaId = button.getAttribute('data-cancha-id');
-
-    document.getElementById("editarCanchaId").value = canchaId;
-
-    cargarDatosCancha(canchaId);
-});
-
-
-// =====================================================================
-// 5) AJAX para obtener datos de UNA cancha
-// =====================================================================
-
-function cargarDatosCancha(id) {
-    fetch(BASE_URL + "src/controllers/admin-cancha/get_canchas.php?id=" + id)
-        .then(response => response.json())
+// Cargar superficies
+// ==========================
+function cargarSuperficies() {
+    fetch(BASE_URL + "src/controllers/admin-cancha/get_superficies.php")
+        .then(res => res.json())
         .then(data => {
+            if (data.status !== "success") return;
 
-            if (data.status === "success") {
-                const cancha = data.data;
+            const select = document.getElementById("tipoSuperficie");
+            select.innerHTML = `<option value="">Seleccionar...</option>`;
 
-                // Cargar valores en los inputs del modal
-                document.getElementById("editarNombre").value = cancha.nombre;
-                document.getElementById("editarDescripcion").value = cancha.descripcion;
-                document.getElementById("editarEstado").value = cancha.id_estado;
-                document.getElementById("editarSuperficie").value = cancha.id_superficie;
-
-            } else {
-                console.error("Error:", data.message);
-            }
-
+            data.data.forEach(s => {
+                select.innerHTML += `
+                    <option value="${s.id_superficie}">${s.nombre}</option>
+                `;
+            });
         })
-        .catch(err => console.error("Error fetch:", err));
+        .catch(err => console.error("Error cargando superficies:", err));
 }
 
 
-// =====================================================================
-// 6) Enviar actualización desde el modal EDITAR
-// =====================================================================
 
-document.getElementById("formEditarCancha").addEventListener("submit", function (e) {
-    e.preventDefault();
+// Guardar cancha nueva
+// ==========================
+function agregarCancha() {
 
-    let formData = new FormData(this);
+    const datos = new FormData();
+    console.log("nombreCancha:", document.getElementById("nombreCancha"));
+    console.log("tipoSuperficie:", document.getElementById("tipoSuperficie"));
+    console.log("ubicacionCancha:", document.getElementById("ubicacionCancha"));
+    console.log("descripcionCancha:", document.getElementById("descripcionCancha"));
+    console.log("capacidadCancha:", document.getElementById("capacidadCancha"));
 
-    fetch("/src/controllers/canchas/update_cancha.php", {
+    datos.append("nombre", document.getElementById("nombreCancha").value);
+    datos.append("superficie", document.getElementById("tipoSuperficie").value);
+    datos.append("ubicacion", document.getElementById("ubicacionCancha").value);
+    datos.append("descripcion", document.getElementById("descripcionCancha").value);
+    datos.append("tipo_cancha", document.getElementById("capacidadCancha").value);
+
+    fetch(BASE_URL + "src/controllers/admin-cancha/agregar_cancha.php", {
         method: "POST",
-        body: formData
+        body: datos
     })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-
             if (data.status === "success") {
-                alert("Cancha actualizada correctamente.");
-                cargarCanchas(); // refresca el listado
-                bootstrap.Modal.getInstance(modalEditar).hide();
+
+                // Cerrar modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById("modalAgregarCancha"));
+                modal.hide();
+
+                // Limpiar formulario
+                document.getElementById("formAgregarCancha").reset();
+
+                // Recargar lista
+                cargarCanchas();
+
             } else {
                 alert("Error: " + data.message);
             }
-
         })
-        .catch(err => console.error(err));
-});
+        .catch(err => {
+            console.error("Error fetch:", err);
+        });
+}
+
+// Editar cancha
+// ==========================
+function abrirModalEditar(id) {
+
+    const cancha = CANCHAS_CACHE.find(c => c.id_cancha == id);
+
+    if (!cancha) {
+        console.error("No se encontró la cancha con ID", id);
+        return;
+    }
+
+    
+    document.getElementById("editCanchaId").value = cancha.id_cancha;
+    document.getElementById("editNombreCancha").value = cancha.nombre;
+    document.getElementById("editUbicacionCancha").value = cancha.direccion_completa;
+    document.getElementById("editDescripcionCancha").value = cancha.descripcion;
+
+    // Select superficie
+    document.getElementById("editTipoSuperficie").value = cancha.id_superficie;
+
+    // Tipo de cancha (capacidad)
+    document.getElementById("editCapacidadCancha").value = cancha.tipo_cancha;
+}
 
 
-// =====================================================================
-// 7) (Opcional) MODALES para eliminar / cerrar cancha
-// =====================================================================
-// Cuando quieras continúo estos módulos con su PHP correspondiente.
+document.getElementById("btnActualizarCancha").addEventListener("click", actualizarCancha);
 
+function actualizarCancha() {
+    const data = new FormData();
+
+    data.append("id_cancha", document.getElementById("editCanchaId").value);
+    data.append("nombre", document.getElementById("editNombreCancha").value);
+    data.append("descripcion", document.getElementById("editDescripcionCancha").value);
+    data.append("ubicacion", document.getElementById("editUbicacionCancha").value);
+    data.append("id_superficie", document.getElementById("editTipoSuperficie").value);
+    data.append("capacidad", document.getElementById("editCapacidadCancha").value);
+
+    fetch("/backend/canchas/update_cancha.php", {
+        method: "POST",
+        body: data
+    })
+        .then(r => r.json())
+        .then(res => {
+            if (res.status === "success") {
+
+                // Cerrar modal
+                bootstrap.Modal.getInstance(document.getElementById("modalEditarCancha")).hide();
+
+                // Volver a cargar lista
+                cargarCanchas();
+            } else {
+                console.error(res.message);
+                alert("Error al actualizar la cancha");
+            }
+        })
+        .catch(err => console.log(err));
+}
