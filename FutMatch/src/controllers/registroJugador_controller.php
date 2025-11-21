@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log("[REGISTRO] Auto-login establecido para usuario ID: " . $id_usuario);
 
         // Redirigir al inicio del jugador con mensaje de bienvenida
-        $_SESSION['registration_success'] = '¡Bienvenido a FutMatch, ' . $nombre . '! Tu cuenta ha sido creada exitosamente.';
+        $_SESSION['registration_success'] = '¡Bienvenido a FutMatch, ' . $nombre . '!';
         header('Location: ' . PAGE_INICIO_JUGADOR);
         exit();
     } catch (PDOException $e) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2025 at 01:43 AM
+-- Generation Time: Nov 21, 2025 at 03:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -81,6 +81,14 @@ CREATE TABLE `calificaciones_jugadores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `calificaciones_jugadores`
+--
+
+INSERT INTO `calificaciones_jugadores` (`id_calificacion`, `id_partido`, `id_jugador_evaluador`, `id_jugador_evaluado`, `puntuacion`, `reportado`, `comentario`) VALUES
+(1, 4, 3, 4, 4, 0, 'Excelente partido! Me encanta jugar con Ana. '),
+(2, 1, 1, 4, 5, 0, 'Ana fue solicitante en mi partido. Desde un principio fue muy respetuosa y fue muy ameno jugar con ella. ');
+
+--
 -- Triggers `calificaciones_jugadores`
 --
 DROP TRIGGER IF EXISTS `actualizar_reputacion_jugador`;
@@ -110,7 +118,7 @@ CREATE TABLE `canchas` (
   `id_direccion` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
-  `telefono` varchar(20) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
   `id_estado` int(11) NOT NULL DEFAULT 1,
   `foto` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL,
@@ -122,10 +130,10 @@ CREATE TABLE `canchas` (
 -- Dumping data for table `canchas`
 --
 
-INSERT INTO `canchas` (`id_cancha`, `id_admin_cancha`, `id_direccion`, `nombre`, `descripcion`, `id_estado`, `foto`, `banner`, `id_superficie`, `politicas_reservas`) VALUES
-(1, 1, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', 3, NULL, NULL, 1, NULL),
-(2, 2, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', 3, NULL, NULL, 1, NULL),
-(3, 1, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', 3, NULL, NULL, 2, NULL);
+INSERT INTO `canchas` (`id_cancha`, `id_admin_cancha`, `id_direccion`, `nombre`, `descripcion`, `telefono`, `id_estado`, `foto`, `banner`, `id_superficie`, `politicas_reservas`) VALUES
+(1, 1, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, NULL),
+(2, 2, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 3, NULL, NULL, 1, NULL),
+(3, 1, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -232,7 +240,8 @@ INSERT INTO `equipos` (`id_equipo`, `id_lider`, `nombre`, `foto`, `clave`, `abie
 (1, 1, 'Los Tigres FC', NULL, '1536', 1, NULL, 3, '2025-11-16 20:52:27'),
 (2, 3, 'Águilas Rojas', NULL, '1598', 0, NULL, 2, '2025-11-16 20:52:27'),
 (3, 5, 'Deportivo Unión', NULL, '6584', 1, NULL, 1, '2025-11-16 20:52:27'),
-(4, 4, 'Domingueross', 'uploads/equipos/equipo_1763336255_691a603f90291.jpg', NULL, 1, 'Nos juntamos a jugar futbol los domingos en CABA', 6, '2025-11-16 20:52:27');
+(4, 4, 'Domingueross', 'uploads/equipos/equipo_1763336255_691a603f90291.jpg', NULL, 1, 'Nos juntamos a jugar futbol los domingos en CABA', 6, '2025-11-16 20:52:27'),
+(6, 4, 'Homero', 'uploads/equipos/equipo_1763340598_691a713630710.jpg', NULL, 1, '', 4, '2025-11-17 00:49:58');
 
 -- --------------------------------------------------------
 
@@ -244,7 +253,6 @@ DROP TABLE IF EXISTS `equipos_partidos`;
 CREATE TABLE `equipos_partidos` (
   `id_equipo` int(11) NOT NULL,
   `id_partido` int(11) NOT NULL,
-  `goles_anotados` int(11) DEFAULT 0,
   `es_ganador` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -252,9 +260,9 @@ CREATE TABLE `equipos_partidos` (
 -- Dumping data for table `equipos_partidos`
 --
 
-INSERT INTO `equipos_partidos` (`id_equipo`, `id_partido`, `goles_anotados`, `es_ganador`) VALUES
-(1, 4, 0, 0),
-(2, 4, 0, 0);
+INSERT INTO `equipos_partidos` (`id_equipo`, `id_partido`, `es_ganador`) VALUES
+(1, 4, 0),
+(2, 4, 0);
 
 --
 -- Triggers `equipos_partidos`
@@ -314,6 +322,14 @@ CREATE TABLE `estadisticas_partido` (
   `faltas` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `estadisticas_partido`
+--
+
+INSERT INTO `estadisticas_partido` (`id_estadistica`, `id_partido`, `id_participante`, `goles`, `asistencias`, `faltas`) VALUES
+(1, 4, 3, 1, 0, 0),
+(2, 1, 11, 0, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -358,7 +374,8 @@ INSERT INTO `estados_solicitudes` (`id_estado`, `nombre`) VALUES
 (2, 'En revisión'),
 (3, 'Aceptada'),
 (4, 'Rechazada'),
-(5, 'Cancelada');
+(5, 'Cancelada'),
+(6, 'Ausente');
 
 -- --------------------------------------------------------
 
@@ -485,7 +502,7 @@ CREATE TABLE `jugadores` (
   `fecha_nacimiento` date NOT NULL,
   `id_sexo` int(11) NOT NULL,
   `id_posicion` int(11) DEFAULT NULL,
-  `reputacion` int(11) DEFAULT NULL
+  `reputacion` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -496,9 +513,10 @@ INSERT INTO `jugadores` (`id_jugador`, `username`, `telefono`, `foto_perfil`, `b
 (1, 'juanpe', '+541123456789', NULL, NULL, '1995-03-15', 2, 3, NULL),
 (2, 'mariag', '+541123456790', NULL, NULL, '1992-07-20', 1, 2, NULL),
 (3, 'carlosl', '+541123456791', NULL, NULL, '1988-11-05', 2, 1, NULL),
-(4, 'anam', '+541123456792', NULL, NULL, '1996-09-12', 1, 4, NULL),
+(4, 'anam', '+541123456792', NULL, NULL, '1996-09-12', 1, 4, 4.5),
 (5, 'diegor', '+541123456793', NULL, NULL, '1990-01-25', 2, 2, NULL),
-(6, 'lauraf', '+541123456794', NULL, NULL, '1994-05-30', 1, 3, NULL);
+(6, 'lauraf', '+541123456794', NULL, NULL, '1994-05-30', 1, 3, NULL),
+(10, 'cnsanto', '1154876550', NULL, NULL, '1999-07-16', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -511,25 +529,29 @@ CREATE TABLE `jugadores_equipos` (
   `id_jugador` int(11) NOT NULL,
   `id_equipo` int(11) NOT NULL,
   `estado_solicitud` int(11) NOT NULL,
-  `invitado_por` int(11) DEFAULT NULL
+  `invitado_por` int(11) DEFAULT NULL,
+  `fecha_act` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `jugadores_equipos`
 --
 
-INSERT INTO `jugadores_equipos` (`id_jugador`, `id_equipo`, `estado_solicitud`, `invitado_por`) VALUES
-(1, 1, 3, 1),
-(1, 3, 3, 4),
-(1, 4, 3, 4),
-(2, 1, 3, 1),
-(3, 2, 3, 2),
-(4, 1, 3, 2),
-(4, 4, 3, 6),
-(5, 2, 3, 3),
-(5, 3, 3, 2),
-(6, 3, 3, 1),
-(6, 4, 1, 4);
+INSERT INTO `jugadores_equipos` (`id_jugador`, `id_equipo`, `estado_solicitud`, `invitado_por`, `fecha_act`) VALUES
+(1, 1, 3, 1, '2025-11-17 01:00:45'),
+(1, 3, 3, 4, '2025-11-17 01:00:45'),
+(1, 4, 1, 4, '2025-11-17 01:50:19'),
+(1, 6, 3, 4, '2025-11-17 01:39:29'),
+(2, 1, 3, 1, '2025-11-17 01:00:45'),
+(2, 4, 1, 4, '2025-11-17 02:19:43'),
+(3, 2, 3, 2, '2025-11-17 01:00:45'),
+(4, 1, 3, 2, '2025-11-17 01:00:45'),
+(4, 4, 3, 6, '2025-11-17 01:00:45'),
+(4, 6, 3, NULL, '2025-11-17 01:00:45'),
+(5, 2, 3, 3, '2025-11-17 01:00:45'),
+(5, 3, 3, 2, '2025-11-17 01:00:45'),
+(6, 3, 3, 1, '2025-11-17 01:00:45'),
+(6, 4, 1, 4, '2025-11-17 01:00:45');
 
 -- --------------------------------------------------------
 
@@ -570,7 +592,7 @@ CREATE TABLE `participantes_partidos` (
 INSERT INTO `participantes_partidos` (`id_participante`, `id_partido`, `id_jugador`, `nombre_invitado`, `id_rol`, `id_estado`, `equipo`) VALUES
 (1, 1, 1, NULL, 1, 3, 1),
 (2, 1, 2, NULL, 2, 3, 2),
-(3, 1, 4, NULL, 3, 1, 2),
+(3, 1, 4, NULL, 3, 3, 2),
 (4, 2, 3, NULL, 1, 3, 1),
 (5, 2, 5, NULL, 2, 3, 1),
 (6, 3, 5, NULL, 1, 3, 1),
@@ -579,9 +601,9 @@ INSERT INTO `participantes_partidos` (`id_participante`, `id_partido`, `id_jugad
 (9, 4, 5, NULL, 2, 3, 2),
 (10, 4, 2, NULL, 2, 3, 1),
 (11, 4, 4, NULL, 2, 3, 1),
-(12, 2, 1, NULL, 3, 1, NULL),
-(13, 2, 4, NULL, 3, 1, NULL),
-(14, 2, 6, NULL, 3, 1, NULL);
+(12, 2, 1, NULL, 3, 1, 1),
+(13, 2, 4, NULL, 3, 6, 2),
+(14, 2, 6, NULL, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -594,18 +616,20 @@ CREATE TABLE `partidos` (
   `id_partido` int(11) NOT NULL,
   `id_anfitrion` int(11) NOT NULL,
   `id_tipo_partido` int(11) NOT NULL DEFAULT 1,
-  `abierto` tinyint(1) DEFAULT 0
+  `abierto` tinyint(1) DEFAULT 0,
+  `goles_equipo_A` int(10) NOT NULL,
+  `goles_equipo_B` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `partidos`
 --
 
-INSERT INTO `partidos` (`id_partido`, `id_anfitrion`, `id_tipo_partido`, `abierto`) VALUES
-(1, 1, 1, 0),
-(2, 3, 1, 1),
-(3, 5, 2, 1),
-(4, 1, 1, 0);
+INSERT INTO `partidos` (`id_partido`, `id_anfitrion`, `id_tipo_partido`, `abierto`, `goles_equipo_A`, `goles_equipo_B`) VALUES
+(1, 1, 1, 0, 1, 1),
+(2, 3, 1, 1, 3, 0),
+(3, 5, 2, 1, 0, 0),
+(4, 1, 1, 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -640,7 +664,9 @@ CREATE TABLE `partidos_torneos` (
   `id_partido` int(11) NOT NULL,
   `id_torneo` int(11) NOT NULL,
   `id_fase` int(11) NOT NULL,
-  `orden_en_fase` int(11) DEFAULT NULL
+  `orden_en_fase` int(11) DEFAULT NULL,
+  `id_equipo_A` int(11) NOT NULL,
+  `id_equipo_B` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1204,7 +1230,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `password`,
 (6, 'Laura', 'Fernández', 'laura.fernandez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-11-13 00:16:20'),
 (7, 'Admin', 'Sistema', 'admin@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-11-13 00:16:20'),
 (8, 'Roberto', 'Silva', 'cancha.centro@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-11-13 00:16:20'),
-(9, 'Patricia', 'Morales', 'cancha.norte@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-11-13 00:16:20');
+(9, 'Patricia', 'Morales', 'cancha.norte@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-11-13 00:16:20'),
+(10, 'Camila', 'Santo', 'cnsanto@gmail.com', '$2y$10$HP6SMxtT1bB4Pe.TS7Eck.sZJbgfU8HtZ5i5yu7.SgH06T45DI2Gi', 1, '2025-11-21 11:01:44');
 
 -- --------------------------------------------------------
 
@@ -1232,7 +1259,8 @@ INSERT INTO `usuarios_roles` (`id`, `id_usuario`, `id_rol`) VALUES
 (6, 6, 1),
 (7, 7, 4),
 (8, 8, 2),
-(9, 9, 2);
+(9, 9, 2),
+(10, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -1242,14 +1270,6 @@ INSERT INTO `usuarios_roles` (`id`, `id_usuario`, `id_rol`) VALUES
 --
 DROP VIEW IF EXISTS `vista_bracket_torneos`;
 CREATE TABLE `vista_bracket_torneos` (
-`id_torneo` int(11)
-,`torneo_nombre` varchar(100)
-,`id_fase` int(11)
-,`fase_nombre` varchar(50)
-,`fase_numero` int(11)
-,`orden_en_fase` int(11)
-,`id_partido` int(11)
-,`equipos_resultado` mediumtext
 );
 
 -- --------------------------------------------------------
@@ -1283,13 +1303,6 @@ CREATE TABLE `vista_equipos_jugador` (
 --
 DROP VIEW IF EXISTS `vista_estadisticas_equipos_torneo`;
 CREATE TABLE `vista_estadisticas_equipos_torneo` (
-`id_torneo` int(11)
-,`id_equipo` int(11)
-,`equipo_nombre` varchar(50)
-,`partidos_jugados` bigint(21)
-,`goles_a_favor` decimal(32,0)
-,`victorias` decimal(22,0)
-,`derrotas` decimal(23,0)
 );
 
 -- --------------------------------------------------------
@@ -1364,6 +1377,8 @@ CREATE TABLE `vista_partidos_jugador` (
 ,`id_partido` int(11)
 ,`id_anfitrion` int(11)
 ,`abierto` tinyint(1)
+,`goles_equipo_A` int(10)
+,`goles_equipo_B` int(10)
 ,`id_reserva` int(11)
 ,`fecha_partido` varchar(10)
 ,`dia_semana` varchar(9)
@@ -1383,19 +1398,66 @@ CREATE TABLE `vista_partidos_jugador` (
 ,`tipo_partido` varchar(50)
 ,`min_participantes` int(11)
 ,`max_participantes` int(11)
-,`equipo_asignado` smallint(6)
+,`equipo_asignado` varchar(11)
 ,`cant_participantes_equipo_a` bigint(21)
 ,`cant_participantes_equipo_b` bigint(21)
-,`id_equipo_del_jugador` int(11)
-,`nombre_equipo_del_jugador` varchar(50)
-,`foto_equipo_del_jugador` varchar(250)
-,`goles_mi_equipo` int(11)
-,`mi_equipo_gano` tinyint(1)
-,`id_equipo_rival` int(11)
-,`nombre_equipo_rival` varchar(50)
-,`foto_equipo_rival` varchar(250)
-,`goles_equipo_rival` int(11)
-,`equipo_rival_gano` tinyint(1)
+,`id_torneo` int(11)
+,`nombre_torneo` varchar(100)
+,`etapa_torneo` varchar(50)
+,`id_fase` int(11)
+,`orden_en_fase` int(11)
+,`id_equipo_A` int(11)
+,`id_equipo_B` int(11)
+,`nombre_equipo_A` varchar(50)
+,`foto_equipo_A` varchar(250)
+,`descripcion_equipo_A` varchar(200)
+,`nombre_equipo_B` varchar(50)
+,`foto_equipo_B` varchar(250)
+,`descripcion_equipo_B` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vista_perfil_cancha`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `vista_perfil_cancha`;
+CREATE TABLE `vista_perfil_cancha` (
+`id_cancha` int(11)
+,`nombre_cancha` varchar(100)
+,`descripcion_cancha` varchar(250)
+,`foto_cancha` varchar(255)
+,`banner_cancha` varchar(255)
+,`direccion_cancha` varchar(500)
+,`latitud_cancha` decimal(10,8)
+,`longitud_cancha` decimal(11,8)
+,`tipo_superficie` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vista_perfil_jugador`
+-- (See below for the actual view)
+--
+DROP VIEW IF EXISTS `vista_perfil_jugador`;
+CREATE TABLE `vista_perfil_jugador` (
+`id_usuario` int(11)
+,`nombre` varchar(100)
+,`apellido` varchar(100)
+,`email` varchar(150)
+,`fecha_registro` datetime
+,`id_jugador` int(11)
+,`username` varchar(20)
+,`telefono` varchar(20)
+,`foto_perfil` varchar(255)
+,`banner` varchar(255)
+,`fecha_nacimiento` date
+,`id_sexo` int(11)
+,`reputacion` float
+,`sexo` varchar(50)
+,`estado_usuario` varchar(50)
 );
 
 -- --------------------------------------------------------
@@ -1473,7 +1535,27 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vista_partidos_jugador`;
 
 DROP VIEW IF EXISTS `vista_partidos_jugador`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_partidos_jugador`  AS SELECT `pp`.`id_jugador` AS `id_jugador`, `j`.`username` AS `mi_username`, `p`.`id_partido` AS `id_partido`, `p`.`id_anfitrion` AS `id_anfitrion`, `p`.`abierto` AS `abierto`, `r`.`id_reserva` AS `id_reserva`, date_format(`r`.`fecha`,'%d/%m/%Y') AS `fecha_partido`, CASE ENDselect count(0) END FROM `participantes_partidos` AS `pp_a` WHERE `pp_a`.`id_partido` = `p`.`id_partido` AND `pp_a`.`equipo` = 1select count(0) from `participantes_partidos` `pp_b` where `pp_b`.`id_partido` = `p`.`id_partido` and `pp_b`.`equipo` = 2) AS `cant_participantes_equipo_b`,`e_propio`.`id_equipo` AS `id_equipo_del_jugador`,`e_propio`.`nombre` AS `nombre_equipo_del_jugador`,`e_propio`.`foto` AS `foto_equipo_del_jugador`,`ep_propio`.`goles_anotados` AS `goles_mi_equipo`,`ep_propio`.`es_ganador` AS `mi_equipo_gano`,`e_rival`.`id_equipo` AS `id_equipo_rival`,`e_rival`.`nombre` AS `nombre_equipo_rival`,`e_rival`.`foto` AS `foto_equipo_rival`,`ep_rival`.`goles_anotados` AS `goles_equipo_rival`,`ep_rival`.`es_ganador` AS `equipo_rival_gano` from (((((((((((((`participantes_partidos` `pp` join `jugadores` `j` on(`pp`.`id_jugador` = `j`.`id_jugador`)) join `partidos` `p` on(`pp`.`id_partido` = `p`.`id_partido`)) join `tipos_partido` `tp` on(`p`.`id_tipo_partido` = `tp`.`id_tipo_partido`)) join `estados_solicitudes` `es` on(`pp`.`id_estado` = `es`.`id_estado`)) join `roles_partidos` `rp` on(`pp`.`id_rol` = `rp`.`id_rol`)) left join `partidos_reservas` `pr` on(`p`.`id_partido` = `pr`.`id_partido`)) left join `reservas` `r` on(`pr`.`id_reserva` = `r`.`id_reserva`)) left join `canchas` `c` on(`r`.`id_cancha` = `c`.`id_cancha`)) left join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) left join `equipos_partidos` `ep_propio` on(`p`.`id_partido` = `ep_propio`.`id_partido` and `ep_propio`.`id_equipo` in (select `je`.`id_equipo` from `jugadores_equipos` `je` where `je`.`id_jugador` = `pp`.`id_jugador`))) left join `equipos` `e_propio` on(`ep_propio`.`id_equipo` = `e_propio`.`id_equipo`)) left join `equipos_partidos` `ep_rival` on(`p`.`id_partido` = `ep_rival`.`id_partido` and `ep_rival`.`id_equipo` <> `ep_propio`.`id_equipo`)) left join `equipos` `e_rival` on(`ep_rival`.`id_equipo` = `e_rival`.`id_equipo`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_partidos_jugador`  AS SELECT `pp`.`id_jugador` AS `id_jugador`, `j`.`username` AS `mi_username`, `p`.`id_partido` AS `id_partido`, `p`.`id_anfitrion` AS `id_anfitrion`, `p`.`abierto` AS `abierto`, `p`.`goles_equipo_A` AS `goles_equipo_A`, `p`.`goles_equipo_B` AS `goles_equipo_B`, `r`.`id_reserva` AS `id_reserva`, date_format(`r`.`fecha`,'%d/%m/%Y') AS `fecha_partido`, CASE ENDselect count(0) END FROM `participantes_partidos` AS `pp_a` WHERE `pp_a`.`id_partido` = `p`.`id_partido` AND `pp_a`.`equipo` = 1select count(0) from `participantes_partidos` `pp_b` where `pp_b`.`id_partido` = `p`.`id_partido` and `pp_b`.`equipo` = 2) AS `cant_participantes_equipo_b`,`t`.`id_torneo` AS `id_torneo`,`t`.`nombre` AS `nombre_torneo`,`et`.`nombre` AS `etapa_torneo`,`pt`.`id_fase` AS `id_fase`,`pt`.`orden_en_fase` AS `orden_en_fase`,`pt`.`id_equipo_A` AS `id_equipo_A`,`pt`.`id_equipo_B` AS `id_equipo_B`,`eqa`.`nombre` AS `nombre_equipo_A`,`eqa`.`foto` AS `foto_equipo_A`,`eqa`.`descripcion` AS `descripcion_equipo_A`,`eqb`.`nombre` AS `nombre_equipo_B`,`eqb`.`foto` AS `foto_equipo_B`,`eqb`.`descripcion` AS `descripcion_equipo_B` from ((((((((((((((`participantes_partidos` `pp` join `jugadores` `j` on(`pp`.`id_jugador` = `j`.`id_jugador`)) join `partidos` `p` on(`pp`.`id_partido` = `p`.`id_partido`)) join `tipos_partido` `tp` on(`p`.`id_tipo_partido` = `tp`.`id_tipo_partido`)) join `estados_solicitudes` `es` on(`pp`.`id_estado` = `es`.`id_estado`)) join `roles_partidos` `rp` on(`pp`.`id_rol` = `rp`.`id_rol`)) left join `partidos_reservas` `pr` on(`p`.`id_partido` = `pr`.`id_partido`)) left join `reservas` `r` on(`pr`.`id_reserva` = `r`.`id_reserva`)) left join `canchas` `c` on(`r`.`id_cancha` = `c`.`id_cancha`)) left join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) left join `partidos_torneos` `pt` on(`p`.`id_partido` = `pt`.`id_partido`)) left join `torneos` `t` on(`pt`.`id_torneo` = `t`.`id_torneo`)) left join `etapas_torneo` `et` on(`t`.`id_etapa` = `et`.`id_etapa`)) left join `equipos` `eqa` on(`pt`.`id_equipo_A` = `eqa`.`id_equipo`)) left join `equipos` `eqb` on(`pt`.`id_equipo_B` = `eqb`.`id_equipo`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vista_perfil_cancha`
+--
+DROP TABLE IF EXISTS `vista_perfil_cancha`;
+
+DROP VIEW IF EXISTS `vista_perfil_cancha`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_perfil_cancha`  AS SELECT `c`.`id_cancha` AS `id_cancha`, `c`.`nombre` AS `nombre_cancha`, `c`.`descripcion` AS `descripcion_cancha`, `c`.`foto` AS `foto_cancha`, `c`.`banner` AS `banner_cancha`, `d`.`direccion_completa` AS `direccion_cancha`, `d`.`latitud` AS `latitud_cancha`, `d`.`longitud` AS `longitud_cancha`, `s`.`nombre` AS `tipo_superficie` FROM ((`canchas` `c` join `direcciones` `d` on(`c`.`id_direccion` = `d`.`id_direccion`)) join `superficies_canchas` `s` on(`c`.`id_superficie` = `s`.`id_superficie`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vista_perfil_jugador`
+--
+DROP TABLE IF EXISTS `vista_perfil_jugador`;
+
+DROP VIEW IF EXISTS `vista_perfil_jugador`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_perfil_jugador`  AS SELECT `u`.`id_usuario` AS `id_usuario`, `u`.`nombre` AS `nombre`, `u`.`apellido` AS `apellido`, `u`.`email` AS `email`, `u`.`fecha_registro` AS `fecha_registro`, `j`.`id_jugador` AS `id_jugador`, `j`.`username` AS `username`, `j`.`telefono` AS `telefono`, `j`.`foto_perfil` AS `foto_perfil`, `j`.`banner` AS `banner`, `j`.`fecha_nacimiento` AS `fecha_nacimiento`, `j`.`id_sexo` AS `id_sexo`, `j`.`reputacion` AS `reputacion`, `s`.`nombre` AS `sexo`, `e`.`nombre` AS `estado_usuario` FROM (((`usuarios` `u` join `jugadores` `j` on(`u`.`id_usuario` = `j`.`id_jugador`)) join `sexo` `s` on(`j`.`id_sexo` = `s`.`id_sexo`)) join `estados_usuarios` `e` on(`u`.`id_estado` = `e`.`id_estado`)) ;
 
 -- --------------------------------------------------------
 
@@ -1671,7 +1753,9 @@ ALTER TABLE `partidos_torneos`
   ADD PRIMARY KEY (`id_partido_torneo`),
   ADD UNIQUE KEY `unique_partido_torneo` (`id_partido`,`id_torneo`),
   ADD KEY `id_fase` (`id_fase`),
-  ADD KEY `idx_torneo_fase` (`id_torneo`,`id_fase`);
+  ADD KEY `idx_torneo_fase` (`id_torneo`,`id_fase`),
+  ADD KEY `fk_id_equipo_a` (`id_equipo_A`),
+  ADD KEY `fk_id_equipo_b` (`id_equipo_B`);
 
 --
 -- Indexes for table `permisos`
@@ -1823,7 +1907,7 @@ ALTER TABLE `admin_sistema`
 -- AUTO_INCREMENT for table `calificaciones_jugadores`
 --
 ALTER TABLE `calificaciones_jugadores`
-  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_calificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `canchas`
@@ -1847,13 +1931,13 @@ ALTER TABLE `direcciones`
 -- AUTO_INCREMENT for table `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `estadisticas_partido`
 --
 ALTER TABLE `estadisticas_partido`
-  MODIFY `id_estadistica` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_estadistica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `estados_canchas`
@@ -1865,7 +1949,7 @@ ALTER TABLE `estados_canchas`
 -- AUTO_INCREMENT for table `estados_solicitudes`
 --
 ALTER TABLE `estados_solicitudes`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `estados_usuarios`
@@ -1895,7 +1979,7 @@ ALTER TABLE `horarios_cancha`
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `observaciones_canchas`
@@ -2009,13 +2093,13 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usuarios_roles`
 --
 ALTER TABLE `usuarios_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -2144,6 +2228,8 @@ ALTER TABLE `partidos_reservas`
 -- Constraints for table `partidos_torneos`
 --
 ALTER TABLE `partidos_torneos`
+  ADD CONSTRAINT `fk_id_equipo_a` FOREIGN KEY (`id_equipo_A`) REFERENCES `equipos` (`id_equipo`),
+  ADD CONSTRAINT `fk_id_equipo_b` FOREIGN KEY (`id_equipo_B`) REFERENCES `equipos` (`id_equipo`),
   ADD CONSTRAINT `partidos_torneos_ibfk_1` FOREIGN KEY (`id_partido`) REFERENCES `partidos` (`id_partido`) ON DELETE CASCADE,
   ADD CONSTRAINT `partidos_torneos_ibfk_2` FOREIGN KEY (`id_torneo`) REFERENCES `torneos` (`id_torneo`) ON DELETE CASCADE,
   ADD CONSTRAINT `partidos_torneos_ibfk_3` FOREIGN KEY (`id_fase`) REFERENCES `fases_torneo` (`id_fase`);
