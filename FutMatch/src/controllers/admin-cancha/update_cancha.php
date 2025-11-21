@@ -55,7 +55,7 @@ try {
             nombre = ?, 
             id_superficie = ?, 
             descripcion = ?,
-            tipo_cancha = ?
+            id_tipo = ?
         WHERE id_cancha = ?
     ");
     $stmt->execute([

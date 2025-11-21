@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../app/config.php';
 
+header("Content-Type: application/json");
+
 try {
     $sql = "
         SELECT 
@@ -9,11 +11,14 @@ try {
             c.descripcion,
             c.id_superficie,
             c.id_estado,
+            c.id_tipo AS tipo_cancha,
             d.direccion_completa,
-            s.nombre AS superficie_nombre
+            s.nombre AS superficie_nombre,
+            tc.nombre AS tipo_nombre
         FROM canchas c
-        INNER JOIN direcciones d ON c.id_direccion = d.id_direccion
-        INNER JOIN superficies_canchas s ON c.id_superficie = s.id_superficie
+        LEFT JOIN direcciones d ON c.id_direccion = d.id_direccion
+        LEFT JOIN superficies_canchas s ON c.id_superficie = s.id_superficie
+        LEFT JOIN tipo_cancha tc ON c.id_tipo = tc.id_tipo
     ";
 
     $stmt = $conn->prepare($sql);
@@ -24,6 +29,7 @@ try {
         'status' => 'success',
         'data'   => $canchas
     ]);
+
 } catch (Exception $e) {
     echo json_encode([
         'status' => 'error',

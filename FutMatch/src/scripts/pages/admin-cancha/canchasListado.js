@@ -9,13 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cargarCanchas() {
-    fetch(BASE_URL + "src/controllers/admin-cancha/get_canchas.php")
 
+    fetch(BASE_URL + "src/controllers/admin-cancha/get_canchas.php")
         .then(response => response.json())
         .then(data => {
+
             if (data.status === "success") {
-                CANCHAS_CACHE = data.data;   // ← necesario para editar
-                renderCanchas(data.data);
+
+                // Guardamos la data en cache correctamente
+                CANCHAS_CACHE = data.data;
+console.log("CANCHAS_CACHE:", CANCHAS_CACHE);
+                // Renderizamos sin duplicar
+                renderCanchas(CANCHAS_CACHE);
+
             } else {
                 console.error("Error cargando canchas:", data.message);
             }
@@ -29,19 +35,21 @@ function cargarCanchas() {
 
 function renderCanchas(canchas) {
     const contenedor = document.getElementById("canchasList");
-    contenedor.innerHTML = "";
+    contenedor.innerHTML = ""; // Evita duplicados
 
     canchas.forEach(cancha => {
+
         const estadoTexto = obtenerTextoEstado(cancha.id_estado);
         const estadoClase = obtenerClaseEstado(cancha.id_estado);
-        const capacidad = obtenerCapacidad(cancha.id_superficie);
+        const capacidad = obtenerCapacidad(cancha.tipo_cancha); // ⚡ usar tipo_cancha
 
-        contenedor.innerHTML += `
+        const html = `
             <div class="col-12">
                 <div class="card shadow-sm border-0 mb-2">
                     <div class="card-body">
                         <div class="row align-items-center">
 
+                            <!-- Icono ubicación -->
                             <div class="col-md-2 text-center">
                                 <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
                                     style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
@@ -49,40 +57,35 @@ function renderCanchas(canchas) {
                                 </div>
                             </div>
 
-                        
+                            <!-- Nombre y dirección de la cancha -->
+                            <div class="col-md-3">
+                                <h5 class="mb-1">${cancha.nombre}</h5>
+                                <small class="text-muted">${cancha.direccion_completa}</small>
+                            </div>
 
+                            <!-- Tipo / capacidad -->
                             <div class="col-md-2">
                                 <span class="text-muted">
                                     <i class="bi bi-people"></i> ${capacidad}
                                 </span>
                             </div>
 
+                            <!-- Estado -->
                             <div class="col-md-2">
                                 <span class="badge ${estadoClase}">${estadoTexto}</span>
                             </div>
 
+                            <!-- Botones -->
                             <div class="col-md-3 text-end">
-                                
-
-                                <button class="btn btn-dark btn-sm me-1" 
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalEditarCancha"
-                                    data-cancha-id="${cancha.id_cancha}">
+                                <button class="btn btn-dark btn-sm me-1 btn-editar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
-
-                                <button class="btn btn-dark btn-sm me-1"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalCerrarCancha"
-                                    data-cancha-id="${cancha.id_cancha}">
+                                <button class="btn btn-dark btn-sm me-1 btn-cerrar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-pause-circle"></i>
                                 </button>
 
-                                <button class="btn btn-dark btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalEliminarCancha"
-                                    data-cancha-id="${cancha.id_cancha}">
+                                <button class="btn btn-dark btn-sm btn-eliminar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -92,7 +95,18 @@ function renderCanchas(canchas) {
                 </div>
             </div>
         `;
+
+        contenedor.insertAdjacentHTML("beforeend", html);
     });
+
+    // 🔹 Asignar listeners SOLO a los botones recien creados
+    document.querySelectorAll(".btn-editar").forEach(btn => {
+        btn.onclick = () => abrirModalEditar(btn.dataset.canchaId);
+    });
+
+    // Puedes agregar listeners para cerrar/eliminar si los necesitas
+    // document.querySelectorAll(".btn-cerrar").forEach(btn => { ... });
+    // document.querySelectorAll(".btn-eliminar").forEach(btn => { ... });
 }
 
 document.addEventListener("click", function (e) {
@@ -105,8 +119,8 @@ document.addEventListener("click", function (e) {
 // Funciones auxiliares (texto y clases de estado, tipo de superficie)
 // =====================================================================
 
-function obtenerCapacidad(idSuperficie) {
-    switch (idSuperficie) {
+function obtenerCapacidad(tipo_cancha) {
+    switch (tipo_cancha) {
         case 1: return "Fútbol 5";
         case 2: return "Fútbol 7";
         case 3: return "Fútbol 9";
@@ -162,11 +176,6 @@ function cargarSuperficies() {
 function agregarCancha() {
 
     const datos = new FormData();
-    console.log("nombreCancha:", document.getElementById("nombreCancha"));
-    console.log("tipoSuperficie:", document.getElementById("tipoSuperficie"));
-    console.log("ubicacionCancha:", document.getElementById("ubicacionCancha"));
-    console.log("descripcionCancha:", document.getElementById("descripcionCancha"));
-    console.log("capacidadCancha:", document.getElementById("capacidadCancha"));
 
     datos.append("nombre", document.getElementById("nombreCancha").value);
     datos.append("superficie", document.getElementById("tipoSuperficie").value);
@@ -178,12 +187,15 @@ function agregarCancha() {
         method: "POST",
         body: datos
     })
-        .then(res => res.json())
+        .then(r => r.json())
         .then(data => {
+
             if (data.status === "success") {
 
                 // Cerrar modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById("modalAgregarCancha"));
+                const modal = bootstrap.Modal.getInstance(
+                    document.getElementById("modalAgregarCancha")
+                );
                 modal.hide();
 
                 // Limpiar formulario
@@ -194,12 +206,14 @@ function agregarCancha() {
 
             } else {
                 alert("Error: " + data.message);
+                console.error(data);
             }
         })
         .catch(err => {
-            console.error("Error fetch:", err);
+            console.error("Error fetch agregar cancha:", err);
         });
 }
+
 
 // Editar cancha
 // ==========================
@@ -212,7 +226,7 @@ function abrirModalEditar(id) {
         return;
     }
 
-    
+
     document.getElementById("editCanchaId").value = cancha.id_cancha;
     document.getElementById("editNombreCancha").value = cancha.nombre;
     document.getElementById("editUbicacionCancha").value = cancha.direccion_completa;
@@ -235,8 +249,9 @@ function actualizarCancha() {
     data.append("nombre", document.getElementById("editNombreCancha").value);
     data.append("descripcion", document.getElementById("editDescripcionCancha").value);
     data.append("ubicacion", document.getElementById("editUbicacionCancha").value);
-    data.append("id_superficie", document.getElementById("editTipoSuperficie").value);
-    data.append("capacidad", document.getElementById("editCapacidadCancha").value);
+    data.append("superficie", document.getElementById("editTipoSuperficie").value);
+    data.append("tipo_cancha", document.getElementById("editCapacidadCancha").value);
+
 
     fetch("/backend/canchas/update_cancha.php", {
         method: "POST",
