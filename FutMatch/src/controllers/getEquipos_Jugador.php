@@ -12,16 +12,32 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$id_jugador = $_SESSION['user_id'];
-$query =
-    'SELECT * FROM vista_equipos_jugador 
-    WHERE id_jugador = :id 
-    ORDER BY nombre_equipo ASC';
+try {
+    $id_jugador = $_SESSION['user_id'];
+    $filtrarSolicitudes = isset($_GET['filtrar_solicitudes'])
+        ? filter_var($_GET['filtrar_solicitudes'], FILTER_VALIDATE_BOOLEAN)
+        : false;
 
-$stmt = $conn->prepare($query);
-$stmt->bindParam(':id', $id_jugador);
-$stmt->execute();
-$equipos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $query = '
+    SELECT * 
+    FROM vista_equipos_jugador
+    WHERE id_jugador = :id';
 
-header('Content-Type: application/json');
-echo json_encode($equipos);
+    if ($filtrarSolicitudes) {
+        $query .= ' AND estado_solicitud = 1';
+    }
+
+    $query .= ' ORDER BY nombre_equipo ASC';
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id_jugador);
+    $stmt->execute();
+    $equipos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    header('Content-Type: application/json');
+    echo json_encode($equipos);
+} catch (PDOException $e) {
+    error_log("GET_EQUIPOS_JUGADOR ERROR: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['error' => 'Error al obtener equipos']);
+    exit();
+}

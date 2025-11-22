@@ -4,7 +4,7 @@ window.onload = function () {
 
 async function cargarPartidosJugador() {
   try {
-    const response = await fetch(API_PARTIDOS, {
+    const response = await fetch(GET_PARTIDOS_JUGADOR, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

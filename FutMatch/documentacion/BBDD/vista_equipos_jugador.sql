@@ -17,8 +17,10 @@ SELECT
     -- Cantidad de integrantes del equipo
     (SELECT COUNT(*) 
      FROM jugadores_equipos je 
-     WHERE je.id_equipo = e.id_equipo) AS cantidad_integrantes,
+     WHERE je.id_equipo = e.id_equipo
+     AND je.estado_solicitud = 3) AS cantidad_integrantes,
      je.id_jugador,
+     je.estado_solicitud,
 
     -- Cantidad de torneos participados por el equipo
     (SELECT COUNT(DISTINCT t.id_torneo)

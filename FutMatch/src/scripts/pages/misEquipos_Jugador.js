@@ -326,6 +326,7 @@ async function validarUsername(username) {
   if (username === "") {
     return { valido: false, error: "vacio" };
   }
+  console.log("Validando username:", username);
 
   try {
     const response = await fetch(
@@ -333,7 +334,6 @@ async function validarUsername(username) {
     );
 
     if (!response.ok) {
-      // No mostrar error 404 en consola, manejarlo silenciosamente
       return { valido: false, error: "no_encontrado" };
     }
 

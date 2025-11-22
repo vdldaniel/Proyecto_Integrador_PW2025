@@ -112,11 +112,12 @@ require_once HEAD_COMPONENT;
   </main>
 
   <!-- Scripts -->
+
+  <script src="<?= JS_PARTIDOS_JUGADOR ?>"></script>
   <script>
-    const API_PARTIDOS = '<?= GET_PARTIDOS_JUGADOR ?>';
+    const GET_PARTIDOS_JUGADOR = '<?= GET_PARTIDOS_JUGADOR ?>';
   </script>
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  <script src="<?= JS_PARTIDOS_JUGADOR ?>"></script>
 </body>
 
 </html>

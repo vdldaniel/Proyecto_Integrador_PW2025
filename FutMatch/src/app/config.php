@@ -130,8 +130,10 @@ define("JS_AGENDA", JS_SCRIPTS_PATH . "agenda.js");
 
 // Scripts de componentes
 define("JS_PERFIL_CANCHA_BASE", JS_COMPONENTS_PATH . "perfilCancha.js");
-define("JS_PERFILES", BASE_URL . "src/scripts/components/perfiles.js");
-define("JS_PERFIL_JUGADOR_BASE", SRC_PATH . "scripts/components/perfilJugador.js");
+define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
+define("JS_PERFIL_JUGADOR_BASE", JS_COMPONENTS_PATH . "perfilJugador.js");
+define("JS_NAVBAR_JUGADOR", JS_COMPONENTS_PATH . "navbar_Jugador.js");
+define("JS_NOTIFICACIONES_JUGADOR", JS_COMPONENTS_PATH . "notificaciones_Jugador.js");
 
 // pages
 define("JS_AGENDA_ADMIN", JS_SCRIPTS_PATH . "agenda-admin.js");
@@ -227,6 +229,7 @@ define("GET_EQUIPO_JUGADOR", BASE_URL . "src/controllers/getEquipo_Jugador.php")
 define("POST_EQUIPO_JUGADOR", BASE_URL . "src/controllers/postEquipo_Jugador.php");
 define("POST_INVITAR_JUGADOR", BASE_URL . "src/controllers/postInvitarJugador_Equipo.php");
 define("UPDATE_EQUIPO_JUGADOR", BASE_URL . "src/controllers/updateEquipo_Jugador.php");
+define("UPDATE_JUGADORES_EQUIPOS", BASE_URL . "src/controllers/updateJugadores_Equipos.php");
 
 //USUARIOS
 define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");

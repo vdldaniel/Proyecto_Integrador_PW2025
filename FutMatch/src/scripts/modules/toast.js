@@ -1,4 +1,4 @@
-/**
+/*
  * Sistema de notificaciones Toast
  * Uso: showToast('mensaje', 'tipo', duración)
  * Tipos: 'success', 'error', 'warning', 'info'

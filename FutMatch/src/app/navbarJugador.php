@@ -18,6 +18,12 @@ function isActive($page_name, $current)
 	return ($page_name === $current) ? 'active' : '';
 }
 ?>
+
+<script>
+	const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
+	const UPDATE_EQUIPO_JUGADOR = '<?= UPDATE_EQUIPO_JUGADOR ?>';
+	const UPDATE_JUGADORES_EQUIPOS = '<?= UPDATE_JUGADORES_EQUIPOS ?>';
+</script>
 <!-- Navbar Jugador -->
 <header>
 	<nav id="navbarFutmatch" class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top border-bottom">
@@ -390,8 +396,9 @@ function isActive($page_name, $current)
 
 						<!-- Lista de solicitudes de equipos -->
 						<div>
-							<div class="list-group">
-								<!-- Invitación a equipo -->
+							<div class="list-group" id="solicitudesEquiposContainer">
+
+								<!-- Ejemplos comentados:
 								<div class="list-group-item">
 									<div class="d-flex justify-content-between align-items-center">
 										<div>
@@ -412,7 +419,7 @@ function isActive($page_name, $current)
 										</div>
 									</div>
 								</div>
-								<!-- Solicitud procesada -->
+								
 								<div class="list-group-item">
 									<div class="d-flex justify-content-between align-items-center">
 										<div>
@@ -430,7 +437,7 @@ function isActive($page_name, $current)
 										</div>
 									</div>
 								</div>
-								<!-- Solicitud pendiente -->
+								
 								<div class="list-group-item">
 									<div class="d-flex justify-content-between align-items-center">
 										<div>
@@ -448,6 +455,7 @@ function isActive($page_name, $current)
 										</div>
 									</div>
 								</div>
+								-->
 							</div>
 						</div>
 					</div>
@@ -639,54 +647,7 @@ function isActive($page_name, $current)
 	</div>
 </div>
 
-<script>
-	// Inicializar tooltips de Bootstrap
-	document.addEventListener('DOMContentLoaded', function() {
-		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-		var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-			return new bootstrap.Tooltip(tooltipTriggerEl);
-		});
-	});
 
-	// Función para editar campos
-	function editarCampo(inputId) {
-		const input = document.getElementById(inputId);
-		if (input.hasAttribute('readonly')) {
-			input.removeAttribute('readonly');
-			input.focus();
-			input.select();
-		} else {
-			input.setAttribute('readonly', 'readonly');
-			// TODO: Aquí iría la llamada AJAX para guardar los cambios
-			alert('Cambios guardados correctamente');
-		}
-	}
-
-	// Función para confirmar suspensión
-	function confirmarSuspension() {
-		const fecha = document.getElementById('fechaReactivacion').value;
-		const hora = document.getElementById('horaReactivacion').value;
-
-		if (!fecha || !hora) {
-			alert('Por favor, complete la fecha y hora de reactivación');
-			return;
-		}
-
-		if (confirm('¿Está seguro que desea suspender su cuenta hasta el ' + fecha + ' a las ' + hora + '? Sus partidos programados serán cancelados.')) {
-			// TODO: Llamada AJAX para suspender cuenta
-			alert('Cuenta suspendida exitosamente');
-			location.reload();
-		}
-	}
-
-	// Función para confirmar eliminación
-	function confirmarEliminacion() {
-		if (confirm('¿Está seguro que desea eliminar su cuenta permanentemente? Esta acción NO se puede deshacer.')) {
-			if (confirm('ÚLTIMA CONFIRMACIÓN: ¿Realmente desea eliminar su cuenta? Sus partidos programados serán cancelados.')) {
-				// TODO: Llamada AJAX para eliminar cuenta
-				alert('Su cuenta ha sido marcada para eliminación. Recibirá un correo de confirmación.');
-				window.location.href = '<?= PAGE_LANDING_PHP ?>';
-			}
-		}
-	}
-</script>
+<script src="<?= JS_NOTIFICACIONES_JUGADOR ?>"></script>
+<script src="<?= JS_TOAST_MODULE ?>"></script>
+<script src=" <?= JS_NAVBAR_JUGADOR ?>"></script>

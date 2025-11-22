@@ -68,12 +68,12 @@ require_once HEAD_COMPONENT;
     <div id="equiposList" class="row g-3">
       <script>
         const BASE_URL = '<?= BASE_URL ?>';
-        const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
-        const GET_EQUIPO_JUGADOR = '<?= GET_EQUIPO_JUGADOR ?>';
         const GET_USUARIOS = '<?= GET_USUARIOS ?>';
+        //const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>'; Ya está en navbarJugador.php
+        //const UPDATE_EQUIPO_JUGADOR = '<?= UPDATE_EQUIPO_JUGADOR ?>';
+        const GET_EQUIPO_JUGADOR = '<?= GET_EQUIPO_JUGADOR ?>';
         const POST_EQUIPO_JUGADOR = '<?= POST_EQUIPO_JUGADOR ?>';
         const POST_INVITAR_JUGADOR = '<?= POST_INVITAR_JUGADOR ?>';
-        const UPDATE_EQUIPO_JUGADOR = '<?= UPDATE_EQUIPO_JUGADOR ?>';
         const CURRENT_USER_ID = <?= $_SESSION['user_id'] ?>;
       </script>
     </div>
@@ -360,7 +360,7 @@ require_once HEAD_COMPONENT;
 
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  <script src="<?= JS_TOAST_MODULE ?>"></script>
+  <!--<script src="<?= JS_TOAST_MODULE ?>"></script>-->
   <script src="<?= JS_MIS_EQUIPOS_JUGADOR ?>"></script>
   <script>
     const IMG_EQUIPO_DEFAULT = '<?= IMG_EQUIPO_DEFAULT ?>';

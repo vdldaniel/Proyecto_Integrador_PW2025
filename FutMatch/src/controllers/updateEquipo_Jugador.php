@@ -19,6 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 // Obtener datos del POST
 $data = $_POST;
 $id_usuario = $_SESSION['user_id'];
+$id_equipo = $data['id_equipo'] ?? null;
 
 // Validar que se recibió id_equipo
 if (empty($data['id_equipo'])) {
@@ -26,8 +27,6 @@ if (empty($data['id_equipo'])) {
     echo json_encode(['error' => 'ID de equipo no proporcionado']);
     exit;
 }
-
-$id_equipo = $data['id_equipo'];
 
 // Función auxiliar para manejar la subida de foto
 function procesarSubidaFoto()
@@ -101,6 +100,7 @@ if (!empty($data['jugadores'])) {
     }
 }
 
+// hacer el update
 try {
     // Caso especial: Eliminar un jugador específico
     if (!empty($data['eliminar_jugador']) && $data['eliminar_jugador'] == '1') {

@@ -79,12 +79,12 @@ include HEAD_COMPONENT;
         const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
         const GET_PARTIDOS_JUGADOR = '<?= GET_PARTIDOS_JUGADOR ?>';
         const GET_RESEÑAS_JUGADORES = '<?= GET_RESEÑAS_JUGADORES ?>';
-        const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
+        //const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
         const GET_ESTADISTICAS_JUGADOR = '<?= GET_ESTADISTICAS_JUGADOR ?>';
         const POST_FOTOS_JUGADOR = '<?= POST_FOTOS_JUGADOR ?>';
     </script>
 
-    <script src="<?= JS_TOAST_MODULE ?>"></script>
+    <!--<script src="<?= JS_TOAST_MODULE ?>"></script>-->
     <script src="<?= JS_PERFIL_JUGADOR_BASE ?>"></script>
 
 
