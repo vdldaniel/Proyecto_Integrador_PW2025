@@ -17,6 +17,7 @@ function cargarCanchas() {
                 CANCHAS_CACHE = data.data;
                 console.log("CANCHAS_CACHE:", CANCHAS_CACHE);
                 renderCanchas(CANCHAS_CACHE);
+                filtrarCanchas(); // Aplicar filtro si hay texto en el input
             } else {
                 console.error("Error cargando canchas:", data.message);
             }
@@ -29,13 +30,38 @@ function cargarCanchas() {
 
 function renderCanchas(canchas) {
     const contenedor = document.getElementById("canchasList");
-    contenedor.innerHTML = ""; // Evita duplicados
+    contenedor.innerHTML = ""; 
 
     canchas.forEach(cancha => {
 
         const estadoTexto = obtenerTextoEstado(cancha.id_estado);
         const estadoClase = obtenerClaseEstado(cancha.id_estado);
-        const capacidad = obtenerCapacidad(cancha.tipo_cancha);
+        const capacidad = obtenerCapacidad(cancha.id_tipo_partido);
+
+        // CONFIGURAMOS EL BOTÓN SEGÚN EL ESTADO
+        let botonAccion = "";
+        let iconoAccion = "";
+        let claseAccion = "";
+        let accion = "";
+
+        if (cancha.id_estado == 3) {
+            // HABILITADA → mostrar botón CERRAR
+            botonAccion = "Cerrar";
+            iconoAccion = "bi-pause-circle";
+            claseAccion = "btn-warning";
+            accion = "cerrar";
+        } 
+        else if (cancha.id_estado == 4) {
+            // DESHABILITADA → mostrar botón RESTAURAR
+            botonAccion = "Restaurar";
+            iconoAccion = "bi-arrow-clockwise";
+            claseAccion = "btn-success";
+            accion = "restaurar";
+        } 
+        else {
+            // Para otros estados no mostramos botón
+            accion = "ninguna";
+        }
 
         const html = `
             <div class="col-12">
@@ -66,15 +92,23 @@ function renderCanchas(canchas) {
                             </div>
 
                             <div class="col-md-3 text-end">
+
                                 <button class="btn btn-dark btn-sm me-1 btn-editar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
-                                <button class="btn btn-dark btn-sm me-1 btn-cerrar" data-cancha-id="${cancha.id_cancha}">
-                                    <i class="bi bi-pause-circle"></i>
-                                </button>
+                                ${accion !== "ninguna"
+                                    ? `
+                                        <button class="btn ${claseAccion} btn-sm me-1 btn-accion" 
+                                            data-accion="${accion}" 
+                                            data-cancha-id="${cancha.id_cancha}">
+                                            <i class="bi ${iconoAccion}"></i> ${botonAccion}
+                                        </button>
+                                    `
+                                    : ""
+                                }
 
-                                <button class="btn btn-dark btn-sm btn-eliminar" data-cancha-id="${cancha.id_cancha}">
+                                <button class="btn btn-danger btn-sm btn-eliminar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -88,47 +122,52 @@ function renderCanchas(canchas) {
         contenedor.insertAdjacentHTML("beforeend", html);
     });
 
-
+    // EVENTOS
     document.querySelectorAll(".btn-editar").forEach(btn => {
-        btn.addEventListener("click", () => {
-            abrirModalEditar(btn.dataset.canchaId);
-        });
+        btn.addEventListener("click", () => abrirModalEditar(btn.dataset.canchaId));
     });
-    document.querySelectorAll(".btn-cerrar").forEach(btn => {
-        btn.addEventListener("click", () => {
-            abrirModalCerrar(btn.dataset.canchaId);
-        });
-    });
+
     document.querySelectorAll(".btn-eliminar").forEach(btn => {
+        btn.addEventListener("click", () => abrirModalEliminar(btn.dataset.canchaId));
+    });
+
+    document.querySelectorAll(".btn-accion").forEach(btn => {
         btn.addEventListener("click", () => {
-            abrirModalEliminar(btn.dataset.canchaId);
+            const id = btn.dataset.canchaId;
+            const accion = btn.dataset.accion;
+
+            if (accion === "cerrar") {
+                abrirModalCerrar(id);
+            } else if (accion === "restaurar") {
+                abrirModalRestaurar(id);
+            }
         });
     });
 }
-
-
-
 
 
 // Funciones auxiliares (texto y clases de estado, tipo de superficie)
 // =====================================================================
 
-function obtenerCapacidad(tipo_cancha) {
-    switch (tipo_cancha) {
-        case 1: return "Fútbol 5";
-        case 2: return "Fútbol 7";
-        case 3: return "Fútbol 9";
-        case 4: return "Fútbol 11";
-        default: return "N/D";
-    }
+function obtenerCapacidad(idTipoPartido) {
+    const select = document.getElementById("capacidadCancha");
+    if (!select) return "N/D";
+
+    const option = select.querySelector(`option[value="${idTipoPartido}"]`);
+    if (!option) return "N/D";
+
+    // Extrae solo el nombre (lo que está antes del paréntesis)
+    return option.textContent.split("(")[0].trim();
 }
+
 
 function obtenerTextoEstado(id_estado) {
     switch (id_estado) {
-        case 1: return "Habilitada";
+        case 1: return "Pendiente de verificación";
         case 2: return "En revisión";
-        case 3: return "Pendiente";
+        case 3: return "Habilitada";
         case 4: return "Deshabilitada";
+        case 5: return "Suspendida";
         default: return "Desconocido";
     }
 }
@@ -320,38 +359,27 @@ function abrirModalCerrar(id) {
 document.getElementById('btnConfirmarCierre').addEventListener('click', () => {
 
     const id = document.getElementById('cerrarCanchaId').value;
-    const fecha = document.getElementById('fechaCierre').value;
-    const indefinido = document.getElementById('cierreIndefinido').checked;
-    const mensaje = document.getElementById('mensajeCierre').value;
-
-    if (!fecha && !indefinido) {
-        alert("Debes elegir una fecha o marcar cierre indefinido.");
-        return;
-    }
 
     fetch(BASE_URL + "src/controllers/admin-cancha/cerrar_cancha.php", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            id_cancha: id,
-            fecha_cierre: indefinido ? null : fecha,
-            indefinido: indefinido,
-            mensaje: mensaje
-        })
+        body: JSON.stringify({ id_cancha: id })
     })
         .then(res => res.json())
         .then(data => {
             if (data.ok) {
-                alert("La cancha fue cerrada temporalmente.");
+                alert("La cancha fue deshabilitada.");
                 location.reload();
             } else {
                 alert("Error: " + data.error);
             }
-        });
+        })
+        .catch(err => console.error("Error en cierre:", err));
 });
 
 
-
+// Cambiar de modal eliminar a cerrar cancha
+// ==========================
 document.getElementById('btnSuspenderEnLugar').addEventListener('click', () => {
 
     const id = document.getElementById('deleteCanchaId').value;
@@ -363,3 +391,62 @@ document.getElementById('btnSuspenderEnLugar').addEventListener('click', () => {
     // Abrir modal de cierre temporal
     abrirModalCerrar(id);
 });
+
+// Abrir modal restaurar cancha
+// ==========================
+function abrirModalRestaurar(id) {
+    document.getElementById('restaurarCanchaId').value = id;
+
+    const modal = new bootstrap.Modal(document.getElementById('modalRestaurarCancha'));
+    modal.show();
+}
+
+document.getElementById('btnConfirmarRestaurar').addEventListener('click', () => {
+
+    const id = document.getElementById('restaurarCanchaId').value;
+
+    fetch(BASE_URL + "src/controllers/admin-cancha/restaurar_cancha.php", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_cancha: id })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.ok) {
+                alert("La cancha fue restaurada y está pendiente de verificación.");
+                location.reload();
+            } else {
+                alert("Error: " + data.error);
+            }
+        })
+        .catch(err => console.error("Error al restaurar:", err));
+});
+
+// Filtro buscar cancha
+// ==========================
+document.getElementById("searchInput").addEventListener("input", filtrarCanchas);
+
+function filtrarCanchas() {
+    const texto = document.getElementById("searchInput").value.toLowerCase().trim();
+
+    if (texto === "") {
+        renderCanchas(CANCHAS_CACHE);
+        return;
+    }
+
+    const filtradas = CANCHAS_CACHE.filter(cancha => {
+
+        // Obtener nombre del tipo de partido
+        const tipoPartidoNombre = obtenerCapacidad(cancha.id_tipo_partido).toLowerCase();
+
+        return (
+            cancha.nombre.toLowerCase().includes(texto) ||
+            (cancha.direccion_completa && cancha.direccion_completa.toLowerCase().includes(texto)) ||
+            (cancha.tipo_cancha && cancha.tipo_cancha.toLowerCase().includes(texto)) ||
+            tipoPartidoNombre.includes(texto) 
+        );
+    });
+
+    renderCanchas(filtradas);
+}
+

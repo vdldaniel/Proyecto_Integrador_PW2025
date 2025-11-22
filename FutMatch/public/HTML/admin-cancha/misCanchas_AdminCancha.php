@@ -227,7 +227,7 @@ require_once HEAD_COMPONENT;
 				<div class="modal-body">
 					<form id="formCerrarCancha">
 						<input type="hidden" id="cerrarCanchaId" />
-						<div class="mb-3">
+						<!-- <div class="mb-3">
 							<label for="fechaCierre" class="form-label">Fecha de cierre (hasta)</label>
 							<input type="date" class="form-control" id="fechaCierre" />
 						</div>
@@ -238,12 +238,12 @@ require_once HEAD_COMPONENT;
 									Cierre indefinido
 								</label>
 							</div>
-						</div>
-						<div class="mb-3">
+						</div> -->
+						<!-- <div class="mb-3">
 							<label for="mensajeCierre" class="form-label">Mensaje para usuarios (opcional)</label>
 							<textarea class="form-control" id="mensajeCierre" rows="3" maxlength="200" placeholder="Ej: En mantenimiento, regresamos pronto"></textarea>
 							<small class="text-muted">Este mensaje será visible para los usuarios al visualizar la cancha.</small>
-						</div>
+						</div> -->
 					</form>
 				</div>
 				<div class="modal-footer">
