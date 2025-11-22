@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../app/config.php';
+header("Content-Type: application/json");
 
 try {
     $sql = "SELECT id_superficie, nombre FROM superficies_canchas";

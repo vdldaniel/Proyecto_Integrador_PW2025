@@ -311,20 +311,7 @@ require_once HEAD_COMPONENT;
 									<th>Acciones</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>4</td>
-									<td>Cancha Eliminada Ejemplo</td>
-									<td>Sintético</td>
-									<td>Fútbol 7</td>
-									<td>15/03/2024</td>
-									<td>
-										<button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modalRestaurarCancha" data-cancha-id="4">
-											<i class="bi bi-arrow-clockwise"></i><span class="d-none d-lg-inline ms-1">Restaurar</span>
-										</button>
-									</td>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 				</div>

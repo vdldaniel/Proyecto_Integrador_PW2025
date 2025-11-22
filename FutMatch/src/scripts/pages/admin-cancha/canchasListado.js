@@ -15,7 +15,7 @@ function cargarCanchas() {
         .then(data => {
             if (data.status === "success") {
                 CANCHAS_CACHE = data.data;
-                console.log("CANCHAS_CACHE:", CANCHAS_CACHE);
+                console.log("Canchas cargadas:", CANCHAS_CACHE);
                 renderCanchas(CANCHAS_CACHE);
                 filtrarCanchas(); // Aplicar filtro si hay texto en el input
             } else {
@@ -30,7 +30,7 @@ function cargarCanchas() {
 
 function renderCanchas(canchas) {
     const contenedor = document.getElementById("canchasList");
-    contenedor.innerHTML = ""; 
+    contenedor.innerHTML = "";
 
     canchas.forEach(cancha => {
 
@@ -38,28 +38,28 @@ function renderCanchas(canchas) {
         const estadoClase = obtenerClaseEstado(cancha.id_estado);
         const capacidad = obtenerCapacidad(cancha.id_tipo_partido);
 
-        // CONFIGURAMOS EL BOTÓN SEGÚN EL ESTADO
+
         let botonAccion = "";
         let iconoAccion = "";
         let claseAccion = "";
         let accion = "";
 
         if (cancha.id_estado == 3) {
-            // HABILITADA → mostrar botón CERRAR
+            //  mostrar botón CERRAR
             botonAccion = "Cerrar";
             iconoAccion = "bi-pause-circle";
             claseAccion = "btn-warning";
             accion = "cerrar";
-        } 
+        }
         else if (cancha.id_estado == 4) {
-            // DESHABILITADA → mostrar botón RESTAURAR
+            //  mostrar botón RESTAURAR
             botonAccion = "Restaurar";
             iconoAccion = "bi-arrow-clockwise";
             claseAccion = "btn-success";
             accion = "restaurar";
-        } 
+        }
         else {
-            // Para otros estados no mostramos botón
+            //  otros estados 
             accion = "ninguna";
         }
 
@@ -93,20 +93,24 @@ function renderCanchas(canchas) {
 
                             <div class="col-md-3 text-end">
 
+                                <a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
+									<i class="bi bi-eye"></i>
+								</a>
+
                                 <button class="btn btn-dark btn-sm me-1 btn-editar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
                                 ${accion !== "ninguna"
-                                    ? `
+                ? `
                                         <button class="btn ${claseAccion} btn-sm me-1 btn-accion" 
                                             data-accion="${accion}" 
                                             data-cancha-id="${cancha.id_cancha}">
                                             <i class="bi ${iconoAccion}"></i> ${botonAccion}
                                         </button>
                                     `
-                                    : ""
-                                }
+                : ""
+            }
 
                                 <button class="btn btn-danger btn-sm btn-eliminar" data-cancha-id="${cancha.id_cancha}">
                                     <i class="bi bi-trash"></i>
@@ -402,25 +406,11 @@ function abrirModalRestaurar(id) {
 }
 
 document.getElementById('btnConfirmarRestaurar').addEventListener('click', () => {
-
     const id = document.getElementById('restaurarCanchaId').value;
 
-    fetch(BASE_URL + "src/controllers/admin-cancha/restaurar_cancha.php", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_cancha: id })
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.ok) {
-                alert("La cancha fue restaurada y está pendiente de verificación.");
-                location.reload();
-            } else {
-                alert("Error: " + data.error);
-            }
-        })
-        .catch(err => console.error("Error al restaurar:", err));
+    restaurarCancha(id, true); // true = recargar página luego
 });
+
 
 // Filtro buscar cancha
 // ==========================
@@ -443,10 +433,112 @@ function filtrarCanchas() {
             cancha.nombre.toLowerCase().includes(texto) ||
             (cancha.direccion_completa && cancha.direccion_completa.toLowerCase().includes(texto)) ||
             (cancha.tipo_cancha && cancha.tipo_cancha.toLowerCase().includes(texto)) ||
-            tipoPartidoNombre.includes(texto) 
+            tipoPartidoNombre.includes(texto)
         );
     });
 
     renderCanchas(filtradas);
 }
+
+// Historial de canchas
+// ==========================
+function cargarHistorialDesdeCache() {
+
+    if (!Array.isArray(CANCHAS_CACHE)) return;
+
+    const historial = CANCHAS_CACHE.filter(c =>
+        c.id_estado == 4 || c.id_estado == 5
+    );
+
+    renderHistorial(historial);
+}
+
+
+function renderHistorial(lista) {
+    const tbody = document.querySelector("#modalHistorialCanchas tbody");
+    tbody.innerHTML = "";
+
+    if (lista.length === 0) {
+        tbody.innerHTML = `
+            <tr><td colspan="6" class="text-center text-muted">No hay canchas en historial.</td></tr>
+        `;
+        return;
+    }
+
+    lista.forEach((c, index) => {
+
+        let estadoTexto = "";
+        switch (c.id_estado) {
+            case 4: estadoTexto = "Deshabilitada"; break;
+            case 5: estadoTexto = "Suspendida"; break;
+            default: estadoTexto = "Estado desconocido";
+        }
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${c.nombre}</td>
+                <td>${c.tipo_nombre}</td>
+                <td>${c.descripcion || "-"}</td>
+                <td>${estadoTexto}</td>
+
+                <td>
+                    ${c.id_estado == 4
+                ? `<button class="btn btn-sm btn-dark btn-restaurar" data-id="${c.id_cancha}">
+                                <i class="bi bi-arrow-clockwise"></i> Restaurar
+                           </button>`
+                : ""
+            }
+                </td>
+            </tr>
+        `;
+    });
+
+    // activar el botón Restaurar
+    document.querySelectorAll(".btn-restaurar").forEach(btn => {
+        btn.addEventListener("click", () => {
+            restaurarCancha(btn.dataset.id, false); // no recargar página
+        });
+    });
+}
+
+
+function restaurarCancha(id, reload = false) {
+
+    return fetch(BASE_URL + "src/controllers/admin-cancha/restaurar_cancha.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id_cancha: id })
+    })
+        .then(r => r.json())
+        .then(res => {
+
+            if (!res.ok) {
+                alert("Error al restaurar la cancha");
+                return;
+            }
+
+            //actualiza cache sin recargar
+            if (!reload) {
+                const cancha = CANCHAS_CACHE.find(c => c.id_cancha == id);
+                if (cancha) cancha.id_estado = 1;
+
+                cargarHistorialDesdeCache();
+                cargarCanchas();
+
+                alert("Cancha restaurada con éxito");
+            }
+
+            
+            if (reload) {
+                alert("La cancha fue restaurada y está pendiente de verificación.");
+                location.reload();
+            }
+        });
+}
+
+document.getElementById("modalHistorialCanchas")
+    .addEventListener("show.bs.modal", () => {
+        cargarHistorialDesdeCache();
+    });
 
