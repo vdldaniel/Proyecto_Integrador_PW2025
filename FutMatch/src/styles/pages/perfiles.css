@@ -102,12 +102,27 @@
 /* ========================================
    INFORMACIÓN DEL PERFIL
    ======================================== */
+.profile-info-left {
+  display: flex;
+  flex-direction: column;
+}
 
+.profile-info-right {
+  text-align: left;
+  justify-content: space-around;
+}
 .profile-info-container {
-  display: inline-block;
+  display: flex;
+  justify-content: space-between; /* separa izquierda/derecha */
+  align-items: center; /* centra verticalmente */
   width: fit-content;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 10px;
+}
+
+.profile-description-container {
+  text-align: left; /* alineado a la izquierda */
+  margin-left: 1rem; /* separa del bloque izquierdo */
 }
 
 .profile-name {

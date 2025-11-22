@@ -86,16 +86,24 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                         </div>
                     </div>
 
-                    <!-- Información básica del jugador -->
-                    <div class="profile-info-container">
-                        <h2 class="profile-name mb-1" id="nombreJugador"></h2>
-                        <p class="profile-username mb-2" id="usernameJugador"></p>
-                        <div class="profile-badges">
-                            <span class="badge bg-success me-2" id="estadoJugador"></span>
-                            <span class="profile-rating me-2" id="calificacionJugador">
+                    <div class="profile-info-container d-flex">
 
-                            </span>
+                        <!-- COLUMNA IZQUIERDA -->
+                        <div class="profile-info-left flex-grow-1">
+                            <h2 class="profile-name mb-1" id="nombreJugador"></h2>
+                            <p class="profile-username mb-2" id="usernameJugador"></p>
+
+                            <div class="profile-badges">
+                                <span class="badge bg-success me-2" id="estadoJugador"></span>
+                                <span class="profile-rating me-2" id="calificacionJugador"></span>
+                            </div>
                         </div>
+
+                        <!-- COLUMNA DERECHA -->
+                        <div class="profile-info-right ms-3">
+                            <p class="profile-description mb-0" id="descripcionJugador"></p>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -37,6 +37,7 @@ SELECT
     j.fecha_nacimiento,
     j.id_sexo,
     j.reputacion,
+    j.descripcion,
 
     -- Sexo
     s.nombre AS sexo,

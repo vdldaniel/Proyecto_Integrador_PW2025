@@ -351,6 +351,9 @@ function cargarInfo(info) {
   document.getElementById("estadoJugador").textContent =
     info.estado_usuario || "";
 
+  document.getElementById("descripcionJugador").textContent =
+    info.descripcion || "";
+
   // Cargar foto de perfil
   const avatarElement = document.getElementById("fotoPerfil");
   if (avatarElement) {
