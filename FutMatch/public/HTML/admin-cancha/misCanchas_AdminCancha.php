@@ -147,13 +147,7 @@ require_once HEAD_COMPONENT;
 							<!-- Capacidad -->
 							<div class="mb-3 col-12 col-lg-6">
 								<label for="capacidadCancha" class="form-label">Tipo de cancha</label>
-								<select class="form-select" id="capacidadCancha" required>
-									<option value="">Seleccionar...</option>
-									<option value="1">Fútbol 5</option>
-									<option value="2">Fútbol 7</option>
-									<option value="3">Fútbol 9</option>
-									<option value="4">Fútbol 11</option>
-								</select>
+								<select class="form-select" id="capacidadCancha" required></select>
 							</div>
 						</div>
 					</form>
@@ -209,12 +203,7 @@ require_once HEAD_COMPONENT;
 							<!-- Capacidad -->
 							<div class="mb-3 col-12 col-lg-6">
 								<label for="editCapacidadCancha" class="form-label">Tipo de cancha</label>
-								<select class="form-select" id="editCapacidadCancha" required>
-									<option value="1">Fútbol 5</option>
-									<option value="2">Fútbol 7</option>
-									<option value="3">Fútbol 9</option>
-									<option value="4">Fútbol 11</option>
-								</select>
+								<select class="form-select" id="editCapacidadCancha" required></select>
 							</div>
 						</div>
 					</form>

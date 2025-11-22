@@ -1,50 +1,48 @@
 <?php
 require_once __DIR__ . '/../../app/config.php';
-
 header("Content-Type: application/json");
 
-// Validación básica
-if (
-    empty($_POST["nombre"]) ||
-    empty($_POST["superficie"]) ||
-    empty($_POST["ubicacion"]) ||
-    empty($_POST["descripcion"]) ||
-    empty($_POST["tipo_cancha"])
-) {
-    echo json_encode(["status" => "error", "message" => "Datos incompletos"]);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(["status"=>"error","message"=>"Método no permitido"]);
     exit;
 }
 
-$nombre       = $_POST["nombre"];
-$superficie   = $_POST["superficie"];   // id_superficie
-$ubicacion    = $_POST["ubicacion"];
-$descripcion  = $_POST["descripcion"];
-$tipoCancha   = $_POST["tipo_cancha"];  // id_tipo
+$nombre       = $_POST['nombre'] ?? null;
+$superficie   = $_POST['superficie'] ?? null;
+$ubicacion    = $_POST['ubicacion'] ?? null;
+$descripcion  = $_POST['descripcion'] ?? null;
+$id_tipo_partido = $_POST['id_tipo_partido'] ?? null; // ahora viene así
 
-try {
-
-    // 1) Insertar dirección
-    $sqlDireccion = "INSERT INTO direcciones (direccion_completa, latitud, longitud) 
-                     VALUES (?, 0, 0)";
-    $stmt = $conn->prepare($sqlDireccion);
-    $stmt->execute([$ubicacion]);
-    $idDireccion = $conn->lastInsertId();
-
-    // 2) Insertar cancha (corregido)
-    $sqlCancha = "INSERT INTO canchas 
-        (id_admin_cancha, id_direccion, nombre, descripcion, id_tipo, id_estado, id_superficie, politicas_reservas)
-        VALUES (1, ?, ?, ?, ?, 1, ?, '')";
-
-    $stmt2 = $conn->prepare($sqlCancha);
-    $stmt2->execute([$idDireccion, $nombre, $descripcion, $tipoCancha, $superficie]);
-
-    echo json_encode(["status" => "success"]);
-
-} catch (Exception $e) {
-
-    echo json_encode([
-        "status" => "error",
-        "message" => $e->getMessage()
-    ]);
+if (!$nombre || !$superficie || !$ubicacion || !$id_tipo_partido) {
+    echo json_encode(["status"=>"error","message"=>"Datos incompletos"]);
+    exit;
 }
 
+try {
+    $conn->beginTransaction();
+
+    // 1) insertar dirección
+    $sql = "INSERT INTO direcciones (direccion_completa, latitud, longitud) VALUES (?, 0, 0)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$ubicacion]);
+    $id_direccion = $conn->lastInsertId();
+
+    // 2) insertar cancha
+    $sql = "INSERT INTO canchas (id_admin_cancha, id_direccion, nombre, descripcion, id_estado, id_superficie, politicas_reservas)
+            VALUES (1, ?, ?, ?, 1, ?, NULL)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$id_direccion, $nombre, $descripcion, $superficie]);
+    $id_cancha = $conn->lastInsertId();
+
+    // 3) insertar relación en canchas_tipos_partido (activo = 1)
+    $sql = "INSERT INTO canchas_tipos_partido (id_cancha, id_tipo_partido, activo) VALUES (?, ?, 1)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$id_cancha, $id_tipo_partido]);
+
+    $conn->commit();
+
+    echo json_encode(["status"=>"success","id_cancha"=>$id_cancha]);
+} catch (Exception $e) {
+    $conn->rollBack();
+    echo json_encode(["status"=>"error","message"=>$e->getMessage()]);
+}
