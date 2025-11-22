@@ -2,6 +2,7 @@
 
 // Cargar configuración
 require_once("../../../src/app/config.php");
+require_once AUTH_REQUIRED_COMPONENT;
 
 // Definir la página actual para el navbar
 $current_page = 'miPerfilJugador';
@@ -13,8 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $page_title = "Mi Perfil - FutMatch";
 
-$page_css = [CSS_PAGES_PERFILES];
-$page_js = [JS_PERFIL_JUGADOR];
+$page_css = [CSS_PAGES_PERFILES, CSS_PAGES_EQUIPOS_JUGADOR];
 
 // Variables para el componente perfilJugador.php
 $perfil_jugador_admin_mode = false;
@@ -30,24 +30,31 @@ $perfil_jugador_botones_header = [
     [
         'tipo' => 'link',
         'texto' => 'Ver Partidos',
-        'icono' => 'bi-calendar-check',
+        'icono' => 'bi-calendar-check m-1',
         'clase' => 'btn-dark',
         'url' => PAGE_MIS_PARTIDOS_JUGADOR
     ],
     [
-        'tipo' => 'button',
-        'texto' => 'Configuración',
-        'icono' => 'bi-gear',
+        'tipo' => 'link',
+        'texto' => 'Ver Equipos',
+        'icono' => 'bi-people m-1',
         'clase' => 'btn-dark',
-        'modal' => '#modalConfiguracion'
+        'url' => PAGE_MIS_EQUIPOS_JUGADOR
     ],
+    [
+        'tipo' => 'link',
+        'texto' => 'Ver Torneos',
+        'icono' => 'bi-trophy m-1',
+        'clase' => 'btn-dark',
+        'url' => PAGE_MIS_TORNEOS_JUGADOR
+    ]/*,
     [
         'tipo' => 'button',
         'texto' => 'Editar Perfil',
         'icono' => 'bi-pencil-square',
         'clase' => 'btn-primary',
         'id' => 'btnEditarPerfil'
-    ]
+    ]*/
 ];
 
 include HEAD_COMPONENT;
@@ -60,114 +67,6 @@ include HEAD_COMPONENT;
     <main>
         <div class="container mt-4">
             <?php include PERFIL_JUGADOR_COMPONENT; ?>
-        </div>
-
-        <!-- Modal Configuración -->
-        <div class="modal fade" id="modalConfiguracion" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            <i class="bi bi-gear"></i> Configuración de Perfil
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formConfiguracion">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombre completo</label>
-                                    <input type="text" class="form-control" name="nombre" id="configNombre" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Username</label>
-                                    <input type="text" class="form-control" name="username" id="configUsername" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" id="configEmail" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" name="telefono" id="configTelefono">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Fecha de nacimiento</label>
-                                    <input type="date" class="form-control" name="fecha_nacimiento" id="configFechaNacimiento">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Posición</label>
-                                    <select class="form-select" name="posicion">
-                                        <option value="arquero">Arquero</option>
-                                        <option value="defensor">Defensor</option>
-                                        <option value="mediocampista" selected>Mediocampista</option>
-                                        <option value="delantero">Delantero</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Pie hábil</label>
-                                    <select class="form-select" name="pie">
-                                        <option value="derecho" selected>Derecho</option>
-                                        <option value="izquierdo">Izquierdo</option>
-                                        <option value="ambos">Ambos</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Especialidades (opcional)</label>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="especialidades[]" value="pases_largos" checked>
-                                            <label class="form-check-label">Pases largos</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="especialidades[]" value="centros" checked>
-                                            <label class="form-check-label">Centros</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="especialidades[]" value="vision_juego" checked>
-                                            <label class="form-check-label">Visión de juego</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="especialidades[]" value="remates">
-                                            <label class="form-check-label">Remates</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="especialidades[]" value="defensa">
-                                            <label class="form-check-label">Defensa</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="especialidades[]" value="velocidad">
-                                            <label class="form-check-label">Velocidad</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" id="btnGuardarConfiguracion">Guardar Cambios</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -182,9 +81,12 @@ include HEAD_COMPONENT;
         const GET_RESEÑAS_JUGADORES = '<?= GET_RESEÑAS_JUGADORES ?>';
         const GET_EQUIPOS_JUGADOR = '<?= GET_EQUIPOS_JUGADOR ?>';
         const GET_ESTADISTICAS_JUGADOR = '<?= GET_ESTADISTICAS_JUGADOR ?>';
+        const POST_FOTOS_JUGADOR = '<?= POST_FOTOS_JUGADOR ?>';
     </script>
 
+    <script src="<?= JS_TOAST_MODULE ?>"></script>
     <script src="<?= JS_PERFIL_JUGADOR_BASE ?>"></script>
+
 
 </body>
 

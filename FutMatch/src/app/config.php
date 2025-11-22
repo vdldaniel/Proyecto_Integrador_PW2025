@@ -233,6 +233,7 @@ define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");
 
 // PERFILES
 define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");
+define("POST_FOTOS_JUGADOR", BASE_URL . "src/controllers/postFotos_Jugador.php");
 
 
 // ===================================

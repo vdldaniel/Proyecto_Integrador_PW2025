@@ -3,7 +3,13 @@ let jugadoresInvitados = [];
 let fotoEquipoSeleccionada = null;
 let fotoEliminada = false; // Flag para indicar si se eliminó la foto en edición
 
-window.onload = function () {
+// Variable global para el equipo actual
+let equipoActualId = null;
+let equipoActual = null;
+let modoEdicion = false;
+let jugadoresEquipoActual = []; // Para almacenar los jugadores actuales del equipo
+
+document.addEventListener("DOMContentLoaded", function () {
   cargarEquiposJugador();
   configurarEventosModal();
   configurarUploadFoto();
@@ -13,7 +19,7 @@ window.onload = function () {
   if (container && container.innerHTML.trim() === "") {
     mostrarBotonInvitar();
   }
-};
+});
 
 function configurarUploadFoto() {
   const dropZone = document.getElementById("dropZoneFoto");
@@ -652,6 +658,7 @@ async function crearEquipo(formData) {
 
 async function actualizarEquipo(formData) {
   try {
+    console.log("UPDATE_EQUIPO_JUGADOR URL:", UPDATE_EQUIPO_JUGADOR);
     const response = await fetch(UPDATE_EQUIPO_JUGADOR, {
       method: "POST",
       body: formData,
@@ -683,12 +690,6 @@ async function actualizarEquipo(formData) {
     );
   }
 }
-
-// Variable global para el equipo actual
-let equipoActualId = null;
-let equipoActual = null;
-let modoEdicion = false;
-let jugadoresEquipoActual = []; // Para almacenar los jugadores actuales del equipo
 
 async function abrirModalInvitarJugadores(idEquipo) {
   equipoActualId = idEquipo;

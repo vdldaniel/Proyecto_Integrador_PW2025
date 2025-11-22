@@ -1,7 +1,7 @@
 <?php
 // Cargar configuración
 require_once '../../../src/app/config.php';
-require_once '../../../src/app/auth-required.php';
+require_once AUTH_REQUIRED_COMPONENT;
 
 // Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
@@ -204,7 +204,7 @@ require_once HEAD_COMPONENT;
               <div class="col-md-8">
                 <label for="editNombreEquipo" class="form-label">Nombre del equipo</label>
                 <div class="position-relative">
-                  <input type="text" class="form-control" id="editNombreEquipo" value="Los Tigres FC" disabled
+                  <input name="nombreEquipo" type="text" class="form-control" id="editNombreEquipo" disabled
                     data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo">
                   <i class="bi bi-lock-fill position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
                 </div>
@@ -212,7 +212,7 @@ require_once HEAD_COMPONENT;
               <div class="col-md-4">
                 <label for="editFotoEquipo" class="form-label">Foto del equipo</label>
                 <div class="position-relative">
-                  <input type="file" class="form-control" id="editFotoEquipo" accept="image/*" disabled
+                  <input name="fotoEquipo" type="file" class="form-control" id="editFotoEquipo" accept="image/*" disabled
                     data-bs-toggle="tooltip" title="Solo puede modificar el líder del equipo">
                   <i class="bi bi-lock-fill position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
                 </div>
@@ -227,7 +227,7 @@ require_once HEAD_COMPONENT;
                   <span class="input-group-text bg-success text-white">
                     <i class="bi bi-star-fill"></i>
                   </span>
-                  <input type="text" class="form-control" value="@jugador_lider" readonly>
+                  <input name="lider" type="text" class="form-control" value="@jugador_lider" readonly>
                 </div>
               </div>
               <div class="col-md-6">

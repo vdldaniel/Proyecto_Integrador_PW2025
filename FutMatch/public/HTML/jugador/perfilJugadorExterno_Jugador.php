@@ -1,7 +1,7 @@
 <?php
 
 // Cargar configuración
-require_once __DIR__ . '/../../../src/app/config.php';
+require_once '../../../src/app/config.php';
 
 // Definir la página actual para el navbar
 $current_page = 'perfilJugadorExterno';

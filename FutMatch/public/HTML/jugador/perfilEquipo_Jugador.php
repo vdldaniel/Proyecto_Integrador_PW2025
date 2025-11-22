@@ -1,6 +1,7 @@
 <?php
 // Cargar configuración
-require_once __DIR__ . '/../../../src/app/config.php';
+require_once '../../../src/app/config.php';
+require_once AUTH_REQUIRED_COMPONENT;
 
 // Resalta la página actual en el navbar
 $current_page = 'perfilEquipo';

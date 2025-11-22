@@ -1,109 +1,13 @@
-/**
- * INFO:
- * apellido: "Martínez"
-banner: null
-email: "ana.martinez@email.com"
-estado_usuario: "Activo"
-fecha_nacimiento: "1996-09-12" --------------------- "Edad"
-fecha_registro: "2025-11-13 00:16:20" -------------- "Miembro desde"
-foto_perfil: null
-id_jugador: 4
-id_sexo: 1
-id_usuario: 4
-nombre: "Ana"
-reputacion: 4.5
-sexo: "femenino"
-telefono: "+541123456792" --------------------------- "Telefono"
-username: "anam"
-
-* PARTIDOS
-abierto: 1
-cant_participantes_equipo_a: 4
-cant_participantes_equipo_b: 1
-descripcion_equipo_A: null
-descripcion_equipo_B: null
-dia_semana: "Lunes"
-direccion_cancha: "San Martín 567, La Plata"
-equipo_asignado: "Equipo B"
-estado_solicitud: "Pendiente"
-etapa_torneo: null
-fecha_partido: "17/11/2025"
-foto_equipo_A: null
-foto_equipo_B: null
-goles_equipo_A: 3
-goles_equipo_B: 0
-goles_equipo_rival: 3
-goles_mi_equipo: 0
-hora_fin: "20:00"
-hora_partido: "19:00"
-id_anfitrion: 3
-id_cancha: 2
-id_equipo_A: null
-id_equipo_B: null
-id_estado: 1
-id_fase: null
-id_jugador: 4
-id_partido: 2
-id_reserva: 3
-id_rol: 3
-id_tipo_partido: 1
-id_tipo_reserva: 1
-id_torneo: null
-latitud_cancha: "-34.92131200"
-longitud_cancha: "-57.95456700"
-max_participantes: 10
-mi_username: "anam"
-min_participantes: 8
-nombre_cancha: "Cancha Norte"
-nombre_equipo_A: null
-nombre_equipo_B: null
-nombre_torneo: null
-orden_en_fase: null
-rol_usuario: "Solicitante"
-tipo_partido: "Fútbol 5"
-
-RESEÑAS
-comentario: "Excelente partido! Me encanta jugar con Ana."
-id_calificacion: 1
-id_jugador_evaluado: 4
-id_jugador_evaluador: 3
-id_partido: 4
-puntuacion: 4
-reportado: 0
-
-EQUIPOS
-abierto: 1
-apellido_lider: "Martínez"
-cantidad_integrantes: 4
-clave: null
-descripcion: "Nos juntamos a jugar futbol los domingos en CABA"
-foto_equipo: "uploads/equipos/equipo_1763336255_691a603f90291.jpg"
-id_equipo: 4
-id_jugador: 4
-id_lider: 4
-nombre_equipo: "Domingueross"
-nombre_lider: "Ana"
-partidos_jugados: 0
-torneos_participados: 0
-
-
-ESTADISTICAS
-asistencias: 0
-faltas: 0
-goles: 1
-id_estadistica: 1
-id_jugador: 4
-id_participante: 3
-id_partido: 4
-
- */
-
 // para las funciones async/await
 const urlPerfil = `${GET_INFO_PERFIL}?id=${CURRENT_USER_ID}&tipo=${TIPO_PERFIL}`;
 const urlPartidos = `${GET_PARTIDOS_JUGADOR}?id=${CURRENT_USER_ID}`;
 const urlReseñas = `${GET_RESEÑAS_JUGADORES}?id=${CURRENT_USER_ID}`;
 const urlEquipos = `${GET_EQUIPOS_JUGADOR}?id=${CURRENT_USER_ID}`;
 const urlEstadisticas = `${GET_ESTADISTICAS_JUGADOR}?id=${CURRENT_USER_ID}`;
+
+// Variables globales p/gestión de fotos
+let fotoPerfilSeleccionada = null;
+let fotoEliminada = false;
 
 document.addEventListener("DOMContentLoaded", function () {
   inicializarPerfil();
@@ -117,12 +21,211 @@ async function inicializarPerfil() {
       getReseñasJugador(),
       getEquiposJugador(),
       getEstadisticasJugador(),
+      configurarUploadFoto(
+        "dropZoneFotoPerfil",
+        "inputFotoPrincipal",
+        "btnGuardarFotoPerfil",
+        "fotoPerfil",
+        "modalCambiarFotoPerfil",
+        "inputFotoPrincipal",
+        "btnEliminarFotoPerfil"
+      ),
+      configurarUploadFoto(
+        "dropZoneBanner",
+        "inputBanner",
+        "btnGuardarBanner",
+        "banner",
+        "modalCambiarBanner",
+        "inputBanner",
+        "btnEliminarBanner"
+      ),
     ]);
 
     cargarPerfil(info, partidos, reseñas, equipos, estadisticas);
   } catch (error) {
     console.error("Error al inicializar perfil:", error);
   }
+}
+
+function configurarUploadFoto(
+  dropZoneID,
+  inputFileID,
+  btnGuardarID,
+  tipoFoto,
+  modalID,
+  inputID,
+  btnEliminarFotoID
+) {
+  const dropZone = document.getElementById(dropZoneID);
+  const inputFile = document.getElementById(inputFileID);
+  const btnGuardar = document.getElementById(btnGuardarID);
+  const btnEliminarFoto = document.getElementById(btnEliminarFotoID);
+
+  if (!dropZone || !inputFile || !btnGuardar) return;
+
+  let fotoSeleccionada = null;
+
+  // Click en la zona de drop
+  dropZone.addEventListener("click", function () {
+    inputFile.click();
+  });
+
+  // Drag and drop
+  dropZone.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+
+  dropZone.addEventListener("dragleave", function (e) {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+  });
+
+  // Cuando se selecciona un archivo
+  inputFile.addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      mostrarPreviewFoto(file, dropZoneID, inputID);
+      fotoSeleccionada = file;
+      btnGuardar.disabled = false;
+    }
+  });
+
+  dropZone.addEventListener("drop", function (e) {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith("image/")) {
+      mostrarPreviewFoto(file, dropZoneID, inputID);
+      fotoSeleccionada = file;
+      // Actualizar el input file
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      inputFile.files = dataTransfer.files;
+      btnGuardar.disabled = false;
+    }
+  });
+
+  // Evento del botón guardar
+  btnGuardar.addEventListener("click", function () {
+    if (fotoSeleccionada) {
+      guardarFoto(fotoSeleccionada, tipoFoto, modalID);
+    }
+  });
+
+  // Evento del botón eliminar foto
+  btnEliminarFoto.addEventListener("click", function () {
+    guardarFoto(null, tipoFoto, modalID);
+  });
+}
+
+async function guardarFoto(foto, tipoFoto, modalID) {
+  try {
+    const formData = new FormData();
+    formData.append("foto", foto);
+    formData.append("tipoFoto", tipoFoto);
+
+    const response = await fetch(POST_FOTOS_JUGADOR, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error del servidor:", errorData);
+      throw new Error(
+        errorData.error || "Error en la solicitud: " + response.status
+      );
+    }
+
+    const resultado = await response.json();
+    console.log("Foto actualizada:", resultado);
+
+    // Cerrar modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById(modalID));
+    modal.hide();
+    location.reload();
+
+    // Actualizar la imagen del avatar en la página
+    const fotoImg = document.getElementById(tipoFoto); // "fotoPerfil" o "banner"
+    const resultadoFoto =
+      tipoFoto === "fotoPerfil" ? resultado.foto_perfil : resultado.banner;
+
+    let tipo = tipoFoto === "fotoPerfil" ? "foto de perfil" : "foto de portada";
+
+    // Mostrar mensaje de éxito
+    if (tipoFoto === "fotoPerfil") {
+      showToast("¡Has cambiado tu " + tipo + "!", "success");
+    } else if (tipoFoto === "banner") {
+      showToast("¡Has cambiado tu " + tipo + "!", "success");
+    }
+  } catch (error) {
+    console.error("Error al cambiar tu " + tipo, error);
+    showToast(
+      "Error al cambiar tu " + tipo + ". Por favor, intenta nuevamente.",
+      "error"
+    );
+  }
+}
+
+function mostrarPreviewFoto(file, dropZoneID, inputID) {
+  const dropZone = document.getElementById(dropZoneID);
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    dropZone.innerHTML = `
+      <img src="${e.target.result}" alt="Preview" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+      <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" id="btnEliminarFoto" style="z-index: 10; border-radius: 50%; width: 30px; height: 30px; padding: 0;">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <div class="upload-icon" style="position: absolute; opacity: 0; transition: opacity 0.3s; background: rgba(0,0,0,0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <i class="bi bi-pencil fs-3 text-white"></i>
+      </div>
+    `;
+
+    // Evento para eliminar foto
+    document
+      .getElementById("btnEliminarFoto")
+      .addEventListener("click", function (e) {
+        e.stopPropagation(); // Evitar que se abra el selector de archivos
+        eliminarFoto(dropZoneID, inputID);
+      });
+
+    // Mostrar el ícono de edición al hacer hover
+    dropZone.addEventListener("mouseenter", function () {
+      const icon = dropZone.querySelector(".upload-icon");
+      if (icon) icon.style.opacity = "1";
+    });
+
+    dropZone.addEventListener("mouseleave", function () {
+      const icon = dropZone.querySelector(".upload-icon");
+      if (icon) icon.style.opacity = "0";
+    });
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function eliminarFoto(dropZoneID, inputID) {
+  const dropZone = document.getElementById(dropZoneID);
+  const inputFile = document.getElementById(inputID);
+
+  // Resetear el input file
+  if (inputFile) {
+    inputFile.value = "";
+  }
+
+  // Resetear la variable global
+  fotoPerfilSeleccionada = null;
+
+  // Restaurar el estado inicial del dropzone
+  dropZone.innerHTML = `
+    <div class="upload-icon">
+      <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+      <span class="upload-text">Click o arrastra una imagen</span>
+    </div>
+  `;
 }
 
 async function getInfoPerfil() {
@@ -248,13 +351,34 @@ function cargarInfo(info) {
   document.getElementById("estadoJugador").textContent =
     info.estado_usuario || "";
 
+  // Cargar foto de perfil
+  const avatarElement = document.getElementById("fotoPerfil");
+  if (avatarElement) {
+    avatarElement.src = info.foto_perfil
+      ? BASE_URL + "public/" + info.foto_perfil
+      : BASE_URL + "public/img/foto_perfil_jugador.png";
+  }
+
+  // Cargar banner
+  const bannerElement = document.getElementById("banner");
+  if (bannerElement && info.banner) {
+    bannerElement.style.backgroundImage = `url('${BASE_URL}public/${info.banner}')`;
+  }
+
   // CALIFICACIÓN (reutilizable)
-  const calificacionHTML = generarEstrellasHTML(info.reputacion);
-  document.getElementById(
-    "calificacionJugador"
-  ).innerHTML = `${calificacionHTML}<small class ="ms-1">(${info.reputacion.toFixed(
-    1
-  )})</small>`;
+  const reputacion = info.reputacion || 0;
+  const calificacionHTML = generarEstrellasHTML(reputacion);
+
+  if (reputacion === 0) {
+    document.getElementById("calificacionJugador").innerHTML =
+      '<small class="text-muted">Sin calificaciones</small>';
+  } else {
+    document.getElementById(
+      "calificacionJugador"
+    ).innerHTML = `${calificacionHTML}<small class ="ms-1">(${reputacion.toFixed(
+      1
+    )})</small>`;
+  }
 
   // INFORMACIÓN PERSONAL:
   document.getElementById("emailJugador").textContent = info.email || "—";
@@ -278,7 +402,7 @@ function cargarInfo(info) {
 
 // Función auxiliar para generar estrellas (reutilizable)
 function generarEstrellasHTML(reputacion) {
-  const estrellas = Math.round(reputacion * 2) / 2;
+  const estrellas = Math.round((reputacion || 0) * 2) / 2;
   let html = "";
 
   for (let i = 1; i <= 5; i++) {
@@ -541,55 +665,72 @@ function cargarEquiposJugadorDOM(equipos) {
 
 function cargarEstadisticasJugadorDOM(info, partidos, estadisticas, reseñas) {
   // CALIFICACIÓN PROMEDIO (reutilizar función)
-  const promedioCalif = info.reputacion || 0;
-  const estrellasHTML = generarEstrellasHTML(promedioCalif);
-  document.getElementById("estrellasCalificacion").innerHTML = estrellasHTML;
-  document.getElementById("promedioCalificacion").textContent =
-    promedioCalif.toFixed(1);
+  const promedioCalif = parseFloat(info.reputacion) || 0;
 
-  // BASADO EN: count reseñas donde id_jugador_evaluado = id_user
-  const totalReseñas = reseñas ? reseñas.length : 0;
-  document.getElementById(
-    "basadoEnReseñas"
-  ).textContent = `Basado en ${totalReseñas} calificaciones`;
+  if (promedioCalif === 0) {
+    document.getElementById("estrellasCalificacion").innerHTML =
+      '<small class="text-muted">Sin calificaciones</small>';
+    document.getElementById("promedioCalificacion").textContent = "—";
+    document.getElementById("basadoEnReseñas").textContent = "";
+  } else {
+    const estrellasHTML = generarEstrellasHTML(promedioCalif);
+    document.getElementById("estrellasCalificacion").innerHTML = estrellasHTML;
+    document.getElementById("promedioCalificacion").textContent =
+      promedioCalif.toFixed(1);
+    // BASADO EN: count reseñas donde id_jugador_evaluado = id_user
+    const totalReseñas = reseñas ? reseñas.length : 0;
+    document.getElementById(
+      "basadoEnReseñas"
+    ).textContent = `Basado en ${totalReseñas} calificaciones`;
+  }
 
   // X PARTIDOS: count partidos
   const totalPartidos = partidos ? partidos.length : 0;
-  document.getElementById("totalPartidos").textContent = totalPartidos;
+  if (totalPartidos === 0) {
+    document.getElementById("totalPartidos").textContent = "—";
+  } else {
+    document.getElementById("totalPartidos").textContent = totalPartidos;
+  }
 
   // X GOLES: sum goles from estadisticas
   let totalGoles = 0;
-  if (estadisticas && estadisticas.length > 0) {
+  if (!estadisticas || estadisticas.length === 0) {
+    document.getElementById("totalGoles").textContent = "—";
+  } else {
     totalGoles = estadisticas.reduce(
       (sum, est) => sum + (parseInt(est.goles) || 0),
       0
     );
+    document.getElementById("totalGoles").textContent = totalGoles;
   }
-  document.getElementById("totalGoles").textContent = totalGoles;
 
   // X ASISTENCIAS: sum asistencias from estadisticas
   let totalAsistencias = 0;
-  if (estadisticas && estadisticas.length > 0) {
+  if (!estadisticas || estadisticas.length === 0) {
+    document.getElementById("totalAsistencias").textContent = "—";
+  } else {
     totalAsistencias = estadisticas.reduce(
       (sum, est) => sum + (parseInt(est.asistencias) || 0),
       0
     );
+    document.getElementById("totalAsistencias").textContent = totalAsistencias;
   }
-  document.getElementById("totalAsistencias").textContent = totalAsistencias;
-
   // X% ASISTENCIA: asistencia a partidos
   // id_estado = 6 significa que el jugador NO asistió
   // id_estado = 3 significa que el jugador SÍ asistió
   let porcentajeAsistencia = 0;
-  if (partidos && partidos.length > 0) {
+  if (!partidos || partidos.length === 0) {
+    document.getElementById("porcentajeAsistencia").textContent = "—";
+    return;
+  } else {
     const partidosAsistidos = partidos.filter(
       (p) => parseInt(p.id_estado) === 3
     ).length;
     porcentajeAsistencia = Math.round(
       (partidosAsistidos / partidos.length) * 100
     );
+    document.getElementById(
+      "porcentajeAsistencia"
+    ).textContent = `${porcentajeAsistencia}%`;
   }
-  document.getElementById(
-    "porcentajeAsistencia"
-  ).textContent = `${porcentajeAsistencia}%`;
 }

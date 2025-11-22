@@ -42,14 +42,6 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         exit;
     }
 
-    // Validar tamaño (máximo 5MB)
-    $tamañoMaximo = 5 * 1024 * 1024; // 5MB en bytes
-    if ($archivo['size'] > $tamañoMaximo) {
-        header('Content-Type: application/json');
-        http_response_code(400);
-        echo json_encode(['error' => 'El archivo es demasiado grande. Máximo 5MB.']);
-        exit;
-    }
 
     // Crear directorio si no existe
     $directorioDestino = __DIR__ . '/../../public/uploads/equipos/';

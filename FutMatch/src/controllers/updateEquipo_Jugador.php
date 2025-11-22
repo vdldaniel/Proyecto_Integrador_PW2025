@@ -6,6 +6,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Establecer header JSON
+header('Content-Type: application/json');
+
+// Verificar autenticación
 if (!isset($_SESSION['user_id'])) {
     http_response_code(401);
     echo json_encode(['error' => 'No autorizado']);
@@ -14,73 +18,31 @@ if (!isset($_SESSION['user_id'])) {
 
 // Obtener datos del POST
 $data = $_POST;
+$id_usuario = $_SESSION['user_id'];
 
-// Verificar si se recibieron datos
-if (empty($data)) {
-    header('Content-Type: application/json');
-    http_response_code(400);
-    echo json_encode([
-        'error' => 'No se recibieron datos',
-    ]);
-    exit;
-}
-
-// Verificar que se recibió el id_equipo
+// Validar que se recibió id_equipo
 if (empty($data['id_equipo'])) {
-    header('Content-Type: application/json');
     http_response_code(400);
-    echo json_encode([
-        'error' => 'ID de equipo no proporcionado',
-    ]);
+    echo json_encode(['error' => 'ID de equipo no proporcionado']);
     exit;
 }
 
 $id_equipo = $data['id_equipo'];
-$id_usuario = $_SESSION['user_id'];
 
-// Verificar que el usuario es el líder del equipo
-$queryVerificar = 'SELECT id_lider FROM equipos WHERE id_equipo = :id_equipo';
-$stmtVerificar = $conn->prepare($queryVerificar);
-$stmtVerificar->bindParam(':id_equipo', $id_equipo);
-$stmtVerificar->execute();
-$equipo = $stmtVerificar->fetch(PDO::FETCH_ASSOC);
+// Función auxiliar para manejar la subida de foto
+function procesarSubidaFoto()
+{
+    if (!isset($_FILES['foto']) || $_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
+        return [null, false];
+    }
 
-if (!$equipo) {
-    header('Content-Type: application/json');
-    http_response_code(404);
-    echo json_encode(['error' => 'Equipo no encontrado']);
-    exit;
-}
-
-if ($equipo['id_lider'] != $id_usuario) {
-    header('Content-Type: application/json');
-    http_response_code(403);
-    echo json_encode(['error' => 'Solo el líder puede modificar el equipo']);
-    exit;
-}
-
-// Manejar la subida de foto
-$rutaFoto = null;
-$actualizarFoto = false;
-
-if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $archivo = $_FILES['foto'];
 
     // Validar tipo de archivo
     $tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
     if (!in_array($archivo['type'], $tiposPermitidos)) {
-        header('Content-Type: application/json');
         http_response_code(400);
         echo json_encode(['error' => 'Tipo de archivo no permitido. Solo se permiten imágenes.']);
-        exit;
-    }
-
-    // Validar tamaño (máximo 5MB)
-    $tamañoMaximo = 5 * 1024 * 1024; // 5MB en bytes
-    if ($archivo['size'] > $tamañoMaximo) {
-        header('Content-Type: application/json');
-        http_response_code(400);
-        echo json_encode(['error' => 'El archivo es demasiado grande. Máximo 5MB.']);
         exit;
     }
 
@@ -97,14 +59,37 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
 
     // Mover archivo al directorio de uploads
     if (move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
-        $rutaFoto = 'uploads/equipos/' . $nombreArchivo;
-        $actualizarFoto = true;
+        return ['uploads/equipos/' . $nombreArchivo, true];
     } else {
-        header('Content-Type: application/json');
         http_response_code(500);
         echo json_encode(['error' => 'Error al guardar el archivo']);
         exit;
     }
+}
+
+// Verificar que el usuario es el líder del equipo
+try {
+    $queryVerificar = 'SELECT id_lider FROM equipos WHERE id_equipo = :id_equipo';
+    $stmtVerificar = $conn->prepare($queryVerificar);
+    $stmtVerificar->bindParam(':id_equipo', $id_equipo);
+    $stmtVerificar->execute();
+    $equipo = $stmtVerificar->fetch(PDO::FETCH_ASSOC);
+
+    if (!$equipo) {
+        http_response_code(404);
+        echo json_encode(['error' => 'Equipo no encontrado']);
+        exit;
+    }
+
+    if ($equipo['id_lider'] != $id_usuario) {
+        http_response_code(403);
+        echo json_encode(['error' => 'Solo el líder puede modificar el equipo']);
+        exit;
+    }
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Error al verificar el equipo', 'details' => $e->getMessage()]);
+    exit;
 }
 
 // Decodificar jugadores si viene como JSON string
@@ -117,10 +102,9 @@ if (!empty($data['jugadores'])) {
 }
 
 try {
-    // Verificar si se trata de eliminar un jugador específico
+    // Caso especial: Eliminar un jugador específico
     if (!empty($data['eliminar_jugador']) && $data['eliminar_jugador'] == '1') {
         if (empty($data['id_jugador'])) {
-            header('Content-Type: application/json');
             http_response_code(400);
             echo json_encode(['error' => 'ID de jugador no proporcionado']);
             exit;
@@ -130,7 +114,6 @@ try {
 
         // No permitir eliminar al líder
         if ($id_jugador_eliminar == $equipo['id_lider']) {
-            header('Content-Type: application/json');
             http_response_code(400);
             echo json_encode(['error' => 'No se puede eliminar al líder del equipo']);
             exit;
@@ -143,7 +126,6 @@ try {
         $stmtEliminarJugador->bindParam(':id_jugador', $id_jugador_eliminar);
         $stmtEliminarJugador->execute();
 
-        header('Content-Type: application/json');
         echo json_encode([
             'success' => true,
             'message' => 'Jugador eliminado exitosamente'
@@ -151,64 +133,18 @@ try {
         exit;
     }
 
-    // Manejar la subida de foto
-    $rutaFoto = null;
-    $actualizarFoto = false;
-
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        $archivo = $_FILES['foto'];
-
-        // Validar tipo de archivo
-        $tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-        if (!in_array($archivo['type'], $tiposPermitidos)) {
-            header('Content-Type: application/json');
-            http_response_code(400);
-            echo json_encode(['error' => 'Tipo de archivo no permitido. Solo se permiten imágenes.']);
-            exit;
-        }
-
-        // Validar tamaño (máximo 5MB)
-        $tamañoMaximo = 5 * 1024 * 1024; // 5MB en bytes
-        if ($archivo['size'] > $tamañoMaximo) {
-            header('Content-Type: application/json');
-            http_response_code(400);
-            echo json_encode(['error' => 'El archivo es demasiado grande. Máximo 5MB.']);
-            exit;
-        }
-
-        // Crear directorio si no existe
-        $directorioDestino = __DIR__ . '/../../public/uploads/equipos/';
-        if (!is_dir($directorioDestino)) {
-            mkdir($directorioDestino, 0755, true);
-        }
-
-        // Generar nombre único para el archivo
-        $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
-        $nombreArchivo = uniqid('equipo_' . time() . '_') . '.' . $extension;
-        $rutaCompleta = $directorioDestino . $nombreArchivo;
-
-        // Mover archivo al directorio de uploads
-        if (move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
-            $rutaFoto = 'uploads/equipos/' . $nombreArchivo;
-            $actualizarFoto = true;
-        } else {
-            header('Content-Type: application/json');
-            http_response_code(500);
-            echo json_encode(['error' => 'Error al guardar el archivo']);
-            exit;
-        }
-    }
-
-    // Verificar si se debe eliminar la foto
-    $eliminarFoto = !empty($data['eliminar_foto']) && $data['eliminar_foto'] == '1';
-
     // Validar que existan los campos requeridos para actualización de equipo
     if (empty($data['nombre'])) {
-        header('Content-Type: application/json');
         http_response_code(400);
         echo json_encode(['error' => 'Nombre del equipo es requerido']);
         exit;
     }
+
+    // Procesar subida de foto (función refactorizada)
+    list($rutaFoto, $actualizarFoto) = procesarSubidaFoto();
+
+    // Verificar si se debe eliminar la foto
+    $eliminarFoto = !empty($data['eliminar_foto']) && $data['eliminar_foto'] == '1';
 
     // Actualizar información del equipo
     if ($actualizarFoto) {
@@ -297,7 +233,6 @@ try {
         }
     }
 
-    header('Content-Type: application/json');
     echo json_encode([
         'success' => true,
         'message' => 'Equipo actualizado exitosamente',
@@ -312,7 +247,6 @@ try {
         }
     }
 
-    header('Content-Type: application/json');
     http_response_code(500);
     echo json_encode([
         'error' => 'Error al actualizar el equipo',

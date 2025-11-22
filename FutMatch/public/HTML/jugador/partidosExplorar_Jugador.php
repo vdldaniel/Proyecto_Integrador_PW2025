@@ -1,11 +1,6 @@
 <?php
-// Iniciar sesión si no está iniciada
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
 // Cargar configuración
-require_once __DIR__ . '/../../../src/app/config.php';
+require_once '../../../src/app/config.php';
 
 // Resalta la página actual en el navbar
 $current_page = 'partidosExplorar';

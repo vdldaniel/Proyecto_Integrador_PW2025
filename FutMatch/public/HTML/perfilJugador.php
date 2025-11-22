@@ -55,7 +55,8 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
         <div class="card shadow-lg rounded-3 overflow-hidden profile-banner-container">
             <!-- Imagen de banner -->
             <div class="position-relative profile-banner-wrapper">
-                <div class="profile-banner-image" style="background-image: url('<?= IMG_BANNER_PERFIL_JUGADOR_DEFAULT ?>');">
+                <div class="profile-banner-image"
+                    id="banner">
                 </div>
 
                 <!-- Botón editar portada (solo si es perfil propio) -->
@@ -72,14 +73,13 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                     <!-- Avatar del jugador (esquina inferior izquierda) -->
                     <div class="profile-avatar-container">
                         <div class="position-relative">
-                            <img src="<?= IMG_FOTO_PERFIL_JUGADOR ?>"
-                                class="profile-avatar"
+                            <img class="profile-avatar"
                                 alt="Avatar"
-                                id="avatarJugador">
+                                id="fotoPerfil">
                             <?php if ($perfil_jugador_es_propio): ?>
                                 <button class="btn btn-dark profile-avatar-edit-btn"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#modalCambiarAvatar">
+                                    data-bs-target="#modalCambiarFotoPerfil">
                                     <i class="bi bi-camera-fill"></i>
                                 </button>
                             <?php endif; ?>
@@ -239,7 +239,7 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
 
 <!-- Modal para cambiar avatar (solo perfil propio) -->
 <?php if ($perfil_jugador_es_propio): ?>
-    <div class="modal fade" id="modalCambiarAvatar" tabindex="-1">
+    <div class="modal fade" id="modalCambiarFotoPerfil" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -247,27 +247,23 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Zona de arrastrar y soltar -->
-                    <div class="avatar-upload-zone" id="avatarUploadZone">
-                        <div class="text-center p-4">
-                            <i class="bi bi-cloud-upload fs-1 text-muted mb-3"></i>
-                            <h5>Arrastra tu imagen aquí</h5>
-                            <p class="text-muted">o haz clic para seleccionar un archivo</p>
-                            <input type="file" class="d-none" id="inputAvatar" accept="image/*">
-                        </div>
-                    </div>
-
-                    <!-- Preview del avatar -->
-                    <div class="mt-3" id="avatarPreviewContainer" style="display: none;">
-                        <label class="form-label">Vista previa:</label>
-                        <div class="avatar-preview-wrapper">
-                            <div class="avatar-preview" id="avatarPreview"></div>
+                    <!-- Zona de arrastrar y soltar-->
+                    <div class="input mb-3">
+                        <label for="inputFotoPrincipal" class="form-label">Foto de Perfil</label>
+                        <div class="foto-principal" id="dropZoneFotoPerfil">
+                            <div class="upload-icon">
+                                <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                                <span class="upload-text">Click o arrastra una imagen</span>
+                            </div>
+                            <input type="file" name="fotoPerfil" class="d-none" id="inputFotoPrincipal" accept="image/*">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnEliminarFotoPerfil">
+                        <i class="bi bi-trash"></i>Eliminar foto actual</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarAvatar" disabled>Guardar Foto</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarFotoPerfil" disabled>Guardar Foto</button>
                 </div>
             </div>
         </div>
@@ -282,27 +278,23 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Zona de arrastrar y soltar -->
-                    <div class="banner-upload-zone" id="bannerUploadZone">
-                        <div class="text-center p-4">
-                            <i class="bi bi-cloud-upload fs-1 text-muted mb-3"></i>
-                            <h5>Arrastra tu imagen aquí</h5>
-                            <p class="text-muted">o haz clic para seleccionar un archivo</p>
-                            <input type="file" class="d-none" id="inputBanner" accept="image/*">
-                        </div>
-                    </div>
-
-                    <!-- Preview del banner -->
-                    <div class="mt-3" id="bannerPreviewContainer" style="display: none;">
-                        <label class="form-label">Vista previa:</label>
-                        <div class="banner-preview-wrapper">
-                            <div class="banner-preview" id="bannerPreview"></div>
+                    <!-- Zona de arrastrar y soltar-->
+                    <div class="input mb-3">
+                        <label for="inputBanner" class="form-label">Banner</label>
+                        <div class="banner" id="dropZoneBanner">
+                            <div class="upload-icon">
+                                <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                                <span class="upload-text">Click o arrastra una imagen</span>
+                            </div>
+                            <input type="file" name="banner" class="d-none" id="inputBanner" accept="image/*">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnEliminarBanner">
+                        <i class="bi bi-trash"></i>Eliminar foto actual</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarBanner" disabled>Guardar Portada</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarBanner" disabled>Guardar Foto</button>
                 </div>
             </div>
         </div>

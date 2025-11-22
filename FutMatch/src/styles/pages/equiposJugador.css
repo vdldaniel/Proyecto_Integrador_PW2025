@@ -4,11 +4,10 @@
 
 .hover-shadow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 .card-title a:hover {
-  color: #0d6efd !important;
+  color: var(--bs-primary);
 }
 
 .input {
@@ -16,19 +15,12 @@
   flex-direction: column;
 }
 
-.input .foto-perfil {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
+.input .banner,
 .input .foto-principal {
   border: 2px dashed #828588;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 150px;
   height: 150px;
   display: flex;
   flex-direction: column;
@@ -40,16 +32,27 @@
   margin: 0 auto;
 }
 
+.input .banner {
+  width: auto; /* Para que sea horizontal*/
+}
+
+.input .foto-principal {
+  width: 150px; /* Para que sea cuadrada*/
+}
+
+.input .banner:hover,
 .input .foto-principal:hover {
-  border-color: #0d6efd;
+  border-color: var(--bs-primary);
   background-color: rgba(13, 110, 253, 0.05);
 }
 
+.input .banner.dragover,
 .input .foto-principal.dragover {
-  border-color: #2b60af;
+  border-color: var(--bs-primary);
   background-color: rgba(13, 110, 253, 0.1);
 }
 
+.input .banner img,
 .input .foto-principal img {
   width: 100%;
   height: 100%;
@@ -59,6 +62,7 @@
   left: 0;
 }
 
+.input .banner .upload-icon,
 .input .foto-principal .upload-icon {
   display: flex;
   flex-direction: column;
@@ -67,9 +71,10 @@
   z-index: 1;
 }
 
+.input .banner .upload-text,
 .input .foto-principal .upload-text {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: var(--bs-secondary);
   text-align: center;
 }
 

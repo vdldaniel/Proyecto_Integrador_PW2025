@@ -1,7 +1,7 @@
 <?php
 // Cargar configuración
 require_once '../../../src/app/config.php';
-require_once '../../../src/app/auth-required.php';
+require_once AUTH_REQUIRED_COMPONENT;
 
 // Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
