@@ -178,7 +178,7 @@ define("JS_MIS_EQUIPOS_JUGADOR", JS_SCRIPTS_PATH . "misEquipos_Jugador.js");
 
 // Admin Cancha
 define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
-
+define("JS_CANCHAS_LISTADO", JS_SCRIPTS_PATH . "admin-cancha/canchasListado.js");
 // ===================================
 // IMÁGENES
 // ===================================

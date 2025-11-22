@@ -61,7 +61,7 @@ require_once HEAD_COMPONENT;
 
 		<!-- Lista de canchas -->
 		<div id="canchasList" class="row g-3">
-			<!-- Cancha 1 -->
+			<!-- Cancha 1
 			<div class="col-12">
 				<div class="card shadow-sm border-0 mb-2">
 					<div class="card-body">
@@ -104,97 +104,9 @@ require_once HEAD_COMPONENT;
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<!-- Cancha 2 -->
-			<div class="col-12">
-				<div class="card shadow-sm border-0 mb-2">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-md-2 text-center">
-								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-									style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-									<i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
-										MegaFutbol Cancha A2-F9
-									</a>
-								</h5>
-							</div>
-							<div class="col-md-2">
-								<span class="text-muted">
-									<i class="bi bi-people"></i> Fútbol 9
-								</span>
-							</div>
-							<div class="col-md-2">
-								<span class="badge text-bg-dark">En revisión</span>
-							</div>
-							<div class="col-md-3 text-end">
-								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
-									<i class="bi bi-eye"></i>
-								</a>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="2" title="Editar">
-									<i class="bi bi-pencil"></i>
-								</button>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="2" title="Cierre temporal">
-									<i class="bi bi-pause-circle"></i>
-								</button>
-								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="2" title="Eliminar">
-									<i class="bi bi-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Cancha 3 -->
-			<div class="col-12">
-				<div class="card shadow-sm border-0 mb-2">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-md-2 text-center">
-								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-									style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-									<i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
-										Cancha Delantera
-									</a>
-								</h5>
-							</div>
-							<div class="col-md-2">
-								<span class="text-muted">
-									<i class="bi bi-people"></i> Fútbol 5
-								</span>
-							</div>
-							<div class="col-md-2">
-								<span class="badge text-bg-dark">Pendiente de verificación</span>
-							</div>
-							<div class="col-md-3 text-end">
-								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
-									<i class="bi bi-eye"></i>
-								</a>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="3" title="Editar">
-									<i class="bi bi-pencil"></i>
-								</button>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="3" title="Cierre temporal">
-									<i class="bi bi-pause-circle"></i>
-								</button>
-								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="3" title="Eliminar">
-									<i class="bi bi-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			</div> -->
+			<!-- //listadode canchas -->
+			<div class="row" id="canchasList"></div>
 		</div>
 	</main>
 
@@ -217,13 +129,7 @@ require_once HEAD_COMPONENT;
 							<!-- Tipo de superficie -->
 							<div class="mb-3 col-12 col-lg-6">
 								<label for="tipoSuperficie" class="form-label">Tipo de superficie</label>
-								<select class="form-select" id="tipoSuperficie" required>
-									<option value="">Seleccionar...</option>
-									<option value="1">Sintético</option>
-									<option value="2">Cemento</option>
-									<option value="3">Parquet</option>
-									<option value="4">Césped natural</option>
-								</select>
+								<select class="form-select" id="tipoSuperficie" required></select>
 							</div>
 							<!-- Ubicación -->
 							<div class="mb-3 col-12">
@@ -241,13 +147,7 @@ require_once HEAD_COMPONENT;
 							<!-- Capacidad -->
 							<div class="mb-3 col-12 col-lg-6">
 								<label for="capacidadCancha" class="form-label">Tipo de cancha</label>
-								<select class="form-select" id="capacidadCancha" required>
-									<option value="">Seleccionar...</option>
-									<option value="1">Fútbol 5</option>
-									<option value="2">Fútbol 7</option>
-									<option value="3">Fútbol 9</option>
-									<option value="4">Fútbol 11</option>
-								</select>
+								<select class="form-select" id="capacidadCancha" required></select>
 							</div>
 						</div>
 					</form>
@@ -303,12 +203,7 @@ require_once HEAD_COMPONENT;
 							<!-- Capacidad -->
 							<div class="mb-3 col-12 col-lg-6">
 								<label for="editCapacidadCancha" class="form-label">Tipo de cancha</label>
-								<select class="form-select" id="editCapacidadCancha" required>
-									<option value="1">Fútbol 5</option>
-									<option value="2">Fútbol 7</option>
-									<option value="3">Fútbol 9</option>
-									<option value="4">Fútbol 11</option>
-								</select>
+								<select class="form-select" id="editCapacidadCancha" required></select>
 							</div>
 						</div>
 					</form>
@@ -332,7 +227,7 @@ require_once HEAD_COMPONENT;
 				<div class="modal-body">
 					<form id="formCerrarCancha">
 						<input type="hidden" id="cerrarCanchaId" />
-						<div class="mb-3">
+						<!-- <div class="mb-3">
 							<label for="fechaCierre" class="form-label">Fecha de cierre (hasta)</label>
 							<input type="date" class="form-control" id="fechaCierre" />
 						</div>
@@ -343,12 +238,12 @@ require_once HEAD_COMPONENT;
 									Cierre indefinido
 								</label>
 							</div>
-						</div>
-						<div class="mb-3">
+						</div> -->
+						<!-- <div class="mb-3">
 							<label for="mensajeCierre" class="form-label">Mensaje para usuarios (opcional)</label>
 							<textarea class="form-control" id="mensajeCierre" rows="3" maxlength="200" placeholder="Ej: En mantenimiento, regresamos pronto"></textarea>
 							<small class="text-muted">Este mensaje será visible para los usuarios al visualizar la cancha.</small>
-						</div>
+						</div> -->
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -416,20 +311,7 @@ require_once HEAD_COMPONENT;
 									<th>Acciones</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>4</td>
-									<td>Cancha Eliminada Ejemplo</td>
-									<td>Sintético</td>
-									<td>Fútbol 7</td>
-									<td>15/03/2024</td>
-									<td>
-										<button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modalRestaurarCancha" data-cancha-id="4">
-											<i class="bi bi-arrow-clockwise"></i><span class="d-none d-lg-inline ms-1">Restaurar</span>
-										</button>
-									</td>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 				</div>
@@ -470,6 +352,9 @@ require_once HEAD_COMPONENT;
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="<?= CSS_ICONS ?>">
 	<!-- Scripts -->
+	<script>
+		const BASE_URL = "<?= BASE_URL ?>";
+	</script>
 	<script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="<?= JS_CANCHAS_LISTADO ?>"></script>
 </body>
