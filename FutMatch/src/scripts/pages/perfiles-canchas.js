@@ -23,6 +23,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
      * Configurar event listeners específicos del admin
      */
     configurarEventListenersAdmin() {
+
         // Botón editar perfil
         const btnEditarPerfil = document.getElementById('btnEditarPerfil');
         if (btnEditarPerfil) {
@@ -30,12 +31,18 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
         }
 
         // Botones gestionar torneos
-        const botonesGestionar = document.querySelectorAll('button:contains("Gestionar")');
+        const botonesGestionar = Array.from(document.querySelectorAll("button"))
+            .filter(btn => btn.textContent.trim().includes("Gestionar"));
+
         botonesGestionar.forEach(boton => {
             boton.addEventListener('click', (e) => {
-                // Buscar el torneo más cercano para obtener ID
+
+                // Contenedor más cercano del torneo
                 const torneoElement = e.target.closest('.border-bottom, .p-4');
-                const torneoNombre = torneoElement?.querySelector('.fw-bold')?.textContent;
+
+                // Nombre del torneo dentro del contenedor
+                const torneoNombre = torneoElement?.querySelector('.fw-bold')?.textContent?.trim();
+
                 this.gestionarTorneo(torneoNombre);
             });
         });
@@ -52,6 +59,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
             btnGuardarConfig.addEventListener('click', () => this.guardarConfiguracion());
         }
     }
+
 
     /**
      * Inicializar modal de edición de cancha
@@ -77,7 +85,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
         // Validación de horarios
         const horaApertura = document.getElementById('editHoraApertura');
         const horaCierre = document.getElementById('editHoraCierre');
-        
+
         if (horaApertura && horaCierre) {
             horaApertura.addEventListener('change', () => this.validarHorarios());
             horaCierre.addEventListener('change', () => this.validarHorarios());
@@ -86,7 +94,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
         // Validación de capacidad según tipo de cancha
         const tipoCancha = document.getElementById('editTipoCancha');
         const capacidad = document.getElementById('editCapacidad');
-        
+
         if (tipoCancha && capacidad) {
             tipoCancha.addEventListener('change', () => this.ajustarCapacidadSegunTipo());
         }
@@ -188,12 +196,12 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
 
         // TODO: Hacer petición AJAX para guardar
         this.mostrarNotificacion('Guardando cambios...', 'info');
-        
+
         // Actualizar interfaz
         setTimeout(() => {
             this.actualizarInterfazCancha(datosCancha);
             this.mostrarNotificacion('Cambios guardados correctamente', 'success');
-            
+
             // Cerrar modal
             const modalEditar = bootstrap.Modal.getInstance(document.getElementById('modalEditarCancha'));
             modalEditar.hide();
@@ -216,7 +224,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
     validarFormularioEdicion() {
         const campos = [
             'editNombreCancha',
-            'editTipoCancha', 
+            'editTipoCancha',
             'editSuperficie',
             'editCapacidad',
             'editDescripcion',
@@ -291,7 +299,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
             if (limite) {
                 capacidadInput.setAttribute('min', limite.min);
                 capacidadInput.setAttribute('max', limite.max);
-                
+
                 // Ajustar valor si está fuera del rango
                 const valorActual = parseInt(capacidadInput.value);
                 if (valorActual < limite.min) {
@@ -305,6 +313,6 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
 }
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     new PerfilCanchaAdmin();
 });

@@ -5,19 +5,7 @@ header("Content-Type: application/json");
 
 try {
 
-    // ====== SQL CORRECTO SEGÚN TUS 3 TABLAS ======
-    // canchas
-    // canchas_tipos_partido
-    // tipos_partido
-    //
-    // Trae:
-    // - Datos de cancha
-    // - Dirección (si existe)
-    // - Tipo de superficie
-    // - Tipo de partido activo
-    //
-    // IMPORTANTE: solo trae 1 tipo de partido (el activo)
-    // Si una cancha soporta varios, luego se adapta.
+
 
     $sql = "
         SELECT 

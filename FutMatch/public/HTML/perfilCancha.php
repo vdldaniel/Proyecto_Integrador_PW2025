@@ -22,7 +22,7 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
 
 // Información básica de la cancha
 $perfil_cancha_nombre = $perfil_cancha_nombre ?? 'Nombre de la Cancha';
-$perfil_cancha_descripcion_banner = $perfil_cancha_descripcion_banner ?? 'Descripción de la cancha aquí.';
+// $perfil_cancha_descripcion_banner = $perfil_cancha_descripcion_banner ?? 'Descripción de la cancha aquí.';
 $perfil_cancha_direccion = $perfil_cancha_direccion ?? 'Dirección de la cancha';
 $perfil_cancha_tipo = $perfil_cancha_tipo ?? 'Fútbol 5';
 $perfil_cancha_superficie = $perfil_cancha_superficie ?? 'Césped sintético';
@@ -70,29 +70,36 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
     <div class="row mb-4">
         <div class="col-md-4 ms-auto">
             <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-                    <i class="bi bi-building"></i> MegaFutbol Cancha A1-F5
+
+                <!-- Botón que muestra la cancha actual -->
+                <button id="btnSelectorCanchas" class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-building"></i> Seleccionar cancha...
                 </button>
-                <ul class="dropdown-menu w-100">
-                    <li><a class="dropdown-item active" href="#"><i class="bi bi-check-circle"></i> MegaFutbol Cancha A1-F5</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-building"></i> MegaFutbol Cancha A2-F9</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-building"></i> Cancha Delantera</a></li>
-                </ul>
+
+                <!-- Lista donde se cargan dinámicamente -->
+                <ul id="listaCanchas" class="dropdown-menu w-100"></ul>
+
             </div>
         </div>
     </div>
 <?php endif; ?>
 
+
 <!-- Banner de la cancha -->
 <div class="row mb-4">
     <div class="col-12">
         <div class="card shadow-lg rounded-3 overflow-hidden">
+
             <!-- Imagen de banner -->
             <div class="position-relative profile-banner-wrapper">
-                <div class="profile-banner-image" style="background-image: url('<?= IMG_BANNER_PERFIL_CANCHA_DEFAULT ?>');">
+
+                <!-- 🔹 ID agregado -->
+                <div id="bannerCancha"
+                    class="profile-banner-image"
+                    style="background-image: url('<?= IMG_BANNER_PERFIL_CANCHA_DEFAULT ?>');">
                 </div>
 
-                <!-- Botón editar portada (solo para admin de cancha) -->
+                <!-- Botón editar portada (solo admin) -->
                 <?php if ($perfil_cancha_admin_mode && !isset($perfil_cancha_es_admin_sistema)): ?>
                     <button class="btn btn-dark btn-sm profile-banner-edit-btn"
                         data-bs-toggle="modal"
@@ -101,14 +108,26 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                     </button>
                 <?php endif; ?>
 
-                <!-- Overlay con información de la cancha -->
+                <!-- Overlay -->
                 <div class="profile-banner-overlay">
                     <div class="profile-info-container bg-dark bg-opacity-75 p-4 rounded">
+
                         <div class="d-flex justify-content-between align-items-end">
+
+                            <!-- Info izquierda -->
                             <div>
-                                <h1 class="mb-2 text-white" id="nombreCancha"><?= $perfil_cancha_nombre ?></h1>
-                                <p class="mb-0 fs-5 text-light" id="descripcionCancha"><?= $perfil_cancha_descripcion_banner ?></p>
+                                <!-- 🔹 IDs para JS -->
+                                <h1 id="nombreCancha"><?= $perfil_cancha_nombre ?></h1>
+                                <p id="descripcionCancha"><?= $perfil_cancha_descripcion_banner ?></p>
+
+                                <!-- 🔹 Estado dinámico -->
+                                <span id="estadoCancha" class="badge bg-info text-dark mt-2">
+                                    <!-- Valor por defecto -->
+                                    Pendiente
+                                </span>
                             </div>
+
+                            <!-- Info derecha -->
                             <div class="text-end">
                                 <div class="text-warning mb-2">
                                     <i class="bi bi-star-fill"></i>
@@ -118,17 +137,27 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                                     <i class="bi bi-star-half"></i>
                                     <span class="ms-1"><?= $perfil_cancha_calificacion ?></span>
                                 </div>
+
+                                <!-- 🔹 Jugadores dinámicos -->
                                 <div class="text-light">
-                                    <i class="bi bi-people"></i> <?= $perfil_cancha_admin_mode ? 'Admin View' : $perfil_cancha_total_jugadores . ' jugadores' ?>
+                                    <i class="bi bi-people"></i>
+                                    <span id="perfilJugadores">
+                                        <?= $perfil_cancha_admin_mode ? 'Admin View' : $perfil_cancha_total_jugadores . ' jugadores' ?>
+                                    </span>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>
+
 
 <!-- Contenido principal -->
 <div class="row">

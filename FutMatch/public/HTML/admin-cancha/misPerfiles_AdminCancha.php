@@ -180,11 +180,16 @@ require_once HEAD_COMPONENT;
   <link rel="stylesheet" href="<?= CSS_ICONS ?>">
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
+  
   <!-- Script base del perfil de cancha (debe ir primero) -->
   <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
   <!-- Script específico del admin (extiende el base) -->
+   <script>
+		const BASE_URL = "<?= BASE_URL ?>";
+	</script>
   <script src="<?= JS_PERFILES_CANCHAS ?>"></script>
   <script src="<?= JS_PERFILES ?>"></script>
+  <script src="<?= JS_PERFILESCANCHA ?>"></script>
 
   <script>
     const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
