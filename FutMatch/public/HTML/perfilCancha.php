@@ -402,51 +402,31 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                 <h5 class="mb-0"><i class="bi bi-clock"></i> Horarios</h5>
             </div>
             <div class="card-body">
-                <small class="text-muted"><?= $perfil_cancha_dias_atencion ?></small>
-                <p class="fw-bold mb-2"><?= $perfil_cancha_horario ?></p>
+                <small class="text-muted" id="diasAtencion"></small>
+
+                <p class="fw-bold mb-2" id="horarioPrincipal"></p>
+
                 <hr class="my-2">
+
                 <div class="d-flex justify-content-between align-items-center">
-                    <span class="text-success fw-bold">
-                        <i class="bi bi-circle-fill"></i> <?= $perfil_cancha_estado_actual ?>
+                    <span class="fw-bold" id="estadoActual">
+                        <i class="bi bi-circle-fill"></i> Cargando...
                     </span>
-                    <small class="text-muted">Cierra a las <?= $perfil_cancha_hora_cierre ?></small>
+                    <small class="text-muted" id="horaCierre">Cierra a las N/A</small>
                 </div>
             </div>
         </div>
 
         <!-- Servicios Incluidos -->
         <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header <?= $perfil_cancha_admin_mode ? 'bg-info text-white' : 'bg-warning' ?>">
-                <h5 class="mb-0"><i class="bi bi-check-circle"></i> <?= $perfil_cancha_admin_mode ? 'Servicios y Facilidades' : 'Servicios Incluidos' ?></h5>
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-check-circle"></i> Servicios y Comodidades</h5>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-6 mb-2">
-                        <small><i class="bi bi-droplet text-primary"></i> Vestuarios</small>
+                <div class="row" id="serviciosContainer">
+                    <div class="col-12">
+                        <p class="text-muted">Cargando servicios...</p>
                     </div>
-                    <div class="col-6 mb-2">
-                        <small><i class="bi bi-shield-check text-success"></i> Duchas</small>
-                    </div>
-                    <div class="col-6 mb-2">
-                        <small><i class="bi bi-car-front text-info"></i> Estacionamiento</small>
-                    </div>
-                    <div class="col-6 mb-2">
-                        <small><i class="bi bi-lightbulb text-warning"></i> Iluminación LED</small>
-                    </div>
-                    <div class="col-6 mb-2">
-                        <small><i class="bi bi-cup-hot text-danger"></i> Cantina</small>
-                    </div>
-                    <div class="col-6 mb-2">
-                        <small><i class="bi bi-wifi text-primary"></i> WiFi gratis</small>
-                    </div>
-                    <?php if ($perfil_cancha_admin_mode): ?>
-                        <div class="col-6 mb-2">
-                            <small><i class="bi bi-shield-shaded text-secondary"></i> Seguridad 24hs</small>
-                        </div>
-                        <div class="col-6 mb-2">
-                            <small><i class="bi bi-tools text-warning"></i> Mantenimiento</small>
-                        </div>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
