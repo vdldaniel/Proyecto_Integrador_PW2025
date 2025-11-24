@@ -14,7 +14,7 @@ try {
 
     $id = intval($_GET['id']);
 
-    // Obtener datos generales de la cancha
+    // Obtener datos generales de la cancha, su dirección y superficie
     $sql1 = "
         SELECT 
             c.id_cancha,
@@ -23,8 +23,13 @@ try {
             c.banner,
             c.id_estado,
             c.id_superficie,
-            c.telefono
+            d.direccion_completa,
+            d.latitud,
+            d.longitud,
+            s.nombre AS superficie_nombre
         FROM canchas c
+        INNER JOIN direcciones d ON d.id_direccion = c.id_direccion
+        INNER JOIN superficies_canchas s ON s.id_superficie = c.id_superficie
         WHERE c.id_cancha = :id
         LIMIT 1
     ";
@@ -41,7 +46,7 @@ try {
         exit;
     }
 
-    // Obtener tipos de partido admitidos
+    // Obtener tipos de partido admitidos (para calcular capacidad y listado de tipos)
     $sql2 = "
         SELECT 
             tp.id_tipo_partido,

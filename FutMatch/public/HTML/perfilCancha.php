@@ -71,35 +71,31 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
         <div class="col-md-4 ms-auto">
             <div class="dropdown">
 
-                <!-- Botón que muestra la cancha actual -->
-                <button id="btnSelectorCanchas" class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                <button id="btnSelectorCanchas" class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-building"></i> Seleccionar cancha...
                 </button>
 
-                <!-- Lista donde se cargan dinámicamente -->
-                <ul id="listaCanchas" class="dropdown-menu w-100"></ul>
+                <ul id="listaCanchas" class="dropdown-menu w-100">
+                </ul>
 
             </div>
         </div>
     </div>
 <?php endif; ?>
 
-
 <!-- Banner de la cancha -->
 <div class="row mb-4">
     <div class="col-12">
         <div class="card shadow-lg rounded-3 overflow-hidden">
 
-            <!-- Imagen de banner -->
             <div class="position-relative profile-banner-wrapper">
 
-                <!-- 🔹 ID agregado -->
+
                 <div id="bannerCancha"
                     class="profile-banner-image"
                     style="background-image: url('<?= IMG_BANNER_PERFIL_CANCHA_DEFAULT ?>');">
                 </div>
 
-                <!-- Botón editar portada (solo admin) -->
                 <?php if ($perfil_cancha_admin_mode && !isset($perfil_cancha_es_admin_sistema)): ?>
                     <button class="btn btn-dark btn-sm profile-banner-edit-btn"
                         data-bs-toggle="modal"
@@ -108,26 +104,21 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                     </button>
                 <?php endif; ?>
 
-                <!-- Overlay -->
                 <div class="profile-banner-overlay">
                     <div class="profile-info-container bg-dark bg-opacity-75 p-4 rounded">
 
                         <div class="d-flex justify-content-between align-items-end">
 
-                            <!-- Info izquierda -->
                             <div>
-                                <!-- 🔹 IDs para JS -->
+
                                 <h1 id="nombreCancha"><?= $perfil_cancha_nombre ?></h1>
                                 <p id="descripcionCancha"><?= $perfil_cancha_descripcion_banner ?></p>
 
-                                <!-- 🔹 Estado dinámico -->
-                                <span id="estadoCancha" class="badge bg-info text-dark mt-2">
-                                    <!-- Valor por defecto -->
+                                <span id="estadoCancha" class="badge bg-info text-light mt-2">
                                     Pendiente
                                 </span>
                             </div>
 
-                            <!-- Info derecha -->
                             <div class="text-end">
                                 <div class="text-warning mb-2">
                                     <i class="bi bi-star-fill"></i>
@@ -138,7 +129,6 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                                     <span class="ms-1"><?= $perfil_cancha_calificacion ?></span>
                                 </div>
 
-                                <!-- 🔹 Jugadores dinámicos -->
                                 <div class="text-light">
                                     <i class="bi bi-people"></i>
                                     <span id="perfilJugadores">
@@ -362,7 +352,6 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
             <?php endif; ?>
         </div>
 
-        <!-- Información básica -->
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-secondary text-white">
                 <h5 class="mb-0"><i class="bi bi-info-circle"></i> Información</h5>
@@ -372,8 +361,7 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-geo-alt"></i> Dirección
                     </label>
-                    <p class="mb-0" id="direccionCancha"><?= $perfil_cancha_direccion ?></p>
-                    <?php if (!$perfil_cancha_admin_mode): ?>
+                    <p class="mb-0" id="direccionCancha"></p> <?php if (!$perfil_cancha_admin_mode): ?>
                         <button class="btn btn-sm btn-dark mt-1" id="btnVerEnMapa">
                             <i class="bi bi-map"></i> Ver en mapa
                         </button>
@@ -383,26 +371,26 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-tag"></i> Tipo de Cancha
                     </label>
-                    <p class="mb-0" id="tipoCancha"><?= $perfil_cancha_tipo ?></p>
+                    <p class="mb-0" id="tipoCancha"></p>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-layers"></i> Superficie
                     </label>
-                    <p class="mb-0" id="superficieCancha"><?= $perfil_cancha_superficie ?></p>
+                    <p class="mb-0" id="superficieCancha"></p>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-people"></i> Capacidad
                     </label>
-                    <p class="mb-0" id="capacidadCancha"><?= $perfil_cancha_capacidad ?></p>
+                    <p class="mb-0" id="capacidadCancha"></p>
                 </div>
                 <?php if ($perfil_cancha_admin_mode): ?>
                     <div class="mb-0">
                         <label class="fw-bold text-muted d-block mb-1">
                             <i class="bi bi-clipboard-check"></i> Estado
                         </label>
-                        <span class="badge text-bg-dark" id="estadoCancha">Habilitada</span>
+                        <span class="badge text-bg-dark" id="estadoCancha"></span>
                     </div>
                 <?php endif; ?>
             </div>

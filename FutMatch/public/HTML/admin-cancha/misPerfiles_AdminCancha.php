@@ -33,20 +33,20 @@ require_once HEAD_COMPONENT;
     ];
 
     // Información específica de la cancha (normalmente vendría de BD del admin logueado)
-    $perfil_cancha_nombre = 'MegaFutbol Cancha A1-F5';
-    $perfil_cancha_descripcion_banner = 'Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.';
-    $perfil_cancha_direccion = 'Av. Corrientes 1234, CABA, Buenos Aires, Argentina';
-    $perfil_cancha_tipo = 'Fútbol 5';
-    $perfil_cancha_superficie = 'Césped sintético';
-    $perfil_cancha_capacidad = '10 jugadores';
-    $perfil_cancha_calificacion = '4.8';
-    $perfil_cancha_total_resenas = '127';
-    $perfil_cancha_total_jugadores = '342';
-    $perfil_cancha_total_partidos = '156';
-    $perfil_cancha_dias_atencion = 'Lunes a Domingo';
-    $perfil_cancha_horario = '07:00 - 23:00';
-    $perfil_cancha_estado_actual = 'Abierto ahora';
-    $perfil_cancha_hora_cierre = '23:00';
+    // $perfil_cancha_nombre = 'MegaFutbol Cancha A1-F5';
+    // $perfil_cancha_descripcion_banner = 'Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.';
+    // $perfil_cancha_direccion = 'Av. Corrientes 1234, CABA, Buenos Aires, Argentina';
+    // $perfil_cancha_tipo = 'Fútbol 5';
+    // $perfil_cancha_superficie = 'Césped sintético';
+    // $perfil_cancha_capacidad = '10 jugadores';
+    // $perfil_cancha_calificacion = '4.8';
+    // $perfil_cancha_total_resenas = '127';
+    // $perfil_cancha_total_jugadores = '342';
+    // $perfil_cancha_total_partidos = '156';
+    // $perfil_cancha_dias_atencion = 'Lunes a Domingo';
+    // $perfil_cancha_horario = '07:00 - 23:00';
+    // $perfil_cancha_estado_actual = 'Abierto ahora';
+    // $perfil_cancha_hora_cierre = '23:00';
     ?>
 
     <!-- Header específico para admin de cancha -->
@@ -180,17 +180,17 @@ require_once HEAD_COMPONENT;
   <link rel="stylesheet" href="<?= CSS_ICONS ?>">
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  
+
   <!-- Script base del perfil de cancha (debe ir primero) -->
   <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
   <!-- Script específico del admin (extiende el base) -->
-   <script>
-		const BASE_URL = "<?= BASE_URL ?>";
-	</script>
-  <script src="<?= JS_PERFILES_CANCHAS ?>"></script>
-  <script src="<?= JS_PERFILES ?>"></script>
-  <script src="<?= JS_PERFILESCANCHA ?>"></script>
+  <script>
+    const BASE_URL = "<?= BASE_URL ?>";
+  </script>
 
+  
+  <script src="<?= JS_PERFILESCANCHA ?>"></script>
+  <script src="<?= JS_PERFILES_CANCHAS ?>"></script>
   <script>
     const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
   </script>
