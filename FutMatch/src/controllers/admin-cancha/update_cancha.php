@@ -22,7 +22,7 @@ if (!$id_cancha || !$nombre || !$superficie) {
 try {
     $conn->beginTransaction();
 
-    // 1) buscar id_direccion actual
+   
     $stmt = $conn->prepare("SELECT id_direccion FROM canchas WHERE id_cancha = ?");
     $stmt->execute([$id_cancha]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -30,20 +30,20 @@ try {
 
     $id_direccion = $row['id_direccion'];
 
-    // 2) actualizar direccion (solo direccion_completa)
+    //actualizar direccion (solo direccion_completa)
     $stmt = $conn->prepare("UPDATE direcciones SET direccion_completa = ? WHERE id_direccion = ?");
     $stmt->execute([$ubicacion, $id_direccion]);
 
-    // 3) actualizar canchas
+    //actualizar canchas
     $stmt = $conn->prepare("UPDATE canchas SET nombre = ?, descripcion = ?, id_superficie = ? WHERE id_cancha = ?");
     $stmt->execute([$nombre, $descripcion, $superficie, $id_cancha]);
 
     if ($id_tipo_partido) {
-        // 4) desactivar relaciones previas
+        
         $stmt = $conn->prepare("UPDATE canchas_tipos_partido SET activo = 0 WHERE id_cancha = ?");
         $stmt->execute([$id_cancha]);
 
-        // 5) insertar nueva relación activa
+        //insertar nueva relación activa
         $stmt = $conn->prepare("INSERT INTO canchas_tipos_partido (id_cancha, id_tipo_partido, activo) VALUES (?, ?, 1)");
         $stmt->execute([$id_cancha, $id_tipo_partido]);
     }

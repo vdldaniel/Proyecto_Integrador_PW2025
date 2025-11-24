@@ -62,9 +62,7 @@ require_once HEAD_COMPONENT;
         <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalEditarCancha">
           <i class="bi bi-gear"></i> Configuración
         </button>
-        <button type="button" class="btn btn-primary" id="btnEditarPerfil">
-          <i class="bi bi-pencil-square"></i> Editar Perfil
-        </button>
+
       </div>
     </div>
 
@@ -74,72 +72,62 @@ require_once HEAD_COMPONENT;
     ?>
   </main>
 
-  <!-- Modal Editar Cancha (reutilizado de misCanchas_AdminCancha.php) -->
-  <div class="modal fade" id="modalEditarCancha" tabindex="-1">
+  <!-- Modal Editar Cancha -->
+  <div class="modal fade" id="modalEditarCancha" tabindex="-1" aria-labelledby="modalEditarCanchaLabel">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"><i class="bi bi-pencil-square"></i> Editar Cancha</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <h5 class="modal-title" id="modalEditarCanchaLabel">Editar Cancha</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form id="formEditarCancha">
+            <input type="hidden" id="editCanchaId" />
             <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="editNombreCancha" class="form-label">Nombre de la cancha</label>
-                <input type="text" class="form-control" id="editNombreCancha" value="MegaFutbol Cancha A1-F5" required>
+              <!-- Nombre -->
+              <div class="mb-3 col-12 col-lg-6">
+                <label for="editNombreCancha" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="editNombreCancha" required />
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="editTipoCancha" class="form-label">Tipo de cancha</label>
-                <select class="form-select" id="editTipoCancha" required>
-                  <option value="futbol5" selected>Fútbol 5</option>
-                  <option value="futbol7">Fútbol 7</option>
-                  <option value="futbol11">Fútbol 11</option>
+              <!-- Tipo de superficie -->
+              <div class="mb-3 col-12 col-lg-6">
+                <label for="editTipoSuperficie" class="form-label">Tipo de superficie</label>
+                <select class="form-select" id="editTipoSuperficie" required>
+                  <option value="1">Sintético</option>
+                  <option value="2">Cemento</option>
+                  <option value="3">Parquet</option>
+                  <option value="4">Césped natural</option>
                 </select>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="editSuperficie" class="form-label">Tipo de superficie</label>
-                <select class="form-select" id="editSuperficie" required>
-                  <option value="cesped_natural">Césped natural</option>
-                  <option value="cesped_sintetico" selected>Césped sintético</option>
-                  <option value="parquet">Parquet</option>
-                  <option value="cemento">Cemento</option>
-                </select>
+              <!-- Ubicación -->
+              <div class="mb-3 col-12">
+                <label for="editUbicacionCancha" class="form-label">Ubicación</label>
+                <input type="text" class="form-control" id="editUbicacionCancha" required />
+                <div class="alert alert-info mt-2 d-none" role="alert" id="alertUbicacionEditar">
+                  <i class="bi bi-info-circle"></i> Al cambiar la dirección, será verificada nuevamente por personal de FutMatch para asegurar la integridad de la aplicación.
+                </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="editCapacidad" class="form-label">Capacidad</label>
-                <input type="number" class="form-control" id="editCapacidad" value="10" min="4" max="22" required>
+              <!-- Descripción -->
+              <div class="mb-3 col-12">
+                <label for="editDescripcionCancha" class="form-label">Descripción</label>
+                <textarea class="form-control" id="editDescripcionCancha" rows="3" placeholder="Describe las características de la cancha..."></textarea>
               </div>
-            </div>
-            <div class="mb-3">
-              <label for="editDescripcion" class="form-label">Descripción</label>
-              <textarea class="form-control" id="editDescripcion" rows="3" required>Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.</textarea>
-            </div>
-            <div class="mb-3">
-              <label for="editDireccion" class="form-label">Dirección completa</label>
-              <input type="text" class="form-control" id="editDireccion" value="Av. Corrientes 1234, CABA, Buenos Aires, Argentina" required>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="editHoraApertura" class="form-label">Hora de apertura</label>
-                <input type="time" class="form-control" id="editHoraApertura" value="07:00" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="editHoraCierre" class="form-label">Hora de cierre</label>
-                <input type="time" class="form-control" id="editHoraCierre" value="23:00" required>
+              <!-- Capacidad -->
+              <div class="mb-3 col-12 col-lg-6">
+                <label for="editCapacidadCancha" class="form-label">Tipo de cancha</label>
+                <select class="form-select" id="editCapacidadCancha" required></select>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Guardar cambios</button>
+          <button type="button" class="btn btn-primary" id="btnActualizarCancha">Guardar cambios</button>
         </div>
       </div>
     </div>
   </div>
+
 
   <!-- Modal para cambiar banner de cancha -->
   <div class="modal fade" id="modalCambiarBanner" tabindex="-1">
@@ -188,7 +176,7 @@ require_once HEAD_COMPONENT;
     const BASE_URL = "<?= BASE_URL ?>";
   </script>
 
-  
+
   <script src="<?= JS_PERFILESCANCHA ?>"></script>
   <script src="<?= JS_PERFILES_CANCHAS ?>"></script>
   <script>

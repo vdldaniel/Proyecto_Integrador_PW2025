@@ -1,11 +1,6 @@
 <!-- Componente reutilizable: Perfil de Cancha -->
 <!-- Se debe incluir dentro de un <main> container y después de cargar navbar -->
-<!-- Variables esperadas:
-  $perfil_cancha_admin_mode - Boolean para mostrar funciones de admin
-  $perfil_cancha_mostrar_selector - Boolean para mostrar selector de cancha (solo admin)
-  $perfil_cancha_titulo_seccion - String para título de la sección de torneos
-  $perfil_cancha_boton_primario - Array con texto y acción del botón principal
--->
+
 
 <?php
 // Variables por defecto si no están definidas
@@ -21,22 +16,13 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
 ];
 
 // Información básica de la cancha
-$perfil_cancha_nombre = $perfil_cancha_nombre ?? 'Nombre de la Cancha';
-// $perfil_cancha_descripcion_banner = $perfil_cancha_descripcion_banner ?? 'Descripción de la cancha aquí.';
-$perfil_cancha_direccion = $perfil_cancha_direccion ?? 'Dirección de la cancha';
-$perfil_cancha_tipo = $perfil_cancha_tipo ?? 'Fútbol 5';
-$perfil_cancha_superficie = $perfil_cancha_superficie ?? 'Césped sintético';
-$perfil_cancha_capacidad = $perfil_cancha_capacidad ?? '10 jugadores';
+
 $perfil_cancha_calificacion = $perfil_cancha_calificacion ?? '4.8';
 $perfil_cancha_total_resenas = $perfil_cancha_total_resenas ?? '127';
 $perfil_cancha_total_jugadores = $perfil_cancha_total_jugadores ?? '342';
 $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
-// Horarios de funcionamiento
-$perfil_cancha_dias_atencion = $perfil_cancha_dias_atencion ?? 'Lunes a Domingo';
-$perfil_cancha_horario = $perfil_cancha_horario ?? '07:00 - 23:00';
-$perfil_cancha_estado_actual = $perfil_cancha_estado_actual ?? 'Abierto ahora';
-$perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
+
 ?>
 
 <?php if (!$perfil_cancha_skip_header): ?>
@@ -351,7 +337,7 @@ $perfil_cancha_hora_cierre = $perfil_cancha_hora_cierre ?? '23:00';
                 </a>
             <?php endif; ?>
         </div>
-
+        <!-- Panel de Informacion -->
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-secondary text-white">
                 <h5 class="mb-0"><i class="bi bi-info-circle"></i> Información</h5>
