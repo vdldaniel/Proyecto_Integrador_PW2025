@@ -33,6 +33,7 @@ try {
 
     $id_partido = (int)$input['id_partido'];
     $id_jugador = $_SESSION['user_id']; // id_usuario = id_jugador
+    $equipo = isset($input['equipo']) ? $input['equipo'] : null;
 
     error_log("POST_SOLICITANTE: id_partido={$id_partido}, id_jugador={$id_jugador}");
 
@@ -60,11 +61,12 @@ try {
     // INSERTAR PARTICIPANTE CON ROL SOLICITANTE
     // ============================================
     $queryInsert = 'INSERT INTO participantes_partidos (id_partido, id_jugador, id_rol, id_estado, equipo) 
-                    VALUES (:id_partido, :id_jugador, 3, 1, NULL)';
+                    VALUES (:id_partido, :id_jugador, 3, 1, :equipo)';
 
     $stmtInsert = $conn->prepare($queryInsert);
     $stmtInsert->bindParam(':id_partido', $id_partido, PDO::PARAM_INT);
     $stmtInsert->bindParam(':id_jugador', $id_jugador, PDO::PARAM_INT);
+    $stmtInsert->bindParam(':equipo', $equipo, PDO::PARAM_STR);
     $stmtInsert->execute();
 
     $id_participante = $conn->lastInsertId();

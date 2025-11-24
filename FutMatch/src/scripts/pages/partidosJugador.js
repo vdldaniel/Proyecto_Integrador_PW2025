@@ -1,6 +1,6 @@
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
   cargarPartidosJugador();
-};
+});
 
 async function cargarPartidosJugador() {
   try {
@@ -88,20 +88,21 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
     }
 
     // Determinar equipos
-    let equipoAsignado;
-    let equipoRival;
+    let equipoAsignado = "Equipo A";
+    let equipoRival = "Equipo B";
     let equiposDefinidos = false;
-    let cantMiEquipo, cantEquipoRival;
+    let cantMiEquipo = 0;
+    let cantEquipoRival = 0;
 
-    if (!partido.id_equipo_del_jugador) {
-      // Si equipo NO definido
-      if (partido.equipo_asignado === 1) {
+    if (!partido.id_equipo_A && !partido.id_equipo_B) {
+      // El Equipo no está definido como entidad EQUIPO
+      if (partido.equipo_asignado === "Equipo A") {
         // Asignado a Equipo A
         equipoAsignado = "Equipo A";
         equipoRival = "Equipo B";
         cantMiEquipo = partido.cant_participantes_equipo_a;
         cantEquipoRival = partido.cant_participantes_equipo_b;
-      } else if (partido.equipo_asignado === 2) {
+      } else if (partido.equipo_asignado === "Equipo A") {
         // Asignado a Equipo B
         equipoAsignado = "Equipo B";
         equipoRival = "Equipo A";
@@ -227,8 +228,8 @@ function renderizarSeccion(seccionId, partidos, nombreSeccion) {
     }
 
     // Renderizar equipos
-    let equipoAsignadoHTML;
-    let equipoRivalHTML;
+    let equipoAsignadoHTML = "";
+    let equipoRivalHTML = "";
 
     if (equiposDefinidos) {
       equipoAsignadoHTML = `

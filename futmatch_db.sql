@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2025 at 06:53 PM
+-- Generation Time: Nov 24, 2025 at 07:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -117,6 +117,7 @@ CREATE TABLE `canchas` (
   `id_direccion` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
   `id_estado` int(11) NOT NULL DEFAULT 1,
   `foto` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL,
@@ -242,9 +243,9 @@ INSERT INTO `equipos` (`id_equipo`, `id_lider`, `nombre`, `foto`, `clave`, `abie
 (1, 1, 'Los Tigres FC', NULL, '1536', 1, NULL, 3, '2025-11-16 20:52:27'),
 (2, 3, 'Águilas Rojas', NULL, '1598', 0, NULL, 2, '2025-11-16 20:52:27'),
 (3, 5, 'Deportivo Unión', NULL, '6584', 1, NULL, 1, '2025-11-16 20:52:27'),
-(4, 4, 'Domingueross', 'uploads/equipos/equipo_1763336255_691a603f90291.jpg', NULL, 1, 'Nos juntamos a jugar futbol los domingos en CABA', 6, '2025-11-16 20:52:27'),
-(6, 4, 'Homero', 'uploads/equipos/equipo_1763340598_691a713630710.jpg', NULL, 1, '', 4, '2025-11-17 00:49:58'),
-(7, 10, 'Fulboleros', 'uploads/equipos/equipo_1763775309_6921134d06ad4.jpg', NULL, 1, 'Jugamos al futbol y cantamos boleros', 10, '2025-11-21 19:02:31');
+(4, 4, 'Domingueross', NULL, NULL, 1, 'Nos juntamos a jugar futbol los domingos en CABA', 6, '2025-11-16 20:52:27'),
+(6, 4, 'Homero', NULL, NULL, 1, '', 4, '2025-11-17 00:49:58'),
+(7, 10, 'Fulboleros', NULL, NULL, 1, 'Jugamos al futbol y cantamos boleros', 10, '2025-11-21 19:02:31');
 
 -- --------------------------------------------------------
 
@@ -520,7 +521,7 @@ INSERT INTO `jugadores` (`id_jugador`, `username`, `telefono`, `foto_perfil`, `b
 (4, 'anam', '+541123456792', NULL, NULL, '1996-09-12', 1, 4, 4.5, NULL),
 (5, 'diegor', '+541123456793', NULL, NULL, '1990-01-25', 2, 2, NULL, NULL),
 (6, 'lauraf', '+541123456794', NULL, NULL, '1994-05-30', 1, 3, NULL, NULL),
-(10, 'cnsanto', '1154876550', 'uploads/jugadores/jugador_1763770851_692101e35cebe.jpg', 'uploads/jugadores/jugador_1763770890_6921020a62a21.jpg', '1999-07-16', 1, NULL, NULL, NULL);
+(10, 'cnsanto', '1154876550', NULL, NULL, '1999-07-16', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2005,7 +2006,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 -- =========================================================
 -- NO BORRAR: SE AGREGAN VISTAS MANUALMENTE YA QUE PHPMYADMIN NO LAS EXPORTA BIEN
