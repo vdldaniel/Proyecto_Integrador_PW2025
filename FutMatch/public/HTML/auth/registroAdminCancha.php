@@ -271,6 +271,10 @@ include HEAD_COMPONENT;
   <script src="<?= JS_BOOTSTRAP ?>"></script>
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Constante para el proxy de geocodificación
+    const GEOCODING_PROXY = '<?= CONTROLLER_GEOCODING_PROXY ?>';
+  </script>
   <script src="<?= JS_REGISTRO_ADMIN_CANCHA ?>"></script>
 </body>
 

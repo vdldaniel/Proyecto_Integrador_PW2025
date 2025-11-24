@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Registro Admin Cancha Controller - Maneja el registro de nuevos administradores de cancha
  * -----------------------------------------------------------------------------------------
@@ -15,13 +16,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("[REGISTRO_ADMIN_CANCHA] Inicio del proceso de registro");
-    
+
     $nombre = trim($_POST['nombre'] ?? '');
     $apellido = trim($_POST['apellido'] ?? '');
     $nombreCancha = trim($_POST['nombreCancha'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $telefono = trim($_POST['telefono'] ?? '');
-    
+
     // Datos de ubicación (del mapa)
     $direccion = trim($_POST['direccion'] ?? '');
     $latitud = trim($_POST['latitud'] ?? '');
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pais = trim($_POST['pais'] ?? '');
     $provincia = trim($_POST['provincia'] ?? '');
     $localidad = trim($_POST['localidad'] ?? '');
-    
+
     // Preferencias de contacto
     $contacto = trim($_POST['contacto'] ?? '');
     $horario = trim($_POST['horario'] ?? '');
@@ -39,11 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // PRIMERO: Verificar si el email ya está registrado
-        $queryCheck = "SELECT COUNT(*) FROM " . TABLE_SOLICITUDES_ADMIN_CANCHA . " WHERE email = :email";
+        $queryCheck = "SELECT COUNT(*) FROM solicitudes_admin_cancha WHERE email = :email";
         $stmtCheck = $conn->prepare($queryCheck);
         $stmtCheck->execute(['email' => $email]);
         $emailCount = $stmtCheck->fetchColumn();
-        
+
         if ($emailCount > 0) {
             error_log("[REGISTRO_ADMIN_CANCHA] Error: El email ya tiene una solicitud registrada");
             $_SESSION['registration_error'] = 'Ya existe una solicitud con este email. Por favor, contactanos para más información.';
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // SEGUNDO: Insertar dirección en la tabla direcciones
-        $queryDireccion = "INSERT INTO " . TABLE_DIRECCIONES . " (direccion_completa, latitud, longitud, pais, provincia, localidad) 
+        $queryDireccion = "INSERT INTO direcciones (direccion_completa, latitud, longitud, pais, provincia, localidad) 
                           VALUES (:direccion, :latitud, :longitud, :pais, :provincia, :localidad)";
         error_log("[REGISTRO_ADMIN_CANCHA] Query dirección: " . $queryDireccion);
         $stmtDireccion = $conn->prepare($queryDireccion);
@@ -70,13 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // TERCERO: Insertar solicitud de admin cancha
         // Nota: id_verificador será asignado por el admin del sistema cuando revise la solicitud
         // Por ahora usamos 1 (primer admin del sistema) como placeholder
-        $querySolicitud = "INSERT INTO " . TABLE_SOLICITUDES_ADMIN_CANCHA . " 
+        $querySolicitud = "INSERT INTO solicitudes_admin_cancha 
                           (nombre, apellido, email, telefono, nombre_cancha, id_direccion, id_verificador, observaciones) 
                           VALUES (:nombre, :apellido, :email, :telefono, :nombre_cancha, :id_direccion, 1, :observaciones)";
         error_log("[REGISTRO_ADMIN_CANCHA] Query solicitud: " . $querySolicitud);
-        
+
         $observaciones = "Contactar por $contacto en horario de $horario";
-        
+
         $stmtSolicitud = $conn->prepare($querySolicitud);
         $stmtSolicitud->execute([
             'nombre' => $nombre,
@@ -87,14 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'id_direccion' => $id_direccion,
             'observaciones' => $observaciones
         ]);
-        
+
         error_log("[REGISTRO_ADMIN_CANCHA] Solicitud registrada con éxito para: " . $email);
 
         // Redirigir con mensaje de éxito
         $_SESSION['registration_success'] = 'Solicitud enviada con éxito. Serás contactado a la brevedad por nuestro equipo.';
         header('Location: ' . PAGE_LANDING_PHP);
         exit();
-        
     } catch (PDOException $e) {
         error_log("[REGISTRO_ADMIN_CANCHA] Error en el registro: " . $e->getMessage());
         $_SESSION['registration_error'] = 'Error al procesar la solicitud. Por favor, intentá nuevamente.';
@@ -106,4 +106,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: ' . PAGE_REGISTRO_ADMIN_CANCHA_PHP);
     exit();
 }
-?>

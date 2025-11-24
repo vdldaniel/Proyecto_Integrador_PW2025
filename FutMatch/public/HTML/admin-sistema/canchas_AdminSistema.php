@@ -19,8 +19,10 @@ include HEAD_COMPONENT;
 
 ?>
 
+
 <body>
     <?php include NAVBAR_ADMIN_SISTEMA_COMPONENT; ?>
+
 
     <main>
         <div class="container mt-4">
@@ -32,7 +34,7 @@ include HEAD_COMPONENT;
                     <p class="text-muted mb-0">Gestioná solicitudes de canchas</p>
                 </div>
 
-                <div class="col-md-6 text-end">
+                <div class="col-md-6 text-end" style="display: none;">
                     <a type="button" class="btn btn-dark me-2" href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>">
                         <i class="bi bi-flag-fill"></i> Ir a Canchas Reportadas
                     </a>
@@ -63,13 +65,13 @@ include HEAD_COMPONENT;
                         <i class="bi bi-building-fill"></i> Solicitudes
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li class="nav-item" role="presentation" style="display: none;">
                     <button class="nav-link" id="verificando-tab" data-bs-toggle="tab" data-bs-target="#verificando"
                         data-bs-toggle="tooltip" title="Filtrar solicitudes de canchas en proceso de verificación" type="button" role="tab">
                         <i class="bi bi-building-fill-exclamation"></i>En verificación
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li class="nav-item" role="presentation" style="display: none;">
                     <button class="nav-link" id="verificadas-tab" data-bs-toggle="tab" data-bs-target="#verificadas"
                         data-bs-toggle="tooltip" title="Filtrar solicitudes de canchas verificadas" type="button" role="tab">
                         <i class="bi bi-building-fill-check"></i>Verificadas
@@ -81,7 +83,7 @@ include HEAD_COMPONENT;
                         <i class="bi bi-building-fill-x"></i>Rechazadas
                     </button>
                 </li>
-                <li class="nav-item" role="administradores">
+                <li class="nav-item" role="administradores" style="display: none;">
                     <button class="nav-link" id="administradores-tab" data-bs-toggle="tab" data-bs-target="#administradores"
                         data-bs-toggle="tooltip" title="Filtrar canchas vinculadas a un administrador de canchas" type="button" role="tab">
                         <i class="bi bi-building-gear"></i>Admin. Canchas
@@ -108,91 +110,7 @@ include HEAD_COMPONENT;
 
                 <!-- SOLAPA 1: SOLICITUDES PENDIENTES -->
                 <div class="tab-pane fade show active" id="solicitudes" role="tabpanel">
-
-                    <!-- Solicitud 1 - Pendiente -->
-                    <div class="card row-card-tabla-admin estado-pendiente" data-estado="solicitudes" data-solicitud-id="SOL-001">
-                        <div class="card-body">
-                            <div class="row solicitud-row">
-                                <div class="col-md-1">
-                                    <strong>SOL-001</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="badge text-bg-dark usuario-estado">Usuario Nuevo</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="fw-bold">Cancha Los Pinos</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">Av. Libertador 1234, CABA</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="text-muted">Sin asignar</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <small>10/11/2025</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="acciones-container">
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-001" data-bs-toggle="tooltip" title="Ver solicitud">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-direccion="Av. Libertador 1234, CABA" data-bs-toggle="tooltip" title="Ver en mapa">
-                                            <i class="bi bi-geo-alt"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-admin-id="ADM-001" data-bs-toggle="tooltip" title="Ver canchas del admin">
-                                            <i class="bi bi-building"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-001" data-bs-toggle="tooltip" title="Tomar caso">
-                                            <i class="bi bi-arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Solicitud 2 - Pendiente -->
-                    <div class="card row-card-tabla-admin estado-pendiente" data-estado="solicitudes" data-solicitud-id="SOL-002">
-                        <div class="card-body">
-                            <div class="row solicitud-row">
-                                <div class="col-md-1">
-                                    <strong>SOL-002</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="badge text-bg-dark usuario-estado">Usuario Existente</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="fw-bold">Deportivo Central</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">San Martín 567, Belgrano</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="text-muted">Sin asignar</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <small>09/11/2025</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="acciones-container">
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-002" data-bs-toggle="tooltip" title="Ver solicitud">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-direccion="San Martín 567, Belgrano" data-bs-toggle="tooltip" title="Ver en mapa">
-                                            <i class="bi bi-geo-alt"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-admin-id="ADM-002" data-bs-toggle="tooltip" title="Ver canchas del admin">
-                                            <i class="bi bi-building"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-002" data-bs-toggle="tooltip" title="Tomar caso">
-                                            <i class="bi bi-arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Las solicitudes pendientes se cargarán aquí dinámicamente vía JavaScript -->
                 </div>
 
                 <!-- SOLAPA 2: EN VERIFICACIÓN -->
@@ -285,46 +203,7 @@ include HEAD_COMPONENT;
 
                 <!-- SOLAPA 4: RECHAZADAS -->
                 <div class="tab-pane fade" id="rechazadas" role="tabpanel">
-
-                    <!-- Solicitud 5 - Rechazada -->
-                    <div class="card row-card-tabla-admin estado-rechazada" data-estado="rechazadas" data-solicitud-id="SOL-005">
-                        <div class="card-body">
-                            <div class="row solicitud-row">
-                                <div class="col-md-1">
-                                    <strong>SOL-005</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="badge text-bg-dark usuario-estado">Usuario Nuevo</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="fw-bold">Cancha Fantasma</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">Dirección Inexistente 000</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="text-danger">Carlos Ruiz</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <small>03/11/2025</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="acciones-container">
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-005" data-bs-toggle="tooltip" title="Ver solicitud">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-direccion="Dirección Inexistente 000" data-bs-toggle="tooltip" title="Ver en mapa">
-                                            <i class="bi bi-geo-alt"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-admin-id="ADM-005" data-bs-toggle="tooltip" title="Ver canchas del admin">
-                                            <i class="bi bi-building"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Las solicitudes rechazadas se cargarán aquí dinámicamente vía JavaScript -->
                 </div>
 
                 <!-- SOLAPA 5: ADMINISTRADORES -->
@@ -468,10 +347,15 @@ include HEAD_COMPONENT;
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="<?= CSS_ICONS ?>">
-
+    <script>
+        const GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA = '<?= GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA ?>';
+        const UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA = '<?= UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA ?>';
+    </script>
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
+    <script src="<?= JS_TOAST_MODULE ?>"></script>
     <script src="<?= JS_CANCHAS_ADMIN_SISTEMA ?>"></script>
+    <script src="<?= JS_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA ?>"></script>
 </body>
 
 </html>

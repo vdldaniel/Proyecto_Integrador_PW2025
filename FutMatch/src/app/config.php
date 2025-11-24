@@ -157,10 +157,13 @@ define("JS_MIS_TORNEOS", JS_SCRIPTS_PATH . "mis-torneos.js");
 define("JS_TORNEO_DETALLE", JS_SCRIPTS_PATH . "torneo-detalle.js");
 define("JS_TORNEOS_JUGADOR", JS_SCRIPTS_PATH . "pages/torneos-jugador.js");
 define("JS_PERFIL_JUGADOR", SRC_PATH . "scripts/perfilJugador.js");
-define("JS_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasAdminSistema.js");
 define("JS_JUGADORES_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresAdminSistema.js");
 define("JS_JUGADORES_REPORTADOS_ADMIN_SISTEMA", SRC_PATH . "scripts/jugadoresReportadosAdminSistema.js");
 define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReportadasAdminSistema.js");
+
+// Admin-sistema
+define("JS_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "scripts/pages/admin-sistema/solicitudesAdminCancha_AdminSistema.js");
+define("JS_CANCHAS_ADMIN_SISTEMA", SRC_PATH . "scripts/pages/admin-sistema/canchasAdminSistema.js");
 
 // ==================================
 // JS - PAGINAS BACKEND
@@ -214,6 +217,7 @@ define("CONTROLLER_LOGIN", BASE_URL . "src/controllers/login_controller.php");
 define("CONTROLLER_LOGOUT", BASE_URL . "src/controllers/logout.php");
 define("CONTROLLER_REGISTRO_JUGADOR", BASE_URL . "src/controllers/registroJugador_controller.php");
 define("CONTROLLER_REGISTRO_ADMIN_CANCHA", BASE_URL . "src/controllers/registroAdminCancha_controller.php");
+define("CONTROLLER_GEOCODING_PROXY", BASE_URL . "src/controllers/geocoding_proxy.php");
 
 //CANCHAS
 define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchasDisponibles_Jugador.php"); //EXPLORAR
@@ -239,6 +243,10 @@ define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");
 // PERFILES
 define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");
 define("POST_FOTOS_JUGADOR", BASE_URL . "src/controllers/postFotos_Jugador.php");
+
+//ADMIN-SISTEMA
+define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/getSolicitudesAdminCancha.php");
+define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/updateSolicitudAdminCancha.php");
 
 
 // ===================================
