@@ -61,51 +61,6 @@ require_once HEAD_COMPONENT;
 
 		<!-- Lista de canchas -->
 		<div id="canchasList" class="row g-3">
-			<!-- Cancha 1
-			<div class="col-12">
-				<div class="card shadow-sm border-0 mb-2">
-					<div class="card-body">
-						<div class="row align-items-center">
-							<div class="col-md-2 text-center">
-								<div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-									style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-									<i class="bi bi-geo-alt text-muted" style="font-size: 1.5rem;"></i>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<h5 class="card-title mb-1">
-									<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" class="text-decoration-none">
-										La Previa Cancha C1-F5
-									</a>
-								</h5>
-							</div>
-							<div class="col-md-2">
-								<span class="text-muted">
-									<i class="bi bi-people"></i> Fútbol 5
-								</span>
-							</div>
-							<div class="col-md-2">
-								<span class="badge text-bg-dark">Habilitada</span>
-							</div>
-							<div class="col-md-3 text-end">
-								<a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" title="Ver perfil">
-									<i class="bi bi-eye"></i>
-								</a>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalEditarCancha" data-cancha-id="1" title="Editar">
-									<i class="bi bi-pencil"></i>
-								</button>
-								<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalCerrarCancha" data-cancha-id="1" title="Cierre temporal">
-									<i class="bi bi-pause-circle"></i>
-								</button>
-								<button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCancha" data-cancha-id="1" title="Eliminar">
-									<i class="bi bi-trash"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-			<!-- //listadode canchas -->
 			<div class="row" id="canchasList"></div>
 		</div>
 	</main>

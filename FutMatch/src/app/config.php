@@ -130,7 +130,7 @@ define("JS_AGENDA", JS_SCRIPTS_PATH . "agenda.js");
 
 // Scripts de componentes
 define("JS_PERFIL_CANCHA_BASE", JS_COMPONENTS_PATH . "perfilCancha.js");
-define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
+// define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
 define("JS_PERFIL_JUGADOR_BASE", JS_COMPONENTS_PATH . "perfilJugador.js");
 define("JS_NAVBAR_JUGADOR", JS_COMPONENTS_PATH . "navbar_Jugador.js");
 define("JS_NOTIFICACIONES_JUGADOR", JS_COMPONENTS_PATH . "notificaciones_Jugador.js");
@@ -141,7 +141,7 @@ define("JS_CALENDARIO_JUGADOR", JS_SCRIPTS_PATH . "calendarioJugador.js");
 define("JS_ADMIN_INC", JS_SCRIPTS_PATH . "adminInc.js");
 define("JS_CANCHA_RESERVAR", JS_SCRIPTS_PATH . "cancha-reservar.js");
 define("JS_CANCHA_PERFIL", JS_SCRIPTS_PATH . "canchaPerfil.js");
-define("JS_PERFILES_CANCHAS", JS_SCRIPTS_PATH . "perfiles-canchas.js");
+
 define("JS_CUENTA_JUGADOR", JS_SCRIPTS_PATH . "cuenta-jugador.js");
 define("JS_DETALLE_TORNEO", JS_SCRIPTS_PATH . "detalle-torneo.js");
 define("JS_EQUIPO_CREAR", JS_SCRIPTS_PATH . "equipo-crear.js");
@@ -179,6 +179,8 @@ define("JS_MIS_EQUIPOS_JUGADOR", JS_SCRIPTS_PATH . "misEquipos_Jugador.js");
 // Admin Cancha
 define("JS_REGISTRO_ADMIN_CANCHA", JS_SCRIPTS_PATH . "registroAdminCancha.js");
 define("JS_CANCHAS_LISTADO", JS_SCRIPTS_PATH . "admin-cancha/canchasListado.js");
+define("JS_PERFILESCANCHA", JS_SCRIPTS_PATH . "admin-cancha/perfilAdmin.js");
+define("JS_PERFILES_CANCHAS", JS_SCRIPTS_PATH . "perfiles-canchas.js");
 // ===================================
 // IMÁGENES
 // ===================================
