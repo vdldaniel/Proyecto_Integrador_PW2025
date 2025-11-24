@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->beginTransaction();
 
         // PRIMERO, verificar si el email ya está registrado
-        $queryCheck = "SELECT COUNT(*) FROM " . TABLE_USUARIOS . " WHERE email = :email";
+        $queryCheck = "SELECT COUNT(*) FROM usuarios WHERE email = :email";
         error_log("[REGISTRO] Query de verificación: " . $queryCheck);
         $stmtCheck = $conn->prepare($queryCheck);
         $stmtCheck->execute(['email' => $email]);
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // SEGUNDO, verificar si el username ya está registrado
-        $queryCheckUsername = "SELECT COUNT(*) FROM " . TABLE_JUGADORES . " WHERE username = :username";
+        $queryCheckUsername = "SELECT COUNT(*) FROM jugadores WHERE username = :username";
         error_log("[REGISTRO] Query de verificación de username: " . $queryCheckUsername);
         $stmtCheckUsername = $conn->prepare($queryCheckUsername);
         $stmtCheckUsername->execute(['username' => $username]);
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Insertar nuevo usuario
-        $query = "INSERT INTO " . TABLE_USUARIOS . " (nombre, apellido, email, password, id_estado) 
+        $query = "INSERT INTO usuarios (nombre, apellido, email, password, id_estado) 
                   VALUES (:nombre, :apellido, :email, :password, :id_estado)";
         error_log("[REGISTRO] Query: " . $query);
         $stmt = $conn->prepare($query);
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log("[REGISTRO] Relación usuario-rol creada para usuario ID: " . $id_usuario);
 
         // Insertar nuevo jugador
-        $queryJugador = "INSERT INTO " . TABLE_JUGADORES . " (id_jugador, username, telefono, fecha_nacimiento, id_sexo)     
+        $queryJugador = "INSERT INTO jugadores (id_jugador, username, telefono, fecha_nacimiento, id_sexo)     
                          VALUES (:id_usuario, :username, :telefono, :fecha_nacimiento, :id_sexo)";
         error_log("[REGISTRO] Query Jugador: " . $queryJugador);
         $stmtJugador = $conn->prepare($queryJugador);

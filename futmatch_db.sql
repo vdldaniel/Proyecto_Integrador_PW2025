@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2025 at 04:04 PM
+-- Generation Time: Nov 24, 2025 at 06:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,17 +32,16 @@ USE `futmatch_db`;
 DROP TABLE IF EXISTS `admin_canchas`;
 CREATE TABLE `admin_canchas` (
   `id_admin_cancha` int(11) NOT NULL,
-  `id_solicitud` int(11) NOT NULL,
-  `telefono` varchar(20) NOT NULL
+  `id_solicitud` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_canchas`
 --
 
-INSERT INTO `admin_canchas` (`id_admin_cancha`, `id_solicitud`, `telefono`) VALUES
-(1, 1, '+541155555001'),
-(2, 2, '+541155555002');
+INSERT INTO `admin_canchas` (`id_admin_cancha`, `id_solicitud`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -122,7 +121,7 @@ CREATE TABLE `canchas` (
   `id_estado` int(11) NOT NULL DEFAULT 1,
   `foto` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL,
-  `id_superficie` int(11) NOT NULL,
+  `id_superficie` int(11) DEFAULT NULL,
   `politicas_reservas` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -133,7 +132,8 @@ CREATE TABLE `canchas` (
 INSERT INTO `canchas` (`id_cancha`, `id_admin_cancha`, `id_direccion`, `nombre`, `descripcion`, `telefono`, `id_estado`, `foto`, `banner`, `id_superficie`, `politicas_reservas`) VALUES
 (1, 1, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, NULL),
 (2, 2, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 3, NULL, NULL, 1, NULL),
-(3, 1, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL);
+(3, 1, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL),
+(5, 1, 7, 'Cancha Sur', 'Test Descripcion', NULL, 1, NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,8 @@ INSERT INTO `canchas_tipos_partido` (`id_cancha`, `id_tipo_partido`, `activo`, `
 (2, 1, 1, '2025-11-13 00:16:20'),
 (2, 2, 1, '2025-11-13 00:16:20'),
 (3, 1, 1, '2025-11-13 00:16:20'),
-(3, 4, 1, '2025-11-13 00:16:20');
+(3, 4, 1, '2025-11-13 00:16:20'),
+(5, 1, 1, '2025-11-24 14:51:18');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,9 @@ INSERT INTO `direcciones` (`id_direccion`, `direccion_completa`, `latitud`, `lon
 (2, 'San Martín 567, La Plata', -34.92131200, -57.95456700, 'Argentina', 'Buenos Aires', 'La Plata'),
 (3, 'Mitre 890, Rosario', -32.94432100, -60.65054300, 'Argentina', 'Santa Fe', 'Rosario'),
 (4, 'Belgrano 445, Córdoba', -31.41677500, -64.18344100, 'Argentina', 'Córdoba', 'Córdoba'),
-(5, '9 de Julio 123, Mendoza', -32.88945800, -68.84583900, 'Argentina', 'Mendoza', 'Mendoza');
+(5, '9 de Julio 123, Mendoza', -32.88945800, -68.84583900, 'Argentina', 'Mendoza', 'Mendoza'),
+(6, 'Presbítero Juan González y Aragón, Barrio Uno, Aeropuerto Internacional Ezeiza, Partido de Ezeiza, Buenos Aires, B1802, Argentina', -34.78115850, -58.53894340, 'Argentina', 'Buenos Aires', 'Aeropuerto Internacional Ezeiza'),
+(7, 'Avenida Independencia 750', 0.00000000, 0.00000000, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -241,7 +244,8 @@ INSERT INTO `equipos` (`id_equipo`, `id_lider`, `nombre`, `foto`, `clave`, `abie
 (2, 3, 'Águilas Rojas', NULL, '1598', 0, NULL, 2, '2025-11-16 20:52:27'),
 (3, 5, 'Deportivo Unión', NULL, '6584', 1, NULL, 1, '2025-11-16 20:52:27'),
 (4, 4, 'Domingueross', 'uploads/equipos/equipo_1763336255_691a603f90291.jpg', NULL, 1, 'Nos juntamos a jugar futbol los domingos en CABA', 6, '2025-11-16 20:52:27'),
-(6, 4, 'Homero', 'uploads/equipos/equipo_1763340598_691a713630710.jpg', NULL, 1, '', 4, '2025-11-17 00:49:58');
+(6, 4, 'Homero', 'uploads/equipos/equipo_1763340598_691a713630710.jpg', NULL, 1, '', 4, '2025-11-17 00:49:58'),
+(7, 10, 'Fulboleros', 'uploads/equipos/equipo_1763775309_6921134d06ad4.jpg', NULL, 1, 'Jugamos al futbol y cantamos boleros', 10, '2025-11-21 19:02:31');
 
 -- --------------------------------------------------------
 
@@ -502,21 +506,22 @@ CREATE TABLE `jugadores` (
   `fecha_nacimiento` date NOT NULL,
   `id_sexo` int(11) NOT NULL,
   `id_posicion` int(11) DEFAULT NULL,
-  `reputacion` float DEFAULT NULL
+  `reputacion` float DEFAULT NULL,
+  `descripcion` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `jugadores`
 --
 
-INSERT INTO `jugadores` (`id_jugador`, `username`, `telefono`, `foto_perfil`, `banner`, `fecha_nacimiento`, `id_sexo`, `id_posicion`, `reputacion`) VALUES
-(1, 'juanpe', '+541123456789', NULL, NULL, '1995-03-15', 2, 3, NULL),
-(2, 'mariag', '+541123456790', NULL, NULL, '1992-07-20', 1, 2, NULL),
-(3, 'carlosl', '+541123456791', NULL, NULL, '1988-11-05', 2, 1, NULL),
-(4, 'anam', '+541123456792', NULL, NULL, '1996-09-12', 1, 4, 4.5),
-(5, 'diegor', '+541123456793', NULL, NULL, '1990-01-25', 2, 2, NULL),
-(6, 'lauraf', '+541123456794', NULL, NULL, '1994-05-30', 1, 3, NULL),
-(10, 'cnsanto', '1154876550', NULL, NULL, '1999-07-16', 1, NULL, NULL);
+INSERT INTO `jugadores` (`id_jugador`, `username`, `telefono`, `foto_perfil`, `banner`, `fecha_nacimiento`, `id_sexo`, `id_posicion`, `reputacion`, `descripcion`) VALUES
+(1, 'juanpe', '+541123456789', NULL, NULL, '1995-03-15', 2, 3, NULL, NULL),
+(2, 'mariag', '+541123456790', NULL, NULL, '1992-07-20', 1, 2, NULL, NULL),
+(3, 'carlosl', '+541123456791', NULL, NULL, '1988-11-05', 2, 1, NULL, NULL),
+(4, 'anam', '+541123456792', NULL, NULL, '1996-09-12', 1, 4, 4.5, NULL),
+(5, 'diegor', '+541123456793', NULL, NULL, '1990-01-25', 2, 2, NULL, NULL),
+(6, 'lauraf', '+541123456794', NULL, NULL, '1994-05-30', 1, 3, NULL, NULL),
+(10, 'cnsanto', '1154876550', 'uploads/jugadores/jugador_1763770851_692101e35cebe.jpg', 'uploads/jugadores/jugador_1763770890_6921020a62a21.jpg', '1999-07-16', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -543,7 +548,8 @@ INSERT INTO `jugadores_equipos` (`id_jugador`, `id_equipo`, `estado_solicitud`, 
 (1, 4, 1, 4, '2025-11-17 01:50:19'),
 (1, 6, 3, 4, '2025-11-17 01:39:29'),
 (2, 1, 3, 1, '2025-11-17 01:00:45'),
-(2, 4, 1, 4, '2025-11-17 02:19:43'),
+(2, 4, 4, 4, '2025-11-17 02:19:43'),
+(2, 7, 3, 10, '2025-11-22 01:59:25'),
 (3, 2, 3, 2, '2025-11-17 01:00:45'),
 (4, 1, 3, 2, '2025-11-17 01:00:45'),
 (4, 4, 3, 6, '2025-11-17 01:00:45'),
@@ -551,7 +557,8 @@ INSERT INTO `jugadores_equipos` (`id_jugador`, `id_equipo`, `estado_solicitud`, 
 (5, 2, 3, 3, '2025-11-17 01:00:45'),
 (5, 3, 3, 2, '2025-11-17 01:00:45'),
 (6, 3, 3, 1, '2025-11-17 01:00:45'),
-(6, 4, 1, 4, '2025-11-17 01:00:45');
+(6, 4, 1, 4, '2025-11-17 01:00:45'),
+(10, 7, 3, NULL, '2025-11-21 19:02:31');
 
 -- --------------------------------------------------------
 
@@ -872,7 +879,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id_rol`, `nombre`) VALUES
 (1, 'jugador'),
 (2, 'admin_cancha'),
-(3, 'admin_sistema_viewer'),
+(3, 'admin_sistema'),
 (4, 'admin_sistema_verificador'),
 (5, 'admin_sistema_moderador'),
 (6, 'admin_sistema_manager');
@@ -1098,7 +1105,8 @@ CREATE TABLE `solicitudes_admin_cancha` (
 INSERT INTO `solicitudes_admin_cancha` (`id_solicitud`, `nombre`, `apellido`, `email`, `telefono`, `nombre_cancha`, `id_direccion`, `fecha_solicitud`, `id_estado`, `id_verificador`, `fecha_resolucion`, `observaciones`) VALUES
 (1, 'Roberto', 'Silva', 'cancha.centro@email.com', '+541155555001', 'Cancha Centro', 1, '2025-11-13 00:16:20', 3, 1, '2025-11-13 00:16:20', NULL),
 (2, 'Patricia', 'Morales', 'cancha.norte@email.com', '+541155555002', 'Cancha Norte', 2, '2025-11-13 00:16:20', 3, 1, '2025-11-13 00:16:20', NULL),
-(3, 'Miguel', 'Torres', 'miguel.torres@email.com', '+541155555003', 'Complejo Sur', 3, '2025-11-13 00:16:20', 1, NULL, NULL, NULL);
+(3, 'Miguel', 'Torres', 'miguel.torres@email.com', '+541155555003', 'Complejo Sur', 3, '2025-11-13 00:16:20', 1, NULL, NULL, NULL),
+(4, 'Cristian', 'Santo', 'cristiansanto@gmail.com', '1166669999', 'Canchas Ezeiza', 6, '2025-11-24 12:26:22', 1, 1, NULL, 'Contactar por whatsapp en horario de manana');
 
 -- --------------------------------------------------------
 
@@ -1257,7 +1265,7 @@ INSERT INTO `usuarios_roles` (`id`, `id_usuario`, `id_rol`) VALUES
 (4, 4, 1),
 (5, 5, 1),
 (6, 6, 1),
-(7, 7, 4),
+(7, 7, 3),
 (8, 8, 2),
 (9, 9, 2),
 (10, 10, 1);
@@ -1590,7 +1598,7 @@ ALTER TABLE `usuarios_roles`
 -- AUTO_INCREMENT for table `admin_canchas`
 --
 ALTER TABLE `admin_canchas`
-  MODIFY `id_admin_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `admin_sistema`
@@ -1608,7 +1616,7 @@ ALTER TABLE `calificaciones_jugadores`
 -- AUTO_INCREMENT for table `canchas`
 --
 ALTER TABLE `canchas`
-  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dias_semana`
@@ -1620,13 +1628,13 @@ ALTER TABLE `dias_semana`
 -- AUTO_INCREMENT for table `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `estadisticas_partido`
@@ -1758,7 +1766,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT for table `solicitudes_admin_cancha`
 --
 ALTER TABLE `solicitudes_admin_cancha`
-  MODIFY `id_solicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_solicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `superficies_canchas`
@@ -1788,13 +1796,13 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `usuarios_roles`
 --
 ALTER TABLE `usuarios_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -1999,7 +2007,14 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
--- agregamos vistas
+
+-- =========================================================
+-- NO BORRAR: SE AGREGAN VISTAS MANUALMENTE YA QUE PHPMYADMIN NO LAS EXPORTA BIEN
+-- =========================================================
+
+-- VISTA PARA VER INFORMACION DE EQUIPOS A LOS QUE PERTENECE UN JUGADOR
+-- Muestra información relevante de los equipos a los que pertenece un jugador
+
 DROP VIEW IF EXISTS vista_equipos_jugador;
 
 CREATE OR REPLACE VIEW vista_equipos_jugador AS

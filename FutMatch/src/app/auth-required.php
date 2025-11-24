@@ -1,18 +1,9 @@
 <?php
+
 /**
  * Componente de Autenticación - FutMatch
  * ----------------------------------------
- * Maneja la sesión y verifica que el usuario esté autenticado.
- * Incluir este archivo en páginas que requieren autenticación.
- * 
- * Uso:
- * require_once '../../../src/app/auth-required.php';
- * 
- * Variables disponibles después de incluir:
- * - $_SESSION['user_id'] - ID del usuario
- * - $_SESSION['email'] - Email del usuario
- * - $_SESSION['user_type'] - Tipo de usuario (jugador, admin_cancha, admin_sistema)
- * - $_SESSION['nombre'] - Nombre del usuario
+ * Deberia implementarse esto a futuro para centralizar la lógica de autenticación
  */
 
 // Iniciar sesión si no está iniciada
@@ -24,7 +15,8 @@ if (session_status() === PHP_SESSION_NONE) {
  * Verifica si el usuario está autenticado
  * @return bool
  */
-function isLoggedIn() {
+function isLoggedIn()
+{
     return isset($_SESSION['user_id']) && isset($_SESSION['email']);
 }
 
@@ -32,13 +24,14 @@ function isLoggedIn() {
  * Requiere autenticación - redirige al login si no está autenticado
  * @param string $redirectTo URL de redirección después del login
  */
-function requireAuth($redirectTo = null) {
+function requireAuth($redirectTo = null)
+{
     if (!isLoggedIn()) {
         // Guardar la URL actual para redirigir después del login
         if ($redirectTo === null) {
             $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
         }
-        
+
         // Redirigir al landing/login
         header("Location: " . PAGE_LANDING_PHP);
         exit();
@@ -50,7 +43,8 @@ function requireAuth($redirectTo = null) {
  * @param string $type Tipo de usuario (jugador, admin_cancha, admin_sistema)
  * @return bool
  */
-function isUserType($type) {
+function isUserType($type)
+{
     return isset($_SESSION['user_type']) && $_SESSION['user_type'] === $type;
 }
 
@@ -58,7 +52,8 @@ function isUserType($type) {
  * Requiere un tipo de usuario específico
  * @param string $type Tipo de usuario requerido
  */
-function requireUserType($type) {
+function requireUserType($type)
+{
     if (!isUserType($type)) {
         // Redirigir según el tipo de usuario actual
         if (isset($_SESSION['user_type'])) {
@@ -86,11 +81,12 @@ function requireUserType($type) {
  * Obtiene información del usuario actual
  * @return array|null
  */
-function getCurrentUser() {
+function getCurrentUser()
+{
     if (!isLoggedIn()) {
         return null;
     }
-    
+
     return [
         'id' => $_SESSION['user_id'] ?? null,
         'email' => $_SESSION['email'] ?? null,
@@ -99,4 +95,3 @@ function getCurrentUser() {
         'user_type' => $_SESSION['user_type'] ?? null
     ];
 }
-?>
