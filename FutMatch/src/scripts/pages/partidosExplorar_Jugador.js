@@ -35,7 +35,6 @@ async function cargarPartidosDisponibles() {
 
     // Guardar todos los partidos para el mapa
     todosLosPartidos = partidos;
-    console.log("Partidos disponibles cargados:", partidos);
 
     // Dividir partidos en páginas
     let paginado = [[]];
@@ -133,7 +132,6 @@ function renderizarPaginaPartidos(partidos, numeroPagina) {
 function renderizarModalUnirsePartido(idPartido) {
   // Buscar el partido en la lista global
   const partido = todosLosPartidos.find((p) => p.id_partido == idPartido);
-  console.log("Partido seleccionado para unirse:", partido);
 
   if (!partido) {
     alert("Error: No se encontró información del partido");
@@ -143,8 +141,6 @@ function renderizarModalUnirsePartido(idPartido) {
   // Calcular cupos disponibles
   const cuposDisponibles =
     partido.max_participantes - partido.participantes_actuales;
-
-  console.log("Renderizando modal para partido:", partido);
 
   // Renderizar información del partido en el modal
   const infoPartidoHTML = `
@@ -180,72 +176,17 @@ function renderizarModalUnirsePartido(idPartido) {
             ? `<p class="card-text mt-2 small">${partido.descripcion}</p>`
             : ""
         }
-
-        <div class="mt-3 d-flex justify-content-center gap-3">
-  
-          <!-- Opción Equipo A -->
-          <label for="equipoA" class="mb-0">
-            <div class="border p-3 rounded d-flex flex-column align-items-center text-center gap-2">
-              <i class="bi bi-people-fill text-primary fs-1"></i>
-              <span>Equipo A</span>
-              <small class="text-muted">
-                ${partido.cant_participantes_equipo_A}/${
-    partido.max_participantes / 2
-  }
-              </small>
-              <input type="checkbox" id="equipoA" name="equipo" value="A" class="check-equipo"/>
-            </div>
-          </label>
-
-          <!-- Opción Equipo B -->
-          <label for="equipoB" class="mb-0">
-            <div class="border p-3 rounded d-flex flex-column align-items-center text-center gap-2">
-              <i class="bi bi-people-fill text-primary fs-1"></i>
-              <span>Equipo B</span>
-              <small class="text-muted">
-                ${partido.cant_participantes_equipo_B}/${
-    partido.max_participantes / 2
-  }
-              </small>
-              <input type="checkbox" id="equipoB" name="equipo" value="B" class="check-equipo" />
-            </div>
-          </label>
-        </div>
-        
-          <div id="equipoErr" class="invalid-feedback"></div>
-
       </div>
     </div>
   `;
 
   document.getElementById("infoPartidoSolicitar").innerHTML = infoPartidoHTML;
 
-  const checks = document.querySelectorAll(".check-equipo");
-  const equipoErr = document.getElementById("equipoErr");
-
-  // Permitir solo un checkbox a la vez
-  checks.forEach((chk) => {
-    chk.addEventListener("change", () => {
-      if (chk.checked) {
-        checks.forEach((c) => {
-          if (c !== chk) c.checked = false;
-          c.classList.remove("is-invalid");
-        });
-
-        // Ocultar error
-        equipoErr.textContent = "";
-      }
-    });
-  });
-
   // Configurar el botón de confirmar
   const btnConfirmar = document.getElementById("btnConfirmarSolicitud");
-  btnConfirmar.addEventListener("click", function () {
-    if (validarEquipo()) {
-      const equipo = obtenerEquipoElegido();
-      enviarSolicitudUnirse(idPartido, equipo);
-    }
-  });
+  btnConfirmar.onclick = function () {
+    enviarSolicitudUnirse(idPartido);
+  };
 
   // Mostrar el modal
   const modal = new bootstrap.Modal(
@@ -254,39 +195,7 @@ function renderizarModalUnirsePartido(idPartido) {
   modal.show();
 }
 
-function validarEquipo() {
-  const checks = document.querySelectorAll(".check-equipo");
-  const equipoErr = document.getElementById("equipoErr");
-
-  const elegido = [...checks].some((c) => c.checked);
-
-  if (!elegido) {
-    equipoErr.textContent = "Elegí un equipo para continuar.";
-    equipoErr.style.display = "block"; // mostrar mensaje
-    checks.forEach((c) => c.classList.add("is-invalid"));
-    return false;
-  }
-
-  checks.forEach((c) => c.classList.remove("is-invalid"));
-  equipoErr.textContent = "";
-  equipoErr.style.display = "none"; // ocultar mensaje
-  return true;
-}
-
-function obtenerEquipoElegido() {
-  // Busca el radio seleccionado
-  const seleccionado = document.querySelector('input[name="equipo"]:checked');
-
-  // Si no hay selección, retornamos null
-  if (!seleccionado) {
-    return null;
-  }
-
-  // Retorna "A" o "B"
-  return seleccionado.value;
-}
-
-async function enviarSolicitudUnirse(idPartido, equipo) {
+async function enviarSolicitudUnirse(idPartido) {
   const btnConfirmar = document.getElementById("btnConfirmarSolicitud");
 
   try {
@@ -302,7 +211,6 @@ async function enviarSolicitudUnirse(idPartido, equipo) {
       },
       body: JSON.stringify({
         id_partido: idPartido,
-        equipo: equipo,
       }),
     });
 
@@ -313,10 +221,8 @@ async function enviarSolicitudUnirse(idPartido, equipo) {
     }
 
     // Mostrar mensaje de éxito
-    showToast("Solicitud enviada correctamente", "success");
-    //
-    //alert(`¡Solicitud enviada correctamente!
-    //  Podés ver el estado de la misma en "Mis Partidos"`);
+    alert(`¡Solicitud enviada correctamente! 
+        Podés ver el estado de la misma en "Mis Partidos"`);
 
     // Cerrar modal
     const modal = bootstrap.Modal.getInstance(
@@ -327,8 +233,8 @@ async function enviarSolicitudUnirse(idPartido, equipo) {
     // Refrescar la página para mostrar el estado actualizado
     window.location.reload();
   } catch (error) {
-    console.error("Error al enviar solicitud:", error, error.message);
-    showToast("Error al enviar solicitud");
+    console.error("Error al enviar solicitud:", error);
+    alert(`Error: ${error.message}`);
   } finally {
     // Rehabilitar botón
     btnConfirmar.disabled = false;

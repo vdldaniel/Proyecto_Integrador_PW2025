@@ -15,9 +15,9 @@ if (!isset($_SESSION['user_id'])) {
 
 try {
     // Obtener el id_jugador desde GET o sesión
-    $id_jugador = $_SESSION['user_id'];
+    $id_jugador = isset($_GET['id']) ? intval($_GET['id']) : $_SESSION['user_id'];
 
-    $query = 'SELECT * FROM vista_partidos_jugador WHERE id_jugador = :id ORDER BY fecha_partido ASC';
+    $query = 'SELECT * FROM vista_partidos_jugador WHERE id_jugador = :id ORDER BY fecha_partido DESC';
 
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $id_jugador, PDO::PARAM_INT);

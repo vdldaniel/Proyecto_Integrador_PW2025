@@ -449,134 +449,111 @@ function cargarPartidosJugadorDOM(partidos, reseñas) {
     return;
   }
 
-  // Filtrar solo partidos finalizados
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-
-  const partidosFinalizados = partidos.filter((p) => {
-    const [dia, mes, año] = p.fecha_partido.split("/");
-    const fechaPartido = new Date(año, mes - 1, dia);
-    fechaPartido.setHours(0, 0, 0, 0);
-    return fechaPartido < hoy;
-  });
-
-  if (partidosFinalizados.length === 0) {
-    lista.innerHTML = `
-      <div class="p-4 text-center text-muted">
-        <i class="bi bi-calendar-x fs-1 d-block mb-2"></i>
-        <p>No hay partidos finalizados aún</p>
-      </div>
-    `;
-    return;
-  }
-
-  partidosFinalizados.forEach((p) => {
+  partidos.forEach((p) => {
     let equipoGanador = 0; // 1 para ganado, 0 para empatado, -1 para perdido
     let resultado = "";
 
     // Determinar goles del equipo del jugador
     if (p.equipo_asignado === "Equipo A") {
-      // Determinar goles del equipo del jugador
-      if (p.equipo_asignado === "Equipo A") {
-        p.goles_mi_equipo = p.goles_equipo_A;
-        p.goles_equipo_rival = p.goles_equipo_B;
-      } else {
-        p.goles_mi_equipo = p.goles_equipo_B;
-        p.goles_equipo_rival = p.goles_equipo_A;
-      }
+      p.goles_mi_equipo = p.goles_equipo_A;
+      p.goles_equipo_rival = p.goles_equipo_B;
+    } else {
+      p.goles_mi_equipo = p.goles_equipo_B;
+      p.goles_equipo_rival = p.goles_equipo_A;
+    }
 
-      // Determinar resultado
-      if (p.goles_mi_equipo > p.goles_equipo_rival) {
-        equipoGanador = 1;
-        resultado = "Victoria";
-      } else if (p.goles_mi_equipo < p.goles_equipo_rival) {
-        equipoGanador = -1;
-        resultado = "Derrota";
-      } else {
-        equipoGanador = 0;
-        resultado = "Empate";
-      }
+    // Determinar resultado
+    if (p.goles_mi_equipo > p.goles_equipo_rival) {
+      equipoGanador = 1;
+      resultado = "Victoria";
+    } else if (p.goles_mi_equipo < p.goles_equipo_rival) {
+      equipoGanador = -1;
+      resultado = "Derrota";
+    } else {
+      equipoGanador = 0;
+      resultado = "Empate";
+    }
 
-      // Buscar reseña del partido
-      let calificacion = null;
-      if (reseñas && reseñas.length > 0) {
-        calificacion = reseñas.find(
-          (r) =>
-            r.id_partido === p.id_partido &&
-            r.id_jugador_evaluado === parseInt(CURRENT_USER_ID)
-        );
-      }
+    // Buscar reseña del partido
+    let calificacion = null;
+    if (reseñas && reseñas.length > 0) {
+      calificacion = reseñas.find(
+        (r) =>
+          r.id_partido === p.id_partido &&
+          r.id_jugador_evaluado === parseInt(CURRENT_USER_ID)
+      );
+    }
 
-      const container = document.createElement("div");
-      container.className = "border-bottom p-4";
+    const container = document.createElement("div");
+    container.className = "border-bottom p-4";
 
-      const row = document.createElement("div");
-      row.className = "d-flex align-items-center mb-3";
+    const row = document.createElement("div");
+    row.className = "d-flex align-items-center mb-3";
 
-      const badge = document.createElement("div");
+    const badge = document.createElement("div");
 
-      if (equipoGanador === 1) {
-        badge.className = "badge text-bg-success me-3 p-2";
-        badge.innerHTML = '<i class="bi bi-trophy-fill"></i>';
-      } else if (equipoGanador === 0) {
-        badge.className = "badge text-bg-secondary me-3 p-2";
-        badge.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
-      } else {
-        badge.className = "badge text-bg-danger me-3 p-2";
-        badge.innerHTML = '<i class="bi bi-x-circle-fill"></i>';
-      }
+    if (equipoGanador === 1) {
+      badge.className = "badge text-bg-success me-3 p-2";
+      badge.innerHTML = '<i class="bi bi-trophy-fill"></i>';
+    } else if (equipoGanador === 0) {
+      badge.className = "badge text-bg-secondary me-3 p-2";
+      badge.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
+    } else {
+      badge.className = "badge text-bg-danger me-3 p-2";
+      badge.innerHTML = '<i class="bi bi-x-circle-fill"></i>';
+    }
 
-      const main = document.createElement("div");
-      main.className = "flex-grow-1";
+    const main = document.createElement("div");
+    main.className = "flex-grow-1";
 
-      const h5 = document.createElement("h5");
-      h5.className = "mb-1";
-      h5.textContent = `${resultado} ${p.goles_mi_equipo} - ${p.goles_equipo_rival}`;
+    const h5 = document.createElement("h5");
+    h5.className = "mb-1";
+    h5.textContent = `${resultado} ${p.goles_mi_equipo} - ${p.goles_equipo_rival}`;
 
-      const pMeta = document.createElement("p");
-      pMeta.className = "text-muted mb-0";
-      pMeta.textContent = `${p.nombre_cancha || "—"} • ${
-        p.fecha_partido || "—"
-      } • ${p.hora_partido || "—"}`;
+    const pMeta = document.createElement("p");
+    pMeta.className = "text-muted mb-0";
+    pMeta.textContent = `${p.nombre_cancha || "—"} • ${
+      p.fecha_partido || "—"
+    } • ${p.hora_partido || "—"}`;
 
-      main.appendChild(h5);
-      main.appendChild(pMeta);
+    main.appendChild(h5);
+    main.appendChild(pMeta);
 
-      const aside = document.createElement("div");
-      aside.className = "text-end";
-      aside.innerHTML = `
+    const aside = document.createElement("div");
+    aside.className = "text-end";
+    aside.innerHTML = `
       <small class="text-muted d-block">${p.tipo_partido || "—"}</small>
       <small class="text-muted">${p.dia_semana || "—"}</small>
-      `;
+    `;
 
-      row.appendChild(badge);
-      row.appendChild(main);
-      row.appendChild(aside);
+    row.appendChild(badge);
+    row.appendChild(main);
+    row.appendChild(aside);
 
-      const desc = document.createElement("p");
-      desc.className = "mb-3";
-      desc.textContent =
-        calificacion?.comentario || "Sin comentarios sobre este partido.";
+    const desc = document.createElement("p");
+    desc.className = "mb-3";
+    desc.textContent =
+      calificacion?.comentario || "Sin comentarios sobre este partido.";
 
-      const footer = document.createElement("div");
-      footer.className = "d-flex justify-content-between align-items-center";
+    const footer = document.createElement("div");
+    footer.className = "d-flex justify-content-between align-items-center";
 
-      // Generar estrellas de calificación
-      let estrellasHTML = "";
-      if (calificacion) {
-        const puntuacion = parseInt(calificacion.puntuacion);
-        for (let i = 1; i <= 5; i++) {
-          if (i <= puntuacion) {
-            estrellasHTML += "★";
-          } else {
-            estrellasHTML += "☆";
-          }
+    // Generar estrellas de calificación
+    let estrellasHTML = "";
+    if (calificacion) {
+      const puntuacion = parseInt(calificacion.puntuacion);
+      for (let i = 1; i <= 5; i++) {
+        if (i <= puntuacion) {
+          estrellasHTML += "★";
+        } else {
+          estrellasHTML += "☆";
         }
-      } else {
-        estrellasHTML = "Sin calificar";
       }
+    } else {
+      estrellasHTML = "Sin calificar";
+    }
 
-      footer.innerHTML = `
+    footer.innerHTML = `
       <small class="text-muted">${p.equipo_asignado || "—"}</small>
       <div>
         <span class="text-warning">${estrellasHTML}</span>
@@ -584,14 +561,13 @@ function cargarPartidosJugadorDOM(partidos, reseñas) {
           calificacion ? "Calificación recibida" : ""
         }</small>
       </div>
-      `;
+    `;
 
-      container.appendChild(row);
-      container.appendChild(desc);
-      container.appendChild(footer);
+    container.appendChild(row);
+    container.appendChild(desc);
+    container.appendChild(footer);
 
-      lista.appendChild(container);
-    }
+    lista.appendChild(container);
   });
 }
 

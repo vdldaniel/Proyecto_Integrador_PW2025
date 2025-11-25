@@ -22,7 +22,7 @@ include HEAD_COMPONENT;
 ?>
 
 <body>
-    <header class="hero bg-image" style="background-image: url('<?= IMG_BG2 ?>');">
+    <header class="hero bg-image" style="background-image: url('<?= IMG_LANDING ?>');">
         <div class="hero-overlay"></div>
 
         <div class="container position-relative">
