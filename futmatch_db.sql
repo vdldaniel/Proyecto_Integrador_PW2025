@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2025 at 03:30 AM
+-- Generation Time: Dec 01, 2025 at 05:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -133,7 +133,7 @@ CREATE TABLE `canchas` (
 --
 
 INSERT INTO `canchas` (`id_cancha`, `id_admin_cancha`, `id_direccion`, `nombre`, `descripcion`, `telefono`, `id_estado`, `foto`, `banner`, `id_superficie`, `politicas_reservas`) VALUES
-(1, 8, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, NULL),
+(1, 8, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, '- Reserva mínima con 24 horas de anticipacion\n- Cancelación gratuita hasta 12 horas antes\n- Depósito del 50% al confirmar la reserva (comunicarse con Wpp para hacer la misma)'),
 (2, 9, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 3, NULL, NULL, 1, NULL),
 (3, 8, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL),
 (5, 9, 7, 'Cancha Sur', 'Test Descripcion', NULL, 1, NULL, NULL, 1, NULL);
@@ -462,8 +462,8 @@ CREATE TABLE `horarios_cancha` (
   `id_horario` int(11) NOT NULL,
   `id_cancha` int(11) NOT NULL,
   `id_dia` int(11) NOT NULL,
-  `hora_apertura` time NOT NULL,
-  `hora_cierre` time NOT NULL
+  `hora_apertura` time DEFAULT NULL,
+  `hora_cierre` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -471,13 +471,6 @@ CREATE TABLE `horarios_cancha` (
 --
 
 INSERT INTO `horarios_cancha` (`id_horario`, `id_cancha`, `id_dia`, `hora_apertura`, `hora_cierre`) VALUES
-(1, 1, 1, '08:00:00', '22:00:00'),
-(2, 1, 2, '08:00:00', '22:00:00'),
-(3, 1, 3, '08:00:00', '22:00:00'),
-(4, 1, 4, '08:00:00', '22:00:00'),
-(5, 1, 5, '08:00:00', '22:00:00'),
-(6, 1, 6, '09:00:00', '24:00:00'),
-(7, 1, 7, '09:00:00', '24:00:00'),
 (8, 2, 1, '07:00:00', '23:00:00'),
 (9, 2, 2, '07:00:00', '23:00:00'),
 (10, 2, 3, '07:00:00', '23:00:00'),
@@ -489,7 +482,14 @@ INSERT INTO `horarios_cancha` (`id_horario`, `id_cancha`, `id_dia`, `hora_apertu
 (16, 3, 2, '09:00:00', '21:00:00'),
 (17, 3, 3, '09:00:00', '21:00:00'),
 (18, 3, 4, '09:00:00', '21:00:00'),
-(19, 3, 5, '09:00:00', '21:00:00');
+(19, 3, 5, '09:00:00', '21:00:00'),
+(34, 1, 1, '08:00:00', '22:00:00'),
+(35, 1, 2, '08:00:00', '22:00:00'),
+(36, 1, 3, NULL, NULL),
+(37, 1, 4, '08:00:00', '22:00:00'),
+(38, 1, 5, '08:00:00', '22:00:00'),
+(39, 1, 6, '09:00:00', '13:00:00'),
+(40, 1, 7, '09:00:00', '14:00:00');
 
 -- --------------------------------------------------------
 
@@ -781,6 +781,13 @@ CREATE TABLE `personas_externas` (
   `telefono` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `personas_externas`
+--
+
+INSERT INTO `personas_externas` (`id_externo`, `nombre`, `apellido`, `telefono`) VALUES
+(3, 'Patricio', 'Conte', '+541166558855');
+
 -- --------------------------------------------------------
 
 --
@@ -867,7 +874,14 @@ INSERT INTO `reservas` (`id_reserva`, `id_cancha`, `id_tipo_reserva`, `fecha`, `
 (6, 1, 1, '2025-11-28', '2025-11-28', '15:00:00', '18:00:00', 'Partido fin de año', 'Nos juntamos a jugar un partidito y después para el que quiera unas birras en el bar de enfrente', 3, '2025-11-24 15:54:06', 1, 1, NULL),
 (7, 3, 1, '2025-11-30', '2025-11-30', '11:00:00', '18:00:00', 'Partido Dominguero', 'El que quiera participar por favor contactarme al +541174589685', 3, '2025-11-24 16:08:17', 6, 6, NULL),
 (8, 5, 1, '2025-12-08', '2025-12-08', '16:00:00', '19:00:00', 'Feriado', 'Festejamos el feriado jugando al futbol', 3, '2025-11-24 16:10:09', 4, 4, NULL),
-(11, 1, 1, '2025-12-16', '2025-12-16', '12:00:00', '15:00:00', 'Partido Amistoso', 'Juan es cliente regular.', 3, '2025-11-30 22:55:16', 8, 1, NULL);
+(11, 1, 1, '2025-12-16', '2025-12-16', '12:00:00', '15:00:00', 'Partido Amistoso', 'Juan es cliente regular.', 3, '2025-11-30 22:55:16', 8, 1, NULL),
+(12, 3, 1, '2025-12-20', '2025-12-20', '11:00:00', '15:00:00', 'Fiesta de cumpleaños', 'Es para el hijo de Juan', 3, '2025-11-30 23:37:45', 8, 1, NULL),
+(13, 1, 4, '2025-12-20', '2025-12-20', '11:00:00', '16:00:00', 'Fiesta de cumpleaños', 'Es para el hijo de Juan y sus compañeros de colegio (aprox 16 años).', 3, '2025-11-30 23:39:15', 8, 1, NULL),
+(14, 1, 4, '2025-01-20', '2025-01-20', '15:00:00', '18:00:00', 'Escuelita niños', 'Escuelita de futbol para niños de 11 años', 3, '2025-11-30 23:47:22', 8, NULL, 3),
+(15, 1, 1, '2025-12-22', '2025-12-22', '10:00:00', '15:00:00', 'Partido Escuela Grilli', 'Reservaron para utilizar el predio el turno de Ed. Física', 3, '2025-12-01 00:02:07', 8, 3, NULL),
+(17, 1, 4, '2025-12-19', '2025-12-19', '11:00:00', '18:00:00', 'Fiesta de cumpleaños', 'El cumpleañero es el hijo de Laura', 3, '2025-12-01 00:06:55', 8, 6, NULL),
+(18, 1, 1, '2025-12-17', '2025-12-17', '19:00:00', '21:00:00', 'Futbol Femenino', 'Partido exclusivo femenino', 3, '2025-12-01 00:15:32', 8, 4, NULL),
+(19, 1, 4, '2025-12-04', '2025-12-04', '12:00:00', '15:00:00', 'Combo Partido + Parrilla', 'Preparar la parrilla para la llegada de Diego', 3, '2025-12-01 00:23:55', 8, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -1708,7 +1722,7 @@ ALTER TABLE `fases_torneo`
 -- AUTO_INCREMENT for table `horarios_cancha`
 --
 ALTER TABLE `horarios_cancha`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `jugadores`
@@ -1750,7 +1764,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT for table `personas_externas`
 --
 ALTER TABLE `personas_externas`
-  MODIFY `id_externo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_externo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `posiciones`
@@ -1768,7 +1782,7 @@ ALTER TABLE `resenias_canchas`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2047,6 +2061,7 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
 -- =========================================================
 -- NO BORRAR: SE AGREGAN VISTAS MANUALMENTE YA QUE PHPMYADMIN NO LAS EXPORTA BIEN
