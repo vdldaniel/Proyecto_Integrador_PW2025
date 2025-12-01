@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2025 at 07:45 PM
+-- Generation Time: Dec 01, 2025 at 03:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,16 +32,19 @@ USE `futmatch_db`;
 DROP TABLE IF EXISTS `admin_canchas`;
 CREATE TABLE `admin_canchas` (
   `id_admin_cancha` int(11) NOT NULL,
-  `id_solicitud` int(11) NOT NULL
+  `id_solicitud` int(11) NOT NULL,
+  `telefono` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin_canchas`
 --
 
-INSERT INTO `admin_canchas` (`id_admin_cancha`, `id_solicitud`) VALUES
-(1, 1),
-(2, 2);
+INSERT INTO `admin_canchas` (`id_admin_cancha`, `id_solicitud`, `telefono`) VALUES
+(1, 3, NULL),
+(2, 4, NULL),
+(8, 1, '1155669988'),
+(9, 2, '1166554477');
 
 -- --------------------------------------------------------
 
@@ -130,10 +133,10 @@ CREATE TABLE `canchas` (
 --
 
 INSERT INTO `canchas` (`id_cancha`, `id_admin_cancha`, `id_direccion`, `nombre`, `descripcion`, `telefono`, `id_estado`, `foto`, `banner`, `id_superficie`, `politicas_reservas`) VALUES
-(1, 1, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, NULL),
-(2, 2, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 3, NULL, NULL, 1, NULL),
-(3, 1, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL),
-(5, 1, 7, 'Cancha Sur', 'Test Descripcion', NULL, 1, NULL, NULL, 1, NULL);
+(1, 8, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, NULL),
+(2, 9, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 3, NULL, NULL, 1, NULL),
+(3, 8, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL),
+(5, 9, 7, 'Cancha Sur', 'Test Descripcion', NULL, 1, NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,8 +159,6 @@ CREATE TABLE `canchas_tipos_partido` (
 INSERT INTO `canchas_tipos_partido` (`id_cancha`, `id_tipo_partido`, `activo`, `fecha_habilitacion`) VALUES
 (1, 1, 1, '2025-11-13 00:16:20'),
 (2, 1, 1, '2025-11-13 00:16:20'),
-(2, 2, 1, '2025-11-13 00:16:20'),
-(3, 1, 1, '2025-11-13 00:16:20'),
 (3, 4, 1, '2025-11-13 00:16:20'),
 (5, 1, 1, '2025-11-24 14:51:18');
 
@@ -589,7 +590,7 @@ CREATE TABLE `participantes_partidos` (
   `nombre_invitado` varchar(100) DEFAULT NULL,
   `id_rol` int(11) NOT NULL,
   `id_estado` int(11) NOT NULL DEFAULT 1,
-  `equipo` smallint(6) DEFAULT NULL
+  `equipo` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -610,7 +611,11 @@ INSERT INTO `participantes_partidos` (`id_participante`, `id_partido`, `id_jugad
 (11, 4, 4, NULL, 2, 3, 1),
 (12, 2, 1, NULL, 3, 1, 1),
 (13, 2, 4, NULL, 3, 6, 2),
-(14, 2, 6, NULL, 3, 1, 1);
+(14, 2, 6, NULL, 3, 1, 1),
+(15, 7, 1, NULL, 1, 3, 1),
+(16, 9, 6, NULL, 1, 3, 1),
+(17, 8, 4, NULL, 1, 3, 2),
+(18, 8, 1, NULL, 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -624,8 +629,8 @@ CREATE TABLE `partidos` (
   `id_anfitrion` int(11) NOT NULL,
   `id_tipo_partido` int(11) NOT NULL DEFAULT 1,
   `abierto` tinyint(1) DEFAULT 0,
-  `goles_equipo_A` int(10) NOT NULL,
-  `goles_equipo_B` int(10) NOT NULL
+  `goles_equipo_A` int(10) DEFAULT NULL,
+  `goles_equipo_B` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -636,7 +641,11 @@ INSERT INTO `partidos` (`id_partido`, `id_anfitrion`, `id_tipo_partido`, `abiert
 (1, 1, 1, 0, 1, 1),
 (2, 3, 1, 1, 3, 0),
 (3, 5, 2, 1, 0, 0),
-(4, 1, 1, 0, 1, 2);
+(4, 1, 1, 0, 1, 2),
+(5, 1, 3, 0, 0, 0),
+(7, 1, 1, 0, 0, 0),
+(8, 4, 1, 1, NULL, NULL),
+(9, 6, 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -657,7 +666,9 @@ CREATE TABLE `partidos_reservas` (
 INSERT INTO `partidos_reservas` (`id_partido`, `id_reserva`) VALUES
 (1, 1),
 (2, 3),
-(4, 5);
+(7, 6),
+(8, 8),
+(9, 7);
 
 -- --------------------------------------------------------
 
@@ -759,6 +770,20 @@ INSERT INTO `permisos` (`id_permiso`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `personas_externas`
+--
+
+DROP TABLE IF EXISTS `personas_externas`;
+CREATE TABLE `personas_externas` (
+  `id_externo` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `telefono` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posiciones`
 --
 
@@ -818,24 +843,31 @@ CREATE TABLE `reservas` (
   `id_cancha` int(11) NOT NULL,
   `id_tipo_reserva` int(11) NOT NULL DEFAULT 1,
   `fecha` date NOT NULL,
+  `fecha_fin` date NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
   `titulo` varchar(50) DEFAULT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `id_estado` int(11) NOT NULL DEFAULT 1,
-  `fecha_solicitud` datetime DEFAULT current_timestamp()
+  `fecha_solicitud` datetime DEFAULT current_timestamp(),
+  `id_creador_usuario` int(11) NOT NULL,
+  `id_titular_jugador` int(11) DEFAULT NULL,
+  `id_titular_externo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `reservas`
 --
 
-INSERT INTO `reservas` (`id_reserva`, `id_cancha`, `id_tipo_reserva`, `fecha`, `hora_inicio`, `hora_fin`, `titulo`, `descripcion`, `id_estado`, `fecha_solicitud`) VALUES
-(1, 1, 1, '2025-11-15', '18:00:00', '19:00:00', NULL, '', 3, '2025-11-13 00:16:20'),
-(2, 1, 1, '2025-11-16', '20:00:00', '21:00:00', 'Partido Casual', '', 1, '2025-11-13 00:16:20'),
-(3, 2, 1, '2025-11-17', '19:00:00', '20:00:00', 'Fútbol Femenino', 'Partido amistoso para pasar un buen rato. Todos los niveles son bienvenidos. Se juega con reglas estándar de fútbol 5.', 3, '2025-11-13 00:16:20'),
-(4, 2, 1, '2025-11-18', '21:00:00', '22:00:00', NULL, '', 1, '2025-11-13 00:16:20'),
-(5, 2, 1, '2025-11-14', '11:00:00', '12:00:00', 'Partido entre 2 equipos', '', 3, '2025-11-13 11:18:11');
+INSERT INTO `reservas` (`id_reserva`, `id_cancha`, `id_tipo_reserva`, `fecha`, `fecha_fin`, `hora_inicio`, `hora_fin`, `titulo`, `descripcion`, `id_estado`, `fecha_solicitud`, `id_creador_usuario`, `id_titular_jugador`, `id_titular_externo`) VALUES
+(1, 1, 1, '2025-11-15', '2025-11-15', '18:00:00', '19:00:00', 'Test', '', 3, '2025-11-13 00:16:20', 1, 1, NULL),
+(2, 1, 1, '2025-11-16', '2025-11-16', '20:00:00', '21:00:00', 'Partido Casual', '', 1, '2025-11-13 00:16:20', 3, 3, NULL),
+(3, 2, 1, '2025-11-17', '2025-11-17', '19:00:00', '20:00:00', 'Fútbol Femenino', 'Partido amistoso para pasar un buen rato. Todos los niveles son bienvenidos. Se juega con reglas estándar de fútbol 5.', 3, '2025-11-13 00:16:20', 5, 5, NULL),
+(4, 2, 1, '2025-11-18', '2025-11-18', '21:00:00', '22:00:00', NULL, '', 1, '2025-11-13 00:16:20', 2, 2, NULL),
+(6, 1, 1, '2025-11-28', '2025-11-28', '15:00:00', '18:00:00', 'Partido fin de año', 'Nos juntamos a jugar un partidito y después para el que quiera unas birras en el bar de enfrente', 3, '2025-11-24 15:54:06', 1, 1, NULL),
+(7, 3, 1, '2025-11-30', '2025-11-30', '11:00:00', '18:00:00', 'Partido Dominguero', 'El que quiera participar por favor contactarme al +541174589685', 3, '2025-11-24 16:08:17', 6, 6, NULL),
+(8, 5, 1, '2025-12-08', '2025-12-08', '16:00:00', '19:00:00', 'Feriado', 'Festejamos el feriado jugando al futbol', 3, '2025-11-24 16:10:09', 4, 4, NULL),
+(11, 1, 1, '2025-12-16', '2025-12-16', '12:00:00', '15:00:00', 'Partido Amistoso', 'Juan es cliente regular.', 3, '2025-11-30 22:55:16', 8, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -849,16 +881,6 @@ CREATE TABLE `reservas_usuarios` (
   `id_usuario` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `reservas_usuarios`
---
-
-INSERT INTO `reservas_usuarios` (`id_reserva`, `id_usuario`, `id_rol`) VALUES
-(1, 1, 1),
-(2, 3, 1),
-(3, 5, 1),
-(4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -1177,10 +1199,11 @@ CREATE TABLE `tipos_reserva` (
 --
 
 INSERT INTO `tipos_reserva` (`id_tipo_reserva`, `nombre`, `descripcion`) VALUES
-(1, 'jugador', 'Reserva realizada por un jugador desde la app'),
-(2, 'torneo', 'Reserva del admin para partido de torneo'),
-(3, 'mantenimiento', 'Reserva del admin para mantenimiento/limpieza'),
-(4, 'evento', 'Reserva del admin para evento especial');
+(1, 'Partido', 'Reserva dedicada a un partido'),
+(2, 'Torneo', 'Reserva del admin para partido de torneo'),
+(3, 'Mantenimiento', 'Reserva del admin para mantenimiento/limpieza'),
+(4, 'Evento', 'Reserva del admin para evento especial'),
+(6, 'Otros', 'Tipo de reserva no clasificado');
 
 -- --------------------------------------------------------
 
@@ -1467,6 +1490,12 @@ ALTER TABLE `permisos`
   ADD PRIMARY KEY (`id_permiso`);
 
 --
+-- Indexes for table `personas_externas`
+--
+ALTER TABLE `personas_externas`
+  ADD PRIMARY KEY (`id_externo`);
+
+--
 -- Indexes for table `posiciones`
 --
 ALTER TABLE `posiciones`
@@ -1488,7 +1517,10 @@ ALTER TABLE `reservas`
   ADD KEY `id_cancha` (`id_cancha`),
   ADD KEY `id_tipo_reserva` (`id_tipo_reserva`),
   ADD KEY `id_estado` (`id_estado`),
-  ADD KEY `idx_reservas_fecha_cancha` (`fecha`,`id_cancha`);
+  ADD KEY `idx_reservas_fecha_cancha` (`fecha`,`id_cancha`),
+  ADD KEY `fk_reservas_creador` (`id_creador_usuario`),
+  ADD KEY `fk_reservas_titular_jugador` (`id_titular_jugador`),
+  ADD KEY `fk_reservas_titular_externo` (`id_titular_externo`);
 
 --
 -- Indexes for table `reservas_usuarios`
@@ -1694,13 +1726,13 @@ ALTER TABLE `observaciones_canchas`
 -- AUTO_INCREMENT for table `participantes_partidos`
 --
 ALTER TABLE `participantes_partidos`
-  MODIFY `id_participante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_participante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `id_partido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_partido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `partidos_torneos`
@@ -1713,6 +1745,12 @@ ALTER TABLE `partidos_torneos`
 --
 ALTER TABLE `permisos`
   MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `personas_externas`
+--
+ALTER TABLE `personas_externas`
+  MODIFY `id_externo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `posiciones`
@@ -1730,7 +1768,7 @@ ALTER TABLE `resenias_canchas`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1784,7 +1822,7 @@ ALTER TABLE `tipos_partido`
 -- AUTO_INCREMENT for table `tipos_reserva`
 --
 ALTER TABLE `tipos_reserva`
-  MODIFY `id_tipo_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tipo_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `torneos`
@@ -1948,6 +1986,9 @@ ALTER TABLE `resenias_canchas`
 -- Constraints for table `reservas`
 --
 ALTER TABLE `reservas`
+  ADD CONSTRAINT `fk_reservas_creador` FOREIGN KEY (`id_creador_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `fk_reservas_titular_externo` FOREIGN KEY (`id_titular_externo`) REFERENCES `personas_externas` (`id_externo`),
+  ADD CONSTRAINT `fk_reservas_titular_jugador` FOREIGN KEY (`id_titular_jugador`) REFERENCES `jugadores` (`id_jugador`),
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_cancha`) REFERENCES `canchas` (`id_cancha`),
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_tipo_reserva`) REFERENCES `tipos_reserva` (`id_tipo_reserva`),
   ADD CONSTRAINT `reservas_ibfk_3` FOREIGN KEY (`id_estado`) REFERENCES `estados_solicitudes` (`id_estado`);
@@ -2578,3 +2619,144 @@ FROM usuarios u
 INNER JOIN jugadores j ON u.id_usuario = j.id_jugador
 INNER JOIN sexo s ON j.id_sexo = s.id_sexo
 INNER JOIN estados_usuarios e ON u.id_estado = e.id_estado;
+
+/* RESERVAS */
+DROP VIEW IF EXISTS vista_reservas;
+CREATE VIEW vista_reservas AS
+SELECT 
+    r.id_reserva,
+    r.fecha,
+    r.fecha_fin,
+    r.hora_inicio,
+    r.hora_fin,
+    r.titulo,
+    r.descripcion,
+    
+    r.id_tipo_reserva,
+    tr.nombre AS tipo_reserva,
+
+    r.id_estado,
+    e.nombre AS estado_reserva,
+    
+    -- Creador de la reserva (admin que la creó)
+    r.id_creador_usuario,
+    u_creador.nombre AS nombre_creador,
+    u_creador.apellido AS apellido_creador,
+    
+    -- Titular de la reserva (jugador o persona externa)
+    r.id_titular_jugador,
+    r.id_titular_externo,
+    
+    -- Datos del titular si es jugador
+    j_titular.username AS username_titular,
+    u_titular.nombre AS nombre_titular_jugador,
+    u_titular.apellido AS apellido_titular_jugador,
+    j_titular.telefono AS telefono_titular_jugador,
+    
+    -- Datos del titular si es persona externa
+    pe.nombre AS nombre_titular_externo,
+    pe.apellido AS apellido_titular_externo,
+    pe.telefono AS telefono_titular_externo,
+    
+    -- Nombre completo del titular (jugador o externo)
+    CASE
+        WHEN r.id_titular_jugador IS NOT NULL THEN CONCAT(u_titular.nombre, ' ', u_titular.apellido)
+        WHEN r.id_titular_externo IS NOT NULL THEN CONCAT(pe.nombre, ' ', pe.apellido)
+        ELSE 'Sin titular'
+    END AS titular_nombre_completo,
+    
+    -- Teléfono del titular (jugador o externo)
+    COALESCE(j_titular.telefono, pe.telefono) AS titular_telefono,
+    
+    -- Indicador de tipo de reserva
+    CASE
+        WHEN r.id_titular_jugador IS NOT NULL THEN 'jugador'
+        WHEN r.id_titular_externo IS NOT NULL THEN 'externo'
+        ELSE NULL
+    END AS tipo_titular,
+    
+    c.id_cancha,
+    c.nombre AS nombre_cancha
+
+FROM reservas r
+INNER JOIN tipos_reserva tr ON r.id_tipo_reserva = tr.id_tipo_reserva
+INNER JOIN estados_solicitudes e ON r.id_estado = e.id_estado
+INNER JOIN usuarios u_creador ON r.id_creador_usuario = u_creador.id_usuario
+INNER JOIN canchas c ON r.id_cancha = c.id_cancha
+LEFT JOIN jugadores j_titular ON r.id_titular_jugador = j_titular.id_jugador
+LEFT JOIN usuarios u_titular ON j_titular.id_jugador = u_titular.id_usuario
+LEFT JOIN personas_externas pe ON r.id_titular_externo = pe.id_externo;
+
+
+
+/* DETALLE RESERVA */
+DROP VIEW IF EXISTS vista_reserva_detalle;
+CREATE VIEW vista_reserva_detalle AS
+    SELECT
+        r.id_reserva,
+        r.id_cancha,
+        r.id_tipo_reserva,
+        r.fecha,
+        r.fecha_fin,
+        r.hora_inicio,
+        r.hora_fin,
+        r.titulo,
+        r.descripcion,
+        r.id_estado,
+        r.fecha_solicitud,
+
+        -- Creador de la reserva (admin que la creó)
+        r.id_creador_usuario,
+        u_creador.nombre AS nombre_creador,
+        u_creador.apellido AS apellido_creador,
+        CONCAT(u_creador.nombre, ' ', u_creador.apellido) AS creador_nombre_completo,
+        
+        -- Titular de la reserva (jugador o persona externa)
+        r.id_titular_jugador,
+        r.id_titular_externo,
+        
+        -- Datos del titular si es jugador
+        j_titular.username AS username_titular,
+        u_titular.nombre AS nombre_titular_jugador,
+        u_titular.apellido AS apellido_titular_jugador,
+        j_titular.telefono AS telefono_titular_jugador,
+        CONCAT(u_titular.nombre, ' ', u_titular.apellido) AS titular_jugador_nombre_completo,
+        
+        -- Datos del titular si es persona externa
+        pe.nombre AS nombre_titular_externo,
+        pe.apellido AS apellido_titular_externo,
+        pe.telefono AS telefono_titular_externo,
+        CONCAT(pe.nombre, ' ', pe.apellido) AS titular_externo_nombre_completo,
+        
+        -- Nombre completo del titular (jugador o externo)
+        CASE
+            WHEN r.id_titular_jugador IS NOT NULL THEN CONCAT(u_titular.nombre, ' ', u_titular.apellido)
+            WHEN r.id_titular_externo IS NOT NULL THEN CONCAT(pe.nombre, ' ', pe.apellido)
+            ELSE 'Sin titular'
+        END AS titular_nombre_completo,
+        
+        -- Teléfono del titular (jugador o externo)
+        COALESCE(j_titular.telefono, pe.telefono) AS titular_telefono,
+        
+        -- Indicador de tipo de reserva
+        CASE
+            WHEN r.id_titular_jugador IS NOT NULL THEN 'jugador'
+            WHEN r.id_titular_externo IS NOT NULL THEN 'externo'
+            ELSE NULL
+        END AS tipo_titular,
+
+        tr.nombre AS tipo_reserva,
+        tr.descripcion AS descripcion_tipo_reserva,
+        e.nombre AS estado_reserva,
+        c.nombre AS nombre_cancha,
+        c.descripcion AS descripcion_cancha
+    
+    FROM reservas r
+    INNER JOIN tipos_reserva tr ON r.id_tipo_reserva = tr.id_tipo_reserva
+    INNER JOIN estados_solicitudes e ON r.id_estado = e.id_estado
+    INNER JOIN usuarios u_creador ON r.id_creador_usuario = u_creador.id_usuario
+    INNER JOIN canchas c ON r.id_cancha = c.id_cancha
+    LEFT JOIN jugadores j_titular ON r.id_titular_jugador = j_titular.id_jugador
+    LEFT JOIN usuarios u_titular ON j_titular.id_jugador = u_titular.id_usuario
+    LEFT JOIN personas_externas pe ON r.id_titular_externo = pe.id_externo;
+    

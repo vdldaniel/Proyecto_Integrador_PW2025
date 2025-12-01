@@ -11,9 +11,7 @@
         <div class="col-md-4">
             <select class="form-select" id="selectorCancha">
                 <option selected>Seleccionar cancha</option>
-                <option value="1">Cancha A - Fútbol 11</option>
-                <option value="2">Cancha B - Fútbol 7</option>
-                <option value="3">Cancha C - Fútbol 5</option>
+                <!-- Las opciones se llenan dinámicamente con JavaScript -->
             </select>
             <label class="form-label small text-muted" for="selectorCancha">Filtrar por cancha</label>
         </div>

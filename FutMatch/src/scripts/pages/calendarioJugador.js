@@ -323,28 +323,28 @@ class AplicacionCalendarioJugador extends CalendarioBase {
 
   mostrarModalReservarCancha(fecha = null, hora = null) {
     // Pre-llenar fecha y hora si se proporcionan
-    const fechaReserva = document.getElementById("fechaReserva");
-    const horaReserva = document.getElementById("horaReserva");
+    const fechaComienzo = document.getElementById("fechaComienzo");
+    const horaComienzo = document.getElementById("horaComienzo");
 
-    if (fechaReserva) {
+    if (fechaComienzo) {
       if (fecha) {
         // Si fecha es un string ISO, usarlo directamente
         if (typeof fecha === "string") {
-          fechaReserva.value = fecha;
+          fechaComienzo.value = fecha;
         } else {
-          fechaReserva.value = fecha.toISOString().split("T")[0];
+          fechaComienzo.value = fecha.toISOString().split("T")[0];
         }
       } else {
         // Establecer fecha actual por defecto
         const hoy = new Date();
         const mañana = new Date(hoy);
         mañana.setDate(hoy.getDate() + 1);
-        fechaReserva.value = mañana.toISOString().split("T")[0];
+        fechaComienzo.value = mañana.toISOString().split("T")[0];
       }
     }
 
-    if (horaReserva && hora) {
-      horaReserva.value = hora;
+    if (horaComienzo && hora) {
+      horaComienzo.value = hora;
     }
 
     // Mostrar modal
@@ -372,8 +372,8 @@ class AplicacionCalendarioJugador extends CalendarioBase {
 
   enviarSolicitudReserva() {
     // Obtener datos del formulario
-    const fecha = document.getElementById("fechaReserva").value;
-    const hora = document.getElementById("horaReserva").value;
+    const fecha = document.getElementById("fechaComienzo").value;
+    const hora = document.getElementById("horaComienzo").value;
     const duracion = document.getElementById("duracionReserva").value;
     const comentarios = document.getElementById("comentariosReserva").value;
 

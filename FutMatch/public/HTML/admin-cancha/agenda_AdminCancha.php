@@ -56,7 +56,7 @@ require_once HEAD_COMPONENT;
     include CALENDARIO_COMPONENT;
     ?>
 
-    <!-- Controles adicionales específicos del admin -->
+    <!-- Controles adicionales específicos del admin 
     <div class="row mb-3">
       <div class="col-md-8">
         <div class="input-group">
@@ -71,14 +71,16 @@ require_once HEAD_COMPONENT;
         </div>
       </div>
       <div class="col-md-4">
-        <!-- Espacio reservado para controles adicionales futuros -->
+        Espacio reservado para controles adicionales futuros 
       </div>
     </div>
+    -->
+
   </main>
 
   <!--MODALES-->
 
-  <!-- Modal de Notificaciones/Solicitudes -->
+  <!-- Modal de Notificaciones/Solicitudes
   <div class="modal fade" id="modalNotificaciones" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -90,7 +92,7 @@ require_once HEAD_COMPONENT;
         </div>
         <div class="modal-body">
           <div id="listaSolicitudes">
-            <!-- Las solicitudes se renderizan dinámicamente desde JavaScript -->
+            Las solicitudes se renderizan dinámicamente desde JavaScript
           </div>
 
           <div id="sinSolicitudes" class="text-center d-none">
@@ -103,7 +105,7 @@ require_once HEAD_COMPONENT;
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Modal de Configuración -->
   <div class="modal fade" id="modalConfigurarHorarios">
@@ -117,84 +119,45 @@ require_once HEAD_COMPONENT;
         </div>
         <div class="modal-body">
           <form id="configuracionForm">
-            <!-- Horarios de operación -->
+            <!-- Selección de cancha -->
             <div class="mb-4">
-              <h6 class="fw-bold mb-3">Horarios de Operación</h6>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="horaApertura" class="form-label">Hora de apertura</label>
-                  <input type="time" class="form-control" id="horaApertura"
-                    value="08:00" min="06:00" max="23:00" required>
-                  <div class="form-text">Horario mínimo: 06:00</div>
-                </div>
-                <div class="col-md-6">
-                  <label for="horaCierre" class="form-label">Hora de cierre</label>
-                  <input type="time" class="form-control" id="horaCierre"
-                    value="22:00" min="07:00" max="24:00" required>
-                  <div class="form-text">Horario máximo: 24:00</div>
-                </div>
-              </div>
-              <div class="alert alert-info d-flex align-items-center">
-                <i class="bi bi-info-circle me-2"></i>
-                <small>El horario de cierre debe ser posterior al de apertura</small>
-              </div>
+              <label for="canchaConfiguracion" class="form-label fw-bold">Cancha</label>
+              <select class="form-select" id="canchaConfiguracion" required>
+                <option value="">Seleccione una cancha...</option>
+              </select>
             </div>
 
-            <!-- Días de operación -->
+            <!-- Horarios de operación por día -->
             <div class="mb-4">
-              <h6 class="fw-bold mb-3">Días de Operación</h6>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="lunes" checked>
-                    <label class="form-check-label" for="lunes">Lunes</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="martes" checked>
-                    <label class="form-check-label" for="martes">Martes</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="miercoles" checked>
-                    <label class="form-check-label" for="miercoles">Miércoles</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="jueves" checked>
-                    <label class="form-check-label" for="jueves">Jueves</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="viernes" checked>
-                    <label class="form-check-label" for="viernes">Viernes</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="sabado" checked>
-                    <label class="form-check-label" for="sabado">Sábado</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="domingo" checked>
-                    <label class="form-check-label" for="domingo">Domingo</label>
-                  </div>
+              <h6 class="fw-bold mb-3">Horarios de Operación</h6>
+              <div id="horariosContainer">
+                <!-- Los horarios se cargarán dinámicamente con JavaScript -->
+                <div class="text-muted text-center py-3">
+                  <i class="bi bi-info-circle me-2"></i>
+                  Seleccione una cancha para configurar sus horarios
                 </div>
               </div>
             </div>
 
             <!-- Información de la cancha -->
-            <div class="mb-4">
-              <h6 class="fw-bold mb-3">Información del Complejo</h6>
+            <div class="mb-4" id="seccionInfoCancha" style="display: none;">
+              <h6 class="fw-bold mb-3">Información de la Cancha</h6>
               <div class="card">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
-                      <p class="mb-2"><strong>Nombre:</strong><br><span id="nombreComplejo">Complejo Deportivo Central</span></p>
-                      <p class="mb-0"><strong>Dirección:</strong><br><span id="direccionComplejo">Av. Principal 123, Buenos Aires</span></p>
+                      <p class="mb-2"><strong>Nombre:</strong><br><span id="nombreCancha">-</span></p>
+                      <p class="mb-2"><strong>Dirección:</strong><br><span id="direccionCancha">-</span></p>
                     </div>
                     <div class="col-md-6">
-                      <p class="mb-2"><strong>Teléfono:</strong><br><span id="telefonoComplejo">+54 11 1234-5678</span></p>
-                      <div class="d-grid">
-                        <a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>" type="button" class="btn btn-dark" id="botonVerPerfilCancha">
+                      <p class="mb-2"><strong>Teléfono:</strong><br><span id="telefonoCancha">-</span></p>
+                      <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-dark btn-sm" id="botonVerPerfilCancha">
                           <i class="bi bi-building me-2"></i>Ver Perfil Completo
-                        </a>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="botonPoliticasReservas">
+                          <i class="bi bi-file-text me-2"></i>Políticas de Reservas
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -244,8 +207,9 @@ require_once HEAD_COMPONENT;
             <!-- Datos del jugador -->
             <div class="row mb-3">
               <div class="col-md-6">
-                <label for="idJugador" class="form-label">ID # Jugador</label>
-                <input type="number" class="form-control" id="idJugador" min="1" required>
+                <label for="username" class="form-label">Username del Jugador</label>
+                <input type="text" class="form-control" id="username" required>
+                <div class="invalid-feedback" id="usernameFeedback">Por favor ingrese un username válido.</div>
               </div>
               <div class="col-md-6 d-flex align-items-end">
                 <div class="form-check">
@@ -273,32 +237,61 @@ require_once HEAD_COMPONENT;
 
             <hr class="my-4">
 
-            <!-- Detalles de la reserva -->
+            <!-- Selección de cancha y tipo de reserva-->
             <div class="row mb-3">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="canchaReserva" class="form-label">Cancha</label>
                 <select class="form-select" id="canchaReserva" required>
                   <option value="">Seleccione una cancha...</option>
-                  <option value="1">Cancha A - Fútbol 11</option>
-                  <option value="2">Cancha B - Fútbol 7</option>
-                  <option value="3">Cancha C - Fútbol 5</option>
+                  <!-- Traer desde get_canchas.php -->
                 </select>
+                <div class="invalid-feedback">Por favor seleccione una cancha.</div>
               </div>
-              <div class="col-md-4">
-                <label for="fechaReserva" class="form-label">Fecha</label>
-                <input type="date" class="form-control" id="fechaReserva" required>
-              </div>
-              <div class="col-md-4">
-                <label for="horaReserva" class="form-label">Hora</label>
-                <input type="time" class="form-control" id="horaReserva"
-                  min="08:00" max="22:00" step="3600" required>
-                <div class="form-text">Horario disponible: 8:00 AM - 10:00 PM</div>
+              <div class="col-md-6">
+                <label for="tipoReserva" class="form-label">Tipo de Reserva</label>
+                <select class="form-select" id="tipoReserva" required>
+                  <option value="">Seleccione un tipo...</option>
+                  <!-- Traer desde getTiposReserva.php -->
+                </select>
+                <div class="invalid-feedback">Por favor seleccione un tipo de reserva.</div>
               </div>
             </div>
 
             <hr class="my-4">
 
-            <!-- Comentario -->
+            <!-- Detalles de la reserva -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="fechaComienzo" class="form-label">Desde</label>
+                <input type="date" class="form-control" id="fechaComienzo" required>
+                <div class="invalid-feedback">Por favor seleccione una fecha de inicio.</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="horaComienzo" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="horaComienzo"
+                  min="08:00" max="22:00" step="3600" required>
+                <div class="invalid-feedback">Por favor seleccione una hora de inicio.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="fechaFin" class="form-label">Hasta</label>
+                <input type="date" class="form-control" id="fechaFin" required>
+                <div class="invalid-feedback">Por favor seleccione una fecha de fin.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="horaFin" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="horaFin"
+                  min="08:00" max="22:00" step="3600" required>
+                <div class="invalid-feedback">Por favor seleccione una hora de fin.</div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Titulo y comentario -->
+            <div class="mb-3">
+              <label for="tituloReserva" class="form-label">Título de la reserva</label>
+              <input type="text" class="form-control" id="tituloReserva" maxlength="100" placeholder="Partido amistoso, entrenamiento, escuela, etc.">
+            </div>
             <div class="mb-3">
               <label for="comentarioReserva" class="form-label">Comentario</label>
               <textarea class="form-control" id="comentarioReserva" rows="3" maxlength="500" placeholder="Información adicional sobre la reserva..."></textarea>
@@ -319,8 +312,49 @@ require_once HEAD_COMPONENT;
     </div>
   </div>
 
+  <!-- Modal de Políticas de Reservas -->
+  <div class="modal fade" id="modalPoliticasReservas" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-file-text me-2"></i>Políticas de Reservas
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">Define las políticas y condiciones para las reservas de esta cancha.</p>
+          <div class="mb-3">
+            <label for="politicasReservasTexto" class="form-label fw-bold">Políticas de Reservas</label>
+            <textarea class="form-control" id="politicasReservasTexto" rows="8" maxlength="2000"
+              placeholder="Ejemplo:&#10;- Reserva mínima con 24 horas de anticipación&#10;- Cancelación gratuita hasta 12 horas antes&#10;- Depósito del 50% al confirmar la reserva&#10;- Prohibido el ingreso de bebidas alcohólicas"></textarea>
+            <div class="form-text">Máximo 2000 caracteres</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="botonGuardarPoliticas">
+            <i class="bi bi-save me-2"></i>Guardar Políticas
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts de JavaScript -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
+
+  <!-- Constantes PHP para JavaScript -->
+  <script>
+    const POST_RESERVA = '<?= POST_RESERVA ?>';
+    const GET_CANCHAS_ADMIN_CANCHA = '<?= GET_CANCHAS_ADMIN_CANCHA ?>';
+    const GET_TIPOS_RESERVA = '<?= GET_TIPOS_RESERVA ?>';
+    const GET_USUARIOS = '<?= GET_USUARIOS ?>';
+    const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
+    const UPDATE_HORARIOS_CANCHAS = '<?= UPDATE_HORARIOS_CANCHAS ?>';
+    const UPDATE_POLITICAS_CANCHA = '<?= UPDATE_POLITICAS_CANCHA ?>';
+    const PAGE_MIS_PERFILES_ADMIN_CANCHA = '<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>';
+  </script>
 
   <!-- Script base del calendario (debe ir primero) -->
   <script src="<?= JS_AGENDA ?>"></script>

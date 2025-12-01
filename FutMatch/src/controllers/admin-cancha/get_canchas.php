@@ -3,17 +3,38 @@ require_once __DIR__ . '/../../app/config.php';
 
 header("Content-Type: application/json");
 
+// Iniciar sesión
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'No autorizado']);
+    exit();
+}
+
+// Obtener el id_admin_cancha del parámetro GET
+$id_admin_cancha = isset($_SESSION['user_id']) ? trim($_SESSION['user_id']) : '';
+
+if (empty($id_admin_cancha)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Username requerido']);
+    exit();
+}
+
 try {
-
-
 
     $sql = "
         SELECT 
             c.id_cancha,
+            c.id_admin_cancha,
             c.nombre,
             c.descripcion,
+            c.telefono,
             c.id_superficie,
             c.id_estado,
+            c.politicas_reservas,
             d.direccion_completa,
 
             -- Tipo de partido asociado
@@ -34,10 +55,13 @@ try {
         LEFT JOIN tipos_partido tp 
             ON ctp.id_tipo_partido = tp.id_tipo_partido
 
+        WHERE id_admin_cancha = :id_admin_cancha
+
         ORDER BY c.id_cancha ASC
     ";
 
     $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id_admin_cancha', $id_admin_cancha, PDO::PARAM_STR);
     $stmt->execute();
     $canchas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +69,6 @@ try {
         'status' => 'success',
         'data'   => $canchas
     ], JSON_UNESCAPED_UNICODE);
-
 } catch (Exception $e) {
 
     echo json_encode([
@@ -53,5 +76,3 @@ try {
         'message' => $e->getMessage()
     ]);
 }
-
-

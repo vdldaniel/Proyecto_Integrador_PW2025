@@ -382,7 +382,7 @@ function isActive($page_name, $current)
 					<label class="form-label">Teléfono</label>
 					<div class="input-group">
 						<input type="tel" class="form-control" id="inputTelefono" value="+54 9 11 1234-5678" readonly>
-						<button class="btn btn-dark" type="button" onclick="editarCampo('inputTelefono')">
+						<button class="btn" type="button" onclick="editarCampo('inputTelefono')">
 							<i class="bi bi-pencil"></i>
 						</button>
 					</div>
@@ -393,7 +393,7 @@ function isActive($page_name, $current)
 					<label class="form-label">Dirección de E-mail</label>
 					<div class="input-group">
 						<input type="email" class="form-control" id="inputEmail" value="admin@futmatch.com" readonly>
-						<button class="btn btn-dark" type="button" onclick="editarCampo('inputEmail')">
+						<button class="btn" type="button" onclick="editarCampo('inputEmail')">
 							<i class="bi bi-pencil"></i>
 						</button>
 					</div>
@@ -401,16 +401,16 @@ function isActive($page_name, $current)
 
 				<hr class="my-4">
 
-				<!-- Suspender y Eliminar cuenta en fila -->
+				<!--Suspender y Eliminar cuenta en fila
 				<div class="row g-3">
-					<!-- Suspender cuenta -->
+					//Suspender cuenta
 					<div class="col-12 col-lg-6">
 						<h6 class="mb-2">Suspender Cuenta</h6>
 						<button class="btn btn-warning w-100" type="button" data-bs-toggle="collapse" data-bs-target="#suspenderForm">
 							<i class="bi bi-pause-circle me-2"></i>Suspender Temporalmente
 						</button>
 
-						<!-- Formulario de suspensión -->
+						//Formulario de suspensión
 						<div class="collapse mt-3" id="suspenderForm">
 							<div class="card card-body">
 								<p class="small text-muted mb-3">
@@ -432,14 +432,14 @@ function isActive($page_name, $current)
 						</div>
 					</div>
 
-					<!-- Eliminar cuenta -->
+					//Eliminar cuenta
 					<div class="col-12 col-lg-6">
 						<h6 class="mb-2 text-danger">Eliminar Cuenta</h6>
 						<button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#eliminarForm">
 							<i class="bi bi-trash me-2"></i>Eliminar Permanentemente
 						</button>
 
-						<!-- Información de eliminación -->
+						//Información de eliminación
 						<div class="collapse mt-3" id="eliminarForm">
 							<div class="card card-body border-danger">
 								<p class="small text-muted mb-3">
@@ -454,6 +454,7 @@ function isActive($page_name, $current)
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -462,67 +463,6 @@ function isActive($page_name, $current)
 	</div>
 </div>
 
-<script>
-	// Inicializar tooltips de Bootstrap
-	document.addEventListener('DOMContentLoaded', function() {
-		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-		var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-			return new bootstrap.Tooltip(tooltipTriggerEl);
-		});
-	});
 
-	// Función para editar campos
-	function editarCampo(inputId) {
-		const input = document.getElementById(inputId);
-		if (input.hasAttribute('readonly')) {
-			input.removeAttribute('readonly');
-			input.focus();
-			input.select();
-		} else {
-			input.setAttribute('readonly', 'readonly');
-			// TODO: Aquí iría la llamada AJAX para guardar los cambios
-			alert('Cambios guardados correctamente');
-		}
-	}
-
-	// Función para confirmar suspensión
-	function confirmarSuspension() {
-		const fecha = document.getElementById('fechaReactivacion').value;
-		const hora = document.getElementById('horaReactivacion').value;
-
-		if (!fecha || !hora) {
-			alert('Por favor, complete la fecha y hora de reactivación');
-			return;
-		}
-
-		if (confirm('¿Está seguro que desea suspender su cuenta hasta el ' + fecha + ' a las ' + hora + '? Las reservas en este período serán canceladas.')) {
-			// TODO: Llamada AJAX para suspender cuenta
-			alert('Cuenta suspendida exitosamente');
-			location.reload();
-		}
-	}
-
-	// Función para confirmar eliminación
-	function confirmarEliminacion() {
-		if (confirm('¿Está seguro que desea eliminar su cuenta permanentemente? Esta acción NO se puede deshacer.')) {
-			if (confirm('ÚLTIMA CONFIRMACIÓN: ¿Realmente desea eliminar su cuenta? Todas sus canchas serán removidas del sistema.')) {
-				// TODO: Llamada AJAX para eliminar cuenta
-				alert('Su cuenta ha sido marcada para eliminación. Recibirá un correo de confirmación.');
-				window.location.href = '<?= PAGE_LANDING_PHP ?>';
-			}
-		}
-	}
-
-	// Función para eliminar notificación
-	function eliminarNotificacion(button) {
-		const listItem = button.closest('.list-group-item');
-		if (confirm('¿Desea eliminar esta notificación?')) {
-			// TODO: Llamada AJAX para eliminar notificación
-			listItem.style.transition = 'opacity 0.3s ease';
-			listItem.style.opacity = '0';
-			setTimeout(() => {
-				listItem.remove();
-			}, 300);
-		}
-	}
-</script>
+<script src="<?= JS_NAVBAR_ADMIN_CANCHA ?>"></script>
+<script src="<?= JS_TOAST_MODULE ?>"></script>

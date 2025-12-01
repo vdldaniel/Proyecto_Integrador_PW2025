@@ -134,10 +134,16 @@ define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 // ===================================
 
 // admin-cancha
+define("POST_RESERVA", SRC_PATH . "controllers/admin-cancha/postReserva.php");
+define("GET_CANCHAS_ADMIN_CANCHA", SRC_PATH . "controllers/admin-cancha/get_canchas.php");
+define("GET_TIPOS_RESERVA", SRC_PATH . "controllers/admin-cancha/getTiposReserva.php");
+define("GET_HORARIOS_CANCHAS", SRC_PATH . "controllers/admin-cancha/getHorariosCanchas.php");
+define("UPDATE_HORARIOS_CANCHAS", SRC_PATH . "controllers/admin-cancha/updateHorariosCanchas.php");
+define("UPDATE_POLITICAS_CANCHA", SRC_PATH . "controllers/admin-cancha/updatePoliticasCancha.php");
 
 // admin-sistema
-define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/getSolicitudesAdminCancha.php");
-define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/updateSolicitudAdminCancha.php");
+define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/getSolicitudesAdminCancha.php");
+define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/updateSolicitudAdminCancha.php");
 
 // resto
 define("CONTROLLER_GEOCODING_PROXY", BASE_URL . "src/controllers/geocoding_proxy.php");
@@ -174,10 +180,13 @@ define("JS_COMPONENTS_PATH", SRC_PATH . "scripts/components/");
 
 // define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
 define("JS_NAVBAR_JUGADOR", JS_COMPONENTS_PATH . "navbar_Jugador.js");
+define("JS_NAVBAR_ADMIN_CANCHA", JS_COMPONENTS_PATH . "navbarAdminCancha.js");
+define("JS_NAVBAR_ADMIN_SISTEMA", JS_COMPONENTS_PATH . "navbar_AdminSistema.js");
 define("JS_NOTIFICACIONES_JUGADOR", JS_COMPONENTS_PATH . "notificaciones_Jugador.js");
 define("JS_PERFIL_CANCHA_BASE", JS_COMPONENTS_PATH . "perfilCancha.js");
 define("JS_PERFIL_JUGADOR_BASE", JS_COMPONENTS_PATH . "perfilJugador.js");
 define("JS_TOAST_MODULE", JS_COMPONENTS_PATH . "toast.js");
+define("JS_AGENDA", JS_COMPONENTS_PATH . "agenda.js");
 
 //=================================
 // PAGES
@@ -187,14 +196,14 @@ define("JS_PAGES_PATH", SRC_PATH . "scripts/pages/");
 // admin-cancha
 define("JS_CANCHAS_LISTADO", JS_PAGES_PATH . "admin-cancha/canchasListado.js");
 define("JS_PERFILESCANCHA", JS_PAGES_PATH . "admin-cancha/perfilAdmin.js");
+define("JS_AGENDA_ADMIN_CANCHA", JS_PAGES_PATH . "admin-cancha/agenda_AdminCancha.js");
+define("JS_AGENDA_ADMIN", JS_PAGES_PATH . "admin-cancha/agenda-admin.js");
 
 // admin-sistema
 define("JS_CANCHAS_ADMIN_SISTEMA", JS_PAGES_PATH . "admin-sistema/canchasAdminSistema.js");
 define("JS_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", JS_PAGES_PATH . "admin-sistema/solicitudesAdminCancha_AdminSistema.js");
 
 // resto
-define("JS_AGENDA_ADMIN", JS_PAGES_PATH . "agenda-admin.js");
-define("JS_AGENDA", JS_PAGES_PATH . "agenda.js");
 define("JS_CALENDARIO_JUGADOR", JS_PAGES_PATH . "calendarioJugador.js");
 define("JS_CACHA_PERFIL_JUGADOR", JS_PAGES_PATH . "cancha-perfil-jugador.js");
 define("JS_CANCHAS_EXPLORAR_JUGADOR", JS_PAGES_PATH . "canchasExplorar_Jugador.js");

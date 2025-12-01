@@ -70,12 +70,12 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
    */
   inicializarReservas() {
     // Configurar fecha mínima (hoy)
-    const fechaReserva = document.getElementById("fechaReserva");
-    if (fechaReserva) {
+    const fechaComienzo = document.getElementById("fechaComienzo");
+    if (fechaComienzo) {
       const hoy = new Date().toISOString().split("T")[0];
-      fechaReserva.setAttribute("min", hoy);
-      fechaReserva.value = hoy;
-      fechaReserva.addEventListener("change", () =>
+      fechaComienzo.setAttribute("min", hoy);
+      fechaComienzo.value = hoy;
+      fechaComienzo.addEventListener("change", () =>
         this.actualizarHorariosDisponibles()
       );
     }
@@ -108,11 +108,11 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
    * Configurar fecha mínima para reservas
    */
   configurarFechaMinima() {
-    const fechaReserva = document.getElementById("fechaReserva");
-    if (fechaReserva) {
+    const fechaComienzo = document.getElementById("fechaComienzo");
+    if (fechaComienzo) {
       const hoy = new Date().toISOString().split("T")[0];
-      fechaReserva.setAttribute("min", hoy);
-      fechaReserva.value = hoy;
+      fechaComienzo.setAttribute("min", hoy);
+      fechaComienzo.value = hoy;
     }
   }
 
