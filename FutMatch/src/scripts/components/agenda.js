@@ -698,31 +698,6 @@ class CalendarioBase {
   }
 }
 
-// Callbacks por defecto (pueden ser sobrescritos)
-function onPendientesClick(fecha, hora) {
-  console.log("Click en pendientes:", fecha, hora);
-}
-
-function onPendientesDiaClick(fecha) {
-  console.log("Click en pendientes del día:", fecha);
-}
-
-function onHistoricasClick(fecha, hora) {
-  console.log("Click en históricas:", fecha, hora);
-}
-
-function onCalendarioDiaClick(fecha) {
-  console.log("Día seleccionado:", fecha);
-}
-
-function onCalendarioHorarioClick(fecha, hora) {
-  console.log("Horario seleccionado:", fecha, hora);
-}
-
-function onReservaClick(idReserva) {
-  console.log("Reserva seleccionada:", idReserva);
-}
-
 // Exportar para uso en módulos
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { CalendarioBase, CONFIGURACION_CALENDARIO };

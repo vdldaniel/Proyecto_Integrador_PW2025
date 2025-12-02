@@ -9,93 +9,138 @@ class AplicacionCalendarioJugador extends CalendarioBase {
     super();
     this.horarioSeleccionado = null;
     this.fechaSeleccionada = null;
-    this.reservasSimuladas = [
-      {
-        fecha: "2025-11-04",
-        hora: "18:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Los Cracks FC",
-      },
-      {
-        fecha: "2025-11-04",
-        hora: "20:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Equipo Delta",
-      },
-      {
-        fecha: "2025-11-05",
-        hora: "19:00",
-        duracion: 1,
-        estado: "reservado",
-        cliente: "Racing Amateur",
-      },
-      {
-        fecha: "2025-11-05",
-        hora: "21:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Villa FC",
-      },
-      {
-        fecha: "2025-11-06",
-        hora: "17:00",
-        duracion: 3,
-        estado: "reservado",
-        cliente: "Deportivo Sur",
-      },
-      {
-        fecha: "2025-11-07",
-        hora: "18:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Club Atlético",
-      },
-      {
-        fecha: "2025-11-08",
-        hora: "20:00",
-        duracion: 1,
-        estado: "reservado",
-        cliente: "Los Tigres",
-      },
-      {
-        fecha: "2025-11-09",
-        hora: "16:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Torneo Copa Verano",
-      },
-      {
-        fecha: "2025-11-09",
-        hora: "18:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Torneo Copa Verano",
-      },
-      {
-        fecha: "2025-11-09",
-        hora: "20:00",
-        duracion: 2,
-        estado: "reservado",
-        cliente: "Torneo Copa Verano",
-      },
-    ];
+    this.datosCancha = null;
+    this.horariosCancha = null;
+    this.politicasCancha = null;
 
     this.inicializarEventosJugador();
     this.personalizarCalendarioJugador();
+    this.cargarDatosCancha();
+  }
+
+  /**
+   * Cargar datos de la cancha desde el backend
+   */
+  async cargarDatosCancha() {
+    if (!ID_CANCHA) {
+      console.error("No hay ID de cancha definido");
+      return;
+    }
+
+    try {
+      // Cargar información del perfil
+      const responsePerfil = await fetch(
+        `${GET_INFO_PERFIL}?id=${ID_CANCHA}&tipo=cancha`
+      );
+      const dataPerfil = await responsePerfil.json();
+
+      if (dataPerfil.id_cancha || dataPerfil) {
+        this.datosCancha = dataPerfil.id_cancha ? dataPerfil : dataPerfil;
+        this.actualizarInfoCancha();
+      }
+
+      // Cargar horarios
+      const responseHorarios = await fetch(
+        `${GET_HORARIOS_CANCHAS}?id_cancha=${ID_CANCHA}`
+      );
+      const dataHorarios = await responseHorarios.json();
+
+      if (dataHorarios.status === "success" && dataHorarios.data) {
+        this.horariosCancha = dataHorarios.data;
+        this.actualizarInfoHorarios();
+      }
+
+      // Cargar políticas (desde datosCancha)
+      if (this.datosCancha && this.datosCancha.politicas_reservas) {
+        this.politicasCancha = this.datosCancha.politicas_reservas;
+        this.actualizarPoliticas();
+      }
+
+      // Cargar reservas automáticamente
+      await this.cargarReservas(ID_CANCHA);
+
+      // Actualizar botón de volver al perfil
+      const btnVolver = document.getElementById("btnVolverPerfil");
+      if (btnVolver) {
+        btnVolver.href = `${PAGE_PERFIL_CANCHA_JUGADOR}?id=${ID_CANCHA}`;
+      }
+    } catch (error) {
+      console.error("Error al cargar datos de la cancha:", error);
+    }
+  }
+
+  /**
+   * Actualizar información de la cancha en el header
+   */
+  actualizarInfoCancha() {
+    if (!this.datosCancha) return;
+
+    const nombreCanchaTexto = document.getElementById("nombreCanchaTexto");
+    if (nombreCanchaTexto) {
+      nombreCanchaTexto.textContent =
+        this.datosCancha.nombre_cancha || "Cancha";
+    }
+
+    const detalleCanchaTexto = document.getElementById("detalleCanchaTexto");
+    if (detalleCanchaTexto) {
+      const superficie = this.datosCancha.tipo_superficie || "N/A";
+      detalleCanchaTexto.textContent = `Fútbol 5 • ${superficie}`;
+    }
+
+    const subtituloCancha = document.getElementById("subtituloCancha");
+    if (subtituloCancha) {
+      subtituloCancha.textContent = `Disponibilidad de ${
+        this.datosCancha.nombre_cancha || "Cancha"
+      }`;
+    }
+
+    const nombreCanchaModal = document.getElementById("nombreCanchaModal");
+    if (nombreCanchaModal) {
+      nombreCanchaModal.textContent =
+        this.datosCancha.nombre_cancha || "Cancha";
+    }
+  }
+
+  /**
+   * Actualizar información de horarios
+   */
+  actualizarInfoHorarios() {
+    if (!this.horariosCancha || this.horariosCancha.length === 0) return;
+
+    const textoHorarios = document.getElementById("textoHorarios");
+    if (textoHorarios) {
+      const diasAbiertos = this.horariosCancha.filter(
+        (h) => h.hora_apertura && h.hora_cierre
+      );
+      if (diasAbiertos.length > 0) {
+        const primerHorario = diasAbiertos[0];
+        const ultimoHorario = diasAbiertos[diasAbiertos.length - 1];
+        const horaInicio = primerHorario.hora_apertura.substring(0, 5);
+        const horaFin = ultimoHorario.hora_cierre.substring(0, 5);
+        textoHorarios.innerHTML = `<strong>Horarios:</strong> ${horaInicio} - ${horaFin}`;
+      }
+    }
+  }
+
+  /**
+   * Actualizar políticas en el modal
+   */
+  actualizarPoliticas() {
+    const contenidoPoliticas = document.getElementById("contenidoPoliticas");
+    if (contenidoPoliticas && this.politicasCancha) {
+      // Convertir texto con saltos de línea a HTML
+      const politicasHTML = this.politicasCancha
+        .split("\n")
+        .filter((linea) => linea.trim())
+        .map((linea) => `<p class="mb-2">${linea}</p>`)
+        .join("");
+
+      contenidoPoliticas.innerHTML =
+        politicasHTML || '<p class="text-muted">No hay políticas definidas</p>';
+    }
   }
 
   personalizarCalendarioJugador() {
-    // Ocultar selector de cancha ya que estamos viendo una cancha específica
-    const selectorCancha = document.getElementById("selectorCancha");
-    if (selectorCancha) {
-      const contenedorCancha = selectorCancha.closest(".col-md-3");
-      if (contenedorCancha) {
-        contenedorCancha.style.display = "none";
-      }
-    }
-
     // Agregar indicadores de disponibilidad en el espacio libre
     const espacioLibre = document.querySelector(
       ".calendario-header .col-md-3:nth-child(3)"
@@ -199,11 +244,20 @@ class AplicacionCalendarioJugador extends CalendarioBase {
           } else {
             const reserva = this.obtenerReserva(this.fechaActual, horaCompleta);
             if (reserva) {
+              // Mostrar información según permisos
+              let textoReserva = "Reservado";
+              if (reserva.es_mi_reserva && reserva.titular_nombre_completo) {
+                textoReserva = `Mi Reserva - ${reserva.titular_nombre_completo}`;
+              } else if (reserva.titular_nombre_completo) {
+                // Si tiene nombre es porque es el titular o creador
+                textoReserva = `Reservado - ${reserva.titular_nombre_completo}`;
+              }
+
               celdaContenido.innerHTML = `
-                                <div class="badge text-bg-dark w-100 p-2">
-                                    <i class="bi bi-x-circle"></i> Reservado - ${reserva.cliente}
-                                </div>
-                            `;
+                <div class="badge text-bg-dark w-100 p-2">
+                    <i class="bi bi-x-circle"></i> ${textoReserva}
+                </div>
+              `;
             }
           }
         }
@@ -265,25 +319,59 @@ class AplicacionCalendarioJugador extends CalendarioBase {
     const hoy = new Date();
 
     // No permitir reservas en el pasado
+    const fechaObj = new Date(fecha);
     if (
-      fecha < hoy.toDateString() ||
-      (fecha.toDateString() === hoy.toDateString() &&
+      fechaObj < hoy ||
+      (fechaObj.toDateString() === hoy.toDateString() &&
         parseInt(hora) <= hoy.getHours())
     ) {
       return false;
     }
 
-    // Verificar si ya está reservado
-    return !this.reservasSimuladas.some(
-      (reserva) => reserva.fecha === fechaString && reserva.hora === hora
-    );
+    // Verificar si está fuera de los horarios de la cancha
+    if (this.horariosCancha && this.horariosCancha.length > 0) {
+      const diaActual = fechaObj.getDay() === 0 ? 7 : fechaObj.getDay();
+      const horarioHoy = this.horariosCancha.find(
+        (h) => h.id_dia === diaActual
+      );
+
+      if (!horarioHoy || !horarioHoy.hora_apertura || !horarioHoy.hora_cierre) {
+        return false; // Cancha cerrada ese día
+      }
+
+      const horaNum = parseInt(hora.split(":")[0]);
+      const aperturaNum = parseInt(horarioHoy.hora_apertura.split(":")[0]);
+      const cierreNum = parseInt(horarioHoy.hora_cierre.split(":")[0]);
+
+      if (horaNum < aperturaNum || horaNum >= cierreNum) {
+        return false; // Fuera del horario de atención
+      }
+    }
+
+    // Verificar si ya está reservado (comparar con reservas confirmadas del backend)
+    const reservado = this.reservas.some((reserva) => {
+      if (reserva.fecha !== fechaString) return false;
+
+      // Verificar si la hora está dentro del rango de la reserva
+      const horaInicio = reserva.hora_inicio.substring(0, 5);
+      const horaFin = reserva.hora_fin.substring(0, 5);
+      return hora >= horaInicio && hora < horaFin;
+    });
+
+    return !reservado;
   }
 
   obtenerReserva(fecha, hora) {
-    const fechaString = this.formatearFecha(fecha);
-    return this.reservasSimuladas.find(
-      (reserva) => reserva.fecha === fechaString && reserva.hora === hora
-    );
+    const fechaString =
+      typeof fecha === "string" ? fecha : this.formatearFecha(fecha);
+
+    return this.reservas.find((reserva) => {
+      if (reserva.fecha !== fechaString) return false;
+
+      const horaInicio = reserva.hora_inicio.substring(0, 5);
+      const horaFin = reserva.hora_fin.substring(0, 5);
+      return hora >= horaInicio && hora < horaFin;
+    });
   }
 
   seleccionarHorario(fecha, hora) {

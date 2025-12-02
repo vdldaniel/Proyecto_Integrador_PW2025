@@ -246,9 +246,9 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     <i class="bi bi-calendar-check"></i> Ver Disponibilidad
                 </button>
             <?php else: ?>
-                <a href="<?= $perfil_cancha_boton_primario['url'] ?>" type="button" class="btn btn-success btn-lg w-100">
+                <button type="button" class="btn btn-success btn-lg w-100" id="btnVerDisponibilidad">
                     <i class="<?= $perfil_cancha_boton_primario['icono'] ?>"></i> <?= $perfil_cancha_boton_primario['texto'] ?>
-                </a>
+                </button>
             <?php endif; ?>
         </div>
         <!-- Panel de Informacion -->
@@ -302,17 +302,19 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                 <h5 class="mb-0"><i class="bi bi-clock"></i> Horarios</h5>
             </div>
             <div class="card-body">
-                <small class="text-muted" id="diasAtencion"></small>
+                <!-- Estado actual -->
+                <div class="mb-3 p-2 rounded">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold" id="estadoActual">
+                            <i class="bi bi-circle-fill"></i> Cargando...
+                        </span>
+                        <small class="text-muted" id="horaCierre"></small>
+                    </div>
+                </div>
 
-                <p class="fw-bold mb-2" id="horarioPrincipal"></p>
-
-                <hr class="my-2">
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="fw-bold" id="estadoActual">
-                        <i class="bi bi-circle-fill"></i> Cargando...
-                    </span>
-                    <small class="text-muted" id="horaCierre">Cierra a las N/A</small>
+                <!-- Horarios detallados por día -->
+                <div id="horariosDetallados" class="mt-3">
+                    <p class="text-muted">Cargando horarios...</p>
                 </div>
             </div>
         </div>
@@ -331,24 +333,26 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
             </div>
         </div> -->
 
-        <!-- Estadísticas -->
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-dark text-white">
-                <h5 class="mb-0"><i class="bi bi-bar-chart"></i> Estadísticas</h5>
-            </div>
-            <div class="card-body">
-                <!-- Estadísticas básicas -->
-                <div class="row text-center">
-                    <div class="col-6 border-end">
-                        <h4 class="text-primary mb-1"><?= $perfil_cancha_total_partidos ?></h4>
-                        <small class="text-muted">Partidos jugados</small>
-                    </div>
-                    <div class="col-6">
-                        <h4 class="text-info mb-1"><?= $perfil_cancha_total_jugadores ?></h4>
-                        <small class="text-muted">Jugadores únicos</small>
+        <!-- Estadísticas (Ocultas temporalmente) -->
+        <?php if (false): ?>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-bar-chart"></i> Estadísticas</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Estadísticas básicas -->
+                    <div class="row text-center">
+                        <div class="col-6 border-end">
+                            <h4 class="text-primary mb-1"><?= $perfil_cancha_total_partidos ?></h4>
+                            <small class="text-muted">Partidos jugados</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-info mb-1"><?= $perfil_cancha_total_jugadores ?></h4>
+                            <small class="text-muted">Jugadores únicos</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>

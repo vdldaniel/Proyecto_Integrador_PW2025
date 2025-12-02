@@ -8,13 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'No autorizado']);
-    exit();
-}
-
-$id_admin_cancha = $_SESSION['user_id'];
+// Público: Los horarios son visibles para todos (jugadores y admins)
 $id_cancha = isset($_GET['id_cancha']) ? intval($_GET['id_cancha']) : null;
 
 if (empty($id_cancha)) {
@@ -24,16 +18,15 @@ if (empty($id_cancha)) {
 }
 
 try {
-    // Verificar que la cancha pertenece al admin
-    $sqlVerificar = "SELECT id_cancha FROM canchas WHERE id_cancha = :id_cancha AND id_admin_cancha = :id_admin_cancha";
+    // Verificar que la cancha existe
+    $sqlVerificar = "SELECT id_cancha FROM canchas WHERE id_cancha = :id_cancha";
     $stmtVerificar = $conn->prepare($sqlVerificar);
     $stmtVerificar->bindParam(':id_cancha', $id_cancha, PDO::PARAM_INT);
-    $stmtVerificar->bindParam(':id_admin_cancha', $id_admin_cancha, PDO::PARAM_INT);
     $stmtVerificar->execute();
 
     if (!$stmtVerificar->fetch()) {
-        http_response_code(403);
-        echo json_encode(['error' => 'No tienes permiso para acceder a esta cancha']);
+        http_response_code(404);
+        echo json_encode(['error' => 'Cancha no encontrada']);
         exit();
     }
 

@@ -23,12 +23,12 @@ require_once HEAD_COMPONENT;
         <div class="row mb-4 align-items-center">
             <div class="col-md-8">
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-dark me-3" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>">
+                    <a class="btn btn-dark me-3" href="<?= PAGE_PERFIL_CANCHA_JUGADOR ?>" id="btnVolverPerfil">
                         <i class="bi bi-arrow-left"></i>
                     </a>
                     <div>
-                        <h1 class="fw-bold mb-1" id="displayFechaActual">Calendario - Noviembre 2025</h1>
-                        <p class="text-muted mb-0">Disponibilidad de MegaFutbol Cancha A1-F5</p>
+                        <h1 class="fw-bold mb-1" id="displayFechaActual">Calendario</h1>
+                        <p class="text-muted mb-0" id="subtituloCancha">Cargando información de la cancha...</p>
                     </div>
                 </div>
             </div>
@@ -39,19 +39,18 @@ require_once HEAD_COMPONENT;
             <div class="col-md-6">
                 <div class="card bg-light">
                     <div class="card-body py-2">
-                        <h6 class="mb-0">
-                            <i class="bi bi-building"></i> MegaFutbol Cancha A1-F5
+                        <h6 class="mb-0" id="nombreCanchaHeader">
+                            <i class="bi bi-building"></i> <span id="nombreCanchaTexto">Cargando...</span>
                         </h6>
-                        <small class="text-muted">Fútbol 5 • Césped sintético</small>
+                        <small class="text-muted" id="detalleCanchaTexto">Cargando detalles...</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="alert alert-info mb-0 d-flex justify-content-between align-items-center">
-                    <div>
+                    <div id="infoHorarios">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>Horarios:</strong> 7:00 AM - 11:00 PM •
-                        <strong>Duración:</strong> 1-3 horas
+                        <span id="textoHorarios">Cargando horarios...</span>
                     </div>
                     <button class="btn btn-sm btn-dark" id="btnVerPoliticas1">
                         <i class="bi bi-file-text"></i> Políticas
@@ -61,7 +60,11 @@ require_once HEAD_COMPONENT;
         </div>
 
         <!-- Incluir el componente de calendario -->
-        <?php include CALENDARIO_COMPONENT; ?>
+        <?php
+        // Configurar calendario sin selector (cancha fija desde URL)
+        $calendario_mostrar_selector = false;
+        include CALENDARIO_COMPONENT;
+        ?>
 
     </main>
 
@@ -77,46 +80,8 @@ require_once HEAD_COMPONENT;
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6 class="mt-4"><i class="bi bi-calendar-check text-success"></i> Reservas</h6>
-                            <ul class="list-unstyled small">
-                                <li>• Reservas con 24h de anticipación</li>
-                                <li>• Confirmación automática disponible</li>
-                                <li>• Máximo 3 reservas simultáneas por usuario</li>
-                                <li>• Duración mínima: 1 hora</li>
-                                <li>• Duración máxima: 3 horas consecutivas</li>
-                            </ul>
-
-                            <h6 class="mt-4"><i class="bi bi-arrow-clockwise text-warning"></i> Cancelaciones</h6>
-                            <ul class="list-unstyled small">
-                                <li>• Cancelación gratuita hasta 4h antes</li>
-                                <li>• Entre 2-4h antes: 50% del costo</li>
-                                <li>• Menos de 2h: sin reembolso</li>
-                                <li>• Lluvia intensa: reembolso completo</li>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <h6 class="mt-4"><i class="bi bi-shield-check text-info"></i> Normas de Uso</h6>
-                            <ul class="list-unstyled small">
-                                <li>• Máximo 10 jugadores por cancha</li>
-                                <li>• Prohibido fumar en las instalaciones</li>
-                                <li>• Uso obligatorio de botines o zapatillas deportivas</li>
-                                <li>• No se permite el ingreso de bebidas alcohólicas</li>
-                                <li>• Responsabilidad por daños materiales</li>
-                            </ul>
-
-                            <h6 class="mt-4"><i class="bi bi-telephone text-primary"></i> Contacto</h6>
-                            <ul class="list-unstyled small">
-                                <li>• WhatsApp: +54 11 1234-5678</li>
-                                <li>• Email: reservas@megafutbol.com</li>
-                                <li>• Atención: Lun-Dom 8:00-22:00</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="modal-body" id="contenidoPoliticas">
+                    <p class="text-center text-muted">Cargando políticas...</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
@@ -134,9 +99,9 @@ require_once HEAD_COMPONENT;
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-info">
+                    <div class="alert alert-info" id="alertInfoCancha">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>MegaFutbol Cancha A1-F5</strong> - Envía tu solicitud y el administrador te contactará para confirmar la disponibilidad.
+                        <strong id="nombreCanchaModal">Cargando...</strong> - Envía tu solicitud y el administrador te contactará para confirmar la disponibilidad.
                     </div>
                     <form id="formReservarCancha">
                         <div class="row">
@@ -170,7 +135,27 @@ require_once HEAD_COMPONENT;
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="<?= CSS_ICONS ?>">
-    <!-- Scripts -->
+
+    <!-- Constantes JavaScript -->
+    <script>
+        const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
+        const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
+        const GET_RESERVAS = '<?= GET_RESERVAS ?>';
+        const GET_RESERVA_DETALLE = '<?= GET_RESERVA_DETALLE ?>';
+        const POST_RESERVA = '<?= POST_RESERVA ?>';
+        const BASE_URL = '<?= BASE_URL ?>';
+        const PAGE_PERFIL_CANCHA_JUGADOR = '<?= PAGE_PERFIL_CANCHA_JUGADOR ?>';
+
+        // Obtener id_cancha del query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const ID_CANCHA = urlParams.get('id') || urlParams.get('id_cancha');
+
+        if (!ID_CANCHA) {
+            console.error('No se proporcionó un ID de cancha en la URL');
+            alert('Error: No se especificó una cancha');
+        }
+    </script>
+
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
     <script src="<?= JS_AGENDA ?>"></script>

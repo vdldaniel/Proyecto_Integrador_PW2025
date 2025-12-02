@@ -176,6 +176,8 @@ require_once HEAD_COMPONENT;
     const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
   </script>
 
+  <!-- Script base de perfil de cancha (clase PerfilCanchaBase con métodos centralizados de horarios) -->
+  <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
   <!-- Script específico del admin (tiene toda la funcionalidad necesaria) -->
   <script src="<?= JS_PERFILES_CANCHA ?>"></script>
 

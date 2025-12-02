@@ -56,29 +56,30 @@ require_once HEAD_COMPONENT;
     <link rel="stylesheet" href="<?= CSS_ICONS ?>">
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
-    
+
     <!-- Constantes JavaScript -->
     <script>
         const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
         const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
         const BASE_URL = '<?= BASE_URL ?>';
-        
+        const PAGE_CALENDARIO_CANCHA_JUGADOR = '<?= PAGE_CALENDARIO_CANCHA_JUGADOR ?>';
+
         // Obtener id_cancha del query string
         const urlParams = new URLSearchParams(window.location.search);
         const ID_CANCHA = urlParams.get('id') || urlParams.get('id_cancha');
-        
+
         if (!ID_CANCHA) {
             console.warn('No se proporcionó un ID de cancha en la URL');
         }
     </script>
-    
+
     <!-- Script de perfiles compartido (debe ir primero) -->
     <script src="<?= JS_PERFILES ?>"></script>
-    <!-- Script base del perfil de cancha -->
+    <!-- Script base de perfil de cancha (clase PerfilCanchaBase con métodos de horarios) -->
     <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
     <!-- Script específico del jugador (extiende el base) -->
     <script src="<?= BASE_URL ?>src/scripts/pages/cancha-perfil-jugador.js"></script>
-    
+
     <!-- Cargar datos de la cancha al cargar la página -->
     <script>
         document.addEventListener('DOMContentLoaded', async function() {

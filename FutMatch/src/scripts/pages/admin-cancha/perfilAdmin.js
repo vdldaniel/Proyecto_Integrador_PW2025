@@ -255,7 +255,7 @@ const cargarCanchas = () => {
     .catch((err) => console.error("Error cargando canchas:", err));
 };
 
-function actualizarBanner(id) {
+async function actualizarBanner(id) {
   if (!id) return;
 
   ID_CANCHA_ACTUAL = id; // Almacenar ID actual
@@ -275,7 +275,7 @@ function actualizarBanner(id) {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       return res.json();
     })
-    .then((json) => {
+    .then(async (json) => {
       if (json.status !== "success" || !json.data || !json.data.cancha) {
         console.error(
           "Respuesta de la API de perfil no exitosa o datos no válidos:",
@@ -290,9 +290,6 @@ function actualizarBanner(id) {
       const tipos = Array.isArray(json.data.tipos_partido)
         ? json.data.tipos_partido
         : [];
-      const horarios = Array.isArray(json.data.horarios)
-        ? json.data.horarios
-        : [];
       const servicios = Array.isArray(json.data.servicios)
         ? json.data.servicios
         : [];
@@ -303,6 +300,15 @@ function actualizarBanner(id) {
         tipos_partido: tipos,
         servicios: servicios,
       };
+
+      // ===== CARGAR HORARIOS DESDE EL MÉTODO CENTRALIZADO =====
+      // Usar el método de la clase base PerfilCanchaBase para cargar horarios
+      if (typeof PerfilCanchaBase !== "undefined") {
+        const baseInstance = new PerfilCanchaBase();
+        await baseInstance.cargarHorariosCancha(id);
+        // Los horarios ya fueron renderizados por el método centralizado
+        // pero si necesitamos la lógica específica del admin, podemos sobrescribirla después
+      }
 
       // 1. ACTUALIZACIÓN DE SELECTOR Y BANNER SUPERIOR
 
@@ -445,88 +451,8 @@ function actualizarBanner(id) {
         btnMapa.onclick = () => window.open(mapUrl, "_blank");
       }
 
-      // 3. ACTUALIZACIÓN DEL PANEL DE HORARIOS
-      const diasAtencionEl = document.getElementById("diasAtencion");
-      const horarioPrincipalEl = document.getElementById("horarioPrincipal");
-      const estadoActualEl = document.getElementById("estadoActual");
-      const horaCierreEl = document.getElementById("horaCierre");
-
-      if (horarios.length > 0) {
-        const formatTime = (timeStr) =>
-          timeStr ? timeStr.substring(0, 5) : "N/A";
-
-        const horariosAgrupados = horarios.reduce((acc, current) => {
-          const key = `${current.hora_apertura}-${current.hora_cierre}`;
-          if (!acc[key]) {
-            acc[key] = {
-              dias: [],
-              apertura: formatTime(current.hora_apertura),
-              cierre: formatTime(current.hora_cierre),
-            };
-          }
-          acc[key].dias.push(current.dia_nombre);
-          return acc;
-        }, {});
-
-        let diasAtencion = "";
-        let horarioPrincipal = "";
-
-        Object.values(horariosAgrupados).forEach((group) => {
-          diasAtencion += `${group.dias.join(", ")}, `;
-          if (horarioPrincipal === "") {
-            horarioPrincipal = `${group.apertura} - ${group.cierre}`;
-          }
-        });
-
-        diasAtencionEl.innerText = diasAtencion.slice(0, -2);
-        horarioPrincipalEl.innerText = horarioPrincipal;
-
-        const ahora = new Date();
-        const diaActual = ahora.getDay() === 0 ? 7 : ahora.getDay();
-        const horaActualMinutos = ahora.getHours() * 60 + ahora.getMinutes();
-
-        const horarioHoy = horarios.find(
-          (h) => parseInt(h.id_dia) === diaActual
-        );
-
-        let estadoActual = "Cerrado";
-        let horaCierre = "N/A";
-        let estadoClase = "text-danger";
-
-        if (horarioHoy) {
-          const [hApertura, mApertura] = horarioHoy.hora_apertura
-            .split(":")
-            .map(Number);
-          const [hCierre, mCierre] = horarioHoy.hora_cierre
-            .split(":")
-            .map(Number);
-
-          const minApertura = hApertura * 60 + mApertura;
-          let minCierre = hCierre * 60 + mCierre;
-
-          if (minCierre === 0) minCierre = 24 * 60;
-
-          horaCierre = formatTime(horarioHoy.hora_cierre);
-
-          if (
-            horaActualMinutos >= minApertura &&
-            horaActualMinutos < minCierre
-          ) {
-            estadoActual = "Abierto";
-            estadoClase = "text-success";
-          }
-        }
-
-        estadoActualEl.innerHTML = `<i class="bi bi-circle-fill"></i> ${estadoActual}`;
-        estadoActualEl.className = `fw-bold ${estadoClase}`;
-        horaCierreEl.innerText = `Cierra a las ${horaCierre}`;
-      } else {
-        diasAtencionEl.innerText = "Horarios no definidos";
-        horarioPrincipalEl.innerText = "N/A";
-        estadoActualEl.innerHTML = `<i class="bi bi-circle-fill"></i> Cerrado`;
-        estadoActualEl.className = `fw-bold text-danger`;
-        horaCierreEl.innerText = `Cierra a las N/A`;
-      }
+      // 3. HORARIOS - Manejados por el método centralizado cargarHorariosCancha() arriba
+      // No duplicar código aquí
 
       // 4. ACTUALIZACIÓN DEL PANEL DE SERVICIOS
       const serviciosContainer = document.getElementById("serviciosContainer");

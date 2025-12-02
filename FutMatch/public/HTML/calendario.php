@@ -8,18 +8,24 @@
 <div class="calendario-component">
     <!-- Header de controles del calendario -->
     <div class="row mb-4 align-items-center calendario-header">
-        <div class="col-md-4">
-            <select class="form-select" id="selectorCancha">
-                <option selected>Seleccionar cancha</option>
-                <!-- Las opciones se llenan dinámicamente con JavaScript -->
-            </select>
-            <label class="form-label small text-muted" for="selectorCancha">Filtrar por cancha</label>
-        </div>
-        <div class="col-md-4">
+        <?php
+        // Solo mostrar selector si está en modo admin
+        $calendario_mostrar_selector = $calendario_mostrar_selector ?? true;
+        ?>
+        <?php if ($calendario_mostrar_selector): ?>
+            <div class="col-md-4">
+                <select class="form-select" id="selectorCancha">
+                    <option selected>Seleccionar cancha</option>
+                    <!-- Las opciones se llenan dinámicamente con JavaScript -->
+                </select>
+                <label class="form-label small text-muted" for="selectorCancha">Filtrar por cancha</label>
+            </div>
+        <?php endif; ?>
+        <div class="<?= $calendario_mostrar_selector ? 'col-md-4' : 'col-md-6' ?>">
             <input type="date" class="form-control" id="selectorFecha">
             <label class="form-label small text-muted" for="selectorFecha">Ir a fecha</label>
         </div>
-        <div class="col-md-4 text-end">
+        <div class="<?= $calendario_mostrar_selector ? 'col-md-4' : 'col-md-6' ?> text-end">
             <button id="botonHoy" class="btn btn-dark me-2" type="button">
                 <i class="bi bi-calendar-today"></i> Hoy
             </button>

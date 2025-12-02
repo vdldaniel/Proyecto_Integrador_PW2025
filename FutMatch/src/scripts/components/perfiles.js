@@ -14,11 +14,11 @@ async function cargarInfoPerfil(id, tipo) {
         "Content-Type": "application/json",
       },
     });
-    
+
     if (!response.ok) {
       throw new Error("Error en la solicitud: " + response.status);
     }
-    
+
     const data = await response.json();
     console.log("Información del perfil cargada:", data);
     return data;
@@ -29,9 +29,10 @@ async function cargarInfoPerfil(id, tipo) {
 }
 
 // Compatibilidad con código existente
-const url = typeof CURRENT_USER_ID !== 'undefined' && typeof TIPO_PERFIL !== 'undefined' 
-  ? `${GET_INFO_PERFIL}?id=${CURRENT_USER_ID}&tipo=${TIPO_PERFIL}` 
-  : null;
+const url =
+  typeof CURRENT_USER_ID !== "undefined" && typeof TIPO_PERFIL !== "undefined"
+    ? `${GET_INFO_PERFIL}?id=${CURRENT_USER_ID}&tipo=${TIPO_PERFIL}`
+    : null;
 
 document.addEventListener("DOMContentLoaded", function () {
   if (url) {
