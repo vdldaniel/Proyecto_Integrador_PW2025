@@ -9,6 +9,11 @@ Consiste en una vista de calendario (mensual, semanal y diaria) donde el admin p
 -->
 
 <?php
+// Iniciar sesión
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 // Cargar configuración
 require_once '../../../src/app/config.php';
 
@@ -341,6 +346,73 @@ require_once HEAD_COMPONENT;
     </div>
   </div>
 
+  <!-- Modal de Detalle de Reserva -->
+  <!-- Modal Detalle Reserva -->
+  <div class="modal fade" id="modalDetalleReserva" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-calendar-check me-2"></i>Detalle de Reserva
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="contenidoDetalleReserva">
+            <!-- Se llena dinámicamente con JavaScript -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Solicitudes Pendientes -->
+  <div class="modal fade" id="modalSolicitudesPendientes" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-clock-history me-2"></i>Solicitudes Pendientes
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="contenidoSolicitudesPendientes">
+            <!-- Se llena dinámicamente con JavaScript -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Reservas Históricas -->
+  <div class="modal fade" id="modalReservasHistoricas" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="bi bi-archive me-2"></i>Historial de Reservas
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="contenidoReservasHistoricas">
+            <!-- Se llena dinámicamente con JavaScript -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts de JavaScript -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
 
@@ -353,6 +425,9 @@ require_once HEAD_COMPONENT;
     const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
     const UPDATE_HORARIOS_CANCHAS = '<?= UPDATE_HORARIOS_CANCHAS ?>';
     const UPDATE_POLITICAS_CANCHA = '<?= UPDATE_POLITICAS_CANCHA ?>';
+    const GET_RESERVAS = '<?= GET_RESERVAS ?>';
+    const GET_RESERVA_DETALLE = '<?= GET_RESERVA_DETALLE ?>';
+    const UPDATE_RESERVA = '<?= UPDATE_RESERVA ?>';
     const PAGE_MIS_PERFILES_ADMIN_CANCHA = '<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>';
   </script>
 

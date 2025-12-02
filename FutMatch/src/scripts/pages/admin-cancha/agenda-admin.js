@@ -8,60 +8,8 @@ class AplicacionAgendaAdmin extends CalendarioBase {
   constructor() {
     super();
 
-    // Datos específicos del admin
-    this.solicitudesPendientes = [
-      {
-        id: 1,
-        jugador: {
-          nombre: "Juan Pérez",
-          telefono: "+54 11 2345-6789",
-          id: 101,
-        },
-        cancha: {
-          id: 1,
-          nombre: "Cancha A",
-        },
-        fecha: "2025-11-05",
-        hora: "16:00",
-        fechaSolicitud: "2025-11-04",
-        estado: "pending",
-      },
-      {
-        id: 2,
-        jugador: {
-          nombre: "María González",
-          telefono: "+54 11 8765-4321",
-          id: 102,
-        },
-        cancha: {
-          id: 2,
-          nombre: "Cancha B",
-        },
-        fecha: "2025-11-06",
-        hora: "14:00",
-        fechaSolicitud: "2025-11-04",
-        estado: "pending",
-      },
-    ];
-
-    this.configuracionCancha = {
-      horaApertura: "08:00",
-      horaCierre: "22:00",
-      diasOperacion: {
-        lunes: true,
-        martes: true,
-        miercoles: true,
-        jueves: true,
-        viernes: true,
-        sabado: true,
-        domingo: true,
-      },
-      canchaInfo: {
-        nombre: "Complejo Deportivo Central",
-        direccion: "Av. Principal 123, Buenos Aires",
-        telefono: "+54 11 1234-5678",
-      },
-    };
+    // Datos específicos del admin (se cargarán desde la BD)
+    this.solicitudesPendientes = [];
 
     // Inicializar funcionalidades específicas del admin
     this.inicializarFuncionalidadesAdmin();
@@ -73,7 +21,7 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     this.renderizarModalConfiguracion();
     this.actualizarContadorNotificaciones();
     this.configurarEventListenersModal();
-    this.generarDatosMuestra();
+    this.configurarModalNotificaciones();
     this.cargarCanchas();
     this.cargarTiposReserva();
   }
@@ -87,6 +35,7 @@ class AplicacionAgendaAdmin extends CalendarioBase {
       // El controller retorna {status, data}
       const canchas = resultado.data || resultado;
 
+      // Llenar select del formulario de reservas
       const selectCancha = document.getElementById("canchaReserva");
       if (selectCancha && canchas.length > 0) {
         selectCancha.innerHTML =
@@ -101,6 +50,20 @@ class AplicacionAgendaAdmin extends CalendarioBase {
         selectCancha.innerHTML =
           '<option value="">No hay canchas disponibles</option>';
       }
+
+      // Llenar select del calendario
+      const selectorCanchaCalendario =
+        document.getElementById("selectorCancha");
+      if (selectorCanchaCalendario && canchas.length > 0) {
+        selectorCanchaCalendario.innerHTML =
+          '<option value="">Seleccionar cancha</option>';
+        canchas.forEach((cancha) => {
+          const option = document.createElement("option");
+          option.value = cancha.id_cancha;
+          option.textContent = cancha.nombre;
+          selectorCanchaCalendario.appendChild(option);
+        });
+      }
     } catch (error) {
       console.error("Error al cargar canchas:", error);
     }
@@ -112,6 +75,10 @@ class AplicacionAgendaAdmin extends CalendarioBase {
       const response = await fetch(GET_TIPOS_RESERVA);
       const tipos = await response.json();
 
+      // Guardar en instancia para uso posterior
+      this.tiposReserva = tipos;
+
+      // Llenar select del formulario de crear reserva
       const selectTipo = document.getElementById("tipoReserva");
       if (selectTipo && tipos.length > 0) {
         selectTipo.innerHTML =
@@ -141,6 +108,21 @@ class AplicacionAgendaAdmin extends CalendarioBase {
       });
     }
 
+    // Configurar selector de cancha para cargar reservas
+    const selectorCancha = document.getElementById("selectorCancha");
+    if (selectorCancha) {
+      selectorCancha.addEventListener("change", (e) => {
+        const idCancha = e.target.value;
+        if (idCancha && idCancha !== "Seleccionar cancha") {
+          this.cargarReservas(idCancha);
+        } else {
+          this.reservas = [];
+          this.canchaSeleccionada = null;
+          this.renderizarVistaActual();
+        }
+      });
+    }
+
     // Configurar búsqueda de reservas
     const searchInput = document.getElementById("searchInput");
     if (searchInput) {
@@ -158,56 +140,8 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     }
   }
 
-  // Override de callbacks del componente calendario para funcionalidades del admin
-  obtenerContenidoDia(fecha) {
-    const fechaStr = this.formatearFechaISO(fecha);
-    const reservasDelDia = this.reservas.filter((r) => r.fecha === fechaStr);
-
-    if (reservasDelDia.length === 0) return "";
-
-    return `
-            <div class="day-reservas">
-                ${reservasDelDia
-                  .slice(0, 2)
-                  .map(
-                    (reserva) => `
-                    <div class="reserva-mini ${
-                      reserva.estado
-                    }" onclick="verEditarReserva(${reserva.id})" title="${
-                      reserva.cliente
-                    } - ${reserva.hora}">
-                        ${reserva.hora.substring(0, 5)}
-                    </div>
-                `
-                  )
-                  .join("")}
-                ${
-                  reservasDelDia.length > 2
-                    ? `<div class="reserva-mini mas">+${
-                        reservasDelDia.length - 2
-                      }</div>`
-                    : ""
-                }
-            </div>
-        `;
-  }
-
-  obtenerContenidoHora(fecha, hora) {
-    const fechaStr = this.formatearFechaISO(fecha);
-    const horaStr = `${hora.toString().padStart(2, "0")}:00`;
-    const reserva = this.reservas.find(
-      (r) => r.fecha === fechaStr && r.hora === horaStr
-    );
-
-    if (!reserva) return "";
-
-    return `
-            <div class="reserva-bloque ${reserva.estado}" onclick="verEditarReserva(${reserva.id})">
-                <div class="reserva-cliente">${reserva.cliente}</div>
-                <div class="reserva-cancha">${reserva.cancha}</div>
-            </div>
-        `;
-  }
+  // Los métodos obtenerContenidoDia y obtenerContenidoHora se heredan de CalendarioBase
+  // y ya están implementados correctamente con la estructura de vista_reservas
 
   // Renderizar solicitudes en el modal dinámicamente
   renderizarSolicitudesModal() {
@@ -309,6 +243,115 @@ class AplicacionAgendaAdmin extends CalendarioBase {
         badge.classList.add("d-none");
       }
     });
+  }
+
+  // Cargar notificaciones para el navbar
+  async cargarNotificacionesNavbar() {
+    // Obtener todas las reservas pendientes de todas las canchas del admin
+    try {
+      const response = await fetch(GET_CANCHAS_ADMIN_CANCHA);
+      const resultado = await response.json();
+      const canchas = resultado.data || resultado;
+
+      let todasPendientes = [];
+
+      // Cargar reservas pendientes de cada cancha
+      for (const cancha of canchas) {
+        const resReservas = await fetch(
+          `${GET_RESERVAS}?id_cancha=${cancha.id_cancha}`
+        );
+        const dataReservas = await resReservas.json();
+
+        if (dataReservas.success && dataReservas.reservas) {
+          const pendientes = dataReservas.reservas.filter(
+            (r) => r.id_estado === 1
+          );
+          todasPendientes = todasPendientes.concat(
+            pendientes.map((r) => ({
+              ...r,
+              nombre_cancha: cancha.nombre,
+            }))
+          );
+        }
+      }
+
+      // Renderizar en tabla del navbar
+      this.renderizarNotificacionesNavbar(todasPendientes);
+    } catch (error) {
+      console.error("Error al cargar notificaciones:", error);
+    }
+  }
+
+  // Renderizar notificaciones en la tabla del navbar
+  renderizarNotificacionesNavbar(reservasPendientes) {
+    const tbody = document.querySelector("#content-agenda tbody");
+    if (!tbody) return;
+
+    if (reservasPendientes.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" class="text-center text-muted">
+            <i class="bi bi-inbox me-2"></i>No hay solicitudes pendientes
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = reservasPendientes
+      .slice(0, 10)
+      .map(
+        (reserva) => `
+      <tr>
+        <td>
+          <div>${reserva.titular_nombre_completo}</div>
+          <small class="text-muted">
+            ${
+              reserva.tipo_titular === "jugador"
+                ? `<i class="bi bi-person"></i> @${
+                    reserva.username_titular || "Usuario"
+                  }`
+                : '<i class="bi bi-person-badge"></i> Externo'
+            }
+          </small>
+        </td>
+        <td>${reserva.nombre_cancha}</td>
+        <td>${new Date(reserva.fecha).toLocaleDateString("es-AR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })}</td>
+        <td>${reserva.hora_inicio.substring(0, 5)}</td>
+        <td>
+          <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-success" onclick="aplicacionAgenda.aceptarSolicitudNavbar(${
+              reserva.id_reserva
+            })" title="Aceptar">
+              <i class="bi bi-check-lg"></i>
+            </button>
+            <button class="btn btn-danger" onclick="aplicacionAgenda.rechazarSolicitudNavbar(${
+              reserva.id_reserva
+            })" title="Rechazar">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `
+      )
+      .join("");
+  }
+
+  // Aceptar solicitud desde navbar
+  async aceptarSolicitudNavbar(idReserva) {
+    await this.cambiarEstadoReserva(idReserva, 3);
+    await this.cargarNotificacionesNavbar();
+  }
+
+  // Rechazar solicitud desde navbar
+  async rechazarSolicitudNavbar(idReserva) {
+    await this.cambiarEstadoReserva(idReserva, 4);
+    await this.cargarNotificacionesNavbar();
   }
 
   // Configurar modal de configuración con datos y validación
@@ -709,6 +752,596 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     }
   }
 
+  // Mostrar detalle de una reserva
+  async verDetalleReserva(idReserva) {
+    try {
+      const response = await fetch(
+        `${GET_RESERVA_DETALLE}?id_reserva=${idReserva}`
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Error al cargar detalle");
+      }
+
+      if (data.success) {
+        this.mostrarModalDetalleReserva(data.reserva);
+      } else {
+        throw new Error(data.message || "Error al cargar detalle");
+      }
+    } catch (error) {
+      console.error("Error al cargar detalle de reserva:", error);
+      showToast("Error al cargar el detalle: " + error.message, "error");
+    }
+  }
+
+  // Renderizar y mostrar modal con el detalle de la reserva
+  mostrarModalDetalleReserva(reserva) {
+    const contenedor = document.getElementById("contenidoDetalleReserva");
+    if (!contenedor) return;
+
+    // Determinar clases de estado
+    // Mapeo de colores: 1=Pendiente(warning), 2=En revisión(info), 3=Aceptada(success), 4=Rechazada(secondary), 5=Cancelada(danger), 6=Ausente(dark)
+    const estadoClass =
+      reserva.id_estado === 1
+        ? "warning"
+        : reserva.id_estado === 2
+        ? "info"
+        : reserva.id_estado === 3
+        ? "success"
+        : reserva.id_estado === 4
+        ? "secondary"
+        : reserva.id_estado === 5
+        ? "danger"
+        : reserva.id_estado === 6
+        ? "dark"
+        : "secondary";
+
+    const tipoTitularLabel =
+      reserva.tipo_titular === "jugador"
+        ? "Jugador Registrado"
+        : "Persona Externa";
+
+    // Construir HTML del detalle editable in-place
+    const html = `
+      <form id="formDetalleReserva">
+        <input type="hidden" id="detailIdReserva" value="${reserva.id_reserva}">
+        
+        <!-- Información General -->
+        <div class="card mb-3">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-info-circle me-2"></i>Información General</span>
+            <span class="badge bg-${estadoClass}">${
+      reserva.estado_reserva
+    }</span>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <small class="text-muted d-block">Cancha</small>
+                <strong>${reserva.nombre_cancha}</strong>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="text-muted d-block small">Tipo de Reserva</label>
+                <select class="form-select form-select-sm" id="detailTipoReserva" disabled>
+                  <!-- Se llena dinámicamente -->
+                </select>
+              </div>
+              <div class="col-12 mb-2 mt-2">
+                <label class="text-muted d-block small">Título del Evento</label>
+                <input type="text" class="form-control form-control-sm" id="detailTitulo" value="${
+                  reserva.titulo || ""
+                }" disabled>
+              </div>
+              <div class="col-12 mb-2">
+                <label class="text-muted d-block small">Descripción</label>
+                <textarea class="form-control form-control-sm" id="detailDescripcion" rows="2" disabled>${
+                  reserva.descripcion || ""
+                }</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fecha y Horario -->
+        <div class="card mb-3">
+          <div class="card-header bg-info text-white">
+            <i class="bi bi-calendar3 me-2"></i>Fecha y Horario
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="text-muted d-block small">Fecha Desde</label>
+                <input type="date" class="form-control form-control-sm" id="detailFecha" value="${
+                  reserva.fecha
+                }" disabled>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="text-muted d-block small">Fecha Hasta</label>
+                <input type="date" class="form-control form-control-sm" id="detailFechaHasta" value="${
+                  reserva.fecha_fin || reserva.fecha
+                }" disabled>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="text-muted d-block small">Hora Inicio</label>
+                <input type="time" class="form-control form-control-sm" id="detailHoraInicio" value="${reserva.hora_inicio.substring(
+                  0,
+                  5
+                )}" disabled>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="text-muted d-block small">Hora Fin</label>
+                <input type="time" class="form-control form-control-sm" id="detailHoraFin" value="${reserva.hora_fin.substring(
+                  0,
+                  5
+                )}" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Titular de la Reserva -->
+      <div class="card mb-3">
+        <div class="card-header bg-success text-white">
+          <i class="bi bi-person-check me-2"></i>Titular de la Reserva
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <small class="text-muted d-block">Tipo</small>
+              <span class="badge bg-${
+                reserva.tipo_titular === "jugador" ? "primary" : "secondary"
+              }">${tipoTitularLabel}</span>
+            </div>
+            <div class="col-md-6 mb-2">
+              <small class="text-muted d-block">Nombre</small>
+              <strong>${reserva.titular_nombre_completo}</strong>
+            </div>
+            ${
+              reserva.titular_telefono
+                ? `
+            <div class="col-12 mt-2">
+              <small class="text-muted d-block">Teléfono</small>
+              <a href="tel:${reserva.titular_telefono}" class="text-decoration-none">
+                <i class="bi bi-telephone-fill text-success"></i> ${reserva.titular_telefono}
+              </a>
+            </div>
+            `
+                : ""
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Información Administrativa -->
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          <i class="bi bi-gear me-2"></i>Información Administrativa
+        </div>
+        <div class="card-body">
+          <small class="text-muted d-block">Creado por</small>
+          <strong>${reserva.creador_nombre_completo}</strong>
+          <div class="mt-1">
+            <small class="text-muted">
+              <i class="bi bi-clock-history"></i> ${new Date(
+                reserva.fecha_solicitud
+              ).toLocaleString("es-AR", {
+                dateStyle: "short",
+                timeStyle: "short",
+              })}
+            </small>
+          </div>
+        </div>
+      </div>
+
+      </form>
+      
+      <!-- Botones de acción -->
+      <div class="mt-3 d-flex gap-2 flex-wrap" id="botonesAccionReserva">
+        <button type="button" class="btn btn-primary" id="btnToggleEdit" onclick="aplicacionAgenda.toggleModoEdicion()">
+          <i class="bi bi-pencil"></i> Editar
+        </button>
+        <button type="button" class="btn btn-success d-none" id="btnGuardarEdit" onclick="aplicacionAgenda.guardarEdicionInPlace()">
+          <i class="bi bi-save"></i> Guardar
+        </button>
+        <button type="button" class="btn btn-secondary d-none" id="btnCancelarEdit" onclick="aplicacionAgenda.cancelarEdicionInPlace()">
+          <i class="bi bi-x"></i> Cancelar
+        </button>
+        ${this.obtenerBotonesEstado(reserva.id_estado, reserva.id_reserva)}
+      </div>
+    `;
+
+    contenedor.innerHTML = html;
+
+    // Guardar reserva actual para edición
+    this.reservaActual = reserva;
+
+    // Llenar select de tipos de reserva
+    const selectTipoReserva = document.getElementById("detailTipoReserva");
+    if (
+      selectTipoReserva &&
+      this.tiposReserva &&
+      this.tiposReserva.length > 0
+    ) {
+      selectTipoReserva.innerHTML = "";
+      this.tiposReserva.forEach((tipo) => {
+        const option = document.createElement("option");
+        option.value = tipo.id_tipo_reserva;
+        option.textContent = tipo.nombre;
+        if (tipo.id_tipo_reserva == reserva.id_tipo_reserva) {
+          option.selected = true;
+        }
+        selectTipoReserva.appendChild(option);
+      });
+    }
+
+    // Mostrar modal
+    const modal = new bootstrap.Modal(
+      document.getElementById("modalDetalleReserva")
+    );
+    modal.show();
+  }
+
+  // Obtener botones dinámicos según estado
+  obtenerBotonesEstado(idEstado, idReserva) {
+    if (idEstado === 3) {
+      // Aceptada -> Cancelar
+      return `
+        <button type="button" class="btn btn-danger" onclick="aplicacionAgenda.cambiarEstadoReserva(${idReserva}, 5)">
+          <i class="bi bi-x-circle"></i> Cancelar Reserva
+        </button>
+      `;
+    } else if (idEstado === 1) {
+      // Pendiente -> Aceptar y Rechazar
+      return `
+        <button type="button" class="btn btn-success" onclick="aplicacionAgenda.cambiarEstadoReserva(${idReserva}, 3)">
+          <i class="bi bi-check-circle"></i> Aceptar
+        </button>
+        <button type="button" class="btn btn-danger" onclick="aplicacionAgenda.cambiarEstadoReserva(${idReserva}, 4)">
+          <i class="bi bi-x-circle"></i> Rechazar
+        </button>
+      `;
+    } else if (idEstado === 4 || idEstado === 5) {
+      // Rechazada/Cancelada -> Restaurar
+      return `
+        <button type="button" class="btn btn-warning" onclick="aplicacionAgenda.cambiarEstadoReserva(${idReserva}, 1)">
+          <i class="bi bi-arrow-counterclockwise"></i> Restaurar
+        </button>
+      `;
+    }
+    return "";
+  }
+
+  // Toggle modo edición in-place
+  toggleModoEdicion() {
+    const campos = [
+      "detailTipoReserva",
+      "detailTitulo",
+      "detailDescripcion",
+      "detailFecha",
+      "detailFechaHasta",
+      "detailHoraInicio",
+      "detailHoraFin",
+    ];
+    const btnEdit = document.getElementById("btnToggleEdit");
+    const btnGuardar = document.getElementById("btnGuardarEdit");
+    const btnCancelar = document.getElementById("btnCancelarEdit");
+
+    campos.forEach((id) => {
+      const campo = document.getElementById(id);
+      if (campo) campo.disabled = false;
+    });
+
+    btnEdit.classList.add("d-none");
+    btnGuardar.classList.remove("d-none");
+    btnCancelar.classList.remove("d-none");
+  }
+
+  // Cancelar edición in-place
+  cancelarEdicionInPlace() {
+    // Recargar el modal con datos originales
+    if (this.reservaActual) {
+      this.verDetalleReserva(this.reservaActual.id_reserva);
+    }
+  }
+
+  // Guardar edición in-place
+  async guardarEdicionInPlace() {
+    const datos = {
+      id_reserva: document.getElementById("detailIdReserva").value,
+      fecha: document.getElementById("detailFecha").value,
+      fecha_fin: document.getElementById("detailFechaHasta").value,
+      hora_inicio: document.getElementById("detailHoraInicio").value + ":00",
+      hora_fin: document.getElementById("detailHoraFin").value + ":00",
+      id_tipo_reserva: document.getElementById("detailTipoReserva").value,
+      titulo: document.getElementById("detailTitulo").value,
+      descripcion: document.getElementById("detailDescripcion").value,
+    };
+
+    try {
+      const response = await fetch(UPDATE_RESERVA, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos),
+      });
+
+      const resultado = await response.json();
+
+      if (resultado.status === "success") {
+        if (typeof showToast !== "undefined") {
+          showToast("Reserva actualizada correctamente", "success");
+        }
+
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("modalDetalleReserva")
+        );
+        modal.hide();
+
+        if (this.canchaSeleccionada) {
+          await this.cargarReservas(this.canchaSeleccionada);
+        }
+      } else {
+        throw new Error(resultado.message || "Error al actualizar reserva");
+      }
+    } catch (error) {
+      console.error("Error al guardar edición:", error);
+      if (typeof showToast !== "undefined") {
+        showToast("Error al guardar cambios: " + error.message, "error");
+      }
+    }
+  }
+
+  // Cambiar estado de reserva (optimizado)
+  async cambiarEstadoReserva(idReserva, nuevoEstado) {
+    // Mostrar modal de confirmación
+    const confirmed = await this.mostrarModalConfirmacion(
+      "¿Está seguro de cambiar el estado de esta reserva?",
+      "Cambiar Estado"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    // Si se va a confirmar (estado 3), validar superposición
+    if (nuevoEstado === 3) {
+      const reservaACambiar = this.reservas.find(
+        (r) => r.id_reserva === idReserva
+      );
+      if (reservaACambiar) {
+        const haySuperposicion =
+          this.validarSuperposicionReserva(reservaACambiar);
+        if (haySuperposicion) {
+          showToast(
+            "No se puede confirmar: existe una reserva confirmada en este horario",
+            "error"
+          );
+          return;
+        }
+      }
+    }
+
+    try {
+      // Cerrar modal inmediatamente para evitar bloqueo
+      const modal = bootstrap.Modal.getInstance(
+        document.getElementById("modalDetalleReserva")
+      );
+      if (modal) modal.hide();
+
+      // Hacer request en paralelo
+      const response = await fetch(UPDATE_RESERVA, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id_reserva: idReserva, id_estado: nuevoEstado }),
+      });
+
+      const resultado = await response.json();
+
+      if (resultado.status === "success") {
+        if (typeof showToast !== "undefined") {
+          showToast("Estado actualizado correctamente", "success");
+        }
+
+        // Recargar reservas
+        if (this.canchaSeleccionada) {
+          await this.cargarReservas(this.canchaSeleccionada);
+        }
+      } else {
+        throw new Error(resultado.message || "Error al actualizar estado");
+      }
+    } catch (error) {
+      console.error("Error al cambiar estado:", error);
+      if (typeof showToast !== "undefined") {
+        showToast("Error al cambiar estado: " + error.message, "error");
+      }
+    }
+  }
+
+  // Ver reservas históricas de un horario
+  async verReservasHistoricas(fecha, hora) {
+    const reservasHistoricas = this.reservas.filter((reserva) => {
+      return (
+        reserva.fecha === fecha &&
+        reserva.hora_inicio === hora &&
+        (reserva.id_estado === 4 || reserva.id_estado === 5)
+      );
+    });
+
+    if (reservasHistoricas.length === 0) {
+      if (typeof showToast !== "undefined") {
+        showToast("No hay reservas históricas en este horario", "info");
+      }
+      return;
+    }
+
+    // Mostrar con diseño de filas
+    let html = `<div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th width="10%">Estado</th>
+            <th width="15%">Horario</th>
+            <th width="30%">Titular</th>
+            <th width="25%">Tipo</th>
+            <th width="20%" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    reservasHistoricas.forEach((reserva) => {
+      const estadoBadge = reserva.id_estado === 4 ? "secondary" : "danger";
+      const estadoTexto = reserva.id_estado === 4 ? "Rechazada" : "Cancelada";
+      const estadoIcon = reserva.id_estado === 4 ? "x-circle" : "ban";
+
+      html += `
+        <tr>
+          <td>
+            <span class="badge bg-${estadoBadge}">
+              <i class="bi bi-${estadoIcon}"></i>
+            </span>
+          </td>
+          <td>
+            <strong>${reserva.hora_inicio.substring(0, 5)}</strong><br>
+            <small class="text-muted">${reserva.hora_fin.substring(
+              0,
+              5
+            )}</small>
+          </td>
+          <td><strong>${reserva.titular_nombre_completo}</strong></td>
+          <td>
+            <span class="badge bg-info">${reserva.tipo_reserva}</span>
+            ${
+              reserva.titulo
+                ? `<br><small class="text-muted">${reserva.titulo}</small>`
+                : ""
+            }
+          </td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-dark" onclick="aplicacionAgenda.verDetalleReserva(${
+                reserva.id_reserva
+              }); bootstrap.Modal.getInstance(document.getElementById('modalReservasHistoricas')).hide();" title="Editar">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-dark" onclick="aplicacionAgenda.cambiarEstadoReserva(${
+                reserva.id_reserva
+              }, 1); bootstrap.Modal.getInstance(document.getElementById('modalReservasHistoricas')).hide();" title="Restaurar">
+                <i class="bi bi-arrow-counterclockwise"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    });
+
+    html += `</tbody></table></div>`;
+
+    const contenedor = document.getElementById("contenidoReservasHistoricas");
+    contenedor.innerHTML = html;
+
+    const modal = new bootstrap.Modal(
+      document.getElementById("modalReservasHistoricas")
+    );
+    modal.show();
+  }
+
+  // Ver solicitudes pendientes de un horario
+  async verSolicitudesPendientes(fecha, hora) {
+    const reservasPendientes = this.reservas.filter((reserva) => {
+      return (
+        reserva.fecha === fecha &&
+        reserva.hora_inicio === hora &&
+        reserva.id_estado === 1
+      ); // Solo pendientes
+    });
+
+    if (reservasPendientes.length === 0) {
+      if (typeof showToast !== "undefined") {
+        showToast("No hay solicitudes pendientes en este horario", "info");
+      }
+      return;
+    }
+
+    // Construir HTML de la lista
+    let html = `<div class="list-group">`;
+
+    reservasPendientes.forEach((reserva, index) => {
+      html += `
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              <h6 class="mb-1">
+                <span class="badge bg-warning text-dark me-2">${
+                  index + 1
+                }</span>
+                ${reserva.titular_nombre_completo}
+              </h6>
+              <p class="mb-1">
+                <small class="text-muted">
+                  <i class="bi bi-clock"></i> ${reserva.hora_inicio.substring(
+                    0,
+                    5
+                  )} - ${reserva.hora_fin.substring(0, 5)}
+                </small>
+                ${
+                  reserva.tipo_reserva
+                    ? `<br><small><i class="bi bi-tag"></i> ${reserva.tipo_reserva}</small>`
+                    : ""
+                }
+                ${
+                  reserva.titular_telefono
+                    ? `<br><small><i class="bi bi-telephone"></i> ${reserva.titular_telefono}</small>`
+                    : ""
+                }
+              </p>
+              ${
+                reserva.titulo
+                  ? `<p class="mb-1"><strong>${reserva.titulo}</strong></p>`
+                  : ""
+              }
+              ${
+                reserva.descripcion
+                  ? `<p class="mb-1 text-muted small">${reserva.descripcion}</p>`
+                  : ""
+              }
+            </div>
+            <div class="btn-group btn-group-sm ms-2" role="group">
+              <button class="btn btn-dark" onclick="aplicacionAgenda.cambiarEstadoReserva(${
+                reserva.id_reserva
+              }, 3); document.getElementById('btnCerrarPendientes').click();" title="Aceptar">
+                <i class="bi bi-check-lg"></i>
+              </button>
+              <button class="btn btn-dark" onclick="aplicacionAgenda.cambiarEstadoReserva(${
+                reserva.id_reserva
+              }, 4); document.getElementById('btnCerrarPendientes').click();" title="Rechazar">
+                <i class="bi bi-x-lg"></i>
+              </button>
+              <button class="btn btn-dark" onclick="aplicacionAgenda.verDetalleReserva(${
+                reserva.id_reserva
+              }); bootstrap.Modal.getInstance(document.getElementById('modalSolicitudesPendientes')).hide();" title="Ver detalles">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    html += `<button id="btnCerrarPendientes" style="display:none" data-bs-dismiss="modal"></button>`;
+
+    // Mostrar en modal
+    const contenedor = document.getElementById(
+      "contenidoSolicitudesPendientes"
+    );
+    contenedor.innerHTML = html;
+
+    const modal = new bootstrap.Modal(
+      document.getElementById("modalSolicitudesPendientes")
+    );
+    modal.show();
+  }
+
   // Gestión de reservas
   crearReserva(fechaSeleccionada = null, horaSeleccionada = null) {
     this.abrirModalReserva("crear", null, fechaSeleccionada, horaSeleccionada);
@@ -815,6 +1448,16 @@ class AplicacionAgendaAdmin extends CalendarioBase {
   }
 
   // Configurar event listeners del modal
+  // Configurar event listener para el modal de notificaciones
+  configurarModalNotificaciones() {
+    const modalNotificaciones = document.getElementById("modalNotificaciones");
+    if (modalNotificaciones) {
+      modalNotificaciones.addEventListener("show.bs.modal", () => {
+        this.cargarNotificacionesNavbar();
+      });
+    }
+  }
+
   configurarEventListenersModal() {
     // Flag para rastrear si fecha_fin fue modificada manualmente
     this.fechaFinModificadaManualmente = false;
@@ -1186,10 +1829,15 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     showToast(mensaje, "warning", 6000);
   }
 
-  eliminarReserva() {
+  async eliminarReserva() {
     const idReserva = parseInt(document.getElementById("idReserva").value);
 
-    if (confirm("¿Está seguro que desea eliminar esta reserva?")) {
+    const confirmed = await this.mostrarModalConfirmacion(
+      "¿Está seguro que desea eliminar esta reserva?",
+      "Eliminar Reserva"
+    );
+
+    if (confirmed) {
       this.reservas = this.reservas.filter((r) => r.id !== idReserva);
       showToast("Reserva eliminada exitosamente", "success");
       this.cerrarModal();
@@ -1251,9 +1899,114 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     }
   }
 
-  filtrarReservas(termino) {
-    console.log("Filtrando reservas con término:", termino);
-    // TODO: Implementar filtrado real
+  // Mostrar modal de confirmación genérico
+  mostrarModalConfirmacion(mensaje, titulo = "Confirmación") {
+    return new Promise((resolve) => {
+      // Crear modal dinámicamente
+      const modalId = "modalConfirmacionGenerica";
+      let modalElement = document.getElementById(modalId);
+
+      if (!modalElement) {
+        modalElement = document.createElement("div");
+        modalElement.id = modalId;
+        modalElement.className = "modal fade";
+        modalElement.tabIndex = -1;
+        modalElement.innerHTML = `
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="${modalId}Title">${titulo}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body" id="${modalId}Body">
+                ${mensaje}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="${modalId}Cancelar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="${modalId}Confirmar">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modalElement);
+      } else {
+        document.getElementById(`${modalId}Title`).textContent = titulo;
+        document.getElementById(`${modalId}Body`).textContent = mensaje;
+      }
+
+      const modal = new bootstrap.Modal(modalElement);
+      const btnConfirmar = document.getElementById(`${modalId}Confirmar`);
+      const btnCancelar = document.getElementById(`${modalId}Cancelar`);
+
+      const handleConfirm = () => {
+        modal.hide();
+        resolve(true);
+        cleanup();
+      };
+
+      const handleCancel = () => {
+        modal.hide();
+        resolve(false);
+        cleanup();
+      };
+
+      const cleanup = () => {
+        btnConfirmar.removeEventListener("click", handleConfirm);
+        btnCancelar.removeEventListener("click", handleCancel);
+        modalElement.removeEventListener("hidden.bs.modal", handleCancel);
+      };
+
+      btnConfirmar.addEventListener("click", handleConfirm);
+      btnCancelar.addEventListener("click", handleCancel);
+      modalElement.addEventListener("hidden.bs.modal", handleCancel, {
+        once: true,
+      });
+
+      modal.show();
+    });
+  }
+
+  // Validar superposición con reservas confirmadas
+  validarSuperposicionReserva(reserva) {
+    // Buscar reservas confirmadas que se superpongan
+    const superposiciones = this.reservas.filter((r) => {
+      // No comparar consigo misma
+      if (r.id_reserva === reserva.id_reserva) return false;
+
+      // Solo verificar contra reservas confirmadas (estado 3)
+      if (r.id_estado !== 3) return false;
+
+      // Misma cancha
+      if (r.id_cancha !== reserva.id_cancha) return false;
+
+      // Verificar superposición de fechas
+      const fechaInicio1 = new Date(reserva.fecha);
+      const fechaFin1 = new Date(reserva.fecha_fin || reserva.fecha);
+      const fechaInicio2 = new Date(r.fecha);
+      const fechaFin2 = new Date(r.fecha_fin || r.fecha);
+
+      const fechasSeSuperponen =
+        (fechaInicio1 >= fechaInicio2 && fechaInicio1 <= fechaFin2) ||
+        (fechaFin1 >= fechaInicio2 && fechaFin1 <= fechaFin2) ||
+        (fechaInicio1 <= fechaInicio2 && fechaFin1 >= fechaFin2);
+
+      if (!fechasSeSuperponen) return false;
+
+      // Verificar superposición de horas (formato HH:MM:SS)
+      const horaInicio1 = reserva.hora_inicio;
+      const horaFin1 = reserva.hora_fin;
+      const horaInicio2 = r.hora_inicio;
+      const horaFin2 = r.hora_fin;
+
+      const horasSeSuperponen =
+        (horaInicio1 >= horaInicio2 && horaInicio1 < horaFin2) ||
+        (horaFin1 > horaInicio2 && horaFin1 <= horaFin2) ||
+        (horaInicio1 <= horaInicio2 && horaFin1 >= horaFin2);
+
+      return horasSeSuperponen;
+    });
+
+    return superposiciones.length > 0;
   }
 
   mostrarMensajeExito(mensaje) {
@@ -1265,37 +2018,6 @@ class AplicacionAgendaAdmin extends CalendarioBase {
   }
 
   // Generar datos de muestra para demostración
-  generarDatosMuestra() {
-    this.reservas = [
-      {
-        id: 1,
-        fecha: "2025-11-04",
-        hora: "18:00",
-        duracion: 2,
-        cancha: "Cancha A",
-        cliente: "Los Cracks FC",
-        estado: "confirmed",
-        telefono: "+54 11 1234-5678",
-        idCancha: "1",
-        esExterna: false,
-        username: "juanpe",
-      },
-      {
-        id: 2,
-        fecha: "2025-11-05",
-        hora: "19:00",
-        duracion: 1,
-        cancha: "Cancha B",
-        cliente: "Racing Amateur",
-        estado: "pending",
-        telefono: "+54 11 2345-6789",
-        idCancha: "2",
-        esExterna: true,
-        nombreExterno: "Racing Amateur",
-        telefonoExterno: "+54 11 2345-6789",
-      },
-    ];
-  }
 }
 
 // Inicialización
@@ -1370,10 +2092,43 @@ function verEditarReserva(idReserva) {
   }
 }
 
+function verDetalleReserva(idReserva) {
+  if (aplicacionAgenda) {
+    aplicacionAgenda.verDetalleReserva(idReserva);
+  }
+}
+
 // Override de callbacks para funcionalidades del admin
+function onReservaClick(idReserva) {
+  if (aplicacionAgenda) {
+    aplicacionAgenda.verDetalleReserva(idReserva);
+  }
+}
+
+function onPendientesClick(fecha, hora) {
+  if (aplicacionAgenda) {
+    aplicacionAgenda.verSolicitudesPendientes(fecha, hora);
+  }
+}
+
+function onPendientesDiaClick(fecha) {
+  if (aplicacionAgenda) {
+    aplicacionAgenda.verSolicitudesPendientesDia(fecha);
+  }
+}
+
+function onHistoricasClick(fecha, hora) {
+  if (aplicacionAgenda) {
+    aplicacionAgenda.verReservasHistoricas(fecha, hora);
+  }
+}
+
 function onCalendarioDiaClick(fecha) {
   console.log("Admin - Día seleccionado:", fecha);
   if (aplicacionAgenda) {
+    // Actualizar la fecha actual a la seleccionada
+    aplicacionAgenda.fechaActual = new Date(fecha);
+    aplicacionAgenda.actualizarDisplayFecha();
     aplicacionAgenda.cambiarVista("dia");
   }
 }

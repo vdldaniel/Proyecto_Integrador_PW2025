@@ -178,11 +178,7 @@ function isActive($page_name, $current)
 							<i class="bi bi-trophy me-1"></i>Torneos
 						</button>
 					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="tab-futmatch" data-bs-toggle="tab" data-bs-target="#content-futmatch" type="button" role="tab">
-							<i class="bi bi-info-circle me-1"></i>FutMatch
-						</button>
-					</li>
+					<!-- Tab FutMatch oculta temporalmente -->
 				</ul>
 
 				<!-- Contenido de las tabs -->

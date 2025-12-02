@@ -134,16 +134,22 @@ define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 // ===================================
 
 // admin-cancha
-define("POST_RESERVA", SRC_PATH . "controllers/admin-cancha/postReserva.php");
 define("GET_CANCHAS_ADMIN_CANCHA", SRC_PATH . "controllers/admin-cancha/get_canchas.php");
-define("GET_TIPOS_RESERVA", SRC_PATH . "controllers/admin-cancha/getTiposReserva.php");
-define("GET_HORARIOS_CANCHAS", SRC_PATH . "controllers/admin-cancha/getHorariosCanchas.php");
-define("UPDATE_HORARIOS_CANCHAS", SRC_PATH . "controllers/admin-cancha/updateHorariosCanchas.php");
-define("UPDATE_POLITICAS_CANCHA", SRC_PATH . "controllers/admin-cancha/updatePoliticasCancha.php");
+
 
 // admin-sistema
 define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/getSolicitudesAdminCancha.php");
 define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/updateSolicitudAdminCancha.php");
+
+// reservas
+define("GET_HORARIOS_CANCHAS", SRC_PATH . "controllers/reservas/getHorariosCanchas.php");
+define("GET_RESERVA_DETALLE", SRC_PATH . "controllers/reservas/getReservaDetalle.php");
+define("GET_RESERVAS", SRC_PATH . "controllers/reservas/getReservas.php");
+define("GET_TIPOS_RESERVA", SRC_PATH . "controllers/reservas/getTiposReserva.php");
+define("POST_RESERVA", SRC_PATH . "controllers/reservas/postReserva.php");
+define("UPDATE_HORARIOS_CANCHAS", SRC_PATH . "controllers/reservas/updateHorariosCanchas.php");
+define("UPDATE_RESERVA", SRC_PATH . "controllers/reservas/updateReserva.php");
+define("UPDATE_POLITICAS_CANCHA", SRC_PATH . "controllers/reservas/updatePoliticasCancha.php");
 
 // resto
 define("CONTROLLER_GEOCODING_PROXY", BASE_URL . "src/controllers/geocoding_proxy.php");

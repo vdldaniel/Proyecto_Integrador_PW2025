@@ -51,8 +51,17 @@
 
                 <!-- Contenido del calendario -->
                 <div id="contenidoCalendario" class="d-flex flex-column flex-grow-1">
+                    <!-- Mensaje de seleccionar cancha -->
+                    <div id="mensajeSeleccionarCancha" class="alert alert-info d-flex align-items-center justify-content-center" style="min-height: 150px;">
+                        <div class="text-center">
+                            <i class="bi bi-info-circle" style="font-size: 2.5rem;"></i>
+                            <h5 class="mt-3 mb-2">Selecciona una cancha</h5>
+                            <p class="text-muted mb-0 small">Para gestionar la agenda, selecciona una cancha del menú desplegable de arriba.</p>
+                        </div>
+                    </div>
+
                     <!-- Vista mensual -->
-                    <div id="vistaMensual" class="vista-calendario d-flex flex-column">
+                    <div id="vistaMensual" class="vista-calendario d-flex flex-column d-none">
                         <div class="table-responsive flex-grow-1">
                             <table id="calendario-mes" class="table table-bordered h-100">
                                 <thead class="table-dark">
