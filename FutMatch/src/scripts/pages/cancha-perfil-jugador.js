@@ -21,6 +21,135 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   }
 
   /**
+   * Cargar y renderizar información de una cancha desde el backend
+   * @param {number} idCancha - ID de la cancha a cargar
+   */
+  async cargarYRenderizarCancha(idCancha) {
+    try {
+      if (typeof cargarInfoPerfil === 'undefined') {
+        throw new Error('La función cargarInfoPerfil no está disponible');
+      }
+
+      const resultado = await cargarInfoPerfil(idCancha, 'cancha');
+      
+      let datos;
+      if (resultado.success && resultado.data) {
+        datos = resultado.data;
+      } else if (resultado.id_cancha) {
+        datos = resultado;
+      } else if (resultado.error) {
+        throw new Error(resultado.error);
+      } else {
+        throw new Error('No se pudieron cargar los datos de la cancha');
+      }
+      
+      this.datosCancha = datos;
+      this.renderizarDatosCancha(this.datosCancha);
+      await this.cargarHorariosCancha(idCancha);
+      
+      return this.datosCancha;
+    } catch (error) {
+      console.error('Error al cargar la cancha:', error);
+      alert('Error al cargar la información de la cancha');
+      throw error;
+    }
+  }
+
+  /**
+   * Renderizar datos básicos de la cancha
+   */
+  renderizarDatosCancha(datos) {
+    const nombreCancha = document.getElementById('nombreCancha');
+    if (nombreCancha) nombreCancha.textContent = datos.nombre_cancha || 'Cancha';
+
+    const descripcionCancha = document.getElementById('descripcionCancha');
+    if (descripcionCancha) descripcionCancha.textContent = datos.descripcion_cancha || '';
+
+    const bannerCancha = document.getElementById('bannerCancha');
+    if (bannerCancha && datos.banner_cancha) {
+      bannerCancha.style.backgroundImage = `url('${BASE_URL}${datos.banner_cancha}')`;
+    }
+
+    const direccionCancha = document.getElementById('direccionCancha');
+    if (direccionCancha) direccionCancha.textContent = datos.direccion_cancha || 'Dirección no disponible';
+
+    const superficieCancha = document.getElementById('superficieCancha');
+    if (superficieCancha) superficieCancha.textContent = datos.tipo_superficie || 'N/A';
+  }
+
+  /**
+   * Cargar horarios de la cancha
+   */
+  async cargarHorariosCancha(idCancha) {
+    try {
+      const url = `${GET_HORARIOS_CANCHAS}?id_cancha=${idCancha}`;
+      const response = await fetch(url);
+      
+      if (!response.ok) throw new Error('Error al cargar horarios');
+      
+      const resultado = await response.json();
+      const horarios = resultado.data || resultado;
+      
+      if (horarios && horarios.length > 0) {
+        this.renderizarHorarios(horarios);
+      }
+    } catch (error) {
+      console.error('Error al cargar horarios:', error);
+    }
+  }
+
+  /**
+   * Renderizar horarios en la interfaz
+   */
+  renderizarHorarios(horarios) {
+    const diasAbiertos = horarios.filter(h => h.hora_apertura && h.hora_cierre);
+    
+    const diasAtencion = document.getElementById('diasAtencion');
+    if (diasAtencion && diasAbiertos.length > 0) {
+      const nombresDias = diasAbiertos.map(h => h.dia_nombre).join(', ');
+      diasAtencion.textContent = nombresDias;
+    }
+
+    const horarioPrincipal = document.getElementById('horarioPrincipal');
+    if (horarioPrincipal && diasAbiertos.length > 0) {
+      const h = diasAbiertos[0];
+      horarioPrincipal.textContent = `${h.hora_apertura.substring(0, 5)} - ${h.hora_cierre.substring(0, 5)}`;
+    }
+
+    this.actualizarEstadoActual(horarios);
+  }
+
+  /**
+   * Actualizar estado actual de la cancha
+   */
+  actualizarEstadoActual(horarios) {
+    const ahora = new Date();
+    const diaActual = ahora.getDay() === 0 ? 7 : ahora.getDay();
+    const horaActual = ahora.getHours() * 60 + ahora.getMinutes();
+
+    const horarioHoy = horarios.find(h => h.id_dia === diaActual);
+    const estadoActual = document.getElementById('estadoActual');
+    const horaCierre = document.getElementById('horaCierre');
+
+    if (!horarioHoy || !horarioHoy.hora_apertura) {
+      if (estadoActual) estadoActual.innerHTML = '<i class="bi bi-circle-fill text-danger"></i> Cerrado hoy';
+      return;
+    }
+
+    const [aH, aM] = horarioHoy.hora_apertura.split(':').map(Number);
+    const [cH, cM] = horarioHoy.hora_cierre.split(':').map(Number);
+    const minApertura = aH * 60 + aM;
+    const minCierre = cH * 60 + cM;
+
+    if (horaActual >= minApertura && horaActual < minCierre) {
+      if (estadoActual) estadoActual.innerHTML = '<i class="bi bi-circle-fill text-success"></i> Abierto ahora';
+      if (horaCierre) horaCierre.textContent = `Cierra a las ${horarioHoy.hora_cierre.substring(0, 5)}`;
+    } else {
+      if (estadoActual) estadoActual.innerHTML = '<i class="bi bi-circle-fill text-danger"></i> Cerrado';
+    }
+  }
+
+  /**
    * Configurar event listeners específicos del jugador
    */
   configurarEventListenersJugador() {
@@ -201,7 +330,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   }
 }
 
-// Inicializar cuando el DOM esté listo
+// Inicializar cuando el DOM esté listo y exponer globalmente
 document.addEventListener("DOMContentLoaded", function () {
-  new PerfilCanchaJugador();
+  window.perfilCanchaJugador = new PerfilCanchaJugador();
 });

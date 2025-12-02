@@ -184,7 +184,7 @@ define("JS_SCRIPTS_PATH", SRC_PATH . "scripts/pages/");
 //=================================
 define("JS_COMPONENTS_PATH", SRC_PATH . "scripts/components/");
 
-// define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
+define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
 define("JS_NAVBAR_JUGADOR", JS_COMPONENTS_PATH . "navbar_Jugador.js");
 define("JS_NAVBAR_ADMIN_CANCHA", JS_COMPONENTS_PATH . "navbarAdminCancha.js");
 define("JS_NAVBAR_ADMIN_SISTEMA", JS_COMPONENTS_PATH . "navbar_AdminSistema.js");
@@ -201,7 +201,7 @@ define("JS_PAGES_PATH", SRC_PATH . "scripts/pages/");
 
 // admin-cancha
 define("JS_CANCHAS_LISTADO", JS_PAGES_PATH . "admin-cancha/canchasListado.js");
-define("JS_PERFILESCANCHA", JS_PAGES_PATH . "admin-cancha/perfilAdmin.js");
+define("JS_PERFILES_CANCHA", JS_PAGES_PATH . "admin-cancha/perfilAdmin.js");
 define("JS_AGENDA_ADMIN_CANCHA", JS_PAGES_PATH . "admin-cancha/agenda_AdminCancha.js");
 define("JS_AGENDA_ADMIN", JS_PAGES_PATH . "admin-cancha/agenda-admin.js");
 

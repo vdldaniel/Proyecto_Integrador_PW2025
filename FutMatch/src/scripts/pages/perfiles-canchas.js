@@ -312,7 +312,7 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
     }
 }
 
-// Inicializar cuando el DOM esté listo
+// Inicializar cuando el DOM esté listo y exponer globalmente
 document.addEventListener('DOMContentLoaded', function () {
-    new PerfilCanchaAdmin();
+    window.perfilCanchaAdmin = new PerfilCanchaAdmin();
 });

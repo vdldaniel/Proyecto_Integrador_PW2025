@@ -1,10 +1,12 @@
 /**
  * Funcionalidades base del perfil de cancha
- * Funciones comunes compartidas entre jugador y admin
+ * SOLO funciones comunes de UI compartidas entre jugador y admin
+ * La carga de datos específica se maneja en cada implementación (perfilAdmin.js, cancha-perfil-jugador.js)
  */
 
 class PerfilCanchaBase {
     constructor() {
+        this.datosCancha = null;
         this.inicializarEventosComunes();
     }
 
