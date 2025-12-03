@@ -22,6 +22,7 @@ try {
             c.banner,
             c.id_estado,
             c.id_superficie,
+            c.politicas_reservas,
             d.direccion_completa,
             d.latitud,
             d.longitud,
@@ -100,7 +101,6 @@ try {
             "servicios" => $servicios // INCLUIDO
         ]
     ]);
-
 } catch (Exception $e) {
     echo json_encode([
         "status" => "error",

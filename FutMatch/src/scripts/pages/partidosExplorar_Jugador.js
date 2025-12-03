@@ -134,7 +134,7 @@ function renderizarModalUnirsePartido(idPartido) {
   const partido = todosLosPartidos.find((p) => p.id_partido == idPartido);
 
   if (!partido) {
-    alert("Error: No se encontró información del partido");
+    showToast("Error: No se encontró información del partido", "Error");
     return;
   }
 
@@ -221,8 +221,10 @@ async function enviarSolicitudUnirse(idPartido) {
     }
 
     // Mostrar mensaje de éxito
-    alert(`¡Solicitud enviada correctamente! 
-        Podés ver el estado de la misma en "Mis Partidos"`);
+    showToast(
+      "¡Solicitud enviada correctamente! Podés ver el estado de la misma en 'Mis Partidos'",
+      "success"
+    );
 
     // Cerrar modal
     const modal = bootstrap.Modal.getInstance(
@@ -234,7 +236,6 @@ async function enviarSolicitudUnirse(idPartido) {
     window.location.reload();
   } catch (error) {
     console.error("Error al enviar solicitud:", error);
-    alert(`Error: ${error.message}`);
   } finally {
     // Rehabilitar botón
     btnConfirmar.disabled = false;

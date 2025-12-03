@@ -1,5 +1,5 @@
 <?php
-require_once '../app/config.php';
+require_once '../../app/config.php';
 
 // Iniciar sesión
 if (session_status() === PHP_SESSION_NONE) {

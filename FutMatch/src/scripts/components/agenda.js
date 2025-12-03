@@ -157,7 +157,7 @@ class CalendarioBase {
     try {
       const response = await fetch(`${GET_RESERVAS}?id_cancha=${idCancha}`);
       const data = await response.json();
-      console.log("Respuesta de reservas:", data);
+      //console.log("Respuesta de reservas:", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Error al cargar reservas");

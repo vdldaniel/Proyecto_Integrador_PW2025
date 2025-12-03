@@ -20,12 +20,23 @@
                 </select>
                 <label class="form-label small text-muted" for="selectorCancha">Filtrar por cancha</label>
             </div>
+        <?php else: ?>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body py-2">
+                        <h6 class="mb-0" id="nombreCanchaHeader">
+                            <i class="bi bi-building"></i> <span id="nombreCanchaTexto"></span>
+                        </h6>
+                        <small class="text-muted" id="detalleCanchaTexto"></small>
+                    </div>
+                </div>
+            </div>
         <?php endif; ?>
-        <div class="<?= $calendario_mostrar_selector ? 'col-md-4' : 'col-md-6' ?>">
+        <div class="col-md-4">
             <input type="date" class="form-control" id="selectorFecha">
             <label class="form-label small text-muted" for="selectorFecha">Ir a fecha</label>
         </div>
-        <div class="<?= $calendario_mostrar_selector ? 'col-md-4' : 'col-md-6' ?> text-end">
+        <div class="col-md-4 text-end">
             <button id="botonHoy" class="btn btn-dark me-2" type="button">
                 <i class="bi bi-calendar-today"></i> Hoy
             </button>

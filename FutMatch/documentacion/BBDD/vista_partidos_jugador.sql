@@ -22,9 +22,9 @@ SELECT
     p.abierto,
     p.goles_equipo_A,
     p.goles_equipo_B,
+    P.id_reserva,
     
     -- Fecha y hora (de la reserva)
-    r.id_reserva,
     DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha_partido,
     CASE DAYOFWEEK(r.fecha)
         WHEN 1 THEN 'Domingo'
@@ -49,8 +49,11 @@ SELECT
     d.longitud as longitud_cancha,
     
     -- Estado de la solicitud del usuario
-    es.id_estado,
-    es.nombre as estado_solicitud,
+    pp.id_estado as id_estado_participante,
+    esp.nombre as estado_participante,
+    r.id_estado as id_estado_reserva,
+    es.nombre as estado_reserva,
+    
     
     -- Rol del usuario en el partido
     rp.id_rol,
@@ -62,12 +65,8 @@ SELECT
     tp.min_participantes as min_participantes,
     tp.max_participantes as max_participantes,
     
-    CASE pp.equipo 
-    WHEN 1 THEN 'Equipo A'
-    WHEN 2 THEN 'Equipo B'
-    ELSE 'Sin asignar'
-    END as equipo_asignado,
-
+    pp.equipo as equipo_asignado,
+    
     -- Cantidad de participantes por equipo
     (SELECT COUNT(*) FROM participantes_partidos pp_a 
      WHERE pp_a.id_partido = p.id_partido AND pp_a.equipo = 1) AS cant_participantes_equipo_a,
@@ -107,7 +106,7 @@ SELECT
     eqa.nombre AS nombre_equipo_A,
     eqa.foto AS foto_equipo_A,
     eqa.descripcion AS descripcion_equipo_A,
-    eqb.nombre AS nombre_equipo_B,
+    eqb.nombre AS nombre_equipo_B,<
     eqb.foto AS foto_equipo_B,
     eqb.descripcion AS descripcion_equipo_B
     
@@ -123,17 +122,15 @@ INNER JOIN partidos p ON pp.id_partido = p.id_partido
 -- Join con tipos de partido
 INNER JOIN tipos_partido tp ON p.id_tipo_partido = tp.id_tipo_partido
 
--- Join con estados de solicitud
-INNER JOIN estados_solicitudes es ON pp.id_estado = es.id_estado
-
 -- Join con roles de partidos
 INNER JOIN roles_partidos rp ON pp.id_rol = rp.id_rol
 
--- Join con partidos_reservas para obtener la reserva
-LEFT JOIN partidos_reservas pr ON p.id_partido = pr.id_partido
-
 -- Join con reservas para obtener fecha y hora
-LEFT JOIN reservas r ON pr.id_reserva = r.id_reserva
+LEFT JOIN reservas r ON p.id_reserva = r.id_reserva
+
+-- Join con estados de solicitud
+INNER JOIN estados_solicitudes es ON r.id_estado = es.id_estado
+INNER JOIN estados_solicitudes esp ON pp.id_estado = esp.id_estado
 
 -- Join con canchas para obtener información de la cancha
 LEFT JOIN canchas c ON r.id_cancha = c.id_cancha
@@ -167,6 +164,8 @@ LEFT JOIN torneos t ON pt.id_torneo = t.id_torneo
 LEFT JOIN etapas_torneo et ON t.id_etapa = et.id_etapa
 
 LEFT JOIN equipos eqa ON pt.id_equipo_A = eqa.id_equipo
-LEFT JOIN equipos eqb ON pt.id_equipo_B = eqb.id_equipo;
+LEFT JOIN equipos eqb ON pt.id_equipo_B = eqb.id_equipo
+
+ORDER BY r.fecha DESC, r.hora_inicio DESC;
 
 -- =========================================================

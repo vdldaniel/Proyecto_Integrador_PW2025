@@ -134,22 +134,29 @@ define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 // ===================================
 
 // admin-cancha
-define("GET_CANCHAS_ADMIN_CANCHA", SRC_PATH . "controllers/admin-cancha/get_canchas.php");
+define("GET_CANCHAS_ADMIN_CANCHA", BASE_URL . "src/controllers/admin-cancha/get_canchas.php");
 
 
 // admin-sistema
-define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/getSolicitudesAdminCancha.php");
-define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/updateSolicitudAdminCancha.php");
+define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/getSolicitudesAdminCancha.php");
+define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/updateSolicitudAdminCancha.php");
+
+// partidos
+define("GET_PARTICIPANTES_PARTIDO", BASE_URL . "src/controllers/partidos/getParticipantesPartido.php");
+define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/partidos/getPartidos_Jugador.php");
+define("POST_PARTICIPANTE_PARTIDO", BASE_URL . "src/controllers/partidos/postParticipante_Partido.php");
+define("UPDATE_PARTIDO", BASE_URL . "src/controllers/partidos/updatePartido.php");
 
 // reservas
-define("GET_HORARIOS_CANCHAS", SRC_PATH . "controllers/reservas/getHorariosCanchas.php");
-define("GET_RESERVA_DETALLE", SRC_PATH . "controllers/reservas/getReservaDetalle.php");
-define("GET_RESERVAS", SRC_PATH . "controllers/reservas/getReservas.php");
-define("GET_TIPOS_RESERVA", SRC_PATH . "controllers/reservas/getTiposReserva.php");
-define("POST_RESERVA", SRC_PATH . "controllers/reservas/postReserva.php");
-define("UPDATE_HORARIOS_CANCHAS", SRC_PATH . "controllers/reservas/updateHorariosCanchas.php");
-define("UPDATE_RESERVA", SRC_PATH . "controllers/reservas/updateReserva.php");
-define("UPDATE_POLITICAS_CANCHA", SRC_PATH . "controllers/reservas/updatePoliticasCancha.php");
+define("GET_DISPONIBILIDAD", BASE_URL . "src/controllers/reservas/getDisponibilidad.php");
+define("GET_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/getHorariosCanchas.php");
+define("GET_RESERVA_DETALLE", BASE_URL . "src/controllers/reservas/getReservaDetalle.php");
+define("GET_RESERVAS", BASE_URL . "src/controllers/reservas/getReservas.php");
+define("GET_TIPOS_RESERVA", BASE_URL . "src/controllers/reservas/getTiposReserva.php");
+define("POST_RESERVA", BASE_URL . "src/controllers/reservas/postReserva.php");
+define("UPDATE_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/updateHorariosCanchas.php");
+define("UPDATE_RESERVA", BASE_URL . "src/controllers/reservas/updateReserva.php");
+define("UPDATE_POLITICAS_CANCHA", BASE_URL . "src/controllers/reservas/updatePoliticasCancha.php");
 
 // resto
 define("CONTROLLER_GEOCODING_PROXY", BASE_URL . "src/controllers/geocoding_proxy.php");
@@ -157,8 +164,7 @@ define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchas
 define("GET_EQUIPO_JUGADOR", BASE_URL . "src/controllers/getEquipo_Jugador.php");
 define("GET_EQUIPOS_JUGADOR", BASE_URL . "src/controllers/getEquipos_Jugador.php");
 define("GET_ESTADISTICAS_JUGADOR", BASE_URL . "src/controllers/getEstadisticas_Jugador.php");
-define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");
-define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");                        //MIS PARTIDOS
+define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");                     //MIS PARTIDOS
 define("GET_PARTIDOS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getPartidosDisponibles_Jugador.php"); //EXPLORAR
 define("GET_RESEÑAS_JUGADORES", BASE_URL . "src/controllers/getReseñas_Jugadores.php");
 define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");

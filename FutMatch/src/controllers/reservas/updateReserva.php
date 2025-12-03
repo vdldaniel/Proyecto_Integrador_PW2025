@@ -33,9 +33,9 @@ if (!isset($input['id_reserva'])) {
 try {
     $id_usuario = $_SESSION['user_id'];
 
-    // Verificar que la reserva pertenece a una cancha del admin
+    // Verificar que la reserva pertenece a una cancha del admin o es el creador de la reserva
     $stmtVerificar = $conn->prepare("
-        SELECT r.id_reserva, r.id_cancha, c.id_admin_cancha
+        SELECT r.id_reserva, r.id_cancha, r.id_creador_usuario, c.id_admin_cancha
         FROM reservas r
         INNER JOIN canchas c ON r.id_cancha = c.id_cancha
         WHERE r.id_reserva = :id_reserva
@@ -49,8 +49,8 @@ try {
         exit;
     }
 
-    // Verificar permisos: el id_admin_cancha debe coincidir con el user_id de la sesión
-    if ($reserva['id_admin_cancha'] != $id_usuario) {
+    // Verificar permisos: el id_admin_cancha O el id_creador_usuario debe coincidir con el user_id de la sesión
+    if ($reserva['id_admin_cancha'] != $id_usuario && $reserva['id_creador_usuario'] != $id_usuario) {
         http_response_code(403);
         echo json_encode(['status' => 'error', 'message' => 'No tiene permiso para modificar esta reserva']);
         exit;
