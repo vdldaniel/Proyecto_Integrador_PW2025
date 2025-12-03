@@ -1,6 +1,6 @@
 <?php
-// En src/app/routes/crear_torneo.php
-require_once __DIR__ . '/../../app/config.php'; // Asume que config.php inicializa $conn y la sesión
+
+require_once __DIR__ . '/../../app/config.php'; 
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -9,17 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// 1. Recolección de datos
+// 1. Recolección de datos (SOLO los campos presentes en el HTML)
 $nombre                     = $_POST['nombre'] ?? null;
 $fechaInicio                = $_POST['fechaInicio'] ?? null;
 $fechaFin                   = $_POST['fechaFin'] ?? null;
-$fechaEstimativa            = filter_var($_POST['fechaEstimativa'] ?? 'false', FILTER_VALIDATE_BOOLEAN);
-$cantidadEquipos            = $_POST['cantidadEquipos'] ?? null;
+
 $descripcion                = $_POST['descripcion'] ?? null;
 $abrirInscripciones         = filter_var($_POST['abrirInscripciones'] ?? 'false', FILTER_VALIDATE_BOOLEAN);
 $fechaCierreInscripciones   = $_POST['fechaCierreInscripciones'] ?? null;
 
-$idAdminCancha = $_SESSION['user_id'] ?? null; // Obtener ID del organizador logueado
+$idAdminCancha = $_SESSION['user_id'] ?? $_POST['idAdminCancha'] ?? null;// Obtener ID del organizador logueado
 
 // 2. Validación
 if (!$nombre || !$fechaInicio || !$idAdminCancha) {
@@ -40,16 +39,9 @@ if ($abrirInscripciones && empty($fechaCierreInscripciones)) {
     exit;
 }
 
-if (!empty($cantidadEquipos) && (!is_numeric($cantidadEquipos) || $cantidadEquipos < 2)) {
-    http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "La cantidad de equipos debe ser un número válido (mínimo 2)."]);
-    exit;
-}
-
-// Lógica de etapa e inserción de datos
 $id_etapa = $abrirInscripciones ? 2 : 1; // 1=Borrador, 2=Inscripciones Abiertas
 
-// Usamos el campo fin_estimativo para almacenar la fecha de cierre de inscripciones
+
 $fecha_cierre_db = $abrirInscripciones ? $fechaCierreInscripciones : null;
 
 
@@ -73,9 +65,6 @@ try {
     
     $stmt->execute();
     $id_torneo = $conn->lastInsertId();
-
-    // NOTA: El campo Cantidad Máxima de Equipos (cantidadEquipos) NO se guarda
-    // en la tabla `torneos`. Si debe guardarse, se requiere una columna o tabla adicional.
     
     $conn->commit();
 
