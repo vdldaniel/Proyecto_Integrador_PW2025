@@ -221,7 +221,7 @@ require_once HEAD_COMPONENT;
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="formCrearTorneo">
+          <form id="formCrearTorneo" novalidate>
             <div class="row">
               <!-- Nombre del Torneo -->
               <div class="mb-3 col-12">
@@ -236,19 +236,14 @@ require_once HEAD_COMPONENT;
               <div class="mb-3 col-12 col-lg-6">
                 <label for="fechaFin" class="form-label">Fecha de Fin</label>
                 <input type="date" class="form-control" id="fechaFin" />
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" id="fechaEstimativa" />
-                  <label class="form-check-label" for="fechaEstimativa">
-                    Fecha estimativa
-                  </label>
-                </div>
               </div>
-              <!-- Cantidad de Equipos -->
-              <div class="mb-3 col-12 col-lg-6">
-                <label for="cantidadEquipos" class="form-label">Cantidad máxima de equipos (opcional)</label>
-                <input type="number" class="form-control" id="cantidadEquipos" min="2" max="64" placeholder="Ej: 16" />
+
+              <!-- Descripción (Agregado para la tabla torneos) -->
+              <div class="mb-3 col-12">
+                <label for="descripcionTorneo" class="form-label">Descripción (Opcional)</label>
+                <textarea class="form-control" id="descripcionTorneo" rows="3" placeholder="Ej: Torneo con premios en efectivo."></textarea>
               </div>
-            </div>
+
 
             <!-- Abrir Inscripciones -->
             <hr class="my-4">
