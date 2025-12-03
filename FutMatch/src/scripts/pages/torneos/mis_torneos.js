@@ -3,11 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Endpoints
     const ENDPOINT_CREAR = BASE_URL + "src/controllers/torneos/torneo_crear.php"; 
-    const ENDPOINT_LISTAR = BASE_URL +  "src/controllers/torneos/lista_torneos.php"; 
+    const ENDPOINT_LISTAR = BASE_URL + "src/controllers/torneos/lista_torneos.php"; 
     const ENDPOINT_CANCELAR = BASE_URL + "src/controllers/torneos/torneo_cancelar.php"; 
 
     // Contenedor principal de la lista de torneos
     const torneosListContainer = document.getElementById('torneosList'); 
+
+    // Elemento de búsqueda (AÑADIDO PARA EL FILTRO)
+    const searchInput = document.getElementById('searchInput'); 
 
     // Elementos del Modal de Creación
     const abrirInscripcionesCheckbox = document.getElementById('abrirInscripciones');
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // === Verificación de Nulos ===
-    if (!abrirInscripcionesCheckbox || !btnCrearTorneo || !formCrearTorneo || !torneosListContainer || !modalCancelarTorneoElement || !btnConfirmarCancelar) {
+    if (!abrirInscripcionesCheckbox || !btnCrearTorneo || !formCrearTorneo || !torneosListContainer || !modalCancelarTorneoElement || !btnConfirmarCancelar || !searchInput) {
         showToast("Error crítico: Faltan elementos esenciales en el DOM.", 'error');
         if (btnCrearTorneo) btnCrearTorneo.disabled = true;
         return; 
@@ -140,8 +143,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (data.status === 'success') {
                 if (data.torneos.length > 0) {
+                    // Renderiza el HTML
                     let html = data.torneos.map(createTorneoCardHtml).join('');
                     torneosListContainer.innerHTML = html;
+                    
+                    // IMPORTANTE: Después de cargar los torneos, aplicamos el filtro
+                    // por si el usuario ya tenía texto en el campo de búsqueda.
+                    filterTorneos(); 
                 } else {
                     torneosListContainer.innerHTML = '<div class="col-12 text-center py-5"><i class="bi bi-info-circle me-2"></i> No has creado ningún torneo aún.</div>';
                 }
@@ -157,6 +165,35 @@ document.addEventListener('DOMContentLoaded', function() {
             torneosListContainer.innerHTML = '<div class="col-12 alert alert-danger">Error de conexión o formato de datos al cargar la lista de torneos.</div>';
         }
     }
+
+    // --- Lógica del Filtro de Búsqueda (INTEGRADA) ---
+
+ 
+    function filterTorneos() {
+        const filter = searchInput.value.toLowerCase().trim();
+        
+        
+        const cards = torneosListContainer.querySelectorAll('.col-12[data-torneo-id]');
+
+        cards.forEach(card => {
+        
+            const cardText = card.textContent.toLowerCase();
+
+            // Comprobar si el texto de la tarjeta incluye la cadena de búsqueda
+            if (cardText.includes(filter)) {
+                // Mostrar la tarjeta
+                card.style.display = 'block';
+            } else {
+                // Ocultar la tarjeta
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Agregar el event listener al campo de búsqueda para activar el filtro al escribir
+    searchInput.addEventListener('input', filterTorneos);
+    
+    // --------------------------------------------------
 
 
     // --- Lógica del Modal de Creación ---
@@ -227,16 +264,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Usa closest para encontrar el botón que disparó el evento
         const button = event.target.closest('.btn-cancelar-torneo-trigger');
         if (button) {
-            console.log('Botón Cancelar presionado. Intentando mostrar modal.'); // Debug
             const torneoId = button.getAttribute('data-torneo-id');
             cancelarTorneoIdInput.value = torneoId; // Almacenar el ID
-            console.log('ID del Torneo:', torneoId); // Debug
             
             if (modalCancelarTorneo) {
                 modalCancelarTorneo.show(); // Mostrar el modal manualmente
-                console.log('Llamada a modalCancelarTorneo.show() ejecutada.'); // Debug
             } else {
-                console.error('La instancia del modal de cancelación no está definida.'); // Debug
+                console.error('La instancia del modal de cancelación no está definida.');
             }
         }
     });
