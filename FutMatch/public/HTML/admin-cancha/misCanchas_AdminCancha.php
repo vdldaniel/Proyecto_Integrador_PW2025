@@ -304,7 +304,7 @@ require_once HEAD_COMPONENT;
 		</div>
 	</div>
 	</main>
-	<div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+	
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="<?= CSS_ICONS ?>">
 	<!-- Scripts -->

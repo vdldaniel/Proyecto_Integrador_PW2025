@@ -16,7 +16,7 @@ function cargarCanchas() {
         CANCHAS_CACHE = data.data;
         console.log("Canchas cargadas:", CANCHAS_CACHE);
         renderCanchas(CANCHAS_CACHE);
-        filtrarCanchas(); // Aplicar filtro si hay texto en el input
+        filtrarCanchas(); 
       } else {
         console.error("Error cargando canchas:", data.message);
       }
@@ -264,18 +264,18 @@ function agregarCancha() {
         document.getElementById("formAgregarCancha").reset();
         cargarCanchas();
 
-        // --- TOAST DE ÉXITO ---
+
         mostrarToast("Cancha agregada correctamente", "success");
 
       } else {
-        // --- TOAST DE ERROR ---
+
         mostrarToast("Error: " + data.message, "error");
         console.error(data);
       }
     })
     .catch((err) => {
       console.error("Error fetch agregar cancha:", err);
-      // --- TOAST DE ERROR ---
+     
       mostrarToast("Error al comunicarse con el servidor", "error");
     });
 }

@@ -59,7 +59,7 @@ try {
     ";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id_admin_cancha', $id_admin_cancha, PDO::PARAM_STR);
+    $stmt->bindParam(':id_admin_cancha', $idAdminCancha, PDO::PARAM_STR);
     $stmt->execute();
     $canchas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
