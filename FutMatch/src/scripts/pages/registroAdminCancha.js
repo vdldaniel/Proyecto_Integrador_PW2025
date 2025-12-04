@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function buscarDireccion() {
     const query = inputBuscadorDireccion.value.trim();
     if (!query) {
-      alert("Por favor, ingresá una dirección para buscar.");
+      showToast("Por favor, ingresá una dirección para buscar.", "warning");
       return;
     }
 
@@ -91,14 +91,15 @@ document.addEventListener("DOMContentLoaded", function () {
           // Obtener dirección detallada
           obtenerDireccionPorCoordenadas(lat, lon);
         } else {
-          alert(
-            "No se encontró la dirección. Intentá con otra búsqueda o arrastrá el marcador en el mapa."
+          showToast(
+            "No se encontró la dirección. Intentá con otra búsqueda o arrastrá el marcador en el mapa.",
+            "error"
           );
         }
       })
       .catch((error) => {
         console.error("Error en la búsqueda:", error);
-        alert("Error al buscar la dirección. Intentá nuevamente.");
+        showToast("Error al buscar la dirección. Intentá nuevamente.", "error");
       });
   }
 

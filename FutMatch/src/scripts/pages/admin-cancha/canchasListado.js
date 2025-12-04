@@ -1,3 +1,9 @@
+// Variables globales para los mapas
+let mapAgregar = null;
+let markerAgregar = null;
+let mapEditar = null;
+let markerEditar = null;
+
 document.addEventListener("DOMContentLoaded", function () {
   console.log("JS cargado correctamente");
   cargarCanchas();
@@ -6,7 +12,188 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("btnGuardarCancha")
     .addEventListener("click", agregarCancha);
+
+  // Inicializar mapas cuando se abren los modales
+  document
+    .getElementById("modalAgregarCancha")
+    .addEventListener("shown.bs.modal", inicializarMapaAgregar);
+  document
+    .getElementById("modalEditarCancha")
+    .addEventListener("shown.bs.modal", inicializarMapaEditar);
 });
+
+// ===================================
+// INICIALIZACIÓN DEL MAPA AGREGAR
+// ===================================
+function inicializarMapaAgregar() {
+  if (mapAgregar) {
+    mapAgregar.remove();
+  }
+
+  // Centrado en La Plata, Argentina por defecto
+  mapAgregar = L.map("mapAgregar").setView([-34.9214, -57.9544], 13);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+    maxZoom: 19,
+  }).addTo(mapAgregar);
+
+  markerAgregar = L.marker([-34.9214, -57.9544], {
+    draggable: true,
+  }).addTo(mapAgregar);
+
+  // Actualizar coordenadas cuando se arrastra el marcador
+  markerAgregar.on("dragend", function (e) {
+    const position = markerAgregar.getLatLng();
+    obtenerDireccionPorCoordenadas(position.lat, position.lng, "agregar");
+  });
+
+  // Botón buscar dirección
+  document.getElementById("btnBuscarDireccionAgregar").onclick = function () {
+    buscarDireccion("agregar");
+  };
+
+  document.getElementById("inputBuscadorDireccionAgregar").onkeypress =
+    function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        buscarDireccion("agregar");
+      }
+    };
+}
+
+// ===================================
+// INICIALIZACIÓN DEL MAPA EDITAR
+// ===================================
+function inicializarMapaEditar() {
+  if (mapEditar) {
+    mapEditar.remove();
+  }
+
+  // Obtener coordenadas actuales de la cancha o usar ubicación por defecto
+  const lat =
+    parseFloat(document.getElementById("inputLatitudEditar").value) || -34.9214;
+  const lng =
+    parseFloat(document.getElementById("inputLongitudEditar").value) ||
+    -57.9544;
+
+  mapEditar = L.map("mapEditar").setView([lat, lng], 13);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+    maxZoom: 19,
+  }).addTo(mapEditar);
+
+  markerEditar = L.marker([lat, lng], {
+    draggable: true,
+  }).addTo(mapEditar);
+
+  // Actualizar coordenadas cuando se arrastra el marcador
+  markerEditar.on("dragend", function (e) {
+    const position = markerEditar.getLatLng();
+    obtenerDireccionPorCoordenadas(position.lat, position.lng, "editar");
+  });
+
+  // Botón buscar dirección
+  document.getElementById("btnBuscarDireccionEditar").onclick = function () {
+    buscarDireccion("editar");
+  };
+
+  document.getElementById("inputBuscadorDireccionEditar").onkeypress =
+    function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        buscarDireccion("editar");
+      }
+    };
+}
+
+// ===================================
+// GEOCODIFICACIÓN: Búsqueda de dirección
+// ===================================
+function buscarDireccion(tipo) {
+  const inputId =
+    tipo === "agregar"
+      ? "inputBuscadorDireccionAgregar"
+      : "inputBuscadorDireccionEditar";
+  const query = document.getElementById(inputId).value.trim();
+
+  if (!query) {
+    showToast("Por favor, ingresá una dirección para buscar.", "warning");
+    return;
+  }
+
+  const url = `${GEOCODING_PROXY}?tipo=search&q=${encodeURIComponent(query)}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.length > 0) {
+        const result = data[0];
+        const lat = parseFloat(result.lat);
+        const lon = parseFloat(result.lon);
+
+        // Mover el mapa y el marcador
+        if (tipo === "agregar") {
+          mapAgregar.setView([lat, lon], 16);
+          markerAgregar.setLatLng([lat, lon]);
+        } else {
+          mapEditar.setView([lat, lon], 16);
+          markerEditar.setLatLng([lat, lon]);
+        }
+
+        // Obtener dirección detallada
+        obtenerDireccionPorCoordenadas(lat, lon, tipo);
+      } else {
+        showToast(
+          "No se encontró la dirección. Intentá con otra búsqueda o arrastrá el marcador en el mapa.",
+          "warning"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la búsqueda:", error);
+      showToast("Error al buscar la dirección. Intentá nuevamente.", "error");
+    });
+}
+
+// ===================================
+// GEOCODIFICACIÓN INVERSA: Coordenadas -> Dirección
+// ===================================
+function obtenerDireccionPorCoordenadas(lat, lon, tipo) {
+  const url = `${GEOCODING_PROXY}?tipo=reverse&lat=${lat}&lon=${lon}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data && data.address) {
+        const displayName = data.display_name;
+
+        if (tipo === "agregar") {
+          document.getElementById("ubicacionCancha").value = displayName;
+          document.getElementById("inputLatitudAgregar").value = lat;
+          document.getElementById("inputLongitudAgregar").value = lon;
+          document.getElementById("textoDireccionAgregar").textContent =
+            displayName;
+          document
+            .getElementById("direccionSeleccionadaAgregar")
+            .classList.remove("d-none");
+        } else {
+          document.getElementById("editUbicacionCancha").value = displayName;
+          document.getElementById("inputLatitudEditar").value = lat;
+          document.getElementById("inputLongitudEditar").value = lon;
+          document.getElementById("textoDireccionEditar").textContent =
+            displayName;
+          document
+            .getElementById("direccionSeleccionadaEditar")
+            .classList.remove("d-none");
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error en geocodificación inversa:", error);
+    });
+}
 
 function cargarCanchas() {
   fetch(BASE_URL + "src/controllers/admin-cancha/get_canchas.php")
@@ -262,6 +449,9 @@ function agregarCancha() {
         if (modal) modal.hide();
 
         document.getElementById("formAgregarCancha").reset();
+        document
+          .getElementById("direccionSeleccionadaAgregar")
+          .classList.add("d-none");
         cargarCanchas();
 
 
@@ -299,6 +489,25 @@ function abrirModalEditar(id) {
   document.getElementById("editTipoSuperficie").value =
     cancha.id_superficie || "";
 
+  // Establecer coordenadas si existen
+  document.getElementById("inputLatitudEditar").value =
+    cancha.latitud || -34.9214;
+  document.getElementById("inputLongitudEditar").value =
+    cancha.longitud || -57.9544;
+
+  // Mostrar dirección si existe
+  if (cancha.direccion_completa) {
+    document.getElementById("textoDireccionEditar").textContent =
+      cancha.direccion_completa;
+    document
+      .getElementById("direccionSeleccionadaEditar")
+      .classList.remove("d-none");
+  } else {
+    document
+      .getElementById("direccionSeleccionadaEditar")
+      .classList.add("d-none");
+  }
+
   // traer id_tipo_partido real
   if (cancha.id_tipo_partido) {
     document.getElementById("editCapacidadCancha").value =
@@ -328,6 +537,11 @@ document
       "ubicacion",
       document.getElementById("editUbicacionCancha").value
     );
+    data.append("latitud", document.getElementById("inputLatitudEditar").value);
+    data.append(
+      "longitud",
+      document.getElementById("inputLongitudEditar").value
+    );
     data.append(
       "superficie",
       document.getElementById("editTipoSuperficie").value
@@ -348,10 +562,14 @@ document
             document.getElementById("modalEditarCancha")
           );
           if (modal) modal.hide();
+          document
+            .getElementById("direccionSeleccionadaEditar")
+            .classList.add("d-none");
           cargarCanchas();
+          showToast("Cancha actualizada exitosamente", "success");
         } else {
           console.error(res);
-          alert("Error al actualizar la cancha");
+          showToast("Error al actualizar la cancha", "error");
         }
       })
       .catch((err) => console.error(err));
@@ -381,10 +599,10 @@ document
       .then((res) => res.json())
       .then((data) => {
         if (data.ok) {
-          alert("Cancha eliminada.");
+          showToast("Cancha eliminada exitosamente", "success");
           location.reload();
         } else {
-          alert("Error: " + data.error);
+          showToast("Error: " + data.error, "error");
         }
       });
   });
@@ -411,10 +629,10 @@ document.getElementById("btnConfirmarCierre").addEventListener("click", () => {
     .then((res) => res.json())
     .then((data) => {
       if (data.ok) {
-        alert("La cancha fue deshabilitada.");
+        showToast("La cancha fue deshabilitada exitosamente", "success");
         location.reload();
       } else {
-        alert("Error: " + data.error);
+        showToast("Error: " + data.error, "error");
       }
     })
     .catch((err) => console.error("Error en cierre:", err));
@@ -563,7 +781,7 @@ function restaurarCancha(id, reload = false) {
     .then((r) => r.json())
     .then((res) => {
       if (!res.ok) {
-        alert("Error al restaurar la cancha");
+        showToast("Error al restaurar la cancha", "error");
         return;
       }
 
@@ -575,11 +793,14 @@ function restaurarCancha(id, reload = false) {
         cargarHistorialDesdeCache();
         cargarCanchas();
 
-        alert("Cancha restaurada con éxito");
+        showToast("Cancha restaurada con éxito", "success");
       }
 
       if (reload) {
-        alert("La cancha fue restaurada y está pendiente de verificación.");
+        showToast(
+          "La cancha fue restaurada y está pendiente de verificación",
+          "success"
+        );
         location.reload();
       }
     });

@@ -29,8 +29,8 @@ const CONFIGURACION_CALENDARIO = {
     "Diciembre",
   ],
   HORARIOS: {
-    HORA_INICIO: 8,
-    HORA_FIN: 22,
+    HORA_INICIO: 6,
+    HORA_FIN: 24,
     INTERVALO: 1, // horas
   },
 };
@@ -157,7 +157,7 @@ class CalendarioBase {
     try {
       const response = await fetch(`${GET_RESERVAS}?id_cancha=${idCancha}`);
       const data = await response.json();
-      console.log("Respuesta de reservas:", data);
+      //console.log("Respuesta de reservas:", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Error al cargar reservas");
@@ -696,31 +696,6 @@ class CalendarioBase {
 
     return html;
   }
-}
-
-// Callbacks por defecto (pueden ser sobrescritos)
-function onPendientesClick(fecha, hora) {
-  console.log("Click en pendientes:", fecha, hora);
-}
-
-function onPendientesDiaClick(fecha) {
-  console.log("Click en pendientes del día:", fecha);
-}
-
-function onHistoricasClick(fecha, hora) {
-  console.log("Click en históricas:", fecha, hora);
-}
-
-function onCalendarioDiaClick(fecha) {
-  console.log("Día seleccionado:", fecha);
-}
-
-function onCalendarioHorarioClick(fecha, hora) {
-  console.log("Horario seleccionado:", fecha, hora);
-}
-
-function onReservaClick(idReserva) {
-  console.log("Reserva seleccionada:", idReserva);
 }
 
 // Exportar para uso en módulos

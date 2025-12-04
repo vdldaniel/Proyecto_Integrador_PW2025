@@ -1342,6 +1342,99 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     modal.show();
   }
 
+  // Ver solicitudes pendientes de un día completo
+  async verSolicitudesPendientesDia(fecha) {
+    const reservasPendientes = this.reservas.filter((reserva) => {
+      return reserva.fecha === fecha && reserva.id_estado === 1; // Solo pendientes del día
+    });
+
+    if (reservasPendientes.length === 0) {
+      if (typeof showToast !== "undefined") {
+        showToast("No hay solicitudes pendientes en este día", "info");
+      }
+      return;
+    }
+
+    // Construir HTML de la lista agrupada por horario
+    let html = `<div class="list-group">`;
+
+    reservasPendientes.forEach((reserva, index) => {
+      html += `
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              <h6 class="mb-1">
+                <span class="badge bg-warning text-dark me-2">${
+                  index + 1
+                }</span>
+                ${reserva.titular_nombre_completo}
+              </h6>
+              <p class="mb-1">
+                <small class="text-muted">
+                  <i class="bi bi-clock"></i> ${reserva.hora_inicio.substring(
+                    0,
+                    5
+                  )} - ${reserva.hora_fin.substring(0, 5)}
+                </small>
+                ${
+                  reserva.tipo_reserva
+                    ? `<br><small><i class="bi bi-tag"></i> ${reserva.tipo_reserva}</small>`
+                    : ""
+                }
+                ${
+                  reserva.titular_telefono
+                    ? `<br><small><i class="bi bi-telephone"></i> ${reserva.titular_telefono}</small>`
+                    : ""
+                }
+              </p>
+              ${
+                reserva.titulo
+                  ? `<p class="mb-1"><strong>${reserva.titulo}</strong></p>`
+                  : ""
+              }
+              ${
+                reserva.descripcion
+                  ? `<p class="mb-1 text-muted small">${reserva.descripcion}</p>`
+                  : ""
+              }
+            </div>
+            <div class="btn-group btn-group-sm ms-2" role="group">
+              <button class="btn btn-dark" onclick="aplicacionAgenda.cambiarEstadoReserva(${
+                reserva.id_reserva
+              }, 3); document.getElementById('btnCerrarPendientesDia').click();" title="Aceptar">
+                <i class="bi bi-check-lg"></i>
+              </button>
+              <button class="btn btn-dark" onclick="aplicacionAgenda.cambiarEstadoReserva(${
+                reserva.id_reserva
+              }, 4); document.getElementById('btnCerrarPendientesDia').click();" title="Rechazar">
+                <i class="bi bi-x-lg"></i>
+              </button>
+              <button class="btn btn-dark" onclick="aplicacionAgenda.verDetalleReserva(${
+                reserva.id_reserva
+              }); bootstrap.Modal.getInstance(document.getElementById('modalSolicitudesPendientes')).hide();" title="Ver detalles">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    html += `<button id="btnCerrarPendientesDia" style="display:none" data-bs-dismiss="modal"></button>`;
+
+    // Mostrar en modal
+    const contenedor = document.getElementById(
+      "contenidoSolicitudesPendientes"
+    );
+    contenedor.innerHTML = html;
+
+    const modal = new bootstrap.Modal(
+      document.getElementById("modalSolicitudesPendientes")
+    );
+    modal.show();
+  }
+
   // Gestión de reservas
   crearReserva(fechaSeleccionada = null, horaSeleccionada = null) {
     this.abrirModalReserva("crear", null, fechaSeleccionada, horaSeleccionada);

@@ -188,10 +188,7 @@ function confirmarSuspension() {
     document.getElementById("mensaje-suspension").value;
 
   if (!fechaSuspension) {
-    mostrarNotificacion(
-      "Por favor, seleccioná una fecha de suspensión",
-      "warning"
-    );
+    showToast("Por favor, seleccioná una fecha de suspensión", "warning");
     return;
   }
 
@@ -201,10 +198,7 @@ function confirmarSuspension() {
   console.log(`Mensaje: ${mensajePersonalizado}`);
 
   // Simular éxito
-  mostrarNotificacion(
-    `Jugador ${jugadorId} suspendido exitosamente`,
-    "success"
-  );
+  showToast(`Jugador ${jugadorId} suspendido exitosamente`, "success");
 
   // Cerrar modal
   const modal = bootstrap.Modal.getInstance(
@@ -230,7 +224,7 @@ function confirmarRestablecimiento() {
   console.log(`Mensaje: ${mensajePersonalizado}`);
 
   // Simular éxito
-  mostrarNotificacion(
+  showToast(
     `Cuenta del jugador ${jugadorId} restablecida exitosamente`,
     "success"
   );
@@ -272,30 +266,4 @@ function actualizarEstadoJugador(jugadorId, nuevoEstado) {
       if (btnReestablecer) btnReestablecer.style.display = "none";
     }
   }
-}
-
-/**
- * Mostrar notificación
- */
-function mostrarNotificacion(mensaje, tipo = "info") {
-  // Crear elemento de notificación
-  const notificacion = document.createElement("div");
-  notificacion.className = `alert alert-${tipo} alert-dismissible fade show position-fixed`;
-  notificacion.style.cssText =
-    "top: 20px; right: 20px; z-index: 9999; min-width: 300px;";
-
-  notificacion.innerHTML = `
-        ${mensaje}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-
-  // Agregar al body
-  document.body.appendChild(notificacion);
-
-  // Auto-remover después de 3 segundos
-  setTimeout(() => {
-    if (notificacion.parentNode) {
-      notificacion.remove();
-    }
-  }, 3000);
 }

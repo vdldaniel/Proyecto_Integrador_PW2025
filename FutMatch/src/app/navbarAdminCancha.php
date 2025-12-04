@@ -76,7 +76,7 @@ function isActive($page_name, $current)
 
 			<!-- Lado derecho: perfil, notificaciones y configuración -->
 			<div class="d-flex align-items-center">
-				<!-- Campanita de notificaciones -->
+				<!-- Campanita de notificaciones
 				<button class="btn btn-dark position-relative me-2"
 					type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
 					title="Notificaciones">
@@ -84,7 +84,7 @@ function isActive($page_name, $current)
 					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 						2
 					</span>
-				</button>
+				</button> -->
 				<!-- Botones solo en pantallas medianas y grandes -->
 				<div class="d-none-custom d-md-flex align-items-center">
 					<button id="botonConfiguracion" class="btn btn-dark me-2" type="button"
@@ -365,34 +365,67 @@ function isActive($page_name, $current)
 				<!-- Información de cuenta -->
 				<h6 class="border-bottom pb-2 mb-3">Información de Cuenta</h6>
 
-				<!-- Nombre y Apellido -->
-				<div class="mb-3">
-					<label class="form-label">Nombre y Apellido</label>
-					<div class="input-group">
-						<input type="text" class="form-control" value="Juan Carlos Administrador" readonly>
+				<!-- Nombre -->
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<label for="inputNombre" class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
 					</div>
-				</div>
-
-				<!-- Teléfono -->
-				<div class="mb-3">
-					<label class="form-label">Teléfono</label>
-					<div class="input-group">
-						<input type="tel" class="form-control" id="inputTelefono" value="+54 9 11 1234-5678" readonly>
-						<button class="btn" type="button" onclick="editarCampo('inputTelefono')">
-							<i class="bi bi-pencil"></i>
-						</button>
+					<div class="col-md-6">
+						<label for="inputApellido" class="form-label">Apellido</label>
+						<input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
 					</div>
 				</div>
 
 				<!-- Email -->
 				<div class="mb-3">
-					<label class="form-label">Dirección de E-mail</label>
-					<div class="input-group">
-						<input type="email" class="form-control" id="inputEmail" value="admin@futmatch.com" readonly>
-						<button class="btn" type="button" onclick="editarCampo('inputEmail')">
-							<i class="bi bi-pencil"></i>
-						</button>
-					</div>
+					<label for="inputEmail" class="form-label">Dirección de E-mail</label>
+					<input type="email" class="form-control" id="inputEmail" placeholder="email@ejemplo.com">
+				</div>
+
+				<!-- Teléfono -->
+				<div class="mb-3">
+					<label for="inputTelefono" class="form-label">Teléfono (opcional)</label>
+					<input type="tel" class="form-control" id="inputTelefono" placeholder="+54 9 11 1234-5678">
+				</div>
+
+				<div class="d-grid mb-4">
+					<button type="button" class="btn btn-primary" id="btnGuardarDatos">
+						<i class="bi bi-save me-2"></i>Guardar Datos
+					</button>
+				</div>
+
+				<hr class="my-4">
+
+				<!-- Cambiar Contraseña -->
+				<h6 class="border-bottom pb-2 mb-3">Seguridad</h6>
+
+				<button type="button" class="btn btn-warning w-100 mb-3" id="btnCambiarPassword">
+					<i class="bi bi-key me-2"></i>Cambiar Contraseña
+				</button>
+
+				<!-- Formulario de cambio de contraseña (oculto por defecto) -->
+				<div id="formCambiarPassword" class="d-none">
+					<form id="passwordChangeForm" autocomplete="off">
+						<input type="text" name="username" autocomplete="username" style="display:none;" aria-hidden="true">
+						<div class="card card-body bg-dark border-warning mb-3">
+							<div class="mb-3">
+								<label for="inputPasswordActual" class="form-label">Contraseña Actual</label>
+								<input type="password" class="form-control" id="inputPasswordActual" placeholder="Contraseña actual" autocomplete="current-password">
+							</div>
+							<div class="mb-3">
+								<label for="inputPasswordNueva" class="form-label">Nueva Contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordNueva" placeholder="Nueva contraseña (mín. 6 caracteres)" autocomplete="new-password">
+							</div>
+							<div class="mb-3">
+								<label for="inputPasswordConfirmar" class="form-label">Confirmar Nueva Contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordConfirmar" placeholder="Confirmar nueva contraseña" autocomplete="new-password">
+							</div>
+							<button type="button" class="btn btn-warning" id="btnGuardarPassword">
+								<i class="bi bi-check-lg me-2"></i>Guardar Nueva Contraseña
+							</button>
+						</div>
+					</form>
 				</div>
 
 				<hr class="my-4">
@@ -460,5 +493,10 @@ function isActive($page_name, $current)
 </div>
 
 
-<script src="<?= JS_NAVBAR_ADMIN_CANCHA ?>"></script>
+<script>
+	const UPDATE_USUARIO_URL = '<?= UPDATE_USUARIO ?>';
+</script>
+
 <script src="<?= JS_TOAST_MODULE ?>"></script>
+<script src="<?= JS_UPDATE_USUARIO ?>"></script>
+<script src="<?= JS_NAVBAR_ADMIN_CANCHA ?>"></script>

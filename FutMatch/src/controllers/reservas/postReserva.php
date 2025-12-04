@@ -1,5 +1,26 @@
 <?php
-require_once '../../app/config.php';
+// Configurar manejo de errores para evitar que se muestren en la salida
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
+
+// Iniciar buffer de salida para evitar cualquier output antes del JSON
+ob_start();
+
+try {
+    require_once '../../app/config.php';
+} catch (Exception $e) {
+    ob_clean();
+    header('Content-Type: application/json');
+    http_response_code(500);
+    echo json_encode(['error' => 'Error al cargar configuración', 'detalle' => $e->getMessage()]);
+    exit();
+}
+
+// Limpiar cualquier output generado por config.php
+ob_clean();
+
+// Establecer header JSON PRIMERO para evitar errores de formato
+header('Content-Type: application/json');
 
 // Iniciar sesión
 if (session_status() === PHP_SESSION_NONE) {
@@ -15,9 +36,12 @@ if (!isset($_SESSION['user_id'])) {
 // Obtener datos del POST
 $data = $_POST;
 
+// Log de debug: datos recibidos y sesión
+error_log("POST_RESERVA - Inicio: user_id=" . $_SESSION['user_id'] . ", user_type=" . ($_SESSION['user_type'] ?? 'null'));
+error_log("POST_RESERVA - Datos POST: " . json_encode($data));
+
 // Verificar si se recibieron datos
 if (empty($data)) {
-    header('Content-Type: application/json');
     http_response_code(400);
     echo json_encode([
         'error' => 'No se recibieron datos',
@@ -25,9 +49,9 @@ if (empty($data)) {
     exit;
 }
 
-$id_admin = $_SESSION['user_id'];
+$id_usuario = $_SESSION['user_id'];
+$user_type = $_SESSION['user_type'] ?? null;
 
-header('Content-Type: application/json');
 
 // Campos de la reserva
 $id_cancha = isset($data['id_cancha']) ? trim($data['id_cancha']) : null;
@@ -64,17 +88,41 @@ if (empty($id_cancha) || empty($id_tipo_reserva) || empty($fecha) || empty($hora
     exit();
 }
 
-// Validar que la cancha pertenece al admin
+// Validar la cancha según el tipo de usuario
 try {
-    $queryCancha = "SELECT id_cancha FROM canchas WHERE id_cancha = :id_cancha AND id_admin_cancha = :id_admin";
-    $stmtCancha = $conn->prepare($queryCancha);
-    $stmtCancha->bindParam(':id_cancha', $id_cancha, PDO::PARAM_INT);
-    $stmtCancha->bindParam(':id_admin', $id_admin, PDO::PARAM_INT);
-    $stmtCancha->execute();
+    if ($user_type === 'admin_cancha') {
+        // Admin: Validar que la cancha le pertenece
+        $queryCancha = "SELECT id_cancha FROM canchas WHERE id_cancha = :id_cancha AND id_admin_cancha = :id_usuario";
+        $stmtCancha = $conn->prepare($queryCancha);
+        $stmtCancha->bindParam(':id_cancha', $id_cancha, PDO::PARAM_INT);
+        $stmtCancha->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmtCancha->execute();
 
-    if (!$stmtCancha->fetch()) {
+        if (!$stmtCancha->fetch()) {
+            http_response_code(403);
+            echo json_encode(['error' => 'No tienes permiso para crear reservas en esta cancha']);
+            exit();
+        }
+    } elseif ($user_type === 'jugador') {
+        // Jugador: Solo verificar que la cancha existe
+        $queryCancha = "SELECT id_cancha FROM canchas WHERE id_cancha = :id_cancha";
+        $stmtCancha = $conn->prepare($queryCancha);
+        $stmtCancha->bindParam(':id_cancha', $id_cancha, PDO::PARAM_INT);
+        $stmtCancha->execute();
+
+        if (!$stmtCancha->fetch()) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Cancha no encontrada']);
+            exit();
+        }
+
+        // Para jugadores: El titular de la reserva ES el jugador que la crea
+        // No necesitamos buscar username, usamos directamente el id_usuario
+        // Esto se manejará más adelante en el código
+        error_log("POST_RESERVA - Jugador creando reserva: id_usuario=$id_usuario, user_type=$user_type");
+    } else {
         http_response_code(403);
-        echo json_encode(['error' => 'No tienes permiso para crear reservas en esta cancha']);
+        echo json_encode(['error' => 'Tipo de usuario no autorizado para crear reservas']);
         exit();
     }
 } catch (PDOException $e) {
@@ -90,9 +138,41 @@ $id_titular_externo = null;
 $nombre_completo = null;
 $telefono = null;
 
-// VALIDACIÓN CRÍTICA: Si hay username, es usuario registrado (ignorar flag reserva_externa)
-if (!empty($username)) {
-    // Reserva para un jugador de la app (USUARIO REGISTRADO)
+// LÓGICA SIMPLIFICADA:
+// 1. Si user_type = 'jugador': id_titular_jugador = id_creador_usuario = user_id
+// 2. Si admin + username: Buscar jugador por username
+// 3. Si admin + reserva_externa: Crear persona externa
+
+if ($user_type === 'jugador') {
+    // JUGADOR: El titular es el mismo jugador que crea la reserva
+    $id_titular_jugador = $id_usuario;
+
+    // Obtener datos del jugador para el log
+    try {
+        $queryJugador = "SELECT 
+            u.nombre,
+            u.apellido,
+            j.telefono
+        FROM jugadores j
+        INNER JOIN usuarios u ON j.id_jugador = u.id_usuario
+        WHERE j.id_jugador = :id_jugador";
+
+        $stmtJugador = $conn->prepare($queryJugador);
+        $stmtJugador->bindParam(':id_jugador', $id_usuario, PDO::PARAM_INT);
+        $stmtJugador->execute();
+        $jugador = $stmtJugador->fetch(PDO::FETCH_ASSOC);
+
+        if ($jugador) {
+            $nombre_completo = $jugador['nombre'] . ' ' . $jugador['apellido'];
+            $telefono = $jugador['telefono'];
+        }
+    } catch (PDOException $e) {
+        error_log("POST_RESERVA - ERROR OBTENER DATOS JUGADOR: " . $e->getMessage());
+    }
+
+    error_log("POST_RESERVA - Jugador creando reserva para sí mismo: id_jugador=$id_titular_jugador, nombre='$nombre_completo'");
+} elseif ($user_type === 'admin_cancha' && !empty($username)) {
+    // ADMIN: Reserva para un jugador de la app (USUARIO REGISTRADO)
     try {
         $queryJugador = "SELECT 
             j.id_jugador,
@@ -109,12 +189,11 @@ if (!empty($username)) {
         $jugador = $stmtJugador->fetch(PDO::FETCH_ASSOC);
 
         if ($jugador) {
-            // Solo guardar el id_jugador como titular (NO crear persona externa)
             $id_titular_jugador = $jugador['id_jugador'];
             $nombre_completo = $jugador['nombre'] . ' ' . $jugador['apellido'];
             $telefono = $jugador['telefono'];
 
-            error_log("POST_RESERVA - Usuario registrado detectado: username='$username', id_jugador=$id_titular_jugador, nombre='$nombre_completo'");
+            error_log("POST_RESERVA - Admin creando reserva para jugador: username='$username', id_jugador=$id_titular_jugador, nombre='$nombre_completo'");
         } else {
             http_response_code(404);
             echo json_encode(['error' => 'Usuario no encontrado']);
@@ -126,7 +205,7 @@ if (!empty($username)) {
         echo json_encode(['error' => 'Error al buscar el jugador']);
         exit();
     }
-} elseif ($reserva_externa && empty($username)) {
+} elseif ($user_type === 'admin_cancha' && $reserva_externa && empty($username)) {
     // Reserva para una PERSONA EXTERNA (no registrada en la app)
     // Solo entra aquí si NO hay username Y el checkbox está marcado
     // Validar que al menos haya nombre
@@ -159,11 +238,14 @@ if (!empty($username)) {
 
     error_log("POST_RESERVA - Persona externa detectada: nombre='$nombre_completo', telefono='$telefono'");
 } else {
-    // Error: no hay username ni está marcado como reserva externa
-    error_log("POST_RESERVA - ERROR: No se proporcionó username ni datos de persona externa");
-    http_response_code(400);
-    echo json_encode(['error' => 'Debe proporcionar un username (usuario registrado) o marcar como reserva externa con nombre']);
-    exit();
+    // Caso no manejado: admin sin username ni reserva_externa
+    if ($user_type === 'admin_cancha') {
+        error_log("POST_RESERVA - ERROR ADMIN: No se proporcionó username ni datos de persona externa");
+        http_response_code(400);
+        echo json_encode(['error' => 'Debe proporcionar un username (usuario registrado) o marcar como reserva externa con nombre']);
+        exit();
+    }
+    // Para jugadores este else no debería ejecutarse nunca (ya se maneja arriba)
 }
 
 // Validar que hora_fin sea posterior a hora_inicio
@@ -241,6 +323,11 @@ try {
     exit();
 }
 
+// Determinar el estado inicial de la reserva
+// Jugadores: Pendiente (1) - requiere aprobación del admin
+// Admin: Confirmada (3) - aprobación automática
+$id_estado_inicial = ($user_type === 'jugador') ? 1 : 3;
+
 // Insertar la reserva
 try {
     $conn->beginTransaction();
@@ -271,7 +358,7 @@ try {
          id_estado, id_creador_usuario, id_titular_jugador, id_titular_externo) 
         VALUES 
         (:id_cancha, :id_tipo_reserva, :fecha, :fecha_fin, :hora_inicio, :hora_fin, :titulo, :descripcion, 
-         3, :id_creador_usuario, :id_titular_jugador, :id_titular_externo)";
+         :id_estado, :id_creador_usuario, :id_titular_jugador, :id_titular_externo)";
 
     $stmtInsert = $conn->prepare($queryInsert);
     $stmtInsert->bindParam(':id_cancha', $id_cancha, PDO::PARAM_INT);
@@ -282,7 +369,8 @@ try {
     $stmtInsert->bindParam(':hora_fin', $hora_fin, PDO::PARAM_STR);
     $stmtInsert->bindParam(':titulo', $titulo, PDO::PARAM_STR);
     $stmtInsert->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
-    $stmtInsert->bindParam(':id_creador_usuario', $id_admin, PDO::PARAM_INT);
+    $stmtInsert->bindParam(':id_estado', $id_estado_inicial, PDO::PARAM_INT);
+    $stmtInsert->bindParam(':id_creador_usuario', $id_usuario, PDO::PARAM_INT);
 
     // Bind condicional para titular (uno será null)
     if ($id_titular_jugador !== null) {
@@ -295,6 +383,32 @@ try {
 
     $stmtInsert->execute();
     $id_reserva = $conn->lastInsertId();
+
+    $queryTipoPartido = "SELECT id_tipo_partido FROM canchas_tipos_partido WHERE id_cancha = :id_cancha";
+    $stmtTipoPartido = $conn->prepare($queryTipoPartido);
+    $stmtTipoPartido->bindParam(':id_cancha', $id_cancha, PDO::PARAM_INT);
+    $stmtTipoPartido->execute();
+    $tipo_partido = $stmtTipoPartido->fetch(PDO::FETCH_ASSOC);
+    if (!$tipo_partido) {
+        throw new Exception("No se encontró el tipo de partido para la cancha ID: $id_cancha");
+    }
+
+    $queryInsertPartido = "INSERT INTO partidos (id_anfitrion, id_tipo_partido, abierto, id_reserva) 
+                          VALUES (:id_anfitrion, :id_tipo_partido, 0, :id_reserva)";
+    $stmtInsertPartido = $conn->prepare($queryInsertPartido);
+    $stmtInsertPartido->bindParam(':id_anfitrion', $id_titular_jugador, PDO::PARAM_INT);
+    $stmtInsertPartido->bindParam(':id_tipo_partido', $tipo_partido['id_tipo_partido'], PDO::PARAM_INT);
+    $stmtInsertPartido->bindParam(':id_reserva', $id_reserva, PDO::PARAM_INT);
+    $stmtInsertPartido->execute();
+    $id_partido = $conn->lastInsertId();
+
+    $queryInsertParticipanteAnfitrion = "INSERT INTO participantes_partidos (id_partido, id_jugador, id_rol, id_estado, equipo) 
+                               VALUES (:id_partido, :id_jugador, 1, 3, 1)";
+    $stmtInsertParticipanteAnfitrion = $conn->prepare($queryInsertParticipanteAnfitrion);
+    $stmtInsertParticipanteAnfitrion->bindParam(':id_partido', $id_partido, PDO::PARAM_INT);
+    $stmtInsertParticipanteAnfitrion->bindParam(':id_jugador', $id_titular_jugador, PDO::PARAM_INT);
+    $stmtInsertParticipanteAnfitrion->execute();
+    $id_participante_anfitrion = $conn->lastInsertId();
 
     $conn->commit();
 
@@ -310,7 +424,7 @@ try {
             'hora_fin' => $hora_fin,
             'titulo' => $titulo,
             'creador' => [
-                'id' => $id_admin
+                'id' => $id_usuario
             ],
             'titular' => [
                 'tipo' => $reserva_externa ? 'externo' : 'jugador',
@@ -319,15 +433,28 @@ try {
                 'nombre' => $nombre_completo,
                 'telefono' => $telefono
             ],
-            'reserva_externa' => $reserva_externa
+            'reserva_externa' => $reserva_externa,
+            'id_partido' => $id_partido,
+            'id_participante_anfitrion' => $id_participante_anfitrion
         ]
     ]);
 } catch (PDOException $e) {
     $conn->rollBack();
-    error_log("POST_RESERVA - ERROR INSERT: " . $e->getMessage());
+    error_log("POST_RESERVA - ERROR PDO: " . $e->getMessage());
     http_response_code(500);
     echo json_encode([
         'error' => 'Error al crear la reserva',
+        'detalles' => $e->getMessage()
+    ]);
+    exit();
+} catch (Exception $e) {
+    if (isset($conn)) {
+        $conn->rollBack();
+    }
+    error_log("POST_RESERVA - ERROR GENERAL: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode([
+        'error' => 'Error inesperado al procesar la reserva',
         'detalles' => $e->getMessage()
     ]);
     exit();

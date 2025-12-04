@@ -31,6 +31,9 @@ SELECT
     c.descripcion AS descripcion_cancha,
     c.foto AS foto_cancha,
     c.banner AS banner_cancha,
+    c.politicas_reservas AS politicas_reservas,
+    
+    e.nombre AS estado_cancha,
     
     -- Dirección de la cancha
     d.direccion_completa AS direccion_cancha,
@@ -41,6 +44,7 @@ SELECT
     s.nombre AS tipo_superficie
 
 FROM canchas c
+INNER JOIN estados_canchas e ON c.id_estado = e.id_estado
 INNER JOIN direcciones d ON c.id_direccion = d.id_direccion
 INNER JOIN superficies_canchas s ON c.id_superficie = s.id_superficie;
 

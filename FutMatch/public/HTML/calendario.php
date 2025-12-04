@@ -8,13 +8,30 @@
 <div class="calendario-component">
     <!-- Header de controles del calendario -->
     <div class="row mb-4 align-items-center calendario-header">
-        <div class="col-md-4">
-            <select class="form-select" id="selectorCancha">
-                <option selected>Seleccionar cancha</option>
-                <!-- Las opciones se llenan dinámicamente con JavaScript -->
-            </select>
-            <label class="form-label small text-muted" for="selectorCancha">Filtrar por cancha</label>
-        </div>
+        <?php
+        // Solo mostrar selector si está en modo admin
+        $calendario_mostrar_selector = $calendario_mostrar_selector ?? true;
+        ?>
+        <?php if ($calendario_mostrar_selector): ?>
+            <div class="col-md-4">
+                <select class="form-select" id="selectorCancha">
+                    <option selected>Seleccionar cancha</option>
+                    <!-- Las opciones se llenan dinámicamente con JavaScript -->
+                </select>
+                <label class="form-label small text-muted" for="selectorCancha">Filtrar por cancha</label>
+            </div>
+        <?php else: ?>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body py-2">
+                        <h6 class="mb-0" id="nombreCanchaHeader">
+                            <i class="bi bi-building"></i> <span id="nombreCanchaTexto"></span>
+                        </h6>
+                        <small class="text-muted" id="detalleCanchaTexto"></small>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="col-md-4">
             <input type="date" class="form-control" id="selectorFecha">
             <label class="form-label small text-muted" for="selectorFecha">Ir a fecha</label>

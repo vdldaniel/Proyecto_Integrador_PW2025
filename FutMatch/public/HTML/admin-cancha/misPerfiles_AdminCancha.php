@@ -169,19 +169,17 @@ require_once HEAD_COMPONENT;
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
 
-  <!-- Script base del perfil de cancha (debe ir primero) -->
-  <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
-  <!-- Script específico del admin (extiende el base) -->
+  <!-- Constantes JavaScript -->
   <script>
     const BASE_URL = "<?= BASE_URL ?>";
-  </script>
-
-
-  <script src="<?= JS_PERFILESCANCHA ?>"></script>
-  <script src="<?= JS_PERFILES_CANCHAS ?>"></script>
-  <script>
     const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
+    const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
   </script>
+
+  <!-- Script base de perfil de cancha (clase PerfilCanchaBase con métodos centralizados de horarios) -->
+  <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
+  <!-- Script específico del admin (tiene toda la funcionalidad necesaria) -->
+  <script src="<?= JS_PERFILES_CANCHA ?>"></script>
 
 </body>
 

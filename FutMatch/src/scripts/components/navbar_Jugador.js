@@ -18,7 +18,7 @@ function editarCampo(inputId) {
   } else {
     input.setAttribute("readonly", "readonly");
     // TODO: Aquí iría la llamada AJAX para guardar los cambios
-    alert("Cambios guardados correctamente");
+    showToast("Cambios guardados correctamente", "success");
   }
 }
 
@@ -28,7 +28,7 @@ function confirmarSuspension() {
   const hora = document.getElementById("horaReactivacion").value;
 
   if (!fecha || !hora) {
-    alert("Por favor, complete la fecha y hora de reactivación");
+    showToast("Por favor, complete la fecha y hora de reactivación", "warning");
     return;
   }
 
@@ -42,7 +42,7 @@ function confirmarSuspension() {
     )
   ) {
     // TODO: Llamada AJAX para suspender cuenta
-    alert("Cuenta suspendida exitosamente");
+    showToast("Cuenta suspendida exitosamente", "success");
     location.reload();
   }
 }
@@ -60,8 +60,9 @@ function confirmarEliminacion() {
       )
     ) {
       // TODO: Llamada AJAX para eliminar cuenta
-      alert(
-        "Su cuenta ha sido marcada para eliminación. Recibirá un correo de confirmación."
+      showToast(
+        "Su cuenta ha sido marcada para eliminación. Recibirá un correo de confirmación.",
+        "success"
       );
       window.location.href = "<?= PAGE_LANDING_PHP ?>";
     }

@@ -21,6 +21,93 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   }
 
   /**
+   * Cargar y renderizar información de una cancha desde el backend
+   * @param {number} idCancha - ID de la cancha a cargar
+   */
+  async cargarYRenderizarCancha(idCancha) {
+    try {
+      if (typeof cargarInfoPerfil === "undefined") {
+        throw new Error("La función cargarInfoPerfil no está disponible");
+      }
+
+      const resultado = await cargarInfoPerfil(idCancha, "cancha");
+
+      let datos;
+      if (resultado.success && resultado.data) {
+        datos = resultado.data;
+      } else if (resultado.id_cancha) {
+        datos = resultado;
+      } else if (resultado.error) {
+        throw new Error(resultado.error);
+      } else {
+        throw new Error("No se pudieron cargar los datos de la cancha");
+      }
+
+      this.datosCancha = datos;
+      this.renderizarDatosCancha(this.datosCancha);
+      // Los horarios ahora se manejan desde la clase base
+      await this.cargarHorariosCancha(idCancha);
+
+      return this.datosCancha;
+    } catch (error) {
+      console.error("Error al cargar la cancha:", error);
+      showToast("Error al cargar la información de la cancha", "error");
+      throw error;
+    }
+  }
+
+  /**
+   * Renderizar datos básicos de la cancha
+   */
+  renderizarDatosCancha(datos) {
+    const nombreCancha = document.getElementById("nombreCancha");
+    if (nombreCancha)
+      nombreCancha.textContent = datos.nombre_cancha || "Cancha";
+
+    const descripcionCancha = document.getElementById("descripcionCancha");
+    if (descripcionCancha)
+      descripcionCancha.textContent = datos.descripcion_cancha || "";
+
+    // Renderizar tipos de partido
+    const tiposPartidoCancha = document.getElementById("tiposPartidoCancha");
+    if (
+      tiposPartidoCancha &&
+      datos.tipos_partido &&
+      datos.tipos_partido.length > 0
+    ) {
+      tiposPartidoCancha.innerHTML = datos.tipos_partido
+        .map(
+          (tipo) => `<span class="badge bg-primary me-1">${tipo.nombre}</span>`
+        )
+        .join("");
+    }
+
+    const bannerCancha = document.getElementById("bannerCancha");
+    if (bannerCancha && datos.banner_cancha) {
+      bannerCancha.style.backgroundImage = `url('${BASE_URL}${datos.banner_cancha}')`;
+    }
+
+    const direccionCancha = document.getElementById("direccionCancha");
+    if (direccionCancha)
+      direccionCancha.textContent =
+        datos.direccion_cancha || "Dirección no disponible";
+
+    const tipoCancha = document.getElementById("tipoCancha");
+    if (tipoCancha && datos.tipos_partido && datos.tipos_partido.length > 0) {
+      tipoCancha.textContent = datos.tipos_partido
+        .map((t) => t.nombre)
+        .join(", ");
+    } else if (tipoCancha) {
+      tipoCancha.textContent = "N/A";
+    }
+
+    const superficieCancha = document.getElementById("superficieCancha");
+    if (superficieCancha)
+      superficieCancha.textContent =
+        datos.tipo_superficie || datos.superficie_nombre || "No especificado";
+  }
+
+  /**
    * Configurar event listeners específicos del jugador
    */
   configurarEventListenersJugador() {
@@ -122,7 +209,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   verTorneos() {
     console.log("Redirigiendo a torneos...");
     // TODO: Redirigir a página de torneos o mostrar modal
-    this.mostrarNotificacion("Función en desarrollo", "info");
+    this.showToast("Función en desarrollo", "info");
   }
 
   /**
@@ -132,7 +219,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   inscribirEquipo(torneoId) {
     console.log(`Inscribir equipo en torneo ${torneoId}`);
     // TODO: Abrir modal de inscripción o redirigir
-    this.mostrarNotificacion("Inscripción en desarrollo", "info");
+    this.showToast("Inscripción en desarrollo", "info");
   }
 
   /**
@@ -142,10 +229,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   notificarInicio(torneoId) {
     console.log(`Notificar inicio del torneo ${torneoId}`);
     // TODO: Implementar sistema de notificaciones
-    this.mostrarNotificacion(
-      "Te notificaremos cuando inicie el torneo",
-      "success"
-    );
+    this.showToast("Te notificaremos cuando inicie el torneo", "success");
   }
 
   /**
@@ -158,7 +242,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
 
     // TODO: Implementar modal de reserva
     console.log(`Reservar para ${fecha} a las ${hora}`);
-    this.mostrarNotificacion(
+    this.showToast(
       `Reservando para ${this.formatearFecha(fecha)} a las ${hora}`,
       "info"
     );
@@ -181,7 +265,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   actualizarHorariosDisponibles() {
     console.log("Actualizando horarios disponibles...");
     // TODO: Hacer petición AJAX para obtener horarios de la fecha
-    this.mostrarNotificacion("Cargando horarios disponibles...", "info");
+    this.showToast("Cargando horarios disponibles...", "info");
   }
 
   /**
@@ -201,7 +285,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   }
 }
 
-// Inicializar cuando el DOM esté listo
+// Inicializar cuando el DOM esté listo y exponer globalmente
 document.addEventListener("DOMContentLoaded", function () {
-  new PerfilCanchaJugador();
+  window.perfilCanchaJugador = new PerfilCanchaJugador();
 });

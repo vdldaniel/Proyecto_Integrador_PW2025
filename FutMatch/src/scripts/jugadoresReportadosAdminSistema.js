@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Tomando caso:", reporteId);
 
     // Mostrar notificación
-    mostrarNotificacion(
+    showToast(
       "Caso tomado correctamente. Ahora eres el verificador asignado.",
       "success"
     );
@@ -266,10 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const mensaje = document.getElementById("mensaje-suspension").value;
 
     if (!fechaSuspension) {
-      mostrarNotificacion(
-        "Por favor selecciona una fecha de suspensión",
-        "error"
-      );
+      showToast("Por favor selecciona una fecha de suspensión", "error");
       return;
     }
 
@@ -284,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = bootstrap.Modal.getInstance(modalSuspenderJugador);
     modal.hide();
 
-    mostrarNotificacion(
+    showToast(
       "Jugador suspendido correctamente. Se ha enviado un email de notificación.",
       "success"
     );
@@ -315,34 +312,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       location.reload();
     }, 2000);
-  }
-
-  // ===================================
-  // SISTEMA DE NOTIFICACIONES
-  // ===================================
-
-  function mostrarNotificacion(mensaje, tipo = "info") {
-    // Crear elemento de notificación
-    const notificacion = document.createElement("div");
-    notificacion.className = `alert alert-${
-      tipo === "error" ? "danger" : tipo
-    } alert-dismissible fade show position-fixed`;
-    notificacion.style.cssText =
-      "top: 20px; right: 20px; z-index: 9999; min-width: 300px;";
-    notificacion.innerHTML = `
-            ${mensaje}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        `;
-
-    // Agregar al DOM
-    document.body.appendChild(notificacion);
-
-    // Auto-remover después de 5 segundos
-    setTimeout(() => {
-      if (notificacion.parentNode) {
-        notificacion.remove();
-      }
-    }, 5000);
   }
 
   // ===================================

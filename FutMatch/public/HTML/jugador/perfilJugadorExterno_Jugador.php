@@ -48,7 +48,16 @@ include HEAD_COMPONENT;
 ?>
 
 <body>
-    <?php include NAVBAR_JUGADOR_COMPONENT; ?>
+    <?php
+    // Cargar navbar de jugador si está logueado
+    if (isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'jugador') {
+        $navbar_jugador_active = true;
+        require_once NAVBAR_JUGADOR_COMPONENT;
+    } else {
+        $navbar_jugador_active = false;
+        require_once NAVBAR_GUEST_COMPONENT;
+    }
+    ?>
 
     <main>
         <div class="container mt-4">

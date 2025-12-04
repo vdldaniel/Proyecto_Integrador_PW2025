@@ -13,13 +13,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Si ya está logueado, redirigir según tipo de usuario
-if (isset($_SESSION['user_id'])) {
+// Si ya está logueado y no viene del formulario, redirigir según tipo de usuario
+if (isset($_SESSION['user_id']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirectToHome();
 }
 
 // Procesar el formulario de login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Detectar si viene del landing (redirigir) o de un modal (JSON)
+    $isFromLanding = isset($_POST['from_landing']) || (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'landing.php') !== false);
+
+    if (!$isFromLanding) {
+        header('Content-Type: application/json');
+    }
+
     error_log("[LOGIN] Inicio del proceso de login");
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -28,8 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validaciones básicas
     if (empty($email) || empty($password)) {
         error_log("[LOGIN] Error: Campos vacíos");
-        $_SESSION['login_error'] = 'Por favor, complete todos los campos.';
-        header('Location: ' . PAGE_LANDING_PHP);
+        if ($isFromLanding) {
+            $_SESSION['login_error'] = 'Por favor, complete todos los campos.';
+            header('Location: ' . PAGE_LANDING_PHP);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Por favor, complete todos los campos.'
+            ]);
+        }
         exit();
     }
 
@@ -71,19 +85,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             error_log("[LOGIN] Sesión establecida para: " . $_SESSION['nombre'] . " (" . $_SESSION['user_type'] . ")");
 
-            // Limpiar error si existía
-            unset($_SESSION['login_error']);
+            // Guardar datos antes de cerrar sesión
+            $user_type = $_SESSION['user_type'];
+            $nombre = $_SESSION['nombre'];
 
-            // Redirigir a la página correspondiente
-            if (isset($_SESSION['redirect_after_login'])) {
-                $redirect = $_SESSION['redirect_after_login'];
-                unset($_SESSION['redirect_after_login']);
-                error_log("[LOGIN] Redirigiendo a: " . $redirect);
-                header("Location: $redirect");
-            } else {
-                error_log("[LOGIN] Redirigiendo al home");
+            // IMPORTANTE: Forzar el guardado de la sesión antes de enviar la respuesta
+            session_write_close();
+
+            // Si viene del landing, redirigir al home correspondiente
+            if ($isFromLanding) {
                 redirectToHome();
             }
+
+            // Login exitoso - devolver respuesta JSON (para modales)
+            echo json_encode([
+                'success' => true,
+                'message' => 'Login exitoso',
+                'user_type' => $user_type,
+                'nombre' => $nombre
+            ]);
             exit();
         } else {
             // Login fallido
@@ -92,14 +112,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 error_log("[LOGIN] Error: Contraseña incorrecta para " . $email);
             }
-            $_SESSION['login_error'] = 'Email o contraseña incorrectos.';
-            header('Location: ' . PAGE_LANDING_PHP);
+
+            if ($isFromLanding) {
+                $_SESSION['login_error'] = 'Email o contraseña incorrectos.';
+                header('Location: ' . PAGE_LANDING_PHP);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Email o contraseña incorrectos.'
+                ]);
+            }
             exit();
         }
     } catch (PDOException $e) {
         error_log("[LOGIN] Error de base de datos: " . $e->getMessage());
-        $_SESSION['login_error'] = 'Error al procesar el login. Intente nuevamente.';
-        header('Location: ' . PAGE_LANDING_PHP);
+
+        if ($isFromLanding) {
+            $_SESSION['login_error'] = 'Error al procesar el login. Intente nuevamente.';
+            header('Location: ' . PAGE_LANDING_PHP);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error al procesar el login. Intente nuevamente.'
+            ]);
+        }
         exit();
     }
 }

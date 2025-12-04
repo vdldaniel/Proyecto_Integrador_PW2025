@@ -13,8 +13,15 @@ require_once HEAD_COMPONENT;
 
 <body>
     <?php
-    // Cargar navbar de jugador
-    require_once NAVBAR_JUGADOR_COMPONENT;
+    // Cargar navbar de jugador si está logueado
+    if (isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'jugador') {
+        $navbar_jugador_active = true;
+        require_once NAVBAR_JUGADOR_COMPONENT;
+    } else {
+        $navbar_jugador_active = false;
+        require_once NAVBAR_GUEST_COMPONENT;
+    }
+
     ?>
 
     <!-- Contenido Principal -->
@@ -31,21 +38,20 @@ require_once HEAD_COMPONENT;
             'url' => PAGE_CALENDARIO_CANCHA_JUGADOR
         ];
 
-        // Información específica de la cancha (normalmente vendría de BD)
-        $perfil_cancha_nombre = 'MegaFutbol Cancha A1-F5';
-        $perfil_cancha_descripcion_banner = 'Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.';
-        $perfil_cancha_direccion = 'Av. Corrientes 1234, CABA, Buenos Aires, Argentina';
-        $perfil_cancha_tipo = 'Fútbol 5';
-        $perfil_cancha_superficie = 'Césped sintético';
-        $perfil_cancha_capacidad = '10 jugadores';
-        $perfil_cancha_calificacion = '4.8';
-        $perfil_cancha_total_resenas = '127';
-        $perfil_cancha_total_jugadores = '342';
-        $perfil_cancha_total_partidos = '156';
+        // Valores por defecto (serán reemplazados por JavaScript desde el backend)
+        $perfil_cancha_nombre = 'Cargando...';
+        $perfil_cancha_descripcion_banner = 'Cargando información de la cancha...';
+        $perfil_cancha_banner = 'Cargando...';
+        $perfil_cancha_direccion = 'Cargando...';
+        $perfil_cancha_tipo = 'N/A';
+        $perfil_cancha_superficie = 'N/A';
+        $perfil_cancha_capacidad = '0';
+        $perfil_cancha_total_jugadores = '0';
+        $perfil_cancha_total_partidos = '0';
         $perfil_cancha_dias_atencion = 'Lunes a Domingo';
-        $perfil_cancha_horario = '07:00 - 23:00';
-        $perfil_cancha_estado_actual = 'Abierto ahora';
-        $perfil_cancha_hora_cierre = '23:00';
+        $perfil_cancha_horario = '08:00 - 22:00';
+        $perfil_cancha_estado_actual = 'Cargando...';
+        $perfil_cancha_hora_cierre = '22:00';
 
         // Incluir componente de perfil de cancha
         include PERFIL_CANCHA_COMPONENT;
@@ -58,10 +64,42 @@ require_once HEAD_COMPONENT;
     <link rel="stylesheet" href="<?= CSS_ICONS ?>">
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
-    <!-- Script base del perfil de cancha (debe ir primero) -->
+
+    <!-- Constantes JavaScript -->
+    <script>
+        const GET_INFO_PERFIL = '<?= GET_INFO_PERFIL ?>';
+        const GET_HORARIOS_CANCHAS = '<?= GET_HORARIOS_CANCHAS ?>';
+        const BASE_URL = '<?= BASE_URL ?>';
+        const PAGE_CALENDARIO_CANCHA_JUGADOR = '<?= PAGE_CALENDARIO_CANCHA_JUGADOR ?>';
+
+        // Obtener id_cancha del query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const ID_CANCHA = urlParams.get('id') || urlParams.get('id_cancha');
+
+        if (!ID_CANCHA) {
+            console.warn('No se proporcionó un ID de cancha en la URL');
+        }
+    </script>
+
+    <!-- Script de perfiles compartido (debe ir primero) -->
+    <script src="<?= JS_PERFILES ?>"></script>
+    <!-- Script base de perfil de cancha (clase PerfilCanchaBase con métodos de horarios) -->
     <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
     <!-- Script específico del jugador (extiende el base) -->
     <script src="<?= BASE_URL ?>src/scripts/pages/cancha-perfil-jugador.js"></script>
+
+    <!-- Cargar datos de la cancha al cargar la página -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (ID_CANCHA && window.perfilCanchaJugador) {
+                try {
+                    await window.perfilCanchaJugador.cargarYRenderizarCancha(ID_CANCHA);
+                } catch (error) {
+                    console.error('Error al cargar la cancha:', error);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

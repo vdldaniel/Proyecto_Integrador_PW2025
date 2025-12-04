@@ -25,6 +25,13 @@ try {
 }
 
 // ===================================
+// SESIÓN
+// ===================================
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// ===================================
 // RUTAS BASE
 // ===================================
 define("BASE_URL", "/Proyecto_Integrador_PW2025/FutMatch/"); // Ajusta según tu configuración de servidor
@@ -56,7 +63,8 @@ define("PAGE_PERFIL_EQUIPO_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/perfi
 define("PAGE_PERFIL_JUGADOR_ADMIN_CANCHA", PUBLIC_PATH . "HTML/admin-cancha/perfilJugador_AdminCancha.php");
 
 // admin-sistema
-define("PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/canchas_AdminSistema.php");
+define("PAGE_SOLICITUDES_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/solicitudes_AdminSistema.php");
+define("PAGE_CANCHAS_LISTADO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/canchas_AdminSistema.php");
 define("PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/canchasReportadas_AdminSistema.php");
 define("PAGE_INICIO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/inicio_AdminSistema.php");
 define("PAGE_JUGADORES_LISTADO_ADMIN_SISTEMA", PUBLIC_PATH . "HTML/admin-sistema/jugadores_AdminSistema.php");
@@ -134,22 +142,34 @@ define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 // ===================================
 
 // admin-cancha
-define("GET_CANCHAS_ADMIN_CANCHA", SRC_PATH . "controllers/admin-cancha/get_canchas.php");
+define("GET_CANCHAS_ADMIN_CANCHA", BASE_URL . "src/controllers/admin-cancha/get_canchas.php");
 
 
 // admin-sistema
-define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/getSolicitudesAdminCancha.php");
-define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", SRC_PATH . "controllers/admin-sistema/updateSolicitudAdminCancha.php");
+define("GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/getSolicitudesAdminCancha.php");
+define("UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/updateSolicitudAdminCancha.php");
+define("GET_CANCHAS_PENDIENTES_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/getCanchasPendientes.php");
+define("UPDATE_CANCHA_ADMIN_SISTEMA", BASE_URL . "src/controllers/admin-sistema/updateCancha.php");
+
+// partidos
+define("GET_PARTICIPANTES_PARTIDO", BASE_URL . "src/controllers/partidos/getParticipantesPartido.php");
+define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/partidos/getPartidos_Jugador.php");
+define("POST_PARTICIPANTE_PARTIDO", BASE_URL . "src/controllers/partidos/postParticipante_Partido.php");
+define("UPDATE_PARTIDO", BASE_URL . "src/controllers/partidos/updatePartido.php");
 
 // reservas
-define("GET_HORARIOS_CANCHAS", SRC_PATH . "controllers/reservas/getHorariosCanchas.php");
-define("GET_RESERVA_DETALLE", SRC_PATH . "controllers/reservas/getReservaDetalle.php");
-define("GET_RESERVAS", SRC_PATH . "controllers/reservas/getReservas.php");
-define("GET_TIPOS_RESERVA", SRC_PATH . "controllers/reservas/getTiposReserva.php");
-define("POST_RESERVA", SRC_PATH . "controllers/reservas/postReserva.php");
-define("UPDATE_HORARIOS_CANCHAS", SRC_PATH . "controllers/reservas/updateHorariosCanchas.php");
-define("UPDATE_RESERVA", SRC_PATH . "controllers/reservas/updateReserva.php");
-define("UPDATE_POLITICAS_CANCHA", SRC_PATH . "controllers/reservas/updatePoliticasCancha.php");
+define("GET_DISPONIBILIDAD", BASE_URL . "src/controllers/reservas/getDisponibilidad.php");
+define("GET_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/getHorariosCanchas.php");
+define("GET_RESERVA_DETALLE", BASE_URL . "src/controllers/reservas/getReservaDetalle.php");
+define("GET_RESERVAS", BASE_URL . "src/controllers/reservas/getReservas.php");
+define("GET_TIPOS_RESERVA", BASE_URL . "src/controllers/reservas/getTiposReserva.php");
+define("POST_RESERVA", BASE_URL . "src/controllers/reservas/postReserva.php");
+define("UPDATE_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/updateHorariosCanchas.php");
+define("UPDATE_RESERVA", BASE_URL . "src/controllers/reservas/updateReserva.php");
+define("UPDATE_POLITICAS_CANCHA", BASE_URL . "src/controllers/reservas/updatePoliticasCancha.php");
+
+// usuarios
+define("UPDATE_USUARIO", BASE_URL . "src/controllers/usuarios/updateUsuario.php");
 
 // resto
 define("CONTROLLER_GEOCODING_PROXY", BASE_URL . "src/controllers/geocoding_proxy.php");
@@ -157,8 +177,7 @@ define("GET_CANCHAS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getCanchas
 define("GET_EQUIPO_JUGADOR", BASE_URL . "src/controllers/getEquipo_Jugador.php");
 define("GET_EQUIPOS_JUGADOR", BASE_URL . "src/controllers/getEquipos_Jugador.php");
 define("GET_ESTADISTICAS_JUGADOR", BASE_URL . "src/controllers/getEstadisticas_Jugador.php");
-define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");
-define("GET_PARTIDOS_JUGADOR", BASE_URL . "src/controllers/getPartidos_Jugador.php");                        //MIS PARTIDOS
+define("GET_INFO_PERFIL", BASE_URL . "src/controllers/getInfoPerfil.php");                     //MIS PARTIDOS
 define("GET_PARTIDOS_DISPONIBLES_JUGADOR", BASE_URL . "src/controllers/getPartidosDisponibles_Jugador.php"); //EXPLORAR
 define("GET_RESEÑAS_JUGADORES", BASE_URL . "src/controllers/getReseñas_Jugadores.php");
 define("GET_USUARIOS", BASE_URL . "src/controllers/getUsuarios.php");
@@ -184,7 +203,7 @@ define("JS_SCRIPTS_PATH", SRC_PATH . "scripts/pages/");
 //=================================
 define("JS_COMPONENTS_PATH", SRC_PATH . "scripts/components/");
 
-// define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
+define("JS_PERFILES", JS_COMPONENTS_PATH . "perfiles.js");
 define("JS_NAVBAR_JUGADOR", JS_COMPONENTS_PATH . "navbar_Jugador.js");
 define("JS_NAVBAR_ADMIN_CANCHA", JS_COMPONENTS_PATH . "navbarAdminCancha.js");
 define("JS_NAVBAR_ADMIN_SISTEMA", JS_COMPONENTS_PATH . "navbar_AdminSistema.js");
@@ -199,9 +218,12 @@ define("JS_AGENDA", JS_COMPONENTS_PATH . "agenda.js");
 //=================================
 define("JS_PAGES_PATH", SRC_PATH . "scripts/pages/");
 
+// Usuarios
+define("JS_UPDATE_USUARIO", SRC_PATH . "scripts/usuarios/updateUsuario.js");
+
 // admin-cancha
 define("JS_CANCHAS_LISTADO", JS_PAGES_PATH . "admin-cancha/canchasListado.js");
-define("JS_PERFILESCANCHA", JS_PAGES_PATH . "admin-cancha/perfilAdmin.js");
+define("JS_PERFILES_CANCHA", JS_PAGES_PATH . "admin-cancha/perfilAdmin.js");
 define("JS_AGENDA_ADMIN_CANCHA", JS_PAGES_PATH . "admin-cancha/agenda_AdminCancha.js");
 define("JS_AGENDA_ADMIN", JS_PAGES_PATH . "admin-cancha/agenda-admin.js");
 define("JS_MIS_TORNEOS", JS_PAGES_PATH . "torneos/mis_torneos.js");
@@ -228,6 +250,7 @@ define("JS_REGISTRO_ADMIN_CANCHA", JS_PAGES_PATH . "registroAdminCancha.js");
 define("JS_REGISTRO_JUGADOR", JS_PAGES_PATH . "registroJugador.js");
 define("JS_TORNEO_DETALLE", JS_PAGES_PATH . "torneo-detalle.js");
 define("JS_TORNEOS_JUGADOR", JS_PAGES_PATH . "torneos-jugador.js");
+
 
 //RESTO FUERA DE PAGES
 define("JS_CANCHAS_REPORTADAS_ADMIN_SISTEMA", SRC_PATH . "scripts/canchasReportadasAdminSistema.js");

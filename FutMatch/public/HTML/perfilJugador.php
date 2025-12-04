@@ -95,7 +95,7 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
 
                             <div class="profile-badges">
                                 <span class="badge bg-success me-2" id="estadoJugador"></span>
-                                <span class="profile-rating me-2" id="calificacionJugador"></span>
+                                <!-- Calificación oculta temporalmente -->
                             </div>
                         </div>
 
@@ -165,16 +165,7 @@ $perfil_jugador_mostrar_equipos = $perfil_jugador_mostrar_equipos ?? true;
                 <h5 class="mb-0"><i class="bi bi-bar-chart"></i> <?= $perfil_jugador_titulo_estadisticas ?></h5>
             </div>
             <div class="card-body">
-                <!-- Calificación promedio -->
-                <div class="text-center mb-3">
-                    <div class="text-warning mb-2" style="font-size: 1.5rem;" id="estrellasCalificacion">
-                        ☆☆☆☆☆
-                    </div>
-                    <h3 class="text-warning mb-0" id="promedioCalificacion">0.0</h3>
-                    <small class="text-muted" id="basadoEnReseñas">Basado en 0 calificaciones</small>
-                </div>
-
-                <hr class="my-3">
+                <!-- Calificación oculta temporalmente -->
 
                 <!-- Estadísticas de juego -->
                 <div class="row text-center mb-3">

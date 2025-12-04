@@ -17,8 +17,9 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
 
 // Información básica de la cancha
 
-$perfil_cancha_calificacion = $perfil_cancha_calificacion ?? '4.8';
-$perfil_cancha_total_resenas = $perfil_cancha_total_resenas ?? '127';
+// Calificaciones temporalmente ocultas
+// $perfil_cancha_calificacion = $perfil_cancha_calificacion ?? '4.8';
+// $perfil_cancha_total_resenas = $perfil_cancha_total_resenas ?? '127';
 $perfil_cancha_total_jugadores = $perfil_cancha_total_jugadores ?? '342';
 $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
@@ -55,7 +56,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 <?php if ($perfil_cancha_mostrar_selector): ?>
     <div class="row mb-4">
         <div class="col-md-4 ms-auto">
-            <div class="dropdown">
+            <div id="selectorCanchas" class="dropdown">
 
                 <button id="btnSelectorCanchas" class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-building"></i> Seleccionar cancha...
@@ -99,28 +100,20 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
                                 <h1 id="nombreCancha"><?= $perfil_cancha_nombre ?></h1>
                                 <p id="descripcionCancha"><?= $perfil_cancha_descripcion_banner ?></p>
-
+                                <div id="tiposPartidoCancha" class="mt-2">
+                                    <!-- Se llenará dinámicamente con JavaScript -->
+                                </div>
+                                <!--
                                 <span id="estadoCancha" class="badge bg-info text-light mt-2">
                                     Pendiente
-                                </span>
+                                </span>-->
                             </div>
 
+                            <!-- TIPO PARTIDO -->
                             <div class="text-end">
-                                <div class="text-warning mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i>
-                                    <span class="ms-1"><?= $perfil_cancha_calificacion ?></span>
+                                <div class="mb-2">
                                 </div>
 
-                                <div class="text-light">
-                                    <i class="bi bi-people"></i>
-                                    <span id="perfilJugadores">
-                                        <?= $perfil_cancha_admin_mode ? 'Admin View' : $perfil_cancha_total_jugadores . ' jugadores' ?>
-                                    </span>
-                                </div>
                             </div>
 
                         </div>
@@ -242,85 +235,6 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
             </div>
         </div>
 
-        <!-- Sección de Horarios Disponibles (solo para jugadores) -->
-        <?php if (!$perfil_cancha_admin_mode): ?>
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-success text-white">
-                    <h4 class="mb-0"><i class="bi bi-calendar-check"></i> Próximos Horarios Disponibles</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <!-- Hoy -->
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-success">
-                                <div class="card-header bg-success text-white py-2">
-                                    <h6 class="mb-0">Hoy - Lun 4/11</h6>
-                                </div>
-                                <div class="card-body p-2">
-                                    <div class="d-grid gap-1">
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-04" data-hora="20:00">
-                                            20:00 - 21:00
-                                        </button>
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-04" data-hora="21:00">
-                                            21:00 - 22:00
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mañana -->
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-primary">
-                                <div class="card-header bg-primary text-white py-2">
-                                    <h6 class="mb-0">Mañana - Mar 5/11</h6>
-                                </div>
-                                <div class="card-body p-2">
-                                    <div class="d-grid gap-1">
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-05" data-hora="16:00">
-                                            16:00 - 17:00
-                                        </button>
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-05" data-hora="18:00">
-                                            18:00 - 19:00
-                                        </button>
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-05" data-hora="22:00">
-                                            22:00 - 23:00
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Miércoles -->
-                        <div class="col-md-4 mb-3">
-                            <div class="card border-info">
-                                <div class="card-header bg-info text-white py-2">
-                                    <h6 class="mb-0">Mié 6/11</h6>
-                                </div>
-                                <div class="card-body p-2">
-                                    <div class="d-grid gap-1">
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-06" data-hora="15:00">
-                                            15:00 - 16:00
-                                        </button>
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-06" data-hora="17:00">
-                                            17:00 - 18:00
-                                        </button>
-                                        <button class="btn btn-sm btn-dark btnReservarHorario" data-fecha="2024-11-06" data-hora="19:00">
-                                            19:00 - 20:00
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-3">
-                        <a href="<?= PAGE_CALENDARIO_CANCHA_JUGADOR ?>" class="btn btn-primary" id="btnVerCalendarioCompleto">
-                            <i class="bi bi-calendar-week"></i> Ver Calendario Completo
-                        </a>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
     </div>
 
     <!-- Sidebar derecha con información -->
@@ -332,9 +246,9 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     <i class="bi bi-calendar-check"></i> Ver Disponibilidad
                 </button>
             <?php else: ?>
-                <a href="<?= $perfil_cancha_boton_primario['url'] ?>" type="button" class="btn btn-success btn-lg w-100">
+                <button type="button" class="btn btn-success btn-lg w-100" id="btnVerDisponibilidad">
                     <i class="<?= $perfil_cancha_boton_primario['icono'] ?>"></i> <?= $perfil_cancha_boton_primario['texto'] ?>
-                </a>
+                </button>
             <?php endif; ?>
         </div>
         <!-- Panel de Informacion -->
@@ -365,12 +279,12 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     </label>
                     <p class="mb-0" id="superficieCancha"></p>
                 </div>
-                <div class="mb-3">
+                <!--<div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-people"></i> Capacidad
                     </label>
                     <p class="mb-0" id="capacidadCancha"></p>
-                </div>
+                </div>-->
                 <?php if ($perfil_cancha_admin_mode): ?>
                     <div class="mb-0">
                         <label class="fw-bold text-muted d-block mb-1">
@@ -384,26 +298,33 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
         <!-- Horarios de atención -->
         <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header bg-info text-white">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="bi bi-clock"></i> Horarios</h5>
+                <?php if ($perfil_cancha_admin_mode): ?>
+                    <a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>?openModal=configurarHorarios" class="btn btn-sm btn-dark">
+                        <i class="bi bi-gear"></i> Cambiar horarios
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="card-body">
-                <small class="text-muted" id="diasAtencion"></small>
+                <!-- Estado actual -->
+                <div class="mb-3 p-2 rounded">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold" id="estadoActual">
+                            <i class="bi bi-circle-fill"></i> Cargando...
+                        </span>
+                        <small class="text-muted" id="horaCierre"></small>
+                    </div>
+                </div>
 
-                <p class="fw-bold mb-2" id="horarioPrincipal"></p>
-
-                <hr class="my-2">
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="fw-bold" id="estadoActual">
-                        <i class="bi bi-circle-fill"></i> Cargando...
-                    </span>
-                    <small class="text-muted" id="horaCierre">Cierra a las N/A</small>
+                <!-- Horarios detallados por día -->
+                <div id="horariosDetallados" class="mt-3">
+                    <p class="text-muted">Cargando horarios...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Servicios Incluidos -->
+        <!-- Servicios Incluidos
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-info text-white">
                 <h5 class="mb-0"><i class="bi bi-check-circle"></i> Servicios y Comodidades</h5>
@@ -415,46 +336,28 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- Estadísticas y Calificaciones -->
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-dark text-white">
-                <h5 class="mb-0"><i class="bi bi-<?= $perfil_cancha_admin_mode ? 'bar-chart' : 'star' ?>"></i> <?= $perfil_cancha_admin_mode ? 'Panel de Control' : 'Reseñas y Estadísticas' ?></h5>
-            </div>
-            <div class="card-body">
-                <!-- Calificación promedio (para ambos) -->
-                <div class="text-center mb-3">
-                    <div class="text-warning mb-2" style="font-size: 1.5rem;">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
-                    </div>
-                    <h3 class="text-warning mb-0"><?= $perfil_cancha_calificacion ?></h3>
-                    <small class="text-muted">Basado en <?= $perfil_cancha_total_resenas ?> reseñas</small>
+        <!-- Estadísticas (Ocultas temporalmente) -->
+        <?php if (false): ?>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-bar-chart"></i> Estadísticas</h5>
                 </div>
-                <hr class="my-3">
-
-                <!-- Primera fila de estadísticas -->
-                <div class="row text-center">
-                    <div class="col-6 border-end">
-                        <h4 class="text-primary mb-1"><?= $perfil_cancha_total_partidos ?></h4>
-                        <small class="text-muted">Partidos jugados</small>
+                <div class="card-body">
+                    <!-- Estadísticas básicas -->
+                    <div class="row text-center">
+                        <div class="col-6 border-end">
+                            <h4 class="text-primary mb-1"><?= $perfil_cancha_total_partidos ?></h4>
+                            <small class="text-muted">Partidos jugados</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-info mb-1"><?= $perfil_cancha_total_jugadores ?></h4>
+                            <small class="text-muted">Jugadores únicos</small>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <h4 class="text-info mb-1"><?= $perfil_cancha_total_jugadores ?></h4>
-                        <small class="text-muted">Jugadores únicos</small>
-                    </div>
-                </div>
-                <!-- Botón ver reseñas para jugadores -->
-                <div class="mt-3 text-center">
-                    <button class="btn btn-sm btn-dark" id="btnVerResenas">
-                        <i class="bi bi-chat-left-text"></i> Ver todas las reseñas
-                    </button>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>

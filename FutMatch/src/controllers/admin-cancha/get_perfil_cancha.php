@@ -22,13 +22,19 @@ try {
             c.banner,
             c.id_estado,
             c.id_superficie,
+            c.politicas_reservas,
             d.direccion_completa,
             d.latitud,
             d.longitud,
-            s.nombre AS superficie_nombre
+            ctp.id_tipo_partido,
+            tp.nombre AS tipo_partido_nombre,
+            COALESCE(s.nombre, 'No especificado') AS superficie_nombre
+
         FROM canchas c
         INNER JOIN direcciones d ON d.id_direccion = c.id_direccion
-        INNER JOIN superficies_canchas s ON s.id_superficie = c.id_superficie
+        LEFT JOIN canchas_tipos_partido ctp ON ctp.id_cancha = c.id_cancha AND ctp.activo = 1
+        LEFT JOIN tipos_partido tp ON tp.id_tipo_partido = ctp.id_tipo_partido
+        LEFT JOIN superficies_canchas s ON s.id_superficie = c.id_superficie
         WHERE c.id_cancha = :id
         LIMIT 1
     ";
@@ -100,7 +106,6 @@ try {
             "servicios" => $servicios // INCLUIDO
         ]
     ]);
-
 } catch (Exception $e) {
     echo json_encode([
         "status" => "error",
