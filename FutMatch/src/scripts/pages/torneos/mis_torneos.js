@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const ENDPOINT_CANCELAR = BASE_URL + "src/controllers/torneos/torneo_cancelar.php";
     const ENDPOINT_CANCELADOS = BASE_URL + "src/controllers/torneos/torneos_cancelados.php";
     const ENDPOINT_TORNEOS_FINALIZADOS = BASE_URL + "src/controllers/torneos/lista_torneos_finalizados.php";
+    const ENDPOINT_ABRIR_INSCRIPCIONES = BASE_URL + "src/controllers/torneos/abrir_inscripciones.php";
+
 
     // Contenedor principal de la lista de torneos
     const torneosListContainer = document.getElementById('torneosList');
@@ -32,8 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Elementos para modal de torneos finalizado y cancelados
     const modalTorneosCanceladosElement = document.getElementById('modalTorneosCancelados');
     const torneosCanceladosTableBody = document.getElementById('torneosCanceladosTableBody');
-    const torneosFinalizadosTableBody = document.getElementById("torneosFinalizadosTableBody");
-    const modalTorneosFinalizadosElement = document.getElementById("modalTorneosFinalizados");
+
 
     // -------------------------------------------------
 
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             actionButton = `<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalSolicitudesTorneo" data-torneo-id="${torneo.id_torneo}" title="Ver solicitudes"><i class="bi bi-people"></i><span class="d-none d-lg-inline ms-1">Solicitudes</span></button>`;
         } else if (torneo.etapa_nombre === 'borrador') {
             badgeColor = 'text-bg-dark';
-            actionButton = `<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="${torneo.id_torneo}" title="Abrir inscripciones"><i class="bi bi-unlock"></i><span class="d-none d-lg-inline ms-1">Abrir inscripciones</span></button>`;
+            actionButton = `<button class="btn btn-dark btn-sm me-1 btn-abrir-inscripciones" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="${torneo.id_torneo}" title="Abrir inscripciones"><i class="bi bi-unlock"></i><span class="d-none d-lg-inline ms-1">Abrir inscripciones</span></button>`;
         } else if (torneo.etapa_nombre === 'en curso') {
             badgeColor = 'text-bg-primary';
             actionButton = `<a class="btn btn-dark btn-sm me-1" href="${torneoLink}?id=${torneo.id_torneo}" title="Gestionar torneo"><i class="bi bi-gear"></i><span class="d-none d-lg-inline ms-1">Gestionar</span></a>`;
@@ -353,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
     }
 
-   
+
     async function loadTorneosCancelados() {
 
         torneosCanceladosTableBody.innerHTML = `
@@ -458,6 +459,66 @@ document.addEventListener('DOMContentLoaded', function () {
             loadTorneosFinalizados();
         });
     }
+
+    // --- Abrir Inscripciones --- //
+    document.addEventListener("click", function (e) {
+
+        const btn = e.target.closest(".btn-abrir-inscripciones");
+        if (!btn) return;
+
+        const torneoId = btn.dataset.torneoId;
+        document.getElementById("abrirTorneoId").value = torneoId;
+
+        // Abrir modal
+        const modalEl = document.getElementById("modalAbrirInscripciones");
+        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+    });
+
+
+    // --- Confirmar apertura --- //
+    document.getElementById("btnConfirmarAbrirInscripciones").addEventListener("click", function () {
+
+        const torneoId = document.getElementById("abrirTorneoId").value;
+        const fechaCierre = document.getElementById("fechaCierreInscripcionesAbrir").value;
+
+        if (!fechaCierre) {
+            showToast("Debes seleccionar una fecha de cierre.", "danger");
+            return;
+        }
+
+        fetch(ENDPOINT_ABRIR_INSCRIPCIONES, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                torneo_id: torneoId,
+                fecha_cierre: fechaCierre
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.status !== "success") {
+                    showToast(data.message || "Error al abrir inscripciones", "danger");
+                    return;
+                }
+
+                // Cerrar modal
+                const modalEl = document.getElementById("modalAbrirInscripciones");
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                modal.hide();
+
+                // Refrescar listado
+                loadTorneos();
+
+                showToast("Inscripciones abiertas correctamente.", "success");
+            })
+            .catch(err => {
+                console.error("Error AJAX:", err);
+                showToast("Error de comunicación con el servidor.", "danger");
+            });
+    });
+
 
     // Llamada inicial para cargar los torneos al cargar la página
     loadTorneos();

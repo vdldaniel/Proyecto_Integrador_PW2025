@@ -74,9 +74,8 @@ function renderCanchas(canchas) {
 
                             <div class="col-md-3">
                                 <h5 class="mb-1">${cancha.nombre}</h5>
-                                <small class="text-muted">${
-                                  cancha.direccion_completa
-                                }</small>
+                                <small class="text-muted">${cancha.direccion_completa
+      }</small>
                             </div>
 
                             <div class="col-md-2">
@@ -95,27 +94,24 @@ function renderCanchas(canchas) {
 									<i class="bi bi-eye"></i>
 								</a>
 
-                                <button class="btn btn-dark btn-sm me-1 btn-editar" data-cancha-id="${
-                                  cancha.id_cancha
-                                }">
+                                <button class="btn btn-dark btn-sm me-1 btn-editar" data-cancha-id="${cancha.id_cancha
+      }">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
-                                ${
-                                  accion !== "ninguna"
-                                    ? `
+                                ${accion !== "ninguna"
+        ? `
                                         <button class="btn ${claseAccion} btn-sm me-1 btn-accion" 
                                             data-accion="${accion}" 
                                             data-cancha-id="${cancha.id_cancha}">
                                             <i class="bi ${iconoAccion}"></i> ${botonAccion}
                                         </button>
                                     `
-                                    : ""
-                                }
+        : ""
+      }
 
-                                <button class="btn btn-danger btn-sm btn-eliminar" data-cancha-id="${
-                                  cancha.id_cancha
-                                }">
+                                <button class="btn btn-danger btn-sm btn-eliminar" data-cancha-id="${cancha.id_cancha
+      }">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -251,14 +247,8 @@ function agregarCancha() {
   datos.append("nombre", document.getElementById("nombreCancha").value);
   datos.append("superficie", document.getElementById("tipoSuperficie").value);
   datos.append("ubicacion", document.getElementById("ubicacionCancha").value);
-  datos.append(
-    "descripcion",
-    document.getElementById("descripcionCancha").value
-  );
-  datos.append(
-    "id_tipo_partido",
-    document.getElementById("capacidadCancha").value
-  );
+  datos.append("descripcion", document.getElementById("descripcionCancha").value);
+  datos.append("id_tipo_partido", document.getElementById("capacidadCancha").value);
 
   fetch(BASE_URL + "src/controllers/admin-cancha/agregar_cancha.php", {
     method: "POST",
@@ -273,14 +263,22 @@ function agregarCancha() {
 
         document.getElementById("formAgregarCancha").reset();
         cargarCanchas();
+
+        // --- TOAST DE ÉXITO ---
+        mostrarToast("Cancha agregada correctamente", "success");
+
       } else {
-        alert("Error: " + data.message);
+        // --- TOAST DE ERROR ---
+        mostrarToast("Error: " + data.message, "error");
         console.error(data);
       }
     })
-    .catch((err) => console.error("Error fetch agregar cancha:", err));
+    .catch((err) => {
+      console.error("Error fetch agregar cancha:", err);
+      // --- TOAST DE ERROR ---
+      mostrarToast("Error al comunicarse con el servidor", "error");
+    });
 }
-
 // ==========================
 // Editar cancha
 // ==========================
@@ -537,13 +535,12 @@ function renderHistorial(lista) {
                 <td>${estadoTexto}</td>
 
                 <td>
-                    ${
-                      c.id_estado == 4
-                        ? `<button class="btn btn-sm btn-dark btn-restaurar" data-id="${c.id_cancha}">
+                    ${c.id_estado == 4
+        ? `<button class="btn btn-sm btn-dark btn-restaurar" data-id="${c.id_cancha}">
                                 <i class="bi bi-arrow-clockwise"></i> Restaurar
                            </button>`
-                        : ""
-                    }
+        : ""
+      }
                 </td>
             </tr>
         `;
@@ -593,3 +590,37 @@ document
   .addEventListener("show.bs.modal", () => {
     cargarHistorialDesdeCache();
   });
+
+
+// --- Sistema de Toasts ---
+function mostrarToast(mensaje, tipo = "success") {
+  const toastContainer = document.getElementById("toastContainer");
+
+  const colores = {
+    success: "bg-success text-white",
+    error: "bg-danger text-white",
+    warning: "bg-warning text-dark",
+    info: "bg-info text-dark"
+  };
+
+  const toast = document.createElement("div");
+  toast.className = `toast align-items-center ${colores[tipo]} border-0`;
+  toast.role = "alert";
+  toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                ${mensaje}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    `;
+
+  toastContainer.appendChild(toast);
+
+  const bsToast = new bootstrap.Toast(toast, { delay: 3500 });
+  bsToast.show();
+
+  toast.addEventListener("hidden.bs.toast", () => {
+    toast.remove();
+  });
+}

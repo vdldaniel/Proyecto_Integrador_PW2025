@@ -60,7 +60,7 @@ require_once HEAD_COMPONENT;
 
     <!-- Lista de torneos -->
     <div id="torneosList" class="row g-3"> </div>
-    
+
   </main>
 
   <!-- Modal Crear Torneo -->
@@ -140,25 +140,32 @@ require_once HEAD_COMPONENT;
           <h5 class="modal-title" id="modalAbrirInscripcionesLabel">
             <i class="bi bi-unlock"></i> Abrir Inscripciones
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+
         <div class="modal-body">
           <form id="formAbrirInscripciones">
-            <input type="hidden" id="abrirTorneoId" />
+            <input type="hidden" id="abrirTorneoId" name="torneo_id" />
+
             <div class="mb-3">
-              <label for="fechaCierreInscripcionesAbrir" class="form-label">Fecha de cierre de inscripciones</label>
-              <input type="date" class="form-control" id="fechaCierreInscripcionesAbrir" required />
-              <small class="text-muted">Las inscripciones se abrirán inmediatamente y se cerrarán en la fecha seleccionada.</small>
+              <label for="fechaCierreInscripcionesAbrir" class="form-label">Fecha límite</label>
+              <input type="date" class="form-control" id="fechaCierreInscripcionesAbrir" name="fecha_cierre" required />
+              <small class="text-muted">
+                La inscripción se abre ahora y se cerrará en la fecha seleccionada.
+              </small>
             </div>
           </form>
         </div>
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" id="btnConfirmarAbrirInscripciones">Abrir Inscripciones</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-success" id="btnConfirmarAbrirInscripciones">Abrir Inscripciones</button>
         </div>
       </div>
     </div>
   </div>
+
+
 
   <!-- Modal Solicitudes de Torneo -->
   <div class="modal fade" id="modalSolicitudesTorneo" tabindex="-1" aria-labelledby="modalSolicitudesTorneoLabel">
@@ -292,8 +299,9 @@ require_once HEAD_COMPONENT;
 
         <div class="modal-header">
           <h5 class="modal-title" id="modalTorneosFinalizadosLabel">
-            <i class="bi bi-trophy"></i> Torneos Finalizados</h5>
-         
+            <i class="bi bi-trophy"></i> Torneos Finalizados
+          </h5>
+
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -305,7 +313,7 @@ require_once HEAD_COMPONENT;
                   <th>Nombre</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  
+
                 </tr>
               </thead>
               <tbody id="torneosFinalizadosTableBody">
