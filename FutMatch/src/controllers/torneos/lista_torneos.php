@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../app/config.php'; // Asume que config.php inicializa $conn y la sesión
+require_once __DIR__ . '/../../app/config.php'; 
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {

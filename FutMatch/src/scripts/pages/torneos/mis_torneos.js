@@ -1,16 +1,17 @@
+document.addEventListener('DOMContentLoaded', function () {
 
-document.addEventListener('DOMContentLoaded', function() {
-    
     // Endpoints
-    const ENDPOINT_CREAR = BASE_URL + "src/controllers/torneos/torneo_crear.php"; 
-    const ENDPOINT_LISTAR = BASE_URL + "src/controllers/torneos/lista_torneos.php"; 
-    const ENDPOINT_CANCELAR = BASE_URL + "src/controllers/torneos/torneo_cancelar.php"; 
+    const ENDPOINT_CREAR = BASE_URL + "src/controllers/torneos/torneo_crear.php";
+    const ENDPOINT_LISTAR = BASE_URL + "src/controllers/torneos/lista_torneos.php";
+    const ENDPOINT_CANCELAR = BASE_URL + "src/controllers/torneos/torneo_cancelar.php";
+    const ENDPOINT_CANCELADOS = BASE_URL + "src/controllers/torneos/torneos_cancelados.php";
+    const ENDPOINT_TORNEOS_FINALIZADOS = BASE_URL + "src/controllers/torneos/lista_torneos_finalizados.php";
 
     // Contenedor principal de la lista de torneos
-    const torneosListContainer = document.getElementById('torneosList'); 
+    const torneosListContainer = document.getElementById('torneosList');
 
     // Elemento de búsqueda (AÑADIDO PARA EL FILTRO)
-    const searchInput = document.getElementById('searchInput'); 
+    const searchInput = document.getElementById('searchInput');
 
     // Elementos del Modal de Creación
     const abrirInscripcionesCheckbox = document.getElementById('abrirInscripciones');
@@ -28,23 +29,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicialización de la instancia de Modal
     const modalCancelarTorneo = new bootstrap.Modal(modalCancelarTorneoElement);
 
-    // Elementos del Toast (NUEVOS)
+    // Elementos para modal de torneos finalizado y cancelados
+    const modalTorneosCanceladosElement = document.getElementById('modalTorneosCancelados');
+    const torneosCanceladosTableBody = document.getElementById('torneosCanceladosTableBody');
+    const torneosFinalizadosTableBody = document.getElementById("torneosFinalizadosTableBody");
+    const modalTorneosFinalizadosElement = document.getElementById("modalTorneosFinalizados");
+
+    // -------------------------------------------------
+
+
+    // Elementos del Toast 
     const appToastElement = document.getElementById('appToast');
     const toastBodyElement = document.getElementById('toastBody');
     const appToast = appToastElement ? new bootstrap.Toast(appToastElement) : null;
 
 
-    // === Función de Toast para reemplazar alerts ===
+    // === Función de Toast  ===
     function showToast(message, type = 'success') {
         if (!appToast || !appToastElement || !toastBodyElement) {
             console.error('Toast elements not found. Falling back to alert:', message);
-            alert(message);
+
             return;
         }
 
         // Remover clases de color previas
         appToastElement.classList.remove('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
-        
+
         // Asignar clase de color según el tipo
         let bgColor = 'bg-success';
         if (type === 'error') bgColor = 'bg-danger';
@@ -59,22 +69,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // === Verificación de Nulos ===
-    if (!abrirInscripcionesCheckbox || !btnCrearTorneo || !formCrearTorneo || !torneosListContainer || !modalCancelarTorneoElement || !btnConfirmarCancelar || !searchInput) {
+    if (!abrirInscripcionesCheckbox || !btnCrearTorneo || !formCrearTorneo || !torneosListContainer || !modalCancelarTorneoElement || !btnConfirmarCancelar || !searchInput || !modalTorneosCanceladosElement || !torneosCanceladosTableBody) {
         showToast("Error crítico: Faltan elementos esenciales en el DOM.", 'error');
         if (btnCrearTorneo) btnCrearTorneo.disabled = true;
-        return; 
+        return;
     }
     // =============================
 
-    // Función para generar la tarjeta HTML de un torneo
+    // Función para generar la tarjeta HTML de un torneo (Se mantiene igual)
     function createTorneoCardHtml(torneo) {
         // Formatear fecha a DD/MM/AAAA
         const fechaInicio = new Date(torneo.fecha_inicio).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        
+
         let badgeColor = 'text-bg-secondary';
         let actionButton = '';
         // Esta variable se asume definida en el entorno PHP que incluye este JS
-        const torneoLink = '<?php echo PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA; ?>'; 
+        const torneoLink = '<?php echo PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA; ?>';
 
         // Lógica de botones y colores basada en el nombre de la etapa (de la tabla etapas_torneo)
         if (torneo.etapa_nombre === 'inscripciones abiertas') {
@@ -85,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             actionButton = `<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="${torneo.id_torneo}" title="Abrir inscripciones"><i class="bi bi-unlock"></i><span class="d-none d-lg-inline ms-1">Abrir inscripciones</span></button>`;
         } else if (torneo.etapa_nombre === 'en curso') {
             badgeColor = 'text-bg-primary';
-             actionButton = `<a class="btn btn-dark btn-sm me-1" href="${torneoLink}?id=${torneo.id_torneo}" title="Gestionar torneo"><i class="bi bi-gear"></i><span class="d-none d-lg-inline ms-1">Gestionar</span></a>`;
+            actionButton = `<a class="btn btn-dark btn-sm me-1" href="${torneoLink}?id=${torneo.id_torneo}" title="Gestionar torneo"><i class="bi bi-gear"></i><span class="d-none d-lg-inline ms-1">Gestionar</span></a>`;
         } else if (torneo.etapa_nombre === 'finalizado') {
             badgeColor = 'text-bg-info';
         } else if (torneo.id_etapa === 5 || torneo.etapa_nombre === 'cancelado') { // Etapa Cancelado (ID 5 asumido en el PHP)
@@ -94,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Mostrar u ocultar el botón de cancelar
         const isCanceled = (torneo.id_etapa === 5 || torneo.etapa_nombre === 'cancelado');
-        const cancelButton = isCanceled ? 
+        const cancelButton = isCanceled ?
             '' : // No mostrar si ya está cancelado
             // CLAVE: Se añade la clase 'btn-cancelar-torneo-trigger' y se eliminan data-bs-toggle/target
             `<button class="btn btn-dark btn-sm btn-cancelar-torneo-trigger" data-torneo-id="${torneo.id_torneo}" title="Cancelar">
@@ -139,17 +149,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             const response = await fetch(ENDPOINT_LISTAR);
-            const data = await response.json(); 
+            const data = await response.json();
 
             if (data.status === 'success') {
                 if (data.torneos.length > 0) {
                     // Renderiza el HTML
                     let html = data.torneos.map(createTorneoCardHtml).join('');
                     torneosListContainer.innerHTML = html;
-                    
+
                     // IMPORTANTE: Después de cargar los torneos, aplicamos el filtro
                     // por si el usuario ya tenía texto en el campo de búsqueda.
-                    filterTorneos(); 
+                    filterTorneos();
                 } else {
                     torneosListContainer.innerHTML = '<div class="col-12 text-center py-5"><i class="bi bi-info-circle me-2"></i> No has creado ningún torneo aún.</div>';
                 }
@@ -167,16 +177,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Lógica del Filtro de Búsqueda (INTEGRADA) ---
-
- 
     function filterTorneos() {
         const filter = searchInput.value.toLowerCase().trim();
-        
-        
+
         const cards = torneosListContainer.querySelectorAll('.col-12[data-torneo-id]');
 
         cards.forEach(card => {
-        
             const cardText = card.textContent.toLowerCase();
 
             // Comprobar si el texto de la tarjeta incluye la cadena de búsqueda
@@ -192,14 +198,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Agregar el event listener al campo de búsqueda para activar el filtro al escribir
     searchInput.addEventListener('input', filterTorneos);
-    
     // --------------------------------------------------
 
 
     // --- Lógica del Modal de Creación ---
-    
+
     // Toggle para la fecha de cierre
-    abrirInscripcionesCheckbox.addEventListener('change', function() {
+    abrirInscripcionesCheckbox.addEventListener('change', function () {
         if (this.checked) {
             fechaCierreContainer.classList.remove('d-none');
             if (fechaCierreInput) fechaCierreInput.setAttribute('required', 'required');
@@ -213,28 +218,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Manejar el envío del formulario de Creación
-    btnCrearTorneo.addEventListener('click', async function(e) {
+    btnCrearTorneo.addEventListener('click', async function (e) {
         e.preventDefault();
-        
+
         if (!formCrearTorneo.checkValidity()) {
             formCrearTorneo.classList.add('was-validated');
             return;
         }
 
-        const data = new FormData(formCrearTorneo); 
-        data.append('idAdminCancha', 1); 
+        const data = new FormData(formCrearTorneo);
+        data.append('idAdminCancha', 1);
 
         btnCrearTorneo.disabled = true;
         btnCrearTorneo.textContent = 'Creando...';
-        
+
         try {
             const response = await fetch(ENDPOINT_CREAR, { method: 'POST', body: data });
-            
+
             if (!response.ok) {
                 const errorResult = await response.json();
                 throw new Error(errorResult.message || `Error ${response.status} en la petición.`);
             }
-            
+
             const result = await response.json();
 
             if (result.status === 'success') {
@@ -242,8 +247,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 formCrearTorneo.reset();
                 formCrearTorneo.classList.remove('was-validated');
                 modalCrearTorneo.hide();
-                
-                await loadTorneos(); 
+
+                await loadTorneos();
             } else {
                 showToast('Error: ' + result.message, 'error');
             }
@@ -259,14 +264,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Lógica del Modal de Cancelación ---
 
-    // Nuevo listener delegado para botones generados dinámicamente
-    torneosListContainer.addEventListener('click', function(event) {
+    // 1. Listener delegado para botones generados dinámicamente
+    torneosListContainer.addEventListener('click', function (event) {
         // Usa closest para encontrar el botón que disparó el evento
         const button = event.target.closest('.btn-cancelar-torneo-trigger');
         if (button) {
             const torneoId = button.getAttribute('data-torneo-id');
             cancelarTorneoIdInput.value = torneoId; // Almacenar el ID
-            
+
             if (modalCancelarTorneo) {
                 modalCancelarTorneo.show(); // Mostrar el modal manualmente
             } else {
@@ -276,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 2. Manejar la confirmación de cancelación
-    btnConfirmarCancelar.addEventListener('click', async function() {
+    btnConfirmarCancelar.addEventListener('click', async function () {
         const torneoId = cancelarTorneoIdInput.value;
         if (!torneoId) {
             showToast('Error: No se encontró el ID del torneo a cancelar.', 'error');
@@ -288,9 +293,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const data = new FormData();
         data.append('torneo_id', torneoId);
-        
+
         try {
-            const response = await fetch(ENDPOINT_CANCELAR, { 
+            const response = await fetch(ENDPOINT_CANCELAR, {
                 method: 'POST',
                 body: data
             });
@@ -320,7 +325,140 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    
+
+    // ---  Historial de Torneos Cancelados ---
+
+    /**
+     * Función para generar una fila de tabla HTML para un torneo cancelado.
+     * @param {Object} torneo - Objeto torneo con id_torneo, nombre, fecha_inicio, fecha_fin, motivo_cancelacion.
+     * @returns {string} HTML de la fila de la tabla.
+     */
+    function createTorneoCanceladoRow(torneo) {
+        const fechaInicio = new Date(torneo.fecha_inicio).toLocaleDateString('es-ES', {
+            day: '2-digit', month: '2-digit', year: 'numeric'
+        });
+
+        const fechaFin = torneo.fecha_fin
+            ? new Date(torneo.fecha_fin).toLocaleDateString('es-ES', {
+                day: '2-digit', month: '2-digit', year: 'numeric'
+            })
+            : 'N/A';
+
+        return `
+        <tr>
+            <td>${torneo.nombre}</td>
+            <td>${fechaInicio}</td>
+            <td>${fechaFin}</td>
+        </tr>
+    `;
+    }
+
+   
+    async function loadTorneosCancelados() {
+
+        torneosCanceladosTableBody.innerHTML = `
+        <tr>
+            <td colspan="3" class="text-center py-3">
+                <i class="bi bi-arrow-clockwise fa-spin me-2"></i> Cargando historial...
+            </td>
+        </tr>
+    `;
+
+        try {
+            const response = await fetch(ENDPOINT_CANCELADOS);
+            const data = await response.json();
+
+            if (data.status === "success") {
+
+                if (data.torneos.length > 0) {
+                    torneosCanceladosTableBody.innerHTML =
+                        data.torneos.map(createTorneoCanceladoRow).join('');
+                } else {
+                    torneosCanceladosTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="text-center py-3 text-muted">
+                            <i class="bi bi-info-circle me-2"></i> No hay torneos cancelados registrados.
+                        </td>
+                    </tr>
+                `;
+                }
+
+            } else {
+                torneosCanceladosTableBody.innerHTML = `
+                <tr><td colspan="3" class="text-center py-3 text-danger">Error: ${data.message}</td></tr>
+            `;
+            }
+
+        } catch (error) {
+            console.error("Error AJAX:", error);
+            torneosCanceladosTableBody.innerHTML = `
+            <tr><td colspan="3" class="text-center py-3 text-danger">Error al conectar con el servidor.</td></tr>
+        `;
+        }
+    }
+
+    // abre el modal
+    modalTorneosCanceladosElement.addEventListener('show.bs.modal', loadTorneosCancelados);
+
+
+    // --- Historial de Torneos Finalizados ---
+
+    function loadTorneosFinalizados() {
+
+        fetch(ENDPOINT_TORNEOS_FINALIZADOS)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.status !== "success") {
+                    console.error("Error backend:", data.message);
+                    return;
+                }
+
+                const tbody = document.getElementById("torneosFinalizadosTableBody");
+                tbody.innerHTML = "";
+
+                if (data.data.length === 0) {
+                    tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">
+                            No hay torneos finalizados.
+                        </td>
+                    </tr>`;
+                    return;
+                }
+
+                data.data.forEach(torneo => {
+
+                    let row = `
+                    <tr>
+                        <td>${torneo.nombre}</td>
+                        <td>${formatearFecha(torneo.fecha_inicio)}</td>
+                        <td>${formatearFecha(torneo.fecha_fin)}</td>
+                    </tr>`;
+
+                    tbody.insertAdjacentHTML("beforeend", row);
+                });
+
+            })
+            .catch(error => {
+                console.error("Error AJAX:", error);
+            });
+    }
+
+
+    function formatearFecha(fecha) {
+        if (!fecha) return "-";
+        return new Date(fecha).toLocaleDateString("es-AR");
+    }
+
+    const modalFinalizados = document.getElementById("modalTorneosFinalizados");
+
+    if (modalFinalizados) {
+        modalFinalizados.addEventListener("show.bs.modal", function () {
+            loadTorneosFinalizados();
+        });
+    }
+
     // Llamada inicial para cargar los torneos al cargar la página
     loadTorneos();
 });

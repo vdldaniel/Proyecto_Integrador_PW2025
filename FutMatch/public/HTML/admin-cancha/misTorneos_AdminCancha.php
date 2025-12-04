@@ -60,42 +60,7 @@ require_once HEAD_COMPONENT;
 
     <!-- Lista de torneos -->
     <div id="torneosList" class="row g-3"> </div>
-    <!-- Torneo 2 -->
-    <div class="col-12">
-      <div class="card shadow-sm border-0 mb-2">
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col-md-2 text-center">
-              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <h5 class="card-title mb-1">
-                <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
-                  Copa FutMatch
-                </a>
-              </h5>
-              <small class="text-muted">11/10/2025</small>
-            </div>
-            <div class="col-md-2">
-              <span class="badge text-bg-dark">Inscripciones abiertas</span>
-            </div>
-            <div class="col-md-5 text-end">
-              <button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalSolicitudesTorneo" data-torneo-id="2" title="Ver solicitudes">
-                <i class="bi bi-people"></i>
-                <span class="d-none d-lg-inline ms-1">Solicitudes</span>
-              </button>
-              <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="2" title="Cancelar">
-                <i class="bi bi-x-circle"></i>
-                <span class="d-none d-lg-inline ms-1">Cancelar</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </main>
 
   <!-- Modal Crear Torneo -->
@@ -292,7 +257,7 @@ require_once HEAD_COMPONENT;
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTorneosCanceladosLabel">
-            <i class="bi bi-x-circle"></i> Torneos Cancelados
+            <i class="bi bi-x-circle"></i> Historial de Torneos Cancelados
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -304,30 +269,11 @@ require_once HEAD_COMPONENT;
                   <th>Nombre</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Torneo Federal</td>
-                  <td>04/11/2025</td>
-                  <td>30/11/2025</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Copa Invierno 2024</td>
-                  <td>15/06/2024</td>
-                  <td>30/07/2024</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
+
+              <tbody id="torneosCanceladosTableBody">
+                <!-- Aquí se cargarán los torneos cancelados dinámicamente -->
               </tbody>
             </table>
           </div>
@@ -343,12 +289,14 @@ require_once HEAD_COMPONENT;
   <div class="modal fade" id="modalTorneosFinalizados" tabindex="-1" aria-labelledby="modalTorneosFinalizadosLabel">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
+
         <div class="modal-header">
           <h5 class="modal-title" id="modalTorneosFinalizadosLabel">
-            <i class="bi bi-trophy"></i> Torneos Finalizados
-          </h5>
+            <i class="bi bi-trophy"></i> Torneos Finalizados</h5>
+         
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
           <div class="table-responsive">
             <table class="table table-striped">
@@ -357,40 +305,25 @@ require_once HEAD_COMPONENT;
                   <th>Nombre</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  <th>Acciones</th>
+                  
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Copa Verano 2024</td>
-                  <td>10/01/2024</td>
-                  <td>28/02/2024</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Torneo Clausura 2023</td>
-                  <td>15/09/2023</td>
-                  <td>15/12/2023</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
+              <tbody id="torneosFinalizadosTableBody">
+                <!-- Se completa por JS -->
               </tbody>
+
             </table>
           </div>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
+
       </div>
     </div>
   </div>
+
   </main>
 
   <!-- Bootstrap Icons -->

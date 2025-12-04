@@ -15,10 +15,6 @@ ob_clean();
 
 header("Content-Type: application/json");
 
-// ===================================
-// VERIFICACIÓN DE CONEXIÓN DB (CRÍTICO)
-// ===================================
-// Si config.php falló al conectar, $conn será null. Devolvemos un error JSON limpio.
 if ($conn === null) {
     http_response_code(503); // Service Unavailable
     // Limpiamos el buffer por si acaso y enviamos el JSON de error.
@@ -38,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // ID de la etapa 'cancelado'.
 const ETAPA_CANCELADO_ID = 5;
 
-// Obtener y validar datos
+
 $torneoId = filter_input(INPUT_POST, 'torneo_id', FILTER_VALIDATE_INT);
 $idAdminCancha = $_SESSION['user_id'] ?? 1; // Usamos el ID de sesión o el de prueba 1
 
