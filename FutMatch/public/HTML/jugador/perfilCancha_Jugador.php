@@ -41,6 +41,7 @@ require_once HEAD_COMPONENT;
         // Valores por defecto (serán reemplazados por JavaScript desde el backend)
         $perfil_cancha_nombre = 'Cargando...';
         $perfil_cancha_descripcion_banner = 'Cargando información de la cancha...';
+        $perfil_cancha_banner = 'Cargando...';
         $perfil_cancha_direccion = 'Cargando...';
         $perfil_cancha_tipo = 'N/A';
         $perfil_cancha_superficie = 'N/A';

@@ -33,6 +33,35 @@ try {
         $query = 'SELECT * FROM vista_perfil_cancha WHERE id_cancha = :id';
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':id', $id_cancha, PDO::PARAM_INT);
+        $stmt->execute();
+        $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$perfil) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Perfil no encontrado']);
+            exit();
+        }
+
+        // Obtener tipos de partido de la cancha
+        $queryTipos = "
+            SELECT 
+                tp.id_tipo_partido,
+                tp.nombre,
+                tp.min_participantes,
+                tp.max_participantes
+            FROM canchas_tipos_partido ctp
+            INNER JOIN tipos_partido tp 
+                ON tp.id_tipo_partido = ctp.id_tipo_partido
+            WHERE ctp.id_cancha = :id AND ctp.activo = 1
+        ";
+        $stmtTipos = $conn->prepare($queryTipos);
+        $stmtTipos->bindParam(':id', $id_cancha, PDO::PARAM_INT);
+        $stmtTipos->execute();
+        $perfil['tipos_partido'] = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
+
+        header('Content-Type: application/json');
+        echo json_encode($perfil);
+        exit();
     } else {
         // Perfil jugador
         $id_jugador = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -46,13 +75,17 @@ try {
         $query = 'SELECT * FROM vista_perfil_jugador WHERE id_jugador = :id';
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':id', $id_jugador, PDO::PARAM_INT);
-    }
+        $stmt->execute();
+        $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt->execute();
-    $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$perfil) {
-        http_response_code(404);
-        echo json_encode(['error' => 'Perfil no encontrado']);
+        if (!$perfil) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Perfil no encontrado']);
+            exit();
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($perfil);
         exit();
     }
 } catch (PDOException $e) {
@@ -61,6 +94,3 @@ try {
     echo json_encode(['error' => 'Error al buscar perfil']);
     exit();
 };
-
-header('Content-Type: application/json');
-echo json_encode($perfil);

@@ -29,21 +29,6 @@ $perfil_cancha_boton_primario = [
     'url' => '#'
 ];
 
-// Información específica de la cancha (normalmente vendría de BD por ID)
-$perfil_cancha_nombre = 'MegaFutbol Cancha A1-F5';
-$perfil_cancha_descripcion_banner = 'Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.';
-$perfil_cancha_direccion = 'Av. Corrientes 1234, CABA, Buenos Aires, Argentina';
-$perfil_cancha_tipo = 'Fútbol 5';
-$perfil_cancha_superficie = 'Césped sintético';
-$perfil_cancha_capacidad = '10 jugadores';
-$perfil_cancha_calificacion = '4.8';
-$perfil_cancha_total_resenas = '127';
-$perfil_cancha_total_jugadores = '342';
-$perfil_cancha_total_partidos = '156';
-$perfil_cancha_dias_atencion = 'Lunes a Domingo';
-$perfil_cancha_horario = '07:00 - 23:00';
-$perfil_cancha_estado_actual = 'Abierto ahora';
-$perfil_cancha_hora_cierre = '23:00';
 
 include HEAD_COMPONENT;
 
@@ -71,7 +56,7 @@ include HEAD_COMPONENT;
                     <p class="text-muted mb-0">Revisión y moderación del funcionamiento de la cancha en la plataforma</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="<?= PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA ?>" class="btn btn-dark me-2">
+                    <a href="<?= PAGE_CANCHAS_LISTADO_ADMIN_SISTEMA ?>" class="btn btn-dark me-2">
                         <i class="bi bi-arrow-left"></i> Volver a Canchas
                     </a>
                     <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalSuspenderCancha">

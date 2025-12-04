@@ -51,7 +51,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
       return this.datosCancha;
     } catch (error) {
       console.error("Error al cargar la cancha:", error);
-      alert("Error al cargar la información de la cancha");
+      showToast("Error al cargar la información de la cancha", "error");
       throw error;
     }
   }
@@ -68,6 +68,20 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
     if (descripcionCancha)
       descripcionCancha.textContent = datos.descripcion_cancha || "";
 
+    // Renderizar tipos de partido
+    const tiposPartidoCancha = document.getElementById("tiposPartidoCancha");
+    if (
+      tiposPartidoCancha &&
+      datos.tipos_partido &&
+      datos.tipos_partido.length > 0
+    ) {
+      tiposPartidoCancha.innerHTML = datos.tipos_partido
+        .map(
+          (tipo) => `<span class="badge bg-primary me-1">${tipo.nombre}</span>`
+        )
+        .join("");
+    }
+
     const bannerCancha = document.getElementById("bannerCancha");
     if (bannerCancha && datos.banner_cancha) {
       bannerCancha.style.backgroundImage = `url('${BASE_URL}${datos.banner_cancha}')`;
@@ -78,9 +92,19 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
       direccionCancha.textContent =
         datos.direccion_cancha || "Dirección no disponible";
 
+    const tipoCancha = document.getElementById("tipoCancha");
+    if (tipoCancha && datos.tipos_partido && datos.tipos_partido.length > 0) {
+      tipoCancha.textContent = datos.tipos_partido
+        .map((t) => t.nombre)
+        .join(", ");
+    } else if (tipoCancha) {
+      tipoCancha.textContent = "N/A";
+    }
+
     const superficieCancha = document.getElementById("superficieCancha");
     if (superficieCancha)
-      superficieCancha.textContent = datos.tipo_superficie || "N/A";
+      superficieCancha.textContent =
+        datos.tipo_superficie || datos.superficie_nombre || "No especificado";
   }
 
   /**

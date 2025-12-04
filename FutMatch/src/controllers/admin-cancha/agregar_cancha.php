@@ -12,6 +12,8 @@ $superficie   = $_POST['superficie'] ?? null;
 $ubicacion    = $_POST['ubicacion'] ?? null;
 $descripcion  = $_POST['descripcion'] ?? null;
 $id_tipo_partido = $_POST['id_tipo_partido'] ?? null;
+$latitud      = $_POST['latitud'] ?? 0;
+$longitud     = $_POST['longitud'] ?? 0;
 
 if (!$nombre || !$superficie || !$ubicacion || !$id_tipo_partido) {
     echo json_encode(["status" => "error", "message" => "Datos incompletos"]);
@@ -22,19 +24,19 @@ try {
     $conn->beginTransaction();
 
 
-    $sql = "INSERT INTO direcciones (direccion_completa, latitud, longitud) VALUES (?, 0, 0)";
+    $sql = "INSERT INTO direcciones (direccion_completa, latitud, longitud) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$ubicacion]);
+    $stmt->execute([$ubicacion, $latitud, $longitud]);
     $id_direccion = $conn->lastInsertId();
 
 
     $sql = "INSERT INTO canchas (id_admin_cancha, id_direccion, nombre, descripcion, id_estado, id_superficie, politicas_reservas)
-            VALUES (:id_admin_cancha, :id_direccion, :id_nombre, id_decripcion, 1, id_superficie, NULL)";
+            VALUES (:id_admin_cancha, :id_direccion, :nombre, :descripcion, 1, :id_superficie, NULL)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id_admin_cancha', $_SESSION['user_id'], PDO::PARAM_STR);
     $stmt->bindParam(':id_direccion', $id_direccion, PDO::PARAM_INT);
-    $stmt->bindParam(':id_nombre', $nombre, PDO::PARAM_STR);
-    $stmt->bindParam(':id_decripcion', $descripcion, PDO::PARAM_STR);
+    $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+    $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
     $stmt->bindParam(':id_superficie', $superficie, PDO::PARAM_INT);
     $stmt->execute();
     $id_cancha = $conn->lastInsertId();

@@ -53,8 +53,10 @@ class PerfilCanchaBase {
       });
     });
 
-    // Selector de cancha (solo admin)
-    const selectorCancha = document.querySelector(".dropdown-menu");
+    // Selector de cancha (solo admin) - usar selector más específico
+    const selectorCancha = document.querySelector(
+      "#selectorCanchas .dropdown-menu"
+    );
     if (selectorCancha) {
       selectorCancha.addEventListener("click", (e) => {
         if (e.target.classList.contains("dropdown-item")) {
@@ -252,7 +254,6 @@ class PerfilCanchaBase {
       direccionCancha: datosCancha.direccion,
       tipoCancha: datosCancha.tipo,
       superficieCancha: datosCancha.superficie,
-      capacidadCancha: datosCancha.capacidad + " jugadores",
     };
 
     Object.keys(elementos).forEach((id) => {

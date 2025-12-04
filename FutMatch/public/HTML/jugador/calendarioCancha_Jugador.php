@@ -205,7 +205,7 @@ require_once HEAD_COMPONENT;
 
         if (!ID_CANCHA) {
             console.error('No se proporcionó un ID de cancha en la URL');
-            alert('Error: No se especificó una cancha');
+            showToast("Error: No se especificó una cancha", "error");
         }
     </script>
 

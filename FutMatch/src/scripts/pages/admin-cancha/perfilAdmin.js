@@ -5,17 +5,6 @@ let TIPOS_PARTIDO_CACHE = [];
 let CANCHAS_CACHE = {};
 let ID_CANCHA_ACTUAL = null; // Variable para almacenar el ID de la cancha visible actualmente
 
-// TOASTS
-// ==========================================================
-function mostrarToast(message, isSuccess = true) {
-  // Implementación de una función de notificación (e.g., usando Bootstrap Toast o alert simple)
-  if (isSuccess) {
-    alert(`Éxito: ${message}`);
-  } else {
-    alert(`Error: ${message}`);
-  }
-}
-
 // FUNCIÓN SELECTORES (CORREGIDA: Ahora devuelve una Promise)
 // ==========================================================
 const cargarSelectores = () => {
@@ -63,9 +52,9 @@ function abrirModalEditar(id) {
       id,
       "en la caché. Cargue el perfil primero."
     );
-    mostrarToast(
+    showToast(
       "No se pudo cargar la información de la cancha para editar. Inténtelo de nuevo.",
-      false
+      "error"
     );
     return;
   }
@@ -151,7 +140,7 @@ document
           );
           if (modal) modal.hide();
 
-          mostrarToast("Cancha actualizada exitosamente.", true); // Mensaje de éxito
+          showToast("Cancha actualizada exitosamente.", "success"); // Mensaje de éxito
 
           // Recargar lista de canchas y perfil de la cancha actual
           cargarCanchas().then(() => {
@@ -164,16 +153,16 @@ document
             "Error del servidor al actualizar:",
             res.message || res
           );
-          mostrarToast(
+          showToast(
             "Error al actualizar la cancha: " +
               (res.message || "Error desconocido"),
-            false
+            "error"
           ); // Mensaje de error
         }
       })
       .catch((err) => {
         console.error("Error de red/fetch al actualizar:", err);
-        mostrarToast("Error de conexión al actualizar la cancha.", false); // Mensaje de error de red
+        showToast("Error de conexión al actualizar la cancha.", "error"); // Mensaje de error de red
       });
   });
 
@@ -339,17 +328,27 @@ async function actualizarBanner(id) {
         btn.innerHTML = `<i class="bi bi-building"></i> ${cancha.nombre} <span class="ms-2">${badge}</span>`;
       }
 
-      document.getElementById("nombreCancha").innerText =
-        cancha.nombre || "Nombre Desconocido";
+      const nombreElement = document.getElementById("nombreCancha");
+      if (nombreElement) {
+        nombreElement.innerText = cancha.nombre || "Nombre Desconocido";
+      }
 
       const descripcion =
         cancha.descripcion_banner ||
         cancha.descripcion_cancha ||
         cancha.descripcion ||
         "";
-      document.getElementById("descripcionCancha").innerText = descripcion;
+      const descripcionElement = document.getElementById("descripcionCancha");
+      if (descripcionElement) {
+        descripcionElement.innerText = descripcion;
+      }
 
       const banner = document.getElementById("bannerCancha");
+      if (!banner) {
+        console.warn("Elemento bannerCancha no encontrado");
+        return;
+      }
+
       let bannerUrl =
         cancha.banner || "<?= IMG_BANNER_PERFIL_CANCHA_DEFAULT ?>";
 
@@ -393,33 +392,46 @@ async function actualizarBanner(id) {
       });
 
       const perfilJugadoresElement = document.getElementById("perfilJugadores");
-      if (cancha.perfil_cancha_admin_mode) {
-        perfilJugadoresElement.innerText = "Admin View";
-      } else if (tipos.length > 0) {
-        perfilJugadoresElement.innerText = total;
+      if (perfilJugadoresElement) {
+        if (cancha.perfil_cancha_admin_mode) {
+          perfilJugadoresElement.innerText = "Admin View";
+        } else if (tipos.length > 0) {
+          perfilJugadoresElement.innerText = total;
+        }
       }
 
       // 2. ACTUALIZACIÓN DEL PANEL DE INFORMACIÓN BÁSICA
-      document.getElementById("direccionCancha").innerText =
-        cancha.direccion_completa || "Dirección no especificada";
-      document.getElementById("superficieCancha").innerText =
-        cancha.superficie_nombre || "Desconocida";
-
-      const tipoCanchaElement = document.getElementById("tipoCancha");
-      if (tipos.length > 0) {
-        const tiposTexto = tipos
-          .map(
-            (t) => `${t.nombre} (${t.min_participantes}-${t.max_participantes})`
-          )
-          .join(", ");
-        tipoCanchaElement.innerText = tiposTexto;
-      } else {
-        tipoCanchaElement.innerText = "No hay tipos de partido configurados.";
+      const direccionElement = document.getElementById("direccionCancha");
+      if (direccionElement) {
+        direccionElement.innerText =
+          cancha.direccion_completa || "Dirección no especificada";
       }
 
-      document.getElementById(
-        "capacidadCancha"
-      ).innerText = `${total} jugadores (Máx. total)`;
+      const superficieElement = document.getElementById("superficieCancha");
+      if (superficieElement) {
+        superficieElement.innerText =
+          cancha.superficie_nombre || "No especificado";
+      }
+
+      const tipoCanchaElement = document.getElementById("tipoCancha");
+      if (tipoCanchaElement) {
+        if (tipos.length > 0) {
+          const tiposTexto = tipos
+            .map(
+              (t) =>
+                `${t.nombre} (${t.min_participantes}-${t.max_participantes})`
+            )
+            .join(", ");
+          tipoCanchaElement.innerText = tiposTexto;
+        } else {
+          tipoCanchaElement.innerText = "No hay tipos de partido configurados.";
+        }
+      }
+
+      const capacidadElement = document.getElementById("capacidadCancha");
+      if (capacidadElement) {
+        capacidadElement.innerText = `${total} jugadores (Máx. total)`;
+      }
 
       const estadoBadgeElement = document.getElementById("estadoCancha");
       if (estadoBadgeElement) {
@@ -539,9 +551,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "Error crítico al inicializar la aplicación. No se pudieron cargar los selectores de edición.",
         error
       );
-      mostrarToast(
+      showToast(
         "Error crítico de inicialización. Recargue la página.",
-        false
+        "error"
       );
     });
 });

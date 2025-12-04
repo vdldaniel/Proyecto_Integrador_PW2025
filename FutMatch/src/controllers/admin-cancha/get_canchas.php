@@ -36,6 +36,8 @@ try {
             c.id_estado,
             c.politicas_reservas,
             d.direccion_completa,
+            d.latitud,
+            d.longitud,
 
             -- Tipo de partido asociado
             tp.id_tipo_partido,

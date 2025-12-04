@@ -56,7 +56,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 <?php if ($perfil_cancha_mostrar_selector): ?>
     <div class="row mb-4">
         <div class="col-md-4 ms-auto">
-            <div class="dropdown">
+            <div id="selectorCanchas" class="dropdown">
 
                 <button id="btnSelectorCanchas" class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-building"></i> Seleccionar cancha...
@@ -100,20 +100,20 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
                                 <h1 id="nombreCancha"><?= $perfil_cancha_nombre ?></h1>
                                 <p id="descripcionCancha"><?= $perfil_cancha_descripcion_banner ?></p>
+                                <div id="tiposPartidoCancha" class="mt-2">
+                                    <!-- Se llenará dinámicamente con JavaScript -->
+                                </div>
                                 <!--
                                 <span id="estadoCancha" class="badge bg-info text-light mt-2">
                                     Pendiente
                                 </span>-->
                             </div>
 
+                            <!-- TIPO PARTIDO -->
                             <div class="text-end">
-                                <!-- Calificación oculta temporalmente -->
-                                <div class="text-light">
-                                    <i class="bi bi-people"></i>
-                                    <span id="perfilJugadores">
-                                        <?= $perfil_cancha_admin_mode ? 'Admin View' : $perfil_cancha_total_jugadores . ' jugadores' ?>
-                                    </span>
+                                <div class="mb-2">
                                 </div>
+
                             </div>
 
                         </div>
@@ -279,12 +279,12 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     </label>
                     <p class="mb-0" id="superficieCancha"></p>
                 </div>
-                <div class="mb-3">
+                <!--<div class="mb-3">
                     <label class="fw-bold text-muted d-block mb-1">
                         <i class="bi bi-people"></i> Capacidad
                     </label>
                     <p class="mb-0" id="capacidadCancha"></p>
-                </div>
+                </div>-->
                 <?php if ($perfil_cancha_admin_mode): ?>
                     <div class="mb-0">
                         <label class="fw-bold text-muted d-block mb-1">
@@ -298,8 +298,13 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
         <!-- Horarios de atención -->
         <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header bg-info text-white">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="bi bi-clock"></i> Horarios</h5>
+                <?php if ($perfil_cancha_admin_mode): ?>
+                    <a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>?openModal=configurarHorarios" class="btn btn-sm btn-dark">
+                        <i class="bi bi-gear"></i> Cambiar horarios
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="card-body">
                 <!-- Estado actual -->

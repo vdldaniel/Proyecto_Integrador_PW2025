@@ -180,7 +180,11 @@ class PerfilCanchaAdmin extends PerfilCanchaBase {
       if (tipoSelect) tipoSelect.value = tipoValue;
     }
 
-    if (datos.superficie) {
+    if (
+      datos.superficie &&
+      datos.superficie !== "No especificado" &&
+      datos.superficie !== "N/A"
+    ) {
       const superficieSelect = document.getElementById("editSuperficie");
       const superficieValue = datos.superficie.toLowerCase().replace(" ", "_");
       if (superficieSelect) superficieSelect.value = superficieValue;

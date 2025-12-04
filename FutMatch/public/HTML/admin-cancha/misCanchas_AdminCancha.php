@@ -20,6 +20,9 @@ $page_css = [];
 require_once HEAD_COMPONENT;
 ?>
 
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 <body>
 	<?php
 	// Cargar navbar de admin cancha
@@ -88,10 +91,36 @@ require_once HEAD_COMPONENT;
 							</div>
 							<!-- Ubicación -->
 							<div class="mb-3 col-12">
-								<label for="ubicacionCancha" class="form-label">Ubicación</label>
-								<input type="text" class="form-control" id="ubicacionCancha" required />
-								<div class="alert alert-info mt-2 d-none" role="alert" id="alertUbicacionAgregar">
-									<i class="bi bi-info-circle"></i> La dirección ingresada será verificada por personal de FutMatch para asegurar la integridad de la aplicación.
+								<label for="ubicacionCancha" class="form-label">Ubicación de la cancha</label>
+								<p class="text-muted small mb-2">
+									Buscá la dirección o arrastrá el marcador en el mapa para indicar la ubicación exacta.
+								</p>
+
+								<!-- Buscador de dirección -->
+								<div class="input-group mb-3">
+									<input
+										type="text"
+										class="form-control"
+										id="inputBuscadorDireccionAgregar"
+										placeholder="Ej: Av. 7 1234, La Plata, Buenos Aires" />
+									<button class="btn btn-dark" type="button" id="btnBuscarDireccionAgregar">
+										<i class="bi bi-search"></i> Buscar
+									</button>
+								</div>
+
+								<!-- Mapa -->
+								<div id="mapAgregar" style="height: 400px; border-radius: 8px; margin-bottom: 1rem;"></div>
+
+								<!-- Campo oculto para la dirección completa -->
+								<input type="hidden" id="ubicacionCancha" name="direccion" required />
+
+								<!-- Campos ocultos para coordenadas -->
+								<input type="hidden" id="inputLatitudAgregar" name="latitud" required />
+								<input type="hidden" id="inputLongitudAgregar" name="longitud" required />
+
+								<!-- Dirección seleccionada (visible para el usuario) -->
+								<div id="direccionSeleccionadaAgregar" class="alert alert-info d-none mt-2">
+									<strong>Dirección seleccionada:</strong> <span id="textoDireccionAgregar"></span>
 								</div>
 							</div>
 							<!-- Descripción -->
@@ -144,9 +173,38 @@ require_once HEAD_COMPONENT;
 							</div>
 							<!-- Ubicación -->
 							<div class="mb-3 col-12">
-								<label for="editUbicacionCancha" class="form-label">Ubicación</label>
-								<input type="text" class="form-control" id="editUbicacionCancha" required />
-								<div class="alert alert-info mt-2 d-none" role="alert" id="alertUbicacionEditar">
+								<label for="editUbicacionCancha" class="form-label">Ubicación de la cancha</label>
+								<p class="text-muted small mb-2">
+									Buscá la dirección o arrastrá el marcador en el mapa para indicar la ubicación exacta.
+								</p>
+
+								<!-- Buscador de dirección -->
+								<div class="input-group mb-3">
+									<input
+										type="text"
+										class="form-control"
+										id="inputBuscadorDireccionEditar"
+										placeholder="Ej: Av. 7 1234, La Plata, Buenos Aires" />
+									<button class="btn btn-dark" type="button" id="btnBuscarDireccionEditar">
+										<i class="bi bi-search"></i> Buscar
+									</button>
+								</div>
+
+								<!-- Mapa -->
+								<div id="mapEditar" style="height: 400px; border-radius: 8px; margin-bottom: 1rem;"></div>
+
+								<!-- Campo oculto para la dirección completa -->
+								<input type="hidden" id="editUbicacionCancha" name="direccion" required />
+
+								<!-- Campos ocultos para coordenadas -->
+								<input type="hidden" id="inputLatitudEditar" name="latitud" required />
+								<input type="hidden" id="inputLongitudEditar" name="longitud" required />
+
+								<!-- Dirección seleccionada (visible para el usuario) -->
+								<div id="direccionSeleccionadaEditar" class="alert alert-info d-none mt-2">
+									<strong>Dirección seleccionada:</strong> <span id="textoDireccionEditar"></span>
+								</div>
+								<div class="alert alert-warning mt-2">
 									<i class="bi bi-info-circle"></i> Al cambiar la dirección, será verificada nuevamente por personal de FutMatch para asegurar la integridad de la aplicación.
 								</div>
 							</div>
@@ -309,7 +367,10 @@ require_once HEAD_COMPONENT;
 	<!-- Scripts -->
 	<script>
 		const BASE_URL = "<?= BASE_URL ?>";
+		const GEOCODING_PROXY = '<?= CONTROLLER_GEOCODING_PROXY ?>';
 	</script>
+	<!-- Leaflet JS -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="<?= JS_CANCHAS_LISTADO ?>"></script>
 </body>
