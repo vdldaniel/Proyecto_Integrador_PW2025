@@ -36,11 +36,11 @@ require_once HEAD_COMPONENT;
         <h1 class="fw-bold mb-1">Bienvenido!</h1>
         <p class="text-muted mb-0">Aquí podrá gestionar sus recursos y eventos</p>
       </div>
-      <div class="col-md-6 text-end">
+      <!--<div class="col-md-6 text-end">
         <button type="button" class="btn btn-success">
           <i class="bi bi-plus-circle"></i> Nueva Reserva
         </button>
-      </div>
+      </div>-->
     </div>
 
     <div class="row">

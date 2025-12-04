@@ -2,14 +2,8 @@
 
 // Cargar configuración
 require_once("../../../src/app/config.php");
-
 // Definir la página actual para el navbar
 $current_page = 'canchasAdminSistema';
-
-// Iniciar sesión para mostrar errores de login
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 $page_title = "Sistema - FutMatch";
 
@@ -60,33 +54,27 @@ include HEAD_COMPONENT;
             <!-- Pestañas de navegación -->
             <ul class="nav nav-tabs" id="canchasTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="solicitudes-tab" data-bs-toggle="tab" data-bs-target="#solicitudes"
-                        data-bs-toggle="tooltip" title="Filtrar solicitudes de canchas pendientes" type="button" role="tab">
-                        <i class="bi bi-building-fill"></i> Solicitudes
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation" style="display: none;">
-                    <button class="nav-link" id="verificando-tab" data-bs-toggle="tab" data-bs-target="#verificando"
-                        data-bs-toggle="tooltip" title="Filtrar solicitudes de canchas en proceso de verificación" type="button" role="tab">
-                        <i class="bi bi-building-fill-exclamation"></i>En verificación
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation" style="display: none;">
-                    <button class="nav-link" id="verificadas-tab" data-bs-toggle="tab" data-bs-target="#verificadas"
-                        data-bs-toggle="tooltip" title="Filtrar solicitudes de canchas verificadas" type="button" role="tab">
-                        <i class="bi bi-building-fill-check"></i>Verificadas
+                    <button class="nav-link active" id="pendientes-tab" data-bs-toggle="tab" data-bs-target="#pendientes"
+                        data-bs-toggle="tooltip" title="Canchas pendientes de verificación" type="button" role="tab">
+                        <i class="bi bi-clock-history"></i> Pendientes
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="rechazadas-tab" data-bs-toggle="tab" data-bs-target="#rechazadas"
-                        data-bs-toggle="tooltip" title="Filtrar solicitudes de canchas rechazadas" type="button" role="tab">
-                        <i class="bi bi-building-fill-x"></i>Rechazadas
+                    <button class="nav-link" id="en-revision-tab" data-bs-toggle="tab" data-bs-target="#en-revision"
+                        data-bs-toggle="tooltip" title="Canchas en proceso de revisión" type="button" role="tab">
+                        <i class="bi bi-hourglass-split"></i> En Revisión
                     </button>
                 </li>
-                <li class="nav-item" role="administradores" style="display: none;">
-                    <button class="nav-link" id="administradores-tab" data-bs-toggle="tab" data-bs-target="#administradores"
-                        data-bs-toggle="tooltip" title="Filtrar canchas vinculadas a un administrador de canchas" type="button" role="tab">
-                        <i class="bi bi-building-gear"></i>Admin. Canchas
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="habilitadas-tab" data-bs-toggle="tab" data-bs-target="#habilitadas"
+                        data-bs-toggle="tooltip" title="Canchas habilitadas y activas" type="button" role="tab">
+                        <i class="bi bi-check-circle"></i> Habilitadas
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="deshabilitadas-tab" data-bs-toggle="tab" data-bs-target="#deshabilitadas"
+                        data-bs-toggle="tooltip" title="Canchas deshabilitadas o rechazadas" type="button" role="tab">
+                        <i class="bi bi-x-circle"></i> Deshabilitadas
                     </button>
                 </li>
             </ul>
@@ -94,250 +82,68 @@ include HEAD_COMPONENT;
             <!-- Contenido de las pestañas -->
             <div class="tab-content tabla-admin" id="canchasTabsContent">
 
-                <div class="table-header  header-card">
-                    <div class=" card-body">
-                        <div class="row">
-                            <div class="col-md-1">ID</div>
-                            <div class="col-md-2">Usuario</div>
-                            <div class="col-md-2">Nombre Cancha</div>
-                            <div class="col-md-2">Dirección</div>
-                            <div class="col-md-2">Verificador</div>
-                            <div class="col-md-1">Fecha</div>
-                            <div class="col-md-2">Acciones</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SOLAPA 1: SOLICITUDES PENDIENTES -->
-                <div class="tab-pane fade show active" id="solicitudes" role="tabpanel">
-                    <!-- Las solicitudes pendientes se cargarán aquí dinámicamente vía JavaScript -->
-                </div>
-
-                <!-- SOLAPA 2: EN VERIFICACIÓN -->
-                <div class="tab-pane fade" id="verificando" role="tabpanel">
-
-                    <!-- Solicitud 3 - En verificación -->
-                    <div class="card row-card-tabla-admin estado-verificando" data-estado="verificando" data-solicitud-id="SOL-003">
-                        <div class="card-body">
-                            <div class="row solicitud-row">
-                                <div class="col-md-1">
-                                    <strong>SOL-003</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="badge text-bg-dark usuario-estado">Usuario Nuevo</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="fw-bold">Futsal Arena</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">Rivadavia 890, Caballito</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="text-info">Camila Santo</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <small>08/11/2025</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="acciones-container">
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-003" data-bs-toggle="tooltip" title="Ver solicitud">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-direccion="Rivadavia 890, Caballito" data-bs-toggle="tooltip" title="Ver en mapa">
-                                            <i class="bi bi-geo-alt"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-admin-id="ADM-003" data-bs-toggle="tooltip" title="Ver canchas del admin">
-                                            <i class="bi bi-building"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- SOLAPA 3: VERIFICADAS -->
-                <div class="tab-pane fade" id="verificadas" role="tabpanel">
-
-                    <!-- Solicitud 4 - Verificada -->
-                    <div class="card row-card-tabla-admin estado-verificada" data-estado="verificadas" data-solicitud-id="SOL-004">
-                        <div class="card-body">
-                            <div class="row solicitud-row">
-                                <div class="col-md-1">
-                                    <strong>SOL-004</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="badge text-bg-dark usuario-estado">Usuario Existente</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="fw-bold">Club Atlético Norte</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">Corrientes 2345, Centro</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="text-success">Ana García</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <small>05/11/2025</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="acciones-container">
-                                        <button class="btn btn-dark" data-solicitud-id="SOL-004" data-bs-toggle="tooltip" title="Ver solicitud">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-direccion="Corrientes 2345, Centro" data-bs-toggle="tooltip" title="Ver en mapa">
-                                            <i class="bi bi-geo-alt"></i>
-                                        </button>
-                                        <button class="btn btn-dark" data-admin-id="ADM-004" data-bs-toggle="tooltip" title="Ver canchas del admin">
-                                            <i class="bi bi-building"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- SOLAPA 4: RECHAZADAS -->
-                <div class="tab-pane fade" id="rechazadas" role="tabpanel">
-                    <!-- Las solicitudes rechazadas se cargarán aquí dinámicamente vía JavaScript -->
-                </div>
-
-                <!-- SOLAPA 5: ADMINISTRADORES -->
-                <div class="tab-pane fade" id="administradores" role="tabpanel">
-
-                    <!-- Lista de administradores con sus canchas -->
-                    <div class="card row-card-tabla-admin" data-estado="administradores">
-                        <div class="card-body">
-                            <div class="row solicitud-row">
-                                <div class="col-md-1">
-                                    <strong>ADM-01</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="badge text-bg-dark">Admin Activo</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="fw-bold">3 Canchas Activas</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">Juan Pérez - Admin</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="text-success">Camila Santo</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <small>01/10/2025</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="acciones-container">
-                                        <button class="btn btn-dark" data-admin-id="ADM-01" data-bs-toggle="tooltip" title="Ver canchas del admin">
-                                            <i class="bi bi-building"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <!-- Tabla con estructura mejorada -->
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover table-bordered tabla-admin-solicitudes">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 8%;">
+                                    ID
+                                    <input type="text" class="form-control form-control-sm mt-1 filter-input"
+                                        placeholder="Filtrar..." data-column="id">
+                                </th>
+                                <th style="width: 20%;">
+                                    Admin Cancha
+                                    <input type="text" class="form-control form-control-sm mt-1 filter-input"
+                                        placeholder="Filtrar..." data-column="admin">
+                                </th>
+                                <th style="width: 15%;">
+                                    Cancha
+                                    <input type="text" class="form-control form-control-sm mt-1 filter-input"
+                                        placeholder="Filtrar..." data-column="cancha">
+                                </th>
+                                <th style="width: 18%;">
+                                    Dirección
+                                    <input type="text" class="form-control form-control-sm mt-1 filter-input"
+                                        placeholder="Filtrar..." data-column="direccion">
+                                </th>
+                                <th style="width: 12%;">
+                                    Verificador
+                                    <input type="text" class="form-control form-control-sm mt-1 filter-input"
+                                        placeholder="Filtrar..." data-column="verificador">
+                                </th>
+                                <th style="width: 10%;">
+                                    Fecha
+                                    <input type="text" class="form-control form-control-sm mt-1 filter-input"
+                                        placeholder="Filtrar..." data-column="fecha">
+                                </th>
+                                <th style="width: 17%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-solicitudes">
+                            <!-- Las filas se cargarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
 
         </div>
 
-        <!-- Modal Detalles de Solicitud -->
-        <div class="modal fade modal-solicitud" id="modalSolicitudDetalle" tabindex="-1" aria-labelledby="modalSolicitudDetalleLabel">
-            <div class="modal-dialog modal-lg">
+        <!-- Modal Confirmación -->
+        <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalSolicitudDetalleLabel">
-                            <i class="bi bi-file-text"></i> Detalles de Solicitud
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar acción</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <!-- Información de la solicitud -->
-                        <div class="info-solicitud">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="label">ID de Solicitud:</div>
-                                    <div class="value" id="modal-solicitud-id">SOL-001</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="label">Fecha de Solicitud:</div>
-                                    <div class="value" id="modal-fecha-solicitud">10/11/2025 14:30</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información del administrador -->
-                        <div class="info-solicitud">
-                            <h6 class="fw-bold mb-3"><i class="bi bi-person"></i> Información del Administrador</h6>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="label">Nombre y Apellido:</div>
-                                    <div class="value" id="modal-nombre-admin">Juan Pérez</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="label">Email de Contacto:</div>
-                                    <div class="value" id="modal-email-admin">juan.perez@email.com</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="label">Teléfono:</div>
-                                    <div class="value" id="modal-telefono-admin">+54 11 1234-5678</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información de la cancha -->
-                        <div class="info-solicitud">
-                            <h6 class="fw-bold mb-3"><i class="bi bi-building"></i> Información de la Cancha</h6>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="label">Nombre de la Cancha:</div>
-                                    <div class="value" id="modal-nombre-cancha">Cancha Los Pinos</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="label">Dirección:</div>
-                                    <div class="value" id="modal-direccion-cancha">Av. Libertador 1234, CABA</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Observaciones -->
-                        <div class="observaciones-section">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6 class="fw-bold mb-0"><i class="bi bi-chat-text"></i> Observaciones</h6>
-                                <button class="btn btn-sm btn-primary btn-agregar-observacion">
-                                    <i class="bi bi-plus"></i> Agregar observación
-                                </button>
-                            </div>
-
-                            <!-- Área para nueva observación -->
-                            <div class="mb-3">
-                                <textarea class="form-control" id="nueva-observacion" rows="3" placeholder="Escribí una nueva observación..."></textarea>
-                            </div>
-
-                            <!-- Lista de observaciones existentes -->
-                            <div id="observaciones-lista">
-                                <div class="observacion-item">
-                                    <div class="observacion-fecha">Sistema - 10/11/2025 15:45</div>
-                                    <p class="observacion-texto">Solicitud recibida y en proceso de revisión inicial.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-body" id="modalConfirmacionTexto">
+                        <!-- Texto de confirmación dinámico -->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-warning">
-                            <i class="bi bi-geo-alt"></i> Ver en Mapa
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <i class="bi bi-arrow-right"></i> Tomar Caso
-                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmarAccion">Confirmar</button>
                     </div>
                 </div>
             </div>
@@ -348,14 +154,12 @@ include HEAD_COMPONENT;
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="<?= CSS_ICONS ?>">
     <script>
-        const GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA = '<?= GET_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA ?>';
-        const UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA = '<?= UPDATE_SOLICITUD_ADMIN_CANCHA_ADMIN_SISTEMA ?>';
+        const GET_CANCHAS_PENDIENTES_ADMIN_SISTEMA = '<?= GET_CANCHAS_PENDIENTES_ADMIN_SISTEMA ?>';
+        const UPDATE_CANCHA_ADMIN_SISTEMA = '<?= UPDATE_CANCHA_ADMIN_SISTEMA ?>';
     </script>
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
-    <script src="<?= JS_TOAST_MODULE ?>"></script>
     <script src="<?= JS_CANCHAS_ADMIN_SISTEMA ?>"></script>
-    <script src="<?= JS_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA ?>"></script>
 </body>
 
 </html>

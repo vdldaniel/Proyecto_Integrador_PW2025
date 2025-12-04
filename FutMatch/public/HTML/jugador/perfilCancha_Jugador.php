@@ -13,8 +13,15 @@ require_once HEAD_COMPONENT;
 
 <body>
     <?php
-    // Cargar navbar de jugador
-    require_once NAVBAR_JUGADOR_COMPONENT;
+    // Cargar navbar de jugador si está logueado
+    if (isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'jugador') {
+        $navbar_jugador_active = true;
+        require_once NAVBAR_JUGADOR_COMPONENT;
+    } else {
+        $navbar_jugador_active = false;
+        require_once NAVBAR_GUEST_COMPONENT;
+    }
+
     ?>
 
     <!-- Contenido Principal -->

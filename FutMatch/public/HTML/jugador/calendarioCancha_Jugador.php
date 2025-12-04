@@ -13,8 +13,15 @@ require_once HEAD_COMPONENT;
 
 <body class="monthly-view-active">
     <?php
-    // Cargar navbar de jugador
-    require_once NAVBAR_JUGADOR_COMPONENT;
+    // Cargar navbar de jugador si está logueado
+    if (isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'jugador') {
+        $navbar_jugador_active = true;
+        require_once NAVBAR_JUGADOR_COMPONENT;
+    } else {
+        $navbar_jugador_active = false;
+        require_once NAVBAR_GUEST_COMPONENT;
+    }
+
     ?>
 
     <!-- Contenido Principal -->
@@ -190,6 +197,7 @@ require_once HEAD_COMPONENT;
         const POST_RESERVA = '<?= POST_RESERVA ?>';
         const BASE_URL = '<?= BASE_URL ?>';
         const PAGE_PERFIL_CANCHA_JUGADOR = '<?= PAGE_PERFIL_CANCHA_JUGADOR ?>';
+        const USUARIO_LOGUEADO = <?= isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'jugador' ? 'true' : 'false' ?>;
 
         // Obtener id_cancha del query string
         const urlParams = new URLSearchParams(window.location.search);
@@ -205,6 +213,13 @@ require_once HEAD_COMPONENT;
     <script src="<?= JS_BOOTSTRAP ?>"></script>
     <script src="<?= JS_AGENDA ?>"></script>
     <script src="<?= JS_CALENDARIO_JUGADOR ?>"></script>
+
+    <?php
+    // Incluir modal de login si no está logueado
+    if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'jugador') {
+        require_once MODAL_LOGIN_COMPONENT;
+    }
+    ?>
 
 </body>
 

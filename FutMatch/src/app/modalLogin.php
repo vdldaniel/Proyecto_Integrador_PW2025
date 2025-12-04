@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Modal de Login - Componente Reutilizable
  * -----------------------------------------
@@ -18,31 +19,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body px-4">
-                <?php if (isset($_SESSION['login_error'])): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        <?= htmlspecialchars($_SESSION['login_error']) ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <?php unset($_SESSION['login_error']); ?>
-                <?php endif; ?>
+                <!-- Mensaje de error (oculto por defecto) -->
+                <div class="alert alert-danger d-none" id="loginError" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <span id="loginErrorMessage"></span>
+                </div>
 
-                <form id="loginForm" action="<?= CONTROLLER_LOGIN ?>" method="POST">
+                <form id="loginForm">
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label">Email</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                            <input 
-                                type="email" 
-                                class="form-control" 
-                                id="loginEmail" 
-                                name="email" 
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="loginEmail"
+                                name="email"
                                 placeholder="tu@email.com"
                                 required
-                                autocomplete="email"
-                            />
+                                autocomplete="email" />
                         </div>
+                        <div class="invalid-feedback" id="emailError"></div>
                     </div>
 
                     <!-- Contraseña -->
@@ -50,16 +48,16 @@
                         <label for="loginPassword" class="form-label">Contraseña</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input 
-                                type="password" 
-                                class="form-control" 
-                                id="loginPassword" 
-                                name="password" 
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="loginPassword"
+                                name="password"
                                 placeholder="••••••••"
                                 required
-                                autocomplete="current-password"
-                            />
+                                autocomplete="current-password" />
                         </div>
+                        <div class="invalid-feedback" id="passwordError"></div>
                     </div>
 
                     <!-- Recordarme -->
@@ -87,11 +85,11 @@
             </div>
             <div class="modal-footer border-0 justify-content-center">
                 <p class="text-muted small mb-0">
-                    ¿No tienes cuenta? 
+                    ¿No tienes cuenta?
                     <a href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>" class="text-decoration-none">
                         Regístrate como jugador
                     </a>
-                    o 
+                    o
                     <a href="<?= PAGE_REGISTRO_ADMIN_CANCHA_PHP ?>" class="text-decoration-none">
                         como administrador de cancha
                     </a>
@@ -102,17 +100,74 @@
 </div>
 
 <script>
-// Auto-abrir modal si hay error de login
-document.addEventListener('DOMContentLoaded', function() {
-    <?php if (isset($_SESSION['login_error'])): ?>
-        var loginModal = new bootstrap.Modal(document.getElementById('modalLogin'));
-        loginModal.show();
-    <?php endif; ?>
-    
-    // Auto-focus en el campo de email cuando se abre el modal
-    var modalLogin = document.getElementById('modalLogin');
-    modalLogin.addEventListener('shown.bs.modal', function () {
-        document.getElementById('loginEmail').focus();
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const loginErrorMessage = document.getElementById('loginErrorMessage');
+        const emailInput = document.getElementById('loginEmail');
+        const passwordInput = document.getElementById('loginPassword');
+        const submitButton = loginForm.querySelector('button[type="submit"]');
+
+        // Auto-focus en el campo de email cuando se abre el modal
+        const modalLogin = document.getElementById('modalLogin');
+        modalLogin.addEventListener('shown.bs.modal', function() {
+            emailInput.focus();
+            // Limpiar errores previos
+            loginError.classList.add('d-none');
+            emailInput.classList.remove('is-invalid');
+            passwordInput.classList.remove('is-invalid');
+        });
+
+        // Manejar el envío del formulario con AJAX
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Limpiar errores previos
+            loginError.classList.add('d-none');
+            emailInput.classList.remove('is-invalid');
+            passwordInput.classList.remove('is-invalid');
+
+            // Deshabilitar botón durante el proceso
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Iniciando...';
+
+            const formData = new FormData(loginForm);
+
+            try {
+                const response = await fetch('<?= CONTROLLER_LOGIN ?>', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Login exitoso - esperar un momento y recargar la página forzando
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 300);
+                } else {
+                    // Mostrar error
+                    loginErrorMessage.textContent = result.message || 'Email o contraseña incorrectos';
+                    loginError.classList.remove('d-none');
+
+                    // Marcar campos como inválidos
+                    emailInput.classList.add('is-invalid');
+                    passwordInput.classList.add('is-invalid');
+
+                    // Re-habilitar botón
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión';
+                }
+            } catch (error) {
+                console.error('Error al procesar login:', error);
+                loginErrorMessage.textContent = 'Error al procesar la solicitud. Intente nuevamente.';
+                loginError.classList.remove('d-none');
+
+                // Re-habilitar botón
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión';
+            }
+        });
     });
-});
 </script>

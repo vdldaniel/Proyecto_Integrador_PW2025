@@ -29,8 +29,8 @@ const CONFIGURACION_CALENDARIO = {
     "Diciembre",
   ],
   HORARIOS: {
-    HORA_INICIO: 8,
-    HORA_FIN: 22,
+    HORA_INICIO: 6,
+    HORA_FIN: 24,
     INTERVALO: 1, // horas
   },
 };

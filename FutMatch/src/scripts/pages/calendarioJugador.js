@@ -621,6 +621,17 @@ class AplicacionCalendarioJugador extends CalendarioBase {
   }
 
   mostrarModalReservarCancha(fecha = null, hora = null) {
+    // Verificar si el usuario está logueado
+    if (typeof USUARIO_LOGUEADO !== "undefined" && !USUARIO_LOGUEADO) {
+      // Mostrar modal de login en lugar del modal de reserva
+      const modalLogin = document.getElementById("modalLogin");
+      if (modalLogin) {
+        const loginModal = new bootstrap.Modal(modalLogin);
+        loginModal.show();
+      }
+      return;
+    }
+
     // Pre-llenar fecha si se proporciona
     const fechaComienzo = document.getElementById("fechaComienzo");
     const fechaFin = document.getElementById("fechaFin");
@@ -800,7 +811,6 @@ class AplicacionCalendarioJugador extends CalendarioBase {
       } else {
         // Mostrar error
         const errorMsg = data.error || "Error al crear la reserva";
-        showToast(`Error: ${errorMsg}`, "error", 5000);
         //console.error("Error al crear reserva:", data);
       }
     } catch (error) {

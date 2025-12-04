@@ -538,6 +538,7 @@ function isActive($page_name, $current)
 	</div>
 </div>
 
+
 <!-- ============================================ -->
 <!-- MODAL: CONFIGURACIÓN DE CUENTA -->
 <!-- ============================================ -->
@@ -554,53 +555,86 @@ function isActive($page_name, $current)
 				<!-- Información de cuenta -->
 				<h6 class="border-bottom pb-2 mb-3">Información de Cuenta</h6>
 
-				<!-- Nombre y Apellido -->
-				<div class="mb-3">
-					<label class="form-label">Nombre y Apellido</label>
-					<div class="input-group">
-						<input type="text" class="form-control" value="Carlos Jugador Martinez" readonly>
+				<!-- Nombre -->
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<label for="inputNombre" class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
 					</div>
-				</div>
-
-				<!-- Teléfono -->
-				<div class="mb-3">
-					<label class="form-label">Teléfono</label>
-					<div class="input-group">
-						<input type="tel" class="form-control" id="inputTelefono" value="+54 9 11 5555-6666" readonly>
-						<button class="btn btn-dark" type="button" onclick="editarCampo('inputTelefono')">
-							<i class="bi bi-pencil"></i>
-						</button>
+					<div class="col-md-6">
+						<label for="inputApellido" class="form-label">Apellido</label>
+						<input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
 					</div>
 				</div>
 
 				<!-- Email -->
 				<div class="mb-3">
-					<label class="form-label">Dirección de E-mail</label>
-					<div class="input-group">
-						<input type="email" class="form-control" id="inputEmail" value="jugador@futmatch.com" readonly>
-						<button class="btn btn-dark" type="button" onclick="editarCampo('inputEmail')">
-							<i class="bi bi-pencil"></i>
-						</button>
-					</div>
+					<label for="inputEmail" class="form-label">Dirección de E-mail</label>
+					<input type="email" class="form-control" id="inputEmail" placeholder="email@ejemplo.com">
+				</div>
+
+				<!-- Teléfono -->
+				<div class="mb-3">
+					<label for="inputTelefono" class="form-label">Teléfono (opcional)</label>
+					<input type="tel" class="form-control" id="inputTelefono" placeholder="+54 9 11 1234-5678">
+				</div>
+
+				<div class="d-grid mb-4">
+					<button type="button" class="btn btn-primary" id="btnGuardarDatos">
+						<i class="bi bi-save me-2"></i>Guardar Datos
+					</button>
 				</div>
 
 				<hr class="my-4">
 
-				<!-- Suspender y Eliminar cuenta en fila -->
+				<!-- Cambiar Contraseña -->
+				<h6 class="border-bottom pb-2 mb-3">Seguridad</h6>
+
+				<button type="button" class="btn btn-warning w-100 mb-3" id="btnCambiarPassword">
+					<i class="bi bi-key me-2"></i>Cambiar Contraseña
+				</button>
+
+				<!-- Formulario de cambio de contraseña (oculto por defecto) -->
+				<div id="formCambiarPassword" class="d-none">
+					<form id="passwordChangeForm" autocomplete="off">
+						<input type="text" name="username" autocomplete="username" style="display:none;" aria-hidden="true">
+						<div class="card card-body bg-dark border-warning mb-3">
+							<div class="mb-3">
+								<label for="inputPasswordActual" class="form-label">Contraseña Actual</label>
+								<input type="password" class="form-control" id="inputPasswordActual" placeholder="Contraseña actual" autocomplete="current-password">
+							</div>
+							<div class="mb-3">
+								<label for="inputPasswordNueva" class="form-label">Nueva Contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordNueva" placeholder="Nueva contraseña (mín. 6 caracteres)" autocomplete="new-password">
+							</div>
+							<div class="mb-3">
+								<label for="inputPasswordConfirmar" class="form-label">Confirmar Nueva Contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordConfirmar" placeholder="Confirmar nueva contraseña" autocomplete="new-password">
+							</div>
+							<button type="button" class="btn btn-warning" id="btnGuardarPassword">
+								<i class="bi bi-check-lg me-2"></i>Guardar Nueva Contraseña
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<hr class="my-4">
+
+				<!--Suspender y Eliminar cuenta en fila
 				<div class="row g-3">
-					<!-- Suspender cuenta -->
+					//Suspender cuenta
 					<div class="col-12 col-lg-6">
 						<h6 class="mb-2">Suspender Cuenta</h6>
 						<button class="btn btn-warning w-100" type="button" data-bs-toggle="collapse" data-bs-target="#suspenderForm">
 							<i class="bi bi-pause-circle me-2"></i>Suspender Temporalmente
 						</button>
 
-						<!-- Formulario de suspensión -->
+						//Formulario de suspensión
 						<div class="collapse mt-3" id="suspenderForm">
 							<div class="card card-body">
 								<p class="small text-muted mb-3">
-									Suspende temporalmente tu cuenta hasta una fecha determinada.
-									Tus partidos programados serán cancelados automáticamente y los organizadores serán notificados.
+									Suspende temporalmente su cuenta y la agenda de sus canchas hasta una fecha determinada.
+									Las reservas dentro del rango serán canceladas automáticamente y los usuarios serán notificados.
 								</p>
 								<div class="mb-3">
 									<label class="form-label">Fecha de reactivación</label>
@@ -617,20 +651,20 @@ function isActive($page_name, $current)
 						</div>
 					</div>
 
-					<!-- Eliminar cuenta -->
+					//Eliminar cuenta
 					<div class="col-12 col-lg-6">
 						<h6 class="mb-2 text-danger">Eliminar Cuenta</h6>
 						<button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#eliminarForm">
 							<i class="bi bi-trash me-2"></i>Eliminar Permanentemente
 						</button>
 
-						<!-- Información de eliminación -->
+						//Información de eliminación
 						<div class="collapse mt-3" id="eliminarForm">
 							<div class="card card-body border-danger">
 								<p class="small text-muted mb-3">
-									Una vez eliminada la cuenta, tus partidos programados serán cancelados.
-									Tu información de contacto será eliminada.
-									El historial de partidos y torneos seguirá visible para otros usuarios.
+									Una vez eliminada la cuenta, las reservas próximas serán canceladas.
+									Su información de contacto será eliminada y sus canchas dejarán de aparecer en el sistema.
+									El historial de partidos y torneos seguirá visible en el historial de los usuarios.
 								</p>
 								<button class="btn btn-danger" type="button" onclick="confirmarEliminacion()">
 									<i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminación
@@ -639,6 +673,7 @@ function isActive($page_name, $current)
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -648,6 +683,12 @@ function isActive($page_name, $current)
 </div>
 
 
+<script>
+	const UPDATE_USUARIO_URL = '<?= UPDATE_USUARIO ?>';
+</script>
+
+
 <script src="<?= JS_NOTIFICACIONES_JUGADOR ?>"></script>
 <script src="<?= JS_TOAST_MODULE ?>"></script>
-<script src=" <?= JS_NAVBAR_JUGADOR ?>"></script>
+<script src="<?= JS_NAVBAR_JUGADOR ?>"></script>
+<script src="<?= JS_UPDATE_USUARIO ?>"></script>

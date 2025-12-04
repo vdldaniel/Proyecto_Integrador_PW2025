@@ -98,10 +98,10 @@ class PerfilCanchaBase {
       navigator.clipboard
         .writeText(window.location.href)
         .then(() => {
-          this.mostrarNotificacion("¡URL copiada al portapapeles!", "success");
+          this.showToast("¡URL copiada al portapapeles!", "success");
         })
         .catch(() => {
-          this.mostrarNotificacion("No se pudo copiar la URL", "error");
+          this.showToast("No se pudo copiar la URL", "error");
         });
     }
   }
@@ -117,7 +117,7 @@ class PerfilCanchaBase {
       )}`;
       window.open(urlMaps, "_blank");
     } else {
-      this.mostrarNotificacion("No se encontró la dirección", "error");
+      this.mostrarNotifshowToasticacion("No se encontró la dirección", "error");
     }
   }
 
@@ -139,17 +139,11 @@ class PerfilCanchaBase {
         window.location.href = `${PAGE_CALENDARIO_CANCHA_JUGADOR}?id=${idCancha}`;
       } else {
         console.error("PAGE_CALENDARIO_CANCHA_JUGADOR no está definida");
-        this.mostrarNotificacion(
-          "Error: No se pudo cargar el calendario",
-          "error"
-        );
+        this.showToast("Error: No se pudo cargar el calendario", "error");
       }
     } else {
       console.error("No se encontró ID de cancha para redirigir al calendario");
-      this.mostrarNotificacion(
-        "Error: No se pudo identificar la cancha",
-        "error"
-      );
+      this.showToast("Error: No se pudo identificar la cancha", "error");
     }
   }
 
@@ -159,7 +153,7 @@ class PerfilCanchaBase {
   verResenas() {
     // TODO: Implementar modal o página de reseñas
     console.log("Mostrar reseñas de la cancha");
-    this.mostrarNotificacion("Función de reseñas en desarrollo", "info");
+    this.showToast("Función de reseñas en desarrollo", "info");
   }
 
   /**
@@ -169,7 +163,7 @@ class PerfilCanchaBase {
   verDetallesTorneo(torneoId) {
     console.log(`Ver detalles del torneo ${torneoId}`);
     // TODO: Redirigir a página de detalles del torneo o abrir modal
-    this.mostrarNotificacion("Redirigiendo a detalles del torneo...", "info");
+    this.showToast("Redirigiendo a detalles del torneo...", "info");
   }
 
   /**
@@ -213,7 +207,7 @@ class PerfilCanchaBase {
     document.getElementById("nombreCancha").textContent = nombreCancha;
 
     // TODO: Hacer petición AJAX para cargar datos reales de la cancha
-    this.mostrarNotificacion(`Cancha cambiada a: ${nombreCancha}`, "success");
+    this.showToast("Cancha cambiada a: ${nombreCancha}", "success");
   }
 
   /**
@@ -221,7 +215,7 @@ class PerfilCanchaBase {
    * @param {string} mensaje - Mensaje a mostrar
    * @param {string} tipo - Tipo de notificación (success, error, info, warning)
    */
-  mostrarNotificacion(mensaje, tipo = "info") {
+  showToast(mensaje, tipo = "info") {
     // Crear elemento de notificación
     const notificacion = document.createElement("div");
     notificacion.className = `alert alert-${

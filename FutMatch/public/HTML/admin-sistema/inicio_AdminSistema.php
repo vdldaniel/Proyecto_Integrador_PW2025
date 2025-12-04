@@ -35,13 +35,13 @@ include HEAD_COMPONENT;
 
       <div class="row">
         <div class="col">
-          <a href="<?= PAGE_CANCHAS_LSITADO_ADMIN_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
+          <a href="<?= PAGE_CANCHAS_LISTADO_ADMIN_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
             <div class="card-body">
               <h5 class="card-title">Listado de Canchas</h5>
               <p class="card-text">Ver y gestionar las canchas disponibles.</p>
             </div>
           </a>
-
+          <!-- 
           <a href="<?= PAGE_CANCHAS_REPORTADAS_ADMIN_SISTEMA ?>" class="card shadow-border-0 rounded-4 mb-5 text-decoration-none">
             <div class="card-body">
               <h5 class="card-title">Canchas reportadas</h5>
@@ -61,7 +61,7 @@ include HEAD_COMPONENT;
               <h5 class="card-title">Listado de Usuarios</h5>
               <p class="card-text">Ver y gestionar los reportes recibidos de los usuairos</p>
             </div>
-          </a>
+          </a>-->
         </div>
       </div>
     </div>

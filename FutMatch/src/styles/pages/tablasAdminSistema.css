@@ -6,6 +6,39 @@
   margin-top: 1rem;
 }
 
+/* Tabla de solicitudes */
+.tabla-admin-solicitudes {
+  font-size: 0.9rem;
+}
+
+.tabla-admin-solicitudes thead th {
+  vertical-align: top;
+  padding: 0.75rem 0.5rem;
+}
+
+.tabla-admin-solicitudes tbody td {
+  vertical-align: middle;
+  padding: 0.75rem 0.5rem;
+}
+
+.tabla-admin-solicitudes .filter-input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--bs-body-color);
+  font-size: 0.8rem;
+}
+
+.tabla-admin-solicitudes .filter-input:focus {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: var(--bs-primary);
+  color: var(--bs-body-color);
+}
+
+.tabla-admin-solicitudes .filter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+}
+
 /* Cards principales */
 .tabla-admin-card {
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;

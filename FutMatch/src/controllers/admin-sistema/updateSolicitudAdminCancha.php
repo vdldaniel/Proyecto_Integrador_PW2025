@@ -32,7 +32,7 @@ error_log("ID Solicitud: " . $id_solicitud);
 error_log("ID Verificador: " . $id_verificador);
 error_log("POST data: " . print_r($_POST, true));
 
-if (!$id_solicitud || !in_array($accion, ['aceptar', 'rechazar', 'reabrir'])) {
+if (!$id_solicitud || !in_array($accion, ['aceptar', 'rechazar', 'reabrir', 'tomar'])) {
     error_log("ERROR: Parámetros inválidos");
     http_response_code(400);
     echo json_encode(['error' => 'Parámetros inválidos']);
@@ -87,6 +87,21 @@ try {
         exit();
     }
 
+    if ($accion === 'tomar') {
+        // Asignar verificador sin cambiar el estado
+        $queryUpdate = 'UPDATE solicitudes_admin_cancha 
+                       SET id_verificador = :id_verificador 
+                       WHERE id_solicitud = :id_solicitud';
+        $stmtUpdate = $conn->prepare($queryUpdate);
+        $stmtUpdate->bindParam(':id_verificador', $id_verificador, PDO::PARAM_INT);
+        $stmtUpdate->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
+        $stmtUpdate->execute();
+
+        $conn->commit();
+        echo json_encode(['success' => true, 'message' => 'Caso asignado correctamente']);
+        exit();
+    }
+
     if ($accion === 'aceptar') {
         // 1. Crear usuario
         error_log("Creando usuario...");
@@ -125,7 +140,7 @@ try {
         // 4. Crear cancha
         $queryCancha = 'INSERT INTO canchas 
                        (id_admin_cancha, id_direccion, nombre, telefono, id_estado) 
-                       VALUES (:id_admin_cancha, :id_direccion, :nombre, :telefono, 1)';
+                       VALUES (:id_admin_cancha, :id_direccion, :nombre, :telefono, 3)';
         $stmtCancha = $conn->prepare($queryCancha);
         $stmtCancha->bindParam(':id_admin_cancha', $id_usuario, PDO::PARAM_INT);
         $stmtCancha->bindParam(':id_direccion', $solicitud['id_direccion'], PDO::PARAM_INT);

@@ -185,7 +185,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   verTorneos() {
     console.log("Redirigiendo a torneos...");
     // TODO: Redirigir a página de torneos o mostrar modal
-    this.mostrarNotificacion("Función en desarrollo", "info");
+    this.showToast("Función en desarrollo", "info");
   }
 
   /**
@@ -195,7 +195,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   inscribirEquipo(torneoId) {
     console.log(`Inscribir equipo en torneo ${torneoId}`);
     // TODO: Abrir modal de inscripción o redirigir
-    this.mostrarNotificacion("Inscripción en desarrollo", "info");
+    this.showToast("Inscripción en desarrollo", "info");
   }
 
   /**
@@ -205,10 +205,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   notificarInicio(torneoId) {
     console.log(`Notificar inicio del torneo ${torneoId}`);
     // TODO: Implementar sistema de notificaciones
-    this.mostrarNotificacion(
-      "Te notificaremos cuando inicie el torneo",
-      "success"
-    );
+    this.showToast("Te notificaremos cuando inicie el torneo", "success");
   }
 
   /**
@@ -221,7 +218,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
 
     // TODO: Implementar modal de reserva
     console.log(`Reservar para ${fecha} a las ${hora}`);
-    this.mostrarNotificacion(
+    this.showToast(
       `Reservando para ${this.formatearFecha(fecha)} a las ${hora}`,
       "info"
     );
@@ -244,7 +241,7 @@ class PerfilCanchaJugador extends PerfilCanchaBase {
   actualizarHorariosDisponibles() {
     console.log("Actualizando horarios disponibles...");
     // TODO: Hacer petición AJAX para obtener horarios de la fecha
-    this.mostrarNotificacion("Cargando horarios disponibles...", "info");
+    this.showToast("Cargando horarios disponibles...", "info");
   }
 
   /**

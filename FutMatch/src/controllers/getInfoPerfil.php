@@ -2,7 +2,7 @@
 require_once '../app/config.php';
 
 
-// Iniciar sesión
+// Iniciar sesión (opcional para perfiles públicos)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,14 +12,9 @@ vista_perfil_jugador
 
 PERFIL CANCHA
 vista_perfil_cancha
-*/
 
-// no requiere iniciar sesión
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'No autorizado']);
-    exit();
-}
+NOTA: Los perfiles son públicos y no requieren autenticación
+*/
 
 $query = '';
 
