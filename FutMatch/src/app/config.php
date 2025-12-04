@@ -226,7 +226,7 @@ define("JS_CANCHAS_LISTADO", JS_PAGES_PATH . "admin-cancha/canchasListado.js");
 define("JS_PERFILES_CANCHA", JS_PAGES_PATH . "admin-cancha/perfilAdmin.js");
 define("JS_AGENDA_ADMIN_CANCHA", JS_PAGES_PATH . "admin-cancha/agenda_AdminCancha.js");
 define("JS_AGENDA_ADMIN", JS_PAGES_PATH . "admin-cancha/agenda-admin.js");
-
+define("JS_MIS_TORNEOS", JS_PAGES_PATH . "torneos/mis_torneos.js");
 // admin-sistema
 define("JS_CANCHAS_ADMIN_SISTEMA", JS_PAGES_PATH . "admin-sistema/canchasAdminSistema.js");
 define("JS_SOLICITUDES_ADMIN_CANCHA_ADMIN_SISTEMA", JS_PAGES_PATH . "admin-sistema/solicitudesAdminCancha_AdminSistema.js");
@@ -241,7 +241,7 @@ define("JS_INICIO_ADMIN_CANCHA", JS_PAGES_PATH . "inicioAdminCancha.js");
 define("JS_INICIO_JUGADOR", JS_PAGES_PATH . "inicioJugador.js");
 define("JS_JUGADORES_ADMIN_SISTEMA", JS_PAGES_PATH . "jugadoresAdminSistema.js");
 define("JS_LANDING", JS_PAGES_PATH . "landing.js");
-define("JS_MIS_TORNEOS", JS_PAGES_PATH . "mis-torneos.js");
+
 define("JS_MIS_EQUIPOS_JUGADOR", JS_PAGES_PATH . "misEquipos_Jugador.js");
 define("JS_PARTIDOS_EXPLORAR_JUGADOR", JS_PAGES_PATH . "partidosExplorar_Jugador.js");
 define("JS_PARTIDOS_JUGADOR", JS_PAGES_PATH . "partidosJugador.js");

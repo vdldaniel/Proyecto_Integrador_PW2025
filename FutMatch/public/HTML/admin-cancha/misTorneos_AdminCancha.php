@@ -59,155 +59,8 @@ require_once HEAD_COMPONENT;
     </div>
 
     <!-- Lista de torneos -->
-    <div id="torneosList" class="row g-3">
-      <!-- Torneo 1 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-0 mb-2">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-md-2 text-center">
-                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                  style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                  <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
-                    Torneo Apertura
-                  </a>
-                </h5>
-                <small class="text-muted">10/10/2025 • 8/16 equipos</small>
-              </div>
-              <div class="col-md-2">
-                <span class="badge text-bg-dark">Borrador</span>
-              </div>
-              <div class="col-md-5 text-end">
-                <button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="1" title="Abrir inscripciones">
-                  <i class="bi bi-unlock"></i>
-                  <span class="d-none d-lg-inline ms-1">Abrir inscripciones</span>
-                </button>
-                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="1" title="Cancelar">
-                  <i class="bi bi-x-circle"></i>
-                  <span class="d-none d-lg-inline ms-1">Cancelar</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="torneosList" class="row g-3"> </div>
 
-      <!-- Torneo 2 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-0 mb-2">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-md-2 text-center">
-                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                  style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                  <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
-                    Copa FutMatch
-                  </a>
-                </h5>
-                <small class="text-muted">11/10/2025 • 12/20 equipos</small>
-              </div>
-              <div class="col-md-2">
-                <span class="badge text-bg-dark">Inscripciones abiertas</span>
-              </div>
-              <div class="col-md-5 text-end">
-                <button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalSolicitudesTorneo" data-torneo-id="2" title="Ver solicitudes">
-                  <i class="bi bi-people"></i>
-                  <span class="d-none d-lg-inline ms-1">Solicitudes</span>
-                </button>
-                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="2" title="Cancelar">
-                  <i class="bi bi-x-circle"></i>
-                  <span class="d-none d-lg-inline ms-1">Cancelar</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Torneo 3 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-0 mb-2">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-md-2 text-center">
-                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                  style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                  <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
-                    Torneo Interclubes
-                  </a>
-                </h5>
-                <small class="text-muted">10/02/2026 • 16/16 equipos</small>
-              </div>
-              <div class="col-md-2">
-                <span class="badge text-bg-dark">Inscripciones cerradas</span>
-              </div>
-              <div class="col-md-5 text-end">
-                <a class="btn btn-dark btn-sm me-1" href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" title="Gestionar torneo">
-                  <i class="bi bi-gear"></i>
-                  <span class="d-none d-lg-inline ms-1">Gestionar</span>
-                </a>
-                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="3" title="Cancelar">
-                  <i class="bi bi-x-circle"></i>
-                  <span class="d-none d-lg-inline ms-1">Cancelar</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Torneo 4 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-0 mb-2">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-md-2 text-center">
-                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                  style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                  <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <h5 class="card-title mb-1">
-                  <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="text-decoration-none">
-                    Liga Primavera
-                  </a>
-                </h5>
-                <small class="text-muted">15/11/2025 • 6/12 equipos</small>
-              </div>
-              <div class="col-md-2">
-                <span class="badge text-bg-dark">En curso</span>
-              </div>
-              <div class="col-md-5 text-end">
-                <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-dark btn-sm me-1" title="Gestionar torneo">
-                  <i class="bi bi-gear"></i>
-                  <span class="d-none d-lg-inline ms-1">Gestionar</span>
-                </a>
-                <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modalCancelarTorneo" data-torneo-id="4" title="Cancelar">
-                  <i class="bi bi-x-circle"></i>
-                  <span class="d-none d-lg-inline ms-1">Cancelar</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </main>
 
   <!-- Modal Crear Torneo -->
@@ -221,51 +74,53 @@ require_once HEAD_COMPONENT;
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="formCrearTorneo">
+          <form id="formCrearTorneo" novalidate>
             <div class="row">
               <!-- Nombre del Torneo -->
               <div class="mb-3 col-12">
                 <label for="nombreTorneo" class="form-label">Nombre del Torneo</label>
-                <input type="text" class="form-control" id="nombreTorneo" placeholder="Ej: Copa FutMatch 2025" required />
+                <!-- FIX: Añadir name="nombre" -->
+                <input type="text" class="form-control" id="nombreTorneo" name="nombre" placeholder="Ej: Copa FutMatch 2025" required />
               </div>
               <!-- Fechas -->
               <div class="mb-3 col-12 col-lg-6">
                 <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-                <input type="date" class="form-control" id="fechaInicio" required />
+                <!-- FIX: Añadir name="fechaInicio" -->
+                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required />
               </div>
               <div class="mb-3 col-12 col-lg-6">
                 <label for="fechaFin" class="form-label">Fecha de Fin</label>
-                <input type="date" class="form-control" id="fechaFin" />
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" id="fechaEstimativa" />
-                  <label class="form-check-label" for="fechaEstimativa">
-                    Fecha estimativa
+                <!-- FIX: Añadir name="fechaFin" -->
+                <input type="date" class="form-control" id="fechaFin" name="fechaFin" />
+              </div>
+
+              <!-- Descripción (Agregado para la tabla torneos) -->
+              <div class="mb-3 col-12">
+                <label for="descripcionTorneo" class="form-label">Descripción (Opcional)</label>
+                <!-- FIX: Añadir name="descripcion" -->
+                <textarea class="form-control" id="descripcionTorneo" name="descripcion" rows="3" placeholder="Ej: Torneo con premios en efectivo."></textarea>
+              </div>
+
+
+              <!-- Abrir Inscripciones -->
+              <hr class="my-4">
+              <div class="alert alert-success border-0" role="alert">
+                <div class="form-check form-switch">
+                  <!-- FIX: Añadir name="abrirInscripciones" y value="true" -->
+                  <input class="form-check-input fs-5" type="checkbox" id="abrirInscripciones" name="abrirInscripciones" value="true" />
+                  <label class="form-check-label fw-bold" for="abrirInscripciones">
+                    <i class="bi bi-unlock-fill"></i> Abrir inscripciones inmediatamente
                   </label>
                 </div>
+                <small class="text-muted">Si no se marca, el torneo se guardará como borrador.</small>
               </div>
-              <!-- Cantidad de Equipos -->
-              <div class="mb-3 col-12 col-lg-6">
-                <label for="cantidadEquipos" class="form-label">Cantidad máxima de equipos (opcional)</label>
-                <input type="number" class="form-control" id="cantidadEquipos" min="2" max="64" placeholder="Ej: 16" />
-              </div>
-            </div>
 
-            <!-- Abrir Inscripciones -->
-            <hr class="my-4">
-            <div class="alert alert-success border-0" role="alert">
-              <div class="form-check form-switch">
-                <input class="form-check-input fs-5" type="checkbox" id="abrirInscripciones" />
-                <label class="form-check-label fw-bold" for="abrirInscripciones">
-                  <i class="bi bi-unlock-fill"></i> Abrir inscripciones inmediatamente
-                </label>
+              <!-- Fecha cierre inscripciones (aparece si se marca el checkbox) -->
+              <div class="mb-3 d-none" id="fechaCierreContainer">
+                <label for="fechaCierreInscripciones" class="form-label">Fecha de cierre de inscripciones</label>
+                <!-- FIX: Añadir name="fechaCierreInscripciones" -->
+                <input type="date" class="form-control" id="fechaCierreInscripciones" name="fechaCierreInscripciones" />
               </div>
-              <small class="text-muted">Si no se marca, el torneo se guardará como borrador.</small>
-            </div>
-
-            <!-- Fecha cierre inscripciones (aparece si se marca el checkbox) -->
-            <div class="mb-3 d-none" id="fechaCierreContainer">
-              <label for="fechaCierreInscripciones" class="form-label">Fecha de cierre de inscripciones</label>
-              <input type="date" class="form-control" id="fechaCierreInscripciones" />
             </div>
           </form>
         </div>
@@ -285,25 +140,32 @@ require_once HEAD_COMPONENT;
           <h5 class="modal-title" id="modalAbrirInscripcionesLabel">
             <i class="bi bi-unlock"></i> Abrir Inscripciones
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+
         <div class="modal-body">
           <form id="formAbrirInscripciones">
-            <input type="hidden" id="abrirTorneoId" />
+            <input type="hidden" id="abrirTorneoId" name="torneo_id" />
+
             <div class="mb-3">
-              <label for="fechaCierreInscripcionesAbrir" class="form-label">Fecha de cierre de inscripciones</label>
-              <input type="date" class="form-control" id="fechaCierreInscripcionesAbrir" required />
-              <small class="text-muted">Las inscripciones se abrirán inmediatamente y se cerrarán en la fecha seleccionada.</small>
+              <label for="fechaCierreInscripcionesAbrir" class="form-label">Fecha límite</label>
+              <input type="date" class="form-control" id="fechaCierreInscripcionesAbrir" name="fecha_cierre" required />
+              <small class="text-muted">
+                La inscripción se abre ahora y se cerrará en la fecha seleccionada.
+              </small>
             </div>
           </form>
         </div>
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" id="btnConfirmarAbrirInscripciones">Abrir Inscripciones</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-success" id="btnConfirmarAbrirInscripciones">Abrir Inscripciones</button>
         </div>
       </div>
     </div>
   </div>
+
+
 
   <!-- Modal Solicitudes de Torneo -->
   <div class="modal fade" id="modalSolicitudesTorneo" tabindex="-1" aria-labelledby="modalSolicitudesTorneoLabel">
@@ -366,8 +228,8 @@ require_once HEAD_COMPONENT;
   </div>
 
   <!-- Modal Cancelar Torneo -->
-  <div class="modal fade" id="modalCancelarTorneo" tabindex="-1" aria-labelledby="modalCancelarTorneoLabel">
-    <div class="modal-dialog">
+  <div class="modal fade" id="modalCancelarTorneo" tabindex="-1" aria-labelledby="modalCancelarTorneoLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-danger text-white">
           <h5 class="modal-title" id="modalCancelarTorneoLabel">
@@ -402,7 +264,7 @@ require_once HEAD_COMPONENT;
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTorneosCanceladosLabel">
-            <i class="bi bi-x-circle"></i> Torneos Cancelados
+            <i class="bi bi-x-circle"></i> Historial de Torneos Cancelados
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -414,30 +276,11 @@ require_once HEAD_COMPONENT;
                   <th>Nombre</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Torneo Federal</td>
-                  <td>04/11/2025</td>
-                  <td>30/11/2025</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Copa Invierno 2024</td>
-                  <td>15/06/2024</td>
-                  <td>30/07/2024</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
+
+              <tbody id="torneosCanceladosTableBody">
+                <!-- Aquí se cargarán los torneos cancelados dinámicamente -->
               </tbody>
             </table>
           </div>
@@ -453,12 +296,15 @@ require_once HEAD_COMPONENT;
   <div class="modal fade" id="modalTorneosFinalizados" tabindex="-1" aria-labelledby="modalTorneosFinalizadosLabel">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
+
         <div class="modal-header">
           <h5 class="modal-title" id="modalTorneosFinalizadosLabel">
             <i class="bi bi-trophy"></i> Torneos Finalizados
           </h5>
+
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
           <div class="table-responsive">
             <table class="table table-striped">
@@ -467,47 +313,51 @@ require_once HEAD_COMPONENT;
                   <th>Nombre</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-                  <th>Acciones</th>
+
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Copa Verano 2024</td>
-                  <td>10/01/2024</td>
-                  <td>28/02/2024</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Torneo Clausura 2023</td>
-                  <td>15/09/2023</td>
-                  <td>15/12/2023</td>
-                  <td>
-                    <a href="<?= PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                    </a>
-                  </td>
-                </tr>
+              <tbody id="torneosFinalizadosTableBody">
+                <!-- Se completa por JS -->
               </tbody>
+
             </table>
           </div>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
+
       </div>
     </div>
   </div>
+
   </main>
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="<?= CSS_ICONS ?>">
   <!-- Scripts -->
+  <script>
+    const BASE_URL = "<?= BASE_URL ?>";
+  </script>
   <script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>
   <script src="<?= JS_MIS_TORNEOS ?>"></script>
+
+  <!-- Contenedor y estructura del Toast (Bootstrap 5) -->
+  <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3">
+      <!-- Toast dinámico, se llenará con JS -->
+      <div id="appToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toastBody" class="toast-body">
+            <!-- Mensaje aquí -->
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

@@ -362,6 +362,7 @@ require_once HEAD_COMPONENT;
 		</div>
 	</div>
 	</main>
+	
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="<?= CSS_ICONS ?>">
 	<!-- Scripts -->
@@ -373,6 +374,8 @@ require_once HEAD_COMPONENT;
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script src="<?= BASE_URL ?>public/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="<?= JS_CANCHAS_LISTADO ?>"></script>
+	<div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+
 </body>
 
 </html>

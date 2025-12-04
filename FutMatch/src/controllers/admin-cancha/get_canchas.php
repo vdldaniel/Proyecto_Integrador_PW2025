@@ -3,21 +3,19 @@ require_once __DIR__ . '/../../app/config.php';
 
 header("Content-Type: application/json");
 
-// Iniciar sesión
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+$idAdminCancha = $_SESSION['user_id'] ?? 1;
 
-if (!isset($_SESSION['user_id'])) {
+if (!$idAdminCancha) {
     http_response_code(401);
-    echo json_encode(['error' => 'No autorizado']);
-    exit();
+    echo json_encode([
+        "status" => "error",
+        "message" => "Usuario no autenticado."
+    ]);
+    exit;
 }
 
-// Obtener el id_admin_cancha del parámetro GET
-$id_admin_cancha = isset($_SESSION['user_id']) ? trim($_SESSION['user_id']) : '';
 
-if (empty($id_admin_cancha)) {
+if (empty($idAdminCancha)) {
     http_response_code(400);
     echo json_encode(['error' => 'Username requerido']);
     exit();
@@ -63,7 +61,7 @@ try {
     ";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id_admin_cancha', $id_admin_cancha, PDO::PARAM_STR);
+    $stmt->bindParam(':id_admin_cancha', $idAdminCancha, PDO::PARAM_STR);
     $stmt->execute();
     $canchas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
