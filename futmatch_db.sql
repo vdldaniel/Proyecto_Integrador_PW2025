@@ -2336,11 +2336,9 @@ SELECT
 
 FROM partidos p
 
--- Unir con partidos_reservas para obtener id_reserva
-INNER JOIN partidos_reservas pr ON p.id_partido = pr.id_partido
 
 -- Unir con reservas para obtener fecha, hora y cancha
-INNER JOIN reservas r ON pr.id_reserva = r.id_reserva
+INNER JOIN reservas r ON p.id_reserva = r.id_reserva
 
 -- Unir con canchas
 INNER JOIN canchas c ON r.id_cancha = c.id_cancha

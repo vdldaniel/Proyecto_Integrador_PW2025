@@ -45,8 +45,12 @@ try {
         $stmt = $conn->prepare("UPDATE canchas_tipos_partido SET activo = 0 WHERE id_cancha = ?");
         $stmt->execute([$id_cancha]);
 
-        //insertar nueva relación activa
-        $stmt = $conn->prepare("INSERT INTO canchas_tipos_partido (id_cancha, id_tipo_partido, activo) VALUES (?, ?, 1)");
+        // Usar INSERT ... ON DUPLICATE KEY UPDATE para evitar error de clave duplicada
+        $stmt = $conn->prepare("
+            INSERT INTO canchas_tipos_partido (id_cancha, id_tipo_partido, activo) 
+            VALUES (?, ?, 1)
+            ON DUPLICATE KEY UPDATE activo = 1
+        ");
         $stmt->execute([$id_cancha, $id_tipo_partido]);
     }
 
