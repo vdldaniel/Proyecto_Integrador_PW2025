@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 
-$idAdminCancha = $_SESSION['user_id'] ?? 1; 
+$idAdminCancha = $_SESSION['user_id'] ?? null; 
 
 if (!$idAdminCancha) {
     http_response_code(401);

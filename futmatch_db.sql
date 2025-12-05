@@ -1229,7 +1229,8 @@ CREATE TABLE `torneos` (
   `fecha_fin` date DEFAULT NULL,
   `fin_estimativo` date DEFAULT NULL,
   `id_etapa` int(11) NOT NULL DEFAULT 1,
-  `descripcion` text DEFAULT NULL
+  `descripcion` text DEFAULT NULL,
+  `max_equipos` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --

@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const data = new FormData(formCrearTorneo);
-        data.append('idAdminCancha', 1);
+        
 
         btnCrearTorneo.disabled = true;
         btnCrearTorneo.textContent = 'Creando...';

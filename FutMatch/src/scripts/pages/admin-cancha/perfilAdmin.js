@@ -1,3 +1,6 @@
+
+console.log("mis_torneos.js cargó");
+
 // VARIABLES
 let SUPERFICIES_CACHE = [];
 let TIPOS_PARTIDO_CACHE = [];
@@ -5,8 +8,8 @@ let TIPOS_PARTIDO_CACHE = [];
 let CANCHAS_CACHE = {};
 let ID_CANCHA_ACTUAL = null; // Variable para almacenar el ID de la cancha visible actualmente
 
-// FUNCIÓN SELECTORES (CORREGIDA: Ahora devuelve una Promise)
-// ==========================================================
+// FUNCIÓN SELECTORES 
+// ===================
 const cargarSelectores = () => {
   // Usamos Promise.all para asegurarnos de que ambas llamadas fetch terminen
   return Promise.all([
@@ -155,7 +158,7 @@ document
           );
           showToast(
             "Error al actualizar la cancha: " +
-              (res.message || "Error desconocido"),
+            (res.message || "Error desconocido"),
             "error"
           ); // Mensaje de error
         }
@@ -166,8 +169,8 @@ document
       });
   });
 
-// DOCUMENT READY / CARGA INICIAL (CORREGIDA: Espera a cargarSelectores)
-// ==========================================================
+// DOCUMENT READY / CARGA INICIAL 
+// ==============================
 
 const cargarCanchas = () => {
   return fetch(BASE_URL + "src/controllers/admin-cancha/get_lista_canchas.php")
@@ -556,4 +559,94 @@ document.addEventListener("DOMContentLoaded", function () {
         "error"
       );
     });
+  cargarListaTorneos();
 });
+
+// SECCION TORNEOS
+// ================
+
+
+function cargarListaTorneos() {
+  fetch(BASE_URL + "src/controllers/torneos/get_torneos.php")
+    .then(res => res.json())
+    .then(data => {
+
+      document.getElementById("loaderTorneos").style.display = "none";
+
+      if (data.status !== "success") {
+        mostrarToast("Error al cargar torneos", "danger");
+        return;
+      }
+
+      renderizarTorneos(data.data);
+    })
+    .catch(e => {
+      mostrarToast("Error de conexión al cargar torneos", "danger");
+    });
+}
+
+function renderizarTorneos(lista) {
+  const cont = document.getElementById("listaTorneos");
+
+  if (lista.length === 0) {
+    cont.innerHTML = `
+      <p class="text-center text-muted p-4">No hay torneos creados.</p>
+    `;
+    return;
+  }
+
+  cont.innerHTML = lista.map(t => generarTarjetaTorneo(t)).join("");
+}
+
+function generarTarjetaTorneo(t) {
+
+  const colores = ["bg-warning", "bg-info", "bg-success"];
+  const color = colores[t.id_torneo % 3];
+
+  let badge = "";
+  if (t.estado === "inscripciones abiertas") {
+    badge = `<span class="badge bg-success">Inscripciones Abiertas</span>`;
+  } else if (t.estado === "en curso") {
+    badge = `<span class="badge bg-info text-dark">En Curso</span>`;
+  } else if (t.estado === "próximamente") {
+    badge = `<span class="badge bg-secondary">Próximamente</span>`;
+  } else if (t.estado === "finalizado") {
+    badge = `<span class="badge bg-dark">Finalizado</span>`;
+  }
+
+  return `
+    <div class="border-bottom p-4">
+
+      <div class="d-flex align-items-center mb-3">
+        <div class="${color} rounded-circle p-2 me-3">
+          <i class="bi bi-trophy text-white"></i>
+        </div>
+
+        <div class="flex-grow-1">
+          <h6 class="mb-1 fw-bold">${t.nombre}</h6>
+          <small class="text-muted">
+            ${t.cupos_disponibles}/${t.max_equipos} equipos • Inicia: ${t.fecha_inicio}
+          </small>
+        </div>
+
+        <div>${badge}</div>
+      </div>
+
+      <p class="mb-3">${t.descripcion}</p>
+
+      <div class="d-flex justify-content-start align-items-center">
+        <a href="PAGE_MIS_PERFILES_ADMIN_CANCHA" class="btn btn-sm btn-dark">Ver Detalles</a>
+      </div>
+
+    </div>
+  `;
+}
+
+function mostrarToast(msg, tipo = "dark") {
+  const toastEl = document.getElementById("toastGeneral");
+  toastEl.classList.remove("bg-dark", "bg-danger", "bg-success", "bg-info", "bg-warning");
+  toastEl.classList.add("bg-" + tipo);
+  toastEl.querySelector(".toast-body").innerText = msg;
+
+  new bootstrap.Toast(toastEl).show();
+}
