@@ -117,6 +117,7 @@ define("IMG_FOTO_PERFIL_JUGADOR", IMG_PATH . "foto_perfil_jugador.png");
 define("IMG_LANDING", IMG_PATH . "landing.jpg");
 define("IMG_LOGO_FONDOVERDE", IMG_PATH . "logo-fondoverde.svg");
 define("IMG_LOGO_SINFONDO", IMG_PATH . "logo-sinfondo.svg");
+define("IMG_TORNEO_DEFAULT", IMG_PATH . "torneo_default.png");
 
 define("UPLOADS_PATH", PUBLIC_PATH . "uploads/");
 define("UPLOADS_CANCHAS_PATH", UPLOADS_PATH . "canchas/");
@@ -143,6 +144,7 @@ define("NAVBAR_JUGADOR_COMPONENT", __DIR__ . "/navbarJugador.php");
 
 // admin-cancha
 define("GET_CANCHAS_ADMIN_CANCHA", BASE_URL . "src/controllers/admin-cancha/get_canchas.php");
+define("GET_LISTA_CANCHAS", BASE_URL . "src/controllers/admin-cancha/get_lista_canchas.php");
 
 
 // admin-sistema
@@ -167,6 +169,13 @@ define("POST_RESERVA", BASE_URL . "src/controllers/reservas/postReserva.php");
 define("UPDATE_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/updateHorariosCanchas.php");
 define("UPDATE_RESERVA", BASE_URL . "src/controllers/reservas/updateReserva.php");
 define("UPDATE_POLITICAS_CANCHA", BASE_URL . "src/controllers/reservas/updatePoliticasCancha.php");
+
+// torneos
+define("GET_TORNEOS_EXPLORAR", BASE_URL . "src/controllers/torneos/getTorneosExplorar.php");
+define("POST_INSCRIPCION_TORNEO", BASE_URL . "src/controllers/torneos/postInscripcionTorneo.php");
+define("GET_SOLICITUDES_TORNEOS", BASE_URL . "src/controllers/torneos/getSolicitudesTorneos.php");
+define("UPDATE_SOLICITUD_TORNEO", BASE_URL . "src/controllers/torneos/updateSolicitudTorneo.php");
+define("GET_MIS_TORNEOS_JUGADOR", BASE_URL . "src/controllers/torneos/getMisTorneos_Jugador.php");
 
 // usuarios
 define("UPDATE_USUARIO", BASE_URL . "src/controllers/usuarios/updateUsuario.php");
@@ -250,6 +259,7 @@ define("JS_REGISTRO_ADMIN_CANCHA", JS_PAGES_PATH . "registroAdminCancha.js");
 define("JS_REGISTRO_JUGADOR", JS_PAGES_PATH . "registroJugador.js");
 define("JS_TORNEO_DETALLE", JS_PAGES_PATH . "torneo-detalle.js");
 define("JS_TORNEOS_JUGADOR", JS_PAGES_PATH . "torneos-jugador.js");
+define("JS_TORNEOS_EXPLORAR_JUGADOR", JS_PAGES_PATH . "torneosExplorar_Jugador.js");
 
 
 //RESTO FUERA DE PAGES

@@ -109,9 +109,9 @@ function isActive($page_name, $current)
 					type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
 					title="Notificaciones">
 					<i class="bi bi-bell"></i>
-					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					<!--<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 						2
-					</span>
+					</span>-->
 				</button>
 				<!-- Botones solo en pantallas medianas y grandes -->
 				<div class="d-none-custom d-md-flex align-items-center">
@@ -209,7 +209,7 @@ function isActive($page_name, $current)
 			<div class="modal-body">
 				<!-- Tabs de navegación -->
 				<ul class="nav nav-tabs mb-3" id="notificacionesTabs" role="tablist">
-					<li class="nav-item" role="presentation">
+					<!--<li class="nav-item" role="presentation">
 						<button class="nav-link active" id="tab-reservas" data-bs-toggle="tab" data-bs-target="#content-reservas" type="button" role="tab">
 							<i class="bi bi-calendar-check me-1"></i>Reservas
 						</button>
@@ -218,34 +218,34 @@ function isActive($page_name, $current)
 						<button class="nav-link" id="tab-solicitantes" data-bs-toggle="tab" data-bs-target="#content-solicitantes" type="button" role="tab">
 							<i class="bi bi-person-plus me-1"></i>Solicitantes
 						</button>
-					</li>
+					</li>-->
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="tab-equipos" data-bs-toggle="tab" data-bs-target="#content-equipos" type="button" role="tab">
+						<button class="nav-link active" id="tab-equipos" data-bs-toggle="tab" data-bs-target="#content-equipos" type="button" role="tab">
 							<i class="bi bi-people me-1"></i>Equipos
 						</button>
 					</li>
-					<li class="nav-item" role="presentation">
+					<!--<li class="nav-item" role="presentation">
 						<button class="nav-link" id="tab-torneos" data-bs-toggle="tab" data-bs-target="#content-torneos" type="button" role="tab">
 							<i class="bi bi-trophy me-1"></i>Torneos
 						</button>
-					</li>
+					</li>-->
 				</ul>
 
 				<!-- Contenido de las tabs -->
 				<div class="tab-content" id="notificacionesTabContent">
-					<!-- TAB 1: RESERVAS -->
+					<!-- TAB 1: RESERVAS
 					<div class="tab-pane fade show active" id="content-reservas" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Estado de Reservas</h6>
 							<a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-calendar-event me-1"></i>Ver Mis Partidos
 							</a>
-						</div>
+						</div> -->
 
-						<!-- Lista de reservas -->
+					<!-- Lista de reservas
 						<div>
-							<div class="list-group">
-								<!-- Reserva aceptada -->
+							<div class="list-group"> -->
+					<!-- Reserva aceptada
 								<div class="list-group-item d-flex justify-content-between align-items-center">
 									<div>
 										<div class="d-flex align-items-center mb-1">
@@ -260,8 +260,8 @@ function isActive($page_name, $current)
 											<i class="bi bi-check-lg me-1"></i>Ver Detalle
 										</button>
 									</div>
-								</div>
-								<!-- Reserva rechazada -->
+								</div> -->
+					<!-- Reserva rechazada
 								<div class="list-group-item d-flex justify-content-between align-items-center">
 									<div>
 										<div class="d-flex align-items-center mb-1">
@@ -276,8 +276,8 @@ function isActive($page_name, $current)
 											<i class="bi bi-search me-1"></i>Buscar Alternativas
 										</button>
 									</div>
-								</div>
-								<!-- Reserva pendiente -->
+								</div> -->
+					<!-- Reserva pendiente
 								<div class="list-group-item d-flex justify-content-between align-items-center">
 									<div>
 										<div class="d-flex align-items-center mb-1">
@@ -295,18 +295,18 @@ function isActive($page_name, $current)
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<!-- TAB 2: SOLICITANTES -->
+					<!-- TAB 2: SOLICITANTES
 					<div class="tab-pane fade" id="content-solicitantes" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes para tus Partidos</h6>
 							<a href="<?= PAGE_MIS_PARTIDOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-people me-1"></i>Gestionar Partidos
 							</a>
-						</div>
+						</div> -->
 
-						<!-- Tabla de solicitudes -->
+					<!-- Tabla de solicitudes
 						<div>
 							<table class="table table-hover">
 								<thead>
@@ -317,8 +317,8 @@ function isActive($page_name, $current)
 										<th scope="col">Acciones</th>
 									</tr>
 								</thead>
-								<tbody>
-									<!-- Solicitud 1 -->
+								<tbody> -->
+					<!-- Solicitud 1 
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
@@ -348,8 +348,8 @@ function isActive($page_name, $current)
 												<i class="bi bi-eye"></i>
 											</button>
 										</td>
-									</tr>
-									<!-- Solicitud 2 -->
+									</tr>-->
+					<!-- Solicitud 2 
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
@@ -383,10 +383,10 @@ function isActive($page_name, $current)
 								</tbody>
 							</table>
 						</div>
-					</div>
+					</div>-->
 
 					<!-- TAB 3: EQUIPOS -->
-					<div class="tab-pane fade" id="content-equipos" role="tabpanel">
+					<div class="tab-pane fade show active" id="content-equipos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Equipos</h6>
 							<a href="<?= PAGE_MIS_EQUIPOS_JUGADOR ?>" class="btn btn-sm btn-dark">
@@ -454,25 +454,25 @@ function isActive($page_name, $current)
 											</button>
 										</div>
 									</div>
-								</div>
-								-->
+								</div>-->
+
 							</div>
 						</div>
 					</div>
 
-					<!-- TAB 4: TORNEOS -->
+					<!-- TAB 4: TORNEOS
 					<div class="tab-pane fade" id="content-torneos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Actualizaciones de Torneos</h6>
 							<a href="<?= PAGE_MIS_TORNEOS_JUGADOR ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-trophy me-1"></i>Ver Mis Torneos
 							</a>
-						</div>
+						</div> -->
 
-						<!-- Lista de notificaciones de torneos -->
+					<!-- Lista de notificaciones de torneos
 						<div>
-							<div class="list-group">
-								<!-- Avance de torneo -->
+							<div class="list-group"> -->
+					<!-- Avance de torneo
 								<div class="list-group-item">
 									<div class="d-flex justify-content-between align-items-center">
 										<div>
@@ -489,8 +489,8 @@ function isActive($page_name, $current)
 											</button>
 										</div>
 									</div>
-								</div>
-								<!-- Solicitud aceptada -->
+								</div> -->
+					<!-- Solicitud aceptada
 								<div class="list-group-item">
 									<div class="d-flex justify-content-between align-items-center">
 										<div>
@@ -507,8 +507,8 @@ function isActive($page_name, $current)
 											</button>
 										</div>
 									</div>
-								</div>
-								<!-- Nueva ronda -->
+								</div> -->
+					<!-- Nueva ronda
 								<div class="list-group-item">
 									<div class="d-flex justify-content-between align-items-center">
 										<div>
@@ -528,7 +528,7 @@ function isActive($page_name, $current)
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="modal-footer">

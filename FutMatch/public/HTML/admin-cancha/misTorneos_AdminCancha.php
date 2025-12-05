@@ -32,8 +32,8 @@ require_once HEAD_COMPONENT;
             <i class="bi bi-clock-history"></i> Historial de Torneos
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalTorneosCancelados">Torneos Cancelados</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalTorneosFinalizados">Torneos Finalizados</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalTorneosCancelados">Torneos Cancelados</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalTorneosFinalizados">Torneos Finalizados</a></li>
           </ul>
         </div>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrearTorneo">
@@ -42,8 +42,8 @@ require_once HEAD_COMPONENT;
       </div>
     </div>
 
-    <!-- Línea 2: Filtros y búsqueda -->
-    <div class="row mb-4">
+    <!-- Línea 2: Filtros y búsqueda-->
+    <div class="row mb-4 d-none">
       <div class="col-12">
         <div class="input-group">
           <span class="input-group-text">
@@ -54,6 +54,7 @@ require_once HEAD_COMPONENT;
             id="searchInput"
             class="form-control"
             placeholder="Buscar torneos por nombre, fecha o estado..." />
+          </input>
         </div>
       </div>
     </div>

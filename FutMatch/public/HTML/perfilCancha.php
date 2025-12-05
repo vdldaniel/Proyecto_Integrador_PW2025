@@ -256,7 +256,6 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                 <div class="mb-3 p-2 rounded">
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="fw-bold" id="estadoActual">
-                            <i class="bi bi-circle-fill"></i> Cargando...
                         </span>
                         <small class="text-muted" id="horaCierre"></small>
                     </div>
@@ -264,7 +263,6 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
                 <!-- Horarios detallados por día -->
                 <div id="horariosDetallados" class="mt-3">
-                    <p class="text-muted">Cargando horarios...</p>
                 </div>
             </div>
         </div>

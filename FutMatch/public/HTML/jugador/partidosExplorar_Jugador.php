@@ -39,7 +39,7 @@ require_once HEAD_COMPONENT;
           <button type="button" class="btn btn-dark" id="btnCambiarVista">
             <i class="bi bi-map" id="iconoVista"></i> <span id="textoVista">Mapa</span>
           </button>
-          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalFiltros">
+          <button type="button" class="btn btn-dark d-none" data-bs-toggle="modal" data-bs-target="#modalFiltros">
             <i class="bi bi-funnel"></i> Filtros
           </button>
           <div class="input-group" style="width: 300px;">

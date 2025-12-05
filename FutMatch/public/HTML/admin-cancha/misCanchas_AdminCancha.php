@@ -46,7 +46,7 @@ require_once HEAD_COMPONENT;
 			</div>
 		</div>
 
-		<!-- Línea 2: Filtros y búsqueda -->
+		<!-- Línea 2: Filtros y búsqueda
 		<div class="row mb-4">
 			<div class="col-12">
 				<div class="input-group">
@@ -60,7 +60,7 @@ require_once HEAD_COMPONENT;
 						placeholder="Buscar canchas por nombre, tipo o capacidad..." />
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- Lista de canchas -->
 		<div id="canchasList" class="row g-3">
@@ -362,7 +362,7 @@ require_once HEAD_COMPONENT;
 		</div>
 	</div>
 	</main>
-	
+
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="<?= CSS_ICONS ?>">
 	<!-- Scripts -->

@@ -17,6 +17,9 @@ try {
     $filtrarSolicitudes = isset($_GET['filtrar_solicitudes'])
         ? filter_var($_GET['filtrar_solicitudes'], FILTER_VALIDATE_BOOLEAN)
         : false;
+    $esLider = isset($_GET['es_lider'])
+        ? filter_var($_GET['es_lider'], FILTER_VALIDATE_BOOLEAN)
+        : false;
 
     $query = '
     SELECT * 
@@ -25,6 +28,10 @@ try {
 
     if ($filtrarSolicitudes) {
         $query .= ' AND estado_solicitud = 1';
+    }
+
+    if ($esLider) {
+        $query .= ' AND id_lider = :id';
     }
 
     $query .= ' ORDER BY nombre_equipo ASC';

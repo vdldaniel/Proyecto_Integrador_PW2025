@@ -1230,7 +1230,7 @@ CREATE TABLE `torneos` (
   `fin_estimativo` date DEFAULT NULL,
   `id_etapa` int(11) NOT NULL DEFAULT 1,
   `descripcion` text DEFAULT NULL,
-  `max_equipos` int(11) NOT NULL,
+  `max_equipos` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2337,11 +2337,9 @@ SELECT
 
 FROM partidos p
 
--- Unir con partidos_reservas para obtener id_reserva
-INNER JOIN partidos_reservas pr ON p.id_partido = pr.id_partido
 
 -- Unir con reservas para obtener fecha, hora y cancha
-INNER JOIN reservas r ON pr.id_reserva = r.id_reserva
+INNER JOIN reservas r ON p.id_reserva = r.id_reserva
 
 -- Unir con canchas
 INNER JOIN canchas c ON r.id_cancha = c.id_cancha
