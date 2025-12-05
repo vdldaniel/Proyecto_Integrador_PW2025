@@ -14,6 +14,8 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
     'icono' => 'bi-calendar-plus',
     'url' => '#'
 ];
+$perfil_cancha_nombre = $perfil_cancha_nombre ?? 'Nombre de Cancha';
+$perfil_cancha_descripcion_banner = $perfil_cancha_descripcion_banner ?? 'Descripción breve de la cancha';
 
 // Información básica de la cancha
 
@@ -85,8 +87,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
                 <?php if ($perfil_cancha_admin_mode && !isset($perfil_cancha_es_admin_sistema)): ?>
                     <button class="btn btn-dark btn-sm profile-banner-edit-btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#modalCambiarBanner">
+                        onclick="abrirModalCambiarImagen()">
                         <i class="bi bi-camera-fill"></i> Editar portada
                     </button>
                 <?php endif; ?>
@@ -121,6 +122,34 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     </div>
                 </div>
 
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal Cambiar Imagen -->
+<div class="modal fade" id="modalCambiarImagen" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Cambiar imagen de la cancha</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="imgCanchaId">
+
+                <div class="mb-3 text-center">
+                    <img id="previewNuevaImagen" src="" class="img-fluid rounded shadow" style="max-height:180px;">
+                </div>
+
+                <input type="file" id="inputNuevaImagen" class="form-control" accept="image/*">
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" id="btnSubirImagen">Guardar</button>
             </div>
 
         </div>
@@ -240,7 +269,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
             </div>
         </div>
 
-        <!-- Servicios Incluidos
+        <!-- Servicios Incluidos-->
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-info text-white">
                 <h5 class="mb-0"><i class="bi bi-check-circle"></i> Servicios y Comodidades</h5>
@@ -252,7 +281,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div> 
 
         <!-- Estadísticas (Ocultas temporalmente) -->
         <?php if (false): ?>

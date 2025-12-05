@@ -461,7 +461,7 @@ async function actualizarBanner(id) {
 
       const btnMapa = document.getElementById("btnVerEnMapa");
       if (btnMapa && cancha.latitud && cancha.longitud) {
-        // Se corrigió la URL del mapa para ser funcional
+
         const mapUrl = `https://www.google.com/maps/search/?api=1&query=${cancha.latitud},${cancha.longitud}`;
         btnMapa.onclick = () => window.open(mapUrl, "_blank");
       }
@@ -650,3 +650,90 @@ function mostrarToast(msg, tipo = "dark") {
 
   new bootstrap.Toast(toastEl).show();
 }
+
+
+
+// MODAL CAMBIAR IMAGEN
+// =====================
+
+function abrirModalCambiarImagen() {
+    if (!ID_CANCHA_ACTUAL) {
+        showToast("No hay cancha seleccionada", "error");
+        return;
+    }
+
+    // Guardar ID en modal
+    document.getElementById("imgCanchaId").value = ID_CANCHA_ACTUAL;
+
+    // Mostrar imagen actual
+    const cancha = CANCHAS_CACHE[ID_CANCHA_ACTUAL];
+    const preview = document.getElementById("bannerCancha");
+    preview.src = cancha.banner;
+
+    // Limpiar input
+    document.getElementById("inputNuevaImagen").value = "";
+
+    const modal = new bootstrap.Modal(
+        document.getElementById("modalCambiarImagen")
+    );
+    modal.show();
+}
+
+// Vista previa de la nueva imagen
+document.getElementById("inputNuevaImagen").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        document.getElementById("previewNuevaImagen").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+
+// SUBIR IMAGEN
+document.getElementById("btnSubirImagen").addEventListener("click", () => {
+    const id = document.getElementById("imgCanchaId").value;
+    const archivo = document.getElementById("inputNuevaImagen").files[0];
+
+
+console.log("ID A ENVIAR:", id);
+console.log("ARCHIVO A ENVIAR:", archivo);
+
+    if (!archivo) {
+        showToast("Seleccione una imagen primero", "error");
+        return;
+    }
+
+    let data = new FormData();
+    data.append("id_cancha", id);
+    data.append("banner", archivo);
+
+
+    fetch(BASE_URL + "src/controllers/admin-cancha/subir_banner.php", {
+        method: "POST",
+        body: data
+    })
+        .then(r => r.json())
+        .then(resp => {
+            if (resp.status === "success") {
+
+                // Cerrar modal
+                const modal = bootstrap.Modal.getInstance(
+                    document.getElementById("modalCambiarImagen")
+                );
+                modal.hide();
+
+                showToast("Imagen actualizada correctamente", "success");
+
+                // Actualizar banner al instante
+                actualizarBanner(id);
+            } else {
+                showToast(resp.message || "Error al subir imagen", "error");
+            }
+        })
+        .catch(err => {
+            console.error("Error:", err);
+            showToast("Error de conexión al subir imagen", "error");
+        });
+});
