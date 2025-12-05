@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../app/config.php';
 
 header("Content-Type: application/json; charset=UTF-8");
 
-$idAdminCancha = $_SESSION['user_id'] ?? 1; 
+$idAdminCancha = $_SESSION['user_id'] ?? 1;
 
 if (!$idAdminCancha) {
     http_response_code(401);
@@ -21,10 +21,11 @@ try {
             t.fecha_inicio,
             t.fecha_fin
         FROM torneos t
-        WHERE t.id_etapa = 4  
+        WHERE t.id_etapa = 4 AND t.id_organizador = :id_organizador
         ORDER BY t.fecha_inicio DESC";
 
     $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id_organizador', $idAdminCancha, PDO::PARAM_INT);
     $stmt->execute();
     $torneos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -32,14 +33,12 @@ try {
         "status" => "success",
         "data" => $torneos
     ]);
-
 } catch (Exception $e) {
 
     echo json_encode([
         "status" => "error",
         "message" => $e->getMessage()
     ]);
-
 }
 
 exit;

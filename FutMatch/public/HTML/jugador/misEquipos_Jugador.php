@@ -360,7 +360,6 @@ require_once HEAD_COMPONENT;
 
   <!-- Scripts -->
   <script src="<?= JS_BOOTSTRAP ?>"></script>
-  <!--<script src="<?= JS_TOAST_MODULE ?>"></script>-->
   <script src="<?= JS_MIS_EQUIPOS_JUGADOR ?>"></script>
   <script>
     const IMG_EQUIPO_DEFAULT = '<?= IMG_EQUIPO_DEFAULT ?>';

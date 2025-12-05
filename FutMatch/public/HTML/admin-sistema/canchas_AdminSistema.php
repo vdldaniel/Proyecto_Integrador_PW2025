@@ -35,8 +35,8 @@ include HEAD_COMPONENT;
                 </div>
             </div>
 
-            <!-- Línea 2: Filtros y búsqueda -->
-            <div class="row mb-4">
+            <!-- Línea 2: Filtros y búsqueda
+            <div class="row mb-4 d-none">
                 <div class="col-12">
                     <div class="input-group">
                         <span class="input-group-text">
@@ -49,7 +49,7 @@ include HEAD_COMPONENT;
                             placeholder="Buscar canchas..." />
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Pestañas de navegación -->
             <ul class="nav nav-tabs" id="canchasTabs" role="tablist">

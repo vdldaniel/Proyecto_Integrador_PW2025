@@ -84,7 +84,6 @@ include HEAD_COMPONENT;
         const POST_FOTOS_JUGADOR = '<?= POST_FOTOS_JUGADOR ?>';
     </script>
 
-    <!--<script src="<?= JS_TOAST_MODULE ?>"></script>-->
     <script src="<?= JS_PERFIL_JUGADOR_BASE ?>"></script>
 
 

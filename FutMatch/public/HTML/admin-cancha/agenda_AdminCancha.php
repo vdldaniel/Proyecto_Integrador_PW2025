@@ -45,6 +45,9 @@ require_once HEAD_COMPONENT;
         <p class="text-muted mb-0">Gestiona las reservas de tus canchas</p>
       </div>
       <div class="col-md-4 text-end">
+        <button id="botonVerSolicitudes" class="btn btn-warning me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalSolicitudesPendientes">
+          <i class="bi bi-clock-history"></i> Ver Solicitudes
+        </button>
         <button id="configurarHorarios" class="btn btn-dark me-2" type="button" data-bs-toggle="modal" data-bs-target="#modalConfigurarHorarios">
           <i class="bi bi-gear"></i> Configuración
         </button>
@@ -61,8 +64,8 @@ require_once HEAD_COMPONENT;
     include CALENDARIO_COMPONENT;
     ?>
 
-    <!-- Controles adicionales específicos del admin 
-    <div class="row mb-3">
+    <!-- Controles adicionales específicos del admin -->
+    <div class="row mb-3 d-none">
       <div class="col-md-8">
         <div class="input-group">
           <span class="input-group-text">
@@ -76,10 +79,10 @@ require_once HEAD_COMPONENT;
         </div>
       </div>
       <div class="col-md-4">
-        Espacio reservado para controles adicionales futuros 
+        Espacio reservado para controles adicionales futuros
       </div>
     </div>
-    -->
+
 
   </main>
 
@@ -427,6 +430,7 @@ require_once HEAD_COMPONENT;
     const UPDATE_POLITICAS_CANCHA = '<?= UPDATE_POLITICAS_CANCHA ?>';
     const GET_RESERVAS = '<?= GET_RESERVAS ?>';
     const GET_RESERVA_DETALLE = '<?= GET_RESERVA_DETALLE ?>';
+    const GET_DATOS_TORNEO_RESERVA = '<?= GET_DATOS_TORNEO_RESERVA ?>';
     const UPDATE_RESERVA = '<?= UPDATE_RESERVA ?>';
     const PAGE_MIS_PERFILES_ADMIN_CANCHA = '<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>';
   </script>

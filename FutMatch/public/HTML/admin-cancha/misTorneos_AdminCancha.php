@@ -102,6 +102,17 @@ require_once HEAD_COMPONENT;
                 <textarea class="form-control" id="descripcionTorneo" name="descripcion" rows="3" placeholder="Ej: Torneo con premios en efectivo."></textarea>
               </div>
 
+              <!-- Máximo de Equipos -->
+              <div class="mb-3 col-12 col-lg-6">
+                <label for="maxEquipos" class="form-label">Máximo de Equipos</label>
+                <select class="form-select" id="maxEquipos" name="maxEquipos" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="4">4 equipos</option>
+                  <option value="8">8 equipos</option>
+                  <option value="16" selected>16 equipos</option>
+                </select>
+                <small class="text-muted">Formato eliminación directa</small>
+              </div>
 
               <!-- Abrir Inscripciones -->
               <hr class="my-4">
@@ -170,7 +181,7 @@ require_once HEAD_COMPONENT;
 
   <!-- Modal Solicitudes de Torneo -->
   <div class="modal fade" id="modalSolicitudesTorneo" tabindex="-1" aria-labelledby="modalSolicitudesTorneoLabel">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalSolicitudesTorneoLabel">
@@ -180,8 +191,33 @@ require_once HEAD_COMPONENT;
         </div>
         <div class="modal-body">
           <input type="hidden" id="solicitudesTorneoId" />
+
+          <!-- Equipos Participantes -->
+          <h6 class="fw-bold mb-3"><i class="bi bi-check-circle"></i> Equipos Participantes</h6>
+          <div class="table-responsive mb-4">
+            <table class="table table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Equipo</th>
+                  <th>Líder</th>
+                  <th>Integrantes</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="equiposParticipantesBody">
+                <tr>
+                  <td colspan="4" class="text-center text-muted">Cargando...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr>
+
+          <!-- Solicitudes Pendientes -->
+          <h6 class="fw-bold mb-3"><i class="bi bi-hourglass-split"></i> Solicitudes Pendientes</h6>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-hover">
               <thead class="table-dark">
                 <tr>
                   <th>Nombre Equipo</th>
@@ -189,33 +225,9 @@ require_once HEAD_COMPONENT;
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="solicitudesPendientesBody">
                 <tr>
-                  <td>Los Cracks FC</td>
-                  <td>9 jugadores</td>
-                  <td>
-                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Deportivo Fútbol</td>
-                  <td>7 jugadores</td>
-                  <td>
-                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
-                      <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver perfil</span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Racing Club</td>
-                  <td>9 jugadores</td>
-                  <td>
-                    <a href="<?= PAGE_PERFIL_EQUIPO_ADMIN_CANCHA ?>" class="btn btn-sm btn-info">
-                      <i class="bi bi-eye"></i><span class="d-none d-md-inline ms-1">Ver perfil</span>
-                    </a>
-                  </td>
+                  <td colspan="3" class="text-center text-muted">Cargando...</td>
                 </tr>
               </tbody>
             </table>
@@ -254,6 +266,50 @@ require_once HEAD_COMPONENT;
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, mantener torneo</button>
           <button type="button" class="btn btn-danger" id="btnConfirmarCancelar">Sí, cancelar torneo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmar Cancelar Participación -->
+  <div class="modal fade" id="modalConfirmarCancelarParticipacion" tabindex="-1" aria-labelledby="modalConfirmarCancelarParticipacionLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalConfirmarCancelarParticipacionLabel">
+            <i class="bi bi-exclamation-triangle"></i> Confirmar Cancelación
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de cancelar la participación de este equipo?</p>
+          <p class="text-muted">El equipo será removido del torneo y deberá solicitar participación nuevamente si desea volver.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, mantener</button>
+          <button type="button" class="btn btn-danger" id="btnConfirmarCancelarParticipacion">Sí, cancelar participación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmar Iniciar Torneo -->
+  <div class="modal fade" id="modalConfirmarIniciarTorneo" tabindex="-1" aria-labelledby="modalConfirmarIniciarTorneoLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="modalConfirmarIniciarTorneoLabel">
+            <i class="bi bi-play-circle"></i> Confirmar Inicio de Torneo
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>¿Estás seguro de iniciar este torneo?</strong></p>
+          <p class="text-muted">Una vez iniciado, no se podrán aceptar más equipos y el torneo pasará a estado "En curso".</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnConfirmarIniciarTorneo">Sí, iniciar torneo</button>
         </div>
       </div>
     </div>
@@ -314,7 +370,7 @@ require_once HEAD_COMPONENT;
                   <th>Nombre</th>
                   <th>Fecha Inicio</th>
                   <th>Fecha Fin</th>
-
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody id="torneosFinalizadosTableBody">

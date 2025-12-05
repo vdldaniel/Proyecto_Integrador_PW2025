@@ -165,6 +165,10 @@ class CalendarioBase {
 
       if (data.success) {
         this.reservas = data.reservas || [];
+
+        // Enriquecer cada reserva con datos de torneo si aplica
+        await this.enriquecerReservasConDatosTorneo();
+
         this.canchaSeleccionada = idCancha;
         this.ocultarMensajeSeleccionarCancha();
         // Forzar el cambio de vista para asegurar renderizado
@@ -182,6 +186,48 @@ class CalendarioBase {
       this.canchaSeleccionada = null;
       this.mostrarMensajeSeleccionarCancha();
     }
+  }
+
+  // Enriquecer reservas con datos de torneo
+  async enriquecerReservasConDatosTorneo() {
+    if (!this.reservas || this.reservas.length === 0) return;
+
+    // Filtrar solo reservas de tipo torneo
+    const reservasTorneo = this.reservas.filter(
+      (r) => r.id_tipo_reserva === "torneo"
+    );
+
+    if (reservasTorneo.length === 0) return;
+
+    // Obtener datos de torneo para cada reserva
+    const promesas = reservasTorneo.map(async (reserva) => {
+      try {
+        const response = await fetch(
+          `${GET_DATOS_TORNEO_RESERVA}?id_reserva=${reserva.id_reserva}`
+        );
+        const data = await response.json();
+
+        if (data.status === "success" && data.es_torneo && data.datos) {
+          // Enriquecer la reserva con los datos del torneo
+          reserva.nombre_torneo = data.datos.nombre_torneo;
+          reserva.fase_nombre = data.datos.fase_nombre;
+          reserva.equipo_a_nombre = data.datos.equipo_a_nombre;
+          reserva.equipo_b_nombre = data.datos.equipo_b_nombre;
+          reserva.id_torneo = data.datos.id_torneo;
+          reserva.id_partido = data.datos.id_partido;
+          reserva.goles_equipo_A = data.datos.goles_equipo_A;
+          reserva.goles_equipo_B = data.datos.goles_equipo_B;
+        }
+      } catch (error) {
+        console.error(
+          `Error al cargar datos de torneo para reserva ${reserva.id_reserva}:`,
+          error
+        );
+      }
+    });
+
+    // Esperar a que todas las promesas se resuelvan
+    await Promise.all(promesas);
   }
 
   // Mostrar mensaje para seleccionar cancha
@@ -643,6 +689,7 @@ class CalendarioBase {
         const horaFin = parseInt(reserva.hora_fin.substring(0, 2));
         const duracion = horaFin - horaInicio;
         const altura = duracion * 40;
+        console.log("Renderizando reserva activa:", reserva);
 
         // En vista dia, dejar espacio para badges a los lados
         const marginLeft = this.vistaActual === "dia" ? "32px" : "2px";
@@ -655,7 +702,11 @@ class CalendarioBase {
                })" 
                style="cursor: pointer; position: absolute; top: 0; left: ${marginLeft}; right: ${marginRight}; 
                       height: ${altura}px; z-index: 10; margin-top: 2px; margin-bottom: 2px;">
-              <strong>${reserva.titular_nombre_completo}</strong><br>
+              <strong>${
+                reserva.id_tipo_reserva === 2
+                  ? reserva.titulo
+                  : reserva.titular_nombre_completo
+              }</strong><br>
               <small>${reserva.hora_inicio.substring(
                 0,
                 5

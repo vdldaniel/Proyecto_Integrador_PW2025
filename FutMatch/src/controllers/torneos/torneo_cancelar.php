@@ -75,12 +75,11 @@ try {
     $stmt->bindValue(':etapa_cancelado_id', ETAPA_CANCELADO_ID, PDO::PARAM_INT);
     $stmt->bindValue(':torneo_id', $torneoId, PDO::PARAM_INT);
     $stmt->execute();
-    
+
     // 3. Respuesta de éxito
     // CERRAMOS el buffer y enviamos el JSON.
     ob_end_clean();
     echo json_encode(["status" => "success", "message" => "Torneo cancelado exitosamente."]);
-
 } catch (Exception $e) {
     // En caso de cualquier error dentro del TRY, limpiamos y cerramos el buffer.
     ob_end_clean();

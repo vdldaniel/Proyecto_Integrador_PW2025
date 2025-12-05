@@ -50,7 +50,7 @@ try {
         exit;
     }
 
-    
+
     //  Obtener fecha de inicio del torneo
     // ---------------------------------------------------
     $sqlTorneo = "SELECT fecha_inicio FROM torneos WHERE id_torneo = :id";
@@ -74,8 +74,8 @@ try {
         exit;
     }
 
-   //Validar que la fecha límite sea al menos 5 días antes
-   
+    //Validar que la fecha límite sea al menos 5 días antes
+
     $fechaMaximaPermitida = date("Y-m-d", strtotime($fechaInicio . " -5 days"));
 
     if ($fechaCierre > $fechaMaximaPermitida) {
@@ -86,10 +86,10 @@ try {
         exit;
     }
 
-  
+
     $sql = "UPDATE torneos 
             SET id_etapa = 2,
-                fin_estimativo = :fecha_cierre
+                cierre_inscripciones = :fecha_cierre
             WHERE id_torneo = :id";
 
     $stmt = $conn->prepare($sql);
@@ -107,7 +107,6 @@ try {
             "message" => "No se pudo actualizar el torneo."
         ]);
     }
-
 } catch (Exception $e) {
     echo json_encode([
         "status" => "error",

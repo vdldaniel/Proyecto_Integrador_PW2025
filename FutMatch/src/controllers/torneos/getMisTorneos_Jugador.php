@@ -25,7 +25,7 @@ try {
         t.id_organizador,
         t.fecha_inicio,
         t.fecha_fin,
-        t.fin_estimativo,
+        t.cierre_inscripciones,
         t.descripcion,
         t.max_equipos,
         t.id_etapa,
