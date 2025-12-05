@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2025 at 04:39 AM
+-- Generation Time: Dec 05, 2025 at 07:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,8 @@ INSERT INTO `admin_canchas` (`id_admin_cancha`, `id_solicitud`, `telefono`) VALU
 (8, 1, '1155669988'),
 (9, 2, '1166554477'),
 (12, 3, '1155566887'),
-(13, 4, '1166995588');
+(13, 4, '1166995588'),
+(16, 5, '1166778899');
 
 -- --------------------------------------------------------
 
@@ -117,11 +118,13 @@ CREATE TABLE `canchas` (
 
 INSERT INTO `canchas` (`id_cancha`, `id_admin_cancha`, `id_direccion`, `nombre`, `descripcion`, `telefono`, `id_estado`, `foto`, `banner`, `id_superficie`, `politicas_reservas`, `fecha_creacion`, `id_verificador`) VALUES
 (1, 8, 1, 'Cancha Centro', 'Cancha de fútbol 5 en el centro de la ciudad', NULL, 3, NULL, NULL, 1, '- Reserva mínima con 24 horas de anticipacion\n- Cancelación gratuita hasta 12 horas antes\n- Depósito del 50% al confirmar la reserva (comunicarse con Wpp para hacer la misma)', '2025-12-03 03:00:00', 7),
-(2, 9, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 3, NULL, NULL, 1, NULL, '2025-12-03 03:00:00', 7),
+(2, 9, 2, 'Cancha Norte', 'Complejo deportivo con múltiples canchas', NULL, 4, NULL, NULL, 1, NULL, '2025-12-03 03:00:00', 7),
 (3, 8, 4, 'Cancha Centro 2', 'Segunda sede del complejo centro', NULL, 3, NULL, NULL, 2, NULL, '2025-12-03 03:00:00', 7),
-(5, 9, 7, 'Cancha Sur', 'Test Descripcion', NULL, 2, NULL, NULL, 1, NULL, '2025-12-03 03:00:00', 7),
-(6, 12, 3, 'Complejo Sur', NULL, '+541155555003', 2, NULL, NULL, NULL, NULL, '2025-12-03 03:00:00', 7),
-(7, 13, 6, 'Canchas Ezeiza', NULL, '1166669999', 3, NULL, NULL, 4, NULL, '2025-12-03 03:00:00', 7);
+(5, 9, 7, 'Club Atlético Talleres', 'Test Descripcion', NULL, 3, NULL, NULL, 4, NULL, '2025-12-03 03:00:00', 7),
+(6, 12, 3, 'Complejo Sur', NULL, '+541155555003', 3, NULL, NULL, NULL, NULL, '2025-12-03 03:00:00', 7),
+(7, 13, 6, 'Canchas Ezeiza', 'Test', '1166669999', 3, NULL, NULL, 4, NULL, '2025-12-03 03:00:00', 7),
+(8, 13, 10, 'Cancha Monte Grande', 'Test', NULL, 3, NULL, NULL, 1, NULL, '2025-12-04 04:17:39', 7),
+(9, 16, 11, 'Complejo Deportivo Homero\r\n', 'Complejo de Canchas de Atletismo y múltiples deportes', '1166655887', 3, NULL, NULL, 4, NULL, '2025-12-05 15:47:51', 7);
 
 -- --------------------------------------------------------
 
@@ -145,7 +148,11 @@ INSERT INTO `canchas_tipos_partido` (`id_cancha`, `id_tipo_partido`, `activo`, `
 (1, 1, 1, '2025-11-13 00:16:20'),
 (2, 3, 1, '2025-11-13 00:16:20'),
 (3, 4, 1, '2025-11-13 00:16:20'),
-(5, 1, 1, '2025-11-24 14:51:18');
+(5, 1, 0, '2025-11-24 14:51:18'),
+(5, 3, 1, '2025-12-04 21:21:33'),
+(7, 8, 1, '2025-12-04 01:17:59'),
+(8, 4, 1, '2025-12-04 01:17:39'),
+(9, 8, 1, '2025-12-05 13:39:39');
 
 -- --------------------------------------------------------
 
@@ -195,12 +202,14 @@ CREATE TABLE `direcciones` (
 
 INSERT INTO `direcciones` (`id_direccion`, `direccion_completa`, `latitud`, `longitud`, `pais`, `provincia`, `localidad`) VALUES
 (1, 'Av. Corrientes 1234, Buenos Aires', -34.60385100, -58.38177500, 'Argentina', 'Buenos Aires', 'CABA'),
-(2, 'San Martín 567, La Plata', -34.92131200, -57.95456700, 'Argentina', 'Buenos Aires', 'La Plata'),
+(2, 'Calle 46, Ángel Etcheverry, Partido de La Plata, Buenos Aires, B1901, Argentina', -35.03632156, -58.08780627, 'Argentina', 'Buenos Aires', 'La Plata'),
 (3, 'Mitre 890, Rosario', -32.94432100, -60.65054300, 'Argentina', 'Santa Fe', 'Rosario'),
 (4, 'Belgrano 445, Córdoba', -31.41677500, -64.18344100, 'Argentina', 'Córdoba', 'Córdoba'),
 (5, '9 de Julio 123, Mendoza', -32.88945800, -68.84583900, 'Argentina', 'Mendoza', 'Mendoza'),
 (6, 'Presbítero Juan González y Aragón, Barrio Uno, Aeropuerto Internacional Ezeiza, Partido de Ezeiza, Buenos Aires, B1802, Argentina', -34.78115850, -58.53894340, 'Argentina', 'Buenos Aires', 'Aeropuerto Internacional Ezeiza'),
-(7, 'Avenida Independencia 750', 0.00000000, 0.00000000, NULL, NULL, NULL);
+(7, 'Avenida Coronel Leonardo Rosales, Villa General Balcarce, Remedios de Escalada, Partido de Lanús, Buenos Aires, 1826, Argentina', -34.72163820, -58.40401460, NULL, NULL, NULL),
+(10, '506, General Las Heras, Monte Grande, Partido de Esteban Echeverría, Buenos Aires, 1842, Argentina', -34.81878760, -58.46446570, NULL, NULL, NULL),
+(11, '3278, Coronel Aguilar, Villa Mauricio, Remedios de Escalada, Partido de Lanús, Buenos Aires, B1828ATD, Argentina', -34.73258421, -58.37739944, 'Argentina', 'Buenos Aires', 'Remedios de Escalada');
 
 -- --------------------------------------------------------
 
@@ -231,7 +240,23 @@ INSERT INTO `equipos` (`id_equipo`, `id_lider`, `nombre`, `foto`, `clave`, `abie
 (3, 5, 'Deportivo Unión', NULL, '6584', 1, NULL, 1, '2025-11-16 20:52:27'),
 (4, 4, 'Domingueross', NULL, NULL, 1, 'Nos juntamos a jugar futbol los domingos en CABA', 6, '2025-11-16 20:52:27'),
 (6, 4, 'Homero', NULL, NULL, 1, '', 4, '2025-11-17 00:49:58'),
-(7, 10, 'Fulboleros', NULL, NULL, 1, 'Jugamos al futbol y cantamos boleros', 10, '2025-11-21 19:02:31');
+(7, 10, 'Fulboleros', NULL, NULL, 1, 'Jugamos al futbol y cantamos boleros', 10, '2025-11-21 19:02:31'),
+(8, 17, 'Los Halcones FC', NULL, '1001', 1, 'Equipo competitivo de zona norte', 17, '2025-12-05 14:18:53'),
+(9, 19, 'Tigres Rojos', NULL, '1002', 1, 'Jugamos con pasión y garra', 19, '2025-12-05 14:18:53'),
+(10, 21, 'Águilas Blancas', NULL, '1003', 1, 'Fútbol técnico y estratégico', 21, '2025-12-05 14:18:53'),
+(11, 23, 'Leones del Sur', NULL, '1004', 1, 'Unidos por el fútbol', 23, '2025-12-05 14:18:53'),
+(12, 25, 'Pumas Negros', NULL, '1005', 1, 'Equipo de amigos veteranos', 25, '2025-12-05 14:18:53'),
+(13, 27, 'Cóndores FC', NULL, '1006', 1, 'Juego limpio y deportividad', 27, '2025-12-05 14:18:53'),
+(14, 29, 'Zorros Grises', NULL, '1007', 1, 'Velocidad y técnica', 29, '2025-12-05 14:18:53'),
+(15, 31, 'Búfalos United', NULL, '1008', 1, 'Fuerza y determinación', 31, '2025-12-05 14:18:53'),
+(16, 33, 'Lobos FC', NULL, '1009', 1, 'Equipo familiar de barrio', 33, '2025-12-05 14:18:53'),
+(17, 35, 'Panteras Azules', NULL, '1010', 1, 'Juego ofensivo y directo', 35, '2025-12-05 14:18:53'),
+(18, 37, 'Jaguares FC', NULL, '1011', 1, 'Equipo joven y dinámico', 37, '2025-12-05 14:18:53'),
+(19, 39, 'Delfines Sport', NULL, '1012', 1, 'Fútbol rápido y efectivo', 39, '2025-12-05 14:18:53'),
+(20, 41, 'Tiburones FC', NULL, '1013', 1, 'Defensa sólida primero', 41, '2025-12-05 14:18:53'),
+(21, 43, 'Osos Pardos', NULL, '1014', 1, 'Potencia y control', 43, '2025-12-05 14:18:53'),
+(22, 45, 'Gavilanes FC', NULL, '1015', 1, 'Equipo de trabajo colectivo', 45, '2025-12-05 14:18:53'),
+(23, 47, 'Venados Dorados', NULL, '1016', 1, 'Juego limpio y fair play', 47, '2025-12-05 14:18:53');
 
 -- --------------------------------------------------------
 
@@ -293,8 +318,26 @@ INSERT INTO `equipos_torneos` (`id_equipo`, `id_torneo`, `id_estado`) VALUES
 (3, 1, 1),
 (1, 1, 3),
 (1, 2, 3),
+(1, 5, 3),
 (2, 1, 3),
-(3, 2, 3);
+(3, 2, 3),
+(7, 5, 3),
+(8, 10, 3),
+(9, 10, 3),
+(10, 10, 3),
+(11, 10, 3),
+(12, 10, 3),
+(13, 10, 3),
+(14, 10, 3),
+(15, 10, 3),
+(16, 10, 3),
+(17, 10, 3),
+(18, 10, 3),
+(19, 10, 3),
+(20, 10, 3),
+(21, 10, 3),
+(22, 10, 3),
+(23, 10, 3);
 
 -- --------------------------------------------------------
 
@@ -475,7 +518,14 @@ INSERT INTO `horarios_cancha` (`id_horario`, `id_cancha`, `id_dia`, `hora_apertu
 (37, 1, 4, '08:00:00', '22:00:00'),
 (38, 1, 5, '08:00:00', '22:00:00'),
 (39, 1, 6, '09:00:00', '13:00:00'),
-(40, 1, 7, '09:00:00', '14:00:00');
+(40, 1, 7, '09:00:00', '14:00:00'),
+(41, 7, 1, NULL, NULL),
+(42, 7, 2, '08:00:00', '22:00:00'),
+(43, 7, 3, '08:00:00', '22:00:00'),
+(44, 7, 4, '08:00:00', '22:00:00'),
+(45, 7, 5, '08:00:00', '22:00:00'),
+(46, 7, 6, '08:00:00', '22:00:00'),
+(47, 7, 7, '08:00:00', '22:00:00');
 
 -- --------------------------------------------------------
 
@@ -508,7 +558,39 @@ INSERT INTO `jugadores` (`id_jugador`, `username`, `telefono`, `foto_perfil`, `b
 (4, 'anam', '+541123456792', NULL, NULL, '1996-09-12', 1, 4, 4.5, NULL),
 (5, 'diegor', '+541123456793', NULL, NULL, '1990-01-25', 2, 2, NULL, NULL),
 (6, 'lauraf', '+541123456794', NULL, NULL, '1994-05-30', 1, 3, NULL, NULL),
-(10, 'cnsanto', '1154876550', NULL, NULL, '1999-07-16', 1, NULL, NULL, NULL);
+(10, 'cnsanto', '1154876550', NULL, NULL, '1999-07-16', 1, NULL, NULL, NULL),
+(17, 'lucmar', '1100000017', NULL, NULL, '2005-12-05', 2, 2, NULL, NULL),
+(18, 'margon', '1100000018', NULL, NULL, '2004-12-05', 1, 3, NULL, NULL),
+(19, 'sangar', '1100000019', NULL, NULL, '2003-12-05', 2, 4, NULL, NULL),
+(20, 'matper', '1100000020', NULL, NULL, '2002-12-05', 1, 1, NULL, NULL),
+(21, 'agusan', '1100000021', NULL, NULL, '2001-12-05', 2, 2, NULL, NULL),
+(22, 'tomrom', '1100000022', NULL, NULL, '2000-12-05', 1, 3, NULL, NULL),
+(23, 'juator', '1100000023', NULL, NULL, '1999-12-05', 2, 4, NULL, NULL),
+(24, 'fraalv', '1100000024', NULL, NULL, '1998-12-05', 1, 1, NULL, NULL),
+(25, 'igndía', '1100000025', NULL, NULL, '1997-12-05', 2, 2, NULL, NULL),
+(26, 'joarui', '1100000026', NULL, NULL, '1996-12-05', 1, 3, NULL, NULL),
+(27, 'maxcas', '1100000027', NULL, NULL, '1995-12-05', 2, 4, NULL, NULL),
+(28, 'gabmor', '1100000028', NULL, NULL, '1994-12-05', 1, 1, NULL, NULL),
+(29, 'sebher', '1100000029', NULL, NULL, '1993-12-05', 2, 2, NULL, NULL),
+(30, 'fervar', '1100000030', NULL, NULL, '2007-12-05', 1, 3, NULL, NULL),
+(31, 'diesil', '1100000031', NULL, NULL, '2006-12-05', 2, 4, NULL, NULL),
+(32, 'rodrey', '1100000032', NULL, NULL, '2005-12-05', 1, 1, NULL, NULL),
+(33, 'leanúñ', '1100000033', NULL, NULL, '2004-12-05', 2, 2, NULL, NULL),
+(34, 'emiort', '1100000034', NULL, NULL, '2003-12-05', 1, 3, NULL, NULL),
+(35, 'dammol', '1100000035', NULL, NULL, '2002-12-05', 2, 4, NULL, NULL),
+(36, 'crimed', '1100000036', NULL, NULL, '2001-12-05', 1, 1, NULL, NULL),
+(37, 'ezeram', '1100000037', NULL, NULL, '2000-12-05', 2, 2, NULL, NULL),
+(38, 'gonjim', '1100000038', NULL, NULL, '1999-12-05', 1, 3, NULL, NULL),
+(39, 'gasflo', '1100000039', NULL, NULL, '1998-12-05', 2, 4, NULL, NULL),
+(40, 'marmen', '1100000040', NULL, NULL, '1997-12-05', 1, 1, NULL, NULL),
+(41, 'claguz', '1100000041', NULL, NULL, '1996-12-05', 2, 2, NULL, NULL),
+(42, 'maraco', '1100000042', NULL, NULL, '1995-12-05', 1, 3, NULL, NULL),
+(43, 'adrben', '1100000043', NULL, NULL, '1994-12-05', 2, 4, NULL, NULL),
+(44, 'gerveg', '1100000044', NULL, NULL, '1993-12-05', 1, 1, NULL, NULL),
+(45, 'javcab', '1100000045', NULL, NULL, '2007-12-05', 2, 2, NULL, NULL),
+(46, 'anddom', '1100000046', NULL, NULL, '2006-12-05', 1, 3, NULL, NULL),
+(47, 'herrío', '1100000047', NULL, NULL, '2005-12-05', 2, 4, NULL, NULL),
+(48, 'rampon', '1100000048', NULL, NULL, '2004-12-05', 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -545,7 +627,40 @@ INSERT INTO `jugadores_equipos` (`id_jugador`, `id_equipo`, `estado_solicitud`, 
 (5, 3, 3, 2, '2025-11-17 01:00:45'),
 (6, 3, 3, 1, '2025-11-17 01:00:45'),
 (6, 4, 1, 4, '2025-11-17 01:00:45'),
-(10, 7, 3, NULL, '2025-11-21 19:02:31');
+(10, 7, 3, NULL, '2025-11-21 19:02:31'),
+(17, 8, 3, NULL, '2025-12-05 14:18:54'),
+(18, 8, 3, 17, '2025-12-05 14:18:54'),
+(19, 9, 3, NULL, '2025-12-05 14:18:54'),
+(20, 9, 3, 19, '2025-12-05 14:18:54'),
+(21, 10, 3, NULL, '2025-12-05 14:18:54'),
+(21, 13, 4, 27, '2025-12-05 16:35:25'),
+(22, 10, 3, 21, '2025-12-05 14:18:54'),
+(23, 11, 3, NULL, '2025-12-05 14:18:54'),
+(24, 11, 3, 23, '2025-12-05 14:18:54'),
+(25, 12, 3, NULL, '2025-12-05 14:18:54'),
+(26, 12, 3, 25, '2025-12-05 14:18:54'),
+(27, 13, 3, NULL, '2025-12-05 14:18:54'),
+(28, 13, 3, 27, '2025-12-05 14:18:54'),
+(29, 14, 3, NULL, '2025-12-05 14:18:54'),
+(30, 14, 3, 29, '2025-12-05 14:18:54'),
+(31, 15, 3, NULL, '2025-12-05 14:18:54'),
+(32, 15, 3, 31, '2025-12-05 14:18:54'),
+(33, 16, 3, NULL, '2025-12-05 14:18:54'),
+(34, 16, 3, 33, '2025-12-05 14:18:54'),
+(35, 17, 3, NULL, '2025-12-05 14:18:54'),
+(36, 17, 3, 35, '2025-12-05 14:18:54'),
+(37, 18, 3, NULL, '2025-12-05 14:18:54'),
+(38, 18, 3, 37, '2025-12-05 14:18:54'),
+(39, 19, 3, NULL, '2025-12-05 14:18:54'),
+(40, 19, 3, 39, '2025-12-05 14:18:54'),
+(41, 20, 3, NULL, '2025-12-05 14:18:54'),
+(42, 20, 3, 41, '2025-12-05 14:18:54'),
+(43, 21, 3, NULL, '2025-12-05 14:18:54'),
+(44, 21, 3, 43, '2025-12-05 14:18:54'),
+(45, 22, 3, NULL, '2025-12-05 14:18:54'),
+(46, 22, 3, 45, '2025-12-05 14:18:54'),
+(47, 23, 3, NULL, '2025-12-05 14:18:54'),
+(48, 23, 3, 47, '2025-12-05 14:18:54');
 
 -- --------------------------------------------------------
 
@@ -627,11 +742,11 @@ DROP TABLE IF EXISTS `partidos`;
 CREATE TABLE `partidos` (
   `id_partido` int(11) NOT NULL,
   `id_anfitrion` int(11) NOT NULL,
-  `id_tipo_partido` int(11) NULL DEFAULT 1,
+  `id_tipo_partido` int(11) DEFAULT 1,
   `abierto` tinyint(1) DEFAULT 0,
   `goles_equipo_A` int(10) DEFAULT NULL,
   `goles_equipo_B` int(10) DEFAULT NULL,
-  `id_reserva` int(11) NULL
+  `id_reserva` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -650,7 +765,22 @@ INSERT INTO `partidos` (`id_partido`, `id_anfitrion`, `id_tipo_partido`, `abiert
 (10, 10, 3, 1, NULL, NULL, 28),
 (11, 10, 4, 0, NULL, NULL, 31),
 (12, 10, 1, 0, NULL, NULL, 32),
-(13, 1, 1, 1, NULL, NULL, 33);
+(13, 1, 1, 1, NULL, NULL, 33),
+(17, 16, 8, 0, 3, 5, 34),
+(18, 16, 8, 0, 2, 0, 35),
+(19, 16, 8, 0, 1, 0, 36),
+(20, 16, 8, 0, 1, 2, 37),
+(21, 16, 8, 0, 2, 3, 38),
+(22, 16, 8, 0, 1, 0, 39),
+(23, 16, 8, 0, 5, 1, 40),
+(24, 16, 8, 0, 4, 2, 41),
+(25, 16, 8, 0, 1, 2, 42),
+(26, 16, 8, 0, 2, 3, 43),
+(27, 16, 8, 0, 4, 2, 44),
+(28, 16, 8, 0, 5, 3, 45),
+(29, 16, 8, 0, 2, 1, 46),
+(30, 16, 8, 0, 3, 1, 47),
+(31, 16, 8, 0, 1, 0, 48);
 
 -- --------------------------------------------------------
 
@@ -668,6 +798,27 @@ CREATE TABLE `partidos_torneos` (
   `id_equipo_A` int(11) NOT NULL,
   `id_equipo_B` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `partidos_torneos`
+--
+
+INSERT INTO `partidos_torneos` (`id_partido_torneo`, `id_partido`, `id_torneo`, `id_fase`, `orden_en_fase`, `id_equipo_A`, `id_equipo_B`) VALUES
+(1, 17, 10, 5, 1, 8, 9),
+(2, 18, 10, 5, 2, 10, 11),
+(3, 19, 10, 5, 3, 12, 13),
+(4, 20, 10, 5, 4, 14, 15),
+(5, 21, 10, 5, 5, 16, 17),
+(6, 22, 10, 5, 6, 18, 19),
+(7, 23, 10, 5, 7, 20, 21),
+(8, 24, 10, 5, 8, 22, 23),
+(9, 25, 10, 4, 1, 9, 10),
+(10, 26, 10, 4, 2, 12, 15),
+(11, 27, 10, 4, 3, 17, 18),
+(12, 28, 10, 4, 4, 20, 22),
+(13, 29, 10, 3, 1, 10, 15),
+(14, 30, 10, 3, 2, 17, 20),
+(15, 31, 10, 2, 1, 10, 17);
 
 -- --------------------------------------------------------
 
@@ -876,7 +1027,22 @@ INSERT INTO `reservas` (`id_reserva`, `id_cancha`, `id_tipo_reserva`, `fecha`, `
 (28, 2, 1, '2025-12-16', '2025-12-16', '20:00:00', '21:00:00', 'test convocatoria', 'este es un test para ver si se abre y se cierra bien la convocatoria', 3, '2025-12-02 21:56:06', 10, 10, NULL),
 (31, 3, 1, '2025-12-05', '2025-12-05', '14:00:00', '16:00:00', 'test partido', '', 5, '2025-12-02 22:28:48', 10, 10, NULL),
 (32, 5, 1, '2025-12-25', '2025-12-25', '19:00:00', '21:00:00', 'test partido 2', '', 3, '2025-12-02 22:32:08', 10, 10, NULL),
-(33, 1, 1, '2025-12-09', '2025-12-09', '09:00:00', '12:00:00', 'Reserva de jugador', '', 3, '2025-12-03 21:17:48', 1, 1, NULL);
+(33, 1, 1, '2025-12-09', '2025-12-09', '09:00:00', '12:00:00', 'Reserva de jugador', '', 3, '2025-12-03 21:17:48', 1, 1, NULL),
+(34, 9, 2, '2025-12-20', '2025-12-20', '09:00:00', '11:00:00', 'Octavos de Final - Los Halcones FC vs Tigres Rojos', 'Copa FutMatch Verano 2025', 3, '2025-12-05 12:51:05', 16, NULL, NULL),
+(35, 9, 2, '2025-12-20', '2025-12-20', '11:00:00', '13:00:00', 'Octavos de Final - Águilas Blancas vs Leones del S', 'Copa FutMatch Verano 2025', 3, '2025-12-05 13:02:00', 16, NULL, NULL),
+(36, 9, 2, '2025-12-20', '2025-12-20', '14:00:00', '16:00:00', 'Octavos de Final - Pumas Negros vs Cóndores FC', 'Copa FutMatch Verano 2025', 3, '2025-12-05 13:57:16', 16, NULL, NULL),
+(37, 9, 2, '2025-12-20', '2025-12-20', '16:00:00', '18:00:00', 'Octavos de Final - Zorros Grises vs Búfalos United', 'Copa FutMatch Verano 2025', 3, '2025-12-05 13:57:53', 16, NULL, NULL),
+(38, 9, 2, '2025-12-21', '2025-12-21', '09:00:00', '11:00:00', 'Octavos de Final - Lobos FC vs Panteras Azules', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:00:12', 16, NULL, NULL),
+(39, 9, 2, '2025-12-21', '2025-12-21', '11:00:00', '13:00:00', 'Octavos de Final - Jaguares FC vs Delfines Sport', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:00:30', 16, NULL, NULL),
+(40, 9, 2, '2025-12-21', '2025-12-21', '14:00:00', '16:00:00', 'Octavos de Final - Tiburones FC vs Osos Pardos', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:00:46', 16, NULL, NULL),
+(41, 9, 2, '2025-12-21', '2025-12-21', '16:00:00', '18:00:00', 'Octavos de Final - Gavilanes FC vs Venados Dorados', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:01:16', 16, NULL, NULL),
+(42, 9, 2, '2025-12-27', '2025-12-27', '09:00:00', '11:00:00', 'Cuartos de Final - Tigres Rojos vs Águilas Blancas', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:56:12', 16, NULL, NULL),
+(43, 9, 2, '2025-12-27', '2025-12-27', '11:00:00', '13:00:00', 'Cuartos de Final - Pumas Negros vs Búfalos United', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:56:29', 16, NULL, NULL),
+(44, 9, 2, '2025-12-27', '2025-12-27', '14:00:00', '16:00:00', 'Cuartos de Final - Panteras Azules vs Jaguares FC', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:56:46', 16, NULL, NULL),
+(45, 9, 2, '2025-12-27', '2025-12-27', '16:00:00', '18:00:00', 'Cuartos de Final - Tiburones FC vs Gavilanes FC', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:56:59', 16, NULL, NULL),
+(46, 9, 2, '2025-12-28', '2025-12-28', '09:00:00', '11:00:00', 'Semifinal - Águilas Blancas vs Búfalos United', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:57:43', 16, NULL, NULL),
+(47, 9, 2, '2025-12-28', '2025-12-28', '11:00:00', '13:00:00', 'Semifinal - Panteras Azules vs Tiburones FC', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:57:59', 16, NULL, NULL),
+(48, 9, 2, '2026-01-03', '2026-01-03', '11:00:00', '13:00:00', 'Final - Águilas Blancas vs Panteras Azules', 'Copa FutMatch Verano 2025', 3, '2025-12-05 14:59:03', 16, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1137,7 +1303,8 @@ INSERT INTO `solicitudes_admin_cancha` (`id_solicitud`, `nombre`, `apellido`, `e
 (1, 'Roberto', 'Silva', 'cancha.centro@email.com', '+541155555001', 'Cancha Centro', 1, '2025-11-13 00:16:20', 3, 7, '2025-11-13 00:16:20', NULL),
 (2, 'Patricia', 'Morales', 'cancha.norte@email.com', '+541155555002', 'Cancha Norte', 2, '2025-11-13 00:16:20', 3, 7, '2025-11-13 00:16:20', NULL),
 (3, 'Miguel', 'Torres', 'miguel.torres@email.com', '+541155555003', 'Complejo Sur', 3, '2025-11-13 00:16:20', 3, 7, NULL, NULL),
-(4, 'Cristian', 'Santo', 'cristiansanto@gmail.com', '1166669999', 'Canchas Ezeiza', 6, '2025-11-24 12:26:22', 3, 7, NULL, 'Contactar por whatsapp en horario de manana');
+(4, 'Cristian', 'Santo', 'cristiansanto@gmail.com', '1166669999', 'Canchas Ezeiza', 6, '2025-11-24 12:26:22', 3, 7, NULL, 'Contactar por whatsapp en horario de manana'),
+(5, 'Roberto', 'Fernández', 'roberto.admin@futmatch.com', '1166778899', 'Complejo Deportivo Homero', 11, '2025-12-05 11:15:38', 3, 1, NULL, 'Contactar por telefono en horario de manana');
 
 -- --------------------------------------------------------
 
@@ -1229,6 +1396,7 @@ CREATE TABLE `torneos` (
   `fecha_fin` date DEFAULT NULL,
   `cierre_inscripciones` date DEFAULT NULL,
   `id_etapa` int(11) NOT NULL DEFAULT 1,
+  `id_fase` int(11) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
   `max_equipos` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1237,9 +1405,15 @@ CREATE TABLE `torneos` (
 -- Dumping data for table `torneos`
 --
 
-INSERT INTO `torneos` (`id_torneo`, `id_organizador`, `nombre`, `fecha_inicio`, `fecha_fin`, `cierre_inscripciones`, `id_etapa`, `descripcion`) VALUES
-(1, 12, 'Copa Primavera 2025', '2025-12-01', '2025-12-15', NULL, 1, 'Torneo de fútbol 5 para equipos amateur'),
-(2, 13, 'Torneo Relámpago', '2025-11-20', '2025-11-20', NULL, 1, 'Torneo de un día en múltiples canchas');
+INSERT INTO `torneos` (`id_torneo`, `id_organizador`, `nombre`, `fecha_inicio`, `fecha_fin`, `cierre_inscripciones`, `id_etapa`, `id_fase`, `descripcion`, `max_equipos`) VALUES
+(1, 12, 'Copa Primavera 2025', '2025-12-01', '2025-12-15', NULL, 1, NULL, 'Torneo de fútbol 5 para equipos amateur', NULL),
+(2, 13, 'Torneo Relámpago', '2025-11-20', '2025-11-20', NULL, 1, NULL, 'Torneo de un día en múltiples canchas', NULL),
+(5, 8, 'Copa Test', '2025-12-15', '2026-01-30', '2025-12-14', 2, NULL, 'Test Descripcion Copa Test', 20),
+(6, 8, 'Copa Test Cancelada', '2026-01-02', '2026-02-07', '2025-12-27', 5, NULL, 'Test descripcion copa cancelada', 16),
+(7, 8, 'Copa cancelada 2', '2026-01-20', '2026-01-30', '2026-01-15', 4, NULL, 'copa enero cancelada', 16),
+(8, 8, 'Copa Test Cancelada', '2026-01-09', '2026-01-11', '2025-12-31', 5, NULL, 'Test descripcion copa cancelada', 16),
+(9, 8, 'Copa Test Cancelada', '2026-01-11', '2026-02-08', '2025-12-31', 5, NULL, 'Test descripcion copa cancelada', 16),
+(10, 16, 'Copa FutMatch Verano 2025', '2025-12-15', '2026-01-31', '2025-12-04', 3, 5, 'Torneo de verano con 16 equipos participantes. Formato eliminación directa con premios para los 3 primeros puestos.', 16);
 
 -- --------------------------------------------------------
 
@@ -1274,7 +1448,40 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `password`,
 (9, 'Patricia', 'Morales', 'cancha.norte@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-11-13 00:16:20'),
 (10, 'Camila', 'Santo', 'cnsanto@gmail.com', '$2y$10$ok3yajjeR7xK/25VKFN9EOb2uRJFzzfF2XZg59WqG/ggc4CwCDo9O', 1, '2025-11-21 11:01:44'),
 (12, 'Miguel', 'Torres', 'miguel.torres@email.com', '$2y$10$x4WdGjtS.hsmiT1wQ8TTludto5gvo7MBsKty9J7JUFIm3qruXw04C', 1, '2025-12-03 15:07:47'),
-(13, 'Cristian', 'Szanto', 'cristiansanto@gmail.com', '$2y$10$SWugxWRbhmLStai94.GkQ.nCAFfQujKcb2l30GOZliCpASu4h5JW6', 1, '2025-12-03 15:08:20');
+(13, 'Cristian', 'Szanto', 'cristiansanto@gmail.com', '$2y$10$SWugxWRbhmLStai94.GkQ.nCAFfQujKcb2l30GOZliCpASu4h5JW6', 1, '2025-12-03 15:08:20'),
+(16, 'Roberto', 'Fernández', 'roberto.admin@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(17, 'Lucas', 'Martínez', 'lucas.martinez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(18, 'Martín', 'González', 'martin.gonzalez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(19, 'Santiago', 'García', 'santiago.garcia@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(20, 'Matías', 'Pérez', 'matias.perez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(21, 'Agustín', 'Sánchez', 'agustin.sanchez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(22, 'Tomás', 'Romero', 'tomas.romero@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(23, 'Juan', 'Torres', 'juan.torres@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(24, 'Francisco', 'Álvarez', 'francisco.alvarez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(25, 'Ignacio', 'Díaz', 'ignacio.diaz@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(26, 'Joaquín', 'Ruiz', 'joaquin.ruiz@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(27, 'Maximiliano', 'Castro', 'maximiliano.castro@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(28, 'Gabriel', 'Morales', 'gabriel.morales@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(29, 'Sebastián', 'Herrera', 'sebastian.herrera@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(30, 'Fernando', 'Vargas', 'fernando.vargas@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(31, 'Diego', 'Silva', 'diego.silva@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(32, 'Rodrigo', 'Reyes', 'rodrigo.reyes@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(33, 'Leandro', 'Núñez', 'leandro.nunez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(34, 'Emiliano', 'Ortiz', 'emiliano.ortiz@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(35, 'Damián', 'Molina', 'damian.molina@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(36, 'Cristian', 'Medina', 'cristian.medina@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(37, 'Ezequiel', 'Ramos', 'ezequiel.ramos@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(38, 'Gonzalo', 'Jiménez', 'gonzalo.jimenez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(39, 'Gastón', 'Flores', 'gaston.flores@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(40, 'Mariano', 'Mendoza', 'mariano.mendoza@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(41, 'Claudio', 'Guzmán', 'claudio.guzman@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(42, 'Marcelo', 'Acosta', 'marcelo.acosta@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(43, 'Adrián', 'Benítez', 'adrian.benitez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(44, 'Germán', 'Vega', 'german.vega@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(45, 'Javier', 'Cabrera', 'javier.cabrera@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(46, 'Andrés', 'Domínguez', 'andres.dominguez@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(47, 'Hernán', 'Ríos', 'hernan.rios@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53'),
+(48, 'Ramiro', 'Ponce', 'ramiro.ponce@futmatch.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2025-12-05 11:18:53');
 
 -- --------------------------------------------------------
 
@@ -1305,7 +1512,40 @@ INSERT INTO `usuarios_roles` (`id`, `id_usuario`, `id_rol`) VALUES
 (9, 9, 2),
 (10, 10, 1),
 (12, 12, 2),
-(13, 13, 2);
+(13, 13, 2),
+(14, 16, 2),
+(15, 17, 1),
+(16, 18, 1),
+(17, 19, 1),
+(18, 20, 1),
+(19, 21, 1),
+(20, 22, 1),
+(21, 23, 1),
+(22, 24, 1),
+(23, 25, 1),
+(24, 26, 1),
+(25, 27, 1),
+(26, 28, 1),
+(27, 29, 1),
+(28, 30, 1),
+(29, 31, 1),
+(30, 32, 1),
+(31, 33, 1),
+(32, 34, 1),
+(33, 35, 1),
+(34, 36, 1),
+(35, 37, 1),
+(36, 38, 1),
+(37, 39, 1),
+(38, 40, 1),
+(39, 41, 1),
+(40, 42, 1),
+(41, 43, 1),
+(42, 44, 1),
+(43, 45, 1),
+(44, 46, 1),
+(45, 47, 1),
+(46, 48, 1);
 
 --
 -- Indexes for dumped tables
@@ -1335,7 +1575,8 @@ ALTER TABLE `canchas`
   ADD KEY `id_admin_cancha` (`id_admin_cancha`),
   ADD KEY `id_direccion` (`id_direccion`),
   ADD KEY `id_estado` (`id_estado`),
-  ADD KEY `id_superficie` (`id_superficie`);
+  ADD KEY `id_superficie` (`id_superficie`),
+  ADD KEY `canchas_ibfk_5` (`id_verificador`);
 
 --
 -- Indexes for table `canchas_tipos_partido`
@@ -1605,7 +1846,8 @@ ALTER TABLE `tipos_reserva`
 ALTER TABLE `torneos`
   ADD PRIMARY KEY (`id_torneo`),
   ADD KEY `id_etapa` (`id_etapa`),
-  ADD KEY `idx_torneos_organizador_etapa` (`id_organizador`,`id_etapa`);
+  ADD KEY `idx_torneos_organizador_etapa` (`id_organizador`,`id_etapa`),
+  ADD KEY `torneos_ibfk_3` (`id_fase`);
 
 --
 -- Indexes for table `usuarios`
@@ -1631,7 +1873,7 @@ ALTER TABLE `usuarios_roles`
 -- AUTO_INCREMENT for table `admin_canchas`
 --
 ALTER TABLE `admin_canchas`
-  MODIFY `id_admin_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_admin_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `calificaciones_jugadores`
@@ -1643,7 +1885,7 @@ ALTER TABLE `calificaciones_jugadores`
 -- AUTO_INCREMENT for table `canchas`
 --
 ALTER TABLE `canchas`
-  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `dias_semana`
@@ -1655,13 +1897,13 @@ ALTER TABLE `dias_semana`
 -- AUTO_INCREMENT for table `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `estadisticas_partido`
@@ -1703,13 +1945,13 @@ ALTER TABLE `fases_torneo`
 -- AUTO_INCREMENT for table `horarios_cancha`
 --
 ALTER TABLE `horarios_cancha`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `observaciones_canchas`
@@ -1727,13 +1969,13 @@ ALTER TABLE `participantes_partidos`
 -- AUTO_INCREMENT for table `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `id_partido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_partido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `partidos_torneos`
 --
 ALTER TABLE `partidos_torneos`
-  MODIFY `id_partido_torneo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_partido_torneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `permisos`
@@ -1763,7 +2005,7 @@ ALTER TABLE `resenias_canchas`
 -- AUTO_INCREMENT for table `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1799,7 +2041,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT for table `solicitudes_admin_cancha`
 --
 ALTER TABLE `solicitudes_admin_cancha`
-  MODIFY `id_solicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_solicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `superficies_canchas`
@@ -1823,19 +2065,19 @@ ALTER TABLE `tipos_reserva`
 -- AUTO_INCREMENT for table `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `id_torneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_torneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `usuarios_roles`
 --
 ALTER TABLE `usuarios_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Constraints for dumped tables
@@ -1860,10 +2102,11 @@ ALTER TABLE `calificaciones_jugadores`
 -- Constraints for table `canchas`
 --
 ALTER TABLE `canchas`
-  ADD CONSTRAINT `canchas_ibfk_1` FOREIGN KEY (`id_admin_cancha`) REFERENCES `usuarios` (`id_usuario`),
+  ADD CONSTRAINT `canchas_ibfk_1` FOREIGN KEY (`id_admin_cancha`) REFERENCES `admin_canchas` (`id_admin_cancha`),
   ADD CONSTRAINT `canchas_ibfk_2` FOREIGN KEY (`id_direccion`) REFERENCES `direcciones` (`id_direccion`),
   ADD CONSTRAINT `canchas_ibfk_3` FOREIGN KEY (`id_estado`) REFERENCES `estados_canchas` (`id_estado`),
-  ADD CONSTRAINT `canchas_ibfk_4` FOREIGN KEY (`id_superficie`) REFERENCES `superficies_canchas` (`id_superficie`);
+  ADD CONSTRAINT `canchas_ibfk_4` FOREIGN KEY (`id_superficie`) REFERENCES `superficies_canchas` (`id_superficie`),
+  ADD CONSTRAINT `canchas_ibfk_5` FOREIGN KEY (`id_verificador`) REFERENCES `usuarios` (`id_usuario`);
 
 --
 -- Constraints for table `canchas_tipos_partido`
@@ -1946,7 +2189,7 @@ ALTER TABLE `participantes_partidos`
 --
 ALTER TABLE `partidos`
   ADD CONSTRAINT `fk_id_reserva_partidos` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`),
-  ADD CONSTRAINT `partidos_ibfk_1` FOREIGN KEY (`id_anfitrion`) REFERENCES `jugadores` (`id_jugador`),
+  ADD CONSTRAINT `partidos_ibfk_1` FOREIGN KEY (`id_anfitrion`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `partidos_ibfk_2` FOREIGN KEY (`id_tipo_partido`) REFERENCES `tipos_partido` (`id_tipo_partido`);
 
 --
@@ -2012,7 +2255,8 @@ ALTER TABLE `solicitudes_admin_cancha`
 --
 ALTER TABLE `torneos`
   ADD CONSTRAINT `torneos_ibfk_1` FOREIGN KEY (`id_organizador`) REFERENCES `admin_canchas` (`id_admin_cancha`),
-  ADD CONSTRAINT `torneos_ibfk_2` FOREIGN KEY (`id_etapa`) REFERENCES `etapas_torneo` (`id_etapa`);
+  ADD CONSTRAINT `torneos_ibfk_2` FOREIGN KEY (`id_etapa`) REFERENCES `etapas_torneo` (`id_etapa`),
+  ADD CONSTRAINT `torneos_ibfk_3` FOREIGN KEY (`id_fase`) REFERENCES `fases_torneo` (`id_fase`);
 
 --
 -- Constraints for table `usuarios`
