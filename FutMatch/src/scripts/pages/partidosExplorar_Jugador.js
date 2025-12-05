@@ -19,6 +19,14 @@ function configurarEventos() {
   if (btnCambiarVista) {
     btnCambiarVista.addEventListener("click", toggleVista);
   }
+
+  // Evento para búsqueda
+  const busquedaPartidos = document.getElementById("busquedaPartidos");
+  if (busquedaPartidos) {
+    busquedaPartidos.addEventListener("input", (e) => {
+      filtrarPartidos(e.target.value);
+    });
+  }
 }
 
 async function cargarPartidosDisponibles() {
@@ -413,6 +421,68 @@ function agregarMarcadoresPartidos() {
   // Ajustar vista del mapa para mostrar todos los marcadores
   if (bounds.length > 0) {
     mapa.fitBounds(bounds, { padding: [50, 50] });
+  }
+}
+
+function filtrarPartidos(busqueda) {
+  const terminoBusqueda = busqueda.toLowerCase().trim();
+
+  if (terminoBusqueda === "") {
+    paginarPartidos(todosLosPartidos);
+    return;
+  }
+
+  const partidosFiltrados = todosLosPartidos.filter((partido) => {
+    // Buscar en tipo de partido
+    if (partido.tipo_partido.toLowerCase().includes(terminoBusqueda))
+      return true;
+
+    // Buscar en nombre de cancha
+    if (partido.nombre_cancha.toLowerCase().includes(terminoBusqueda))
+      return true;
+
+    // Buscar en dirección
+    if (partido.direccion_completa.toLowerCase().includes(terminoBusqueda))
+      return true;
+
+    // Buscar en motivo
+    if (
+      partido.motivo &&
+      partido.motivo.toLowerCase().includes(terminoBusqueda)
+    )
+      return true;
+
+    // Buscar en superficie
+    if (
+      partido.tipo_superficie &&
+      partido.tipo_superficie.toLowerCase().includes(terminoBusqueda)
+    )
+      return true;
+
+    return false;
+  });
+
+  paginarPartidos(partidosFiltrados);
+}
+
+function paginarPartidos(partidos) {
+  let paginado = [[]];
+  let pagina = 0;
+
+  partidos.forEach((partido) => {
+    if (paginado[pagina].length === PARTIDOS_POR_PAGINA) {
+      paginado.push([]);
+      pagina++;
+    }
+    paginado[pagina].push(partido);
+  });
+
+  partidosPaginados = paginado;
+  paginaActual = 0;
+
+  if (partidosPaginados.length > 0) {
+    renderizarPaginaPartidos(partidosPaginados[0], 0);
+    actualizarControlesPaginacion();
   }
 }
 

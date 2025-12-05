@@ -54,124 +54,12 @@ require_once HEAD_COMPONENT;
 
         <!-- Lista de torneos -->
         <div id="torneosList" class="row g-3">
-            <!-- Torneo 1 - Participando -->
-            <div class="col-12">
-                <div class="card shadow-sm border-0 mb-2">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                                    style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                                    <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="card-title mb-1">
-                                    Copa FutMatch 2025
-                                </h5>
-                                <small class="text-muted">11/10/2025 - 15/12/2025 • 16 equipos</small>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="badge text-bg-dark fs-6">Participando</span>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-eye"></i> Ver Torneo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Los torneos se cargan dinámicamente con JavaScript -->
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
                 </div>
-            </div>
-
-            <!-- Torneo 2 - En curso -->
-            <div class="col-12">
-                <div class="card shadow-sm border-0 mb-2">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                                    style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                                    <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="card-title mb-1">
-                                    Liga Primavera Amateur
-                                </h5>
-                                <small class="text-muted">01/09/2025 - 30/11/2025 • 12 equipos</small>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="badge text-bg-dark fs-6">En curso</span>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-eye"></i> Ver Torneo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Torneo 3 - Inscripciones abiertas -->
-            <div class="col-12">
-                <div class="card shadow-sm border-0 mb-2">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                                    style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                                    <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="card-title mb-1">
-                                    Torneo Interclubes Verano
-                                </h5>
-                                <small class="text-muted">15/01/2026 - 28/02/2026 • 8/20 equipos</small>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="badge text-bg-dark fs-6">Inscripciones abiertas</span>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-eye"></i> Ver Torneo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Torneo 4 - Próximo a comenzar -->
-            <div class="col-12">
-                <div class="card shadow-sm border-0 mb-2">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 text-center">
-                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                                    style="width: 60px; height: 60px; border: 2px solid #dee2e6;">
-                                    <i class="bi bi-trophy text-muted" style="font-size: 1.5rem;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="card-title mb-1">
-                                    Copa Navideña Express
-                                </h5>
-                                <small class="text-muted">20/12/2025 - 22/12/2025 • 8 equipos</small>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="badge text-bg-dark fs-6">Próximamente</span>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-eye"></i> Ver Torneo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-muted mt-3">Cargando tus torneos...</p>
             </div>
         </div>
     </main>
@@ -214,25 +102,9 @@ require_once HEAD_COMPONENT;
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Los torneos finalizados se cargan dinámicamente con JavaScript -->
                                         <tr>
-                                            <td>Copa Verano 2024</td>
-                                            <td>10/01/2024 - 28/02/2024</td>
-                                            <td><span class="badge text-bg-dark">Campeón</span></td>
-                                            <td>
-                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-dark">
-                                                    <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Torneo Clausura 2023</td>
-                                            <td>15/09/2023 - 15/12/2023</td>
-                                            <td><span class="badge text-bg-dark">3° Puesto</span></td>
-                                            <td>
-                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-dark">
-                                                    <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                                                </a>
-                                            </td>
+                                            <td colspan="4" class="text-center text-muted">Cargando...</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -251,15 +123,9 @@ require_once HEAD_COMPONENT;
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Los torneos cancelados se cargan dinámicamente con JavaScript -->
                                         <tr>
-                                            <td>Torneo Federal</td>
-                                            <td>04/11/2025 - 30/11/2025</td>
-                                            <td><span class="text-muted">Cancelado por organizador</span></td>
-                                            <td>
-                                                <a href="<?= PAGE_TORNEO_DETALLE_JUGADOR ?>" class="btn btn-sm btn-dark">
-                                                    <i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver detalle</span>
-                                                </a>
-                                            </td>
+                                            <td colspan="4" class="text-center text-muted">Cargando...</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -274,11 +140,17 @@ require_once HEAD_COMPONENT;
         </div>
     </div>
 
+    <script>
+        const GET_MIS_TORNEOS_JUGADOR = "<?= GET_MIS_TORNEOS_JUGADOR ?>";
+        const GET_LISTA_CANCHAS = "<?= GET_LISTA_CANCHAS ?>";
+        const IMG_PATH = "<?= IMG_PATH ?>";
+    </script>
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="<?= CSS_ICONS ?>">
     <!-- Scripts -->
     <script src="<?= JS_BOOTSTRAP ?>"></script>
     <script src="<?= JS_TORNEOS_JUGADOR ?>"></script>
+
 </body>
 
 </html>

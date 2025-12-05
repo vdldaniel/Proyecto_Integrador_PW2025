@@ -19,6 +19,14 @@ function configurarEventos() {
   if (btnCambiarVista) {
     btnCambiarVista.addEventListener("click", toggleVista);
   }
+
+  // Evento para búsqueda
+  const busquedaCanchas = document.getElementById("busquedaCanchas");
+  if (busquedaCanchas) {
+    busquedaCanchas.addEventListener("input", (e) => {
+      filtrarCanchas(e.target.value);
+    });
+  }
 }
 
 async function cargarCanchasDisponibles() {
@@ -315,6 +323,64 @@ function agregarMarcadoresCanchas() {
   // Ajustar vista del mapa para mostrar todos los marcadores
   if (bounds.length > 0) {
     mapa.fitBounds(bounds, { padding: [50, 50] });
+  }
+}
+
+function filtrarCanchas(busqueda) {
+  const terminoBusqueda = busqueda.toLowerCase().trim();
+
+  if (terminoBusqueda === "") {
+    paginarCanchas(todasLasCanchas);
+    return;
+  }
+
+  const canchasFiltradas = todasLasCanchas.filter((cancha) => {
+    // Buscar en nombre de cancha
+    if (cancha.nombre_cancha.toLowerCase().includes(terminoBusqueda))
+      return true;
+
+    // Buscar en dirección
+    if (cancha.direccion_completa.toLowerCase().includes(terminoBusqueda))
+      return true;
+
+    // Buscar en tipo de partido
+    if (
+      cancha.tipo_partido_max &&
+      cancha.tipo_partido_max.toLowerCase().includes(terminoBusqueda)
+    )
+      return true;
+
+    // Buscar en superficie
+    if (
+      cancha.tipo_superficie &&
+      cancha.tipo_superficie.toLowerCase().includes(terminoBusqueda)
+    )
+      return true;
+
+    return false;
+  });
+
+  paginarCanchas(canchasFiltradas);
+}
+
+function paginarCanchas(canchas) {
+  let paginado = [[]];
+  let pagina = 0;
+
+  canchas.forEach((cancha) => {
+    if (paginado[pagina].length === CANCHAS_POR_PAGINA) {
+      paginado.push([]);
+      pagina++;
+    }
+    paginado[pagina].push(cancha);
+  });
+
+  canchasPaginadas = paginado;
+  paginaActual = 0;
+
+  if (canchasPaginadas.length > 0) {
+    renderizarPaginaCanchas(canchasPaginadas[0], 0);
+    actualizarControlesPaginacion();
   }
 }
 
