@@ -196,6 +196,119 @@ document.addEventListener("DOMContentLoaded", function () {
           // por si el usuario ya tenía texto en el campo de búsqueda.
           filterTorneos();
         } else {
+            fechaCierreContainer.classList.add('d-none');
+            if (fechaCierreInput) {
+                fechaCierreInput.removeAttribute('required');
+                fechaCierreInput.value = '';
+            }
+        }
+    });
+
+    // Manejar el envío del formulario de Creación
+    btnCrearTorneo.addEventListener('click', async function (e) {
+        e.preventDefault();
+
+        if (!formCrearTorneo.checkValidity()) {
+            formCrearTorneo.classList.add('was-validated');
+            return;
+        }
+
+        const data = new FormData(formCrearTorneo);
+        
+
+        btnCrearTorneo.disabled = true;
+        btnCrearTorneo.textContent = 'Creando...';
+
+        try {
+            const response = await fetch(ENDPOINT_CREAR, { method: 'POST', body: data });
+
+            if (!response.ok) {
+                const errorResult = await response.json();
+                throw new Error(errorResult.message || `Error ${response.status} en la petición.`);
+            }
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                showToast('Torneo creado exitosamente.');
+                formCrearTorneo.reset();
+                formCrearTorneo.classList.remove('was-validated');
+                modalCrearTorneo.hide();
+
+                await loadTorneos();
+            } else {
+                showToast('Error: ' + result.message, 'error');
+            }
+        } catch (error) {
+            console.error('Error AJAX (Crear Torneo):', error);
+            showToast('Error al crear torneo: ' + error.message, 'error');
+        } finally {
+            btnCrearTorneo.disabled = false;
+            btnCrearTorneo.textContent = 'Crear Torneo';
+        }
+    });
+
+
+    // --- Lógica del Modal de Cancelación ---
+
+    // 1. Listener delegado para botones generados dinámicamente
+    torneosListContainer.addEventListener('click', function (event) {
+        // Usa closest para encontrar el botón que disparó el evento
+        const button = event.target.closest('.btn-cancelar-torneo-trigger');
+        if (button) {
+            const torneoId = button.getAttribute('data-torneo-id');
+            cancelarTorneoIdInput.value = torneoId; // Almacenar el ID
+
+            if (modalCancelarTorneo) {
+                modalCancelarTorneo.show(); // Mostrar el modal manualmente
+            } else {
+                console.error('La instancia del modal de cancelación no está definida.');
+            }
+        }
+    });
+
+    // 2. Manejar la confirmación de cancelación
+    btnConfirmarCancelar.addEventListener('click', async function () {
+        const torneoId = cancelarTorneoIdInput.value;
+        if (!torneoId) {
+            showToast('Error: No se encontró el ID del torneo a cancelar.', 'error');
+            return;
+        }
+
+        btnConfirmarCancelar.disabled = true;
+        btnConfirmarCancelar.textContent = 'Cancelando...';
+
+        const data = new FormData();
+        data.append('torneo_id', torneoId);
+
+        try {
+            const response = await fetch(ENDPOINT_CANCELAR, {
+                method: 'POST',
+                body: data
+            });
+
+            if (!response.ok) {
+                // Leer el JSON de error del servidor
+                const errorResult = await response.json();
+                throw new Error(errorResult.message || `Error ${response.status} en la petición.`);
+            }
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                showToast('Torneo cancelado exitosamente.');
+                modalCancelarTorneo.hide();
+                await loadTorneos(); // Recargar la lista para que el torneo se muestre como 'cancelado'
+            } else {
+                showToast('Error: ' + result.message, 'error');
+            }
+
+        } catch (error) {
+            console.error('Error AJAX (Cancelar Torneo):', error);
+            showToast('Error al cancelar torneo: ' + error.message, 'error');
+        } finally {
+            btnConfirmarCancelar.disabled = false;
+            btnConfirmarCancelar.textContent = 'Sí, cancelar torneo';
           torneosListContainer.innerHTML =
             '<div class="col-12 text-center py-5"><i class="bi bi-info-circle me-2"></i> No has creado ningún torneo aún.</div>';
         }

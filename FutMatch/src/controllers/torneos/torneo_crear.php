@@ -18,7 +18,7 @@ $descripcion                = $_POST['descripcion'] ?? null;
 $abrirInscripciones         = filter_var($_POST['abrirInscripciones'] ?? 'false', FILTER_VALIDATE_BOOLEAN);
 $fechaCierreInscripciones   = $_POST['fechaCierreInscripciones'] ?? null;
 
-$idAdminCancha = $_SESSION['user_id'] ?? $_POST['idAdminCancha'] ?? null;// Obtener ID del organizador logueado
+$idAdminCancha = $_SESSION['user_id']  ?? null;// Obtener ID del organizador logueado
 
 // 2. Validación
 if (!$nombre || !$fechaInicio || !$idAdminCancha) {

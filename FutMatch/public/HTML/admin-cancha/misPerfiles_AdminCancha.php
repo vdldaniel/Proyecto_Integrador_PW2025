@@ -32,21 +32,7 @@ require_once HEAD_COMPONENT;
       'url' => PAGE_AGENDA_ADMIN_CANCHA
     ];
 
-    // Información específica de la cancha (normalmente vendría de BD del admin logueado)
-    // $perfil_cancha_nombre = 'MegaFutbol Cancha A1-F5';
-    // $perfil_cancha_descripcion_banner = 'Cancha de césped sintético de última generación con iluminación LED profesional. Ideal para partidos de Fútbol 5 con excelente drenaje y superficie antideslizante.';
-    // $perfil_cancha_direccion = 'Av. Corrientes 1234, CABA, Buenos Aires, Argentina';
-    // $perfil_cancha_tipo = 'Fútbol 5';
-    // $perfil_cancha_superficie = 'Césped sintético';
-    // $perfil_cancha_capacidad = '10 jugadores';
-    // $perfil_cancha_calificacion = '4.8';
-    // $perfil_cancha_total_resenas = '127';
-    // $perfil_cancha_total_jugadores = '342';
-    // $perfil_cancha_total_partidos = '156';
-    // $perfil_cancha_dias_atencion = 'Lunes a Domingo';
-    // $perfil_cancha_horario = '07:00 - 23:00';
-    // $perfil_cancha_estado_actual = 'Abierto ahora';
-    // $perfil_cancha_hora_cierre = '23:00';
+
     ?>
 
     <!-- Header específico para admin de cancha -->
@@ -180,7 +166,15 @@ require_once HEAD_COMPONENT;
   <script src="<?= JS_PERFIL_CANCHA_BASE ?>"></script>
   <!-- Script específico del admin (tiene toda la funcionalidad necesaria) -->
   <script src="<?= JS_PERFILES_CANCHA ?>"></script>
-
+  <!-- TOASTS -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastGeneral" class="toast align-items-center text-white bg-dark border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

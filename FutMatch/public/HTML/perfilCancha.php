@@ -14,6 +14,8 @@ $perfil_cancha_boton_primario = $perfil_cancha_boton_primario ?? [
     'icono' => 'bi-calendar-plus',
     'url' => '#'
 ];
+$perfil_cancha_nombre = $perfil_cancha_nombre ?? 'Nombre de Cancha';
+$perfil_cancha_descripcion_banner = $perfil_cancha_descripcion_banner ?? 'Descripción breve de la cancha';
 
 // Información básica de la cancha
 
@@ -85,8 +87,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
 
                 <?php if ($perfil_cancha_admin_mode && !isset($perfil_cancha_es_admin_sistema)): ?>
                     <button class="btn btn-dark btn-sm profile-banner-edit-btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#modalCambiarBanner">
+                        onclick="abrirModalCambiarImagen()">
                         <i class="bi bi-camera-fill"></i> Editar portada
                     </button>
                 <?php endif; ?>
@@ -126,6 +127,34 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
         </div>
     </div>
 </div>
+<!-- Modal Cambiar Imagen -->
+<div class="modal fade" id="modalCambiarImagen" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Cambiar imagen de la cancha</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="imgCanchaId">
+
+                <div class="mb-3 text-center">
+                    <img id="previewNuevaImagen" src="" class="img-fluid rounded shadow" style="max-height:180px;">
+                </div>
+
+                <input type="file" id="inputNuevaImagen" class="form-control" accept="image/*">
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" id="btnSubirImagen">Guardar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 <!-- Contenido principal -->
@@ -136,102 +165,18 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
             <div class="card-header bg-primary text-white">
                 <h4 class="mb-0"><i class="bi bi-trophy"></i> <?= $perfil_cancha_titulo_seccion ?></h4>
             </div>
+
             <div class="card-body p-0">
-                <!-- Torneo 1 -->
-                <div class="border-bottom p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-warning rounded-circle p-2 me-3">
-                            <i class="bi bi-trophy text-dark"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1 fw-bold">Copa Verano 2025</h6>
-                            <small class="text-muted">Fútbol 5 • <?= $perfil_cancha_admin_mode ? '16' : '12/16' ?> equipos • Inicia: 15 de enero</small>
-                        </div>
-                        <div>
-                            <span class="badge text-bg-dark">Inscripciones Abiertas</span>
-                        </div>
-                    </div>
-                    <p class="mb-3">Torneo de temporada de verano con premios para los 3 primeros puestos. Modalidad todos contra todos + eliminatorias.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <?php if (!$perfil_cancha_admin_mode): ?>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-dark btnVerDetalles" data-torneo-id="1">Ver Detalles</button>
-                                <button class="btn btn-sm btn-success btnInscribirEquipo" data-torneo-id="1">
-                                    <i class="bi bi-trophy"></i> Inscribirse
-                                </button>
-                            </div>
-                        <?php else: ?>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-dark">Ver Detalles</button>
-                                <button class="btn btn-sm btn-primary">Gestionar</button>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+
+                <!-- LOADER -->
+                <div id="loaderTorneos" class="text-center p-4">
+                    <div class="spinner-border" role="status"></div>
+                    <p class="mt-2">Cargando torneos...</p>
                 </div>
 
-                <!-- Torneo 2 -->
-                <div class="border-bottom p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-info rounded-circle p-2 me-3">
-                            <i class="bi bi-trophy text-white"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1 fw-bold">Liga Amateur - Fecha 8</h6>
-                            <small class="text-muted">Fútbol 5 • 12 equipos • En curso</small>
-                        </div>
-                        <div>
-                            <span class="badge text-bg-dark">En Curso</span>
-                        </div>
-                    </div>
-                    <p class="mb-3">Liga amateur semanal. Próxima fecha: Sábado 9 de noviembre a partir de las 14:00.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <?php if (!$perfil_cancha_admin_mode): ?>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-dark" data-action="verDetallesTorneo" data-torneo-id="2">Ver Detalles</button>
-                                <button class="btn btn-sm btn-secondary" disabled>
-                                    <i class="bi bi-lock"></i> Cupos Llenos
-                                </button>
-                            </div>
-                        <?php else: ?>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-dark">Ver Detalles</button>
-                                <button class="btn btn-sm btn-primary">Gestionar</button>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
+                <!-- LISTA DINÁMICA -->
+                <div id="listaTorneos"></div>
 
-                <!-- Torneo 3 -->
-                <div class="p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-success rounded-circle p-2 me-3">
-                            <i class="bi bi-trophy text-white"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1 fw-bold">Torneo Nocturno Express</h6>
-                            <small class="text-muted">Fútbol 5 • <?= $perfil_cancha_admin_mode ? '8' : '0/8' ?> equipos • Viernes por la noche</small>
-                        </div>
-                        <div>
-                            <span class="badge bg-text-dark">Próximamente</span>
-                        </div>
-                    </div>
-                    <p class="mb-3">Torneo express de eliminación directa. Ideal para equipos que quieren competir sin comprometerse toda la temporada.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <?php if (!$perfil_cancha_admin_mode): ?>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-dark btnVerDetalles" data-torneo-id="3">Ver Detalles</button>
-                                <button class="btn btn-sm btn-warning btnNotificarInicio" data-torneo-id="3">
-                                    <i class="bi bi-bell"></i> Notificar Inicio
-                                </button>
-                            </div>
-                        <?php else: ?>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-dark">Ver Detalles</button>
-                                <button class="btn btn-sm btn-primary">Gestionar</button>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -322,7 +267,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
             </div>
         </div>
 
-        <!-- Servicios Incluidos
+        <!-- Servicios Incluidos-->
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-info text-white">
                 <h5 class="mb-0"><i class="bi bi-check-circle"></i> Servicios y Comodidades</h5>
@@ -334,7 +279,7 @@ $perfil_cancha_total_partidos = $perfil_cancha_total_partidos ?? '156';
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div> 
 
         <!-- Estadísticas (Ocultas temporalmente) -->
         <?php if (false): ?>
