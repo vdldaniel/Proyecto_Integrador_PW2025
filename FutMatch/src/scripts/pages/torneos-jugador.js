@@ -103,7 +103,7 @@ function renderizarTorneos(torneos) {
       case 3: // Aprobado
         estadoBadge = `<span class="badge text-bg-success fs-6">${torneo.etapa}</span>`;
         botonHTML = `
-          <a href="torneoDetalle_Jugador.php?id=${torneo.id_torneo}" class="btn btn-primary btn-sm">
+          <a href="${BASE_URL}public/HTML/jugador/torneoDetalle_Jugador.php?id=${torneo.id_torneo}" class="btn btn-primary btn-sm">
             <i class="bi bi-eye"></i> Ver Torneo
           </a>
         `;
@@ -290,8 +290,8 @@ async function verDetalleTorneo(idTorneo) {
     month: "long",
     year: "numeric",
   });
-  const finEstimativo = torneo.fin_estimativo
-    ? new Date(torneo.fin_estimativo).toLocaleDateString("es-AR", {
+  const finEstimativo = torneo.cierre_inscripciones
+    ? new Date(torneo.cierre_inscripciones).toLocaleDateString("es-AR", {
         day: "2-digit",
         month: "long",
         year: "numeric",

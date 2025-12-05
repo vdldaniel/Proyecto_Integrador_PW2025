@@ -115,10 +115,13 @@ function renderizarPaginaTorneos(torneos, numeroPagina) {
       month: "long",
       year: "numeric",
     });
-    const finEstimativo = new Date(torneo.fin_estimativo).toLocaleDateString(
-      "es-AR",
-      { day: "2-digit", month: "long", year: "numeric" }
-    );
+    const finEstimativo = new Date(
+      torneo.cierre_inscripciones
+    ).toLocaleDateString("es-AR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
 
     // Información de ubicación
     let ubicacionHTML = "";
@@ -289,8 +292,8 @@ function verDetalleTorneo(idTorneo) {
     month: "long",
     year: "numeric",
   });
-  const finEstimativo = torneo.fin_estimativo
-    ? new Date(torneo.fin_estimativo).toLocaleDateString("es-AR", {
+  const finEstimativo = torneo.cierre_inscripciones
+    ? new Date(torneo.cierre_inscripciones).toLocaleDateString("es-AR", {
         day: "2-digit",
         month: "long",
         year: "numeric",

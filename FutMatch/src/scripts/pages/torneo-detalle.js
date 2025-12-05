@@ -22,19 +22,6 @@ function inicializarTooltips() {
 }
 
 /**
- * Inicializa el sistema de modales para los detalles de partidos
- */
-function inicializarModalPartidos() {
-  const partidoCards = document.querySelectorAll(".partido-card");
-
-  partidoCards.forEach((card) => {
-    card.addEventListener("click", function () {
-      mostrarDetallePartido(this);
-    });
-  });
-}
-
-/**
  * Muestra los detalles del partido en el modal
  * @param {HTMLElement} cardElement - Elemento de la tarjeta del partido clickeada
  */

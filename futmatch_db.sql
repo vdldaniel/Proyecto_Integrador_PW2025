@@ -627,11 +627,11 @@ DROP TABLE IF EXISTS `partidos`;
 CREATE TABLE `partidos` (
   `id_partido` int(11) NOT NULL,
   `id_anfitrion` int(11) NOT NULL,
-  `id_tipo_partido` int(11) NOT NULL DEFAULT 1,
+  `id_tipo_partido` int(11) NULL DEFAULT 1,
   `abierto` tinyint(1) DEFAULT 0,
   `goles_equipo_A` int(10) DEFAULT NULL,
   `goles_equipo_B` int(10) DEFAULT NULL,
-  `id_reserva` int(11) NOT NULL
+  `id_reserva` int(11) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1227,7 +1227,7 @@ CREATE TABLE `torneos` (
   `nombre` varchar(100) NOT NULL,
   `fecha_inicio` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
-  `fin_estimativo` date DEFAULT NULL,
+  `cierre_inscripciones` date DEFAULT NULL,
   `id_etapa` int(11) NOT NULL DEFAULT 1,
   `descripcion` text DEFAULT NULL,
   `max_equipos` smallint(6) DEFAULT NULL
@@ -1237,7 +1237,7 @@ CREATE TABLE `torneos` (
 -- Dumping data for table `torneos`
 --
 
-INSERT INTO `torneos` (`id_torneo`, `id_organizador`, `nombre`, `fecha_inicio`, `fecha_fin`, `fin_estimativo`, `id_etapa`, `descripcion`) VALUES
+INSERT INTO `torneos` (`id_torneo`, `id_organizador`, `nombre`, `fecha_inicio`, `fecha_fin`, `cierre_inscripciones`, `id_etapa`, `descripcion`) VALUES
 (1, 12, 'Copa Primavera 2025', '2025-12-01', '2025-12-15', NULL, 1, 'Torneo de fútbol 5 para equipos amateur'),
 (2, 13, 'Torneo Relámpago', '2025-11-20', '2025-11-20', NULL, 1, 'Torneo de un día en múltiples canchas');
 
@@ -2372,9 +2372,27 @@ ORDER BY r.fecha ASC, r.hora_inicio ASC;
 -- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1;
 -- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 2 ORDER BY fecha_partido DESC;
 
+-- =========================================================
+-- VISTA: Partidos por Jugador
+-- =========================================================
+-- Esta vista permite consultar los partidos de cualquier jugador
+-- simplemente filtrando por id_jugador en el WHERE
+--
+-- Incluye:
+-- 1. Partidos donde el jugador participa directamente (participantes_partidos)
+-- 2. Partidos de torneos donde el jugador pertenece a un equipo inscrito
+--
+-- Ejemplo de uso:
+-- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 1;
+-- SELECT * FROM vista_partidos_jugador WHERE id_jugador = 2 ORDER BY fecha_partido DESC;
+
 DROP VIEW IF EXISTS vista_partidos_jugador;
 
 CREATE VIEW vista_partidos_jugador AS
+
+-- =========================================================
+-- PARTE 1: Partidos regulares (donde el jugador participa directamente)
+-- =========================================================
 SELECT 
     -- Información del jugador
     pp.id_jugador,
@@ -2530,7 +2548,90 @@ LEFT JOIN etapas_torneo et ON t.id_etapa = et.id_etapa
 LEFT JOIN equipos eqa ON pt.id_equipo_A = eqa.id_equipo
 LEFT JOIN equipos eqb ON pt.id_equipo_B = eqb.id_equipo
 
-ORDER BY r.fecha DESC, r.hora_inicio DESC;
+UNION ALL
+
+-- =========================================================
+-- PARTE 2: Partidos de torneos (donde el jugador pertenece a un equipo inscrito)
+-- =========================================================
+SELECT 
+    je.id_jugador,
+    j.username as mi_username,
+    p.id_partido,
+    NULL as id_anfitrion,
+    0 as abierto,
+    p.goles_equipo_A,
+    p.goles_equipo_B,
+    p.id_reserva,
+    DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha_partido,
+    CASE DAYOFWEEK(r.fecha)
+        WHEN 1 THEN 'Domingo'
+        WHEN 2 THEN 'Lunes'
+        WHEN 3 THEN 'Martes'
+        WHEN 4 THEN 'Miércoles'
+        WHEN 5 THEN 'Jueves'
+        WHEN 6 THEN 'Viernes'
+        WHEN 7 THEN 'Sábado'
+    END as dia_semana,
+    TIME_FORMAT(r.hora_inicio, '%H:%i') as hora_partido,
+    TIME_FORMAT(r.hora_fin, '%H:%i') as hora_fin,
+    r.id_tipo_reserva,
+    c.id_cancha,
+    c.nombre as nombre_cancha,
+    d.direccion_completa as direccion_cancha,
+    d.latitud as latitud_cancha,
+    d.longitud as longitud_cancha,
+    NULL as id_estado_participante,
+    NULL as estado_participante,
+    r.id_estado as id_estado_reserva,
+    es.nombre as estado_reserva,
+    NULL as id_rol,
+    'Jugador de Equipo' as rol_usuario,
+    tp.id_tipo_partido,
+    tp.nombre as tipo_partido,
+    tp.min_participantes as min_participantes,
+    tp.max_participantes as max_participantes,
+    CASE 
+        WHEN pt.id_equipo_A = je.id_equipo THEN 1
+        WHEN pt.id_equipo_B = je.id_equipo THEN 2
+    END as equipo_asignado,
+    (SELECT COUNT(*) FROM jugadores_equipos 
+     WHERE id_equipo = pt.id_equipo_A AND estado_solicitud = 3) AS cant_participantes_equipo_a,
+    (SELECT COUNT(*) FROM jugadores_equipos 
+     WHERE id_equipo = pt.id_equipo_B AND estado_solicitud = 3) AS cant_participantes_equipo_b,
+    t.id_torneo,
+    t.nombre AS nombre_torneo,
+    ft.nombre AS etapa_torneo,
+    pt.id_fase,
+    pt.orden_en_fase,
+    pt.id_equipo_A,
+    pt.id_equipo_B,
+    eqa.nombre AS nombre_equipo_A,
+    eqa.foto AS foto_equipo_A,
+    eqa.descripcion AS descripcion_equipo_A,
+    eqb.nombre AS nombre_equipo_B,
+    eqb.foto AS foto_equipo_B,
+    eqb.descripcion AS descripcion_equipo_B
+FROM jugadores_equipos je
+INNER JOIN jugadores j ON je.id_jugador = j.id_jugador
+INNER JOIN equipos_torneos et_inscripcion 
+    ON je.id_equipo = et_inscripcion.id_equipo 
+    AND et_inscripcion.id_estado = 3
+INNER JOIN partidos_torneos pt 
+    ON et_inscripcion.id_torneo = pt.id_torneo
+    AND (pt.id_equipo_A = je.id_equipo OR pt.id_equipo_B = je.id_equipo)
+INNER JOIN partidos p ON pt.id_partido = p.id_partido
+INNER JOIN reservas r ON p.id_reserva = r.id_reserva
+LEFT JOIN tipos_partido tp ON p.id_tipo_partido = tp.id_tipo_partido
+INNER JOIN estados_solicitudes es ON r.id_estado = es.id_estado
+INNER JOIN torneos t ON pt.id_torneo = t.id_torneo
+INNER JOIN fases_torneo ft ON pt.id_fase = ft.id_fase
+LEFT JOIN canchas c ON r.id_cancha = c.id_cancha
+LEFT JOIN direcciones d ON c.id_direccion = d.id_direccion
+LEFT JOIN equipos eqa ON pt.id_equipo_A = eqa.id_equipo
+LEFT JOIN equipos eqb ON pt.id_equipo_B = eqb.id_equipo
+WHERE je.estado_solicitud = 3
+
+ORDER BY fecha_partido DESC, hora_partido DESC;
 
 -- =========================================================
 

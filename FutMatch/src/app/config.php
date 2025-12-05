@@ -165,6 +165,7 @@ define("GET_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/getHorariosC
 define("GET_RESERVA_DETALLE", BASE_URL . "src/controllers/reservas/getReservaDetalle.php");
 define("GET_RESERVAS", BASE_URL . "src/controllers/reservas/getReservas.php");
 define("GET_TIPOS_RESERVA", BASE_URL . "src/controllers/reservas/getTiposReserva.php");
+define("GET_DATOS_TORNEO_RESERVA", BASE_URL . "src/controllers/reservas/getDatosTorneoReserva.php");
 define("POST_RESERVA", BASE_URL . "src/controllers/reservas/postReserva.php");
 define("UPDATE_HORARIOS_CANCHAS", BASE_URL . "src/controllers/reservas/updateHorariosCanchas.php");
 define("UPDATE_RESERVA", BASE_URL . "src/controllers/reservas/updateReserva.php");
@@ -257,7 +258,8 @@ define("JS_PARTIDOS_JUGADOR", JS_PAGES_PATH . "partidosJugador.js");
 define("JS_PERFILES_CANCHAS", JS_PAGES_PATH . "perfiles-canchas.js");
 define("JS_REGISTRO_ADMIN_CANCHA", JS_PAGES_PATH . "registroAdminCancha.js");
 define("JS_REGISTRO_JUGADOR", JS_PAGES_PATH . "registroJugador.js");
-define("JS_TORNEO_DETALLE", JS_PAGES_PATH . "torneo-detalle.js");
+define("JS_TORNEO_DETALLE", JS_PAGES_PATH . "torneos/torneoDetalle_AdminCancha.js");
+define("JS_TORNEO_DETALLE_JUGADOR", JS_PAGES_PATH . "torneos/torneoDetalle_Jugador.js");
 define("JS_TORNEOS_JUGADOR", JS_PAGES_PATH . "torneos-jugador.js");
 define("JS_TORNEOS_EXPLORAR_JUGADOR", JS_PAGES_PATH . "torneosExplorar_Jugador.js");
 

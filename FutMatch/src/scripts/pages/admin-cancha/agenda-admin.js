@@ -24,6 +24,7 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     this.configurarModalNotificaciones();
     this.cargarCanchas();
     this.cargarTiposReserva();
+    this.configurarBotonVerSolicitudes();
   }
 
   // Cargar canchas del admin desde el controller
@@ -95,6 +96,16 @@ class AplicacionAgendaAdmin extends CalendarioBase {
       }
     } catch (error) {
       console.error("Error al cargar tipos de reserva:", error);
+    }
+  }
+
+  // Configurar botón Ver Solicitudes
+  configurarBotonVerSolicitudes() {
+    const botonVerSolicitudes = document.getElementById("botonVerSolicitudes");
+    if (botonVerSolicitudes) {
+      botonVerSolicitudes.addEventListener("click", () => {
+        this.cargarNotificacionesNavbar();
+      });
     }
   }
 
@@ -245,7 +256,7 @@ class AplicacionAgendaAdmin extends CalendarioBase {
     });
   }
 
-  // Cargar notificaciones para el navbar
+  // Cargar notificaciones para el modal de solicitudes
   async cargarNotificacionesNavbar() {
     // Obtener todas las reservas pendientes de todas las canchas del admin
     try {
@@ -261,6 +272,11 @@ class AplicacionAgendaAdmin extends CalendarioBase {
           `${GET_RESERVAS}?id_cancha=${cancha.id_cancha}`
         );
         const dataReservas = await resReservas.json();
+        console.log(
+          "Reservas cargadas para cancha:",
+          cancha.nombre,
+          dataReservas
+        );
 
         if (dataReservas.success && dataReservas.reservas) {
           const pendientes = dataReservas.reservas.filter(
@@ -275,14 +291,176 @@ class AplicacionAgendaAdmin extends CalendarioBase {
         }
       }
 
-      // Renderizar en tabla del navbar
-      this.renderizarNotificacionesNavbar(todasPendientes);
+      // Enriquecer con datos de torneo si aplica
+      await this.enriquecerReservasConDatosTorneo(todasPendientes);
+
+      // Renderizar en el modal de solicitudes pendientes
+      this.renderizarSolicitudesEnModal(todasPendientes);
     } catch (error) {
       console.error("Error al cargar notificaciones:", error);
     }
   }
 
-  // Renderizar notificaciones en la tabla del navbar
+  // Enriquecer reservas con datos de torneo (sobrecarga para arrays externos)
+  async enriquecerReservasConDatosTorneo(reservas = null) {
+    const reservasAProcesar = reservas || this.reservas;
+
+    if (!reservasAProcesar || reservasAProcesar.length === 0) return;
+
+    // Filtrar solo reservas de tipo torneo
+    const reservasTorneo = reservasAProcesar.filter(
+      (r) => r.id_tipo_reserva === "torneo"
+    );
+
+    if (reservasTorneo.length === 0) return;
+
+    // Obtener datos de torneo para cada reserva
+    const promesas = reservasTorneo.map(async (reserva) => {
+      try {
+        const response = await fetch(
+          `${GET_DATOS_TORNEO_RESERVA}?id_reserva=${reserva.id_reserva}`
+        );
+        const data = await response.json();
+
+        if (data.status === "success" && data.es_torneo && data.datos) {
+          // Enriquecer la reserva con los datos del torneo
+          reserva.nombre_torneo = data.datos.nombre_torneo;
+          reserva.fase_nombre = data.datos.fase_nombre;
+          reserva.equipo_a_nombre = data.datos.equipo_a_nombre;
+          reserva.equipo_b_nombre = data.datos.equipo_b_nombre;
+          reserva.id_torneo = data.datos.id_torneo;
+          reserva.id_partido = data.datos.id_partido;
+          reserva.goles_equipo_A = data.datos.goles_equipo_A;
+          reserva.goles_equipo_B = data.datos.goles_equipo_B;
+        }
+      } catch (error) {
+        console.error(
+          `Error al cargar datos de torneo para reserva ${reserva.id_reserva}:`,
+          error
+        );
+      }
+    });
+
+    // Esperar a que todas las promesas se resuelvan
+    await Promise.all(promesas);
+  }
+
+  // Renderizar solicitudes en el modal de Solicitudes Pendientes
+  renderizarSolicitudesEnModal(reservasPendientes) {
+    const contenedor = document.getElementById(
+      "contenidoSolicitudesPendientes"
+    );
+    if (!contenedor) return;
+
+    if (reservasPendientes.length === 0) {
+      contenedor.innerHTML = `
+        <div class="text-center text-muted py-5">
+          <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+          <p class="mt-3">No hay solicitudes pendientes</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = `<div class="list-group">`;
+
+    reservasPendientes.forEach((reserva, index) => {
+      // Determinar qué mostrar como titular
+      let titularDisplay = "";
+
+      if (reserva.id_tipo_reserva === "torneo") {
+        // Formato: "Nombre Torneo - Fase - Equipo A vs Equipo B"
+        const nombreTorneo = reserva.nombre_torneo || "Torneo";
+        const fase = reserva.fase_nombre || "Fase";
+        const equipoA = reserva.equipo_a_nombre || "Equipo A";
+        const equipoB = reserva.equipo_b_nombre || "Equipo B";
+        titularDisplay = `
+          <h6 class="mb-1"><i class="bi bi-trophy text-warning me-2"></i>${nombreTorneo}</h6>
+          <p class="mb-1 text-muted"><strong>${fase}</strong> - ${equipoA} vs ${equipoB}</p>
+        `;
+      } else {
+        // Formato normal para reservas no-torneo
+        titularDisplay = `
+          <h6 class="mb-1">
+            ${
+              reserva.tipo_titular === "jugador"
+                ? `<i class="bi bi-person-fill text-primary me-2"></i>`
+                : `<i class="bi bi-person-badge text-secondary me-2"></i>`
+            }
+            ${reserva.titular_nombre_completo}
+          </h6>
+          <p class="mb-1 text-muted">
+            ${
+              reserva.tipo_titular === "jugador"
+                ? `@${reserva.username_titular || "Usuario"}`
+                : "Reserva Externa"
+            }
+          </p>
+        `;
+      }
+
+      html += `
+        <div class="list-group-item">
+          <div class="d-flex w-100 justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              ${titularDisplay}
+              <p class="mb-1">
+                <i class="bi bi-geo-alt-fill text-info me-2"></i><strong>${
+                  reserva.nombre_cancha
+                }</strong>
+              </p>
+              <p class="mb-1">
+                <i class="bi bi-calendar3 me-2"></i>${new Date(
+                  reserva.fecha
+                ).toLocaleDateString("es-AR", {
+                  weekday: "long",
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+              <p class="mb-0">
+                <i class="bi bi-clock me-2"></i>${reserva.hora_inicio.substring(
+                  0,
+                  5
+                )} - ${reserva.hora_fin.substring(0, 5)}
+              </p>
+              ${
+                reserva.titulo
+                  ? `<p class="mb-0 mt-2"><strong>Título:</strong> ${reserva.titulo}</p>`
+                  : ""
+              }
+              ${
+                reserva.descripcion
+                  ? `<p class="mb-0 text-muted small">${reserva.descripcion}</p>`
+                  : ""
+              }
+            </div>
+            <div class="ms-3">
+              <div class="btn-group-vertical" role="group">
+                <button class="btn btn-success btn-sm mb-1" onclick="aplicacionAgenda.aceptarSolicitudNavbar(${
+                  reserva.id_reserva
+                })" title="Aceptar solicitud">
+                  <i class="bi bi-check-lg"></i> Aceptar
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="aplicacionAgenda.rechazarSolicitudNavbar(${
+                  reserva.id_reserva
+                })" title="Rechazar solicitud">
+                  <i class="bi bi-x-lg"></i> Rechazar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+
+    contenedor.innerHTML = html;
+  }
+
+  // Renderizar notificaciones en la tabla del navbar (método legacy, puede ser removido si no se usa)
   renderizarNotificacionesNavbar(reservasPendientes) {
     const tbody = document.querySelector("#content-agenda tbody");
     if (!tbody) return;
@@ -300,58 +478,108 @@ class AplicacionAgendaAdmin extends CalendarioBase {
 
     tbody.innerHTML = reservasPendientes
       .slice(0, 10)
-      .map(
-        (reserva) => `
-      <tr>
-        <td>
-          <div>${reserva.titular_nombre_completo}</div>
-          <small class="text-muted">
-            ${
-              reserva.tipo_titular === "jugador"
-                ? `<i class="bi bi-person"></i> @${
-                    reserva.username_titular || "Usuario"
-                  }`
-                : '<i class="bi bi-person-badge"></i> Externo'
-            }
-          </small>
-        </td>
-        <td>${reserva.nombre_cancha}</td>
-        <td>${new Date(reserva.fecha).toLocaleDateString("es-AR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })}</td>
-        <td>${reserva.hora_inicio.substring(0, 5)}</td>
-        <td>
-          <div class="btn-group btn-group-sm" role="group">
-            <button class="btn btn-success" onclick="aplicacionAgenda.aceptarSolicitudNavbar(${
-              reserva.id_reserva
-            })" title="Aceptar">
-              <i class="bi bi-check-lg"></i>
-            </button>
-            <button class="btn btn-danger" onclick="aplicacionAgenda.rechazarSolicitudNavbar(${
-              reserva.id_reserva
-            })" title="Rechazar">
-              <i class="bi bi-x-lg"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-    `
-      )
+      .map((reserva) => {
+        // Determinar qué mostrar en la columna de titular
+        let titularDisplay = "";
+
+        if (reserva.id_tipo_reserva === "torneo") {
+          // Formato: "Nombre Torneo - Fase - Equipo A vs Equipo B"
+          const nombreTorneo = reserva.nombre_torneo || "Torneo";
+          const fase = reserva.fase_nombre || "Fase";
+          const equipoA = reserva.equipo_a_nombre || "Equipo A";
+          const equipoB = reserva.equipo_b_nombre || "Equipo B";
+          titularDisplay = `
+              <div><strong>${nombreTorneo}</strong></div>
+              <small class="text-muted">
+                <i class="bi bi-trophy"></i> ${fase} - ${equipoA} vs ${equipoB}
+              </small>
+            `;
+        } else {
+          // Formato normal para reservas no-torneo
+          titularDisplay = `
+              <div>${reserva.titular_nombre_completo}</div>
+              <small class="text-muted">
+                ${
+                  reserva.tipo_titular === "jugador"
+                    ? `<i class="bi bi-person"></i> @${
+                        reserva.username_titular || "Usuario"
+                      }`
+                    : '<i class="bi bi-person-badge"></i> Externo'
+                }
+              </small>
+            `;
+        }
+
+        return `
+            <tr>
+              <td>${titularDisplay}</td>
+              <td>${reserva.nombre_cancha}</td>
+              <td>${new Date(reserva.fecha).toLocaleDateString("es-AR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })}</td>
+              <td>${reserva.hora_inicio.substring(0, 5)}</td>
+              <td>
+                <div class="btn-group btn-group-sm" role="group">
+                  <button class="btn btn-success" onclick="aplicacionAgenda.aceptarSolicitudNavbar(${
+                    reserva.id_reserva
+                  })" title="Aceptar">
+                    <i class="bi bi-check-lg"></i>
+                  </button>
+                  <button class="btn btn-danger" onclick="aplicacionAgenda.rechazarSolicitudNavbar(${
+                    reserva.id_reserva
+                  })" title="Rechazar">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+      })
       .join("");
   }
 
-  // Aceptar solicitud desde navbar
+  // Aceptar solicitud desde modal de solicitudes
   async aceptarSolicitudNavbar(idReserva) {
-    await this.cambiarEstadoReserva(idReserva, 3);
-    await this.cargarNotificacionesNavbar();
+    try {
+      await this.cambiarEstadoReserva(idReserva, 3);
+      await this.cargarNotificacionesNavbar();
+
+      // Si hay una cancha seleccionada, recargar su calendario
+      const canchaSeleccionada =
+        document.getElementById("selectorCancha")?.value;
+      if (canchaSeleccionada) {
+        await this.cargarReservas(canchaSeleccionada);
+        this.renderizarVistaActual();
+      }
+
+      showToast("Solicitud aceptada exitosamente", "success");
+    } catch (error) {
+      console.error("Error al aceptar solicitud:", error);
+      showToast("Error al aceptar la solicitud", "error");
+    }
   }
 
-  // Rechazar solicitud desde navbar
+  // Rechazar solicitud desde modal de solicitudes
   async rechazarSolicitudNavbar(idReserva) {
-    await this.cambiarEstadoReserva(idReserva, 4);
-    await this.cargarNotificacionesNavbar();
+    try {
+      await this.cambiarEstadoReserva(idReserva, 4);
+      await this.cargarNotificacionesNavbar();
+
+      // Si hay una cancha seleccionada, recargar su calendario
+      const canchaSeleccionada =
+        document.getElementById("selectorCancha")?.value;
+      if (canchaSeleccionada) {
+        await this.cargarReservas(canchaSeleccionada);
+        this.renderizarVistaActual();
+      }
+
+      showToast("Solicitud rechazada", "info");
+    } catch (error) {
+      console.error("Error al rechazar solicitud:", error);
+      showToast("Error al rechazar la solicitud", "error");
+    }
   }
 
   // Configurar modal de configuración con datos y validación
@@ -895,7 +1123,11 @@ class AplicacionAgendaAdmin extends CalendarioBase {
             </div>
             <div class="col-md-6 mb-2">
               <small class="text-muted d-block">Nombre</small>
-              <strong>${reserva.titular_nombre_completo}</strong>
+              <strong>${
+                reserva.id_tipo_reserva === 2
+                  ? reserva.titulo
+                  : reserva.titular_nombre_completo
+              }</strong>
             </div>
             ${
               reserva.titular_telefono
@@ -1207,7 +1439,11 @@ class AplicacionAgendaAdmin extends CalendarioBase {
               5
             )}</small>
           </td>
-          <td><strong>${reserva.titular_nombre_completo}</strong></td>
+          <td><strong>${
+            reserva.id_tipo_reserva === 2
+              ? reserva.titulo
+              : reserva.titular_nombre_completo
+          }</strong></td>
           <td>
             <span class="badge bg-info">${reserva.tipo_reserva}</span>
             ${
@@ -1274,7 +1510,15 @@ class AplicacionAgendaAdmin extends CalendarioBase {
                 <span class="badge bg-warning text-dark me-2">${
                   index + 1
                 }</span>
-                ${reserva.titular_nombre_completo}
+                ${
+                  reserva.id_tipo_reserva === 2
+                    ? `<i class="bi bi-trophy text-warning me-1"></i>${
+                        reserva.nombre_torneo || "Torneo"
+                      } - ${reserva.fase_nombre || "Fase"} - ${
+                        reserva.equipo_a_nombre || "Equipo A"
+                      } vs ${reserva.equipo_b_nombre || "Equipo B"}`
+                    : reserva.titular_nombre_completo
+                }
               </h6>
               <p class="mb-1">
                 <small class="text-muted">
@@ -1367,7 +1611,15 @@ class AplicacionAgendaAdmin extends CalendarioBase {
                 <span class="badge bg-warning text-dark me-2">${
                   index + 1
                 }</span>
-                ${reserva.titular_nombre_completo}
+                ${
+                  reserva.id_tipo_reserva === "torneo"
+                    ? `<i class="bi bi-trophy text-warning me-1"></i>${
+                        reserva.nombre_torneo || "Torneo"
+                      } - ${reserva.fase_nombre || "Fase"} - ${
+                        reserva.equipo_a_nombre || "Equipo A"
+                      } vs ${reserva.equipo_b_nombre || "Equipo B"}`
+                    : reserva.titular_nombre_completo
+                }
               </h6>
               <p class="mb-1">
                 <small class="text-muted">

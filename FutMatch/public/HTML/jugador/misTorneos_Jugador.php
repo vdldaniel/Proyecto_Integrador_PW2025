@@ -37,7 +37,7 @@ require_once HEAD_COMPONENT;
         </div>
 
         <!-- Línea 2: Filtros y búsqueda -->
-        <div class="row mb-4">
+        <div class="row mb-4 d-none">
             <div class="col-12">
                 <div class="input-group">
                     <span class="input-group-text">
@@ -141,6 +141,7 @@ require_once HEAD_COMPONENT;
     </div>
 
     <script>
+        const BASE_URL = "<?= BASE_URL ?>";
         const GET_MIS_TORNEOS_JUGADOR = "<?= GET_MIS_TORNEOS_JUGADOR ?>";
         const GET_LISTA_CANCHAS = "<?= GET_LISTA_CANCHAS ?>";
         const IMG_PATH = "<?= IMG_PATH ?>";

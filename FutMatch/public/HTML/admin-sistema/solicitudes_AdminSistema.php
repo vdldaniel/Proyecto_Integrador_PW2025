@@ -32,7 +32,7 @@ include HEAD_COMPONENT;
             </div>
 
             <!-- Línea 2: Búsqueda general -->
-            <div class="row mb-4">
+            <div class="row mb-4 d-none">
                 <div class="col-12">
                     <div class="input-group">
                         <span class="input-group-text">

@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 require_once __DIR__ . '/../../app/config.php';
 
-$idAdminCancha = $_SESSION['user_id'] ?? 1; 
+$idAdminCancha = $_SESSION['user_id'] ?? 1;
 
 if (!$idAdminCancha) {
     http_response_code(401);
@@ -12,8 +12,8 @@ if (!$idAdminCancha) {
 }
 
 try {
-    // OBTENER SOLO TORNEOS CANCELADOS id_etapa = 5 
-   
+    // OBTENER SOLO TORNEOS CANCELADOS id_etapa = 5 del admin actual
+
     $sql = "
         SELECT 
             t.id_torneo,
@@ -21,11 +21,12 @@ try {
             t.fecha_inicio,
             t.fecha_fin
         FROM torneos t
-        WHERE t.id_etapa = 5  
+        WHERE t.id_etapa = 5 AND t.id_organizador = :id_organizador
         ORDER BY t.fecha_inicio DESC
     ";
 
     $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id_organizador', $idAdminCancha, PDO::PARAM_INT);
     $stmt->execute();
     $torneos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -33,7 +34,6 @@ try {
         "status" => "success",
         "torneos" => $torneos
     ]);
-
 } catch (Exception $e) {
     echo json_encode([
         "status" => "error",

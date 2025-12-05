@@ -15,7 +15,7 @@ try {
             e.nombre AS etapa_nombre,
             t.descripcion,
             t.max_equipos,
-            t.fin_estimativo,
+            t.cierre_inscripciones,
             (
                 SELECT COUNT(te.id_equipo) 
                 FROM equipos_torneos te 

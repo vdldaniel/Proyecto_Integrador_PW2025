@@ -11,6 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
     BASE_URL + "src/controllers/torneos/lista_torneos_finalizados.php";
   const ENDPOINT_ABRIR_INSCRIPCIONES =
     BASE_URL + "src/controllers/torneos/abrir_inscripciones.php";
+  const ENDPOINT_GET_SOLICITUDES =
+    BASE_URL + "src/controllers/torneos/getSolicitudesTorneos.php";
+  const ENDPOINT_UPDATE_SOLICITUD =
+    BASE_URL + "src/controllers/torneos/updateSolicitudTorneo.php";
+  const ENDPOINT_INICIAR_TORNEO =
+    BASE_URL + "src/controllers/torneos/iniciar_torneo.php";
+  const ENDPOINT_MODIFICAR =
+    BASE_URL + "src/controllers/torneos/torneo_modificar.php";
 
   // Contenedor principal de la lista de torneos
   const torneosListContainer = document.getElementById("torneosList");
@@ -29,6 +37,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalCrearTorneo = new bootstrap.Modal(
     document.getElementById("modalCrearTorneo")
   );
+
+  // Resetear modal cuando se cierra
+  document
+    .getElementById("modalCrearTorneo")
+    .addEventListener("hidden.bs.modal", function () {
+      formCrearTorneo.reset();
+      formCrearTorneo.classList.remove("was-validated");
+      delete formCrearTorneo.dataset.torneoId;
+      delete formCrearTorneo.dataset.modoEdicion;
+      document.querySelector("#modalCrearTorneo .modal-title").textContent =
+        "Crear Nuevo Torneo";
+      document.getElementById("btnCrearTorneo").textContent = "Crear Torneo";
+    });
 
   // Elementos del Modal de Cancelación
   const modalCancelarTorneoElement = document.getElementById(
@@ -49,44 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // -------------------------------------------------
 
-  // Elementos del Toast
-  const appToastElement = document.getElementById("appToast");
-  const toastBodyElement = document.getElementById("toastBody");
-  const appToast = appToastElement
-    ? new bootstrap.Toast(appToastElement)
-    : null;
-
-  // === Función de Toast  ===
-  function showToast(message, type = "success") {
-    if (!appToast || !appToastElement || !toastBodyElement) {
-      console.error(
-        "Toast elements not found. Falling back to alert:",
-        message
-      );
-
-      return;
-    }
-
-    // Remover clases de color previas
-    appToastElement.classList.remove(
-      "bg-success",
-      "bg-danger",
-      "bg-warning",
-      "bg-info"
-    );
-
-    // Asignar clase de color según el tipo
-    let bgColor = "bg-success";
-    if (type === "error") bgColor = "bg-danger";
-    else if (type === "warning") bgColor = "bg-warning";
-    else if (type === "info") bgColor = "bg-info";
-
-    appToastElement.classList.add(bgColor);
-    toastBodyElement.textContent = message;
-    appToast.show();
-  }
-  // ===============================================
-
   // === Verificación de Nulos ===
   if (
     !abrirInscripcionesCheckbox ||
@@ -105,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // =============================
 
-  // Función para generar la tarjeta HTML de un torneo (Se mantiene igual)
+  // Función para generar la tarjeta HTML de un torneo
   function createTorneoCardHtml(torneo) {
     // Formatear fecha a DD/MM/AAAA
     const fechaInicio = new Date(torneo.fecha_inicio).toLocaleDateString(
@@ -115,36 +98,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let badgeColor = "text-bg-secondary";
     let actionButton = "";
-    // Esta variable se asume definida en el entorno PHP que incluye este JS
-    const torneoLink = "<?php echo PAGE_MIS_TORNEOS_DETALLE_ADMIN_CANCHA; ?>";
+    const torneoLink =
+      BASE_URL + "public/HTML/admin-cancha/misTorneosDetalle_AdminCancha.php";
 
-    // Lógica de botones y colores basada en el nombre de la etapa (de la tabla etapas_torneo)
-    if (torneo.etapa_nombre === "inscripciones abiertas") {
-      badgeColor = "text-bg-success";
-      actionButton = `<button class="btn btn-dark btn-sm me-1" data-bs-toggle="modal" data-bs-target="#modalSolicitudesTorneo" data-torneo-id="${torneo.id_torneo}" title="Ver solicitudes"><i class="bi bi-people"></i><span class="d-none d-lg-inline ms-1">Solicitudes</span></button>`;
-    } else if (torneo.etapa_nombre === "borrador") {
-      badgeColor = "text-bg-dark";
-      actionButton = `<button class="btn btn-dark btn-sm me-1 btn-abrir-inscripciones" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="${torneo.id_torneo}" title="Abrir inscripciones"><i class="bi bi-unlock"></i><span class="d-none d-lg-inline ms-1">Abrir inscripciones</span></button>`;
-    } else if (torneo.etapa_nombre === "en curso") {
-      badgeColor = "text-bg-primary";
-      actionButton = `<a class="btn btn-dark btn-sm me-1" href="${torneoLink}?id=${torneo.id_torneo}" title="Gestionar torneo"><i class="bi bi-gear"></i><span class="d-none d-lg-inline ms-1">Gestionar</span></a>`;
-    } else if (torneo.etapa_nombre === "finalizado") {
-      badgeColor = "text-bg-info";
-    } else if (torneo.id_etapa === 5 || torneo.etapa_nombre === "cancelado") {
-      // Etapa Cancelado (ID 5 asumido en el PHP)
-      badgeColor = "text-bg-danger";
+    // Verificar si fecha cierre_inscripciones es menor a HOY y la etapa sigue siendo 2
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    const cierreInscripciones = torneo.cierre_inscripciones
+      ? new Date(torneo.cierre_inscripciones)
+      : null;
+    console.log("Cierre Inscripciones:", cierreInscripciones);
+    const inscripcionesCerradas =
+      cierreInscripciones && cierreInscripciones < hoy && torneo.id_etapa === 2;
+
+    // Determinar el nombre de etapa a mostrar
+    let etapaNombre = torneo.etapa_nombre || "Desconocido";
+    if (inscripcionesCerradas) {
+      etapaNombre = "Inscripciones cerradas";
     }
 
-    // Mostrar u ocultar el botón de cancelar
-    const isCanceled =
-      torneo.id_etapa === 5 || torneo.etapa_nombre === "cancelado";
-    const cancelButton = isCanceled
-      ? "" // No mostrar si ya está cancelado
-      : // CLAVE: Se añade la clase 'btn-cancelar-torneo-trigger' y se eliminan data-bs-toggle/target
-        `<button class="btn btn-dark btn-sm btn-cancelar-torneo-trigger" data-torneo-id="${torneo.id_torneo}" title="Cancelar">
-                <i class="bi bi-x-circle"></i>
-                <span class="d-none d-lg-inline ms-1">Cancelar</span>
-            </button>`;
+    // Lógica de botones y colores basada en id_etapa
+    if (torneo.id_etapa === 1) {
+      // Borrador
+      badgeColor = "text-bg-dark";
+      actionButton = `<button class="btn btn-secondary btn-sm me-1 btn-modificar-torneo" data-torneo-id="${torneo.id_torneo}" data-bs-toggle="modal" data-bs-target="#modalCrearTorneo" title="Modificar"><i class="bi bi-pencil"></i><span class="d-none d-lg-inline ms-1">Modificar</span></button>
+                      <button class="btn btn-dark btn-sm me-1 btn-abrir-inscripciones" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="${torneo.id_torneo}" title="Abrir inscripciones"><i class="bi bi-unlock"></i><span class="d-none d-lg-inline ms-1">Abrir inscripciones</span></button>`;
+    } else if (torneo.id_etapa === 2) {
+      // Inscripciones abiertas o cerradas
+      if (inscripcionesCerradas) {
+        // Inscripciones cerradas: cambiar badge y mostrar botones "Abrir inscripciones" e "Iniciar torneo"
+        badgeColor = "text-bg-warning";
+        actionButton = `<button class="btn btn-dark btn-sm me-1 btn-abrir-inscripciones" data-bs-toggle="modal" data-bs-target="#modalAbrirInscripciones" data-torneo-id="${torneo.id_torneo}" title="Abrir inscripciones"><i class="bi bi-unlock"></i><span class="d-none d-lg-inline ms-1">Abrir inscripciones</span></button>
+                        <button class="btn btn-primary btn-sm me-1 btn-iniciar-torneo" data-torneo-id="${torneo.id_torneo}" title="Iniciar torneo"><i class="bi bi-play-circle"></i><span class="d-none d-lg-inline ms-1">Iniciar torneo</span></button>`;
+      } else {
+        // Inscripciones abiertas
+        badgeColor = "text-bg-success";
+        actionButton = `<button class="btn btn-dark btn-sm me-1 btn-ver-solicitudes" data-torneo-id="${torneo.id_torneo}" title="Ver solicitudes"><i class="bi bi-people"></i><span class="d-none d-lg-inline ms-1">Ver solicitudes</span></button>`;
+      }
+    } else if (torneo.id_etapa === 3) {
+      // En curso
+      badgeColor = "text-bg-primary";
+      actionButton = `<a class="btn btn-dark btn-sm me-1" href="${torneoLink}?id=${torneo.id_torneo}" title="Ver Torneo"><i class="bi bi-eye"></i><span class="d-none d-lg-inline ms-1">Ver Torneo</span></a>`;
+    } else if (torneo.id_etapa === 4) {
+      // Finalizado - no aparece en lista principal
+      return "";
+    } else if (torneo.id_etapa === 5) {
+      // Cancelado - no aparece en lista principal
+      return "";
+    }
+
+    // Botón cancelar solo si etapa es 2 (inscripciones abiertas)
+    const cancelButton =
+      torneo.id_etapa === 2
+        ? `<button class="btn btn-danger btn-sm btn-cancelar-torneo-trigger" data-torneo-id="${torneo.id_torneo}" title="Cancelar">
+          <i class="bi bi-x-circle"></i>
+          <span class="d-none d-lg-inline ms-1">Cancelar</span>
+        </button>`
+        : "";
 
     return `
             <div class="col-12" data-torneo-id="${torneo.id_torneo}">
@@ -164,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <small class="text-muted">${fechaInicio}</small>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge ${badgeColor}">${torneo.etapa_nombre || "Desconocido"}</span>
+                                <span class="badge ${badgeColor}">${etapaNombre}</span>
                             </div>
                             <div class="col-md-5 text-end">
                                 ${actionButton}
@@ -188,127 +198,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (data.status === "success") {
         if (data.torneos.length > 0) {
+          // Filtrar torneos: excluir finalizados (id_etapa=4) y cancelados (id_etapa=5)
+          const torneosActivos = data.torneos.filter(
+            (t) => t.id_etapa !== 4 && t.id_etapa !== 5
+          );
+
           // Renderiza el HTML
-          let html = data.torneos.map(createTorneoCardHtml).join("");
-          torneosListContainer.innerHTML = html;
+          let html = torneosActivos.map(createTorneoCardHtml).join("");
+          torneosListContainer.innerHTML =
+            html ||
+            '<div class="col-12 text-center py-5"><i class="bi bi-info-circle me-2"></i> No tienes torneos activos.</div>';
 
           // IMPORTANTE: Después de cargar los torneos, aplicamos el filtro
           // por si el usuario ya tenía texto en el campo de búsqueda.
           filterTorneos();
         } else {
-            fechaCierreContainer.classList.add('d-none');
-            if (fechaCierreInput) {
-                fechaCierreInput.removeAttribute('required');
-                fechaCierreInput.value = '';
-            }
-        }
-    });
-
-    // Manejar el envío del formulario de Creación
-    btnCrearTorneo.addEventListener('click', async function (e) {
-        e.preventDefault();
-
-        if (!formCrearTorneo.checkValidity()) {
-            formCrearTorneo.classList.add('was-validated');
-            return;
-        }
-
-        const data = new FormData(formCrearTorneo);
-        
-
-        btnCrearTorneo.disabled = true;
-        btnCrearTorneo.textContent = 'Creando...';
-
-        try {
-            const response = await fetch(ENDPOINT_CREAR, { method: 'POST', body: data });
-
-            if (!response.ok) {
-                const errorResult = await response.json();
-                throw new Error(errorResult.message || `Error ${response.status} en la petición.`);
-            }
-
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                showToast('Torneo creado exitosamente.');
-                formCrearTorneo.reset();
-                formCrearTorneo.classList.remove('was-validated');
-                modalCrearTorneo.hide();
-
-                await loadTorneos();
-            } else {
-                showToast('Error: ' + result.message, 'error');
-            }
-        } catch (error) {
-            console.error('Error AJAX (Crear Torneo):', error);
-            showToast('Error al crear torneo: ' + error.message, 'error');
-        } finally {
-            btnCrearTorneo.disabled = false;
-            btnCrearTorneo.textContent = 'Crear Torneo';
-        }
-    });
-
-
-    // --- Lógica del Modal de Cancelación ---
-
-    // 1. Listener delegado para botones generados dinámicamente
-    torneosListContainer.addEventListener('click', function (event) {
-        // Usa closest para encontrar el botón que disparó el evento
-        const button = event.target.closest('.btn-cancelar-torneo-trigger');
-        if (button) {
-            const torneoId = button.getAttribute('data-torneo-id');
-            cancelarTorneoIdInput.value = torneoId; // Almacenar el ID
-
-            if (modalCancelarTorneo) {
-                modalCancelarTorneo.show(); // Mostrar el modal manualmente
-            } else {
-                console.error('La instancia del modal de cancelación no está definida.');
-            }
-        }
-    });
-
-    // 2. Manejar la confirmación de cancelación
-    btnConfirmarCancelar.addEventListener('click', async function () {
-        const torneoId = cancelarTorneoIdInput.value;
-        if (!torneoId) {
-            showToast('Error: No se encontró el ID del torneo a cancelar.', 'error');
-            return;
-        }
-
-        btnConfirmarCancelar.disabled = true;
-        btnConfirmarCancelar.textContent = 'Cancelando...';
-
-        const data = new FormData();
-        data.append('torneo_id', torneoId);
-
-        try {
-            const response = await fetch(ENDPOINT_CANCELAR, {
-                method: 'POST',
-                body: data
-            });
-
-            if (!response.ok) {
-                // Leer el JSON de error del servidor
-                const errorResult = await response.json();
-                throw new Error(errorResult.message || `Error ${response.status} en la petición.`);
-            }
-
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                showToast('Torneo cancelado exitosamente.');
-                modalCancelarTorneo.hide();
-                await loadTorneos(); // Recargar la lista para que el torneo se muestre como 'cancelado'
-            } else {
-                showToast('Error: ' + result.message, 'error');
-            }
-
-        } catch (error) {
-            console.error('Error AJAX (Cancelar Torneo):', error);
-            showToast('Error al cancelar torneo: ' + error.message, 'error');
-        } finally {
-            btnConfirmarCancelar.disabled = false;
-            btnConfirmarCancelar.textContent = 'Sí, cancelar torneo';
           torneosListContainer.innerHTML =
             '<div class="col-12 text-center py-5"><i class="bi bi-info-circle me-2"></i> No has creado ningún torneo aún.</div>';
         }
@@ -386,11 +290,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const data = new FormData(formCrearTorneo);
     data.append("idAdminCancha", 1);
 
+    // Detectar si estamos en modo edición
+    const modoEdicion = formCrearTorneo.dataset.modoEdicion === "true";
+    const torneoId = formCrearTorneo.dataset.torneoId;
+
+    if (modoEdicion && torneoId) {
+      data.append("id_torneo", torneoId);
+    }
+
     btnCrearTorneo.disabled = true;
-    btnCrearTorneo.textContent = "Creando...";
+    btnCrearTorneo.textContent = modoEdicion ? "Guardando..." : "Creando...";
 
     try {
-      const response = await fetch(ENDPOINT_CREAR, {
+      const endpoint = modoEdicion ? ENDPOINT_MODIFICAR : ENDPOINT_CREAR;
+      const response = await fetch(endpoint, {
         method: "POST",
         body: data,
       });
@@ -405,9 +318,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = await response.json();
 
       if (result.status === "success") {
-        showToast("Torneo creado exitosamente.", "success");
+        const mensaje = modoEdicion
+          ? "Torneo modificado exitosamente."
+          : "Torneo creado exitosamente.";
+        showToast(mensaje, "success");
         formCrearTorneo.reset();
         formCrearTorneo.classList.remove("was-validated");
+        delete formCrearTorneo.dataset.torneoId;
+        delete formCrearTorneo.dataset.modoEdicion;
         modalCrearTorneo.hide();
 
         await loadTorneos();
@@ -415,11 +333,19 @@ document.addEventListener("DOMContentLoaded", function () {
         showToast("Error: " + result.message, "error");
       }
     } catch (error) {
-      console.error("Error AJAX (Crear Torneo):", error);
-      showToast("Error al crear torneo: " + error.message, "error");
+      console.error("Error AJAX (Crear/Modificar Torneo):", error);
+      showToast(
+        "Error al " +
+          (modoEdicion ? "modificar" : "crear") +
+          " torneo: " +
+          error.message,
+        "error"
+      );
     } finally {
       btnCrearTorneo.disabled = false;
-      btnCrearTorneo.textContent = "Crear Torneo";
+      btnCrearTorneo.textContent = modoEdicion
+        ? "Guardar Cambios"
+        : "Crear Torneo";
     }
   });
 
@@ -586,12 +512,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.data.length === 0) {
           tbody.innerHTML = `
                     <tr>
-                        <td colspan="3" class="text-center text-muted">
+                        <td colspan="4" class="text-center text-muted">
                             No hay torneos finalizados.
                         </td>
                     </tr>`;
           return;
         }
+
+        const torneoLink =
+          BASE_URL +
+          "public/HTML/admin-cancha/misTorneosDetalle_AdminCancha.php";
 
         data.data.forEach((torneo) => {
           let row = `
@@ -599,6 +529,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td>${torneo.nombre}</td>
                         <td>${formatearFecha(torneo.fecha_inicio)}</td>
                         <td>${formatearFecha(torneo.fecha_fin)}</td>
+                        <td>
+                            <a href="${torneoLink}?id=${
+            torneo.id_torneo
+          }" class="btn btn-sm btn-primary">
+                                <i class="bi bi-eye"></i> Ver Torneo
+                            </a>
+                        </td>
                     </tr>`;
 
           tbody.insertAdjacentHTML("beforeend", row);
@@ -621,6 +558,271 @@ document.addEventListener("DOMContentLoaded", function () {
       loadTorneosFinalizados();
     });
   }
+
+  // --- Ver Solicitudes --- //
+  document.addEventListener("click", async function (e) {
+    const btn = e.target.closest(".btn-ver-solicitudes");
+    if (!btn) return;
+
+    const torneoId = btn.dataset.torneoId;
+
+    // Abrir modal
+    const modalEl = document.getElementById("modalSolicitudesTorneo");
+    const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    modal.show();
+
+    // Cargar solicitudes
+    await cargarSolicitudesTorneo(torneoId);
+  });
+
+  async function cargarSolicitudesTorneo(torneoId) {
+    const participantesBody = document.getElementById(
+      "equiposParticipantesBody"
+    );
+    const pendientesBody = document.getElementById("solicitudesPendientesBody");
+
+    participantesBody.innerHTML =
+      '<tr><td colspan="4" class="text-center">Cargando...</td></tr>';
+    pendientesBody.innerHTML =
+      '<tr><td colspan="4" class="text-center">Cargando...</td></tr>';
+
+    try {
+      const response = await fetch(
+        `${ENDPOINT_GET_SOLICITUDES}?id_torneo=${torneoId}`
+      );
+      const data = await response.json();
+
+      if (data.status === "success") {
+        // Renderizar participantes
+        if (data.data.participantes.length > 0) {
+          participantesBody.innerHTML = data.data.participantes
+            .map(
+              (equipo) => `
+            <tr>
+              <td>${equipo.nombre_equipo}</td>
+              <td>${equipo.lider_nombre}</td>
+              <td>${equipo.total_integrantes}</td>
+              <td>
+                <button class="btn btn-sm btn-danger btn-cancelar-participacion" 
+                        data-torneo-id="${torneoId}" 
+                        data-equipo-id="${equipo.id_equipo}">
+                  <i class="bi bi-x-circle"></i> Cancelar
+                </button>
+              </td>
+            </tr>
+          `
+            )
+            .join("");
+        } else {
+          participantesBody.innerHTML =
+            '<tr><td colspan="4" class="text-center text-muted">No hay equipos participantes aún</td></tr>';
+        }
+
+        // Renderizar pendientes
+        if (data.data.pendientes.length > 0) {
+          pendientesBody.innerHTML = data.data.pendientes
+            .map(
+              (equipo) => `
+            <tr>
+              <td>${equipo.nombre_equipo}</td>
+              <td>${equipo.lider_nombre}</td>
+              <td>${equipo.total_integrantes}</td>
+              <td>
+                <button class="btn btn-sm btn-success me-1 btn-aceptar-solicitud" 
+                        data-torneo-id="${torneoId}" 
+                        data-equipo-id="${equipo.id_equipo}">
+                  <i class="bi bi-check-circle"></i> Aceptar
+                </button>
+                <button class="btn btn-sm btn-danger btn-rechazar-solicitud" 
+                        data-torneo-id="${torneoId}" 
+                        data-equipo-id="${equipo.id_equipo}">
+                  <i class="bi bi-x-circle"></i> Rechazar
+                </button>
+              </td>
+            </tr>
+          `
+            )
+            .join("");
+        } else {
+          pendientesBody.innerHTML =
+            '<tr><td colspan="4" class="text-center text-muted">No hay solicitudes pendientes</td></tr>';
+        }
+      } else {
+        showToast("Error al cargar solicitudes: " + data.message, "error");
+        participantesBody.innerHTML =
+          '<tr><td colspan="4" class="text-center text-danger">Error al cargar</td></tr>';
+        pendientesBody.innerHTML =
+          '<tr><td colspan="4" class="text-center text-danger">Error al cargar</td></tr>';
+      }
+    } catch (error) {
+      console.error("Error al cargar solicitudes:", error);
+      showToast("Error de conexión al cargar solicitudes", "error");
+      participantesBody.innerHTML =
+        '<tr><td colspan="4" class="text-center text-danger">Error de conexión</td></tr>';
+      pendientesBody.innerHTML =
+        '<tr><td colspan="4" class="text-center text-danger">Error de conexión</td></tr>';
+    }
+  }
+
+  // Event listener para botones de aceptar/rechazar/cancelar solicitudes
+  document.addEventListener("click", async function (e) {
+    const btnAceptar = e.target.closest(".btn-aceptar-solicitud");
+    const btnRechazar = e.target.closest(".btn-rechazar-solicitud");
+    const btnCancelar = e.target.closest(".btn-cancelar-participacion");
+
+    if (btnAceptar) {
+      await actualizarSolicitud(
+        btnAceptar.dataset.torneoId,
+        btnAceptar.dataset.equipoId,
+        "aceptar"
+      );
+    } else if (btnRechazar) {
+      await actualizarSolicitud(
+        btnRechazar.dataset.torneoId,
+        btnRechazar.dataset.equipoId,
+        "rechazar"
+      );
+    } else if (btnCancelar) {
+      // Guardar datos y abrir modal de confirmación
+      const modalCancelar = new bootstrap.Modal(
+        document.getElementById("modalConfirmarCancelarParticipacion")
+      );
+      const btnConfirmar = document.getElementById(
+        "btnConfirmarCancelarParticipacion"
+      );
+
+      // Remover listeners anteriores
+      const newBtn = btnConfirmar.cloneNode(true);
+      btnConfirmar.parentNode.replaceChild(newBtn, btnConfirmar);
+
+      // Agregar nuevo listener
+      newBtn.addEventListener("click", async function () {
+        modalCancelar.hide();
+        await actualizarSolicitud(
+          btnCancelar.dataset.torneoId,
+          btnCancelar.dataset.equipoId,
+          "cancelar"
+        );
+      });
+
+      modalCancelar.show();
+    }
+  });
+
+  async function actualizarSolicitud(torneoId, equipoId, accion) {
+    try {
+      const response = await fetch(ENDPOINT_UPDATE_SOLICITUD, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id_torneo: torneoId,
+          id_equipo: equipoId,
+          accion: accion,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        showToast(data.message, "success");
+        // Recargar solicitudes
+        await cargarSolicitudesTorneo(torneoId);
+      } else {
+        showToast("Error: " + data.message, "error");
+      }
+    } catch (error) {
+      console.error("Error al actualizar solicitud:", error);
+      showToast("Error de conexión al actualizar solicitud", "error");
+    }
+  }
+
+  // --- Iniciar Torneo --- //
+  document.addEventListener("click", async function (e) {
+    const btn = e.target.closest(".btn-iniciar-torneo");
+    if (!btn) return;
+
+    const torneoId = btn.dataset.torneoId;
+
+    // Abrir modal de confirmación
+    const modalIniciar = new bootstrap.Modal(
+      document.getElementById("modalConfirmarIniciarTorneo")
+    );
+    const btnConfirmar = document.getElementById("btnConfirmarIniciarTorneo");
+
+    // Remover listeners anteriores
+    const newBtn = btnConfirmar.cloneNode(true);
+    btnConfirmar.parentNode.replaceChild(newBtn, btnConfirmar);
+
+    // Agregar nuevo listener
+    newBtn.addEventListener("click", async function () {
+      modalIniciar.hide();
+
+      try {
+        const response = await fetch(ENDPOINT_INICIAR_TORNEO, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ torneo_id: torneoId }),
+        });
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          showToast(data.message, "success");
+          loadTorneos(); // Recargar lista
+        } else {
+          showToast("Error: " + data.message, "error");
+        }
+      } catch (error) {
+        console.error("Error al iniciar torneo:", error);
+        showToast("Error de conexión al iniciar torneo", "error");
+      }
+    });
+
+    modalIniciar.show();
+  });
+
+  // --- Modificar Torneo (Borrador) --- //
+  document.addEventListener("click", async function (e) {
+    const btn = e.target.closest(".btn-modificar-torneo");
+    if (!btn) return;
+
+    const torneoId = btn.dataset.torneoId;
+
+    // Cargar datos del torneo
+    try {
+      const response = await fetch(`${ENDPOINT_LISTAR}`);
+      const data = await response.json();
+
+      if (data.status === "success") {
+        const torneo = data.torneos.find((t) => t.id_torneo == torneoId);
+
+        if (torneo) {
+          // Llenar el formulario con los datos del torneo
+          document.getElementById("nombreTorneo").value = torneo.nombre || "";
+          document.getElementById("fechaInicio").value =
+            torneo.fecha_inicio || "";
+          document.getElementById("fechaFin").value = torneo.fecha_fin || "";
+          document.getElementById("descripcionTorneo").value =
+            torneo.descripcion || "";
+          document.getElementById("maxEquipos").value =
+            torneo.max_equipos || "";
+
+          // Guardar el ID del torneo para actualizar en lugar de crear
+          formCrearTorneo.dataset.torneoId = torneoId;
+          formCrearTorneo.dataset.modoEdicion = "true";
+
+          // Cambiar título del modal
+          document.querySelector("#modalCrearTorneo .modal-title").textContent =
+            "Modificar Torneo";
+          document.getElementById("btnCrearTorneo").textContent =
+            "Guardar Cambios";
+        }
+      }
+    } catch (error) {
+      console.error("Error al cargar torneo:", error);
+      showToast("Error al cargar datos del torneo", "error");
+    }
+  });
 
   // --- Abrir Inscripciones --- //
   document.addEventListener("click", function (e) {
