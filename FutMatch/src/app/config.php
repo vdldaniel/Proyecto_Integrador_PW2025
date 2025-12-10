@@ -20,8 +20,8 @@ $DB_PORT = getenv('DB_PORT') ?: '3306';
 
 try {
     $conn = new PDO(
-        "mysql:host=" . DB_SERVER . ";port=" . $DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4", 
-        DB_USERNAME, 
+        "mysql:host=" . DB_SERVER . ";port=" . $DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        DB_USERNAME,
         DB_PASSWORD
     );
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
