@@ -4,9 +4,6 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ Página inicio-jugador cargada correctamente");
-  
   // Aquí se puede agregar lógica adicional de la página
   // Por ejemplo: animaciones, eventos de tarjetas, etc.
 });
-

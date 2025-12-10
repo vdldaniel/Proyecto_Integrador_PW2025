@@ -1,10 +1,8 @@
 # Integrantes del equipo:
 
-- Alvarez Facundo, 41.392.985
 - Daniel Vidal, 35.065.354
 - Martín Santo, 44.668.584
 - Camila Santo, 42.076.819
-- Agustin Zarate, 40.720.288
 
 # FutMatch:
 

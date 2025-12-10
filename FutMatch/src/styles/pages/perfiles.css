@@ -1,0 +1,265 @@
+/* ========================================
+   ESTILOS GENERALES DE PERFILES
+   ======================================== */
+
+.thumb-post img {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  margin-bottom: 1rem;
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* ========================================
+   BANNER DE PERFIL DE JUGADOR
+   ======================================== */
+
+.profile-banner-container {
+  position: relative;
+}
+
+.profile-banner-wrapper {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.profile-banner-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease;
+}
+
+.profile-banner-edit-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.profile-banner-edit-btn:hover {
+  opacity: 1;
+}
+
+.profile-banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 30px;
+  color: white;
+  display: flex;
+  align-items: end;
+  gap: 20px;
+}
+
+/* ========================================
+   AVATAR EN EL BANNER
+   ======================================== */
+
+.profile-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-avatar-edit-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  line-height: 1;
+}
+
+.profile-avatar-edit-btn i {
+  font-size: 0.875rem;
+}
+
+/* ========================================
+   INFORMACIÓN DEL PERFIL
+   ======================================== */
+.profile-info-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info-right {
+  text-align: left;
+  justify-content: space-around;
+}
+.profile-info-container {
+  display: flex;
+  justify-content: space-between; /* separa izquierda/derecha */
+  align-items: center; /* centra verticalmente */
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+}
+
+.profile-description-container {
+  text-align: left; /* alineado a la izquierda */
+  margin-left: 1rem; /* separa del bloque izquierdo */
+}
+
+.profile-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.profile-username {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.profile-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-rating {
+  color: #ffc107;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .profile-banner-wrapper {
+    height: 250px;
+  }
+
+  .profile-banner-overlay {
+    padding: 20px;
+    align-items: flex-start;
+    text-align: left;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+
+  .profile-username {
+    font-size: 1rem;
+  }
+
+  .profile-banner-edit-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-banner-wrapper {
+    height: 200px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-name {
+    font-size: 1.25rem;
+  }
+
+  .profile-badges {
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   PERFIL EQUIPO
+   ======================================== */
+
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: -23px;
+  top: 15px;
+  bottom: -20px;
+  width: 2px;
+  background-color: #aaaaaa;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -30px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #cacaca;
+}
+
+.player-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+}
+
+.chart-placeholder {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgb(100, 100, 100);
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,256 @@
+/* ===================================
+   PÁGINAS DE EXPLORACIÓN
+   Estilos compartidos para explorar canchas, partidos, equipos, etc.
+   =================================== */
+
+/* ===================================
+   TARJETAS DE EXPLORACIÓN
+   =================================== */
+
+.tarjeta-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-item .card {
+  transition: box-shadow 0.3s ease;
+}
+
+.tarjeta-item .card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Imagen de la tarjeta */
+.tarjeta-imagen {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.partido-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Título de la tarjeta */
+.tarjeta-titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ubicación */
+.tarjeta-ubicacion {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Badges de información */
+.tarjeta-badges {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tarjeta-badges .badge {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+}
+
+/* Descripción */
+.tarjeta-descripcion {
+  font-size: 0.875rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Calificación con estrellas */
+.tarjeta-calificacion {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tarjeta-calificacion i {
+  font-size: 0.9rem;
+}
+
+.tarjeta-calificacion small {
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Footer de tarjeta (calificación + acciones) */
+.tarjeta-footer {
+  margin-top: auto;
+}
+
+/* Botones de acción */
+.tarjeta-acciones {
+  padding-top: 0.5rem;
+}
+
+/* ===================================
+   BARRA DE BÚSQUEDA Y FILTROS
+   =================================== */
+
+.barra-busqueda {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.barra-busqueda .input-group {
+  max-width: 300px;
+  min-width: 200px;
+}
+
+/* Filtros activos */
+.filtros-activos-container {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+[data-bs-theme="dark"] .filtros-activos-container {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filtros-activos-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ===================================
+   PAGINACIÓN
+   =================================== */
+
+.pagination-explorar {
+  margin-top: 2rem;
+}
+
+.pagination-explorar .page-link {
+  color: var(--bs-dark);
+  border-color: var(--bs-border-color);
+}
+
+.pagination-explorar .page-item.active .page-link {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.pagination-explorar .page-item.disabled .page-link {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+[data-bs-theme="dark"] .pagination-explorar .page-link {
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+/* ===================================
+   VISTA DE MAPA
+   =================================== */
+
+.vista-mapa-container {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.vista-mapa-container #map {
+  min-height: 500px;
+  width: 100%;
+}
+
+/* Marcadores personalizados de Leaflet */
+.custom-marker {
+  background: transparent;
+  border: none;
+  text-align: center;
+}
+
+.custom-marker i {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease;
+}
+
+.custom-marker:hover i {
+  transform: scale(1.2);
+}
+
+/* Popup de cancha en mapa */
+.leaflet-popup-content-wrapper {
+  border-radius: 0.5rem;
+  padding: 0;
+}
+
+.popup-cancha h6 {
+  color: var(--bs-dark);
+}
+/* ===================================
+   ESTADO VACÍO
+   =================================== */
+
+.estado-vacio {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.estado-vacio i {
+  font-size: 4rem;
+  color: var(--bs-secondary);
+  opacity: 0.5;
+}
+
+.estado-vacio h5 {
+  margin-top: 1.5rem;
+  color: var(--bs-secondary);
+}
+
+.estado-vacio p {
+  color: var(--bs-secondary);
+  opacity: 0.8;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+  .tarjeta-imagen {
+    height: 180px;
+    width: auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .barra-busqueda {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .barra-busqueda .input-group {
+    max-width: 100%;
+  }
+
+  .tarjeta-titulo {
+    font-size: 1rem;
+  }
+}

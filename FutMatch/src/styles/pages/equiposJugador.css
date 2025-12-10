@@ -1,0 +1,86 @@
+.hover-shadow {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-2px);
+}
+
+.card-title a:hover {
+  color: var(--bs-primary);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input .banner,
+.input .foto-principal {
+  border: 2px dashed #828588;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+.input .banner {
+  width: auto; /* Para que sea horizontal*/
+}
+
+.input .foto-principal {
+  width: 150px; /* Para que sea cuadrada*/
+}
+
+.input .banner:hover,
+.input .foto-principal:hover {
+  border-color: var(--bs-primary);
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.input .banner.dragover,
+.input .foto-principal.dragover {
+  border-color: var(--bs-primary);
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.input .banner img,
+.input .foto-principal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.input .banner .upload-icon,
+.input .foto-principal .upload-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.input .banner .upload-text,
+.input .foto-principal .upload-text {
+  font-size: 0.875rem;
+  color: var(--bs-secondary);
+  text-align: center;
+}
+
+.codigo-equipo {
+  letter-spacing: 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+}

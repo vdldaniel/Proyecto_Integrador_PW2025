@@ -1,0 +1,201 @@
+/* ----- General ----- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.bracket-container {
+  display: flex;
+  width: 100%;
+  align-items: stretch; /* todas las columnas misma altura */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ----- Columna (rama) ----- */
+.bracket-branch {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+/* ----- Encabezado de cada columna ----- */
+.branch-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* ----- Contenedor de partidos ----- */
+.branch-body {
+  flex: 1; /* ocupa el resto del alto */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* distribuye los partidos uniformemente */
+  gap: 10px;
+}
+
+.branch-block {
+  flex: 1; /* ocupa el resto del alto */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* distribuye los partidos uniformemente */
+  gap: 10px;
+}
+
+/* ----- Partido (match) ----- */
+.branch-match {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bs-card-bg);
+  border-radius: 8px;
+  border: 2px solid var(--bs-border-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.branch-match:hover {
+  border-color: var(--bs-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.branch-pair {
+  flex: 1; /* ocupa el resto del alto */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.branch-pair:hover {
+  border-left: 2px solid var(--bs-border-color); /* color y grosor del borde */
+  padding-left: 10px; /* separa los partidos del borde */
+}
+
+/* ----- Distribución proporcional de alto ----- */
+.octavos .bracket-match {
+  height: 12.5%;
+}
+.cuartos .bracket-match {
+  height: 25%;
+}
+.semis .bracket-match {
+  height: 50%;
+}
+.final .bracket-match {
+  height: 100%;
+}
+
+/* ----- Equipos dentro del match ----- */
+.match-team {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.match-team:last-child {
+  border-bottom: none;
+}
+
+.match-team.winner {
+  background: var(--bs-success-bg-subtle);
+  font-weight: bold;
+}
+
+.team-name {
+  font-size: 0.9rem;
+  flex: 1;
+}
+.team-score {
+  font-weight: bold;
+  color: var(--bs-primary);
+  min-width: 30px;
+  text-align: center;
+}
+/* ===== ESTADOS DE PARTIDOS ===== */
+.bracket-match.finalizado {
+  border-color: var(--bs-success);
+}
+
+.bracket-match.en-juego {
+  border-color: var(--bs-warning);
+  background: var(--bs-warning-bg-subtle);
+}
+
+.bracket-match.programado {
+  border-color: var(--bs-secondary);
+  opacity: 0.8;
+}
+
+/* ===== INFO DEL PARTIDO ===== */
+.match-info {
+  text-align: center;
+  padding: 8px;
+  font-size: 0.8rem;
+  color: var(--bs-secondary);
+  border-top: 1px solid var(--bs-border-color);
+}
+
+/* ===== EQUIPOS TAB STYLES ===== */
+.equipos-header {
+  margin: 1.5rem;
+}
+
+.equipos-header h3 {
+  margin-bottom: 0;
+}
+
+/* Badge de posición en listado de equipos */
+.team-position-badge {
+  width: 40px;
+}
+
+/* Avatar circular de equipo */
+.team-avatar {
+  width: 50px;
+  height: 50px;
+  border: 2px solid;
+}
+
+/* Icono dentro del avatar */
+.team-avatar i {
+  font-size: 1.2rem;
+}
+
+/* Estados de equipos */
+.team-card.eliminated {
+  opacity: 0.75;
+}
+
+/* Variantes de colores para avatares de equipos según posición */
+.team-avatar.first-place {
+  border-color: #28a745;
+}
+
+.team-avatar.second-place {
+  border-color: #17a2b8;
+}
+
+.team-avatar.third-place {
+  border-color: #ffc107;
+}
+
+.team-avatar.default-place {
+  border-color: #6c757d;
+}
+
+/* Estilos para cards de equipos */
+.team-card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}

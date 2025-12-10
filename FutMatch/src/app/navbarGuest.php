@@ -7,11 +7,6 @@
  * Requiere: config.php cargado previamente
  */
 
-// Asegurar que config.php está cargado
-if (!defined('BASE_URL')) {
-    require_once __DIR__ . '/config.php';
-}
-
 // Determinar página activa (si no está definida, intentar detectarla)
 if (!isset($current_page)) {
     $current_page = basename($_SERVER['PHP_SELF'], '.php');
@@ -55,34 +50,36 @@ function isActive($page_name, $current)
                             <span class="d-none d-lg-inline ms-1">Explorar</span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownExplorar">
-                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_LISTADO ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_CANCHAS_EXPLORAR_JUGADOR ?>">
                                     <i class="bi bi-geo-alt me-2"></i>Explorar canchas
                                 </a></li>
-                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_LISTADO ?>">
+                            <li><a class="dropdown-item" href="<?= PAGE_PARTIDOS_EXPLORAR_JUGADOR ?>">
                                     <i class="bi bi-people me-2"></i>Explorar partidos
                                 </a></li>
                         </ul>
                     </div>
-                    <a href="<?= PAGE_FOROS_LISTADO ?>"
-                        class="btn btn-dark me-2 <?= isActive('explorarForos', $current_page) ?>"
-                        id="botonForos"
-                        title="Foros">
-                        <i class="bi bi-chat-dots"></i>
-                        <span class="d-none d-lg-inline ms-1">Foros</span>
-                    </a>
                 </div>
             </div>
 
             <!-- Lado derecho: perfil, notificaciones y configuración -->
             <div class="d-flex align-items-center">
-                <!-- Botón Mi Perfil -->
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
-                    class="btn btn-dark me-2 d-none d-md-flex <?= isActive('miPerfil', $current_page) ?>"
-                    id="botonMiPerfil"
-                    title="Mi Perfil">
+                <!-- Botón Registrarse -->
+                <a href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>"
+                    class="btn btn-outline-light me-2 d-none d-md-flex"
+                    title="Registrarse">
+                    <i class="bi bi-person-plus"></i>
+                    <span class="d-none d-lg-inline ms-1">Registrarse</span>
+                </a>
+
+                <!-- Botón Iniciar Sesión -->
+                <button type="button"
+                    class="btn btn-primary me-2 d-none d-md-flex"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalLogin"
+                    title="Iniciar Sesión">
                     <i class="bi bi-person-circle"></i>
                     <span class="d-none d-lg-inline ms-1">Iniciar sesión</span>
-                </a>
+                </button>
             </div>
         </div>
     </nav>
@@ -108,28 +105,31 @@ function isActive($page_name, $current)
         <!-- Sección Explorar -->
         <h6 class="offcanvas-section-title mb-2">Explorar</h6>
         <div class="d-grid gap-2 mb-4">
-            <a href="<?= PAGE_CANCHAS_LISTADO ?>"
+            <a href="<?= PAGE_CANCHAS_EXPLORAR_JUGADOR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarCanchas', $current_page) ?>">
                 <i class="bi bi-geo-alt me-2"></i>Explorar Canchas
             </a>
-            <a href="<?= PAGE_PARTIDOS_LISTADO ?>"
+            <a href="<?= PAGE_PARTIDOS_EXPLORAR_JUGADOR ?>"
                 class="btn btn-dark text-start <?= isActive('explorarPartidos', $current_page) ?>">
                 <i class="bi bi-people me-2"></i>Explorar Partidos
-            </a>
-            <a href="<?= PAGE_FOROS_LISTADO ?>"
-                class="btn btn-dark text-start <?= isActive('explorarForos', $current_page) ?>">
-                <i class="bi bi-chat-dots me-2"></i>Foros
             </a>
         </div>
 
         <!-- Perfil y configuración -->
         <div class="mt-auto pt-3 border-top">
             <div class="d-grid gap-2">
-                <a href="<?= PAGE_PERFIL_JUGADOR_DETALLE ?>"
-                    class="btn btn-dark text-start <?= isActive('miPerfil', $current_page) ?>"
-                    title="Mi Perfil">
-                    <i class="bi bi-person-circle me-2"></i>Iniciar sesión
+                <a href="<?= PAGE_REGISTRO_JUGADOR_PHP ?>"
+                    class="btn btn-outline-dark text-start"
+                    title="Registrarse">
+                    <i class="bi bi-person-plus me-2"></i>Registrarse
                 </a>
+                <button type="button"
+                    class="btn btn-primary text-start"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalLogin"
+                    title="Iniciar Sesión">
+                    <i class="bi bi-person-circle me-2"></i>Iniciar sesión
+                </button>
             </div>
         </div>
     </div>

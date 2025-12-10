@@ -41,7 +41,6 @@ body {
   overflow: hidden !important;
 }
 
-
 /* ===================================
    ESTRUCTURA DE TABLAS
    =================================== */
@@ -135,6 +134,232 @@ body {
 }
 
 /* ===================================
+   ESTILOS ESPECÍFICOS COMPONENTE CALENDARIO
+   =================================== */
+.calendario-component {
+  width: 100%;
+}
+
+.calendario-main-container {
+  min-height: 600px;
+  overflow: hidden;
+  /* Evitar problemas de scroll */
+}
+
+.vista-calendario {
+  min-height: 500px;
+  width: 100%;
+}
+
+/* Vista mensual específica */
+#vistaMensual .table-responsive {
+  height: 500px;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.calendario-dia {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-height: 100px;
+  border: 1px solid var(--bs-border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.calendario-dia:hover {
+  background-color: var(--bs-primary-bg-subtle) !important;
+  border-color: var(--bs-primary);
+}
+
+/* Vista semanal y diaria */
+.calendario-horario {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+  min-height: 50px;
+}
+
+.calendario-horario:hover {
+  background-color: var(--bs-primary-bg-subtle);
+  border-color: var(--bs-primary);
+  transform: scale(1.02);
+}
+
+.calendario-horario.disponible {
+  background-color: var(--bs-success-bg-subtle);
+  border-color: var(--bs-success);
+}
+
+.calendario-horario.ocupado {
+  background-color: var(--bs-danger-bg-subtle);
+  border-color: var(--bs-danger);
+}
+
+.calendario-horario.no-disponible {
+  background-color: var(--bs-secondary-bg-subtle);
+  border-color: var(--bs-secondary);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Mejoras visuales para el calendario */
+.calendario-header {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--bs-body-bg);
+  border-radius: 8px;
+  border: 1px solid var(--bs-border-color);
+}
+
+/* Estilos adicionales para agenda */
+.numero-dia {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.contenido-dia {
+  font-size: 0.8rem;
+}
+
+/* Los días del mes actual usan el estilo por defecto */
+.otro-mes {
+  color: var(--bs-text-muted);
+  opacity: 0.6;
+}
+
+.hoy {
+  background-color: var(--bs-primary) !important;
+  color: var(--bs-white) !important;
+}
+
+.celda-hora,
+.celda-dia {
+  padding: 2px;
+  min-height: 40px;
+  height: 40px;
+  vertical-align: top;
+  border: 1px solid var(--bs-border-color);
+  transition: background-color 0.2s ease;
+  position: relative;
+  overflow: visible;
+}
+
+.celda-hora:hover,
+.celda-dia:hover {
+  background-color: var(--bs-primary-bg-subtle);
+  cursor: pointer;
+}
+
+.hora-label {
+  background-color: var(--bs-light);
+  color: var(--bs-dark);
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  width: 80px;
+}
+
+.reserva-mini {
+  background-color: var(--bs-success);
+  color: var(--bs-white);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  margin: 1px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.reserva-mini.confirmed {
+  background-color: var(--bs-success);
+}
+
+.reserva-mini.pending {
+  background-color: var(--bs-warning);
+}
+
+.reserva-mini.mas {
+  background-color: var(--bs-info);
+}
+
+.reserva-bloque {
+  background-color: var(--bs-success-bg-subtle);
+  border: 1px solid var(--bs-success);
+  border-radius: 4px;
+  padding: 4px;
+  margin: 2px 0;
+  cursor: pointer;
+}
+
+.reserva-bloque.confirmed {
+  background-color: var(--bs-success-bg-subtle);
+  border-color: var(--bs-success);
+}
+
+.reserva-bloque.pending {
+  background-color: var(--bs-warning-bg-subtle);
+  border-color: var(--bs-warning);
+}
+
+.reserva-cliente {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.reserva-cancha {
+  font-size: 0.7rem;
+  color: var(--bs-text-muted);
+}
+
+/* Responsividad mejorada para calendario */
+@media (max-width: 768px) {
+  .calendario-header .col-md-3 {
+    margin-bottom: 1rem;
+  }
+
+  .calendario-main-container {
+    min-height: 400px;
+  }
+
+  .table-responsive table {
+    font-size: 0.85rem;
+  }
+
+  #vistaMensual th,
+  #vistaMensual td {
+    padding: 4px 2px;
+    font-size: 0.8rem;
+  }
+
+  .calendario-dia {
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  #vistaMensual th,
+  #vistaMensual td {
+    padding: 2px 1px;
+    font-size: 0.75rem;
+  }
+
+  .calendario-dia {
+    min-height: 60px;
+  }
+}
+
+/* Dark theme adjustments para calendario */
+[data-bs-theme="dark"] .calendario-dia:hover {
+  background-color: var(--bs-gray-800);
+}
+
+[data-bs-theme="dark"] .calendario-horario:hover {
+  background-color: var(--bs-primary-bg-subtle);
+}
+
+/* ===================================
    DARK MODE - TABLAS
    =================================== */
 /* Tablas - Encabezados */
@@ -164,4 +389,78 @@ body {
   background-color: var(--bs-warning-bg-subtle) !important;
   color: var(--bs-warning-text-emphasis) !important;
   border-color: var(--bs-warning-border-subtle);
+}
+
+/* ===================================
+   ESTILOS DE RESERVAS EN CALENDARIO
+   =================================== */
+.reservas-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.reserva-item {
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.reserva-item:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.reserva-item.pendiente {
+  background-color: var(--bs-warning-bg-subtle);
+  color: var(--bs-warning-text-emphasis);
+  border-left: 3px solid var(--bs-warning);
+}
+
+.reserva-item.confirmada {
+  background-color: var(--bs-success-bg-subtle);
+  color: var(--bs-success-text-emphasis);
+  border-left: 3px solid var(--bs-success);
+}
+
+.reserva-item.cancelada {
+  background-color: var(--bs-danger-bg-subtle);
+  color: var(--bs-danger-text-emphasis);
+  border-left: 3px solid var(--bs-danger);
+}
+
+.reserva-bloque {
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.reserva-bloque:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 12 !important;
+}
+
+.reserva-bloque.pendiente {
+  background-color: var(--bs-warning-bg-subtle);
+  color: var(--bs-warning-text-emphasis);
+  border-left: 4px solid var(--bs-warning);
+}
+
+.reserva-bloque.confirmada {
+  background-color: var(--bs-success-bg-subtle);
+  color: var(--bs-success-text-emphasis);
+  border-left: 4px solid var(--bs-success);
+}
+
+.reserva-bloque.cancelada {
+  background-color: var(--bs-danger-bg-subtle);
+  color: var(--bs-danger-text-emphasis);
+  border-left: 4px solid var(--bs-danger);
 }

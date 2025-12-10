@@ -1,0 +1,506 @@
+/* ===== TABLAS ADMIN SISTEMA STYLES ===== */
+/* Estilos unificados para las páginas de administración del sistema */
+
+/* Tabla principal */
+.tabla-admin {
+  margin-top: 1rem;
+}
+
+/* Tabla de solicitudes */
+.tabla-admin-solicitudes {
+  font-size: 0.9rem;
+}
+
+.tabla-admin-solicitudes thead th {
+  vertical-align: top;
+  padding: 0.75rem 0.5rem;
+}
+
+.tabla-admin-solicitudes tbody td {
+  vertical-align: middle;
+  padding: 0.75rem 0.5rem;
+}
+
+.tabla-admin-solicitudes .filter-input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--bs-body-color);
+  font-size: 0.8rem;
+}
+
+.tabla-admin-solicitudes .filter-input:focus {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: var(--bs-primary);
+  color: var(--bs-body-color);
+}
+
+.tabla-admin-solicitudes .filter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+}
+
+/* Cards principales */
+.tabla-admin-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--bs-border-color);
+  margin-bottom: 0.75rem;
+}
+
+.tabla-admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-admin-header-card {
+  border: 1px solid var(--bs-border-color);
+  margin-bottom: 0.75rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.tabla-admin-header-card .card-body {
+  padding: 1rem 1.25rem;
+}
+
+/* Headers de tabla */
+.tabla-admin-header {
+  font-weight: 600;
+  border-bottom: 2px solid var(--bs-border-color);
+  padding: 1rem;
+}
+
+.tabla-admin-header .col {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--bs-dark);
+  font-weight: 600;
+}
+
+/* Contenido de filas */
+.tabla-admin-row {
+  padding: 1rem;
+  align-items: center;
+}
+
+.tabla-admin-row .col {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Estados de usuario */
+.usuario-estado {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.usuario-nuevo {
+  color: var(--bs-success);
+}
+
+.usuario-existente {
+  color: var(--bs-info);
+}
+
+/* Botones de acciones */
+.tabla-admin-acciones-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Estados específicos */
+
+/* Estados de solicitudes de cancha */
+.tabla-admin-estado-pendiente {
+  background-color: var(--bs-warning-bg-subtle);
+  border-left: 4px solid var(--bs-warning);
+}
+
+.tabla-admin-estado-verificando {
+  background-color: var(--bs-info-bg-subtle);
+  border-left: 4px solid var(--bs-info);
+}
+
+.tabla-admin-estado-verificada {
+  background-color: var(--bs-success-bg-subtle);
+  border-left: 4px solid var(--bs-success);
+}
+
+.tabla-admin-estado-verificado {
+  background-color: var(--bs-success-bg-subtle);
+  border-left: 4px solid var(--bs-success);
+}
+
+.tabla-admin-estado-rechazada {
+  background-color: var(--bs-danger-bg-subtle);
+  border-left: 4px solid var(--bs-danger);
+}
+
+.tabla-admin-estado-rechazado {
+  background-color: var(--bs-danger-bg-subtle);
+  border-left: 4px solid var(--bs-danger);
+}
+
+/* Estados de jugadores */
+.tabla-admin-estado-activo {
+  background-color: var(--bs-success-bg-subtle);
+  border-left: 4px solid var(--bs-success);
+}
+
+.tabla-admin-estado-suspendido {
+  background-color: var(--bs-danger-bg-subtle);
+  border-left: 4px solid var(--bs-danger);
+}
+
+.tabla-admin-estado-reportado {
+  background-color: var(--bs-warning-bg-subtle);
+  border-left: 4px solid var(--bs-warning);
+}
+
+/* Modales */
+.tabla-admin-modal .modal-header {
+  background-color: var(--bs-primary);
+}
+
+.tabla-admin-modal .modal-body {
+  overflow-y: auto;
+}
+
+/* Info en modales */
+.tabla-admin-info {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tabla-admin-info .label {
+  font-weight: 600;
+  color: var(--bs-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.tabla-admin-info .value {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Secciones adicionales */
+.tabla-admin-section {
+  border-top: 1px solid var(--bs-border-color);
+  padding-top: 1rem;
+}
+
+.tabla-admin-item {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--bs-primary);
+}
+
+.tabla-admin-fecha {
+  font-size: 0.8rem;
+  color: var(--bs-secondary);
+  font-weight: 500;
+}
+
+.tabla-admin-texto {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabla-admin-acciones-container {
+    flex-direction: column;
+  }
+
+  .tabla-admin-header,
+  .tabla-admin-row {
+    padding: 0.75rem;
+  }
+}
+
+/* ===== COMPATIBILITY CLASSES ===== */
+/* Clases de compatibilidad para mantener funcionalidad existente */
+
+/* Para canchas */
+.row-card-tabla-admin {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--bs-border-color);
+  margin-bottom: 0.75rem;
+}
+
+.row-card-tabla-admin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-card {
+  border: 1px solid var(--bs-border-color);
+  margin-bottom: 0.75rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.header-card .card-body {
+  padding: 1rem 1.25rem;
+}
+
+.table-header {
+  font-weight: 600;
+  border-bottom: 2px solid var(--bs-border-color);
+  padding: 1rem;
+}
+
+.table-header .col {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--bs-dark);
+  font-weight: 600;
+}
+
+.solicitud-row {
+  padding: 1rem;
+  align-items: center;
+}
+
+.solicitud-row .col {
+  padding: 0.25rem 0.5rem;
+}
+
+.acciones-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.estado-pendiente {
+  background-color: var(--bs-warning-bg-subtle);
+  border-left: 4px solid var(--bs-warning);
+}
+
+.estado-verificando {
+  background-color: var(--bs-info-bg-subtle);
+  border-left: 4px solid var(--bs-info);
+}
+
+.estado-verificada {
+  background-color: var(--bs-success-bg-subtle);
+  border-left: 4px solid var(--bs-success);
+}
+
+.estado-rechazada {
+  background-color: var(--bs-danger-bg-subtle);
+  border-left: 4px solid var(--bs-danger);
+}
+
+/* Para jugadores */
+.jugador-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--bs-border-color);
+  margin-bottom: 0.75rem;
+}
+
+.jugador-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.jugador-row {
+  padding: 1rem;
+  align-items: center;
+}
+
+.jugador-row .col {
+  padding: 0.25rem 0.5rem;
+}
+
+.estado-activo {
+  background-color: var(--bs-success-bg-subtle);
+  border-left: 4px solid var(--bs-success);
+}
+
+.estado-suspendido {
+  background-color: var(--bs-danger-bg-subtle);
+  border-left: 4px solid var(--bs-danger);
+}
+
+.estado-reportado {
+  background-color: var(--bs-warning-bg-subtle);
+  border-left: 4px solid var(--bs-warning);
+}
+
+/* Para reportes */
+.reporte-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--bs-border-color);
+  margin-bottom: 0.75rem;
+}
+
+.reporte-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reporte-row {
+  padding: 1rem;
+  align-items: center;
+}
+
+.reporte-row .col {
+  padding: 0.25rem 0.5rem;
+}
+
+.estado-verificado {
+  background-color: var(--bs-success-bg-subtle);
+  border-left: 4px solid var(--bs-success);
+}
+
+.estado-rechazado {
+  background-color: var(--bs-danger-bg-subtle);
+  border-left: 4px solid var(--bs-danger);
+}
+
+/* Modal específicos */
+.modal-solicitud .modal-header {
+  background-color: var(--bs-primary);
+}
+
+.modal-solicitud .modal-body {
+  overflow-y: auto;
+}
+
+.modal-jugador .modal-header {
+  background-color: var(--bs-primary);
+}
+
+.modal-jugador .modal-body {
+  overflow-y: auto;
+}
+
+.modal-reporte .modal-header {
+  background-color: var(--bs-primary);
+}
+
+.modal-reporte .modal-body {
+  overflow-y: auto;
+}
+
+.info-solicitud {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-solicitud .label {
+  font-weight: 600;
+  color: var(--bs-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.info-solicitud .value {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.info-jugador {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-jugador .label {
+  font-weight: 600;
+  color: var(--bs-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.info-jugador .value {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.info-reporte {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-reporte .label {
+  font-weight: 600;
+  color: var(--bs-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.info-reporte .value {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.observaciones-section {
+  border-top: 1px solid var(--bs-border-color);
+  padding-top: 1rem;
+}
+
+.historial-section {
+  border-top: 1px solid var(--bs-border-color);
+  padding-top: 1rem;
+}
+
+.reporte-section {
+  border-top: 1px solid var(--bs-border-color);
+  padding-top: 1rem;
+}
+
+.observacion-item {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--bs-primary);
+}
+
+.historial-item {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--bs-primary);
+}
+
+.reporte-item {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--bs-primary);
+}
+
+.observacion-fecha {
+  font-size: 0.8rem;
+  color: var(--bs-secondary);
+  font-weight: 500;
+}
+
+.historial-fecha {
+  font-size: 0.8rem;
+  color: var(--bs-secondary);
+  font-weight: 500;
+}
+
+.reporte-fecha {
+  font-size: 0.8rem;
+  color: var(--bs-secondary);
+  font-weight: 500;
+}
+
+.observacion-texto {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.historial-texto {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.reporte-texto {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}

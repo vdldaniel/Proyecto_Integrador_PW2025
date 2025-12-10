@@ -36,7 +36,7 @@ include HEAD_COMPONENT;
           <!-- Card con efecto glassmorphism -->
           <div class="card card-action" style="cursor: default;">
             <div class="card-body p-4">
-              <form id="formRegistro" class="needs-validation" novalidate>
+              <form id="formRegistro" action="<?= CONTROLLER_REGISTRO_JUGADOR ?>" method="POST" class="needs-validation" novalidate>
                 <div class="row g-3">
                   <!-- Nombre -->
                   <div class="col-12 col-md-6">
@@ -47,6 +47,7 @@ include HEAD_COMPONENT;
                       id="inputNombre"
                       name="nombre"
                       required
+                      value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"
                     />
                     <!--Para agregar una descripcion: -->
 
@@ -62,6 +63,7 @@ include HEAD_COMPONENT;
                       id="inputApellido"
                       name="apellido"
                       required
+                      value="<?= htmlspecialchars($_POST['apellido'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">El apellido es obligatorio.</div>
                   </div>
@@ -75,6 +77,7 @@ include HEAD_COMPONENT;
                       id="inputUsername"
                       name="username"
                       required
+                      value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">El nombre de usuario es obligatorio.</div>
                   </div>
@@ -88,6 +91,7 @@ include HEAD_COMPONENT;
                       id="inputFechaDeNacimiento"
                       name="fechaNacimiento"
                       required
+                      value="<?= htmlspecialchars($_POST['fechaNacimiento'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">Debes ser mayor de 18 años.</div>
                   </div>
@@ -100,11 +104,12 @@ include HEAD_COMPONENT;
                       id="inputGenero"
                       name="genero"
                       required
+                      value="<?= htmlspecialchars($_POST['genero'] ?? '') ?>"
                     >
                       <option value="" selected disabled>Seleccioná tu género</option>
-                      <option value="masculino">Masculino</option>
-                      <option value="femenino">Femenino</option>
-                      <option value="otro">Prefiero no decir</option>
+                      <option value="2">Masculino</option>
+                      <option value="1">Femenino</option>
+                      <option value="3">Prefiero no decir</option>
                     </select>
                     <div class="invalid-feedback">El género es obligatorio.</div>
                   </div>
@@ -119,6 +124,7 @@ include HEAD_COMPONENT;
                       name="email"
                       placeholder="tu@email.com"
                       required
+                      value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">Ingresá un email válido.</div>
                   </div>
@@ -133,6 +139,7 @@ include HEAD_COMPONENT;
                       name="telefono"
                       placeholder="Ej: 11-1234-5678"
                       required
+                      value="<?= htmlspecialchars($_POST['telefono'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">Ingresá un teléfono válido (solo números y guiones).</div>
                   </div>
@@ -147,6 +154,7 @@ include HEAD_COMPONENT;
                       name="password"
                       placeholder="Mínimo 8 caracteres"
                       required
+                      value="<?= htmlspecialchars($_POST['password'] ?? '') ?>"
                     />
                     <div class="invalid-feedback">
                       Mínimo 8 caracteres, una minúscula y un número.

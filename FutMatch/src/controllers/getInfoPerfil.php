@@ -1,0 +1,96 @@
+<?php
+require_once '../app/config.php';
+
+
+// Iniciar sesión (opcional para perfiles públicos)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/* PERFIL JUGADOR
+vista_perfil_jugador
+
+PERFIL CANCHA
+vista_perfil_cancha
+
+NOTA: Los perfiles son públicos y no requieren autenticación
+*/
+
+$query = '';
+
+try {
+
+    if (isset($_GET['tipo']) && $_GET['tipo'] === 'cancha') {
+        // Perfil cancha
+        $id_cancha = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+        if ($id_cancha <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'ID de cancha inválido']);
+            exit();
+        }
+
+        $query = 'SELECT * FROM vista_perfil_cancha WHERE id_cancha = :id';
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':id', $id_cancha, PDO::PARAM_INT);
+        $stmt->execute();
+        $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$perfil) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Perfil no encontrado']);
+            exit();
+        }
+
+        // Obtener tipos de partido de la cancha
+        $queryTipos = "
+            SELECT 
+                tp.id_tipo_partido,
+                tp.nombre,
+                tp.min_participantes,
+                tp.max_participantes
+            FROM canchas_tipos_partido ctp
+            INNER JOIN tipos_partido tp 
+                ON tp.id_tipo_partido = ctp.id_tipo_partido
+            WHERE ctp.id_cancha = :id AND ctp.activo = 1
+        ";
+        $stmtTipos = $conn->prepare($queryTipos);
+        $stmtTipos->bindParam(':id', $id_cancha, PDO::PARAM_INT);
+        $stmtTipos->execute();
+        $perfil['tipos_partido'] = $stmtTipos->fetchAll(PDO::FETCH_ASSOC);
+
+        header('Content-Type: application/json');
+        echo json_encode($perfil);
+        exit();
+    } else {
+        // Perfil jugador
+        $id_jugador = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+        if ($id_jugador <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'ID de jugador inválido']);
+            exit();
+        }
+
+        $query = 'SELECT * FROM vista_perfil_jugador WHERE id_jugador = :id';
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':id', $id_jugador, PDO::PARAM_INT);
+        $stmt->execute();
+        $perfil = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$perfil) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Perfil no encontrado']);
+            exit();
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($perfil);
+        exit();
+    }
+} catch (PDOException $e) {
+    error_log("GET_INFO_PERFIL ERROR: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['error' => 'Error al buscar perfil']);
+    exit();
+};

@@ -3,15 +3,10 @@
 /**
  * NAVBAR ADMIN_CANCHA - Componente de navegación para administradores de canchas
  * Incluye botones: Logo, 'Home', 'Agenda', 'Mis Canchas', 
- *                  'Mis Torneos', 'Foros', Notificaciones, Perfil
+ *                  'Mis Torneos', Notificaciones, Perfil
  * Soporte para página activa mediante la variable $current_page
  * Requiere: config.php cargado previamente
  */
-
-// Asegurar que config.php está cargado
-if (!defined('BASE_URL')) {
-	require_once __DIR__ . '/config.php';
-}
 
 // Determinar página activa (si no está definida, intentar detectarla)
 if (!isset($current_page)) {
@@ -48,55 +43,55 @@ function isActive($page_name, $current)
 						<i class="bi bi-house-door"></i>
 						<span class="d-none d-lg-inline ms-1">Home</span>
 					</a>
-					<a href="<?= PAGE_AGENDA ?>"
+					<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('agenda', $current_page) ?>"
 						id="botonAgenda"
 						title="Agenda">
 						<i class="bi bi-calendar-event"></i>
 						<span class="d-none d-lg-inline ms-1">Agenda</span>
 					</a>
-					<a href="<?= PAGE_ADMIN_CANCHAS_LISTADO ?>"
+					<a href="<?= PAGE_MIS_CANCHAS_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('misCanchas', $current_page) ?>"
 						id="botonMisCanchas"
 						title="Mis Canchas">
 						<i class="bi bi-geo-alt-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Canchas</span>
 					</a>
-					<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>"
+					<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>"
+						class="btn btn-dark me-2 <?= isActive('canchaPerfil', $current_page) ?>"
+						id="botonPerfiles"
+						title="Perfiles">
+						<i class="bi bi-person-circle"></i>
+						<span class="d-none d-lg-inline ms-1">Perfiles</span>
+					</a>
+					<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>"
 						class="btn btn-dark me-2 <?= isActive('misTorneos', $current_page) ?>"
 						id="botonMisTorneos"
 						title="Mis Torneos">
 						<i class="bi bi-trophy-fill"></i>
 						<span class="d-none d-lg-inline ms-1">Mis Torneos</span>
 					</a>
-					<a href="<?= PAGE_FOROS_LISTADO ?>"
-						class="btn btn-dark me-2 <?= isActive('explorarForos', $current_page) ?>"
-						id="botonForos"
-						title="Foros">
-						<i class="bi bi-chat-dots"></i>
-						<span class="d-none d-lg-inline ms-1">Foros</span>
-					</a>
 				</div>
 			</div>
 
 			<!-- Lado derecho: perfil, notificaciones y configuración -->
 			<div class="d-flex align-items-center">
-				<!-- Campanita de notificaciones -->
-				<button class="btn btn-outline-warning position-relative me-2"
+				<!-- Campanita de notificaciones
+				<button class="btn btn-dark position-relative me-2"
 					type="button" data-bs-toggle="modal" data-bs-target="#modalNotificaciones"
 					title="Notificaciones">
 					<i class="bi bi-bell"></i>
 					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 						2
 					</span>
-				</button>
+				</button> -->
 				<!-- Botones solo en pantallas medianas y grandes -->
 				<div class="d-none-custom d-md-flex align-items-center">
 					<button id="botonConfiguracion" class="btn btn-dark me-2" type="button"
 						data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
 						<i class="bi bi-gear"></i>
 					</button>
-					<a href="<?= PAGE_LANDING_PHP ?>" class="btn btn-danger me-2 d-none d-lg-flex" id="btnCerrarSesion"
+					<a href="<?= CONTROLLER_LOGOUT ?>" class="btn btn-danger me-2 d-none d-lg-flex" id="btnCerrarSesion"
 						title="Cerrar Sesión">
 						<i class="bi bi-box-arrow-right text-white"></i>
 					</a>
@@ -121,29 +116,25 @@ function isActive($page_name, $current)
 				title="Home">
 				<i class="bi bi-house-door me-2"></i>Home
 			</a>
-			<a href="<?= PAGE_AGENDA ?>"
+			<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('agenda', $current_page) ?>"
 				title="Agenda">
 				<i class="bi bi-calendar-event me-2"></i>Agenda
 			</a>
-			<a href="<?= PAGE_ADMIN_CANCHAS_LISTADO ?>"
+			<a href="<?= PAGE_MIS_CANCHAS_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('misCanchas', $current_page) ?>"
 				title="Mis Canchas">
 				<i class="bi bi-geo-alt-fill me-2"></i>Mis Canchas
 			</a>
-			<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>"
+			<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>"
 				class="btn btn-dark text-start <?= isActive('misTorneos', $current_page) ?>"
 				title="Mis Torneos">
-				<i class="bi bi-geo-alt-fill me-2"></i>Mis Torneos
+				<i class="bi bi-trophy-fill me-2"></i>Mis Torneos
 			</a>
-		</div>
-
-		<!-- Sección Explorar -->
-		<h6 class="offcanvas-section-title mb-2">Explorar</h6>
-		<div class="d-grid gap-2 mb-4">
-			<a href="<?= PAGE_FOROS_LISTADO ?>"
-				class="btn btn-dark text-start <?= isActive('explorarForos', $current_page) ?>">
-				<i class="bi bi-chat-dots me-2"></i>Foros
+			<a href="<?= PAGE_MIS_PERFILES_ADMIN_CANCHA ?>"
+				class="btn btn-dark text-start <?= isActive('canchaPerfil', $current_page) ?>"
+				title="Perfiles">
+				<i class="bi bi-person-circle me-2"></i>Perfiles
 			</a>
 		</div>
 
@@ -154,7 +145,7 @@ function isActive($page_name, $current)
 					data-bs-toggle="modal" data-bs-target="#modalConfiguracion">
 					<i class="bi bi-gear me-2"></i>Configuración
 				</button>
-				<a href="<?= PAGE_LANDING_PHP ?>" class="btn btn-danger text-start"
+				<a href="<?= CONTROLLER_LOGOUT ?>" class="btn btn-danger text-start"
 					title="Cerrar Sesión">
 					<i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
 				</a>
@@ -165,7 +156,7 @@ function isActive($page_name, $current)
 <!-- ============================================ -->
 <!-- MODAL: NOTIFICACIONES -->
 <!-- ============================================ -->
-<div class="modal fade" id="modalNotificaciones" tabindex="-1" aria-labelledby="modalNotificacionesLabel" aria-hidden="true">
+<div class="modal fade" id="modalNotificaciones" tabindex="-1" aria-labelledby="modalNotificacionesLabel">
 	<div class="modal-dialog modal-lg modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -187,16 +178,7 @@ function isActive($page_name, $current)
 							<i class="bi bi-trophy me-1"></i>Torneos
 						</button>
 					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="tab-foros" data-bs-toggle="tab" data-bs-target="#content-foros" type="button" role="tab">
-							<i class="bi bi-chat-dots me-1"></i>Foros
-						</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="tab-futmatch" data-bs-toggle="tab" data-bs-target="#content-futmatch" type="button" role="tab">
-							<i class="bi bi-info-circle me-1"></i>FutMatch
-						</button>
-					</li>
+					<!-- Tab FutMatch oculta temporalmente -->
 				</ul>
 
 				<!-- Contenido de las tabs -->
@@ -205,7 +187,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade show active" id="content-agenda" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Reserva</h6>
-							<a href="<?= PAGE_AGENDA ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_AGENDA_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-calendar-event me-1"></i>Ver Agenda Completa
 							</a>
 						</div>
@@ -301,7 +283,7 @@ function isActive($page_name, $current)
 					<div class="tab-pane fade" id="content-torneos" role="tabpanel">
 						<div class="d-flex justify-content-between align-items-center mb-3">
 							<h6 class="mb-0">Solicitudes de Torneos</h6>
-							<a href="<?= PAGE_ADMIN_MIS_TORNEOS ?>" class="btn btn-sm btn-outline-primary">
+							<a href="<?= PAGE_MIS_TORNEOS_ADMIN_CANCHA ?>" class="btn btn-sm btn-dark">
 								<i class="bi bi-trophy me-1"></i>Ver Mis Torneos
 							</a>
 						</div>
@@ -323,7 +305,7 @@ function isActive($page_name, $current)
 										<td>Los Tigres FC</td>
 										<td>Copa Primavera 2025</td>
 										<td>
-											<a href="#" class="btn btn-sm btn-outline-info">
+											<a href="#" class="btn btn-sm btn-dark">
 												<i class="bi bi-eye me-1"></i>Ver Equipo
 											</a>
 										</td>
@@ -341,7 +323,7 @@ function isActive($page_name, $current)
 										<td>Águilas United</td>
 										<td>Liga Nocturna</td>
 										<td>
-											<a href="#" class="btn btn-sm btn-outline-info">
+											<a href="#" class="btn btn-sm btn-dark">
 												<i class="bi bi-eye me-1"></i>Ver Equipo
 											</a>
 										</td>
@@ -356,118 +338,6 @@ function isActive($page_name, $current)
 									</tr>
 								</tbody>
 							</table>
-						</div>
-					</div>
-
-					<!-- TAB 3: FOROS -->
-					<div class="tab-pane fade" id="content-foros" role="tabpanel">
-						<div class="d-flex justify-content-between align-items-center mb-3">
-							<h6 class="mb-0">Respuestas en Foros</h6>
-							<a href="<?= PAGE_FOROS_LISTADO ?>" class="btn btn-sm btn-outline-primary">
-								<i class="bi bi-chat-dots me-1"></i>Ver Todos los Foros
-							</a>
-						</div>
-
-						<!-- Lista de notificaciones de foros -->
-						<div class="list-group">
-							<div class="list-group-item">
-								<div class="d-flex gap-2">
-									<!-- Contenido a la izquierda -->
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-center mb-1">
-											<h6 class="mb-0">Laura Martínez</h6>
-										</div>
-										<p class="mb-1">Ha respondido a tu foro: <strong>"¿Mejores horarios para torneos?"</strong></p>
-										<small class="text-muted">"Creo que los fines de semana son ideales..."</small>
-										<small class="text-muted">Hace 2 horas</small>
-									</div>
-									<!-- Botones a la derecha-->
-									<div class="notification-actions flex-shrink-0">
-										<button class="btn btn-sm btn-outline-primary" title="Ver">
-											<i class="bi bi-eye"></i>
-										</button>
-										<button class="btn btn-sm btn-outline-danger" onclick="eliminarNotificacion(this)" title="Eliminar">
-											<i class="bi bi-x-lg"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="list-group-item">
-								<div class="d-flex gap-2">
-									<!-- Contenido a la izquierda -->
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-center mb-1">
-											<h6 class="mb-0">Diego Torres</h6>
-										</div>
-										<p class="mb-1">Ha respondido a tu foro: <strong>"Nuevas canchas techadas"</strong></p>
-										<small class="text-muted">"Excelente iniciativa! Cuando estarían..."</small>
-										<small class="text-muted">Hace 5 horas</small>
-									</div>
-									<!-- Botones a la derecha -->
-									<div class="notification-actions flex-shrink-0">
-										<button class="btn btn-sm btn-outline-primary" title="Ver">
-											<i class="bi bi-eye"></i>
-										</button>
-										<button class="btn btn-sm btn-outline-danger" onclick="eliminarNotificacion(this)" title="Eliminar">
-											<i class="bi bi-x-lg"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="list-group-item">
-								<div class="d-flex gap-2">
-									<!-- Contenido a la izquierda -->
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-center mb-1">
-											<h6 class="mb-0">Roberto Sánchez</h6>
-										</div>
-										<p class="mb-1">Ha respondido a tu foro: <strong>"Consulta sobre reservas"</strong></p>
-										<small class="text-muted">"Hola, me gustaría saber si..."</small>
-										<small class="text-muted">Hace 1 día</small>
-									</div>
-									<!-- Botones a la derecha -->
-									<div class="notification-actions flex-shrink-0">
-										<button class="btn btn-sm btn-outline-primary" title="Ver">
-											<i class="bi bi-eye"></i>
-										</button>
-										<button class="btn btn-sm btn-outline-danger" onclick="eliminarNotificacion(this)" title="Eliminar">
-											<i class="bi bi-x-lg"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- TAB 4: FUTMATCH -->
-					<div class="tab-pane fade" id="content-futmatch" role="tabpanel">
-						<div class="mb-3">
-							<h6 class="mb-3">Mensajes del Sistema</h6>
-						</div>
-
-						<!-- Mensajes de administración -->
-						<div class="list-group">
-							<div class="list-group-item list-group-item-info">
-								<div class="d-flex w-100 justify-content-between">
-									<h6 class="mb-1"><i class="bi bi-megaphone me-2"></i>Actualización del Sistema</h6>
-									<small>10/10/2025</small>
-								</div>
-								<p class="mb-1">Hemos implementado nuevas funcionalidades en el dashboard. Ahora puedes visualizar estadísticas de ocupación en tiempo real.</p>
-							</div>
-							<div class="list-group-item list-group-item-warning">
-								<div class="d-flex w-100 justify-content-between">
-									<h6 class="mb-1"><i class="bi bi-exclamation-triangle me-2"></i>Mantenimiento Programado</h6>
-									<small>05/10/2025</small>
-								</div>
-								<p class="mb-1">El sistema estará en mantenimiento el día 15/10/2025 de 02:00 a 04:00 hs. Disculpe las molestias.</p>
-							</div>
-							<div class="list-group-item">
-								<div class="d-flex w-100 justify-content-between">
-									<h6 class="mb-1"><i class="bi bi-info-circle me-2"></i>Nuevas Políticas</h6>
-									<small>01/10/2025</small>
-								</div>
-								<p class="mb-1">Se han actualizado los términos y condiciones del servicio. Por favor, revísalos en tu cuenta.</p>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -495,48 +365,81 @@ function isActive($page_name, $current)
 				<!-- Información de cuenta -->
 				<h6 class="border-bottom pb-2 mb-3">Información de Cuenta</h6>
 
-				<!-- Nombre y Apellido -->
-				<div class="mb-3">
-					<label class="form-label">Nombre y Apellido</label>
-					<div class="input-group">
-						<input type="text" class="form-control" value="Juan Carlos Administrador" readonly>
+				<!-- Nombre -->
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<label for="inputNombre" class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
 					</div>
-				</div>
-
-				<!-- Teléfono -->
-				<div class="mb-3">
-					<label class="form-label">Teléfono</label>
-					<div class="input-group">
-						<input type="tel" class="form-control" id="inputTelefono" value="+54 9 11 1234-5678" readonly>
-						<button class="btn btn-outline-primary" type="button" onclick="editarCampo('inputTelefono')">
-							<i class="bi bi-pencil"></i>
-						</button>
+					<div class="col-md-6">
+						<label for="inputApellido" class="form-label">Apellido</label>
+						<input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
 					</div>
 				</div>
 
 				<!-- Email -->
 				<div class="mb-3">
-					<label class="form-label">Dirección de E-mail</label>
-					<div class="input-group">
-						<input type="email" class="form-control" id="inputEmail" value="admin@futmatch.com" readonly>
-						<button class="btn btn-outline-primary" type="button" onclick="editarCampo('inputEmail')">
-							<i class="bi bi-pencil"></i>
-						</button>
-					</div>
+					<label for="inputEmail" class="form-label">Dirección de E-mail</label>
+					<input type="email" class="form-control" id="inputEmail" placeholder="email@ejemplo.com">
+				</div>
+
+				<!-- Teléfono -->
+				<div class="mb-3">
+					<label for="inputTelefono" class="form-label">Teléfono (opcional)</label>
+					<input type="tel" class="form-control" id="inputTelefono" placeholder="+54 9 11 1234-5678">
+				</div>
+
+				<div class="d-grid mb-4">
+					<button type="button" class="btn btn-primary" id="btnGuardarDatos">
+						<i class="bi bi-save me-2"></i>Guardar Datos
+					</button>
 				</div>
 
 				<hr class="my-4">
 
-				<!-- Suspender y Eliminar cuenta en fila -->
+				<!-- Cambiar Contraseña -->
+				<h6 class="border-bottom pb-2 mb-3">Seguridad</h6>
+
+				<button type="button" class="btn btn-warning w-100 mb-3" id="btnCambiarPassword">
+					<i class="bi bi-key me-2"></i>Cambiar Contraseña
+				</button>
+
+				<!-- Formulario de cambio de contraseña (oculto por defecto) -->
+				<div id="formCambiarPassword" class="d-none">
+					<form id="passwordChangeForm" autocomplete="off">
+						<input type="text" name="username" autocomplete="username" style="display:none;" aria-hidden="true">
+						<div class="card card-body bg-dark border-warning mb-3">
+							<div class="mb-3">
+								<label for="inputPasswordActual" class="form-label">Contraseña Actual</label>
+								<input type="password" class="form-control" id="inputPasswordActual" placeholder="Contraseña actual" autocomplete="current-password">
+							</div>
+							<div class="mb-3">
+								<label for="inputPasswordNueva" class="form-label">Nueva Contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordNueva" placeholder="Nueva contraseña (mín. 6 caracteres)" autocomplete="new-password">
+							</div>
+							<div class="mb-3">
+								<label for="inputPasswordConfirmar" class="form-label">Confirmar Nueva Contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordConfirmar" placeholder="Confirmar nueva contraseña" autocomplete="new-password">
+							</div>
+							<button type="button" class="btn btn-warning" id="btnGuardarPassword">
+								<i class="bi bi-check-lg me-2"></i>Guardar Nueva Contraseña
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<hr class="my-4">
+
+				<!--Suspender y Eliminar cuenta en fila
 				<div class="row g-3">
-					<!-- Suspender cuenta -->
+					//Suspender cuenta
 					<div class="col-12 col-lg-6">
 						<h6 class="mb-2">Suspender Cuenta</h6>
 						<button class="btn btn-warning w-100" type="button" data-bs-toggle="collapse" data-bs-target="#suspenderForm">
 							<i class="bi bi-pause-circle me-2"></i>Suspender Temporalmente
 						</button>
 
-						<!-- Formulario de suspensión -->
+						//Formulario de suspensión
 						<div class="collapse mt-3" id="suspenderForm">
 							<div class="card card-body">
 								<p class="small text-muted mb-3">
@@ -558,21 +461,20 @@ function isActive($page_name, $current)
 						</div>
 					</div>
 
-					<!-- Eliminar cuenta -->
+					//Eliminar cuenta
 					<div class="col-12 col-lg-6">
 						<h6 class="mb-2 text-danger">Eliminar Cuenta</h6>
 						<button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#eliminarForm">
 							<i class="bi bi-trash me-2"></i>Eliminar Permanentemente
 						</button>
 
-						<!-- Información de eliminación -->
+						//Información de eliminación
 						<div class="collapse mt-3" id="eliminarForm">
 							<div class="card card-body border-danger">
 								<p class="small text-muted mb-3">
 									Una vez eliminada la cuenta, las reservas próximas serán canceladas.
 									Su información de contacto será eliminada y sus canchas dejarán de aparecer en el sistema.
 									El historial de partidos y torneos seguirá visible en el historial de los usuarios.
-									Sus publicaciones en Foros serán eliminadas después de 12 meses.
 								</p>
 								<button class="btn btn-danger" type="button" onclick="confirmarEliminacion()">
 									<i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminación
@@ -581,6 +483,7 @@ function isActive($page_name, $current)
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -589,67 +492,11 @@ function isActive($page_name, $current)
 	</div>
 </div>
 
+
 <script>
-	// Inicializar tooltips de Bootstrap
-	document.addEventListener('DOMContentLoaded', function() {
-		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-		var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-			return new bootstrap.Tooltip(tooltipTriggerEl);
-		});
-	});
-
-	// Función para editar campos
-	function editarCampo(inputId) {
-		const input = document.getElementById(inputId);
-		if (input.hasAttribute('readonly')) {
-			input.removeAttribute('readonly');
-			input.focus();
-			input.select();
-		} else {
-			input.setAttribute('readonly', 'readonly');
-			// TODO: Aquí iría la llamada AJAX para guardar los cambios
-			alert('Cambios guardados correctamente');
-		}
-	}
-
-	// Función para confirmar suspensión
-	function confirmarSuspension() {
-		const fecha = document.getElementById('fechaReactivacion').value;
-		const hora = document.getElementById('horaReactivacion').value;
-
-		if (!fecha || !hora) {
-			alert('Por favor, complete la fecha y hora de reactivación');
-			return;
-		}
-
-		if (confirm('¿Está seguro que desea suspender su cuenta hasta el ' + fecha + ' a las ' + hora + '? Las reservas en este período serán canceladas.')) {
-			// TODO: Llamada AJAX para suspender cuenta
-			alert('Cuenta suspendida exitosamente');
-			location.reload();
-		}
-	}
-
-	// Función para confirmar eliminación
-	function confirmarEliminacion() {
-		if (confirm('¿Está seguro que desea eliminar su cuenta permanentemente? Esta acción NO se puede deshacer.')) {
-			if (confirm('ÚLTIMA CONFIRMACIÓN: ¿Realmente desea eliminar su cuenta? Todas sus canchas serán removidas del sistema.')) {
-				// TODO: Llamada AJAX para eliminar cuenta
-				alert('Su cuenta ha sido marcada para eliminación. Recibirá un correo de confirmación.');
-				window.location.href = '<?= PAGE_LANDING_PHP ?>';
-			}
-		}
-	}
-
-	// Función para eliminar notificación
-	function eliminarNotificacion(button) {
-		const listItem = button.closest('.list-group-item');
-		if (confirm('¿Desea eliminar esta notificación?')) {
-			// TODO: Llamada AJAX para eliminar notificación
-			listItem.style.transition = 'opacity 0.3s ease';
-			listItem.style.opacity = '0';
-			setTimeout(() => {
-				listItem.remove();
-			}, 300);
-		}
-	}
+	const UPDATE_USUARIO_URL = '<?= UPDATE_USUARIO ?>';
 </script>
+
+<script src="<?= JS_TOAST_MODULE ?>"></script>
+<script src="<?= JS_UPDATE_USUARIO ?>"></script>
+<script src="<?= JS_NAVBAR_ADMIN_CANCHA ?>"></script>

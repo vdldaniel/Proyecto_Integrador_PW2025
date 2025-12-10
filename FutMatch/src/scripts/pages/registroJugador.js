@@ -39,6 +39,21 @@ document.addEventListener('DOMContentLoaded', function() {
   validarSoloLetras(inputApellido);
 
   // ===================================
+  // VALIDACIÓN: Nombre, Apellido y Username - Quitar error cuando se llenen
+  // ===================================
+  [inputNombre, inputApellido, inputUsername].forEach(campo => {
+    campo.addEventListener('input', function() {
+      if (this.value.trim()) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+      } else {
+        this.classList.remove('is-valid');
+        this.classList.add('is-invalid');
+      }
+    });
+  });
+
+  // ===================================
   // VALIDACIÓN: Teléfono - Solo números y guiones
   // ===================================
   inputTelefono.addEventListener('input', function(e) {
@@ -279,28 +294,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Si todo es válido, enviar
     if (isValid) {
-      // TODO: Aquí iría la llamada AJAX al backend
-      const formData = {
-        nombre: inputNombre.value.trim(),
-        apellido: inputApellido.value.trim(),
-        username: inputUsername.value.trim(),
-        fechaNacimiento: inputFecha.value,
-        genero: inputGenero.value,
-        email: inputEmail.value.trim(),
-        telefono: inputTelefono.value.trim(),
-        password: inputPassword.value,
-        terminos: checkTerminos.checked,
-        promociones: document.getElementById('checkPromociones').checked
-      };
-
-      console.log('Formulario válido. Datos:', formData);
-      
-      // Simular envío exitoso
-      alert('¡Registro exitoso! (Esto es una simulación, falta conectar con el backend)');
-      
-      // Opcional: Resetear formulario
-      // form.reset();
-      // form.classList.remove('was-validated');
+      console.log('Formulario válido. Enviando...');
+      // Enviar el formulario al servidor
+      form.submit();
     } else {
       // Scroll al primer campo inválido
       const primerInvalido = form.querySelector('.is-invalid');

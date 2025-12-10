@@ -6,9 +6,6 @@
 /* ===================================
    BUTTONS / BOTONES
    =================================== */
-button i {
-  margin-right: 5px;
-}
 
 .btn {
   transition: all 0.2s ease-in-out;
@@ -48,18 +45,6 @@ button i {
   --bs-btn-hover-border-color: #6c757d;
 }
 
-/* Botones sidebar */
-.sidebar-fijo .btn-outline-secondary {
-  border-color: #6c757d;
-  color: #6c757d;
-}
-
-.sidebar-fijo .btn-outline-secondary:hover {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  color: white;
-}
-
 .list-group-item .btn {
   min-width: 95px;
 }
@@ -71,7 +56,6 @@ button i {
   background-color: var(--card-bg) !important;
   border-color: var(--card-border) !important;
   backdrop-filter: blur(10px);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .card-header {
@@ -89,7 +73,7 @@ button i {
   --card-bg: rgba(255, 255, 255, 0.05);
 }
 
-[data-bs-theme="light"] .card:hover, 
+[data-bs-theme="light"] .card:hover,
 :root:not([data-bs-theme="dark"]) .card:hover {
   --card-bg: rgba(0, 0, 0, 0.04);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
@@ -101,8 +85,8 @@ button i {
   border-radius: var(--radius);
   backdrop-filter: blur(10px);
   background: var(--card-bg) !important;
-  box-shadow: 0 6px 18px rgba(0,0,0,.12);
-  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   cursor: pointer;
   outline: none;
   color: var(--card-text-color) !important;
@@ -113,20 +97,21 @@ button i {
 }
 
 .card-action:focus-visible {
-  box-shadow: 0 0 0 0.25rem rgba(25,135,84,.35), 0 6px 18px rgba(0,0,0,.12);
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.35),
+    0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .card-action:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 26px rgba(0,0,0,.16);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
 }
 
 [data-bs-theme="dark"] .card-action {
-  box-shadow: 0 6px 18px rgba(0,0,0,.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 [data-bs-theme="dark"] .card-action:hover {
-  box-shadow: 0 10px 26px rgba(0,0,0,.4);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
 }
 
 /* Cards especiales */
@@ -138,7 +123,7 @@ button i {
 
 .option-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-img-top {
@@ -226,27 +211,10 @@ form {
   min-width: 250px;
 }
 
-.table td input, .table td select {
+.table td input,
+.table td select {
   width: 100%;
   box-sizing: border-box;
-}
-
-/* Dark mode form adjustments */
-[data-bs-theme="dark"] .form-control {
-  background-color: var(--bs-body-bg);
-  border-color: var(--bs-border-color);
-  color: var(--bs-body-color);
-}
-
-[data-bs-theme="dark"] .form-control:focus {
-  background-color: var(--bs-body-bg);
-  border-color: var(--bs-primary);
-  color: var(--bs-body-color);
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-[data-bs-theme="dark"] .form-label {
-  color: var(--bs-body-color);
 }
 
 /* ===================================
@@ -303,7 +271,7 @@ form {
    LIST GROUPS
    =================================== */
 .list-group-item:hover {
-  background-color: rgba(0,123,255,0.1) !important;
+  background-color: rgba(0, 123, 255, 0.1) !important;
   padding: 0.5rem;
 }
 
@@ -323,7 +291,8 @@ form {
 /* ===================================
    TABLES
    =================================== */
-.table th, .table td {
+.table th,
+.table td {
   vertical-align: middle;
 }
 
@@ -344,12 +313,12 @@ form {
    =================================== */
 .link-cancha {
   display: inline-block;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   margin-bottom: 2rem;
   color: var(--link-cancha-color) !important;
   text-decoration: none;
   border-bottom: 1px dotted var(--link-cancha-border);
-  transition: color .15s ease, border-color .15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .link-cancha:hover {
@@ -363,7 +332,7 @@ form {
 }
 
 .chevron {
-  transition: rotate .18s ease;
+  transition: rotate 0.18s ease;
   font-size: 1.25rem;
   line-height: 1;
 }
@@ -400,16 +369,16 @@ form {
   .badge-applicant {
     font-size: 0.75rem;
   }
-  
+
   .btn-sm {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
-  
+
   .card-header h6 {
     font-size: 0.9rem;
   }
-  
+
   .navbar .form-control {
     min-width: 200px;
   }
@@ -423,7 +392,7 @@ form {
   .badge {
     transition: none;
   }
-  
+
   .card-action:hover,
   .option-card:hover,
   .card:hover {
@@ -431,5 +400,109 @@ form {
   }
 }
 
+/* ===================================
+   TOAST NOTIFICATIONS
+   =================================== */
+.toast-container {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  z-index: 9999;
+  max-width: 400px;
+}
 
+.toast-notification {
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-left: 4px solid;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 300px;
+  animation: slideInLeft 0.3s ease-out;
+  transition: all 0.3s ease;
+}
 
+.toast-notification.hiding {
+  animation: slideOutLeft 0.3s ease-in;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+[data-bs-theme="dark"] .toast-notification {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.toast-notification.success {
+  border-left-color: var(--bs-success);
+}
+
+.toast-notification.error {
+  border-left-color: var(--bs-danger);
+}
+
+.toast-notification.warning {
+  border-left-color: var(--bs-warning);
+}
+
+.toast-notification.info {
+  border-left-color: var(--bs-info);
+}
+
+.toast-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.toast-notification.success .toast-icon {
+  color: var(--bs-success);
+}
+
+.toast-notification.error .toast-icon {
+  color: var(--bs-danger);
+}
+
+.toast-notification.warning .toast-icon {
+  color: var(--bs-warning);
+}
+
+.toast-notification.info .toast-icon {
+  color: var(--bs-info);
+}
+
+.toast-content {
+  flex: 1;
+}
+
+.toast-message {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--bs-body-color);
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}

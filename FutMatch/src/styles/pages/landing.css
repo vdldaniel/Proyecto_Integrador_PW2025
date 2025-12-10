@@ -21,21 +21,21 @@
 /* Título y lema con sombras */
 .brand-title,
 .brand-tagline {
-  text-shadow: 0 2px 18px rgba(0,0,0,.6);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
 }
 
 [data-bs-theme="dark"] .brand-title,
 [data-bs-theme="dark"] .brand-tagline {
-  text-shadow: 0 2px 18px rgba(0,0,0,.8);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8);
 }
 
 /* Utilidades de font-weight */
-.fw-800 { 
-  font-weight: 800; 
+.fw-800 {
+  font-weight: 800;
 }
 
-.fw-600 { 
-  font-weight: 600; 
+.fw-600 {
+  font-weight: 600;
 }
 
 /* ===================================
@@ -47,7 +47,7 @@
 }
 
 .chevron {
-  transition: rotate .18s ease;
+  transition: rotate 0.18s ease;
   font-size: 1.25rem;
   line-height: 1;
 }
@@ -61,18 +61,6 @@
   --bs-btn-border-color: #198754;
   --bs-btn-hover-bg: #157347;
   --bs-btn-hover-border-color: #146c43;
-}
-
-.card-action .btn-outline-secondary {
-  --bs-btn-color: var(--bs-secondary);
-  --bs-btn-border-color: var(--bs-secondary);
-}
-
-[data-bs-theme="dark"] .card-action .btn-outline-secondary {
-  --bs-btn-color: #6c757d;
-  --bs-btn-border-color: #6c757d;
-  --bs-btn-hover-bg: #6c757d;
-  --bs-btn-hover-color: #fff;
 }
 
 /* ===================================
