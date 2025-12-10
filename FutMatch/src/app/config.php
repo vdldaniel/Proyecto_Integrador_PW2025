@@ -11,13 +11,19 @@
 // ===================================
 // CONEXIÓN A LA BASE DE DATOS
 // ===================================
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'futmatch_db');
+// Detectar si estamos en Railway (producción) o local
+define('DB_SERVER', getenv('DB_HOST') ?: 'localhost');
+define('DB_USERNAME', getenv('DB_USER') ?: 'root');
+define('DB_PASSWORD', getenv('DB_PASSWORD') ?: '');
+define('DB_NAME', getenv('DB_NAME') ?: 'futmatch_db');
+$DB_PORT = getenv('DB_PORT') ?: '3306';
 
 try {
-    $conn = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USERNAME, DB_PASSWORD);
+    $conn = new PDO(
+        "mysql:host=" . DB_SERVER . ";port=" . $DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4", 
+        DB_USERNAME, 
+        DB_PASSWORD
+    );
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -34,7 +40,9 @@ if (session_status() === PHP_SESSION_NONE) {
 // ===================================
 // RUTAS BASE
 // ===================================
-define("BASE_URL", "/Proyecto_Integrador_PW2025/FutMatch/"); // Ajusta según tu configuración de servidor
+// Detectar si estamos en Railway o local
+$isRailway = getenv('RAILWAY_ENVIRONMENT') !== false;
+define("BASE_URL", $isRailway ? "/" : "/Proyecto_Integrador_PW2025/FutMatch/");
 define("PUBLIC_PATH", BASE_URL . "public/");
 define("SRC_PATH", BASE_URL . "src/");
 
